@@ -444,7 +444,7 @@ footer{
   color: #fff;
 }
 
-/* ===== CONTACT – PREMIUM ===== */
+/* ===== CONTACT – STUDIO PREMIUM ===== */
 
 .contact-grid{
   display:grid;
@@ -458,79 +458,146 @@ footer{
   display:flex;
   align-items:center;
   gap:20px;
-  padding:26px 30px;
+  padding:28px 32px;
   border-radius:22px;
   text-decoration:none;
   color:var(--white);
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.045);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,0.15);
   transition:
-    transform .45s cubic-bezier(.22,.61,.36,1),
-    border-color .45s,
-    background .45s;
+    transform .5s cubic-bezier(.22,.61,.36,1),
+    border-color .5s,
+    background .5s;
 }
 
-.contact-item::before{
+.contact-item::after{
   content:"";
   position:absolute;
   inset:0;
   border-radius:inherit;
-  background:linear-gradient(
-    120deg,
-    rgba(255,255,255,.25),
-    rgba(255,255,255,0)
+  background:radial-gradient(
+    400px circle at var(--x,50%) var(--y,50%),
+    rgba(255,255,255,.18),
+    transparent 40%
   );
   opacity:0;
-  transition:.45s;
+  transition:.4s;
   pointer-events:none;
 }
 
-.contact-item:hover::before{
-  opacity:.35;
+.contact-item:hover::after{
+  opacity:1;
 }
 
 .contact-item:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,255,255,.45);
-  background:rgba(255,255,255,0.06);
+  transform:translateY(-8px);
+  border-color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,0.07);
 }
 
 .contact-item i{
   font-size:20px;
-  opacity:.95;
 }
 
 .contact-label{
   font-size:10px;
-  letter-spacing:.22em;
+  letter-spacing:.24em;
   text-transform:uppercase;
   color:var(--muted);
   display:block;
-  margin-bottom:4px;
+  margin-bottom:6px;
 }
 
 .contact-value{
   font-size:15px;
   font-weight:500;
-  line-height:1.4;
 }
 
-.contact-item.no-link{
-  cursor:default;
+/* ===== CTA BUTTON ===== */
+
+.contact-cta{
+  margin-top:38px;
+  align-self:flex-start;
 }
 
-  
- /* ===== ABOUT – BASE (PORTÁTIL) ===== */
+/* ===== MODAL ===== */
 
-#about .content{
-  max-width: 1035px;
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(11,11,13,.75);
+  backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:2000;
 }
 
-#about p{
-  max-width: 680px;
+.modal.active{
+  opacity:1;
+  pointer-events:auto;
 }
+
+.modal-box{
+  background:#0e0e11;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;
+  padding:46px;
+  width:420px;
+  max-width:90%;
+  text-align:center;
+  transform:translateY(20px);
+  opacity:0;
+  transition:.45s cubic-bezier(.22,.61,.36,1);
+}
+
+.modal.active .modal-box{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.modal-box h3{
+  font-size:24px;
+  margin-bottom:14px;
+}
+
+.modal-box p{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:26px;
+}
+
+.modal-actions{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+}
+
+.modal-actions a{
+  padding:12px 26px;
+  border-radius:30px;
+  background:#fff;
+  color:#000;
+  font-weight:600;
+  font-size:13px;
+}
+
+.modal-close{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  cursor:pointer;
+  margin-top:22px;
+}
+
 
   /* ===== ABOUT – PANTALLA GRANDE ===== */
 @media (min-width: 1920px){
@@ -795,8 +862,8 @@ footer{
     <h2 class="fade-up">Contacto</h2>
 
     <p class="fade-up delay-1">
-      Si te interesa mi trabajo, tienes una propuesta o simplemente quieres
-      hablar de diseño y producto, estaré encantado de escucharte.
+      Si tienes una idea, una propuesta o quieres colaborar en un proyecto,
+      estaré encantado de escucharte.
     </p>
 
     <div class="contact-grid fade-up delay-2">
@@ -825,12 +892,32 @@ footer{
       </div>
     </div>
 
-    <!-- CTA PREMIUM -->
-    <button class="btn fade-up delay-2" style="margin-top:34px">
+    <button class="btn contact-cta fade-up delay-2" onclick="openModal()">
       Hablemos de tu proyecto
     </button>
   </div>
 </section>
+
+  <div class="modal" id="contactModal">
+  <div class="modal-box">
+    <h3>¿Hablamos?</h3>
+    <p>
+      Escríbeme y cuéntame tu idea, tu proyecto o simplemente
+      qué tienes en mente.
+    </p>
+
+    <div class="modal-actions">
+      <a href="mailto:luis@email.com">Enviar email</a>
+      <a href="https://linkedin.com/in/tuusuario" target="_blank">LinkedIn</a>
+    </div>
+
+    <button class="modal-close" onclick="closeModal()">
+      Cerrar
+    </button>
+  </div>
+</div>
+
+
 
 <footer>
   © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
@@ -982,6 +1069,24 @@ function changeSection(id, link) {
   footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
+
+  function openModal(){
+  document.getElementById('contactModal').classList.add('active');
+}
+
+function closeModal(){
+  document.getElementById('contactModal').classList.remove('active');
+}
+
+// Glow interactivo
+document.querySelectorAll('.contact-item').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--x',`${e.clientX - r.left}px`);
+    card.style.setProperty('--y',`${e.clientY - r.top}px`);
+  });
+});
+
 </script>
 
 </body>
