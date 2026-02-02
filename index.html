@@ -191,7 +191,7 @@ nav a:hover::after{
 }
 
 .lang-switch button.active::after,
-lang-switch button:hover::after{
+.lang-switch button:hover::after{
   transform:scaleX(1); /* La línea se expande cuando el botón es activo o se pasa el ratón */
 }
 
@@ -529,7 +529,7 @@ footer{
 /* ===== AJUSTE ALTURA H2 – PANTALLA GRANDE ===== */
 @media (min-width: 1920px){
 
-#sobre mí h2{
+#about h2{
     margin-top: -230px;
   }
   
@@ -853,18 +853,21 @@ function resetAnimations(scope=document){
     el.className = c;
   });
 
-  // Reset header and nav link animations (cascading effect)
-  scope.querySelectorAll('.logo, nav a').forEach((el, index) => {
-    el.style.animation = 'none'; // remove current animation
-    void el.offsetHeight; // force reflow
-    el.style.animation = `navIn 0.55s ease forwards ${index * 0.08}s`; // apply cascading effect
-  });
+  scope.querySelectorAll('nav a').forEach((el, index) => {
+  el.style.animation = 'none';
+  void el.offsetHeight;
+  el.style.animation = `navIn 0.55s ease forwards ${index * 0.08}s`;
+});
 
-  // Reset button animation (faster entry)
-  const button = scope.querySelector('.btn');
+
+const button = scope.querySelector('.btn');
+if (button) {
   button.style.animation = 'none';
   void button.offsetHeight;
-  button.style.animation = `btnIn 0.6s cubic-bezier(.4,0,.2,1) forwards 0.8s`; // Reduced delay
+  button.style.animation =
+    'btnIn 0.6s cubic-bezier(.4,0,.2,1) forwards 0.8s';
+}
+
 
   // Reset language button animation (from right)
   const langButtons = scope.querySelectorAll('.lang-switch button');
