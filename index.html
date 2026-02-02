@@ -892,30 +892,11 @@ footer{
       </div>
     </div>
 
-    <button class="btn contact-cta fade-up delay-2" onclick="openModal()">
-      Hablemos de tu proyecto
-    </button>
+    
   </div>
 </section>
 
-  <div class="modal" id="contactModal">
-  <div class="modal-box">
-    <h3>¿Hablamos?</h3>
-    <p>
-      Escríbeme y cuéntame tu idea, tu proyecto o simplemente
-      qué tienes en mente.
-    </p>
-
-    <div class="modal-actions">
-      <a href="mailto:luis@email.com">Enviar email</a>
-      <a href="https://linkedin.com/in/tuusuario" target="_blank">LinkedIn</a>
-    </div>
-
-    <button class="modal-close" onclick="closeModal()">
-      Cerrar
-    </button>
-  </div>
-</div>
+  
 
 
 
@@ -1070,13 +1051,7 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
-  function openModal(){
-  document.getElementById('contactModal').classList.add('active');
-}
-
-function closeModal(){
-  document.getElementById('contactModal').classList.remove('active');
-}
+  
 
 // Glow interactivo
 document.querySelectorAll('.contact-item').forEach(card=>{
