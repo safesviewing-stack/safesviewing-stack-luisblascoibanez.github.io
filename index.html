@@ -951,6 +951,17 @@ function changeSection(id, link) {
   footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
+
+// Glow interactivo
+document.querySelectorAll('.contact-item').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--x',`${e.clientX - r.left}px`);
+    card.style.setProperty('--y',`${e.clientY - r.top}px`);
+  });
+});
+
+  
 </script>
 
 </body>
