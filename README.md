@@ -1,1 +1,1 @@
-safesviewing-stack/luisblascoibanez.github.io
+luisblascoibanez.github.io
