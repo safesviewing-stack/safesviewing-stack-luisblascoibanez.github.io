@@ -444,53 +444,81 @@ footer{
   color: #fff;
 }
 
-
-  /* ===== CONTACT SECTION ===== */
+/* ===== CONTACT – PREMIUM ===== */
 
 .contact-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 26px;
-  margin-top: 10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+  margin-top:18px;
 }
 
 .contact-item{
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 22px 26px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 18px;
-  text-decoration: none;
-  color: var(--white);
-  transition: border-color .3s, transform .3s;
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:26px 30px;
+  border-radius:22px;
+  text-decoration:none;
+  color:var(--white);
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.15);
+  transition:
+    transform .45s cubic-bezier(.22,.61,.36,1),
+    border-color .45s,
+    background .45s;
 }
 
-.contact-item i{
-  font-size: 18px;
-  opacity: .9;
+.contact-item::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,.25),
+    rgba(255,255,255,0)
+  );
+  opacity:0;
+  transition:.45s;
+  pointer-events:none;
+}
+
+.contact-item:hover::before{
+  opacity:.35;
 }
 
 .contact-item:hover{
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-2px);
+  transform:translateY(-6px);
+  border-color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,0.06);
+}
+
+.contact-item i{
+  font-size:20px;
+  opacity:.95;
 }
 
 .contact-label{
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: block;
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:block;
+  margin-bottom:4px;
 }
 
 .contact-value{
-  font-size: 14px;
-  line-height: 1.4;
+  font-size:15px;
+  font-weight:500;
+  line-height:1.4;
 }
 
 .contact-item.no-link{
-  cursor: default;
+  cursor:default;
 }
 
   
@@ -767,8 +795,8 @@ footer{
     <h2 class="fade-up">Contacto</h2>
 
     <p class="fade-up delay-1">
-      Si te interesa mi trabajo, tienes una propuesta o simplemente quieres hablar de diseño,
-      estaré encantado de escucharte.
+      Si te interesa mi trabajo, tienes una propuesta o simplemente quieres
+      hablar de diseño y producto, estaré encantado de escucharte.
     </p>
 
     <div class="contact-grid fade-up delay-2">
@@ -796,9 +824,13 @@ footer{
         </div>
       </div>
     </div>
+
+    <!-- CTA PREMIUM -->
+    <button class="btn fade-up delay-2" style="margin-top:34px">
+      Hablemos de tu proyecto
+    </button>
   </div>
 </section>
-
 
 <footer>
   © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
