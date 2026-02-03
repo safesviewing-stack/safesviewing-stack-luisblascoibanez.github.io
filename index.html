@@ -766,6 +766,27 @@ footer{
   animation-delay: calc(.6s + (var(--i) * .06s));
 }
 
+  /* ===== SKILLS BLOCK ENTRY ===== */
+
+.skills-block{
+  opacity: 0;
+  transform: translateY(14px);   /* desplazamiento corto */
+  animation: skillsBlockIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* Delay base + secuencia */
+.skills-1{ animation-delay: .6s; }
+.skills-2{ animation-delay: .85s; }
+.skills-3{ animation-delay: 1.1s; }
+
+@keyframes skillsBlockIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
   
 </style>
 </head>
@@ -916,7 +937,7 @@ footer{
     <h2 class="fade-up">Habilidades</h2>
 
     <!-- MODELADO 3D -->
-    <div class="skills-block fade-up delay-1">
+<div class="skills-block skills-1">
       <h3 class="skills-title">Modelado 3D</h3>
       <div class="skills-grid">
         <div class="skill-item">Inventor</div>
@@ -928,7 +949,7 @@ footer{
     </div>
 
     <!-- DISEÑO GRÁFICO -->
-    <div class="skills-block fade-up delay-2">
+<div class="skills-block skills-2">
       <h3 class="skills-title">Diseño gráfico y web</h3>
       <div class="skills-grid">
         <div class="skill-item">Animate</div>
@@ -940,7 +961,7 @@ footer{
     </div>
 
     <!-- TÉCNICA & PROCESOS -->
-    <div class="skills-block fade-up delay-2">
+<div class="skills-block skills-3">
       <h3 class="skills-title">Técnica y procesos</h3>
       <div class="skills-grid">
         <div class="skill-item skill-wide">Prototipado</div>
