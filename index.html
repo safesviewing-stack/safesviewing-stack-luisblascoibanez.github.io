@@ -449,11 +449,12 @@ footer{
   /* ===== CONTACT SECTION ===== */
 
 .contact-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 26px;
-  margin-top: 10px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:26px;
+  margin-top:10px;
 }
+
 
 .contact-item{
   display: flex;
@@ -605,6 +606,11 @@ footer{
   }
 }
 
+@media (max-width: 768px){
+  .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
   
 </style>
