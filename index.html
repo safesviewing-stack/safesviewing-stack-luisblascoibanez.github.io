@@ -458,7 +458,7 @@ footer{
   align-items: center;
   gap: 18px;
   padding: 20px 24px;
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.28);
   border-radius: 16px;
   text-decoration: none;
   color: var(--white);
@@ -472,22 +472,26 @@ footer{
   overflow: hidden;
 }
 
-/* Glow */
 .contact-item::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius:inherit;
   background: radial-gradient(
-    280px circle at var(--x, 50%) var(--y, 50%),
-    rgba(255,255,255,0.22),
-    rgba(255,255,255,0.08) 40%,
-    transparent 60%
+    240px circle at var(--x, 50%) var(--y, 50%),
+    rgba(255,255,255,0.16),
+    rgba(255,255,255,0.06) 45%,
+    transparent 70%
   );
   opacity:0;
-  transition: opacity .3s ease;
+  transition: opacity .35s ease;
   pointer-events:none;
 }
+
+.contact-item:hover::before{
+  opacity:1;
+}
+
 
 
 .contact-item i{
@@ -497,8 +501,8 @@ footer{
 
 
 .contact-item:hover{
-  border-color: rgba(255,255,255,0.38);
-  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.48);
+  transform: translateY(-0.5px);
 }
 
 
@@ -800,10 +804,6 @@ footer{
  <section id="contact" class="section">
   <div class="content">
     <h2 class="fade-up">Contacto</h2>
-
-    <p class="fade-up delay-1" style="max-width:520px">
-      Si te interesa mi perfil o quieres hablar sobre un proyecto, estaré encantado de conocerte.
-    </p>
 
     <div class="contact-grid fade-up delay-2">
       
