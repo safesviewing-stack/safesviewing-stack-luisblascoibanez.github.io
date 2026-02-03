@@ -705,9 +705,7 @@ footer{
 
 
 /* items anchos */
-.skill-wide{
-  padding: 0 14px;   /* ← compensación visual */
-}
+
 
   /* ===== CONTACT ENTRY ANIMATION ===== */
 
@@ -728,53 +726,19 @@ footer{
     opacity: 1;
     transform: translateX(0);  
   }
-
-
-.skills-group{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 14px;
-  margin-top: 16px;
 }
 
-  .skill-box{
-  height: 44px;
-  border: 1.4px solid rgba(255,255,255,0.28);
-  border-radius: 14px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  font-size: 12px;
-  letter-spacing: .06em;
-  color: var(--white);
-  text-align: center;
-
-  opacity: 0;
-  transform: translateY(12px); /* desplazamiento corto */
-  animation: skillIn .9s cubic-bezier(.22,.61,.36,1) forwards;
-}
-
-/* Delay base (espera al título) */
-.skills-1 .skill-box{ animation-delay: .6s; }
-.skills-2 .skill-box{ animation-delay: .85s; }
-.skills-3 .skill-box{ animation-delay: 1.1s; }
-
-/* Stagger interno */
-.skills-1 .skill-box:nth-child(n){
-  animation-delay: calc(.6s + (var(--i) * .06s));
-}
 
   /* ===== SKILLS BLOCK ENTRY ===== */
 
 .skills-block{
   opacity: 0;
-  transform: translateY(14px);   /* desplazamiento corto */
+  transform: translateY(14px);
   animation: skillsBlockIn .9s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
-/* Delay base + secuencia */
 .skills-1{ animation-delay: .6s; }
 .skills-2{ animation-delay: .85s; }
 .skills-3{ animation-delay: 1.1s; }
