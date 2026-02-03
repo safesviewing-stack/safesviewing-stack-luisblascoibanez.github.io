@@ -672,13 +672,15 @@ footer{
 /* ===== SKILL ITEM ===== */
 
 .skill-item{
-  height: 52px;                 /* ← MÁS BAJITO */
+  height: 50px;
+  padding: 0 22px;              /* ← CLAVE: mismo margen lateral */
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1.4px solid rgba(255,255,255,0.28);
-  border-radius: 14px;          /* un poco más fino */
+  border: 1.3px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
 
   font-size: 11px;
   letter-spacing: .18em;
@@ -687,10 +689,11 @@ footer{
 
   background: transparent;
   transition:
-    border-color .35s ease,
-    background .35s ease,
-    transform .35s ease;
+    border-color .3s ease,
+    background .3s ease,
+    transform .3s ease;
 }
+
 
 .skill-item:hover{
   border-color: rgba(255,255,255,0.5);
