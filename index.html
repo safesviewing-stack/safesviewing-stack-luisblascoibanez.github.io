@@ -434,6 +434,53 @@ footer{
   line-height: 1.9;
 }
 
+  /* ===== SKILLS – TAG BUTTONS ===== */
+
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px;
+  margin-top: 10px;
+}
+
+.skill-block{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skill-title{
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: .9;
+}
+
+.skill-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-tag{
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.4px solid rgba(255,255,255,0.32);
+  font-size: 13px;
+  color: var(--white);
+  background: transparent;
+  white-space: nowrap;
+  cursor: default;
+  transition: border-color .35s ease, background .35s ease;
+}
+
+.skill-tag:hover{
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.04);
+}
+
+
 
 /* ===== CV STYLING ===== */
 .cv-details {
@@ -806,36 +853,43 @@ footer{
 
       <div class="skill-block">
         <span class="skill-title">Diseño</span>
-        <ul>
-          <li>Diseño de producto</li>
-          <li>Conceptualización</li>
-          <li>Diseño centrado en el usuario</li>
-          <li>Desarrollo de concepto</li>
-        </ul>
+        <div class="skill-tags">
+          <span class="skill-tag">Desarrollo de concepto</span>
+          <span class="skill-tag">Lenguaje formal</span>
+          <span class="skill-tag">Diseño centrado en el usuario</span>
+          <span class="skill-tag">Diseño para uso colectivo</span>
+        </div>
       </div>
 
       <div class="skill-block">
         <span class="skill-title">Técnica</span>
-        <ul>
-          <li>CAD · SolidWorks / Fusion</li>
-          <li>Impresión 3D</li>
-          <li>Prototipado</li>
-          <li>Definición técnica</li>
-        </ul>
+        <div class="skill-tags">
+          <span class="skill-tag">Impresión 3D</span>
+          <span class="skill-tag">Prototipado físico</span>
+          <span class="skill-tag">Validación funcional</span>
+        </div>
       </div>
 
       <div class="skill-block">
         <span class="skill-title">Software</span>
-        <ul>
-          <li>KeyShot</li>
-          <li>Adobe Illustrator</li>
-          <li>Photoshop</li>
-        </ul>
+        <div class="skill-tags">
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">Inventor</span>
+          <span class="skill-tag">Fusion 360</span>
+          <span class="skill-tag">3ds Max</span>
+          <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">InDesign</span>
+          <span class="skill-tag">Animate</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">GitHub</span>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
+
+
 
 
  <section id="contact" class="section">
