@@ -724,39 +724,27 @@ footer{
 
 
 
+.contact-item{
+  opacity: 0;
+  transform: translateX(-24px);
+  padding: 20px 24px;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.015);
 
- .skills-line{
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-top: 14px;
-  max-width: 900px;
+  animation: contactIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+  transition: background .35s ease, border-color .35s ease, transform .35s ease;
 }
 
-/* título de cada línea */
-.skills-label{
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 500;
-  white-space: nowrap;
-}
+.contact-item:nth-child(1){ animation-delay: .6s; }
+.contact-item:nth-child(2){ animation-delay: .75s; }
+.contact-item:nth-child(3){ animation-delay: .9s; }
 
-/* separador editorial */
-.skills-sep{
-  opacity: .35;
-  font-weight: 300;
+.contact-item:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-1px);
 }
-
-/* contenido */
-.skills-items{
-  font-size: 14px;
-  font-weight: 500;   /* ← aquí el nuevo grosor */
-  line-height: 1.7;
-  color: var(--white);
-}
-
 
 
   
