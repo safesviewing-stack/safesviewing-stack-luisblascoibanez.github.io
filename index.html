@@ -479,25 +479,7 @@ footer{
   overflow: hidden;
 }
 
-.contact-item::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  background: radial-gradient(
-    240px circle at var(--x, 50%) var(--y, 50%),
-    rgba(255,255,255,0.16),
-    rgba(255,255,255,0.06) 45%,
-    transparent 70%
-  );
-  opacity:0;
-  transition: opacity .35s ease;
-  pointer-events:none;
-}
 
-.contact-item:hover::before{
-  opacity:1;
-}
 
 
 
@@ -532,6 +514,20 @@ footer{
 
 .contact-item.no-link{
   cursor: default;
+}
+
+  .contact-item{
+  background: rgba(255,255,255,0.015);
+  transition:
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+.contact-item:hover{
+  background: rgba(255,255,255,0.06); /* ilumina todo */
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-1px);
 }
 
   
@@ -1130,14 +1126,7 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
-// Glow interactivo
-document.querySelectorAll('.contact-item').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--x',`${e.clientX - r.left}px`);
-    card.style.setProperty('--y',`${e.clientY - r.top}px`);
-  });
-});
+
 
   
 </script>
