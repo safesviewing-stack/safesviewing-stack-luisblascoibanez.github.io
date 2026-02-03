@@ -658,59 +658,47 @@ footer{
   margin-top: 30px;
 }
 
-.skills-block:first-of-type{
-  margin-top: 6px;    /* ← mucho más cerca del h2 */
+.skills-pro{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 10px;
+  max-width: 760px;
 }
-.skills-title{
-  font-size: 11px;
+
+.skill-card{
+  padding: 18px 22px;
+  border: 1.4px solid rgba(255,255,255,0.28);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.02);
+
+  transition:
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+.skill-card:hover{
+  background: rgba(255,255,255,0.085);
+  border-color: rgba(255,255,255,0.55);
+  transform: translateY(-1px);
+}
+
+.skill-tag{
+  display: block;
+  font-size: 10px;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 15px;
+  margin-bottom: 6px;
 }
 
-/* ===== GRID ===== */
-
-.skills-grid{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-}
-
-/* ===== SKILL ITEM ===== */
-
-.skill-item{
-  height: 50px;
-  padding: 0 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1.3px solid rgba(255,255,255,0.3);
-  border-radius: 12px;
-
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+.skill-card p{
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--white);
-
-  background: transparent;
-  transition:
-    border-color .3s ease,
-    background .3s ease,
-    transform .3s ease;
 }
 
-
-.skill-item:hover{
-  border-color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);  /* hover más sutil */
-}
-
-
-/* items anchos */
 
 
   /* ===== CONTACT ENTRY ANIMATION ===== */
