@@ -705,7 +705,26 @@ footer{
 /* items anchos */
 .skill-wide{
   padding: 0 14px;   /* ← compensación visual */
+}
 
+  /* ===== CONTACT ENTRY ANIMATION ===== */
+
+.contact-item{
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: contactIn 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* Delays progresivos */
+.contact-item:nth-child(1){ animation-delay: .15s; }
+.contact-item:nth-child(2){ animation-delay: .3s; }
+.contact-item:nth-child(3){ animation-delay: .45s; }
+
+@keyframes contactIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
   
@@ -903,7 +922,8 @@ footer{
   <div class="content">
     <h2 class="fade-up">Contacto</h2>
 
-    <div class="contact-grid fade-up delay-2">
+    <div class="contact-grid">
+
       
       <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-item">
         <i class="fas fa-envelope"></i>
