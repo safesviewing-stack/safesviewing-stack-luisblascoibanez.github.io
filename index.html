@@ -463,12 +463,13 @@ footer{
 
   
 .contact-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap:26px;
-  margin-top:10px;
-  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  margin-top: 20px;
+  max-width: 460px;
 }
+
 
 
 .contact-item{
@@ -811,40 +812,25 @@ footer{
   </div>
 </section>
 
- <section id="contact" class="section">
-  <div class="content">
-    <h2 class="fade-up">Contacto</h2>
+ <div class="contact-grid fade-up delay-2">
 
-    <div class="contact-grid fade-up delay-2">
-      <a href="mailto:luis@email.com" class="contact-item">
-        <i class="fas fa-envelope"></i>
-        <div>
-          <span class="contact-label">Email</span>
-          <span class="contact-value">luisblascoibanezberbel@gmail.com</span>
-        </div>
-      </a>
+  <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-item">
+    <span class="contact-label">Email</span>
+    <span class="contact-value">luisblascoibanezberbel@gmail.com</span>
+  </a>
 
-      <a href="tel:+34630511806" class="contact-item">
-  <i class="fas fa-phone-alt"></i>
-  <div>
+  <a href="tel:+34630511806" class="contact-item">
     <span class="contact-label">Teléfono</span>
     <span class="contact-value">+34 630 511 806</span>
-  </div>
-</a>
+  </a>
 
+  <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank" class="contact-item">
+    <span class="contact-label">LinkedIn</span>
+    <span class="contact-value">linkedin.com/in/luisblasiber</span>
+  </a>
 
-      <a href="https://linkedin.com/in/tuusuario" target="_blank" class="contact-item">
-        <i class="fab fa-linkedin-in"></i>
-        <div>
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">https://www.linkedin.com/in/luisblasiber/</span>
-        </div>
-      </a>
+</div>
 
-     
-    </div>
-  </div>
-</section>
 
 
 
