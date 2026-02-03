@@ -677,57 +677,75 @@ footer{
 }
 
 
-  /* ===== SKILLS GRID IMPROVED ===== */
+/* ===== SKILLS – CLEAN 3 COLUMNS ===== */
 
-.skills-grid{
+.skills-columns{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  margin-top: 24px;
 }
 
-/* Skill base */
-.skill-item{
-  height: 50px;
-  padding: 0 22px;
+/* Columna */
+.skills-col{
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1.2px solid rgba(255,255,255,0.28);
-  border-radius: 14px;
-
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--white);
-
-  background: rgba(255,255,255,0.02);
-  transition:
-    border-color .35s ease,
-    background .35s ease,
-    transform .35s ease,
-    box-shadow .35s ease;
+  flex-direction: column;
 }
 
-/* Core skills (lo que dominas) */
-.skill-item.core{
-  border-color: rgba(255,255,255,0.55);
-  background: rgba(255,255,255,0.06);
+/* Título */
+.skills-title{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+/* Lista */
+.skills-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Item */
+.skills-list li{
+  font-size: 14px;
+  letter-spacing: .04em;
+  color: var(--white);
+  position: relative;
+  padding-left: 14px;
+}
+
+/* Punto sutil */
+.skills-list li::before{
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,0.35);
+}
+
+/* Skills principales */
+.skills-list li.core{
   font-weight: 600;
 }
 
-/* Items anchos */
-.skill-item.wide{
-  grid-column: span 2;
+.skills-list li.core::before{
+  color: rgba(255,255,255,0.8);
 }
 
-/* Hover */
-.skill-item:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.65);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+/* Responsive */
+@media (max-width: 900px){
+  .skills-columns{
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
+
 
 
 
