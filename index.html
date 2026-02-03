@@ -473,16 +473,33 @@ footer{
 
 
 .contact-item{
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 22px 26px;
-  border: 1.35px solid rgba(255,255,255,0.2);
-  border-radius: 18px;
+  position: relative;
+  padding: 0 0 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
   text-decoration: none;
   color: var(--white);
-  transition: border-color .3s, transform .3s;
+  transition: border-color .3s ease;
 }
+
+  .contact-label{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.contact-value{
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .02em;
+}
+
+  .contact-item:hover{
+  border-color: rgba(255,255,255,0.4);
+}
+
 
   .contact-item{
   position: relative;
