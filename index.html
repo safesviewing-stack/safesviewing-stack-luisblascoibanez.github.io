@@ -399,40 +399,7 @@ footer{
   opacity: 1;
 }
 
-  /* ===== SKILLS – PREMIUM ===== */
 
-.skills-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
-  margin-top: 10px;
-}
-
-.skill-block{
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.skill-title{
-  font-size: 12px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--white);
-  opacity: .9;
-}
-
-.skill-block ul{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.skill-block li{
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.9;
-}
 
  
 
@@ -677,35 +644,47 @@ footer{
   }
 }
 
-  /* ===== SKILLS – SOFTWARE GRID ===== */
+ /* ===== SKILLS GRID ===== */
 
-.software-grid{
+.skills-grid{
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* ← 6 por fila = 2 líneas */
-  gap: 22px;
-  margin-top: 40px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-top: 42px;
 }
 
-.software-item{
-  padding: 26px 18px;
-  border: 1.5px solid rgba(255,255,255,0.28);
-  border-radius: 16px;
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: .08em;
+/* ===== SKILL ITEM ===== */
+
+.skill-item{
+  height: 110px;
+  display: flex;
+  align-items: center;        /* centrado vertical */
+  justify-content: center;    /* centrado horizontal */
+
+  border: 1.6px solid rgba(255,255,255,0.3);
+  border-radius: 18px;
+
+  font-size: 12px;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--white);
+
   background: transparent;
-  transition: 
+  transition:
     border-color .35s ease,
-    transform .35s ease,
-    background .35s ease;
+    background .35s ease,
+    transform .35s ease;
 }
 
-/* Hover premium */
-.software-item:hover{
-  border-color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.04);
+/* Items más anchos (técnica & procesos) */
+.skill-wide{
+  grid-column: span 2;
+}
+
+/* Hover minimal premium */
+.skill-item:hover{
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.045);
   transform: translateY(-2px);
 }
 
@@ -858,18 +837,25 @@ footer{
   <div class="content">
     <h2 class="fade-up">Habilidades</h2>
 
-    <div class="software-grid fade-up delay-2">
-      <div class="software-item">SolidWorks</div>
-      <div class="software-item">Autodesk Inventor</div>
-      <div class="software-item">Fusion 360</div>
-      <div class="software-item">AutoCAD</div>
-      <div class="software-item">3ds Max</div>
-      <div class="software-item">Illustrator</div>
-      <div class="software-item">InDesign</div>
-      <div class="software-item">Animate</div>
-      <div class="software-item">Photoshop</div>
-      <div class="software-item">GitHub</div>
-      <div class="software-item">Impresión 3D</div>
+    <div class="skills-grid fade-up delay-2">
+
+      <!-- MODELADO 3D -->
+      <div class="skill-item">Inventor</div>
+      <div class="skill-item">Fusion 360</div>
+      <div class="skill-item">SolidWorks</div>
+      <div class="skill-item">3ds Max</div>
+      <div class="skill-item">AutoCAD</div>
+
+      <!-- DISEÑO GRÁFICO -->
+      <div class="skill-item">Animate</div>
+      <div class="skill-item">Photoshop</div>
+      <div class="skill-item">Illustrator</div>
+      <div class="skill-item">InDesign</div>
+
+      <!-- TÉCNICA & PROCESOS -->
+      <div class="skill-item skill-wide">Prototipado manual</div>
+      <div class="skill-item skill-wide">Impresión 3D</div>
+
     </div>
   </div>
 </section>
