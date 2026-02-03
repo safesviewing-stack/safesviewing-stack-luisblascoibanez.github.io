@@ -399,6 +399,42 @@ footer{
   opacity: 1;
 }
 
+  /* ===== SKILLS – PREMIUM ===== */
+
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  margin-top: 10px;
+}
+
+.skill-block{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-title{
+  font-size: 12px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: .9;
+}
+
+.skill-block ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-block li{
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+
 /* ===== CV STYLING ===== */
 .cv-details {
   display: flex;
@@ -766,40 +802,41 @@ footer{
   <div class="content">
     <h2 class="fade-up">Habilidades</h2>
 
-    <p class="fade-up delay-1">
-      Estas son algunas de las habilidades técnicas y creativas que he desarrollado a lo largo de mi formación y experiencia.
-    </p>
+    <div class="skills-grid fade-up delay-2">
 
-    <div class="cv-details fade-up delay-2">
-      <div class="cv-column">
-        <h3>Diseño</h3>
+      <div class="skill-block">
+        <span class="skill-title">Diseño</span>
         <ul>
           <li>Diseño de producto</li>
           <li>Conceptualización</li>
           <li>Diseño centrado en el usuario</li>
+          <li>Desarrollo de concepto</li>
         </ul>
       </div>
 
-      <div class="cv-column">
-        <h3>Técnicas</h3>
+      <div class="skill-block">
+        <span class="skill-title">Técnica</span>
         <ul>
-          <li>CAD (SolidWorks / Fusion)</li>
+          <li>CAD · SolidWorks / Fusion</li>
           <li>Impresión 3D</li>
           <li>Prototipado</li>
+          <li>Definición técnica</li>
         </ul>
       </div>
 
-      <div class="cv-column">
-        <h3>Software</h3>
+      <div class="skill-block">
+        <span class="skill-title">Software</span>
         <ul>
           <li>KeyShot</li>
           <li>Adobe Illustrator</li>
           <li>Photoshop</li>
         </ul>
       </div>
+
     </div>
   </div>
 </section>
+
 
  <section id="contact" class="section">
   <div class="content">
