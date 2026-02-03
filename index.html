@@ -202,8 +202,9 @@ nav a:hover::after{
   position:absolute;
   inset:0;
   display:none;
-  align-items:center;
+  align-items:flex-start;
 }
+
 .section.active{display:flex}
 
 .content{
@@ -216,7 +217,8 @@ nav a:hover::after{
 
 .section .content{
   max-width:1035px;
-  transform: translateY(15px);
+  padding-top: 160px;
+
 }
 
 
@@ -445,21 +447,6 @@ footer{
 
 
   /* ===== CONTACT SECTION ===== */
-
-#contact{
-  align-items: flex-start;
-}
-
-#contact .content{
-  transform: none !important;
-}
-
-#contact h2{
-  margin-top: 150px;
-}
-
-
-
 
   
 .contact-grid{
