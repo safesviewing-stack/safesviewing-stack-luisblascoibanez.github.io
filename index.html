@@ -652,65 +652,7 @@ footer{
   }
 }
 
- /* ===== SKILLS BLOCK ===== */
-
-.skills-block{
-  margin-top: 30px;
-}
-
-.skills-block:first-of-type{
-  margin-top: 6px;    /* ← mucho más cerca del h2 */
-}
-.skills-title{
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 15px;
-}
-
-/* ===== GRID ===== */
-
-.skills-grid{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-}
-
-/* ===== SKILL ITEM ===== */
-
-.skill-item{
-  height: 50px;
-  padding: 0 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1.3px solid rgba(255,255,255,0.3);
-  border-radius: 12px;
-
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--white);
-
-  background: transparent;
-  transition:
-    border-color .3s ease,
-    background .3s ease,
-    transform .3s ease;
-}
-
-
-.skill-item:hover{
-  border-color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);  /* hover más sutil */
-}
-
-
-/* items anchos */
+ 
 
 
   /* ===== CONTACT ENTRY ANIMATION ===== */
@@ -735,26 +677,58 @@ footer{
 }
 
 
+  /* ===== SKILLS GRID IMPROVED ===== */
 
-
-  /* ===== SKILLS BLOCK ENTRY ===== */
-
-.skills-block{
-  opacity: 0;
-  transform: translateY(14px);
-  animation: skillsBlockIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
 }
 
-.skills-1{ animation-delay: .6s; }
-.skills-2{ animation-delay: .85s; }
-.skills-3{ animation-delay: 1.1s; }
+/* Skill base */
+.skill-item{
+  height: 50px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-@keyframes skillsBlockIn{
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border: 1.2px solid rgba(255,255,255,0.28);
+  border-radius: 14px;
+
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--white);
+
+  background: rgba(255,255,255,0.02);
+  transition:
+    border-color .35s ease,
+    background .35s ease,
+    transform .35s ease,
+    box-shadow .35s ease;
 }
+
+/* Core skills (lo que dominas) */
+.skill-item.core{
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.06);
+  font-weight: 600;
+}
+
+/* Items anchos */
+.skill-item.wide{
+  grid-column: span 2;
+}
+
+/* Hover */
+.skill-item:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.65);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
 
 
   
