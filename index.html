@@ -323,6 +323,10 @@ p{
 }
 
 /* ===== FOOTER ===== */
+/* ===============================
+   FOOTER BASE
+================================ */
+
 footer{
   position: fixed;
   bottom: 0;
@@ -332,20 +336,36 @@ footer{
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
+
   opacity: 0;
   transform: translateY(30px);
   pointer-events: none;
 }
 
-/* ENTRADA CV */
-footer.cv-in{
-  animation: footerIn 1.2s cubic-bezier(.22,.61,.36,1) forwards;
+/* ===============================
+   FOOTER NORMAL (RESTO SECCIONES)
+================================ */
+
+footer.footer-normal{
+  animation: footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards;
+  animation-delay: 1.5s;
 }
 
-/* SALIDA CV */
-footer.cv-out{
-  animation: footerOut .6s cubic-bezier(.22,.61,.36,1) forwards;
+/* ===============================
+   FOOTER CV (SCROLL)
+================================ */
+
+footer.cv-in{
+  animation: footerCVIn 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
+
+footer.cv-out{
+  animation: footerCVOut .7s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* ===============================
+   KEYFRAMES
+================================ */
 
 @keyframes footerIn{
   to{
@@ -354,7 +374,22 @@ footer.cv-out{
   }
 }
 
-@keyframes footerOut{
+@keyframes footerCVIn{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes footerCVOut{
+  from{
+    opacity: 1;
+    transform: translateY(0);
+  }
   to{
     opacity: 0;
     transform: translateY(30px);
@@ -1305,6 +1340,9 @@ function changeSection(id, link) {
   if (id === 'portfolio') {
     const portfolioLink = document.querySelector('nav a:nth-child(3)');
     portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
+
+    handleFooterOnSectionChange(id);
+
   }
   
   // Ocultar el logo en todas las secciones excepto Home
@@ -1319,113 +1357,67 @@ function changeSection(id, link) {
     logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
   }
 
-  // Mostrar el footer con animación cada vez que se cambie de sección
-  const footer = document.querySelector('footer');
-  footer.style.animation = 'none';
-  void footer.offsetHeight; // Fuerza el reflujo del DOM
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
-  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
-}
+  /* ===============================
+   FOOTER — SISTEMA UNIFICADO
+================================ */
 
-
-function handleFooterCV(){
-  const scrollBottom = window.innerHeight + window.scrollY;
-  const pageHeight = document.documentElement.scrollHeight;
-
-  const SHOW_AT = pageHeight - 40;   // aparece casi al final
-  const HIDE_AT = pageHeight - 120;  // desaparece antes al subir
-
-  /* ===== ENTRADA ===== */
-  if (scrollBottom >= SHOW_AT && !footerVisible) {
-    footer.classList.remove('animate-out');
-    void footer.offsetHeight; // reflow
-    footer.classList.add('animate-in');
-    footerVisible = true;
-  }
-
-  /* ===== SALIDA ===== */
-  if (scrollBottom < HIDE_AT && footerVisible) {
-    footer.classList.remove('animate-in');
-    void footer.offsetHeight;
-    footer.classList.add('animate-out');
-    footerVisible = false;
-  }
-}
-
-const footer = document.querySelector('footer');
-let footerVisible = false;
-
-function handleFooterCV(){
-  const scrollBottom = window.innerHeight + window.scrollY;
-  const pageHeight = document.documentElement.scrollHeight;
-
-  const SHOW_AT = pageHeight - 10;    // prácticamente al final
-  const HIDE_AT = pageHeight - 120;  // desaparece al subir un poco
-
-  // ===== APARECER =====
-  if(scrollBottom >= SHOW_AT && !footerVisible){
-    footer.classList.remove('animate-out');
-    void footer.offsetHeight; // reflow
-    footer.classList.add('animate-in');
-    footerVisible = true;
-  }
-
-  // ===== DESAPARECER =====
-  if(scrollBottom < HIDE_AT && footerVisible){
-    footer.classList.remove('animate-in');
-    void footer.offsetHeight;
-    footer.classList.add('animate-out');
-    footerVisible = false;
-  }
-}
-
-  window.addEventListener('scroll', () => {
-  if(document.getElementById('cv').classList.contains('active')){
-    handleFooterCV();
-  }
-});
-
-  const footer = document.querySelector('footer');
-
+const footer = document.getElementById('main-footer');
 let cvFooterVisible = false;
+
+/* ===== FOOTER NORMAL ===== */
+
+function showNormalFooter(){
+  footer.className = '';
+  footer.classList.add('footer-normal');
+}
+
+/* ===== FOOTER CV ===== */
 
 function handleCVFooterScroll(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_AT = pageHeight - 20;   // casi al final
-  const HIDE_AT = pageHeight - 140;  // desaparece al subir un poco
+  const SHOW_AT = pageHeight - 20;
+  const HIDE_AT = pageHeight - 140;
 
-  // ===== ENTRAR =====
+  // ENTRAR
   if(scrollBottom >= SHOW_AT && !cvFooterVisible){
-    footer.classList.remove('cv-out');
+    footer.className = '';
     void footer.offsetHeight;
     footer.classList.add('cv-in');
     cvFooterVisible = true;
   }
 
-  // ===== SALIR =====
+  // SALIR
   if(scrollBottom < HIDE_AT && cvFooterVisible){
-    footer.classList.remove('cv-in');
+    footer.className = '';
     void footer.offsetHeight;
     footer.classList.add('cv-out');
     cvFooterVisible = false;
   }
 }
+
+/* ===== CAMBIO DE SECCIÓN ===== */
+
+function handleFooterOnSectionChange(sectionId){
+
+  footer.className = '';
+  footer.style.opacity = '';
+  footer.style.transform = '';
+  cvFooterVisible = false;
+
+  if(sectionId !== 'cv'){
+    showNormalFooter();
+  }
+}
+
+/* ===== LISTENERS ===== */
+
 window.addEventListener('scroll', () => {
   if(document.getElementById('cv').classList.contains('active')){
     handleCVFooterScroll();
   }
 });
-
-  const footer = document.querySelector('footer');
-
-/* ===== RESET FOOTER SI SALIMOS DE CV ===== */
-if(!document.getElementById('cv').classList.contains('active')){
-  footer.classList.remove('cv-in', 'cv-out');
-  footer.style.opacity = '';
-  footer.style.transform = '';
-}
 
   
 </script>
