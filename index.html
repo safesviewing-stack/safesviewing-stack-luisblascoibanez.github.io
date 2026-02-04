@@ -1211,9 +1211,10 @@ footer.cv-out{
 
 
 
-<footer>
+<footer id="main-footer">
   © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
 </footer>
+
 
 <script>
 let currentLang = 'es';
@@ -1341,7 +1342,6 @@ function changeSection(id, link) {
     const portfolioLink = document.querySelector('nav a:nth-child(3)');
     portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
 
-    handleFooterOnSectionChange(id);
 
   }
   
@@ -1474,6 +1474,60 @@ window.addEventListener('scroll', () => {
   }
 });
 
+/* ===============================
+   FOOTER — SISTEMA DEFINITIVO
+================================ */
+
+const footer = document.getElementById('main-footer');
+let cvFooterVisible = false;
+
+/* FOOTER NORMAL */
+function showNormalFooter(){
+  footer.className = '';
+  footer.classList.add('footer-normal');
+}
+
+/* FOOTER CV */
+function handleCVFooterScroll(){
+  const scrollBottom = window.innerHeight + window.scrollY;
+  const pageHeight = document.documentElement.scrollHeight;
+
+  const SHOW_AT = pageHeight - 20;
+  const HIDE_AT = pageHeight - 140;
+
+  if(scrollBottom >= SHOW_AT && !cvFooterVisible){
+    footer.className = '';
+    void footer.offsetHeight;
+    footer.classList.add('cv-in');
+    cvFooterVisible = true;
+  }
+
+  if(scrollBottom < HIDE_AT && cvFooterVisible){
+    footer.className = '';
+    void footer.offsetHeight;
+    footer.classList.add('cv-out');
+    cvFooterVisible = false;
+  }
+}
+
+/* CAMBIO DE SECCIÓN */
+function handleFooterOnSectionChange(sectionId){
+  footer.className = '';
+  footer.style.opacity = '';
+  footer.style.transform = '';
+  cvFooterVisible = false;
+
+  if(sectionId !== 'cv'){
+    showNormalFooter();
+  }
+}
+
+/* SCROLL SOLO PARA CV */
+window.addEventListener('scroll', () => {
+  if(document.getElementById('cv').classList.contains('active')){
+    handleCVFooterScroll();
+  }
+});
 
   
 </script>
