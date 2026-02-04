@@ -734,6 +734,40 @@ footer{
   }
 }
 
+/* ===== VARIACIONES DE GRID ===== */
+
+.skills-core{
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.skills-compact{
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.skills-process{
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ===== ITEMS ANCHOS ===== */
+
+.skill-wide{
+  grid-column: span 2;
+}
+
+/* Ajuste fino en pantallas grandes */
+@media (min-width: 1920px){
+  .skills-core{
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .skills-compact{
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .skills-process{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 
 
@@ -906,34 +940,34 @@ footer{
   <div class="content">
     <h2 class="fade-up">Habilidades</h2>
 
-    <!-- MODELADO 3D -->
-<div class="skills-block skills-1">
-      <h3 class="skills-title">Modelado 3D</h3>
-      <div class="skills-grid">
+    <!-- CORE TOOLS -->
+    <div class="skills-block skills-1">
+      <h3 class="skills-title">Herramientas de modelado 3D</h3>
+      <div class="skills-grid skills-core">
+        <div class="skill-item skill-wide">SolidWorks</div>
+        <div class="skill-item skill-wide">Fusion 360</div>
         <div class="skill-item">Inventor</div>
-        <div class="skill-item">Fusion 360</div>
-        <div class="skill-item">SolidWorks</div>
-        <div class="skill-item">3ds Max</div>
         <div class="skill-item">AutoCAD</div>
+        <div class="skill-item">3ds Max</div>
       </div>
     </div>
 
-    <!-- DISEÑO GRÁFICO -->
-<div class="skills-block skills-2">
-      <h3 class="skills-title">Diseño gráfico y web</h3>
-      <div class="skills-grid">
-        <div class="skill-item">Animate</div>
+    <!-- GRAPHIC & DIGITAL -->
+    <div class="skills-block skills-2">
+      <h3 class="skills-title">Diseño gráfico & digital</h3>
+      <div class="skills-grid skills-compact">
         <div class="skill-item">Photoshop</div>
         <div class="skill-item">Illustrator</div>
         <div class="skill-item">InDesign</div>
-        <div class="skill-item">Github</div>
+        <div class="skill-item">Animate</div>
+        <div class="skill-item">GitHub</div>
       </div>
     </div>
 
-    <!-- TÉCNICA & PROCESOS -->
-<div class="skills-block skills-3">
-      <h3 class="skills-title">Técnica y procesos</h3>
-      <div class="skills-grid">
+    <!-- PROCESOS -->
+    <div class="skills-block skills-3">
+      <h3 class="skills-title">Procesos y fabricación</h3>
+      <div class="skills-grid skills-process">
         <div class="skill-item skill-wide">Prototipado</div>
         <div class="skill-item skill-wide">Impresión 3D</div>
       </div>
@@ -941,6 +975,7 @@ footer{
 
   </div>
 </section>
+
 
 
 
