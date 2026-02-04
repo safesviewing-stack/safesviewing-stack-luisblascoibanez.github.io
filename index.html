@@ -677,66 +677,88 @@ footer{
 }
 
 
-/* ===== SKILLS – ULTRA PREMIUM ===== */
+/* ===== SKILLS – BUTTONS PREMIUM ===== */
 
-.skills-ultra{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:90px;
-  margin-top:20px;
+.skills-nav{
+  display:flex;
+  gap:28px;
+  margin:24px 0 40px;
 }
 
-.skills-block{
+.skills-nav button{
+  background:none;
+  border:none;
+  color:rgba(255,255,255,0.55);
+  font-size:11px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  cursor:pointer;
   position:relative;
-  padding-top:28px;
+  padding-bottom:6px;
+  transition:color .35s ease;
 }
 
-/* Línea técnica */
-.skills-block::before{
+/* Línea */
+.skills-nav button::after{
   content:"";
   position:absolute;
-  top:0;
   left:0;
-  width:36px;
+  right:0;
+  bottom:0;
   height:1px;
-  background:rgba(255,255,255,0.4);
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s ease;
 }
 
-/* Eyebrow */
-.skills-eyebrow{
-  font-size:10px;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.55);
-  display:block;
-  margin-bottom:6px;
+.skills-nav button.active,
+.skills-nav button:hover{
+  color:#fff;
 }
 
-/* Heading */
-.skills-heading{
-  font-size:20px;
-  font-weight:500;
-  margin-bottom:22px;
+.skills-nav button.active::after{
+  transform:scaleX(1);
 }
 
-/* Core skills */
+/* Panels */
+.skills-panels{
+  position:relative;
+  max-width:420px;
+}
+
+.skills-panel{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease;
+}
+
+.skills-panel.active{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+  position:relative;
+}
+
+/* Core */
 .skills-core{
   list-style:none;
   display:flex;
   flex-direction:column;
   gap:12px;
-  margin-bottom:22px;
+  margin-bottom:24px;
 }
 
 .skills-core li{
   font-size:14px;
   font-weight:500;
-  letter-spacing:.02em;
   padding-left:20px;
   position:relative;
 }
 
-/* Punto sólido */
 .skills-core li::before{
   content:"";
   position:absolute;
@@ -749,7 +771,7 @@ footer{
   transform:translateY(-50%);
 }
 
-/* Secondary skills */
+/* Secondary */
 .skills-secondary{
   list-style:none;
   display:flex;
@@ -760,12 +782,10 @@ footer{
 .skills-secondary li{
   font-size:12.5px;
   color:rgba(255,255,255,0.65);
-  letter-spacing:.02em;
   padding-left:20px;
   position:relative;
 }
 
-/* Punto vacío */
 .skills-secondary li::before{
   content:"";
   position:absolute;
@@ -778,39 +798,10 @@ footer{
   transform:translateY(-50%);
 }
 
-/* Hover muy sutil */
-.skills-block li{
-  transition:transform .3s ease, color .3s ease;
-}
-
-.skills-block li:hover{
-  transform:translateX(2px);
-  color:#fff;
-}
-
-/* Entrada premium */
-#skills.active .skills-block{
-  opacity:0;
-  transform:translateY(20px);
-  animation:skillsUltraIn .9s cubic-bezier(.22,.61,.36,1) forwards;
-}
-
-#skills.active .skills-block:nth-child(1){animation-delay:.15s}
-#skills.active .skills-block:nth-child(2){animation-delay:.3s}
-#skills.active .skills-block:nth-child(3){animation-delay:.45s}
-
-@keyframes skillsUltraIn{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
 /* Responsive */
-@media(max-width:1024px){
-  .skills-ultra{
-    grid-template-columns:1fr;
-    gap:56px;
+@media(max-width:768px){
+  .skills-nav{
+    gap:18px;
   }
 }
 
@@ -1199,6 +1190,24 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
+<script>
+document.querySelectorAll('.skills-nav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = btn.dataset.skill;
+
+    // botones
+    document.querySelectorAll('.skills-nav button')
+      .forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // panels
+    document.querySelectorAll('.skills-panel')
+      .forEach(p=>{
+        p.classList.toggle('active', p.dataset.panel === target);
+      });
+  });
+});
+</script>
 
 
   
