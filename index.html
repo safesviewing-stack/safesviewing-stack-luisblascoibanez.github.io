@@ -1298,15 +1298,25 @@ function handleFooterCV(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 30;    // aparece prácticamente al final
-  const HIDE_OFFSET = 50; // desaparece rápido al subir
+  const SHOW_OFFSET = 30;
+  const HIDE_OFFSET = 80;
 
- if(scrollBottom >= pageHeight - SHOW_OFFSET){
-  footer.classList.add('cv-visible');
-}else if(scrollBottom < pageHeight - HIDE_OFFSET){
-  footer.classList.remove('cv-visible');
- }
+  if(scrollBottom >= pageHeight - SHOW_OFFSET){
+
+    if(!footer.classList.contains('animate')){
+      footer.classList.add('cv-visible');
+
+      // forzamos reflow para que la animación se dispare
+      void footer.offsetHeight;
+
+      footer.classList.add('animate');
+    }
+
+  }else if(scrollBottom < pageHeight - HIDE_OFFSET){
+    footer.classList.remove('cv-visible','animate');
+  }
 }
+
 
 /* =========================
    CONTROL CENTRAL
