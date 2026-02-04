@@ -1312,10 +1312,15 @@ function changeSection(id, link) {
 
   // Mostrar el footer con animación cada vez que se cambie de sección
   const footer = document.querySelector('footer');
+
+if (id !== 'cv') {
   footer.style.animation = 'none';
-  void footer.offsetHeight; // Fuerza el reflujo del DOM
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
-  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
+  void footer.offsetHeight;
+  footer.style.animation =
+    'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+  footer.style.animationDelay = '1.5s';
+}
+
 
     // ===== MODO CV (SCROLL + FOOTER FINAL) =====
   if (id === 'cv') {
