@@ -1366,6 +1366,38 @@ function handleFooterCV(){
   }
 }
 
+const footer = document.querySelector('footer');
+let footerVisible = false;
+
+function handleFooterCV(){
+  const scrollBottom = window.innerHeight + window.scrollY;
+  const pageHeight = document.documentElement.scrollHeight;
+
+  const SHOW_AT = pageHeight - 10;    // prácticamente al final
+  const HIDE_AT = pageHeight - 120;  // desaparece al subir un poco
+
+  // ===== APARECER =====
+  if(scrollBottom >= SHOW_AT && !footerVisible){
+    footer.classList.remove('animate-out');
+    void footer.offsetHeight; // reflow
+    footer.classList.add('animate-in');
+    footerVisible = true;
+  }
+
+  // ===== DESAPARECER =====
+  if(scrollBottom < HIDE_AT && footerVisible){
+    footer.classList.remove('animate-in');
+    void footer.offsetHeight;
+    footer.classList.add('animate-out');
+    footerVisible = false;
+  }
+}
+
+  window.addEventListener('scroll', () => {
+  if(document.getElementById('cv').classList.contains('active')){
+    handleFooterCV();
+  }
+});
 
   
 </script>
