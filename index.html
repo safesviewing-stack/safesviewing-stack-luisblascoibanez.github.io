@@ -357,6 +357,22 @@ footer.animate{
     opacity: 1;
     transform: translateY(0);
   }
+
+  footer.hide{
+  animation: footerOut 1.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes footerOut{
+  from{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
 }
 
 
@@ -1271,8 +1287,9 @@ const cvSection = document.getElementById('cv');
 
 /* reset total */
 function resetFooter(){
-  footer.classList.remove('visible','animate','cv-visible');
+  footer.classList.remove('visible','animate','cv-visible','hide');
 }
+
 
 /* =========================
    FOOTER NORMAL (NO CV)
@@ -1291,31 +1308,43 @@ function showFooterNormal(){
   }, 800);
 }
 
-/* =========================
-   FOOTER CV (SOLO AL FINAL)
-========================= */
 function handleFooterCV(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
   const SHOW_OFFSET = 30;
-  const HIDE_OFFSET = 80;
+  const HIDE_OFFSET = 120;
 
+  // === ENTRADA ===
   if(scrollBottom >= pageHeight - SHOW_OFFSET){
 
     if(!footer.classList.contains('animate')){
+      footer.classList.remove('hide');
       footer.classList.add('cv-visible');
 
-      // forzamos reflow para que la animación se dispare
+      // forzar reflow
       void footer.offsetHeight;
 
       footer.classList.add('animate');
     }
 
+  // === SALIDA ===
   }else if(scrollBottom < pageHeight - HIDE_OFFSET){
-    footer.classList.remove('cv-visible','animate');
+
+    if(!footer.classList.contains('hide')){
+      footer.classList.remove('animate');
+      footer.classList.add('hide');
+
+      // limpiar clases al terminar animación
+      footer.addEventListener('animationend', function clean(){
+        footer.classList.remove('cv-visible','hide');
+        footer.removeEventListener('animationend', clean);
+      });
+    }
+
   }
 }
+
 
 
 /* =========================
