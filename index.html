@@ -35,6 +35,19 @@ body::-webkit-scrollbar{
   height: 0;
 }
 
+  html,
+body{
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+
 
 /* ===== BACKGROUND ===== */
 .bg-layer{
