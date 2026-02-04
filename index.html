@@ -1324,13 +1324,14 @@ if (id !== 'cv') {
 }
 
 
+
     // ===== MODO CV (SCROLL + FOOTER FINAL) =====
   if (id === 'cv') {
-    document.body.classList.add('cv-active');
-    window.scrollTo(0, 0); // empieza arriba del CV
-  } else {
-    document.body.classList.remove('cv-active');
-  }
+  document.body.classList.add('cv-active');
+  cvFooterShown = false;
+  window.scrollTo(0, 0);
+} else {
+  document.body.classList.remove('cv-active');
 }
 
 const cvSection = document.getElementById('cv');
@@ -1347,8 +1348,10 @@ function handleCVScroll(){
     void footer.offsetHeight;
     footer.style.animation =
       'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+    footer.style.animationDelay = '1.5s';
   }
 }
+
 
 window.addEventListener('scroll', () => {
   if(document.body.classList.contains('cv-active')){
