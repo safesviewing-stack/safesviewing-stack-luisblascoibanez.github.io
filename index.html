@@ -1314,6 +1314,21 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
+<script>
+const footer = document.querySelector('footer');
+
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageHeight = document.documentElement.scrollHeight;
+
+  // margen de tolerancia (px)
+  if (scrollPosition >= pageHeight - 10) {
+    footer.classList.add('visible');
+  } else {
+    footer.classList.remove('visible');
+  }
+});
+</script>
 
 
   
