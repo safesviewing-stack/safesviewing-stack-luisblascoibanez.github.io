@@ -797,6 +797,8 @@ footer{
   grid-template-columns: 28px 1fr;
   gap: 22px;
   align-items: flex-start;
+  z-index: 6; /* puntos y texto por encima */
+
 
   opacity: 0;
   transform: translateX(-40px);
@@ -812,6 +814,8 @@ footer{
   width: 1px;
   background: rgba(255,255,255,0.22);
   pointer-events: none;
+  z-index: 5;                          /* ⬅️ CLAVE */
+
 }
 
 
