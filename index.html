@@ -772,6 +772,77 @@ footer{
   padding-bottom: 160px;      /* espacio para footer */
 }
 
+/* ===== CV BLOCKS ===== */
+
+.cv-content{
+  gap: 36px;
+  position: relative;
+}
+
+.cv-content::before{
+  content:"";
+  position:absolute;
+  left: 5px;
+  top: 40px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.2);
+}
+  
+.cv-block{
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 26px;
+  align-items: flex-start;
+
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: cvIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.cv-marker{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: 6px;
+}
+
+/* Texto */
+.cv-text h3{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cv-text span{
+  display: block;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.cv-text p{
+  max-width: 560px;
+}
+
+/* ===== ANIMACIÓN ===== */
+
+@keyframes cvIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== STAGGER ===== */
+
+.cv-1{ animation-delay: .4s; }
+.cv-2{ animation-delay: .6s; }
+.cv-3{ animation-delay: .8s; }
+.cv-4{ animation-delay: 1s; }
 
   
 </style>
@@ -870,53 +941,61 @@ footer{
 </section>
 
 <section id="cv" class="section">
-  <div class="content">
-    <h2 class="fade-up" data-i18n="cv_title">Currículum Vitae</h2>
+  <div class="content cv-content">
 
-    <p class="fade-up delay-1" data-i18n="cv_description">
-      Aquí podrás ver una descripción general de mi trayectoria académica y profesional. He adquirido una experiencia valiosa tanto en el ámbito académico como en el mundo real, enfrentando retos de diseño innovadores.
-    </p>
+    <h2 class="fade-up">Currículum Vitae</h2>
 
-    <div class="cv-details fade-up delay-2">
-      <div class="cv-column">
-        <h3>Educación</h3>
-        <ul>
-          <li>
-            <strong>Universidad Politécnica de Valencia</strong><br>
-            <span>Grado en Diseño Industrial (2022-2026)</span>
-          </li>
-          <li>
-            <strong>Formación Profesional en Electricidad</strong><br>
-            <span>Formación técnica en el sector eléctrico, que me ha proporcionado una sólida base técnica.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="cv-column">
-        <h3>Experiencia Profesional</h3>
-        <ul>
-          <li>
-            <strong>Prácticas en Sixay</strong><br>
-            <span>Diseño de mobiliario personalizado y gestión de proyectos en una empresa de diseño líder.</span>
-          </li>
-          <li>
-            <strong>Freelance</strong><br>
-            <span>Desarrollo de proyectos de diseño de productos para clientes individuales, con enfoque en la funcionalidad y la estética.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="cv-column">
-        <h3>Habilidades Técnicas</h3>
-        <ul>
-          <li><i class="fas fa-cogs"></i> Diseño asistido por computadora (CAD)</li>
-          <li><i class="fas fa-3d"></i> Impresión 3D y prototipado rápido</li>
-          <li><i class="fas fa-pen"></i> Modelado 3D y renderizado</li>
-        </ul>
+    <div class="cv-block cv-1">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Grado en Diseño Industrial</h3>
+        <span>Universidad Politécnica de Valencia · 2022–2026</span>
+        <p>
+          Formación en diseño de producto, procesos de fabricación,
+          desarrollo técnico y prototipado.
+        </p>
       </div>
     </div>
+
+    <div class="cv-block cv-2">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Formación Profesional en Electricidad</h3>
+        <span>Base técnica aplicada al diseño</span>
+        <p>
+          Conocimientos sólidos en sistemas eléctricos,
+          lectura de planos y procesos industriales.
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-block cv-3">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Prácticas en Sixay</h3>
+        <span>Diseño de mobiliario · 2025</span>
+        <p>
+          Desarrollo de mobiliario a medida, definición técnica,
+          optimización de componentes y trabajo en equipo.
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-block cv-4">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Perfil Técnico</h3>
+        <span>CAD · Prototipado · Impresión 3D</span>
+        <p>
+          Experiencia en herramientas de modelado 3D,
+          validación de concepto y desarrollo de producto.
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
+
 
 <section id="skills" class="section">
   <div class="content">
