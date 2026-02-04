@@ -1175,6 +1175,9 @@ body.cv-active footer{
 let currentLang = 'es';
 
 const translations = {
+
+let cvFooterShown = false;
+
   es:{
     nav_home:"Inicio",
     nav_about:"Sobre mí",
@@ -1338,10 +1341,13 @@ function handleCVScroll(){
   const scrollBottom =
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
 
-  if(scrollBottom){
+  if(scrollBottom && !cvFooterShown){
+    cvFooterShown = true;
+
     footer.style.animation = 'none';
     void footer.offsetHeight;
-    footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+    footer.style.animation =
+      'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
   }
 }
 
