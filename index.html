@@ -794,7 +794,7 @@ footer{
   
 .cv-block{
   display: grid;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 32px 1fr;
   gap: 26px;
   align-items: flex-start;
 
@@ -802,6 +802,18 @@ footer{
   transform: translateX(-40px);
   animation: cvIn .9s cubic-bezier(.22,.61,.36,1) forwards;
 }
+
+  .cv-content::before{
+  content: "";
+  position: absolute;
+  left: 16px;        /* ⬅️ dentro de la columna timeline */
+  top: 70px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.22);
+  pointer-events: none;
+}
+
 
 .cv-marker{
   width: 12px;
