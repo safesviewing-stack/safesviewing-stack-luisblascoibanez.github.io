@@ -1172,17 +1172,18 @@ body.cv-active footer{
 
 
 <script>
+/* ===== ESTADO GLOBAL ===== */
 let currentLang = 'es';
 let cvFooterShown = false;
 
+const footer = document.getElementById('main-footer');
 
+/* ===== TRADUCCIONES ===== */
 const translations = {
   es:{
     nav_home:"Inicio",
     nav_about:"Sobre mí",
     nav_portfolio:"Portfolio",
-    portfolio_title: "Portfolio",
-    cv_title: "Currículum Vitae",
     nav_cv:"CV",
     nav_skills:"Habilidades",
     nav_contact:"Contacto",
@@ -1191,15 +1192,12 @@ const translations = {
     home_sub:"Perfil técnico y creativo enfocado en producto.",
     home_btn:"Ver proyectos",
     about_title:"Sobre mí",
-    about_text:"Hola, soy Luis, tengo 24 años y soy estudiante de Diseño Industrial en la UPV, actualmente en mi último año. Vivo en Valencia y me considero una persona con una mente ecléctica y perfeccionista, siempre interesada en encontrar el equilibrio entre lo técnico y lo estético. Desde pequeño he tenido curiosidad por entender cómo funcionan las cosas, y mi formación profesional en el sector de la electricidad me permitió adquirir una base técnica sólida que hoy aplico al diseño y desarrollo de producto. Disfruto especialmente del proceso completo de diseño, desde la idea inicial hasta la definición técnica y el detalle final, y tengo una necesidad constante de estar creando y resolviendo. Si algo no me sale, no paro hasta encontrar la solución, porque para mí el proceso es tan importante como el resultado final. Como dato curioso, me interesa especialmente el campo de la impresión 3D, ya que me permite experimentar con el diseño y validar conceptos de la forma más rápida y precisa.",
-    footer:"© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial"
+    about_text:"Hola, soy Luis, tengo 24 años y soy estudiante de Diseño Industrial en la UPV, actualmente en mi último año. Vivo en Valencia y me considero una persona con una mente ecléctica y perfeccionista..."
   },
   en:{
     nav_home:"Home",
     nav_about:"About",
     nav_portfolio:"Portfolio",
-    portfolio_title: "Portfolio",
-    cv_title: "Curriculum Vitae",
     nav_cv:"CV",
     nav_skills:"Skills",
     nav_contact:"Contact",
@@ -1208,65 +1206,21 @@ const translations = {
     home_sub:"Technical and creative profile focused on product.",
     home_btn:"View projects",
     about_title:"About me",
-    about_text:"Hi, I’m Luis, I’m 24 years old and an Industrial Design student at UPV, currently in my final year. I live in Valencia and consider myself an eclectic and perfectionist person, always interested in finding the balance between technical precision and aesthetics. From an early age, I’ve been curious about how things work, and my vocational training in the electrical sector gave me a solid technical foundation that I now apply to product design and development. I especially enjoy the complete design process, from the initial idea to technical definition and final detailing, and I have a constant need to keep creating and solving problems. If something doesn’t work, I don’t stop until I find the solution, because for me the process is just as important as the final result. As a curious fact, I’m particularly interested in the field of 3D printing, as it allows me to directly experiment with design and validate concepts in the fastest and most precise way.",
-    footer:"© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Design Engineering"
+    about_text:"Hi, I’m Luis, I’m 24 years old and an Industrial Design student..."
   }
 };
 
+/* ===== ANIMACIONES ===== */
 function resetAnimations(scope=document){
   scope.querySelectorAll('.fade-up, .photo-in').forEach(el=>{
     const c = el.className;
     el.className = c.replace(/fade-up|delay-1|delay-2|photo-in/g,'').trim();
-    void el.offsetHeight; // force reflow
+    void el.offsetHeight;
     el.className = c;
   });
-
-  scope.querySelectorAll('nav a').forEach((el, index) => {
-  el.style.animation = 'none';
-  void el.offsetHeight;
-  el.style.animation = `navIn 0.55s ease forwards ${index * 0.08}s`;
-});
-
-
-const button = scope.querySelector('.btn');
-if (button) {
-  button.style.animation = 'none';
-  void button.offsetHeight;
-  button.style.animation =
-    'btnIn 0.6s cubic-bezier(.4,0,.2,1) forwards 0.8s';
 }
 
-
-  // Reset language button animation (from right)
-  const langButtons = scope.querySelectorAll('.lang-switch button');
-  langButtons.forEach((btn, index) => {
-    btn.style.animation = 'none';
-    void btn.offsetHeight;
-    btn.style.animation = `langFadeRight 1s cubic-bezier(.4,0,.2,1) forwards`; // Apply same timing for both buttons
-  });
-
-  // Reset logo animation (same as initial entry)
-  const logo = scope.querySelector('.logo');
-  logo.style.animation = 'none'; 
-  void logo.offsetHeight; // force reflow
-  logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reapply the same animation on language change
-
-  // Reset header animation
-  scope.querySelectorAll('header').forEach(el => {
-    el.style.animation = 'none';
-    void el.offsetHeight;
-    el.style.animation = '';
-  });
-
-  // Reset footer animation (triggered on button click)
-  scope.querySelectorAll('footer').forEach(el => {
-    el.style.animation = 'none';
-    void el.offsetHeight; 
-    el.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Apply same animation for all footers
-    el.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
-  });
-}
-
+/* ===== CAMBIO DE IDIOMA ===== */
 function changeLang(lang){
   if(lang === currentLang) return;
   currentLang = lang;
@@ -1275,75 +1229,70 @@ function changeLang(lang){
     el.textContent = translations[lang][el.dataset.i18n];
   });
 
-  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
-  document.querySelector(`.lang-switch button[onclick*="${lang}"]`).classList.add('active');
+  document.querySelectorAll('.lang-switch button')
+    .forEach(b=>b.classList.remove('active'));
 
-  resetAnimations(); // Reset animations when changing language
+  document
+    .querySelector(`.lang-switch button[onclick*="${lang}"]`)
+    .classList.add('active');
+
+  resetAnimations();
 }
 
+/* ===== CAMBIO DE SECCIÓN ===== */
 function changeSection(id, link) {
-  // Verificar si ya estamos en la misma sección
   if (document.getElementById(id).classList.contains('active')) return;
 
-  // Desactivar todas las secciones
-  document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-  // Activar la sección correspondiente
+  document.querySelectorAll('.section')
+    .forEach(section => section.classList.remove('active'));
+
   document.getElementById(id).classList.add('active');
-  // Desactivar la clase active en todos los enlaces
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  // Activar la clase active en el enlace correspondiente
-  link.classList.add('active'); // Aseguramos que el enlace activo tiene la línea debajo
-  
-  // Si es la sección de Portfolio, aplicamos la clase active al enlace de Portfolio
-  if (id === 'portfolio') {
-    const portfolioLink = document.querySelector('nav a:nth-child(3)');
-    portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
-  }
-  
-  // Ocultar el logo en todas las secciones excepto Home
+
+  document.querySelectorAll('nav a')
+    .forEach(a => a.classList.remove('active'));
+
+  link.classList.add('active');
+
+  /* Logo */
   const logo = document.getElementById('logo-home');
   if (id !== 'home') {
     logo.style.visibility = 'hidden';
   } else {
     logo.style.visibility = 'visible';
-    // Reaplicar la animación al logo cuando se entra en Home
-    logo.style.animation = 'none'; // Para reiniciar la animación
-    void logo.offsetHeight; // Fuerza el reflujo del DOM
-    logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
+    logo.style.animation = 'none';
+    void logo.offsetHeight;
+    logo.style.animation =
+      'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards';
   }
 
-  // Mostrar el footer con animación cada vez que se cambie de sección
-  const footer = document.querySelector('footer');
+  /* Footer normal (NO CV) */
+  if (id !== 'cv') {
+    footer.style.animation = 'none';
+    void footer.offsetHeight;
+    footer.style.animation =
+      'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+    footer.style.animationDelay = '1.5s';
+    document.body.classList.remove('cv-active');
+  }
 
-if (id !== 'cv') {
-  footer.style.animation = 'none';
-  void footer.offsetHeight;
-  footer.style.animation =
-    'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
-  footer.style.animationDelay = '1.5s';
-}
-
-
-
-    // ===== MODO CV (SCROLL + FOOTER FINAL) =====
+  /* Modo CV */
   if (id === 'cv') {
-  document.body.classList.add('cv-active');
-  cvFooterShown = false;
-  window.scrollTo(0, 0);
-} else {
-  document.body.classList.remove('cv-active');
+    document.body.classList.add('cv-active');
+    cvFooterShown = false;
+    window.scrollTo(0, 0);
+  }
 }
 
-const cvSection = document.getElementById('cv');
-const footer = document.getElementById('main-footer');
-
+/* ===== FOOTER SOLO AL FINAL DEL CV ===== */
 function handleCVScroll(){
-  const scrollBottom =
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+  if (!document.body.classList.contains('cv-active')) return;
 
-  if(scrollBottom && !cvFooterShown){
+  const reachedBottom =
+    window.innerHeight + window.scrollY >=
+    document.body.offsetHeight - 10;
+
+  if (reachedBottom && !cvFooterShown) {
     cvFooterShown = true;
-
     footer.style.animation = 'none';
     void footer.offsetHeight;
     footer.style.animation =
@@ -1352,15 +1301,9 @@ function handleCVScroll(){
   }
 }
 
-
-window.addEventListener('scroll', () => {
-  if(document.body.classList.contains('cv-active')){
-    handleCVScroll();
-  }
-});
-
-  
+window.addEventListener('scroll', handleCVScroll);
 </script>
+
 
 </body>
 </html>
