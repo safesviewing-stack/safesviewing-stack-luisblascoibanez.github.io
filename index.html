@@ -1323,7 +1323,7 @@ function handleFooterVisibility() {
   const pageHeight = document.documentElement.scrollHeight;
 
   const SHOW_OFFSET = 10;    // aparece casi al final
-  const HIDE_OFFSET = 120;  // ⬅️ desaparece antes al subir
+  const HIDE_OFFSET = 300;  // ⬅️ desaparece antes al subir
 
   if (scrollBottom >= pageHeight - SHOW_OFFSET) {
     footer.classList.add('visible');
