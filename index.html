@@ -324,22 +324,28 @@ p{
 
 /* ===== FOOTER ===== */
 footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  padding:18px 40px;
-  text-align:center;
-  font-size:11px;
-  letter-spacing:.08em;
-  color:#9a9a9a;
-  background-color:transparent; /* Fondo transparente */
-  pointer-events:none;
-
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 18px 40px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #9a9a9a;
+  background-color: transparent;
+  pointer-events: none;
   opacity:0;
   transform:translateY(20px);
   animation:footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards; /* Duración igual a la animación de entrada */
   animation-delay:1.5s; /* Retraso reducido a 1.5 segundos */
+  transition: opacity .6s ease, transform .6s ease;
 }
+
+footer.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+  
 @keyframes footerIn{
   to{opacity:1;transform:translateY(0);}
 }
