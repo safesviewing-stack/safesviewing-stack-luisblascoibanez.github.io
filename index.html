@@ -344,6 +344,38 @@ footer{
   to{opacity:1;transform:translateY(0);}
 }
 
+  /* ===== FOOTER CV ANIMATIONS ===== */
+footer.animate-in{
+  animation: footerIn 1.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+footer.animate-out{
+  animation: footerOut 0.8s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes footerIn{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes footerOut{
+  from{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+
 /* ===== BUTTON ===== */
 .btn{
   margin-top:14px;
@@ -1308,6 +1340,31 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
+let footerVisible = false;
+
+function handleFooterCV(){
+  const scrollBottom = window.innerHeight + window.scrollY;
+  const pageHeight = document.documentElement.scrollHeight;
+
+  const SHOW_AT = pageHeight - 40;   // aparece casi al final
+  const HIDE_AT = pageHeight - 120;  // desaparece antes al subir
+
+  /* ===== ENTRADA ===== */
+  if (scrollBottom >= SHOW_AT && !footerVisible) {
+    footer.classList.remove('animate-out');
+    void footer.offsetHeight; // reflow
+    footer.classList.add('animate-in');
+    footerVisible = true;
+  }
+
+  /* ===== SALIDA ===== */
+  if (scrollBottom < HIDE_AT && footerVisible) {
+    footer.classList.remove('animate-in');
+    void footer.offsetHeight;
+    footer.classList.add('animate-out');
+    footerVisible = false;
+  }
+}
 
 
   
