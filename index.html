@@ -1184,7 +1184,6 @@ body.cv-active footer{
 <script>
 /* ===== ESTADO GLOBAL ===== */
 let currentLang = 'es';
-let cvFooterShown = false;
 
 const footer = document.getElementById('main-footer');
 
@@ -1276,7 +1275,7 @@ function changeSection(id, link) {
   }
 
   /* Footer normal (NO CV) */
-  if (id !== 'cv') {
+ if (id !== 'cv') {
   footer.classList.remove('show');
   footer.style.animation = 'none';
   void footer.offsetHeight;
@@ -1287,29 +1286,30 @@ function changeSection(id, link) {
 }
 
 
+
   /* Modo CV */
-  if (id === 'cv') {
+ if (id === 'cv') {
   document.body.classList.add('cv-active');
-  cvFooterShown = false;
   footer.classList.remove('show');
   window.scrollTo(0, 0);
-  }
 }
+
 
 /* ===== FOOTER SOLO AL FINAL DEL CV ===== */
 function handleCVScroll(){
   if (!document.body.classList.contains('cv-active')) return;
-  if (cvFooterShown) return;
 
   const reachedBottom =
     window.innerHeight + window.scrollY >=
     document.body.offsetHeight - 10;
 
   if (reachedBottom) {
-    cvFooterShown = true;
     footer.classList.add('show');
+  } else {
+    footer.classList.remove('show');
   }
 }
+
 
 
 window.addEventListener('scroll', handleCVScroll);
