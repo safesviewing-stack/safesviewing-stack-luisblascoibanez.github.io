@@ -25,7 +25,8 @@
 body{
   background:var(--bg);
   color:var(--white);
-  overflow:hidden;
+  overflow-y: auto;   /* ← permite scroll natural */
+  overflow-x: hidden;
 }
 
 /* ===== BACKGROUND ===== */
@@ -199,11 +200,13 @@ nav a:hover::after{
 
 /* ===== SECTIONS ===== */
 .section{
-  position:absolute;
-  inset:0;
   display:none;
-  align-items:flex-start;
 }
+
+.section.active{
+  display:block;
+}
+
 
 .section.active{display:flex}
 
