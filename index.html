@@ -340,7 +340,7 @@ footer{
 
 /* visible pero aún sin animar */
 footer.visible{
-  opacity: 1;
+  pointer-events: none;
 }
 
 /* animación SOLO fuera de CV */
@@ -1272,20 +1272,13 @@ function resetFooter(){
 function showFooterNormal(){
   resetFooter();
 
-  // estado base
-  footer.style.animation = 'none';
-  footer.classList.remove('visible');
+  void footer.offsetHeight; // reflow
 
-  // reflow
-  void footer.offsetHeight;
-
-  // mostrar (sigue invisible visualmente)
   footer.classList.add('visible');
 
-  // ⏱️ delay antes de empezar la animación
   setTimeout(() => {
     footer.classList.add('animate');
-  }, 800); // ← retraso antes de entrar
+  }, 800);
 }
 
 
