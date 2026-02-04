@@ -335,17 +335,17 @@ footer{
   pointer-events: none;
 
   opacity: 0;
-  transform: translateY(30px);   /* ⬅️ más recorrido */
+  transform: translateY(30px);
 }
 
-/* visible pero aún sin animar */
-footer.visible{
-  pointer-events: none;
+/* ENTRADA */
+footer.animate-in{
+  animation: footerIn 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
-/* animación SOLO fuera de CV */
-footer.animate{
-  animation: footerIn 1.6s cubic-bezier(.22,.61,.36,1) forwards;
+/* SALIDA */
+footer.animate-out{
+  animation: footerOut 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 @keyframes footerIn{
@@ -357,9 +357,6 @@ footer.animate{
     opacity: 1;
     transform: translateY(0);
   }
-
-  footer.hide{
-  animation: footerOut 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 @keyframes footerOut{
@@ -373,7 +370,6 @@ footer.animate{
   }
 }
 
-}
 
 
 
@@ -1285,85 +1281,46 @@ function changeSection(id, link){
 const footer = document.querySelector('footer');
 const cvSection = document.getElementById('cv');
 
-/* reset total */
+let footerVisible = false;
+
 function resetFooter(){
-  footer.classList.remove('visible','animate','cv-visible','hide');
-}
-
-
-/* =========================
-   FOOTER NORMAL (NO CV)
-========================= */
-function showFooterNormal(){
-  resetFooter();
-
-  // forzar reflow
-  void footer.offsetHeight;
-
-  footer.classList.add('visible');
-
-  // delay + animación lenta
-  setTimeout(() => {
-    footer.classList.add('animate');
-  }, 800);
+  footer.classList.remove('animate-in','animate-out');
 }
 
 function handleFooterCV(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 30;
-  const HIDE_OFFSET = 120;
+  const SHOW_AT = pageHeight - 40;
+  const HIDE_AT = pageHeight - 120;
 
-  // === ENTRADA ===
-  if(scrollBottom >= pageHeight - SHOW_OFFSET){
+  /* ===== APARECER ===== */
+  if(scrollBottom >= SHOW_AT && !footerVisible){
+    resetFooter();
+    void footer.offsetHeight; // reflow
+    footer.classList.add('animate-in');
+    footerVisible = true;
+  }
 
-    if(!footer.classList.contains('animate')){
-      footer.classList.remove('hide');
-      footer.classList.add('cv-visible');
-
-      // forzar reflow
-      void footer.offsetHeight;
-
-      footer.classList.add('animate');
-    }
-
-  // === SALIDA ===
-  }else if(scrollBottom < pageHeight - HIDE_OFFSET){
-
-    if(!footer.classList.contains('hide')){
-      footer.classList.remove('animate');
-      footer.classList.add('hide');
-
-      // limpiar clases al terminar animación
-      footer.addEventListener('animationend', function clean(){
-        footer.classList.remove('cv-visible','hide');
-        footer.removeEventListener('animationend', clean);
-      });
-    }
-
+  /* ===== DESAPARECER ===== */
+  if(scrollBottom < HIDE_AT && footerVisible){
+    resetFooter();
+    void footer.offsetHeight;
+    footer.classList.add('animate-out');
+    footerVisible = false;
   }
 }
 
-
-
-/* =========================
-   CONTROL CENTRAL
-========================= */
 function updateFooter(){
   if(cvSection.classList.contains('active')){
-    handleFooterCV();      // ⬅️ CV independiente
+    handleFooterCV();
   }else{
-    showFooterNormal();    // ⬅️ resto de secciones
+    resetFooter();
+    footerVisible = false;
   }
 }
 
-/* =========================
-   EVENTOS
-========================= */
 window.addEventListener('scroll', updateFooter);
-
-/* init */
 updateFooter();
 
 
