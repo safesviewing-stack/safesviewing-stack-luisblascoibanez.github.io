@@ -1253,6 +1253,7 @@ function changeSection(id, link){
   const logo = document.getElementById('logo-home');
   logo.style.visibility = (id === 'home') ? 'visible' : 'hidden';
 
+  resetFooter();
   window.scrollTo(0,0);
   updateFooter();
 }
@@ -1298,8 +1299,7 @@ function handleFooterCV(){
 /* controlador */
 function updateFooter(){
   if(cvSection.classList.contains('active')){
-    resetFooter();
-    handleFooterCV();
+    handleFooterCV();   // ⬅️ SOLO esto
   }else{
     showFooterNormal();
   }
