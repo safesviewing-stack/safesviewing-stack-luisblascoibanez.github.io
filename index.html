@@ -844,6 +844,16 @@ footer{
 .cv-3{ animation-delay: .8s; }
 .cv-4{ animation-delay: 1s; }
 
+  /* ===== OCULTAR SCROLLBAR ===== */
+body{
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / Edge antiguo */
+}
+
+body::-webkit-scrollbar{
+  display: none;              /* Chrome / Safari */
+}
+
   
 </style>
 </head>
