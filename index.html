@@ -847,6 +847,24 @@ footer{
 .cv-3{ animation-delay: .8s; }
 .cv-4{ animation-delay: 1s; }
 
+  /* ===== CV TIMELINE LINE ===== */
+
+.cv-content{
+  position: relative;
+}
+
+/* Línea vertical */
+.cv-content::before{
+  content: "";
+  position: absolute;
+  left: 23px;                 /* centra la línea con los markers */
+  top: 70px;                  /* arranca debajo del h2 */
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.22);
+  pointer-events: none;
+}
+
  
  
   
