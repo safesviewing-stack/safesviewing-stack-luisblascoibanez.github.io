@@ -1294,8 +1294,8 @@ function handleFooterCV(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 8;    // aparece prácticamente al final
-  const HIDE_OFFSET = 120; // desaparece rápido al subir
+  const SHOW_OFFSET = 30;    // aparece prácticamente al final
+  const HIDE_OFFSET = 50; // desaparece rápido al subir
 
   if(scrollBottom >= pageHeight - SHOW_OFFSET){
     footer.classList.add('visible');
