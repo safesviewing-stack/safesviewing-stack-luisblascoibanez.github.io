@@ -811,7 +811,7 @@ footer{
   left: 14px;        /* ⬅️ dentro de la columna timeline */
   top: 250px;
   bottom: 320px;       /* ⬅️ MISMO valor que padding-bottom */
-  height: calc(100% - 670px);
+  height: calc(100% - 658px);
   width: 1.5px;
   background: rgba(255,255,255,0.22);
   pointer-events: none;
@@ -895,6 +895,27 @@ footer{
 @keyframes cvLineIn{
   to{
     transform: scaleY(1);
+  }
+}
+
+
+@keyframes cvLineInGlow{
+  0%{
+    transform: scaleY(0);
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+  }
+
+  65%{
+    transform: scaleY(1);
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.6),
+      0 0 20px rgba(255,255,255,0.35);
+  }
+
+  100%{
+    transform: scaleY(1);
+    box-shadow:
+      0 0 6px rgba(255,255,255,0.25);
   }
 }
 
