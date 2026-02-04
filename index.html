@@ -1323,19 +1323,20 @@ function changeSection(id, link) {
 
 const footer = document.querySelector('footer');
 
-function handleFooterVisibility() {
-  const cvSection = document.getElementById('cv');
-
-  // ===== NO CV → footer normal con animación =====
-  if (!cvSection.classList.contains('active')) {
-    footer.classList.add('visible');
-    footer.classList.add('animate');
-    return;
-  }
-
-  // ===== CV → comportamiento independiente =====
+/* ===== RESET TOTAL ===== */
+function resetFooter() {
+  footer.classList.remove('visible');
   footer.classList.remove('animate');
+}
 
+/* ===== FOOTER NORMAL (no CV) ===== */
+function showFooterNormal() {
+  footer.classList.add('visible');
+  footer.classList.add('animate');
+}
+
+/* ===== FOOTER CV (independiente) ===== */
+function handleFooterCV() {
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
@@ -1349,7 +1350,25 @@ function handleFooterVisibility() {
   }
 }
 
-window.addEventListener('scroll', handleFooterVisibility);
+/* ===== CONTROLADOR CENTRAL ===== */
+function updateFooter() {
+  const cvSection = document.getElementById('cv');
+  const isCVActive = cvSection.classList.contains('active');
+
+  resetFooter();
+
+  if (isCVActive) {
+    handleFooterCV();
+  } else {
+    showFooterNormal();
+  }
+}
+
+/* ===== EVENTOS ===== */
+window.addEventListener('scroll', updateFooter);
+
+/* Llamar también al cargar */
+updateFooter();
 
 
   
