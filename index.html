@@ -817,6 +817,11 @@ footer{
   pointer-events: none;
   z-index: 5;                          /* ⬅️ CLAVE */
 
+  transform: scaleY(0);
+  transform-origin: bottom;        /* ⬅️ empieza desde abajo */
+  animation: cvLineIn 1s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay: .25s;
+
 }
 
   .cv-block:first-of-type::before{
@@ -887,6 +892,14 @@ footer{
   margin-left: clamp(120px, 16vw, 240px); /* ⬅️ más a la izquierda */
 }
 
+@keyframes cvLineIn{
+  to{
+    transform: scaleY(1);
+  }
+}
+
+
+  
   
 </style>
 </head>
