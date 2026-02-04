@@ -335,27 +335,30 @@ footer{
   pointer-events: none;
 
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .35s ease, transform .35s ease;
+  transform: translateY(30px);   /* ⬅️ más recorrido */
 }
 
-/* visible normal */
+/* visible pero aún sin animar */
 footer.visible{
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* animación SOLO para secciones normales */
+/* animación SOLO fuera de CV */
 footer.animate{
-  animation: footerIn 1.2s cubic-bezier(.4,0,.2,1) forwards;
+  animation: footerIn 1.6s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 @keyframes footerIn{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to{
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 
 
 /* ===== BUTTON ===== */
@@ -1269,21 +1272,22 @@ function resetFooter(){
 function showFooterNormal(){
   resetFooter();
 
-  // estado oculto real
+  // estado base
   footer.style.animation = 'none';
   footer.classList.remove('visible');
 
   // reflow
   void footer.offsetHeight;
 
-  // mostrar footer
+  // mostrar (sigue invisible visualmente)
   footer.classList.add('visible');
 
-  // ⏱️ DELAY EXTRA ANTES DE ANIMAR (ajusta a gusto)
+  // ⏱️ delay antes de empezar la animación
   setTimeout(() => {
     footer.classList.add('animate');
-  }, 700); // ← prueba entre 350–600
+  }, 800); // ← retraso antes de entrar
 }
+
 
 
 /* footer CV (solo al final del scroll) */
