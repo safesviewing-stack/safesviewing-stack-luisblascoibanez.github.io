@@ -853,13 +853,15 @@ footer{
 
 .cv-content{
   position: relative;
+  padding-left: 32px;   /* ← AJUSTA ESTE VALOR */
+
 }
 
 /* Línea vertical */
 .cv-content::before{
   content: "";
   position: absolute;
-  left: 24px;   /* ✅ centro exacto del marker */
+  left: calc(24px + 32px); /* centro columna + padding */
   top: 70px;
   bottom: 0;
   width: 1px;
