@@ -1266,17 +1266,23 @@ function resetFooter(){
   footer.classList.remove('visible','animate');
 }
 
-/* footer normal */
 function showFooterNormal(){
   resetFooter();
 
-  // fuerza reflow para reiniciar animación
+  // forzamos estado oculto real
+  footer.style.animation = 'none';
+  footer.classList.remove('visible');
+
+  // reflow
   void footer.offsetHeight;
 
+  // mostrar
   footer.classList.add('visible');
 
-  // animación SOLO fuera de CV
-  footer.classList.add('animate');
+  // animar con un micro delay
+  requestAnimationFrame(() => {
+    footer.classList.add('animate');
+  });
 }
 
 /* footer CV (solo al final del scroll) */
