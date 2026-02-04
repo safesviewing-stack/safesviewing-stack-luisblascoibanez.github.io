@@ -1260,60 +1260,69 @@ function changeSection(id, link){
 
 
 /* =========================
-   FOOTER (LIMPIO Y AISLADO)
+   FOOTER (DEFINITIVO)
 ========================= */
 const footer = document.querySelector('footer');
 const cvSection = document.getElementById('cv');
 
-/* reset */
+/* reset total */
 function resetFooter(){
-  footer.classList.remove('visible','animate');
+  footer.classList.remove('visible', 'animate');
 }
 
+/* =========================
+   FOOTER NORMAL (NO CV)
+========================= */
 function showFooterNormal(){
   resetFooter();
 
-  void footer.offsetHeight; // reflow
+  // forzar reflow
+  void footer.offsetHeight;
 
   footer.classList.add('visible');
 
+  // delay + animación lenta
   setTimeout(() => {
     footer.classList.add('animate');
   }, 800);
 }
 
-
-
-/* footer CV (solo al final del scroll) */
+/* =========================
+   FOOTER CV (SOLO AL FINAL)
+========================= */
 function handleFooterCV(){
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  if(scrollBottom >= pageHeight - 10){
+  const SHOW_OFFSET = 8;    // aparece prácticamente al final
+  const HIDE_OFFSET = 120; // desaparece rápido al subir
+
+  if(scrollBottom >= pageHeight - SHOW_OFFSET){
     footer.classList.add('visible');
-  }else{
+  }else if(scrollBottom < pageHeight - HIDE_OFFSET){
     footer.classList.remove('visible');
   }
 }
 
-/* controlador */
+/* =========================
+   CONTROL CENTRAL
+========================= */
 function updateFooter(){
   if(cvSection.classList.contains('active')){
-    handleFooterCV();   // ⬅️ SOLO esto
+    handleFooterCV();      // ⬅️ CV independiente
   }else{
-    showFooterNormal();
+    showFooterNormal();    // ⬅️ resto de secciones
   }
 }
 
-/* eventos */
-window.addEventListener('scroll', () => {
-  if (cvSection.classList.contains('active')) {
-    handleFooterCV();
-  }
-});
+/* =========================
+   EVENTOS
+========================= */
+window.addEventListener('scroll', updateFooter);
 
 /* init */
 updateFooter();
+
 </script>
 
 
