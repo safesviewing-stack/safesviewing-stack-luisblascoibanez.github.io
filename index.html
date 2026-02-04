@@ -709,17 +709,22 @@ footer{
 }
 
 .skills-list li{
-  font-size: 14px;
-  color: var(--white);
+  font-size: 13.5px;          /* un poco más fino */
+  letter-spacing: .02em;      /* respiración ligera */
+  color: rgba(255,255,255,0.92);
   position: relative;
-  padding-left: 14px;
+  padding-left: 18px;
+  font-weight: 400;
 }
 
 .skills-list li::before{
-  content: "—";
+  content: "·";               /* punto medio */
   position: absolute;
   left: 0;
-  color: rgba(255,255,255,0.4);
+  top: 0;
+  color: rgba(255,255,255,0.45);
+  font-size: 20px;
+  line-height: 1;
 }
 
 /* Responsive */
