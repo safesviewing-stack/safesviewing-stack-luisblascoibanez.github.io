@@ -1269,21 +1269,22 @@ function resetFooter(){
 function showFooterNormal(){
   resetFooter();
 
-  // forzamos estado oculto real
+  // estado oculto real
   footer.style.animation = 'none';
   footer.classList.remove('visible');
 
   // reflow
   void footer.offsetHeight;
 
-  // mostrar
+  // mostrar footer
   footer.classList.add('visible');
 
-  // animar con un micro delay
-  requestAnimationFrame(() => {
+  // ⏱️ DELAY EXTRA ANTES DE ANIMAR (ajusta a gusto)
+  setTimeout(() => {
     footer.classList.add('animate');
-  });
+  }, 450); // ← prueba entre 350–600
 }
+
 
 /* footer CV (solo al final del scroll) */
 function handleFooterCV(){
