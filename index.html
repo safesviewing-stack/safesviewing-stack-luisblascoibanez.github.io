@@ -336,12 +336,25 @@ footer{
 
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity .6s ease, transform .6s ease;
+  transition: opacity .35s ease, transform .35s ease;
 }
 
+/* visible normal */
 footer.visible{
   opacity: 1;
   transform: translateY(0);
+}
+
+/* animación SOLO para secciones normales */
+footer.animate{
+  animation: footerIn 1.2s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes footerIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -1304,10 +1317,7 @@ function changeSection(id, link) {
 
   // Mostrar el footer con animación cada vez que se cambie de sección
   const footer = document.querySelector('footer');
-  footer.style.animation = 'none';
   void footer.offsetHeight; // Fuerza el reflujo del DOM
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
-  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
   
@@ -1317,13 +1327,16 @@ const footer = document.querySelector('footer');
 function handleFooterVisibility() {
   const cvSection = document.getElementById('cv');
 
-  // 👉 SI NO ESTAMOS EN CV → footer normal (siempre visible)
+  // ===== NO CV → footer normal con animación =====
   if (!cvSection.classList.contains('active')) {
     footer.classList.add('visible');
+    footer.classList.add('animate');
     return;
   }
 
-  // 👉 SI ESTAMOS EN CV → comportamiento especial con scroll
+  // ===== CV → comportamiento independiente =====
+  footer.classList.remove('animate');
+
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
@@ -1338,7 +1351,6 @@ function handleFooterVisibility() {
 }
 
 window.addEventListener('scroll', handleFooterVisibility);
-handleFooterVisibility();
 
 
   
