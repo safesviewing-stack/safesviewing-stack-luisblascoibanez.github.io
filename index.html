@@ -798,6 +798,22 @@ footer{
   transform:translateY(-50%);
 }
 
+  #skills{
+  z-index:5;
+  pointer-events:auto;
+}
+
+.skills-nav,
+.skills-nav button{
+  pointer-events:auto;
+}
+
+  .skills-nav{
+  position:relative;
+  z-index:10;
+}
+
+  
 /* Responsive */
 @media(max-width:768px){
   .skills-nav{
@@ -1209,6 +1225,24 @@ document.querySelectorAll('.skills-nav button').forEach(btn=>{
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.skills-nav button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.dataset.skill;
+
+      document.querySelectorAll('.skills-nav button')
+        .forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.skills-panel')
+        .forEach(p=>{
+          p.classList.toggle('active', p.dataset.panel === target);
+        });
+    });
+  });
+});
+</script>
 
   
 </script>
