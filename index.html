@@ -1300,6 +1300,9 @@ function changeSection(id, link) {
   if (id === 'portfolio') {
     const portfolioLink = document.querySelector('nav a:nth-child(3)');
     portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
+
+  window.scrollTo(0, 0);
+  updateFooter();
   }
   
   // Ocultar el logo en todas las secciones excepto Home
@@ -1314,39 +1317,32 @@ function changeSection(id, link) {
     logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
   }
 
+/* ==================================================
+   FOOTER – LÓGICA LIMPIA Y DEFINITIVA
+================================================== */
+
 const footer = document.querySelector('footer');
 const cvSection = document.getElementById('cv');
 
-/* =========================
-   RESET TOTAL FOOTER
-========================= */
+/* --- reset total --- */
 function resetFooter() {
-  footer.classList.remove('visible');
-  footer.classList.remove('animate');
+  footer.classList.remove('visible', 'animate');
 }
 
-/* =========================
-   FOOTER NORMAL (no CV)
-========================= */
+/* --- footer normal (todas menos CV) --- */
 function showFooterNormal() {
   resetFooter();
-
-  // forzamos reflow para que la animación siempre se dispare
-  void footer.offsetHeight;
-
-  footer.classList.add('visible');
-  footer.classList.add('animate');
+  void footer.offsetHeight; // fuerza animación
+  footer.classList.add('visible', 'animate');
 }
 
-/* =========================
-   FOOTER CV (independiente)
-========================= */
+/* --- footer CV (independiente) --- */
 function handleFooterCV() {
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 10;     // aparece casi al final
-  const HIDE_OFFSET = 140;   // desaparece rápido al subir
+  const SHOW_OFFSET = 10;
+  const HIDE_OFFSET = 140;
 
   if (scrollBottom >= pageHeight - SHOW_OFFSET) {
     footer.classList.add('visible');
@@ -1355,28 +1351,22 @@ function handleFooterCV() {
   }
 }
 
-/* =========================
-   CONTROL CENTRAL
-========================= */
+/* --- controlador central --- */
 function updateFooter() {
-  const isCVActive = cvSection.classList.contains('active');
-
-  if (isCVActive) {
-    // ⚠️ CV: footer NO fijo, NO animación normal
-    resetFooter();
-    handleFooterCV();
+  if (cvSection.classList.contains('active')) {
+    resetFooter();        // ❌ no footer fijo
+    handleFooterCV();     // ✅ solo al final
   } else {
-    // ✅ resto de secciones
-    showFooterNormal();
+    showFooterNormal();   // ✅ footer normal animado
   }
 }
 
-/* =========================
-   EVENTOS
-========================= */
-window.addEventListener('scroll', updateFooter);
-
-
+/* --- eventos --- */
+window.addEventListener('scroll', () => {
+  if (cvSection.classList.contains('active')) {
+    handleFooterCV();
+  }
+});
 
 /* init */
 updateFooter();
