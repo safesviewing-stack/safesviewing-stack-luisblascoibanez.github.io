@@ -1376,13 +1376,8 @@ function updateFooter() {
 ========================= */
 window.addEventListener('scroll', updateFooter);
 
-/* cuando cambias de sección */
-const originalChangeSection = changeSection;
-changeSection = function(id, link) {
-  originalChangeSection(id, link);
-  window.scrollTo(0, 0); // evita heredar scroll del CV
-  updateFooter();
-};
+
+updateFooter();
 
 /* init */
 updateFooter();
