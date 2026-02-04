@@ -677,66 +677,49 @@ footer{
 }
 
 
-/* ===== SKILLS – ONE ROW / 3 COLUMNS ===== */
-
 .skills-row{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
-  margin-top: 26px;
+  gap: 64px;
+  margin-top: 32px;
   align-items: start;
 }
 
-/* Columna */
 .skills-col{
   display: flex;
   flex-direction: column;
 }
 
-/* Título */
 .skills-title{
   font-size: 11px;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-/* Lista */
 .skills-list{
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Item */
 .skills-list li{
   font-size: 14px;
-  letter-spacing: .04em;
   color: var(--white);
   position: relative;
   padding-left: 14px;
 }
 
-/* Guion */
 .skills-list li::before{
   content: "—";
   position: absolute;
   left: 0;
-  color: rgba(255,255,255,0.35);
-}
-
-/* Core skills */
-.skills-list li.core{
-  font-weight: 600;
-}
-
-.skills-list li.core::before{
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.4);
 }
 
 /* Responsive */
@@ -898,43 +881,46 @@ footer{
   <div class="content">
     <h2 class="fade-up">Habilidades</h2>
 
-    <!-- MODELADO 3D -->
-<div class="skills-block skills-1">
-      <h3 class="skills-title">Modelado 3D</h3>
-      <div class="skills-grid">
-        <div class="skill-item">Inventor</div>
-        <div class="skill-item">Fusion 360</div>
-        <div class="skill-item">SolidWorks</div>
-        <div class="skill-item">3ds Max</div>
-        <div class="skill-item">AutoCAD</div>
+    <div class="skills-row fade-up delay-1">
+
+      <!-- COLUMNA 1 -->
+      <div class="skills-col">
+        <h3 class="skills-title">Modelado 3D</h3>
+        <ul class="skills-list">
+          <li>Inventor</li>
+          <li>Fusion 360</li>
+          <li>SolidWorks</li>
+          <li>3ds Max</li>
+          <li>AutoCAD</li>
+        </ul>
       </div>
-    </div>
 
-    <!-- DISEÑO GRÁFICO -->
-<div class="skills-block skills-2">
-      <h3 class="skills-title">Diseño gráfico y web</h3>
-      <div class="skills-grid">
-        <div class="skill-item">Animate</div>
-        <div class="skill-item">Photoshop</div>
-        <div class="skill-item">Illustrator</div>
-        <div class="skill-item">InDesign</div>
-        <div class="skill-item">Github</div>
+      <!-- COLUMNA 2 -->
+      <div class="skills-col">
+        <h3 class="skills-title">Diseño gráfico y web</h3>
+        <ul class="skills-list">
+          <li>Animate</li>
+          <li>Photoshop</li>
+          <li>Illustrator</li>
+          <li>InDesign</li>
+          <li>GitHub</li>
+        </ul>
       </div>
-    </div>
 
-    <!-- TÉCNICA & PROCESOS -->
-<div class="skills-block skills-3">
-      <h3 class="skills-title">Técnica y procesos</h3>
-      <div class="skills-grid">
-        <div class="skill-item skill-wide">Prototipado</div>
-        <div class="skill-item skill-wide">Impresión 3D</div>
-        <div class="skill-item skill-wide">Corte láser</div>
-
+      <!-- COLUMNA 3 -->
+      <div class="skills-col">
+        <h3 class="skills-title">Técnica y procesos</h3>
+        <ul class="skills-list">
+          <li>Prototipado</li>
+          <li>Impresión 3D</li>
+          <li>Corte láser</li>
+        </ul>
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
+
 
 
 
