@@ -332,12 +332,10 @@ footer{
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
-  background-color: transparent;
   pointer-events: none;
-  opacity:0;
-  transform:translateY(20px);
-  animation:footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards; /* Duración igual a la animación de entrada */
-  animation-delay:1.5s; /* Retraso reducido a 1.5 segundos */
+
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity .6s ease, transform .6s ease;
 }
 
@@ -345,10 +343,7 @@ footer.visible{
   opacity: 1;
   transform: translateY(0);
 }
-  
-@keyframes footerIn{
-  to{opacity:1;transform:translateY(0);}
-}
+
 
 /* ===== BUTTON ===== */
 .btn{
@@ -1317,17 +1312,24 @@ function changeSection(id, link) {
   
 const footer = document.querySelector('footer');
 
-window.addEventListener('scroll', () => {
-  const scrollPosition = window.innerHeight + window.scrollY;
+function handleFooterVisibility() {
+  const cvSection = document.getElementById('cv');
+  if (!cvSection.classList.contains('active')) {
+    footer.classList.remove('visible');
+    return;
+  }
+
+  const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  // margen de tolerancia (px)
-  if (scrollPosition >= pageHeight - 10) {
+  if (scrollBottom >= pageHeight - 10) {
     footer.classList.add('visible');
   } else {
     footer.classList.remove('visible');
   }
-});
+}
+
+window.addEventListener('scroll', handleFooterVisibility);
 
 
   
