@@ -1312,18 +1312,23 @@ function changeSection(id, link) {
   
 const footer = document.querySelector('footer');
 
+const footer = document.querySelector('footer');
+
 function handleFooterVisibility() {
   const cvSection = document.getElementById('cv');
+
+  // 👉 SI NO ESTAMOS EN CV → footer normal (siempre visible)
   if (!cvSection.classList.contains('active')) {
-    footer.classList.remove('visible');
+    footer.classList.add('visible');
     return;
   }
 
+  // 👉 SI ESTAMOS EN CV → comportamiento especial con scroll
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 50;    // aparece casi al final
-  const HIDE_OFFSET = 50;  // ⬅️ desaparece antes al subir
+  const SHOW_OFFSET = 10;
+  const HIDE_OFFSET = 120;
 
   if (scrollBottom >= pageHeight - SHOW_OFFSET) {
     footer.classList.add('visible');
@@ -1331,6 +1336,7 @@ function handleFooterVisibility() {
     footer.classList.remove('visible');
   }
 }
+
 window.addEventListener('scroll', handleFooterVisibility);
 handleFooterVisibility();
 
