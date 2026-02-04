@@ -25,9 +25,13 @@
 body{
   background:var(--bg);
   color:var(--white);
-  overflow-y: auto;   /* ← permite scroll natural */
+  overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: none;
+  scrollbar-width: none;        /* Firefox */
+}
+
+body::-webkit-scrollbar{
+  display: none;                /* Chrome / Safari */
 }
 
 /* ===== BACKGROUND ===== */
