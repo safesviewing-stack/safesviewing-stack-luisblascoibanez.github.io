@@ -847,7 +847,11 @@ footer.animate{
 
 }
 
-  
+  footer.cv-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 .cv-marker{
@@ -1267,7 +1271,7 @@ const cvSection = document.getElementById('cv');
 
 /* reset total */
 function resetFooter(){
-  footer.classList.remove('visible', 'animate');
+  footer.classList.remove('visible','animate','cv-visible');
 }
 
 /* =========================
@@ -1297,11 +1301,11 @@ function handleFooterCV(){
   const SHOW_OFFSET = 30;    // aparece prácticamente al final
   const HIDE_OFFSET = 50; // desaparece rápido al subir
 
-  if(scrollBottom >= pageHeight - SHOW_OFFSET){
-    footer.classList.add('visible');
-  }else if(scrollBottom < pageHeight - HIDE_OFFSET){
-    footer.classList.remove('visible');
-  }
+ if(scrollBottom >= pageHeight - SHOW_OFFSET){
+  footer.classList.add('cv-visible');
+}else if(scrollBottom < pageHeight - HIDE_OFFSET){
+  footer.classList.remove('cv-visible');
+ }
 }
 
 /* =========================
