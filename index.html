@@ -919,6 +919,15 @@ footer{
   }
 }
 
+/* ===== FOOTER CV (SCROLL) ===== */
+
+body.cv-active footer{
+  position: relative;
+  margin-top: 120px;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(20px);
+}
 
   
   
@@ -1157,9 +1166,10 @@ footer{
 
 
 
-<footer>
+<footer id="main-footer">
   © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
 </footer>
+
 
 <script>
 let currentLang = 'es';
@@ -1308,7 +1318,34 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
+    // ===== MODO CV (SCROLL + FOOTER FINAL) =====
+  if (id === 'cv') {
+    document.body.classList.add('cv-active');
+    window.scrollTo(0, 0); // empieza arriba del CV
+  } else {
+    document.body.classList.remove('cv-active');
+  }
+}
 
+const cvSection = document.getElementById('cv');
+const footer = document.getElementById('main-footer');
+
+function handleCVScroll(){
+  const scrollBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+
+  if(scrollBottom){
+    footer.style.animation = 'none';
+    void footer.offsetHeight;
+    footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+  }
+}
+
+window.addEventListener('scroll', () => {
+  if(document.body.classList.contains('cv-active')){
+    handleCVScroll();
+  }
+});
 
   
 </script>
