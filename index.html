@@ -1314,34 +1314,40 @@ function changeSection(id, link) {
     logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
   }
 
-  // Mostrar el footer con animación cada vez que se cambie de sección
-  const footer = document.querySelector('footer');
-  void footer.offsetHeight; // Fuerza el reflujo del DOM
-}
-
-  
-
+  <script>
 const footer = document.querySelector('footer');
+const cvSection = document.getElementById('cv');
 
-/* ===== RESET TOTAL ===== */
+/* =========================
+   RESET TOTAL FOOTER
+========================= */
 function resetFooter() {
   footer.classList.remove('visible');
   footer.classList.remove('animate');
 }
 
-/* ===== FOOTER NORMAL (no CV) ===== */
+/* =========================
+   FOOTER NORMAL (no CV)
+========================= */
 function showFooterNormal() {
+  resetFooter();
+
+  // forzamos reflow para que la animación siempre se dispare
+  void footer.offsetHeight;
+
   footer.classList.add('visible');
   footer.classList.add('animate');
 }
 
-/* ===== FOOTER CV (independiente) ===== */
+/* =========================
+   FOOTER CV (independiente)
+========================= */
 function handleFooterCV() {
   const scrollBottom = window.innerHeight + window.scrollY;
   const pageHeight = document.documentElement.scrollHeight;
 
-  const SHOW_OFFSET = 10;
-  const HIDE_OFFSET = 120;
+  const SHOW_OFFSET = 10;     // aparece casi al final
+  const HIDE_OFFSET = 140;   // desaparece rápido al subir
 
   if (scrollBottom >= pageHeight - SHOW_OFFSET) {
     footer.classList.add('visible');
@@ -1350,25 +1356,38 @@ function handleFooterCV() {
   }
 }
 
-/* ===== CONTROLADOR CENTRAL ===== */
+/* =========================
+   CONTROL CENTRAL
+========================= */
 function updateFooter() {
-  const cvSection = document.getElementById('cv');
   const isCVActive = cvSection.classList.contains('active');
 
-  resetFooter();
-
   if (isCVActive) {
+    // ⚠️ CV: footer NO fijo, NO animación normal
+    resetFooter();
     handleFooterCV();
   } else {
+    // ✅ resto de secciones
     showFooterNormal();
   }
 }
 
-/* ===== EVENTOS ===== */
+/* =========================
+   EVENTOS
+========================= */
 window.addEventListener('scroll', updateFooter);
 
-/* Llamar también al cargar */
+/* cuando cambias de sección */
+const originalChangeSection = changeSection;
+changeSection = function(id, link) {
+  originalChangeSection(id, link);
+  window.scrollTo(0, 0); // evita heredar scroll del CV
+  updateFooter();
+};
+
+/* init */
 updateFooter();
+</script>
 
 
   
