@@ -1300,16 +1300,16 @@ function changeSection(id, link) {
 function handleCVScroll(){
   if (!document.body.classList.contains('cv-active')) return;
 
-  const reachedBottom =
-    window.innerHeight + window.scrollY >=
-    document.body.offsetHeight - 10;
+  const rect = cvContent.getBoundingClientRect();
 
-  if (reachedBottom) {
+  // cuando el final del CV entra en pantalla
+  if (rect.bottom <= window.innerHeight + 10) {
     footer.classList.add('show');
   } else {
     footer.classList.remove('show');
   }
 }
+
 
 
 
