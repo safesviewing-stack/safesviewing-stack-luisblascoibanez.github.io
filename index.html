@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio · L·BIB | Luis Blasco-Ibáñez Berbel</title>
+  <title>Portfolio · L.BIB — Luis Blasco-Ibáñez Berbel</title>
 
   <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -50,28 +50,6 @@
     .delay-3{transition-delay:.3s}
 
     /* ==================================================
-       TOP BAR · IDENTIDAD
-    ================================================== */
-    .topbar{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      padding:28px 8vw;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:13px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--text-muted);
-      z-index:10;
-    }
-    .topbar-right strong{
-      font-weight:500;
-      color:var(--text-main);
-    }
-
-    /* ==================================================
        CURSOR EDITORIAL
     ================================================== */
     .cursor{
@@ -114,10 +92,18 @@
     }
     .home-content{max-width:900px}
     .home h1{
-      font-size:clamp(52px,6vw,88px);
+      font-size:clamp(48px,6vw,86px);
       font-weight:500;
       line-height:1.05;
-      margin-bottom:28px;
+      margin-bottom:32px;
+    }
+    .home h1 span{
+      display:block;
+      font-size:0.45em;
+      font-weight:400;
+      color:var(--text-muted);
+      margin-top:16px;
+      letter-spacing:.04em;
     }
     .home p{
       font-size:18px;
@@ -284,20 +270,19 @@
 
 <body>
 
-  <!-- BARRA SUPERIOR -->
-  <header class="topbar">
-    <span>Portfolio</span>
-    <span class="topbar-right"><strong>L.BIB</strong> · Luis Blasco-Ibáñez Berbel</span>
-  </header>
-
   <!-- CURSOR -->
   <div class="cursor"></div>
 
   <!-- HOME -->
   <section class="home">
     <div class="home-content reveal">
-      <h1>Diseño Industrial</h1>
-      <p>Portfolio personal de desarrollo de producto y diseño técnico.</p>
+      <h1>
+        Portfolio
+        <span>L.BIB · Luis Blasco-Ibáñez Berbel</span>
+      </h1>
+      <p>
+        Diseño industrial y desarrollo de producto con enfoque técnico, atención al detalle y sensibilidad editorial.
+      </p>
       <a href="#portfolio" class="btn"><span>Ver proyectos</span></a>
     </div>
   </section>
@@ -327,15 +312,9 @@
   <section class="portfolio" id="portfolio">
     <h2 class="reveal">Portfolio</h2>
     <div class="portfolio-grid reveal">
-      <div class="project">
-        <div class="project-overlay"><p>Producto · Prototipado · 3D</p></div>
-      </div>
-      <div class="project">
-        <div class="project-overlay"><p>Diseño técnico · Desarrollo funcional</p></div>
-      </div>
-      <div class="project">
-        <div class="project-overlay"><p>Concepto · Iteración · Detalle</p></div>
-      </div>
+      <div class="project"><div class="project-overlay"><p>Producto · Prototipado · 3D</p></div></div>
+      <div class="project"><div class="project-overlay"><p>Diseño técnico · Desarrollo funcional</p></div></div>
+      <div class="project"><div class="project-overlay"><p>Concepto · Iteración · Detalle</p></div></div>
     </div>
   </section>
 
@@ -423,15 +402,9 @@
     <h2 class="reveal">Contacto</h2>
 
     <div class="contact-cards reveal">
-      <div class="contact-card">
-        Email<br>luisblascoibanezberbel@gmail.com
-      </div>
-      <div class="contact-card">
-        LinkedIn<br>linkedin.com/in/luisblasiber
-      </div>
-      <div class="contact-card">
-        Teléfono<br>+34 630 511 806
-      </div>
+      <div class="contact-card">Email<br>luisblascoibanezberbel@gmail.com</div>
+      <div class="contact-card">LinkedIn<br>linkedin.com/in/luisblasiber</div>
+      <div class="contact-card">Teléfono<br>+34 630 511 806</div>
     </div>
 
     <footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
