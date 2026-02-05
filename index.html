@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Luis Blasco-Ibáñez · Diseño Industrial</title>
+  <title>Portfolio · L·BIB | Luis Blasco-Ibáñez Berbel</title>
 
   <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
        VARIABLES · RESET · BASE
     ================================================== */
     :root{
-      --bg-main:#000000;          /* negro absoluto */
-      --bg-elev:#0e0e0e;          /* elevación sutil */
+      --bg-main:#000000;
+      --bg-elev:#0e0e0e;
       --text-main:#ffffff;
       --text-muted:#b3b3b3;
       --border-soft:rgba(255,255,255,0.08);
@@ -31,8 +31,9 @@
       line-height:1.65;
       -webkit-font-smoothing:antialiased;
     }
+
     section{padding:120px 8vw}
-    a{color:inherit;text-decoration:none}
+    a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
 
     /* ==================================================
@@ -49,15 +50,39 @@
     .delay-3{transition-delay:.3s}
 
     /* ==================================================
+       TOP BAR · IDENTIDAD
+    ================================================== */
+    .topbar{
+      position:absolute;
+      top:0;left:0;
+      width:100%;
+      padding:28px 8vw;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--text-muted);
+      z-index:10;
+    }
+    .topbar-right strong{
+      font-weight:500;
+      color:var(--text-main);
+    }
+
+    /* ==================================================
        CURSOR EDITORIAL
     ================================================== */
     .cursor{
       width:42px;height:42px;
       border:1px solid rgba(255,255,255,.35);
       border-radius:50%;
-      position:fixed;pointer-events:none;
+      position:fixed;
+      pointer-events:none;
       transform:translate(-50%,-50%);
-      opacity:0;z-index:9999;
+      opacity:0;
+      z-index:9999;
       transition:transform .15s ease,opacity .3s ease;
     }
 
@@ -83,18 +108,22 @@
     ================================================== */
     .home{
       min-height:100vh;
-      display:flex;align-items:center;
-      background:#000000; /* negro puro */
+      display:flex;
+      align-items:center;
+      background:#000000;
     }
     .home-content{max-width:900px}
     .home h1{
       font-size:clamp(52px,6vw,88px);
-      font-weight:500;line-height:1.05;
+      font-weight:500;
+      line-height:1.05;
       margin-bottom:28px;
     }
     .home p{
-      font-size:18px;color:var(--text-muted);
-      max-width:520px;margin-bottom:56px;
+      font-size:18px;
+      color:var(--text-muted);
+      max-width:520px;
+      margin-bottom:56px;
     }
 
     /* ==================================================
@@ -102,11 +131,21 @@
     ================================================== */
     .about{background:#000000}
     .about-grid{
-      display:grid;grid-template-columns:1.2fr 1fr;
-      gap:90px;align-items:center;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:90px;
+      align-items:center;
     }
-    .about h2{font-size:42px;font-weight:500;margin-bottom:28px}
-    .about p{color:var(--text-muted);margin-bottom:18px;max-width:540px}
+    .about h2{
+      font-size:42px;
+      font-weight:500;
+      margin-bottom:28px;
+    }
+    .about p{
+      color:var(--text-muted);
+      margin-bottom:18px;
+      max-width:540px;
+    }
     .about-image{
       border-radius:var(--radius);
       overflow:hidden;
@@ -117,29 +156,46 @@
     /* ==================================================
        PORTFOLIO
     ================================================== */
-    .portfolio h2{font-size:42px;font-weight:500;margin-bottom:64px}
+    .portfolio h2{
+      font-size:42px;
+      font-weight:500;
+      margin-bottom:64px;
+    }
     .portfolio-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
       gap:34px;
     }
     .project{
-      position:relative;aspect-ratio:4/3;
+      position:relative;
+      aspect-ratio:4/3;
       background:var(--bg-elev);
       border-radius:var(--radius);
       border:1px solid var(--border-soft);
-      overflow:hidden;cursor:pointer;
+      overflow:hidden;
+      cursor:pointer;
       transition:transform var(--transition);
     }
-    .project:hover{transform:translateY(-6px) scale(1.01)}
+    .project:hover{
+      transform:translateY(-6px) scale(1.01);
+    }
     .project-overlay{
-      position:absolute;inset:0;
+      position:absolute;
+      inset:0;
       background:rgba(0,0,0,.8);
-      display:flex;align-items:center;justify-content:center;
-      text-align:center;padding:24px;
-      opacity:0;transition:opacity var(--transition);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+      opacity:0;
+      transition:opacity var(--transition);
     }
     .project:hover .project-overlay{opacity:1}
-    .project-overlay p{font-size:14px;color:var(--text-muted)}
+    .project-overlay p{
+      font-size:14px;
+      color:var(--text-muted);
+    }
 
     /* ==================================================
        CV
@@ -148,7 +204,11 @@
     .cv h2{font-size:42px;margin-bottom:52px}
     .cv-section{margin-bottom:56px}
     .cv-item{margin-bottom:26px}
-    .cv-item span{display:block;font-size:14px;color:var(--text-muted)}
+    .cv-item span{
+      display:block;
+      font-size:14px;
+      color:var(--text-muted);
+    }
     .download{margin-top:56px}
 
     /* ==================================================
@@ -156,36 +216,57 @@
     ================================================== */
     .skills h2{font-size:42px;margin-bottom:48px}
     .skills-group{margin-bottom:34px}
-    .tags{display:flex;flex-wrap:wrap;gap:12px}
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
     .tag{
-      padding:8px 18px;border-radius:999px;
+      padding:8px 18px;
+      border-radius:999px;
       background:var(--bg-elev);
       border:1px solid var(--border-soft);
-      font-size:13px;color:var(--text-muted);
+      font-size:13px;
+      color:var(--text-muted);
     }
 
     /* ==================================================
        CONTACTO · FOOTER LOCAL
     ================================================== */
-    .contact{background:#000000;padding-bottom:90px}
-    .contact h2{font-size:42px;margin-bottom:52px}
+    .contact{
+      background:#000000;
+      padding-bottom:90px;
+    }
+    .contact h2{
+      font-size:42px;
+      margin-bottom:52px;
+    }
     .contact-cards{
-      display:grid;grid-template-columns:repeat(3,1fr);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
       gap:26px;
     }
     .contact-card{
-      padding:32px;border-radius:var(--radius);
+      padding:32px;
+      border-radius:var(--radius);
       background:var(--bg-elev);
       border:1px solid var(--border-soft);
-      font-size:14px;color:var(--text-muted);
+      font-size:14px;
+      color:var(--text-muted);
     }
     footer{
-      margin-top:90px;text-align:center;
-      font-size:12px;color:#666;
-      opacity:0;transform:translateY(20px);
+      margin-top:90px;
+      text-align:center;
+      font-size:12px;
+      color:#666;
+      opacity:0;
+      transform:translateY(20px);
       transition:opacity var(--transition),transform var(--transition);
     }
-    .contact.visible footer{opacity:1;transform:translateY(0)}
+    .contact.visible footer{
+      opacity:1;
+      transform:translateY(0);
+    }
 
     /* ==================================================
        RESPONSIVE
@@ -203,15 +284,21 @@
 
 <body>
 
+  <!-- BARRA SUPERIOR -->
+  <header class="topbar">
+    <span>Portfolio</span>
+    <span class="topbar-right"><strong>L.BIB</strong> · Luis Blasco-Ibáñez Berbel</span>
+  </header>
+
   <!-- CURSOR -->
   <div class="cursor"></div>
 
   <!-- HOME -->
   <section class="home">
     <div class="home-content reveal">
-      <h1>Diseño Industrial<br>y Desarrollo de Producto</h1>
-      <p>Diseñador industrial con perfil técnico y creativo, orientado al desarrollo de producto y al detalle.</p>
-      <a href="#portfolio" class="btn"><span>Ver portfolio</span></a>
+      <h1>Diseño Industrial</h1>
+      <p>Portfolio personal de desarrollo de producto y diseño técnico.</p>
+      <a href="#portfolio" class="btn"><span>Ver proyectos</span></a>
     </div>
   </section>
 
@@ -220,12 +307,18 @@
     <div class="about-grid reveal">
       <div>
         <h2>Sobre mí</h2>
-        <p class="reveal delay-1">Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en último año de Ingeniería en Diseño Industrial y Desarrollo de Producto en Valencia.</p>
-        <p class="reveal delay-2">Mi perfil combina una sólida base técnica en electricidad con una fuerte sensibilidad estética, especial interés en impresión 3D, prototipado y procesos de fabricación.</p>
-        <p class="reveal delay-3">Trabajo desde la precisión, el orden y la atención al detalle, entendiendo el diseño como equilibrio entre función, forma y criterio técnico.</p>
+        <p class="reveal delay-1">
+          Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en último año de Ingeniería en Diseño Industrial y Desarrollo de Producto en Valencia.
+        </p>
+        <p class="reveal delay-2">
+          Mi perfil combina una sólida base técnica en electricidad con una fuerte sensibilidad estética, especial interés en impresión 3D, prototipado y procesos de fabricación.
+        </p>
+        <p class="reveal delay-3">
+          Trabajo desde la precisión, el orden y la atención al detalle, entendiendo el diseño como equilibrio entre función, forma y criterio técnico.
+        </p>
       </div>
       <div class="about-image">
-        <img src="https://via.placeholder.com/600x800" alt="Luis Blasco-Ibáñez">
+        <img src="https://via.placeholder.com/600x800" alt="Luis Blasco-Ibáñez Berbel">
       </div>
     </div>
   </section>
@@ -234,9 +327,15 @@
   <section class="portfolio" id="portfolio">
     <h2 class="reveal">Portfolio</h2>
     <div class="portfolio-grid reveal">
-      <div class="project"><div class="project-overlay"><p>Producto · Prototipado · 3D</p></div></div>
-      <div class="project"><div class="project-overlay"><p>Diseño técnico · Desarrollo funcional</p></div></div>
-      <div class="project"><div class="project-overlay"><p>Concepto · Iteración · Detalle</p></div></div>
+      <div class="project">
+        <div class="project-overlay"><p>Producto · Prototipado · 3D</p></div>
+      </div>
+      <div class="project">
+        <div class="project-overlay"><p>Diseño técnico · Desarrollo funcional</p></div>
+      </div>
+      <div class="project">
+        <div class="project-overlay"><p>Concepto · Iteración · Detalle</p></div>
+      </div>
     </div>
   </section>
 
@@ -246,32 +345,40 @@
 
     <div class="cv-section reveal">
       <h3>Formación académica</h3>
-      <div class="cv-item">Ingeniería en Diseño Industrial y Desarrollo de Producto
+      <div class="cv-item">
+        Ingeniería en Diseño Industrial y Desarrollo de Producto
         <span>Universidad Politécnica de Valencia · 09/2024 – En curso</span>
       </div>
-      <div class="cv-item">Ingeniería en Diseño Industrial y Desarrollo de Producto
+      <div class="cv-item">
+        Ingeniería en Diseño Industrial y Desarrollo de Producto
         <span>Universidad Jaume I · 09/2021 – 07/2024</span>
       </div>
-      <div class="cv-item">Grado Superior en Instalaciones Electrotécnicas y Automatizadas
+      <div class="cv-item">
+        Grado Superior en Instalaciones Electrotécnicas y Automatizadas
         <span>Escuelas San José de Valencia · 09/2019 – 07/2021</span>
       </div>
-      <div class="cv-item">Grado Medio en Instalaciones Eléctricas y Automáticas
+      <div class="cv-item">
+        Grado Medio en Instalaciones Eléctricas y Automáticas
         <span>Escuelas San José de Valencia · 09/2017 – 07/2019</span>
       </div>
     </div>
 
     <div class="cv-section reveal">
       <h3>Experiencia laboral</h3>
-      <div class="cv-item">Montador de cuadros eléctricos (prácticas)
+      <div class="cv-item">
+        Montador de cuadros eléctricos (prácticas)
         <span>Autrial · Valencia · 04/2017 – 06/2017</span>
       </div>
-      <div class="cv-item">Mantenimiento preventivo y correctivo (prácticas)
+      <div class="cv-item">
+        Mantenimiento preventivo y correctivo (prácticas)
         <span>Elecnor · Valencia · 04/2021 – 06/2021</span>
       </div>
     </div>
 
     <div class="download reveal">
-      <a href="cv_luis_blasco.pdf" download class="btn"><span>Descargar currículum</span></a>
+      <a href="cv_luis_blasco.pdf" download class="btn">
+        <span>Descargar currículum</span>
+      </a>
     </div>
   </section>
 
@@ -282,8 +389,10 @@
     <div class="skills-group reveal">
       <h4>Modelado 3D</h4>
       <div class="tags">
-        <span class="tag">Inventor</span><span class="tag">Fusion 360</span>
-        <span class="tag">SolidWorks</span><span class="tag">3ds Max</span>
+        <span class="tag">Inventor</span>
+        <span class="tag">Fusion 360</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">3ds Max</span>
         <span class="tag">AutoCAD</span>
       </div>
     </div>
@@ -291,8 +400,10 @@
     <div class="skills-group reveal">
       <h4>Diseño gráfico y web</h4>
       <div class="tags">
-        <span class="tag">Photoshop</span><span class="tag">Illustrator</span>
-        <span class="tag">InDesign</span><span class="tag">Animate</span>
+        <span class="tag">Photoshop</span>
+        <span class="tag">Illustrator</span>
+        <span class="tag">InDesign</span>
+        <span class="tag">Animate</span>
         <span class="tag">GitHub</span>
       </div>
     </div>
@@ -312,9 +423,15 @@
     <h2 class="reveal">Contacto</h2>
 
     <div class="contact-cards reveal">
-      <div class="contact-card">Email<br>luisblascoibanezberbel@gmail.com</div>
-      <div class="contact-card">LinkedIn<br>linkedin.com/in/luisblasiber</div>
-      <div class="contact-card">Teléfono<br>+34 630 511 806</div>
+      <div class="contact-card">
+        Email<br>luisblascoibanezberbel@gmail.com
+      </div>
+      <div class="contact-card">
+        LinkedIn<br>linkedin.com/in/luisblasiber
+      </div>
+      <div class="contact-card">
+        Teléfono<br>+34 630 511 806
+      </div>
     </div>
 
     <footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
@@ -325,11 +442,13 @@
     /* Scroll reveal */
     const reveals=document.querySelectorAll('.reveal');
     const observer=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('visible');
+      });
     },{threshold:.15});
     reveals.forEach(el=>observer.observe(el));
 
-    /* Cursor */
+    /* Cursor editorial */
     const cursor=document.querySelector('.cursor');
     const interactive=document.querySelectorAll('a,.project');
     document.addEventListener('mousemove',e=>{
