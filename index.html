@@ -756,39 +756,42 @@ footer{
   }
 }
 
-/* ===== CV TIMELINE ===== */
+/* ===== CV SCROLL LIST ===== */
 
-.cv-timeline-wrapper{
-  position: relative;
-  margin-top: 40px;
-  overflow: hidden;
+.cv-scroll{
+  padding-bottom: 160px;
 }
 
-.cv-timeline{
+.cv-list{
   display: flex;
-  transition: transform .8s cubic-bezier(.22,.61,.36,1);
+  flex-direction: column;
+  gap: 140px;
+  margin-top: 80px;
 }
 
-.cv-slide{
-  min-width: 100%;
-  padding: 40px 80px;
+.cv-item{
+  max-width: 620px;
   opacity: .25;
-  transform: scale(.96);
-  transition: .6s ease;
+  transform: translateY(40px);
+  transition: .8s cubic-bezier(.22,.61,.36,1);
 }
 
-.cv-slide.active{
+.cv-item.active{
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 
-.cv-slide h3{
+.cv-index{
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cv-item h3{
   font-size: 26px;
   margin-bottom: 14px;
-}
-
-.cv-slide p{
-  max-width: 520px;
 }
 
 .cv-year{
@@ -799,26 +802,6 @@ footer{
   text-transform: uppercase;
   color: var(--muted);
 }
-
-/* Flechas */
-
-.cv-nav{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 42px;
-  cursor: pointer;
-  opacity: .5;
-  transition: opacity .3s ease;
-}
-
-.cv-nav:hover{ opacity: 1; }
-
-.cv-nav.left{ left: 10px; }
-.cv-nav.right{ right: 10px; }
 
   
 </style>
@@ -917,54 +900,51 @@ footer{
 </section>
 
 <section id="cv" class="section">
-  <div class="content">
+  <div class="content cv-scroll">
+
     <h2 class="fade-up">Currículum Vitae</h2>
 
-    <div class="cv-timeline-wrapper fade-up delay-1">
+    <div class="cv-list">
 
-      <button class="cv-nav left" onclick="moveCV(-1)">‹</button>
+      <article class="cv-item" data-bg="bg-electricidad.jpg">
+        <span class="cv-index">01</span>
+        <h3>Formación técnica</h3>
+        <p>
+          Formación Profesional en Electricidad.<br>
+          Base sólida en sistemas, procesos y resolución técnica.
+        </p>
+        <span class="cv-year">2018 · 2020</span>
+      </article>
 
-      <div class="cv-timeline" id="cvTimeline">
+      <article class="cv-item" data-bg="bg-upv.jpg">
+        <span class="cv-index">02</span>
+        <h3>UPV · Diseño Industrial</h3>
+        <p>
+          Grado en Ingeniería en Diseño Industrial.<br>
+          Producto, detalle técnico y proceso completo.
+        </p>
+        <span class="cv-year">2022 · 2026</span>
+      </article>
 
-        <div class="cv-slide active">
-          <h3>Formación técnica</h3>
-          <p>
-            Formación Profesional en Electricidad.<br>
-            Base sólida en sistemas, procesos y resolución técnica.
-          </p>
-          <span class="cv-year">2018 · 2020</span>
-        </div>
+      <article class="cv-item" data-bg="bg-sixay.jpg">
+        <span class="cv-index">03</span>
+        <h3>Sixay · Prácticas</h3>
+        <p>
+          Diseño de mobiliario a medida y desarrollo técnico
+          en entorno profesional real.
+        </p>
+        <span class="cv-year">2025</span>
+      </article>
 
-        <div class="cv-slide">
-          <h3>UPV · Diseño Industrial</h3>
-          <p>
-            Grado en Ingeniería en Diseño Industrial.<br>
-            Enfoque en producto, detalle técnico y proceso completo.
-          </p>
-          <span class="cv-year">2022 · 2026</span>
-        </div>
-
-        <div class="cv-slide">
-          <h3>Sixay · Prácticas</h3>
-          <p>
-            Diseño de mobiliario a medida, desarrollo técnico
-            y contacto directo con cliente.
-          </p>
-          <span class="cv-year">2025</span>
-        </div>
-
-        <div class="cv-slide">
-          <h3>Perfil actual</h3>
-          <p>
-            Diseñador industrial con background técnico,
-            foco en producto real y fabricación.
-          </p>
-          <span class="cv-year">Ahora</span>
-        </div>
-
-      </div>
-
-      <button class="cv-nav right" onclick="moveCV(1)">›</button>
+      <article class="cv-item" data-bg="bg-now.jpg">
+        <span class="cv-index">04</span>
+        <h3>Perfil actual</h3>
+        <p>
+          Diseñador industrial con background técnico,
+          foco en producto y fabricación.
+        </p>
+        <span class="cv-year">Actualidad</span>
+      </article>
 
     </div>
   </div>
@@ -1206,16 +1186,32 @@ function changeSection(id, link) {
 
 let cvIndex = 0;
 
-function moveCV(dir){
-  const slides = document.querySelectorAll('.cv-slide');
-  cvIndex = Math.max(0, Math.min(slides.length - 1, cvIndex + dir));
+const cvItems = document.querySelectorAll('.cv-item');
+const bgLayer = document.querySelector('.bg-layer');
 
-  document.getElementById('cvTimeline').style.transform =
-    `translateX(-${cvIndex * 100}%)`;
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      cvItems.forEach(i => i.classList.remove('active'));
+      entry.target.classList.add('active');
 
-  slides.forEach(s => s.classList.remove('active'));
-  slides[cvIndex].classList.add('active');
-}
+      const bg = entry.target.dataset.bg;
+      if(bg){
+        bgLayer.style.opacity = 0;
+        setTimeout(() => {
+          bgLayer.style.background =
+            `linear-gradient(rgba(11,11,13,.75), rgba(11,11,13,.7)),
+             url('${bg}') center / cover no-repeat`;
+          bgLayer.style.opacity = 1;
+        }, 300);
+      }
+    }
+  });
+},{
+  threshold: 0.6
+});
+
+cvItems.forEach(item => observer.observe(item));
 
 
   
