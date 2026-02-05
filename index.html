@@ -335,14 +335,40 @@
 
   <!-- JS -->
   <script>
-    const reveals=document.querySelectorAll('.reveal');
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add('visible');
-      });
-    },{threshold:.15});
-    reveals.forEach(el=>observer.observe(el));
-  </script>
+  /* ===============================
+     SCROLL REVEAL
+  =============================== */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  /* ===============================
+     HOME SCROLL CONTROL
+  =============================== */
+  const homeLink = document.querySelector('a[href="#home"]');
+
+  homeLink.addEventListener('click', e => {
+    e.preventDefault();
+
+    // Fuerza el scroll exactamente al inicio
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Seguridad extra: nunca permitir scroll negativo
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 0) {
+      window.scrollTo(0, 0);
+    }
+  });
+</script>
+
 
 </body>
 </html>
