@@ -1224,14 +1224,22 @@ header{
   display: block;
 }
 
-  .cv-footer{
-  margin-top: 120px;
-  padding: 18px 40px;
+ /* ===== CV FOOTER FINAL ===== */
+.cv-footer{
+  width: 100%;
+  margin-top: 140px;      /* separación respecto al contenido */
+  padding: 24px 40px 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
   font-size: 11px;
   letter-spacing: .08em;
-  color: #9a9a9a;
-  opacity: .85;
+  color: rgba(255,255,255,.55);
+
+  position: relative;    /* 👈 clave: pertenece al scroll */
 }
 
 /* Ocultar footer global cuando CV está activa */
