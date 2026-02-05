@@ -240,6 +240,19 @@ nav{
     }
 
     /* ==================================================
+   PAGE FADE IN (solo primera visita)
+================================================== */
+body.preload {
+  opacity: 0;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+
+    /* ==================================================
        RESPONSIVE
     ================================================== */
     @media(max-width:1024px){
@@ -267,22 +280,14 @@ body.loaded {
   transition: opacity 1s ease, transform 1s ease;
 }
 
-/* ==================================================
-   HEADER OCULTO EN HOME
-================================================== */
 header {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+header.hide {
+  transform: translateY(-120%);
   opacity: 0;
-  pointer-events: none;
-  transition: opacity .6s ease, transform .6s ease;
-  transform: translateY(-8px);
 }
-
-header.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
 
 
 
@@ -373,41 +378,28 @@ header.visible {
   <!-- JS -->
 <script>
   /* ===============================
-     ENTRADA SOLO LA PRIMERA VEZ
+     ENTRADA SOLO PRIMERA VEZ
   =============================== */
-  const firstVisit = !sessionStorage.getItem('visited');
+  const isFirstVisit = !sessionStorage.getItem('visited');
 
-  if (firstVisit) {
+  if (isFirstVisit) {
     document.body.classList.add('preload');
+
+    window.addEventListener('load', () => {
+      history.replaceState(null, null, window.location.pathname);
+      window.scrollTo(0, 0);
+
+      document.body.classList.remove('preload');
+      document.body.classList.add('fade-in');
+
+      sessionStorage.setItem('visited', 'true');
+    });
+  } else {
+    window.addEventListener('load', () => {
+      history.replaceState(null, null, window.location.pathname);
+      window.scrollTo(0, 0);
+    });
   }
-
-  window.addEventListener('load', () => {
-    // Siempre empezar en Home
-    history.replaceState(null, null, window.location.pathname);
-    window.scrollTo(0, 0);
-
-    if (firstVisit) {
-      setTimeout(() => {
-        document.body.classList.add('loaded');
-        sessionStorage.setItem('visited', 'true');
-      }, 100);
-    } else {
-      document.body.classList.add('loaded');
-    }
-  });
-
-  /* ===============================
-     HEADER APARECE AL SCROLL
-  =============================== */
-  const header = document.querySelector('header');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header.classList.add('visible');
-    } else {
-      header.classList.remove('visible');
-    }
-  });
 
   /* ===============================
      SCROLL REVEAL
@@ -415,15 +407,37 @@ header.visible {
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
   }, { threshold: 0.15 });
+
   reveals.forEach(el => observer.observe(el));
+
+  /* ===============================
+     HEADER HIDE / SHOW ON SCROLL
+  =============================== */
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 120) {
+      header.classList.add('hide');
+    } else {
+      header.classList.remove('hide');
+    }
+
+    lastScroll = currentScroll;
+  });
 
   /* ===============================
      HOME LINK CONTROL
   =============================== */
   const homeLink = document.querySelector('a[href="#home"]');
+
   if (homeLink) {
     homeLink.addEventListener('click', e => {
       e.preventDefault();
@@ -456,6 +470,7 @@ header.visible {
     });
   });
 </script>
+
 
 
 </body>
