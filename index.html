@@ -1166,53 +1166,36 @@ header{
 }
 
 
-/* ===== CV DOWNLOAD BUTTON ===== */
+/* ===== CV DOWNLOAD BUTTON (MATCH HOME) ===== */
 
 .cv-download{
-  margin-top: 120px;
-  padding-bottom: 160px;
+  margin-top: 80px;        /* ↓ menos separación */
+  padding-bottom: 80px;   /* ↓ final más compacto */
   display: flex;
 }
 
 .cv-download-btn{
-  padding: 16px 38px;
+  padding: 14px 34px;
   border-radius: 40px;
-  border: 1.5px solid rgba(255,255,255,.6);
-  background: transparent;
-  color: #fff;
+  border: none;
+  background: #fff;
+  color: #000;
 
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 
   transition:
-    background .35s ease,
-    color .35s ease,
     transform .35s ease,
-    border-color .35s ease;
+    box-shadow .35s ease;
 }
 
 .cv-download-btn:hover{
-  background: #fff;
-  color: #000;
   transform: translateY(-1px);
-  border-color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
 }
 
-  .cv-download{
-  opacity: 0;
-  transform: translateY(24px);
-  animation: cvDownloadIn .9s cubic-bezier(.22,.61,.36,1) forwards;
-  animation-delay: 1.7s;
-}
-
-@keyframes cvDownloadIn{
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 
 </style>
@@ -1402,6 +1385,7 @@ header{
 
   </div>
 </section>
+
 
 
 
