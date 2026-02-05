@@ -330,6 +330,11 @@ footer{
   width: 100%;
   padding: 18px 40px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
@@ -344,25 +349,12 @@ footer{
 
 
 
+
 /* CV: oculto siempre */
 
 
 /* CV: SOLO visible al final */
-body.cv-active footer.show{
-  position: relative;
-  margin: 120px auto 0;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  text-align: center;
-
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
 
 
 
@@ -1201,7 +1193,6 @@ body.cv-active footer.show{
 let currentLang = 'es';
 
 const footer = document.getElementById('main-footer');
-const cvContent = document.querySelector('.cv-content');
 
 
 /* ===== TRADUCCIONES ===== */
@@ -1279,38 +1270,12 @@ function changeSection(id, link) {
   const logo = document.getElementById('logo-home');
   logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
 
-  if (id === 'cv') {
-    document.body.classList.add('cv-active');
-    footer.classList.remove('show');
-    window.scrollTo(0, 0);
-  } else {
-    document.body.classList.remove('cv-active');
-    footer.classList.remove('show');
-
-    footer.style.animation = 'none';
-    void footer.offsetHeight;
-    footer.style.animation =
-      'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
-    footer.style.animationDelay = '1.5s';
-  }
-}
-
+ 
 
 
 /* ===== FOOTER SOLO AL FINAL DEL CV ===== */
-function handleCVScroll(){
-  if (!document.body.classList.contains('cv-active')) return;
 
-  const rect = cvContent.getBoundingClientRect();
 
-  if (rect.bottom <= window.innerHeight + 5) {
-    footer.classList.add('show');
-  } else {
-    footer.classList.remove('show');
-  }
-}
-
-window.addEventListener('scroll', handleCVScroll);
 
 </script>
 
