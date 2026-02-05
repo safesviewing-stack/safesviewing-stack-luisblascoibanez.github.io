@@ -25,7 +25,8 @@
 body{
   background:var(--bg);
   color:var(--white);
-  overflow:hidden;
+  overflow-y: auto;   /* ✅ habilita scroll vertical */
+  overflow-x: hidden; /* mantiene limpio horizontal */
 }
 
 /* ===== BACKGROUND ===== */
@@ -203,6 +204,12 @@ nav a:hover::after{
   inset:0;
   display:none;
   align-items:flex-start;
+  overflow: hidden;
+}
+
+
+  #cv{
+  overflow-y: auto;
 }
 
 .section.active{display:flex}
@@ -1005,6 +1012,14 @@ header{
 .cv-text p{
   max-width: 620px;
 }
+
+
+#cv .content{
+  overflow: visible;
+}
+
+
+  
 
 </style>
 </head>
