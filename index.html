@@ -20,20 +20,19 @@
       --text-muted: #b3b3b3;
       --border-soft: rgba(255,255,255,0.08);
       --accent: #ffffff;
+      --radius: 14px;
+      --transition: 0.6s cubic-bezier(.2,.8,.2,1);
     }
 
     body.light {
-      --bg-main: #f7f7f7;
+      --bg-main: #f6f6f6;
       --bg-soft: #ffffff;
-      --bg-card: #f0f0f0;
+      --bg-card: #eeeeee;
       --text-main: #111111;
       --text-muted: #555555;
       --border-soft: rgba(0,0,0,0.08);
       --accent: #111111;
     }
-
-    --radius: 14px;
-    --transition: 0.6s cubic-bezier(.2,.8,.2,1);
 
     /* ==================================================
        RESET · BASE
@@ -67,7 +66,7 @@
     }
 
     /* ==================================================
-       TOGGLE MODO CLARO
+       TOGGLE TEMA
     ================================================== */
     .theme-toggle {
       position: absolute;
@@ -77,6 +76,7 @@
       color: var(--text-muted);
       cursor: pointer;
       transition: color var(--transition);
+      z-index: 10;
     }
 
     .theme-toggle:hover {
@@ -146,16 +146,35 @@
     }
 
     /* ==================================================
-       HOME
+       HOME · FONDO RELOJ
     ================================================== */
     .home {
+      position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: radial-gradient(circle at top, var(--bg-soft), var(--bg-main));
+      overflow: hidden;
+      background: var(--bg-main);
+    }
+
+    .home::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("reloj1.jpg") center / cover no-repeat;
+      opacity: 0.12;
+      filter: grayscale(100%) contrast(1.1);
+      z-index: 0;
+    }
+
+    body.light .home::before {
+      opacity: 0.18;
+      filter: grayscale(100%) contrast(1.05);
     }
 
     .home-content {
+      position: relative;
+      z-index: 1;
       max-width: 900px;
     }
 
@@ -223,10 +242,10 @@
       background: var(--bg-card);
       border-radius: var(--radius);
       border: 1px solid var(--border-soft);
-      transition: transform var(--transition);
-      cursor: pointer;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition);
     }
 
     .project:hover {
@@ -236,7 +255,7 @@
     .project-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.7);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -372,7 +391,7 @@
       <div>
         <h2>Sobre mí</h2>
         <p class="reveal delay-1">Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en formación con una fuerte base técnica.</p>
-        <p class="reveal delay-2">Trabajo desde el equilibrio entre precisión técnica, estética y funcionalidad.</p>
+        <p class="reveal delay-2">Trabajo desde el equilibrio entre precisión, estética y funcionalidad.</p>
         <p class="reveal delay-3">El detalle no es un añadido: es el diseño.</p>
       </div>
       <div class="about-image">
@@ -381,7 +400,7 @@
     </div>
   </section>
 
-  <!-- (resto de secciones iguales: Portfolio, CV, Skills, Contacto) -->
+  <!-- (Portfolio · CV · Skills · Contacto seguirían igual que antes) -->
 
   <!-- JS -->
   <script>
@@ -402,7 +421,7 @@
       cursor.style.opacity = 1;
     });
 
-    /* Theme toggle */
+    /* Toggle tema */
     const toggle = document.getElementById('themeToggle');
     const body = document.body;
 
