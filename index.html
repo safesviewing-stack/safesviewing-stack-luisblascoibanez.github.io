@@ -961,6 +961,18 @@ header{
   padding-bottom: 160px;
 }
 
+  .cv-group{
+  margin-top: 80px;
+}
+
+  .cv-group-title{
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
 .cv-timeline{
   margin-top: 80px;
   position: relative;
@@ -979,17 +991,15 @@ header{
 
 .cv-entry{
   display: grid;
-  grid-template-columns: 80px 60px 1fr;
-  align-items: flex-start;
-  margin-bottom: 120px;
+  grid-template-columns: 140px 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
 }
 
 .cv-date{
   font-size: 11px;
-  letter-spacing: .22em;
+  letter-spacing: .18em;
   color: var(--muted);
-  text-align: right;
-  padding-top: 4px;
 }
 
 .cv-dot{
@@ -1009,8 +1019,14 @@ header{
   margin-bottom: 14px;
 }
 
+  .cv-text h4{
+  font-size: 18px;   /* 👈 títulos más pequeños */
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
 .cv-text p{
-  max-width: 620px;
+  max-width: 640px;
 }
 
 
@@ -1121,45 +1137,82 @@ header{
 
     <h2 class="fade-up">Currículum Vitae</h2>
 
-    <div class="cv-timeline">
+    <!-- FORMACIÓN -->
+    <div class="cv-group">
+      <h3 class="cv-group-title">Formación</h3>
 
       <article class="cv-entry">
         <span class="cv-date">2018 · 2020</span>
-        <div class="cv-dot"></div>
         <div class="cv-text">
-          <h3>Grado Medio en Electricidad</h3>
+          <h4>Grado Medio en Electricidad</h4>
           <p>
-            Formación técnica enfocada en instalaciones, sistemas eléctricos
-            y resolución de problemas en entorno real.
+            Formación técnica en instalaciones eléctricas,
+            sistemas básicos y trabajo en entorno real.
           </p>
         </div>
       </article>
 
       <article class="cv-entry">
         <span class="cv-date">2020 · 2022</span>
-        <div class="cv-dot"></div>
         <div class="cv-text">
-          <h3>Grado Superior en Electricidad</h3>
+          <h4>Grado Superior en Electricidad</h4>
           <p>
-            Profundización técnica, lectura de planos, ejecución,
-            criterio constructivo y responsabilidad en procesos.
+            Profundización técnica, interpretación de planos,
+            ejecución de proyectos y criterio constructivo.
           </p>
         </div>
       </article>
 
       <article class="cv-entry">
         <span class="cv-date">2022 · Actualidad</span>
-        <div class="cv-dot active"></div>
         <div class="cv-text">
-          <h3>Ingeniería en Diseño Industrial</h3>
+          <h4>Ingeniería en Diseño Industrial · UPV</h4>
           <p>
-            Enfoque en diseño de producto, desarrollo técnico,
-            fabricación y equilibrio entre forma y función.
+            Desarrollo de producto, diseño técnico,
+            procesos de fabricación y enfoque funcional.
           </p>
         </div>
       </article>
 
+      <article class="cv-entry">
+        <span class="cv-date">En curso</span>
+        <div class="cv-text">
+          <h4>Diseño Industrial · UJI</h4>
+          <p>
+            Complemento formativo en diseño,
+            metodología proyectual y pensamiento crítico.
+          </p>
+        </div>
+      </article>
     </div>
+
+    <!-- EXPERIENCIA -->
+    <div class="cv-group">
+      <h3 class="cv-group-title">Experiencia laboral</h3>
+
+      <article class="cv-entry">
+        <span class="cv-date">Prácticas</span>
+        <div class="cv-text">
+          <h4>Autrial</h4>
+          <p>
+            Prácticas en entorno industrial,
+            apoyo técnico en instalaciones y procesos eléctricos.
+          </p>
+        </div>
+      </article>
+
+      <article class="cv-entry">
+        <span class="cv-date">Prácticas</span>
+        <div class="cv-text">
+          <h4>Elecnor</h4>
+          <p>
+            Trabajo en proyectos eléctricos reales,
+            contacto con obra, normativa y ejecución técnica.
+          </p>
+        </div>
+      </article>
+    </div>
+
   </div>
 </section>
 
