@@ -416,22 +416,17 @@ header.hide {
   reveals.forEach(el => observer.observe(el));
 
   /* ===============================
-     HEADER HIDE / SHOW ON SCROLL
-  =============================== */
-  const header = document.querySelector('header');
-  let lastScroll = 0;
+   HEADER SOLO EN HOME (TOP)
+=============================== */
+const header = document.querySelector('header');
 
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > lastScroll && currentScroll > 120) {
-      header.classList.add('hide');
-    } else {
-      header.classList.remove('hide');
-    }
-
-    lastScroll = currentScroll;
-  });
+window.addEventListener('scroll', () => {
+  if (window.scrollY === 0) {
+    header.classList.remove('hide');
+  } else {
+    header.classList.add('hide');
+  }
+});
 
   /* ===============================
      HOME LINK CONTROL
