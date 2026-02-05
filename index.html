@@ -251,6 +251,43 @@ nav{
       section{padding:80px 6vw}
       .portfolio-grid,.contact-cards{grid-template-columns:1fr}
     }
+
+
+/* ==================================================
+   ENTRADA INICIAL · FADE IN
+================================================== */
+body.preload {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+body.loaded {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* ==================================================
+   HEADER OCULTO EN HOME
+================================================== */
+header {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(-8px);
+}
+
+header.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+
+
+
+
+    
   </style>
 </head>
 
@@ -334,16 +371,42 @@ nav{
   </section>
 
   <!-- JS -->
- <script>
+<script>
   /* ===============================
-     FORZAR INICIO EN HOME
+     ENTRADA SOLO LA PRIMERA VEZ
   =============================== */
-  window.addEventListener('load', () => {
-    // Elimina cualquier anchor de la URL
-    history.replaceState(null, null, window.location.pathname);
+  const firstVisit = !sessionStorage.getItem('visited');
 
-    // Fuerza scroll al inicio
+  if (firstVisit) {
+    document.body.classList.add('preload');
+  }
+
+  window.addEventListener('load', () => {
+    // Siempre empezar en Home
+    history.replaceState(null, null, window.location.pathname);
     window.scrollTo(0, 0);
+
+    if (firstVisit) {
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+        sessionStorage.setItem('visited', 'true');
+      }, 100);
+    } else {
+      document.body.classList.add('loaded');
+    }
+  });
+
+  /* ===============================
+     HEADER APARECE AL SCROLL
+  =============================== */
+  const header = document.querySelector('header');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.classList.add('visible');
+    } else {
+      header.classList.remove('visible');
+    }
   });
 
   /* ===============================
