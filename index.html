@@ -327,6 +327,7 @@ p{
 footer{
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   padding: 18px 40px;
 
@@ -339,13 +340,13 @@ footer{
   letter-spacing: .08em;
   color: #9a9a9a;
 
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: none;
   pointer-events: none;
 
-  animation: footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards;
-  animation-delay: 1.5s;
+  z-index: 10;
 }
+
 
 
 
@@ -1269,8 +1270,8 @@ function changeSection(id, link) {
 
   const logo = document.getElementById('logo-home');
   logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
+}
 
- }
 
 
 /* ===== FOOTER SOLO AL FINAL DEL CV ===== */
