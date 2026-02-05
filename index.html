@@ -1140,23 +1140,23 @@ header{
   }
 }
 
-/* ===== CV CONTENT ENTRANCE (BOTTOM · MÁS TARDE) ===== */
+/* ===== CV CONTENT ENTRANCE (BOTTOM · AJUSTE FINO) ===== */
 
 .cv-entry{
   opacity: 0;
-  transform: translateY(36px);
-  animation: cvEntryUp 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+  transform: translateY(32px);
+  animation: cvEntryUp 0.85s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
-/* FORMACIÓN — espera clara tras el título */
-.cv-group:nth-of-type(1) .cv-entry:nth-of-type(1){ animation-delay: 1.3s; }
-.cv-group:nth-of-type(1) .cv-entry:nth-of-type(2){ animation-delay: 1.5s; }
-.cv-group:nth-of-type(1) .cv-entry:nth-of-type(3){ animation-delay: 1.7s; }
-.cv-group:nth-of-type(1) .cv-entry:nth-of-type(4){ animation-delay: 1.9s; }
+/* FORMACIÓN — pausa elegante */
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(1){ animation-delay: 1.05s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(2){ animation-delay: 1.20s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(3){ animation-delay: 1.35s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(4){ animation-delay: 1.50s; }
 
-/* EXPERIENCIA — todavía un poco más tarde */
-.cv-group:nth-of-type(2) .cv-entry:nth-of-type(1){ animation-delay: 1.8s; }
-.cv-group:nth-of-type(2) .cv-entry:nth-of-type(2){ animation-delay: 2.0s; }
+/* EXPERIENCIA — entra después pero sin hacerse larga */
+.cv-group:nth-of-type(2) .cv-entry:nth-of-type(1){ animation-delay: 1.35s; }
+.cv-group:nth-of-type(2) .cv-entry:nth-of-type(2){ animation-delay: 1.50s; }
 
 @keyframes cvEntryUp{
   to{
@@ -1164,6 +1164,7 @@ header{
     transform: translateY(0);
   }
 }
+
 
 
 
