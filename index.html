@@ -822,6 +822,66 @@ footer{
   left: 26px;              /* recoloca la línea vertical */
 }
 
+/* ===== CV – ESTRUCTURA VERTICAL ===== */
+
+.cv-vertical{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 680px;
+}
+
+.cv-block{
+  position: relative;
+  padding-left: 28px;
+}
+
+.cv-block::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:rgba(255,255,255,0.25);
+}
+
+.cv-block h3{
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.cv-block li{
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 18px;
+}
+
+.cv-block li::before{
+  content:"";
+  position:absolute;
+  left:-28px;
+  top:7px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.cv-block strong{
+  display:block;
+  font-size:14px;
+}
+
+.cv-block span{
+  font-size:13px;
+  line-height:1.6;
+  color: var(--muted);
+}
+
   
 </style>
 </head>
@@ -918,58 +978,47 @@ footer{
   </div>
 </section>
 
-<section id="cv" class="section">
-  <div class="content">
+<div class="cv-details cv-vertical fade-up delay-2">
 
-    <h2 class="fade-up" data-i18n="cv_title">Currículum Vitae</h2>
-
-    <div class="cv-details fade-up delay-2">
-
-      <!-- EDUCACIÓN -->
-      <div class="cv-column">
-        <h3>Educación</h3>
-        <ul>
-          <li>
-            <strong>Universidad Politécnica de Valencia (UPV)</strong><br>
-            <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2024 – Actualidad</span>
-          </li>
-          <li>
-            <strong>Universitat Jaume I de Castellón (UJI)</strong><br>
-            <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2021 – 2024</span>
-          </li>
-          <li>
-            <strong>Escuelas San José de Valencia</strong><br>
-            <span>Grado Superior en Instalaciones Electrotécnicas y Automatizadas · 2019 – 2021</span>
-          </li>
-          <li>
-            <strong>Escuelas San José de Valencia</strong><br>
-            <span>Grado Medio en Instalaciones Eléctricas y Automáticas · 2017 – 2019</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- EXPERIENCIA EN PRÁCTICAS -->
-      <div class="cv-column">
-        <h3>Prácticas Profesionales</h3>
-        <ul>
-          <li>
-            <strong>Elecnor</strong><br>
-            <span>Prácticas de mantenimiento de equipos eléctricos en instalaciones universitarias. Soporte técnico y mantenimiento preventivo.</span>
-          </li>
-          <li>
-            <strong>Autrial</strong><br>
-            <span>Prácticas como montador de cuadros eléctricos. Mantenimiento preventivo y correctivo de instalaciones eléctricas.</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- COLUMNA VACÍA PARA RESPIRACIÓN VISUAL -->
-      <div class="cv-column"></div>
-
-    </div>
-
+  <!-- FORMACIÓN -->
+  <div class="cv-block">
+    <h3>Formación académica</h3>
+    <ul>
+      <li>
+        <strong>Universidad Politécnica de Valencia (UPV)</strong><br>
+        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2024 – Actualidad</span>
+      </li>
+      <li>
+        <strong>Universitat Jaume I de Castellón (UJI)</strong><br>
+        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2021 – 2024</span>
+      </li>
+      <li>
+        <strong>Escuelas San José de Valencia</strong><br>
+        <span>Grado Superior en Instalaciones Electrotécnicas y Automatizadas · 2019 – 2021</span>
+      </li>
+      <li>
+        <strong>Escuelas San José de Valencia</strong><br>
+        <span>Grado Medio en Instalaciones Eléctricas y Automáticas · 2017 – 2019</span>
+      </li>
+    </ul>
   </div>
-</section>
+
+  <!-- EXPERIENCIA -->
+  <div class="cv-block">
+    <h3>Prácticas profesionales</h3>
+    <ul>
+      <li>
+        <strong>Elecnor</strong><br>
+        <span>Prácticas de mantenimiento de equipos eléctricos en instalaciones universitarias.</span>
+      </li>
+      <li>
+        <strong>Autrial</strong><br>
+        <span>Montaje y mantenimiento de cuadros eléctricos e instalaciones eléctricas.</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
 
 
 <section id="skills" class="section">
