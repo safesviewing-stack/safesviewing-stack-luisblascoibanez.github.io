@@ -817,7 +817,7 @@ footer{
 }
 
 
-}
+
 
   .cv-snap{
   position: relative;
@@ -1225,78 +1225,36 @@ function changeLang(lang){
 }
 
 function changeSection(id, link) {
-  // Verificar si ya estamos en la misma sección
   if (document.getElementById(id).classList.contains('active')) return;
 
-  // Desactivar todas las secciones
-  document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-  // Activar la sección correspondiente
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  // Desactivar la clase active en todos los enlaces
+
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  // Activar la clase active en el enlace correspondiente
-  link.classList.add('active'); // Aseguramos que el enlace activo tiene la línea debajo
-  
-  // Si es la sección de Portfolio, aplicamos la clase active al enlace de Portfolio
+  link.classList.add('active');
+
   if (id === 'portfolio') {
-    const portfolioLink = document.querySelector('nav a:nth-child(3)');
-    portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
-}
-
-    if (id === 'cv') {
-  const cvSnap = document.querySelector('.cv-snap');
-  cvSnap.scrollTop = 0;
-}
-
+    document.querySelector('nav a:nth-child(3)').classList.add('active');
   }
-  
-  // Ocultar el logo en todas las secciones excepto Home
+
+  if (id === 'cv') {
+    const cvSnap = document.querySelector('.cv-snap');
+    if (cvSnap) cvSnap.scrollTop = 0;
+  }
+
   const logo = document.getElementById('logo-home');
-  if (id !== 'home') {
-    logo.style.visibility = 'hidden';
-  } else {
-    logo.style.visibility = 'visible';
-    // Reaplicar la animación al logo cuando se entra en Home
-    logo.style.animation = 'none'; // Para reiniciar la animación
-    void logo.offsetHeight; // Fuerza el reflujo del DOM
-    logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
-  }
+  logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
 
-  // Mostrar el footer con animación cada vez que se cambie de sección
   const footer = document.querySelector('footer');
   footer.style.animation = 'none';
-  void footer.offsetHeight; // Fuerza el reflujo del DOM
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
-  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
+  void footer.offsetHeight;
+  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
+  footer.style.animationDelay = '1.5s';
 }
 
-let cvIndex = 0;
 
-const bgLayer = document.querySelector('.bg-layer');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      cvItems.forEach(i => i.classList.remove('active'));
-      entry.target.classList.add('active');
 
-      const bg = entry.target.dataset.bg;
-      if(bg){
-        bgLayer.style.opacity = 0;
-        setTimeout(() => {
-          bgLayer.style.background =
-            `linear-gradient(rgba(11,11,13,.75), rgba(11,11,13,.7)),
-             url('${bg}') center / cover no-repeat`;
-          bgLayer.style.opacity = 1;
-        }, 300);
-      }
-    }
-  });
-},{
-  threshold: 0.6
-});
-
-cvItems.forEach(item => observer.observe(item));
 
 const snapItems = document.querySelectorAll('.cv-snap-item');
 
