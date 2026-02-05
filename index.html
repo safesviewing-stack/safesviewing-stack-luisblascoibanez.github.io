@@ -927,6 +927,13 @@ p{
  
  #cv .content{
   margin-left: clamp(120px, 16vw, 240px); /* ⬅️ más a la izquierda */
+  padding-bottom: 120px; /* espacio antes del footer */
+
+}
+
+
+  #cv{
+  min-height: 100vh;
 }
 
 @keyframes cvLineIn{
@@ -956,6 +963,14 @@ p{
   }
 }
 
+#cv #global-footer{
+  position: static;
+  background: none;
+  padding: 60px 0 40px;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
 
   
   
@@ -1106,8 +1121,11 @@ p{
         </p>
       </div>
     </div>
-
   </div>
+
+  <footer id="global-footer">
+    © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
+  </footer>
 </section>
 
 
@@ -1194,9 +1212,7 @@ p{
 
 
 
-<footer id="global-footer">
-  © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
-</footer>
+
 
 <script>
 let currentLang = 'es';
