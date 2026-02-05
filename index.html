@@ -809,10 +809,13 @@ footer{
 .cv-snap{
   height: calc(100vh - 160px);
   overflow-y: auto;
+
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  overscroll-behavior: contain; /* evita scroll del body */
+
+  overscroll-behavior: contain;
 }
+
 
 }
 
@@ -1238,6 +1241,13 @@ function changeSection(id, link) {
   if (id === 'portfolio') {
     const portfolioLink = document.querySelector('nav a:nth-child(3)');
     portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
+}
+
+    if (id === 'cv') {
+  const cvSnap = document.querySelector('.cv-snap');
+  cvSnap.scrollTop = 0;
+}
+
   }
   
   // Ocultar el logo en todas las secciones excepto Home
@@ -1314,36 +1324,7 @@ const snapObserver = new IntersectionObserver(entries => {
 
 snapItems.forEach(item => snapObserver.observe(item));
 
-const cvSnap = document.querySelector('.cv-snap');
-const snapItems = document.querySelectorAll('.cv-snap-item');
 
-let currentSnap = 0;
-let isScrolling = false;
-
-cvSnap.addEventListener('wheel', (e) => {
-  e.preventDefault(); // 🔥 bloquea scroll libre
-
-  if (isScrolling) return;
-
-  isScrolling = true;
-
-  if (e.deltaY > 0) {
-    currentSnap = Math.min(currentSnap + 1, snapItems.length - 1);
-  } else {
-    currentSnap = Math.max(currentSnap - 1, 0);
-  }
-
-  snapItems[currentSnap].scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-
-  // tiempo de bloqueo = duración de la animación
-  setTimeout(() => {
-    isScrolling = false;
-  }, 900);
-
-}, { passive: false });
 
   
 </script>
