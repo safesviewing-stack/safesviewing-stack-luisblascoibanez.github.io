@@ -948,7 +948,64 @@ header{
   color: var(--muted);
 }
 
-  
+  /* ===== CV EDITORIAL ===== */
+
+.cv-editorial{
+  padding-bottom: 160px;
+}
+
+.cv-timeline{
+  margin-top: 80px;
+  position: relative;
+}
+
+/* Línea vertical */
+.cv-timeline::before{
+  content:"";
+  position: absolute;
+  left: 110px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,.25);
+}
+
+.cv-entry{
+  display: grid;
+  grid-template-columns: 80px 60px 1fr;
+  align-items: flex-start;
+  margin-bottom: 120px;
+}
+
+.cv-date{
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--muted);
+  text-align: right;
+  padding-top: 4px;
+}
+
+.cv-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  margin-top: 6px;
+}
+
+.cv-dot.active{
+  background: #fff;
+}
+
+.cv-text h3{
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.cv-text p{
+  max-width: 620px;
+}
+
 </style>
 </head>
 
@@ -1045,63 +1102,52 @@ header{
 </section>
 
 <section id="cv" class="section">
-  <div class="content cv-layout">
+  <div class="content cv-editorial">
 
     <h2 class="fade-up">Currículum Vitae</h2>
 
-    <div class="cv-grid">
+    <div class="cv-timeline">
 
-      <!-- COLUMNA IZQUIERDA -->
-      <nav class="cv-nav">
-        <a onclick="goCV('cv-1')" class="active">01 · Formación técnica</a>
-        <a onclick="goCV('cv-2')">02 · UPV</a>
-        <a onclick="goCV('cv-3')">03 · Sixay</a>
-        <a onclick="goCV('cv-4')">04 · Actual</a>
-      </nav>
-
-      <!-- COLUMNA DERECHA -->
-      <div class="cv-content">
-
-        <article id="cv-1" class="cv-block">
-          <h3>Formación técnica</h3>
+      <article class="cv-entry">
+        <span class="cv-date">2018 · 2020</span>
+        <div class="cv-dot"></div>
+        <div class="cv-text">
+          <h3>Grado Medio en Electricidad</h3>
           <p>
-            Formación Profesional en Electricidad.<br>
-            Base sólida en sistemas, procesos y resolución técnica.
+            Formación técnica enfocada en instalaciones, sistemas eléctricos
+            y resolución de problemas en entorno real.
           </p>
-          <span class="cv-year">2018 · 2020</span>
-        </article>
+        </div>
+      </article>
 
-        <article id="cv-2" class="cv-block">
-          <h3>UPV · Diseño Industrial</h3>
+      <article class="cv-entry">
+        <span class="cv-date">2020 · 2022</span>
+        <div class="cv-dot"></div>
+        <div class="cv-text">
+          <h3>Grado Superior en Electricidad</h3>
           <p>
-            Grado en Ingeniería en Diseño Industrial.<br>
-            Producto, detalle técnico y proceso completo.
+            Profundización técnica, lectura de planos, ejecución,
+            criterio constructivo y responsabilidad en procesos.
           </p>
-          <span class="cv-year">2022 · 2026</span>
-        </article>
+        </div>
+      </article>
 
-        <article id="cv-3" class="cv-block">
-          <h3>Sixay · Prácticas</h3>
+      <article class="cv-entry">
+        <span class="cv-date">2022 · Actualidad</span>
+        <div class="cv-dot active"></div>
+        <div class="cv-text">
+          <h3>Ingeniería en Diseño Industrial</h3>
           <p>
-            Diseño de mobiliario a medida y desarrollo técnico
-            en entorno profesional real.
+            Enfoque en diseño de producto, desarrollo técnico,
+            fabricación y equilibrio entre forma y función.
           </p>
-          <span class="cv-year">2025</span>
-        </article>
+        </div>
+      </article>
 
-        <article id="cv-4" class="cv-block">
-          <h3>Perfil actual</h3>
-          <p>
-            Diseñador industrial con background técnico,
-            foco en producto y fabricación.
-          </p>
-          <span class="cv-year">Actualidad</span>
-        </article>
-
-      </div>
     </div>
   </div>
 </section>
+
 
 
 <section id="skills" class="section">
