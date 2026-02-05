@@ -1035,7 +1035,31 @@ header{
 }
 
 
-  
+  /* ===== CV GROUP HEADER ===== */
+
+.cv-group{
+  margin-top: 100px;
+}
+
+.cv-group-header{
+  margin-bottom: 48px;
+}
+
+.cv-group-title{
+  font-size: 12px;                 /* un pelín más presente */
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.cv-divider{
+  display: block;
+  width: 72px;                     /* línea corta, elegante */
+  height: 1px;
+  background: rgba(255,255,255,.35);
+}
+
 
 </style>
 </head>
@@ -1137,16 +1161,20 @@ header{
 
     <h2 class="fade-up">Currículum Vitae</h2>
 
-    <!-- FORMACIÓN -->
+    <!-- ================= FORMACIÓN ================= -->
     <div class="cv-group">
-      <h3 class="cv-group-title">Formación</h3>
+
+      <div class="cv-group-header">
+        <h3 class="cv-group-title">Formación</h3>
+        <span class="cv-divider"></span>
+      </div>
 
       <article class="cv-entry">
         <span class="cv-date">2018 · 2020</span>
         <div class="cv-text">
           <h4>Grado Medio en Electricidad</h4>
           <p>
-            Formación técnica en instalaciones eléctricas,
+            Formación técnica orientada a instalaciones eléctricas,
             sistemas básicos y trabajo en entorno real.
           </p>
         </div>
@@ -1179,16 +1207,21 @@ header{
         <div class="cv-text">
           <h4>Diseño Industrial · UJI</h4>
           <p>
-            Complemento formativo en diseño,
+            Formación complementaria en diseño,
             metodología proyectual y pensamiento crítico.
           </p>
         </div>
       </article>
+
     </div>
 
-    <!-- EXPERIENCIA -->
+    <!-- ============== EXPERIENCIA LABORAL ============== -->
     <div class="cv-group">
-      <h3 class="cv-group-title">Experiencia laboral</h3>
+
+      <div class="cv-group-header">
+        <h3 class="cv-group-title">Experiencia laboral</h3>
+        <span class="cv-divider"></span>
+      </div>
 
       <article class="cv-entry">
         <span class="cv-date">Prácticas</span>
@@ -1206,11 +1239,12 @@ header{
         <div class="cv-text">
           <h4>Elecnor</h4>
           <p>
-            Trabajo en proyectos eléctricos reales,
+            Participación en proyectos eléctricos reales,
             contacto con obra, normativa y ejecución técnica.
           </p>
         </div>
       </article>
+
     </div>
 
   </div>
