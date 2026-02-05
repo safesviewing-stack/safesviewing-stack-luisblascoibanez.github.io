@@ -882,6 +882,72 @@ header{
   display: none;
 }
 
+  /* ===== CV 2 COLUMN LAYOUT ===== */
+
+.cv-layout{
+  padding-bottom: 120px;
+}
+
+.cv-grid{
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 80px;
+  margin-top: 40px;
+}
+
+/* IZQUIERDA */
+.cv-nav{
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.cv-nav a{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  position: relative;
+}
+
+.cv-nav a.active,
+.cv-nav a:hover{
+  color: #fff;
+}
+
+/* DERECHA */
+.cv-content{
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  padding-right: 20px;
+}
+
+.cv-content::-webkit-scrollbar{
+  width: 4px;
+}
+.cv-content::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.25);
+}
+
+.cv-block{
+  margin-bottom: 120px;
+  opacity: .9;
+}
+
+.cv-block h3{
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.cv-year{
+  display: block;
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--muted);
+}
+
   
 </style>
 </head>
@@ -979,55 +1045,64 @@ header{
 </section>
 
 <section id="cv" class="section">
-  <div class="content cv-snap">
+  <div class="content cv-layout">
 
     <h2 class="fade-up">Currículum Vitae</h2>
 
-    <div class="cv-snap-list">
+    <div class="cv-grid">
 
-      <article class="cv-snap-item" data-bg="bg-electricidad.jpg">
-        <span class="cv-index">01</span>
-        <h3>Formación técnica</h3>
-        <p>
-          Formación Profesional en Electricidad.<br>
-          Base sólida en sistemas, procesos y resolución técnica.
-        </p>
-        <span class="cv-year">2018 · 2020</span>
-      </article>
+      <!-- COLUMNA IZQUIERDA -->
+      <nav class="cv-nav">
+        <a onclick="goCV('cv-1')" class="active">01 · Formación técnica</a>
+        <a onclick="goCV('cv-2')">02 · UPV</a>
+        <a onclick="goCV('cv-3')">03 · Sixay</a>
+        <a onclick="goCV('cv-4')">04 · Actual</a>
+      </nav>
 
-      <article class="cv-snap-item" data-bg="bg-upv.jpg">
-        <span class="cv-index">02</span>
-        <h3>UPV · Diseño Industrial</h3>
-        <p>
-          Grado en Ingeniería en Diseño Industrial.<br>
-          Producto, detalle técnico y proceso completo.
-        </p>
-        <span class="cv-year">2022 · 2026</span>
-      </article>
+      <!-- COLUMNA DERECHA -->
+      <div class="cv-content">
 
-      <article class="cv-snap-item" data-bg="bg-sixay.jpg">
-        <span class="cv-index">03</span>
-        <h3>Sixay · Prácticas</h3>
-        <p>
-          Diseño de mobiliario a medida y desarrollo técnico
-          en entorno profesional real.
-        </p>
-        <span class="cv-year">2025</span>
-      </article>
+        <article id="cv-1" class="cv-block">
+          <h3>Formación técnica</h3>
+          <p>
+            Formación Profesional en Electricidad.<br>
+            Base sólida en sistemas, procesos y resolución técnica.
+          </p>
+          <span class="cv-year">2018 · 2020</span>
+        </article>
 
-      <article class="cv-snap-item" data-bg="bg-now.jpg">
-        <span class="cv-index">04</span>
-        <h3>Perfil actual</h3>
-        <p>
-          Diseñador industrial con background técnico,
-          foco en producto y fabricación.
-        </p>
-        <span class="cv-year">Actualidad</span>
-      </article>
+        <article id="cv-2" class="cv-block">
+          <h3>UPV · Diseño Industrial</h3>
+          <p>
+            Grado en Ingeniería en Diseño Industrial.<br>
+            Producto, detalle técnico y proceso completo.
+          </p>
+          <span class="cv-year">2022 · 2026</span>
+        </article>
 
+        <article id="cv-3" class="cv-block">
+          <h3>Sixay · Prácticas</h3>
+          <p>
+            Diseño de mobiliario a medida y desarrollo técnico
+            en entorno profesional real.
+          </p>
+          <span class="cv-year">2025</span>
+        </article>
+
+        <article id="cv-4" class="cv-block">
+          <h3>Perfil actual</h3>
+          <p>
+            Diseñador industrial con background técnico,
+            foco en producto y fabricación.
+          </p>
+          <span class="cv-year">Actualidad</span>
+        </article>
+
+      </div>
     </div>
   </div>
 </section>
+
 
 <section id="skills" class="section">
   <div class="content">
@@ -1282,6 +1357,18 @@ const snapObserver = new IntersectionObserver(entries => {
 
 snapItems.forEach(item => snapObserver.observe(item));
 
+function goCV(id){
+  const target = document.getElementById(id);
+  if(!target) return;
+
+  document.querySelectorAll('.cv-nav a').forEach(a => a.classList.remove('active'));
+  event.target.classList.add('active');
+
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
 
 
   
