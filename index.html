@@ -882,6 +882,23 @@ footer{
   color: var(--muted);
 }
 
+  /* ===== CV – AJUSTES FINALES ===== */
+
+/* Más separación entre bloques */
+.cv-vertical{
+  gap: 70px; /* antes 50px */
+}
+
+/* Separación extra solo para experiencia */
+.cv-block-experience{
+  margin-top: 20px;
+}
+
+/* Eliminar puntos del timeline */
+.cv-block li::before{
+  display: none;
+}
+
   
 </style>
 </head>
@@ -1009,7 +1026,7 @@ footer{
       </div>
 
       <!-- EXPERIENCIA -->
-      <div class="cv-block">
+      <div class="cv-block cv-block-experience">
         <h3>Prácticas profesionales</h3>
         <ul>
           <li>
@@ -1027,6 +1044,7 @@ footer{
 
   </div>
 </section>
+
 
 
 
