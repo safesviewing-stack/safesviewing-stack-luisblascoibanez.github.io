@@ -308,7 +308,7 @@ p{
 
 /* ===== FOOTER ===== */
 footer{
-  position:fixed;
+  position:relative;
   bottom:0;
   width:100%;
   padding:18px 40px;
@@ -1220,6 +1220,21 @@ header{
 }
 
 
+#cv.active footer{
+  display: block;
+}
+
+  .cv-footer{
+  margin-top: 120px;
+  padding: 18px 40px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #9a9a9a;
+  opacity: .85;
+}
+
+  
 </style>
 </head>
 
@@ -1406,7 +1421,14 @@ header{
     </div>
 
   </div>
+
+  <!-- ===== FOOTER SOLO PARA CV (DENTRO DEL SCROLL) ===== -->
+  <footer class="cv-footer">
+    © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
+  </footer>
+
 </section>
+
 
 
 
