@@ -1048,6 +1048,7 @@ header{
 
 #cv .content{
   overflow: visible;
+  padding-bottom: 140px;
 }
 
 
@@ -1205,6 +1206,18 @@ header{
   box-shadow: 0 6px 20px rgba(0,0,0,.25);
 }
 
+/* ===== FOOTER FIJO SOLO EN CV ===== */
+
+#cv.active ~ footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
 
 </style>
@@ -1623,21 +1636,7 @@ snapItems.forEach(item => snapObserver.observe(item));
 
 /* ===== FOOTER SOLO AL FINAL DEL CV ===== */
 
-const footer = document.querySelector('footer');
 
-window.addEventListener('scroll', () => {
-  const cvSection = document.getElementById('cv');
-
-  if (!cvSection.classList.contains('active')) {
-    footer.classList.remove('visible');
-    return;
-  }
-
-  const atBottom =
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 20;
-
-  footer.classList.toggle('visible', atBottom);
-});
 
   
 </script>
