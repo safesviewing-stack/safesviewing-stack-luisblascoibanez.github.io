@@ -1117,6 +1117,54 @@ header{
   }
 }
 
+  /* ===== CV TITLES ENTRANCE (LEFT) ===== */
+
+.cv-group-header{
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: cvTitleIn 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.cv-group:nth-of-type(1) .cv-group-header{
+  animation-delay: .2s;
+}
+
+.cv-group:nth-of-type(2) .cv-group-header{
+  animation-delay: .45s;
+}
+
+@keyframes cvTitleIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+  /* ===== CV CONTENT ENTRANCE (BOTTOM) ===== */
+
+.cv-entry{
+  opacity: 0;
+  transform: translateY(32px);
+  animation: cvEntryUp 0.8s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* FORMACION */
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(1){ animation-delay: .45s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(2){ animation-delay: .6s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(3){ animation-delay: .75s; }
+.cv-group:nth-of-type(1) .cv-entry:nth-of-type(4){ animation-delay: .9s; }
+
+/* EXPERIENCIA */
+.cv-group:nth-of-type(2) .cv-entry:nth-of-type(1){ animation-delay: .7s; }
+.cv-group:nth-of-type(2) .cv-entry:nth-of-type(2){ animation-delay: .85s; }
+
+@keyframes cvEntryUp{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 </style>
 </head>
