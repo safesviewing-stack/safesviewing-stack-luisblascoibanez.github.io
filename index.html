@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Blasco-Ibáñez · Diseño Industrial</title>
+<title>Luis Blasco-Ibáñez · Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -12,248 +12,246 @@
    VARIABLES · DARK / SOFT
 ================================================== */
 :root {
-  --bg-main: #0b0b0b;
-  --bg-soft: #121212;
-  --bg-card: #161616;
-  --text-main: #ffffff;
-  --text-muted: #b3b3b3;
-  --border-soft: rgba(255,255,255,0.08);
+  --bg-main:#0b0b0b; --bg-soft:#121212; --bg-card:#161616;
+  --text-main:#fff; --text-muted:#b3b3b3;
+  --border-soft:rgba(255,255,255,0.08);
+  --radius:14px;
+  --transition:0.7s cubic-bezier(.2,.8,.2,1);
 }
 
 body.soft {
-  --bg-main: #f3f3f1;
-  --bg-soft: #ededeb;
-  --bg-card: #ffffff;
-  --text-main: #1a1a1a;
-  --text-muted: #555;
-  --border-soft: rgba(0,0,0,0.08);
-}
-
-:root {
-  --radius: 14px;
-  --transition: 0.7s cubic-bezier(.2,.8,.2,1);
+  --bg-main:#f3f3f1; --bg-soft:#ededeb; --bg-card:#ffffff;
+  --text-main:#1a1a1a; --text-muted:#555;
+  --border-soft:rgba(0,0,0,0.08);
 }
 
 /* ==================================================
-   RESET · BASE
+   BASE
 ================================================== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.65;
-  transition: background var(--transition), color var(--transition);
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  line-height:1.65;
+  transition:background var(--transition),color var(--transition);
 }
-
-section {
-  padding: 140px 8vw;
-  position: relative;
-}
-
-/* Separador editorial invisible */
-section::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 8vw;
-  right: 8vw;
-  height: 1px;
-  background: var(--border-soft);
+section{padding:140px 8vw;position:relative;}
+section::after{
+  content:"";position:absolute;bottom:0;left:8vw;right:8vw;
+  height:1px;background:var(--border-soft);
 }
 
 /* ==================================================
-   REVEAL EDITORIAL
+   CONTROLES
 ================================================== */
-.section-inner {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity var(--transition), transform var(--transition);
+.controls{
+  position:fixed;top:28px;right:28px;
+  display:flex;gap:18px;
+  font-size:13px;opacity:.6;z-index:1000;
 }
-
-.section-inner.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.controls span{cursor:pointer;}
+.controls span:hover{opacity:1;}
 
 /* ==================================================
-   TOGGLE SOFT MODE
+   REVEAL
 ================================================== */
-.toggle {
-  position: fixed;
-  top: 32px;
-  right: 32px;
-  font-size: 13px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity var(--transition);
-  z-index: 1000;
+.section-inner{
+  opacity:0;transform:translateY(60px);
+  transition:opacity var(--transition),transform var(--transition);
 }
-
-.toggle:hover { opacity: 1; }
+.section-inner.visible{opacity:1;transform:none;}
 
 /* ==================================================
-   BOTONES
+   BUTTON
 ================================================== */
-.btn {
-  display: inline-block;
-  padding: 14px 34px;
-  border-radius: 999px;
-  border: 1px solid currentColor;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  transition: background var(--transition), color var(--transition), transform var(--transition);
+.btn{
+  display:inline-block;padding:14px 34px;
+  border-radius:999px;border:1px solid currentColor;
+  font-size:14px;letter-spacing:.05em;
+  transition:background var(--transition),color var(--transition),transform var(--transition);
 }
-
-.btn span { transition: transform var(--transition); display: inline-block; }
-
-.btn:hover {
-  background: var(--text-main);
-  color: var(--bg-main);
-  transform: translateY(-2px);
+.btn span{display:inline-block;transition:transform var(--transition);}
+.btn:hover{
+  background:var(--text-main);color:var(--bg-main);
+  transform:translateY(-2px);
 }
-
-.btn:hover span { transform: translateX(4px); }
+.btn:hover span{transform:translateX(4px);}
 
 /* ==================================================
    HOME
 ================================================== */
-.home {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.home h1 {
-  font-size: clamp(56px, 6vw, 90px);
-  font-weight: 500;
-  line-height: 1.05;
-  margin-bottom: 32px;
-}
-
-.home p {
-  color: var(--text-muted);
-  max-width: 520px;
-  margin-bottom: 56px;
-}
+.home{min-height:100vh;display:flex;align-items:center;}
+.home h1{font-size:clamp(56px,6vw,92px);line-height:1.05;margin-bottom:32px;}
+.home p{color:var(--text-muted);max-width:520px;margin-bottom:56px;}
 
 /* ==================================================
    ABOUT
 ================================================== */
-.about { background: var(--bg-soft); }
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 90px;
-  align-items: center;
+.about{background:var(--bg-soft);}
+.about-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:90px;align-items:center;
 }
 
 /* ==================================================
    PORTFOLIO
 ================================================== */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 36px;
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
 }
-
-.project {
-  aspect-ratio: 4/3;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-soft);
-  background: var(--bg-card);
-  transition: transform var(--transition);
+.project{
+  aspect-ratio:4/3;border-radius:var(--radius);
+  border:1px solid var(--border-soft);
+  background:var(--bg-card);
+  transition:transform var(--transition);
 }
-
-.project:hover { transform: translateY(-8px); }
+.project:hover{transform:translateY(-8px);}
 
 /* ==================================================
-   CV · SKILLS · CONTACT
+   CV
 ================================================== */
-.cv, .skills { background: var(--bg-soft); }
+.cv{background:var(--bg-soft);}
+.cv-section{margin-bottom:64px;}
+.cv-item{margin-bottom:26px;}
+.cv-item span{display:block;font-size:14px;color:var(--text-muted);}
+.download{margin-top:48px;}
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+/* ==================================================
+   SKILLS
+================================================== */
+.skills{background:var(--bg-soft);}
+.tags{display:flex;flex-wrap:wrap;gap:12px;}
+.tag{
+  padding:8px 18px;border-radius:999px;
+  border:1px solid var(--border-soft);
+  background:var(--bg-card);
+  font-size:13px;color:var(--text-muted);
 }
 
-.tag {
-  padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  background: var(--bg-card);
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.contact {
-  background: var(--bg-main);
-  padding-bottom: 100px;
-}
-
-footer {
-  margin-top: 100px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-muted);
+/* ==================================================
+   CONTACT
+================================================== */
+.contact{padding-bottom:100px;}
+footer{
+  margin-top:100px;text-align:center;
+  font-size:12px;color:var(--text-muted);
 }
 
 /* ==================================================
    RESPONSIVE
 ================================================== */
-@media (max-width: 1024px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr 1fr;}
 }
-
-@media (max-width: 640px) {
-  section { padding: 100px 6vw; }
-  .portfolio-grid { grid-template-columns: 1fr; }
+@media(max-width:640px){
+  section{padding:100px 6vw;}
+  .portfolio-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOGGLE -->
-<div class="toggle" id="toggle">Modo soft</div>
+<!-- CONTROLS -->
+<div class="controls">
+  <span id="lang">EN</span>
+  <span id="theme">Soft</span>
+</div>
 
 <!-- HOME -->
 <section class="home">
-  <div class="section-inner">
+  <div class="section-inner" data-es>
     <h1>Diseño Industrial<br>y Desarrollo de Producto</h1>
     <p>Perfil técnico y creativo enfocado en producto</p>
     <a href="#portfolio" class="btn"><span>Ver portfolio</span></a>
+  </div>
+  <div class="section-inner" data-en hidden>
+    <h1>Industrial Design<br>and Product Development</h1>
+    <p>Technical and creative profile focused on product</p>
+    <a href="#portfolio" class="btn"><span>View portfolio</span></a>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about">
-  <div class="section-inner about-grid">
+  <div class="section-inner about-grid" data-es>
     <div>
       <h2>Sobre mí</h2>
-      <p>Soy Luis Blasco-Ibáñez Berbel, diseñador industrial con base técnica en electricidad y una atención extrema al detalle.</p>
-      <p>Trabajo desde la precisión, el prototipado y la sensibilidad formal.</p>
+      <p>Diseñador industrial con base técnica en electricidad, orientación al detalle y especial interés en prototipado e impresión 3D.</p>
     </div>
+    <img src="https://via.placeholder.com/600x800">
+  </div>
+
+  <div class="section-inner about-grid" data-en hidden>
     <div>
-      <img src="https://via.placeholder.com/600x800" alt="Luis Blasco">
+      <h2>About me</h2>
+      <p>Industrial designer with a strong technical background in electricity, focused on detail, prototyping and 3D printing.</p>
     </div>
+    <img src="https://via.placeholder.com/600x800">
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
-  <div class="section-inner">
+  <div class="section-inner" data-es>
     <h2>Portfolio</h2>
     <div class="portfolio-grid">
-      <div class="project"></div>
-      <div class="project"></div>
-      <div class="project"></div>
+      <div class="project"></div><div class="project"></div><div class="project"></div>
+    </div>
+  </div>
+
+  <div class="section-inner" data-en hidden>
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="project"></div><div class="project"></div><div class="project"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="cv">
+  <div class="section-inner" data-es>
+    <h2>Currículum</h2>
+
+    <div class="cv-section">
+      <h3>Formación académica</h3>
+      <div class="cv-item">Ingeniería en Diseño Industrial<span>UPV · 2024 – Actualidad</span></div>
+      <div class="cv-item">Ingeniería en Diseño Industrial<span>UJI · 2021 – 2024</span></div>
+      <div class="cv-item">Grado Superior Electrotécnico<span>2019 – 2021</span></div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Experiencia laboral</h3>
+      <div class="cv-item">Montador de cuadros eléctricos<span>Autrial · 2017</span></div>
+      <div class="cv-item">Mantenimiento eléctrico<span>Elecnor · 2021</span></div>
+    </div>
+
+    <div class="download">
+      <a href="cv_luis_blasco.pdf" download class="btn"><span>Descargar currículum</span></a>
+    </div>
+  </div>
+
+  <div class="section-inner" data-en hidden>
+    <h2>Curriculum Vitae</h2>
+
+    <div class="cv-section">
+      <h3>Education</h3>
+      <div class="cv-item">Industrial Design Engineering<span>UPV · 2024 – Present</span></div>
+      <div class="cv-item">Industrial Design Engineering<span>UJI · 2021 – 2024</span></div>
+      <div class="cv-item">Electrical Engineering Degree<span>2019 – 2021</span></div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Experience</h3>
+      <div class="cv-item">Electrical panel assembler<span>Autrial · 2017</span></div>
+      <div class="cv-item">Electrical maintenance<span>Elecnor · 2021</span></div>
+    </div>
+
+    <div class="download">
+      <a href="cv_luis_blasco.pdf" download class="btn"><span>Download CV</span></a>
     </div>
   </div>
 </section>
@@ -261,12 +259,10 @@ footer {
 <!-- SKILLS -->
 <section class="skills">
   <div class="section-inner">
-    <h2>Habilidades</h2>
+    <h2>Skills</h2>
     <div class="tags">
-      <span class="tag">Inventor</span>
-      <span class="tag">Fusion 360</span>
-      <span class="tag">SolidWorks</span>
-      <span class="tag">Impresión 3D</span>
+      <span class="tag">Inventor</span><span class="tag">Fusion 360</span>
+      <span class="tag">SolidWorks</span><span class="tag">3D Printing</span>
     </div>
   </div>
 </section>
@@ -274,7 +270,7 @@ footer {
 <!-- CONTACT -->
 <section class="contact">
   <div class="section-inner">
-    <h2>Contacto</h2>
+    <h2>Contacto / Contact</h2>
     <p>luisblascoibanezberbel@gmail.com</p>
     <p>linkedin.com/in/luisblasiber</p>
     <p>+34 630 511 806</p>
@@ -283,31 +279,28 @@ footer {
 </section>
 
 <script>
-/* Editorial reveal */
-const sections = document.querySelectorAll('.section-inner');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.2 });
+/* Reveal */
+const sections=document.querySelectorAll('.section-inner');
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.2});
+sections.forEach(s=>obs.observe(s));
 
-sections.forEach(s => observer.observe(s));
+/* Language */
+const langBtn=document.getElementById('lang');
+let lang='es';
 
-/* Soft mode */
-const toggle = document.getElementById('toggle');
-const body = document.body;
+langBtn.onclick=()=>{
+  lang=lang==='es'?'en':'es';
+  document.querySelectorAll('[data-es]').forEach(e=>e.hidden=lang!=='es');
+  document.querySelectorAll('[data-en]').forEach(e=>e.hidden=lang!=='en');
+  langBtn.textContent=lang==='es'?'EN':'ES';
+};
 
-if (localStorage.getItem('soft') === 'true') {
-  body.classList.add('soft');
-  toggle.textContent = 'Modo oscuro';
-}
-
-toggle.addEventListener('click', () => {
-  body.classList.toggle('soft');
-  const active = body.classList.contains('soft');
-  localStorage.setItem('soft', active);
-  toggle.textContent = active ? 'Modo oscuro' : 'Modo soft';
-});
+/* Theme */
+const themeBtn=document.getElementById('theme');
+themeBtn.onclick=()=>{
+  document.body.classList.toggle('soft');
+  themeBtn.textContent=document.body.classList.contains('soft')?'Dark':'Soft';
+};
 </script>
 
 </body>
