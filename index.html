@@ -1602,84 +1602,41 @@ function changeSection(id, link) {
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   link.classList.add('active');
 
-  if (id === 'portfolio') {
-    document.querySelector('nav a:nth-child(3)').classList.add('active');
-  }
-
-  if (id === 'cv') {
-    const cvSnap = document.querySelector('.cv-snap');
-    if (cvSnap) cvSnap.scrollTop = 0;
-  }
-
   const logo = document.getElementById('logo-home');
   logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
+}
 
-  }
-
-  const snapItems = document.querySelectorAll('.cv-snap-item');
-
-
-
-
+/* ===== CV SNAP OBSERVER ===== */
 
 const snapItems = document.querySelectorAll('.cv-snap-item');
 
 const snapObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
+    if (entry.isIntersecting) {
       snapItems.forEach(i => i.classList.remove('active'));
       entry.target.classList.add('active');
-
-      const bg = entry.target.dataset.bg;
-      if(bg){
-        bgLayer.style.opacity = 0;
-        setTimeout(() => {
-          bgLayer.style.background =
-            `linear-gradient(rgba(11,11,13,.75), rgba(11,11,13,.7)),
-             url('${bg}') center / cover no-repeat`;
-          bgLayer.style.opacity = 1;
-        }, 300);
-      }
     }
   });
-},{
-  threshold: 0.65
-});
+}, { threshold: 0.65 });
 
 snapItems.forEach(item => snapObserver.observe(item));
 
-function goCV(id){
-  const target = document.getElementById(id);
-  if(!target) return;
-
-  document.querySelectorAll('.cv-nav a').forEach(a => a.classList.remove('active'));
-  event.target.classList.add('active');
-
-  target.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-}
+/* ===== FOOTER SOLO AL FINAL DEL CV ===== */
 
 const footer = document.querySelector('footer');
 
 window.addEventListener('scroll', () => {
   const cvSection = document.getElementById('cv');
 
-  // Solo aplicar lógica si CV está activa
   if (!cvSection.classList.contains('active')) {
     footer.classList.remove('visible');
     return;
   }
 
-  const scrollBottom =
+  const atBottom =
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 20;
 
-  if (scrollBottom) {
-    footer.classList.add('visible');
-  } else {
-    footer.classList.remove('visible');
-  }
+  footer.classList.toggle('visible', atBottom);
 });
 
   
