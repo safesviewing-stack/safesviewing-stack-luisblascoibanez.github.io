@@ -444,6 +444,62 @@ footer{
   color: #fff;
 }
 
+  /* ===== CV – ESTÉTICA PREMIUM ===== */
+
+.cv-details{
+  margin-top: 25px;
+}
+
+.cv-column{
+  position: relative;
+  padding-left: 22px;
+}
+
+.cv-column::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:rgba(255,255,255,0.25);
+}
+
+.cv-column h3{
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.cv-column li{
+  position: relative;
+  padding-left: 14px;
+}
+
+.cv-column li::before{
+  content:"";
+  position:absolute;
+  left:-22px;
+  top:6px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.cv-column li strong{
+  display:block;
+  font-size:14px;
+  margin-bottom: 2px;
+}
+
+.cv-column li span{
+  font-size:13px;
+  line-height:1.6;
+}
+
 
   /* ===== CONTACT SECTION ===== */
 
