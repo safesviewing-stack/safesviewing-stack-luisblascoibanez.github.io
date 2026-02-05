@@ -9,17 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* =====================
-       VARIABLES & RESET
-    ====================== */
+    /* ==================================================
+       VARIABLES · RESET · BASE
+    ================================================== */
     :root {
-      --bg-main: #0e0e0e;
-      --bg-soft: #141414;
+      --bg-main: #0b0b0b;
+      --bg-soft: #121212;
+      --bg-card: #161616;
       --text-main: #ffffff;
-      --text-muted: #b5b5b5;
-      --accent: #ffffff;
+      --text-muted: #b3b3b3;
       --border-soft: rgba(255,255,255,0.08);
-      --radius: 12px;
+      --radius: 14px;
       --transition: 0.6s cubic-bezier(.2,.8,.2,1);
     }
 
@@ -37,7 +37,8 @@
       font-family: 'Inter', sans-serif;
       background: var(--bg-main);
       color: var(--text-main);
-      line-height: 1.6;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
     img {
@@ -54,9 +55,9 @@
       padding: 120px 8vw;
     }
 
-    /* =====================
-       ANIMACIONES SCROLL
-    ====================== */
+    /* ==================================================
+       SCROLL REVEAL
+    ================================================== */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -68,33 +69,63 @@
       transform: translateY(0);
     }
 
-    /* =====================
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ==================================================
+       CURSOR EDITORIAL
+    ================================================== */
+    .cursor {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: transform 0.15s ease-out, opacity 0.3s ease;
+      z-index: 9999;
+    }
+
+    /* ==================================================
        BOTONES
-    ====================== */
+    ================================================== */
     .btn {
       display: inline-block;
-      padding: 14px 32px;
+      padding: 14px 34px;
       border-radius: 999px;
-      border: 1px solid var(--accent);
+      border: 1px solid #fff;
       font-size: 14px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
+      overflow: hidden;
       transition: background var(--transition), color var(--transition), transform var(--transition);
     }
 
+    .btn span {
+      display: inline-block;
+      transition: transform var(--transition);
+    }
+
     .btn:hover {
-      background: var(--accent);
+      background: #fff;
       color: #000;
       transform: translateY(-2px);
     }
 
-    /* =====================
+    .btn:hover span {
+      transform: translateX(4px);
+    }
+
+    /* ==================================================
        HOME
-    ====================== */
+    ================================================== */
     .home {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
+      background: radial-gradient(circle at top, #1a1a1a, #070707);
     }
 
     .home-content {
@@ -102,22 +133,22 @@
     }
 
     .home h1 {
-      font-size: clamp(48px, 6vw, 86px);
+      font-size: clamp(52px, 6vw, 88px);
       font-weight: 500;
       line-height: 1.05;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .home p {
       font-size: 18px;
       color: var(--text-muted);
-      margin-bottom: 48px;
       max-width: 520px;
+      margin-bottom: 52px;
     }
 
-    /* =====================
+    /* ==================================================
        SOBRE MÍ
-    ====================== */
+    ================================================== */
     .about {
       background: var(--bg-soft);
     }
@@ -125,19 +156,20 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 80px;
+      gap: 90px;
       align-items: center;
     }
 
     .about h2 {
       font-size: 42px;
-      margin-bottom: 24px;
       font-weight: 500;
+      margin-bottom: 28px;
     }
 
     .about p {
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      max-width: 520px;
     }
 
     .about-image {
@@ -146,29 +178,34 @@
       border: 1px solid var(--border-soft);
     }
 
-    /* =====================
+    /* ==================================================
        PORTFOLIO
-    ====================== */
+    ================================================== */
     .portfolio h2 {
       font-size: 42px;
-      margin-bottom: 64px;
       font-weight: 500;
+      margin-bottom: 64px;
     }
 
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 34px;
     }
 
     .project {
       position: relative;
+      aspect-ratio: 4 / 3;
       background: #1a1a1a;
       border-radius: var(--radius);
-      overflow: hidden;
       border: 1px solid var(--border-soft);
-      aspect-ratio: 4 / 3;
+      overflow: hidden;
       cursor: pointer;
+      transition: transform var(--transition);
+    }
+
+    .project:hover {
+      transform: translateY(-6px) scale(1.01);
     }
 
     .project-overlay {
@@ -193,46 +230,46 @@
       color: var(--text-muted);
     }
 
-    /* =====================
+    /* ==================================================
        CV
-    ====================== */
+    ================================================== */
     .cv {
       background: var(--bg-soft);
     }
 
     .cv h2 {
       font-size: 42px;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
 
     .cv-section {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
 
     .cv-item {
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
 
     .cv-item span {
       display: block;
-      color: var(--text-muted);
       font-size: 14px;
+      color: var(--text-muted);
     }
 
     .download {
-      margin-top: 48px;
+      margin-top: 56px;
     }
 
-    /* =====================
+    /* ==================================================
        HABILIDADES
-    ====================== */
+    ================================================== */
     .skills h2 {
       font-size: 42px;
       margin-bottom: 48px;
     }
 
     .skills-group {
-      margin-bottom: 32px;
+      margin-bottom: 34px;
     }
 
     .tags {
@@ -242,52 +279,60 @@
     }
 
     .tag {
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 999px;
-      background: #1a1a1a;
+      background: var(--bg-card);
       border: 1px solid var(--border-soft);
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    /* =====================
-       CONTACTO + FOOTER
-    ====================== */
+    /* ==================================================
+       CONTACTO · FOOTER LOCAL
+    ================================================== */
     .contact {
-      background: #0b0b0b;
-      padding-bottom: 80px;
+      background: #070707;
+      padding-bottom: 90px;
     }
 
     .contact h2 {
       font-size: 42px;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
 
     .contact-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 26px;
     }
 
     .contact-card {
       padding: 32px;
       border-radius: var(--radius);
-      background: #141414;
+      background: var(--bg-card);
       border: 1px solid var(--border-soft);
       font-size: 14px;
       color: var(--text-muted);
     }
 
     footer {
-      margin-top: 80px;
+      margin-top: 90px;
       text-align: center;
       font-size: 12px;
       color: #666;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--transition), transform var(--transition);
     }
 
-    /* =====================
+    .contact.visible footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================================================
        RESPONSIVE
-    ====================== */
+    ================================================== */
     @media (max-width: 1024px) {
       .about-grid {
         grid-template-columns: 1fr;
@@ -314,12 +359,15 @@
 
 <body>
 
+  <!-- CURSOR -->
+  <div class="cursor"></div>
+
   <!-- HOME -->
   <section class="home">
     <div class="home-content reveal">
       <h1>Diseño Industrial<br>y Desarrollo de Producto</h1>
       <p>Perfil técnico y creativo enfocado en producto</p>
-      <a href="#portfolio" class="btn">Ver portfolio</a>
+      <a href="#portfolio" class="btn"><span>Ver portfolio</span></a>
     </div>
   </section>
 
@@ -328,12 +376,11 @@
     <div class="about-grid reveal">
       <div>
         <h2>Sobre mí</h2>
-        <p>Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en formación, con una mente ecléctica y perfeccionista.</p>
-        <p>Mi base técnica en electricidad se combina con una fuerte sensibilidad estética, especial interés en impresión 3D y prototipado, y una atención obsesiva al detalle.</p>
-        <p>Busco equilibrio entre forma y función, entendiendo el diseño como una herramienta precisa, honesta y emocional.</p>
+        <p class="delay-1 reveal">Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en formación, con una mente ecléctica y perfeccionista.</p>
+        <p class="delay-2 reveal">Mi base técnica en electricidad se combina con una fuerte sensibilidad estética, especial interés en impresión 3D y prototipado.</p>
+        <p class="delay-3 reveal">Concibo el diseño como equilibrio entre forma, función y detalle consciente.</p>
       </div>
       <div class="about-image">
-        <!-- Sustituye por tu imagen -->
         <img src="https://via.placeholder.com/600x800" alt="Luis Blasco">
       </div>
     </div>
@@ -343,21 +390,9 @@
   <section class="portfolio" id="portfolio">
     <h2 class="reveal">Portfolio</h2>
     <div class="portfolio-grid reveal">
-      <div class="project">
-        <div class="project-overlay">
-          <p>Proyecto de producto · Prototipado · 3D</p>
-        </div>
-      </div>
-      <div class="project">
-        <div class="project-overlay">
-          <p>Diseño técnico · Desarrollo funcional</p>
-        </div>
-      </div>
-      <div class="project">
-        <div class="project-overlay">
-          <p>Concepto · Iteración · Detalle</p>
-        </div>
-      </div>
+      <div class="project"><div class="project-overlay"><p>Producto · Prototipado · 3D</p></div></div>
+      <div class="project"><div class="project-overlay"><p>Diseño técnico · Desarrollo funcional</p></div></div>
+      <div class="project"><div class="project-overlay"><p>Concepto · Iteración · Detalle</p></div></div>
     </div>
   </section>
 
@@ -367,39 +402,19 @@
 
     <div class="cv-section reveal">
       <h3>Formación académica</h3>
-
-      <div class="cv-item">
-        Ingeniería en Diseño Industrial y Desarrollo de Producto
-        <span>UPV · Valencia · 09/2024 – En curso</span>
-      </div>
-
-      <div class="cv-item">
-        Ingeniería en Diseño Industrial y Desarrollo de Producto
-        <span>UJI · Castellón · 09/2021 – 07/2024</span>
-      </div>
-
-      <div class="cv-item">
-        Grado Superior en Instalaciones Electrotécnicas
-        <span>Escuelas San José · 09/2019 – 07/2021</span>
-      </div>
+      <div class="cv-item">Ingeniería en Diseño Industrial<span>UPV · 09/2024 – En curso</span></div>
+      <div class="cv-item">Ingeniería en Diseño Industrial<span>UJI · 09/2021 – 07/2024</span></div>
+      <div class="cv-item">Grado Superior Electrotécnico<span>Escuelas San José · 2019 – 2021</span></div>
     </div>
 
     <div class="cv-section reveal">
       <h3>Experiencia laboral</h3>
-
-      <div class="cv-item">
-        Montador de cuadros eléctricos (prácticas)
-        <span>Autrial · 04/2017 – 06/2017</span>
-      </div>
-
-      <div class="cv-item">
-        Mantenimiento de instalaciones eléctricas (prácticas)
-        <span>Elecnor · 04/2021 – 06/2021</span>
-      </div>
+      <div class="cv-item">Montador cuadros eléctricos<span>Autrial · 2017</span></div>
+      <div class="cv-item">Mantenimiento eléctrico<span>Elecnor · 2021</span></div>
     </div>
 
     <div class="download reveal">
-      <a href="cv_luis_blasco.pdf" download class="btn">Descargar currículum</a>
+      <a href="cv_luis_blasco.pdf" download class="btn"><span>Descargar currículum</span></a>
     </div>
   </section>
 
@@ -410,10 +425,8 @@
     <div class="skills-group reveal">
       <h4>Modelado 3D</h4>
       <div class="tags">
-        <span class="tag">Inventor</span>
-        <span class="tag">Fusion 360</span>
-        <span class="tag">SolidWorks</span>
-        <span class="tag">3ds Max</span>
+        <span class="tag">Inventor</span><span class="tag">Fusion 360</span>
+        <span class="tag">SolidWorks</span><span class="tag">3ds Max</span>
         <span class="tag">AutoCAD</span>
       </div>
     </div>
@@ -421,10 +434,8 @@
     <div class="skills-group reveal">
       <h4>Diseño gráfico y web</h4>
       <div class="tags">
-        <span class="tag">Photoshop</span>
-        <span class="tag">Illustrator</span>
-        <span class="tag">InDesign</span>
-        <span class="tag">Animate</span>
+        <span class="tag">Photoshop</span><span class="tag">Illustrator</span>
+        <span class="tag">InDesign</span><span class="tag">Animate</span>
         <span class="tag">GitHub</span>
       </div>
     </div>
@@ -444,38 +455,44 @@
     <h2 class="reveal">Contacto</h2>
 
     <div class="contact-cards reveal">
-      <div class="contact-card">
-        Email<br>
-        luisblascoibanezberbel@gmail.com
-      </div>
-      <div class="contact-card">
-        LinkedIn<br>
-        linkedin.com/in/luisblasiber
-      </div>
-      <div class="contact-card">
-        Teléfono<br>
-        +34 630 511 806
-      </div>
+      <div class="contact-card">Email<br>luisblascoibanezberbel@gmail.com</div>
+      <div class="contact-card">LinkedIn<br>linkedin.com/in/luisblasiber</div>
+      <div class="contact-card">Teléfono<br>+34 630 511 806</div>
     </div>
 
-    <footer>
-      © 2026 · Luis Blasco-Ibáñez Berbel
-    </footer>
+    <footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
   </section>
 
   <!-- JS -->
   <script>
+    /* Scroll reveal */
     const reveals = document.querySelectorAll('.reveal');
-
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.15 });
-
     reveals.forEach(el => observer.observe(el));
+
+    /* Cursor */
+    const cursor = document.querySelector('.cursor');
+    const interactive = document.querySelectorAll('a, .project');
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    interactive.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.opacity = 1;
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.4)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.opacity = 0;
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    });
   </script>
 
 </body>
