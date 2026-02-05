@@ -323,32 +323,16 @@ p{
 }
 
 /* ===== FOOTER ===== */
-#global-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.section-footer{
+  margin-top: 160px;
+  padding: 40px 0 30px;
 
-  padding: 18px 40px;
   text-align: center;
-
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
-
-  background: linear-gradient(
-    to top,
-    rgba(11,11,13,.85),
-    rgba(11,11,13,0)
-  );
-
-  z-index: 900;
-  pointer-events: none;
-
-  opacity: 0;
-  transform: translateY(14px);
-  animation: footerIn 1.2s cubic-bezier(.4,0,.2,1) forwards;
 }
+
 
 @keyframes footerIn{
   to{
@@ -1119,9 +1103,7 @@ p{
     </div>
   </div>
 
- <div class="cv-footer">
-  © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
-</div>
+ 
 
 </section>
 
@@ -1208,7 +1190,9 @@ p{
 </section>
 
 
-
+<div class="section-footer">
+  © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
+</div>
 
 
 <script>
@@ -1297,12 +1281,7 @@ if (button) {
   });
 
   // Reset footer animation (triggered on button click)
-  scope.querySelectorAll('footer').forEach(el => {
-    el.style.animation = 'none';
-    void el.offsetHeight; 
-    el.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Apply same animation for all footers
-    el.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
-  });
+  
 }
 
 function changeLang(lang){
@@ -1351,12 +1330,7 @@ function changeSection(id, link) {
   }
 
   // Mostrar el footer con animación cada vez que se cambie de sección
-  const footer = document.querySelector('footer');
-  footer.style.animation = 'none';
-  void footer.offsetHeight; // Fuerza el reflujo del DOM
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
-  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
-}
+ 
 
 
 
