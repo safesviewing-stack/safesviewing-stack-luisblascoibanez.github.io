@@ -962,17 +962,18 @@ header{
 }
 
   .cv-group{
-  margin-top: 80px;
+  margin-top: 120px;
 }
 
   .cv-group-title{
-  font-size: 11px;
-  letter-spacing: .28em;
+  font-size: 17px;              /* 👈 más grande */
+  font-weight: 600;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 40px;
+  color: #fff;
+  margin-bottom: 16px;
 }
-
+  
 .cv-timeline{
   margin-top: 80px;
   position: relative;
@@ -993,7 +994,7 @@ header{
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 40px;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 
 .cv-date{
@@ -1019,14 +1020,20 @@ header{
   margin-bottom: 14px;
 }
 
-  .cv-text h4{
-  font-size: 18px;   /* 👈 títulos más pequeños */
-  font-weight: 600;
-  margin-bottom: 8px;
+ .cv-text h4{
+  font-size: 15px;          /* 👈 más pequeño que antes */
+  font-weight: 500;
+  margin-bottom: 6px;
 }
 
 .cv-text p{
+  font-size: 14px;
+  line-height: 1.7;
   max-width: 640px;
+}
+
+  .cv-text h4:contains("Diseño Industrial"){
+  font-weight: 600;
 }
 
 
@@ -1042,20 +1049,14 @@ header{
 }
 
 .cv-group-header{
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
-.cv-group-title{
-  font-size: 12px;                 /* un pelín más presente */
-  letter-spacing: .32em;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 14px;
-}
+
 
 .cv-divider{
   display: block;
-  width: 72px;                     /* línea corta, elegante */
+  width: 100%;
   height: 1px;
   background: rgba(255,255,255,.35);
 }
