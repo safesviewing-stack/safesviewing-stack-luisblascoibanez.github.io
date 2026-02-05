@@ -329,15 +329,25 @@ footer{
   bottom: 0;
   width: 100%;
   padding: 18px 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
+
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none;
+
   animation: footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards;
   animation-delay: 1.5s;
 }
+
 
 /* CV: oculto siempre */
 
@@ -345,13 +355,20 @@ footer{
 /* CV: SOLO visible al final */
 body.cv-active footer.show{
   position: relative;
-  margin: 120px auto 0;   /* ⬅️ centra horizontalmente */
-  width: fit-content;    
+  margin: 120px auto 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  text-align: center;
+
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-
 }
+
 
 
 /* ===== BUTTON ===== */
