@@ -756,6 +756,69 @@ footer{
   }
 }
 
+/* ===== CV TIMELINE ===== */
+
+.cv-timeline-wrapper{
+  position: relative;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.cv-timeline{
+  display: flex;
+  transition: transform .8s cubic-bezier(.22,.61,.36,1);
+}
+
+.cv-slide{
+  min-width: 100%;
+  padding: 40px 80px;
+  opacity: .25;
+  transform: scale(.96);
+  transition: .6s ease;
+}
+
+.cv-slide.active{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cv-slide h3{
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.cv-slide p{
+  max-width: 520px;
+}
+
+.cv-year{
+  display: block;
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Flechas */
+
+.cv-nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 42px;
+  cursor: pointer;
+  opacity: .5;
+  transition: opacity .3s ease;
+}
+
+.cv-nav:hover{ opacity: 1; }
+
+.cv-nav.left{ left: 10px; }
+.cv-nav.right{ right: 10px; }
 
   
 </style>
@@ -855,49 +918,54 @@ footer{
 
 <section id="cv" class="section">
   <div class="content">
-    <h2 class="fade-up" data-i18n="cv_title">Currículum Vitae</h2>
+    <h2 class="fade-up">Currículum Vitae</h2>
 
-    <p class="fade-up delay-1" data-i18n="cv_description">
-      Aquí podrás ver una descripción general de mi trayectoria académica y profesional. He adquirido una experiencia valiosa tanto en el ámbito académico como en el mundo real, enfrentando retos de diseño innovadores.
-    </p>
+    <div class="cv-timeline-wrapper fade-up delay-1">
 
-    <div class="cv-details fade-up delay-2">
-      <div class="cv-column">
-        <h3>Educación</h3>
-        <ul>
-          <li>
-            <strong>Universidad Politécnica de Valencia</strong><br>
-            <span>Grado en Diseño Industrial (2022-2026)</span>
-          </li>
-          <li>
-            <strong>Formación Profesional en Electricidad</strong><br>
-            <span>Formación técnica en el sector eléctrico, que me ha proporcionado una sólida base técnica.</span>
-          </li>
-        </ul>
+      <button class="cv-nav left" onclick="moveCV(-1)">‹</button>
+
+      <div class="cv-timeline" id="cvTimeline">
+
+        <div class="cv-slide active">
+          <h3>Formación técnica</h3>
+          <p>
+            Formación Profesional en Electricidad.<br>
+            Base sólida en sistemas, procesos y resolución técnica.
+          </p>
+          <span class="cv-year">2018 · 2020</span>
+        </div>
+
+        <div class="cv-slide">
+          <h3>UPV · Diseño Industrial</h3>
+          <p>
+            Grado en Ingeniería en Diseño Industrial.<br>
+            Enfoque en producto, detalle técnico y proceso completo.
+          </p>
+          <span class="cv-year">2022 · 2026</span>
+        </div>
+
+        <div class="cv-slide">
+          <h3>Sixay · Prácticas</h3>
+          <p>
+            Diseño de mobiliario a medida, desarrollo técnico
+            y contacto directo con cliente.
+          </p>
+          <span class="cv-year">2025</span>
+        </div>
+
+        <div class="cv-slide">
+          <h3>Perfil actual</h3>
+          <p>
+            Diseñador industrial con background técnico,
+            foco en producto real y fabricación.
+          </p>
+          <span class="cv-year">Ahora</span>
+        </div>
+
       </div>
 
-      <div class="cv-column">
-        <h3>Experiencia Profesional</h3>
-        <ul>
-          <li>
-            <strong>Prácticas en Sixay</strong><br>
-            <span>Diseño de mobiliario personalizado y gestión de proyectos en una empresa de diseño líder.</span>
-          </li>
-          <li>
-            <strong>Freelance</strong><br>
-            <span>Desarrollo de proyectos de diseño de productos para clientes individuales, con enfoque en la funcionalidad y la estética.</span>
-          </li>
-        </ul>
-      </div>
+      <button class="cv-nav right" onclick="moveCV(1)">›</button>
 
-      <div class="cv-column">
-        <h3>Habilidades Técnicas</h3>
-        <ul>
-          <li><i class="fas fa-cogs"></i> Diseño asistido por computadora (CAD)</li>
-          <li><i class="fas fa-3d"></i> Impresión 3D y prototipado rápido</li>
-          <li><i class="fas fa-pen"></i> Modelado 3D y renderizado</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
@@ -1136,6 +1204,18 @@ function changeSection(id, link) {
   footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
 }
 
+let cvIndex = 0;
+
+function moveCV(dir){
+  const slides = document.querySelectorAll('.cv-slide');
+  cvIndex = Math.max(0, Math.min(slides.length - 1, cvIndex + dir));
+
+  document.getElementById('cvTimeline').style.transform =
+    `translateX(-${cvIndex * 100}%)`;
+
+  slides.forEach(s => s.classList.remove('active'));
+  slides[cvIndex].classList.add('active');
+}
 
 
   
