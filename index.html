@@ -1141,6 +1141,11 @@ p{
   </div>
 </section>
 
+      </div> <!-- cierra .content cv-content -->
+  </div>   <!-- cierra .cv-scroll -->
+</section>
+
+
 
 <section id="skills" class="section">
   <div class="content">
@@ -1340,6 +1345,7 @@ function changeLang(lang){
 function changeSection(id, link) {
   // Verificar si ya estamos en la misma sección
   if (document.getElementById(id).classList.contains('active')) return;
+  footer.classList.remove('hide');
 
   // Desactivar todas las secciones
   document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
@@ -1400,21 +1406,19 @@ window.addEventListener('scroll', () => {
 const footer = document.getElementById('global-footer');
 const cvScroll = document.querySelector('.cv-scroll');
 
-let lastCvScroll = 0;
+let lastScroll = 0;
 
 if (cvScroll) {
   cvScroll.addEventListener('scroll', () => {
-    const currentScroll = cvScroll.scrollTop;
+    const current = cvScroll.scrollTop;
 
-    if (currentScroll > lastCvScroll + 6) {
-      // Scroll hacia abajo → ocultar
+    if (current > lastScroll + 6) {
       footer.classList.add('hide');
-    } else if (currentScroll < lastCvScroll - 6) {
-      // Scroll hacia arriba → mostrar
+    } else if (current < lastScroll - 6) {
       footer.classList.remove('hide');
     }
 
-    lastCvScroll = currentScroll;
+    lastScroll = current;
   });
 }
 
