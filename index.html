@@ -1166,6 +1166,53 @@ header{
 }
 
 
+/* ===== CV DOWNLOAD BUTTON ===== */
+
+.cv-download{
+  margin-top: 120px;
+  padding-bottom: 160px;
+  display: flex;
+}
+
+.cv-download-btn{
+  padding: 16px 38px;
+  border-radius: 40px;
+  border: 1.5px solid rgba(255,255,255,.6);
+  background: transparent;
+  color: #fff;
+
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    background .35s ease,
+    color .35s ease,
+    transform .35s ease,
+    border-color .35s ease;
+}
+
+.cv-download-btn:hover{
+  background: #fff;
+  color: #000;
+  transform: translateY(-1px);
+  border-color: #fff;
+}
+
+  .cv-download{
+  opacity: 0;
+  transform: translateY(24px);
+  animation: cvDownloadIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay: 1.7s;
+}
+
+@keyframes cvDownloadIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 </style>
@@ -1279,7 +1326,7 @@ header{
       </div>
 
       <article class="cv-entry">
-        <span class="cv-date">2024 · En curso</span>
+        <span class="cv-date">2024 · Actualidad</span>
         <div class="cv-text">
           <h4>Ingeniería en Diseño Industrial y Desarrollo de Productos</h4>
           <p>Universidad Politécnica de Valencia (UPV) · Valencia</p>
@@ -1312,40 +1359,48 @@ header{
 
     </div>
 
-   <!-- ================= EXPERIENCIA ================= -->
-<div class="cv-group">
+    <!-- ================= EXPERIENCIA ================= -->
+    <div class="cv-group">
 
-  <div class="cv-group-header">
-    <h3 class="cv-group-title">Experiencia laboral</h3>
-    <span class="cv-divider"></span>
+      <div class="cv-group-header">
+        <h3 class="cv-group-title">Experiencia laboral</h3>
+        <span class="cv-divider"></span>
+      </div>
+
+      <article class="cv-entry">
+        <span class="cv-date">2017</span>
+        <div class="cv-text">
+          <h4>Montador de cuadros eléctricos · Prácticas</h4>
+          <p>
+            Autrial · Valencia, Comunidad Valenciana<br>
+            Mantenimiento preventivo y correctivo de cuadros eléctricos
+            e instalaciones en entorno industrial.
+          </p>
+        </div>
+      </article>
+
+      <article class="cv-entry">
+        <span class="cv-date">2021</span>
+        <div class="cv-text">
+          <h4>Mantenimiento de equipos eléctricos · Prácticas</h4>
+          <p>
+            Elecnor · Valencia, Comunidad Valenciana<br>
+            Prácticas de mantenimiento de instalaciones eléctricas
+            mediante un grado superior.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ================= DOWNLOAD ================= -->
+    <div class="cv-download">
+      <a href="cv-luis-blasco.pdf" download class="cv-download-btn">
+        Descargar currículum
+      </a>
+    </div>
+
   </div>
-
-  <article class="cv-entry">
-    <span class="cv-date">2017 (3 meses)</span>
-    <div class="cv-text">
-      <h4>Montador de cuadros eléctricos · Prácticas</h4>
-      <p>
-        Autrial · Valencia, Comunidad Valenciana<br>
-        Mantenimiento preventivo de cuadros eléctricos
-        e instalaciones en entorno industrial.
-      </p>
-    </div>
-  </article>
-
-  <article class="cv-entry">
-    <span class="cv-date">2021 (3 meses)</span>
-    <div class="cv-text">
-      <h4>Mantenimiento de equipos eléctricos · Prácticas</h4>
-      <p>
-        Elecnor · Valencia, Comunidad Valenciana<br>
-        Prácticas de mantenimiento de instalaciones eléctricas
-        a través de un grado superior.
-      </p>
-    </div>
-  </article>
-
-</div>
-
 </section>
 
 
