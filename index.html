@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Luis Blasco · Industrial Designer</title>
+<title>Luis Blasco · Diseño Industrial</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
 body{
   background:var(--bg);
   color:var(--text);
-  line-height:1.6;
+  line-height:1.7;
 }
 
 /* ===== HEADER ===== */
@@ -39,6 +39,7 @@ header{
   padding:18px 40px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   z-index:10;
 }
 
@@ -64,7 +65,7 @@ nav a:hover{
 main{
   max-width:1100px;
   margin:0 auto;
-  padding:140px 40px 80px;
+  padding:140px 40px 120px;
   display:flex;
   flex-direction:column;
   gap:140px;
@@ -74,13 +75,13 @@ main{
 .hero h1{
   font-size:48px;
   font-weight:600;
-  max-width:18ch;
+  max-width:20ch;
 }
 
 .hero p{
-  margin-top:16px;
+  margin-top:18px;
   color:var(--muted);
-  max-width:420px;
+  max-width:460px;
 }
 
 .btn{
@@ -97,8 +98,8 @@ main{
 /* ===== ABOUT ===== */
 .about{
   display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:60px;
+  grid-template-columns:1.3fr .7fr;
+  gap:80px;
 }
 
 .about img{
@@ -110,28 +111,32 @@ main{
 .projects{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:30px;
+  gap:40px;
 }
 
 .project{
   border-top:1px solid var(--line);
-  padding-top:16px;
+  padding-top:18px;
 }
 
 .project span{
   font-size:11px;
   color:var(--muted);
+  display:block;
+  margin-top:6px;
 }
 
 /* ===== CV ===== */
-.cv-section{
+.cv{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:80px;
 }
 
-.cv-item{
-  margin-bottom:32px;
+.cv-group{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
 }
 
 .cv-item span{
@@ -164,6 +169,7 @@ main{
   margin-bottom:12px;
   color:#000;
   text-decoration:none;
+  font-size:14px;
 }
 
 /* ===== FOOTER ===== */
@@ -178,7 +184,7 @@ footer{
 <body>
 
 <header>
-  <strong>Luis Blasco</strong>
+  <strong>Luis Blasco-Ibáñez Berbel</strong>
   <nav>
     <a href="#home">Inicio</a>
     <a href="#portfolio">Portfolio</a>
@@ -189,65 +195,130 @@ footer{
 
 <main>
 
+<!-- ===== HOME ===== -->
 <section class="hero" id="home">
-  <h1>Industrial Design & Product Development</h1>
-  <p>Perfil técnico y creativo con base en ingeniería y experiencia en electricidad.</p>
+  <h1>Diseño Industrial & Desarrollo de Producto</h1>
+  <p>
+    Perfil técnico y creativo con base en ingeniería, experiencia en electricidad
+    e interés en prototipado e impresión 3D.
+  </p>
   <a href="#portfolio" class="btn">Ver proyectos</a>
 </section>
 
+<!-- ===== ABOUT ===== -->
 <section class="about">
   <div>
     <h2>Sobre mí</h2>
-    <p>Soy Luis, estudiante de Ingeniería en Diseño Industrial en la UPV, con una fuerte base técnica y especial interés en prototipado e impresión 3D.</p>
+    <p>
+      Soy Luis, tengo 24 años y soy estudiante de Ingeniería en Diseño Industrial
+      y Desarrollo de Producto en la UPV. Vivo en Valencia y me considero una persona
+      con una mente ecléctica y perfeccionista, interesada en el equilibrio entre
+      lo técnico y lo estético.
+    </p>
+    <p>
+      Mi formación profesional en electricidad me ha proporcionado una base técnica
+      sólida que aplico al diseño de producto. Disfruto del proceso completo de diseño,
+      desde la idea inicial hasta la definición técnica y el detalle final.
+    </p>
   </div>
+
   <img src="foto.jpg" alt="Luis Blasco">
 </section>
 
+<!-- ===== PORTFOLIO ===== -->
 <section id="portfolio">
   <h2>Portfolio</h2>
   <div class="projects">
     <div class="project">
-      <strong>Lámpara modular</strong>
-      <span>Diseño · Prototipo</span>
+      <strong>Diseño de lámpara moderna</strong>
+      <span>Producto · Prototipado</span>
     </div>
     <div class="project">
-      <strong>Mobiliario oficina</strong>
-      <span>Producto · Ergonomía</span>
+      <strong>Mobiliario para oficina</strong>
+      <span>Diseño industrial · Ergonomía</span>
     </div>
     <div class="project">
-      <strong>Rediseño técnico</strong>
-      <span>Optimización</span>
+      <strong>Rediseño técnico de producto</strong>
+      <span>Optimización · Funcionalidad</span>
     </div>
   </div>
 </section>
 
-<section class="cv-section" id="cv">
-  <div>
-    <h2>Formación</h2>
-    <div class="cv-item">
-      <strong>Ingeniería en Diseño Industrial</strong>
-      <span>UPV · En curso</span>
-    </div>
-  </div>
+<!-- ===== CV ===== -->
+<section id="cv">
+  <h2>Currículum Vitae</h2>
 
-  <div>
-    <h2>Experiencia</h2>
-    <div class="cv-item">
-      <strong>Montador cuadros eléctricos</strong>
-      <span>Autrial · 2017</span>
+  <div class="cv">
+    <div class="cv-group">
+      <h3>Formación</h3>
+
+      <div class="cv-item">
+        <strong>Ingeniería en Diseño Industrial y Desarrollo de Producto</strong>
+        <span>UPV · Valencia · 09/2024 – En curso</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Ingeniería en Diseño Industrial y Desarrollo de Producto</strong>
+        <span>UJI · Castellón · 09/2021 – 07/2024</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Grado Superior en Instalaciones Electrotécnicas</strong>
+        <span>Escuelas San José · Valencia · 2019 – 2021</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Grado Medio en Instalaciones Eléctricas</strong>
+        <span>Escuelas San José · Valencia · 2017 – 2019</span>
+      </div>
+    </div>
+
+    <div class="cv-group">
+      <h3>Experiencia</h3>
+
+      <div class="cv-item">
+        <strong>Montador de cuadros eléctricos (prácticas)</strong>
+        <span>Autrial · Valencia · 04/2017 – 06/2017</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Mantenimiento de equipos eléctricos (prácticas)</strong>
+        <span>Elecnor · Valencia · 04/2021 – 06/2021</span>
+      </div>
     </div>
   </div>
 
   <a href="cv-luis-blasco.pdf" class="btn">Descargar currículum</a>
 </section>
 
+<!-- ===== SKILLS ===== -->
+<section>
+  <h2>Habilidades</h2>
+
+  <div class="skills">
+    <span class="skill">Inventor</span>
+    <span class="skill">Fusion 360</span>
+    <span class="skill">SolidWorks</span>
+    <span class="skill">AutoCAD</span>
+    <span class="skill">Prototipado</span>
+    <span class="skill">Impresión 3D</span>
+    <span class="skill">Corte láser</span>
+    <span class="skill">Photoshop</span>
+    <span class="skill">Illustrator</span>
+    <span class="skill">InDesign</span>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
 <section class="contact" id="contact">
   <h2>Contacto</h2>
-  <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a>
-  <a href="https://linkedin.com/in/luisblasiber">LinkedIn</a>
+
+  <a href="mailto:luisblascoibanezberbel@gmail.com">luisblascoibanezberbel@gmail.com</a>
+  <a href="https://www.linkedin.com/in/luisblasiber" target="_blank">linkedin.com/in/luisblasiber</a>
+  <a href="tel:+34630511806">+34 630 511 806</a>
 
   <footer>
-    © 2026 · Luis Blasco-Ibáñez Berbel
+    © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en Diseño Industrial
   </footer>
 </section>
 
