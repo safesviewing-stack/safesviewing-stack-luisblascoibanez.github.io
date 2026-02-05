@@ -1137,12 +1137,6 @@ p{
         </p>
       </div>
     </div>
-
-  </div>
-</section>
-
-      </div> <!-- cierra .content cv-content -->
-  </div>   <!-- cierra .cv-scroll -->
 </section>
 
 
@@ -1343,21 +1337,26 @@ function changeLang(lang){
 }
 
 function changeSection(id, link) {
-  // Verificar si ya estamos en la misma sección
   if (document.getElementById(id).classList.contains('active')) return;
-  footer.classList.remove('hide');
 
-  // Desactivar todas las secciones
-  document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-  // Activar la sección correspondiente
+  document.querySelectorAll('.section').forEach(section =>
+    section.classList.remove('active')
+  );
+
   document.getElementById(id).classList.add('active');
-  // Desactivar la clase active en todos los enlaces
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  // Activar la clase active en el enlace correspondiente
-  link.classList.add('active'); // Aseguramos que el enlace activo tiene la línea debajo
+
+  document.querySelectorAll('nav a').forEach(a =>
+    a.classList.remove('active')
+  );
+
+  link.classList.add('active');
 
   footer.classList.remove('hide');
+
+  const logo = document.getElementById('logo-home');
+  logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
 }
+
   
   // Si es la sección de Portfolio, aplicamos la clase active al enlace de Portfolio
   if (id === 'portfolio') {
@@ -1387,9 +1386,7 @@ function changeSection(id, link) {
 
 
 let lastScrollY = window.scrollY;
-const footer = document.getElementById('global-footer');
 
-window.addEventListener('scroll', () => {
   const currentScrollY = window.scrollY;
 
   if (currentScrollY > lastScrollY + 5) {
@@ -1403,7 +1400,6 @@ window.addEventListener('scroll', () => {
   lastScrollY = currentScrollY;
 });
 
-const footer = document.getElementById('global-footer');
 const cvScroll = document.querySelector('.cv-scroll');
 
 let lastScroll = 0;
