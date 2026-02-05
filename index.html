@@ -40,22 +40,22 @@
        HEADER · NAV
     ================================================== */
     header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:transparent;
-      padding:28px 8vw;
-    }
+  position:sticky;
+  top:16px;                 /* 👈 lo baja un poco */
+  z-index:20;
+  background:transparent;
+  padding:20px 8vw;         /* 👈 menos alto, más fino */
+}
 
-    nav{
-      display:flex;
-      justify-content:flex-end;
-      gap:32px;
-      font-size:13px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--text-muted);
-    }
+nav{
+  display:flex;
+  justify-content:flex-end;
+  gap:28px;                 /* 👈 un poco más compacto */
+  font-size:12px;           /* 👈 ligeramente más pequeño */
+  letter-spacing:.1em;      /* 👈 más editorial */
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
 
     nav a{
       position:relative;
