@@ -1,307 +1,482 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Blasco-Ibáñez · Industrial Design</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luis Blasco-Ibáñez · Diseño Industrial</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-/* ==================================================
-   VARIABLES · DARK / SOFT
-================================================== */
-:root {
-  --bg-main:#0b0b0b; --bg-soft:#121212; --bg-card:#161616;
-  --text-main:#fff; --text-muted:#b3b3b3;
-  --border-soft:rgba(255,255,255,0.08);
-  --radius:14px;
-  --transition:0.7s cubic-bezier(.2,.8,.2,1);
-}
+  <style>
+    /* =====================
+       VARIABLES & RESET
+    ====================== */
+    :root {
+      --bg-main: #0e0e0e;
+      --bg-soft: #141414;
+      --text-main: #ffffff;
+      --text-muted: #b5b5b5;
+      --accent: #ffffff;
+      --border-soft: rgba(255,255,255,0.08);
+      --radius: 12px;
+      --transition: 0.6s cubic-bezier(.2,.8,.2,1);
+    }
 
-body.soft {
-  --bg-main:#f3f3f1; --bg-soft:#ededeb; --bg-card:#ffffff;
-  --text-main:#1a1a1a; --text-muted:#555;
-  --border-soft:rgba(0,0,0,0.08);
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ==================================================
-   BASE
-================================================== */
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg-main);
-  color:var(--text-main);
-  line-height:1.65;
-  transition:background var(--transition),color var(--transition);
-}
-section{padding:140px 8vw;position:relative;}
-section::after{
-  content:"";position:absolute;bottom:0;left:8vw;right:8vw;
-  height:1px;background:var(--border-soft);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ==================================================
-   CONTROLES
-================================================== */
-.controls{
-  position:fixed;top:28px;right:28px;
-  display:flex;gap:18px;
-  font-size:13px;opacity:.6;z-index:1000;
-}
-.controls span{cursor:pointer;}
-.controls span:hover{opacity:1;}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
 
-/* ==================================================
-   REVEAL
-================================================== */
-.section-inner{
-  opacity:0;transform:translateY(60px);
-  transition:opacity var(--transition),transform var(--transition);
-}
-.section-inner.visible{opacity:1;transform:none;}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-/* ==================================================
-   BUTTON
-================================================== */
-.btn{
-  display:inline-block;padding:14px 34px;
-  border-radius:999px;border:1px solid currentColor;
-  font-size:14px;letter-spacing:.05em;
-  transition:background var(--transition),color var(--transition),transform var(--transition);
-}
-.btn span{display:inline-block;transition:transform var(--transition);}
-.btn:hover{
-  background:var(--text-main);color:var(--bg-main);
-  transform:translateY(-2px);
-}
-.btn:hover span{transform:translateX(4px);}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* ==================================================
-   HOME
-================================================== */
-.home{min-height:100vh;display:flex;align-items:center;}
-.home h1{font-size:clamp(56px,6vw,92px);line-height:1.05;margin-bottom:32px;}
-.home p{color:var(--text-muted);max-width:520px;margin-bottom:56px;}
+    section {
+      padding: 120px 8vw;
+    }
 
-/* ==================================================
-   ABOUT
-================================================== */
-.about{background:var(--bg-soft);}
-.about-grid{
-  display:grid;grid-template-columns:1.2fr 1fr;
-  gap:90px;align-items:center;
-}
+    /* =====================
+       ANIMACIONES SCROLL
+    ====================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
 
-/* ==================================================
-   PORTFOLIO
-================================================== */
-.portfolio-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
-}
-.project{
-  aspect-ratio:4/3;border-radius:var(--radius);
-  border:1px solid var(--border-soft);
-  background:var(--bg-card);
-  transition:transform var(--transition);
-}
-.project:hover{transform:translateY(-8px);}
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* ==================================================
-   CV
-================================================== */
-.cv{background:var(--bg-soft);}
-.cv-section{margin-bottom:64px;}
-.cv-item{margin-bottom:26px;}
-.cv-item span{display:block;font-size:14px;color:var(--text-muted);}
-.download{margin-top:48px;}
+    /* =====================
+       BOTONES
+    ====================== */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
 
-/* ==================================================
-   SKILLS
-================================================== */
-.skills{background:var(--bg-soft);}
-.tags{display:flex;flex-wrap:wrap;gap:12px;}
-.tag{
-  padding:8px 18px;border-radius:999px;
-  border:1px solid var(--border-soft);
-  background:var(--bg-card);
-  font-size:13px;color:var(--text-muted);
-}
+    .btn:hover {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-2px);
+    }
 
-/* ==================================================
-   CONTACT
-================================================== */
-.contact{padding-bottom:100px;}
-footer{
-  margin-top:100px;text-align:center;
-  font-size:12px;color:var(--text-muted);
-}
+    /* =====================
+       HOME
+    ====================== */
+    .home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
+    }
 
-/* ==================================================
-   RESPONSIVE
-================================================== */
-@media(max-width:1024px){
-  .about-grid{grid-template-columns:1fr;}
-  .portfolio-grid{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:640px){
-  section{padding:100px 6vw;}
-  .portfolio-grid{grid-template-columns:1fr;}
-}
-</style>
+    .home-content {
+      max-width: 900px;
+    }
+
+    .home h1 {
+      font-size: clamp(48px, 6vw, 86px);
+      font-weight: 500;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .home p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    /* =====================
+       SOBRE MÍ
+    ====================== */
+    .about {
+      background: var(--bg-soft);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about h2 {
+      font-size: 42px;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .about p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .about-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+
+    /* =====================
+       PORTFOLIO
+    ====================== */
+    .portfolio h2 {
+      font-size: 42px;
+      margin-bottom: 64px;
+      font-weight: 500;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .project {
+      position: relative;
+      background: #1a1a1a;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .project:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* =====================
+       CV
+    ====================== */
+    .cv {
+      background: var(--bg-soft);
+    }
+
+    .cv h2 {
+      font-size: 42px;
+      margin-bottom: 48px;
+    }
+
+    .cv-section {
+      margin-bottom: 48px;
+    }
+
+    .cv-item {
+      margin-bottom: 24px;
+    }
+
+    .cv-item span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .download {
+      margin-top: 48px;
+    }
+
+    /* =====================
+       HABILIDADES
+    ====================== */
+    .skills h2 {
+      font-size: 42px;
+      margin-bottom: 48px;
+    }
+
+    .skills-group {
+      margin-bottom: 32px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tag {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #1a1a1a;
+      border: 1px solid var(--border-soft);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* =====================
+       CONTACTO + FOOTER
+    ====================== */
+    .contact {
+      background: #0b0b0b;
+      padding-bottom: 80px;
+    }
+
+    .contact h2 {
+      font-size: 42px;
+      margin-bottom: 48px;
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .contact-card {
+      padding: 32px;
+      border-radius: var(--radius);
+      background: #141414;
+      border: 1px solid var(--border-soft);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ====================== */
+    @media (max-width: 1024px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-grid,
+      .contact-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 80px 6vw;
+      }
+
+      .portfolio-grid,
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- CONTROLS -->
-<div class="controls">
-  <span id="lang">EN</span>
-  <span id="theme">Soft</span>
-</div>
-
-<!-- HOME -->
-<section class="home">
-  <div class="section-inner" data-es>
-    <h1>Diseño Industrial<br>y Desarrollo de Producto</h1>
-    <p>Perfil técnico y creativo enfocado en producto</p>
-    <a href="#portfolio" class="btn"><span>Ver portfolio</span></a>
-  </div>
-  <div class="section-inner" data-en hidden>
-    <h1>Industrial Design<br>and Product Development</h1>
-    <p>Technical and creative profile focused on product</p>
-    <a href="#portfolio" class="btn"><span>View portfolio</span></a>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about">
-  <div class="section-inner about-grid" data-es>
-    <div>
-      <h2>Sobre mí</h2>
-      <p>Diseñador industrial con base técnica en electricidad, orientación al detalle y especial interés en prototipado e impresión 3D.</p>
+  <!-- HOME -->
+  <section class="home">
+    <div class="home-content reveal">
+      <h1>Diseño Industrial<br>y Desarrollo de Producto</h1>
+      <p>Perfil técnico y creativo enfocado en producto</p>
+      <a href="#portfolio" class="btn">Ver portfolio</a>
     </div>
-    <img src="https://via.placeholder.com/600x800">
-  </div>
+  </section>
 
-  <div class="section-inner about-grid" data-en hidden>
-    <div>
-      <h2>About me</h2>
-      <p>Industrial designer with a strong technical background in electricity, focused on detail, prototyping and 3D printing.</p>
+  <!-- SOBRE MÍ -->
+  <section class="about">
+    <div class="about-grid reveal">
+      <div>
+        <h2>Sobre mí</h2>
+        <p>Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en formación, con una mente ecléctica y perfeccionista.</p>
+        <p>Mi base técnica en electricidad se combina con una fuerte sensibilidad estética, especial interés en impresión 3D y prototipado, y una atención obsesiva al detalle.</p>
+        <p>Busco equilibrio entre forma y función, entendiendo el diseño como una herramienta precisa, honesta y emocional.</p>
+      </div>
+      <div class="about-image">
+        <!-- Sustituye por tu imagen -->
+        <img src="https://via.placeholder.com/600x800" alt="Luis Blasco">
+      </div>
     </div>
-    <img src="https://via.placeholder.com/600x800">
-  </div>
-</section>
+  </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="section-inner" data-es>
-    <h2>Portfolio</h2>
-    <div class="portfolio-grid">
-      <div class="project"></div><div class="project"></div><div class="project"></div>
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <h2 class="reveal">Portfolio</h2>
+    <div class="portfolio-grid reveal">
+      <div class="project">
+        <div class="project-overlay">
+          <p>Proyecto de producto · Prototipado · 3D</p>
+        </div>
+      </div>
+      <div class="project">
+        <div class="project-overlay">
+          <p>Diseño técnico · Desarrollo funcional</p>
+        </div>
+      </div>
+      <div class="project">
+        <div class="project-overlay">
+          <p>Concepto · Iteración · Detalle</p>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section-inner" data-en hidden>
-    <h2>Portfolio</h2>
-    <div class="portfolio-grid">
-      <div class="project"></div><div class="project"></div><div class="project"></div>
-    </div>
-  </div>
-</section>
+  <!-- CV -->
+  <section class="cv">
+    <h2 class="reveal">Currículum</h2>
 
-<!-- CV -->
-<section class="cv">
-  <div class="section-inner" data-es>
-    <h2>Currículum</h2>
-
-    <div class="cv-section">
+    <div class="cv-section reveal">
       <h3>Formación académica</h3>
-      <div class="cv-item">Ingeniería en Diseño Industrial<span>UPV · 2024 – Actualidad</span></div>
-      <div class="cv-item">Ingeniería en Diseño Industrial<span>UJI · 2021 – 2024</span></div>
-      <div class="cv-item">Grado Superior Electrotécnico<span>2019 – 2021</span></div>
+
+      <div class="cv-item">
+        Ingeniería en Diseño Industrial y Desarrollo de Producto
+        <span>UPV · Valencia · 09/2024 – En curso</span>
+      </div>
+
+      <div class="cv-item">
+        Ingeniería en Diseño Industrial y Desarrollo de Producto
+        <span>UJI · Castellón · 09/2021 – 07/2024</span>
+      </div>
+
+      <div class="cv-item">
+        Grado Superior en Instalaciones Electrotécnicas
+        <span>Escuelas San José · 09/2019 – 07/2021</span>
+      </div>
     </div>
 
-    <div class="cv-section">
+    <div class="cv-section reveal">
       <h3>Experiencia laboral</h3>
-      <div class="cv-item">Montador de cuadros eléctricos<span>Autrial · 2017</span></div>
-      <div class="cv-item">Mantenimiento eléctrico<span>Elecnor · 2021</span></div>
+
+      <div class="cv-item">
+        Montador de cuadros eléctricos (prácticas)
+        <span>Autrial · 04/2017 – 06/2017</span>
+      </div>
+
+      <div class="cv-item">
+        Mantenimiento de instalaciones eléctricas (prácticas)
+        <span>Elecnor · 04/2021 – 06/2021</span>
+      </div>
     </div>
 
-    <div class="download">
-      <a href="cv_luis_blasco.pdf" download class="btn"><span>Descargar currículum</span></a>
+    <div class="download reveal">
+      <a href="cv_luis_blasco.pdf" download class="btn">Descargar currículum</a>
     </div>
-  </div>
+  </section>
 
-  <div class="section-inner" data-en hidden>
-    <h2>Curriculum Vitae</h2>
+  <!-- HABILIDADES -->
+  <section class="skills">
+    <h2 class="reveal">Habilidades</h2>
 
-    <div class="cv-section">
-      <h3>Education</h3>
-      <div class="cv-item">Industrial Design Engineering<span>UPV · 2024 – Present</span></div>
-      <div class="cv-item">Industrial Design Engineering<span>UJI · 2021 – 2024</span></div>
-      <div class="cv-item">Electrical Engineering Degree<span>2019 – 2021</span></div>
+    <div class="skills-group reveal">
+      <h4>Modelado 3D</h4>
+      <div class="tags">
+        <span class="tag">Inventor</span>
+        <span class="tag">Fusion 360</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">3ds Max</span>
+        <span class="tag">AutoCAD</span>
+      </div>
     </div>
 
-    <div class="cv-section">
-      <h3>Experience</h3>
-      <div class="cv-item">Electrical panel assembler<span>Autrial · 2017</span></div>
-      <div class="cv-item">Electrical maintenance<span>Elecnor · 2021</span></div>
+    <div class="skills-group reveal">
+      <h4>Diseño gráfico y web</h4>
+      <div class="tags">
+        <span class="tag">Photoshop</span>
+        <span class="tag">Illustrator</span>
+        <span class="tag">InDesign</span>
+        <span class="tag">Animate</span>
+        <span class="tag">GitHub</span>
+      </div>
     </div>
 
-    <div class="download">
-      <a href="cv_luis_blasco.pdf" download class="btn"><span>Download CV</span></a>
+    <div class="skills-group reveal">
+      <h4>Técnica y procesos</h4>
+      <div class="tags">
+        <span class="tag">Prototipado</span>
+        <span class="tag">Impresión 3D</span>
+        <span class="tag">Corte láser</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS -->
-<section class="skills">
-  <div class="section-inner">
-    <h2>Skills</h2>
-    <div class="tags">
-      <span class="tag">Inventor</span><span class="tag">Fusion 360</span>
-      <span class="tag">SolidWorks</span><span class="tag">3D Printing</span>
+  <!-- CONTACTO -->
+  <section class="contact">
+    <h2 class="reveal">Contacto</h2>
+
+    <div class="contact-cards reveal">
+      <div class="contact-card">
+        Email<br>
+        luisblascoibanezberbel@gmail.com
+      </div>
+      <div class="contact-card">
+        LinkedIn<br>
+        linkedin.com/in/luisblasiber
+      </div>
+      <div class="contact-card">
+        Teléfono<br>
+        +34 630 511 806
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- CONTACT -->
-<section class="contact">
-  <div class="section-inner">
-    <h2>Contacto / Contact</h2>
-    <p>luisblascoibanezberbel@gmail.com</p>
-    <p>linkedin.com/in/luisblasiber</p>
-    <p>+34 630 511 806</p>
-    <footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
-  </div>
-</section>
+    <footer>
+      © 2026 · Luis Blasco-Ibáñez Berbel
+    </footer>
+  </section>
 
-<script>
-/* Reveal */
-const sections=document.querySelectorAll('.section-inner');
-const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.2});
-sections.forEach(s=>obs.observe(s));
+  <!-- JS -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
 
-/* Language */
-const langBtn=document.getElementById('lang');
-let lang='es';
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
 
-langBtn.onclick=()=>{
-  lang=lang==='es'?'en':'es';
-  document.querySelectorAll('[data-es]').forEach(e=>e.hidden=lang!=='es');
-  document.querySelectorAll('[data-en]').forEach(e=>e.hidden=lang!=='en');
-  langBtn.textContent=lang==='es'?'EN':'ES';
-};
-
-/* Theme */
-const themeBtn=document.getElementById('theme');
-themeBtn.onclick=()=>{
-  document.body.classList.toggle('soft');
-  themeBtn.textContent=document.body.classList.contains('soft')?'Dark':'Soft';
-};
-</script>
+    reveals.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
