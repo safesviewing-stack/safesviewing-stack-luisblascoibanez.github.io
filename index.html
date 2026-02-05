@@ -324,30 +324,31 @@ p{
 
 /* ===== FOOTER ===== */
 footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  padding:18px 40px;
-  text-align:center;
-  font-size:11px;
-  letter-spacing:.08em;
-  color:#9a9a9a;
-  background-color:transparent; /* Fondo transparente */
-  pointer-events:none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 18px 40px;
 
-  opacity:0;
-  transform:translateY(20px);
-  animation:footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards; /* Duración igual a la animación de entrada */
-  animation-delay:1.5s; /* Retraso reducido a 1.5 segundos */
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #9a9a9a;
+
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+
+  animation: footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards;
+  animation-delay: 1.5s;
 }
+
 @keyframes footerIn{
-  to{opacity:1;transform:translateY(0);}
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-  footer.show{
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ===== BUTTON ===== */
 .btn{
@@ -926,13 +927,7 @@ footer{
 
 /* ===== FOOTER CV (SCROLL) ===== */
 
-body.cv-active footer{
-  position: relative;
-  margin-top: 120px;
-  pointer-events: auto;
-  opacity: 0;
-  transform: translateY(20px);
-}
+
 
   
   
@@ -1179,7 +1174,6 @@ body.cv-active footer{
 <script>
 /* ===== ESTADO GLOBAL ===== */
 let currentLang = 'es';
-let cvFooterShown = false;
 
 const footer = document.getElementById('main-footer');
 
@@ -1246,69 +1240,27 @@ function changeLang(lang){
 
 /* ===== CAMBIO DE SECCIÓN ===== */
 function changeSection(id, link) {
-  if (document.getElementById(id).classList.contains('active')) return;
 
   document.querySelectorAll('.section')
     .forEach(section => section.classList.remove('active'));
-
   document.getElementById(id).classList.add('active');
 
   document.querySelectorAll('nav a')
     .forEach(a => a.classList.remove('active'));
-
   link.classList.add('active');
 
-  }
-
-  /* Logo */
   const logo = document.getElementById('logo-home');
-  if (id !== 'home') {
-    logo.style.visibility = 'hidden';
-  } else {
-    logo.style.visibility = 'visible';
-    logo.style.animation = 'none';
-    void logo.offsetHeight;
-    logo.style.animation =
-      'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards';
-  }
-
-  /* Footer normal (NO CV) */
-  if (id !== 'cv') {
-  footer.classList.remove('show');
-  footer.style.animation = 'none';
-  void footer.offsetHeight;
-  footer.style.animation =
-    'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
-  footer.style.animationDelay = '1.5s';
-  document.body.classList.remove('cv-active');
+  logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
 }
+
+ 
 
 
   /* Modo CV */
-  if (id === 'cv') {
-  document.body.classList.add('cv-active');
-  cvFooterShown = false;
-  footer.classList.remove('show');
-  window.scrollTo(0, 0);
-}
+ 
 
 /* ===== FOOTER SOLO AL FINAL DEL CV ===== */
-function handleCVScroll(){
-  if (!document.body.classList.contains('cv-active')) return;
-  if (cvFooterShown) return;
 
-  const reachedBottom =
-    window.innerHeight + window.scrollY >=
-    document.body.offsetHeight - 10;
-
-  if (reachedBottom) {
-    cvFooterShown = true;
-    footer.classList.add('show');
-  }
-}
-
-
-window.addEventListener('scroll', handleCVScroll);
 </script>
 
 
