@@ -28,7 +28,7 @@
       font-family:'Inter',sans-serif;
       background:var(--bg-main);
       color:var(--text-main);
-      line-height:1.65;
+      line-height:1.6;
       -webkit-font-smoothing:antialiased;
     }
 
@@ -45,9 +45,6 @@
       transition:opacity var(--transition),transform var(--transition);
     }
     .reveal.visible{opacity:1;transform:translateY(0)}
-    .delay-1{transition-delay:.1s}
-    .delay-2{transition-delay:.2s}
-    .delay-3{transition-delay:.3s}
 
     /* ==================================================
        CURSOR EDITORIAL
@@ -90,25 +87,17 @@
       align-items:center;
       background:#000000;
     }
-    .home-content{max-width:900px}
+    .home-content{max-width:960px}
     .home h1{
       font-size:clamp(48px,6vw,86px);
       font-weight:500;
       line-height:1.05;
-      margin-bottom:32px;
-    }
-    .home h1 span{
-      display:block;
-      font-size:0.45em;
-      font-weight:400;
-      color:var(--text-muted);
-      margin-top:16px;
-      letter-spacing:.04em;
+      margin-bottom:36px;
     }
     .home p{
       font-size:18px;
       color:var(--text-muted);
-      max-width:520px;
+      max-width:540px;
       margin-bottom:56px;
     }
 
@@ -130,7 +119,7 @@
     .about p{
       color:var(--text-muted);
       margin-bottom:18px;
-      max-width:540px;
+      max-width:560px;
     }
     .about-image{
       border-radius:var(--radius);
@@ -277,11 +266,12 @@
   <section class="home">
     <div class="home-content reveal">
       <h1>
-        Portfolio
-        <span>L.BIB · Luis Blasco-Ibáñez Berbel</span>
+        Portfolio<br>
+        L.BIB · Luis Blasco-Ibáñez Berbel
       </h1>
       <p>
-        Diseño industrial y desarrollo de producto con enfoque técnico, atención al detalle y sensibilidad editorial.
+        Diseño industrial y desarrollo de producto con enfoque técnico,
+        atención al detalle y sensibilidad editorial.
       </p>
       <a href="#portfolio" class="btn"><span>Ver proyectos</span></a>
     </div>
@@ -292,14 +282,18 @@
     <div class="about-grid reveal">
       <div>
         <h2>Sobre mí</h2>
-        <p class="reveal delay-1">
-          Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en último año de Ingeniería en Diseño Industrial y Desarrollo de Producto en Valencia.
+        <p>
+          Soy Luis Blasco-Ibáñez Berbel, diseñador industrial en último año de
+          Ingeniería en Diseño Industrial y Desarrollo de Producto en Valencia.
         </p>
-        <p class="reveal delay-2">
-          Mi perfil combina una sólida base técnica en electricidad con una fuerte sensibilidad estética, especial interés en impresión 3D, prototipado y procesos de fabricación.
+        <p>
+          Mi perfil combina una sólida base técnica en electricidad con una
+          fuerte sensibilidad estética, especial interés en impresión 3D,
+          prototipado y procesos de fabricación.
         </p>
-        <p class="reveal delay-3">
-          Trabajo desde la precisión, el orden y la atención al detalle, entendiendo el diseño como equilibrio entre función, forma y criterio técnico.
+        <p>
+          Trabajo desde la precisión, el orden y la atención al detalle,
+          entendiendo el diseño como equilibrio entre función, forma y criterio técnico.
         </p>
       </div>
       <div class="about-image">
@@ -412,7 +406,6 @@
 
   <!-- JS -->
   <script>
-    /* Scroll reveal */
     const reveals=document.querySelectorAll('.reveal');
     const observer=new IntersectionObserver(entries=>{
       entries.forEach(e=>{
@@ -421,7 +414,6 @@
     },{threshold:.15});
     reveals.forEach(el=>observer.observe(el));
 
-    /* Cursor editorial */
     const cursor=document.querySelector('.cursor');
     const interactive=document.querySelectorAll('a,.project');
     document.addEventListener('mousemove',e=>{
