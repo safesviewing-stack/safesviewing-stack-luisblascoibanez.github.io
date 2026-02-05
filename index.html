@@ -323,9 +323,18 @@ footer{
   transform:translateY(20px);
   animation:footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards; /* Duración igual a la animación de entrada */
   animation-delay:1.5s; /* Retraso reducido a 1.5 segundos */
+  transition: opacity .4s ease, transform .4s ease;
+
 }
 @keyframes footerIn{
   to{opacity:1;transform:translateY(0);}
+}
+
+
+  footer.visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* ===== BUTTON ===== */
@@ -1605,13 +1614,7 @@ function changeSection(id, link) {
   const logo = document.getElementById('logo-home');
   logo.style.visibility = id === 'home' ? 'visible' : 'hidden';
 
-  const footer = document.querySelector('footer');
-  footer.style.animation = 'none';
-  void footer.offsetHeight;
-  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards';
-  footer.style.animationDelay = '1.5s';
-}
-
+  
 
 
 
@@ -1655,6 +1658,26 @@ function goCV(id){
   });
 }
 
+const footer = document.querySelector('footer');
+
+window.addEventListener('scroll', () => {
+  const cvSection = document.getElementById('cv');
+
+  // Solo aplicar lógica si CV está activa
+  if (!cvSection.classList.contains('active')) {
+    footer.classList.remove('visible');
+    return;
+  }
+
+  const scrollBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 20;
+
+  if (scrollBottom) {
+    footer.classList.add('visible');
+  } else {
+    footer.classList.remove('visible');
+  }
+});
 
   
 </script>
