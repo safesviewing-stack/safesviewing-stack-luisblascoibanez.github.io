@@ -335,6 +335,9 @@ p{
   font-size: 11px;
   letter-spacing: .08em;
   color: #9a9a9a;
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
 
   background: linear-gradient(
     to top,
@@ -807,6 +810,11 @@ p{
 
 }
 
+#global-footer.hide{
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
 
   
 .cv-block{
@@ -1318,6 +1326,9 @@ function changeSection(id, link) {
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   // Activar la clase active en el enlace correspondiente
   link.classList.add('active'); // Aseguramos que el enlace activo tiene la línea debajo
+
+  footer.classList.remove('hide');
+
   
   // Si es la sección de Portfolio, aplicamos la clase active al enlace de Portfolio
   if (id === 'portfolio') {
@@ -1346,6 +1357,22 @@ function changeSection(id, link) {
 }
 
 
+let lastScrollY = window.scrollY;
+const footer = document.getElementById('global-footer');
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY + 5) {
+    // Scroll hacia abajo
+    footer.classList.add('hide');
+  } else if (currentScrollY < lastScrollY - 5) {
+    // Scroll hacia arriba
+    footer.classList.remove('hide');
+  }
+
+  lastScrollY = currentScrollY;
+});
 
   
 </script>
