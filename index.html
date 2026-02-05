@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio · Industrial Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+:root{
+  --bg:#0b0b0d;
+  --white:#ffffff;
+  --muted:#cfcfcf;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, system-ui, sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;        /* Firefox */
+}
+
+body::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+
+  html,
+body{
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+
+
+/* ===== BACKGROUND ===== */
+.bg-layer{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(11,11,13,.75), rgba(11,11,13,.7)),
+    url("reloj1.jpg") center / cover no-repeat;
+  z-index:-1; /* Ajustado para no bloquear la interacción */
+  opacity:0;
+  animation:bgFadeIn 1.4s ease forwards;
+  pointer-events:none;
+}
+@keyframes bgFadeIn{ to{opacity:1;} }
+
+/* ===== GLOBAL SECTION FADE ===== */
+.section-fade{
+  position:fixed;
+  inset:0;
+  background:rgba(11,11,13,.9);
+  z-index:1; /* Ajustado para no bloquear los botones */
+  opacity:0;
+  pointer-events:none;
+}
+.section-fade.active{
+  animation:sectionFade 1.4s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes sectionFade{
+  from{opacity:1}
+  to{opacity:0}
+}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:34px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:1000; /* Aseguramos que el header esté encima de todos los elementos interactivos */
+  opacity:1;
+  transform:translateY(0);
+}
+
+.logo{
+  font-size:16px;
+  letter-spacing:.3em;
+  font-weight:500;
+  opacity:1;
+  transform:translateX(0);
+  animation:logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* Animación de entrada para el logo */
+@keyframes logoInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+nav{
+  display:flex;
+  gap:36px;
+  align-items:center;
+}
+
+nav a{
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  position:relative;
+  padding-bottom:6px;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(-12px);
+  animation:navIn 0.55s ease forwards;
+  line-height:1; /* ← añade esto */
+
+}
+
+nav a:nth-child(1){animation-delay:.25s}
+nav a:nth-child(2){animation-delay:.33s}
+nav a:nth-child(3){animation-delay:.41s}
+nav a:nth-child(4){animation-delay:.49s}
+nav a:nth-child(5){animation-delay:.57s}
+nav a:nth-child(6){animation-delay:.65s}
+
+@keyframes navIn{ to{opacity:1;transform:translateY(0);} }
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:.18em;
+  bottom:0;
+  height:1px;  /* Grosor de la línea */
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.3s;
+}
+
+nav a.active::after,
+nav a:hover::after{
+  transform:scaleX(1);
+}
+
+/* ===== LANGUAGE ===== */
+.lang-switch{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  opacity:0;
+  animation:langFadeRight 1s cubic-bezier(.4,0,.2,1) forwards; /* Animación de los botones de idioma entrando desde la derecha */
+}
+
+@keyframes langFadeRight{
+  from{
+    opacity:0;
+    transform:translateX(100%); /* Los botones entran desde la derecha */
+  }
+  to{
+    opacity:1;
+    transform:translateX(0); /* Se posicionan en su lugar final */
+  }
+}
+
+.lang-switch button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  position:relative;
+  padding-bottom:6px;
+  opacity:1; /* Aseguramos que no haya fundido */
+  line-height:1; /* ← añade esto */
+
+}
+
+/* Línea decorativa debajo de los botones de idioma con grosor de 1px */
+.lang-switch button::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px; /* Grosor de la línea igual al de los títulos del header */
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.3s;
+}
+
+.lang-switch button.active::after,
+.lang-switch button:hover::after{
+  transform:scaleX(1); /* La línea se expande cuando el botón es activo o se pasa el ratón */
+}
+
+.lang-switch button.active{opacity:1}
+
+/* ===== SECTIONS ===== */
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+
+.section.active{display:flex}
+
+.content{
+  max-width:1000px;
+  margin-left:clamp(120px,16vw,240px);
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.section .content{
+  max-width:1105px;
+  padding-top: 160px;
+
+}
+
+  /* ===== HOME OVERRIDE ===== */
+#home .content{
+  padding-top: 240px;
+}
+
+
+/* ===== TEXT ===== */
+h1{
+  font-size:44px;
+  font-weight:600;
+  max-width:32ch;
+}
+
+  h1 .title-line{
+  line-height: 1.3;
+}
+
+.title-line{display:block}
+
+h2{
+  font-size:28px;
+  font-weight:610;
+  margin-bottom: 15px;
+
+
+}
+
+
+
+
+p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+  text-align:justify;
+}
+
+/* ===== ABOUT LAYOUT ===== */
+.about-layout{
+  display: grid;
+  grid-template-columns: 1.2fr auto;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.about-image img{
+  width:335px;
+  transform: scale(0.95);
+  transform-origin: top right;
+}
+
+.about-image{
+  margin-top: 8px;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up{
+  opacity:0;
+  transform:translateY(24px);
+  animation:fadeUp .8s cubic-bezier(.4,0,.2,1) forwards;
+}
+.delay-1{animation-delay:.35s}
+.delay-2{animation-delay:.6s}
+
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0);}
+}
+
+.photo-in{
+  opacity:0;
+  transform:translateX(48px) scale(.95);
+  animation:photoIn 1.1s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay:.75s;
+}
+@keyframes photoIn{
+  to{opacity:1;transform:translateX(0) scale(1);}
+}
+
+/* ===== FOOTER ===== */
+footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding:18px 40px;
+  text-align:center;
+  font-size:11px;
+  letter-spacing:.08em;
+  color:#9a9a9a;
+  background-color:transparent; /* Fondo transparente */
+  pointer-events:none;
+
+  opacity:0;
+  transform:translateY(20px);
+  animation:footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards; /* Duración igual a la animación de entrada */
+  animation-delay:1.5s; /* Retraso reducido a 1.5 segundos */
+}
+@keyframes footerIn{
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  margin-top:14px;
+  padding:14px 34px;
+  border-radius:40px;
+  border:none;
+  background:#fff;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+  align-self:flex-start;
+  opacity:0;
+  transform:translateY(24px);
+  animation:btnIn 0.6s cubic-bezier(.4,0,.2,1) forwards;
+  animation-delay:0.9s; /* Reduced delay */
+  font-size:14px;        /* ← fuerza mismo tamaño */
+  line-height:1;         /* ← evita que escale visualmente */
+}
+
+@keyframes btnIn{
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== PORTFOLIO STYLING ===== */
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.project-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.project-item:hover {
+  transform: scale(1.05);
+}
+
+.project-img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.project-item:hover .project-img {
+  opacity: 0.7;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.project-item:hover .project-overlay {
+  opacity: 1;
+}
+
+
+
+ 
+
+
+/* ===== CV STYLING ===== */
+.cv-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cv-column {
+  width: 32%;
+}
+
+.cv-column h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.cv-column ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-column li {
+  margin-bottom: 12px;
+}
+
+.cv-column li strong {
+  font-weight: 600;
+}
+
+.cv-column li span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.cv-column i {
+  margin-right: 8px;
+  color: #fff;
+}
+
+
+  /* ===== CONTACT SECTION ===== */
+
+  
+.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 6px;
+  max-width: 460px;
+}
+
+
+
+.contact-item{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--white);
+  background: transparent;
+  transition: border-color .35s ease, transform .35s ease;
+  transform: translateX(-18px);
+
+}
+
+
+  .contact-item{
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+
+.contact-item i{
+  font-size: 16px;
+  opacity: .75;
+  transition: opacity .35s ease;
+
+}
+
+
+.contact-item:hover{
+  border-color: rgba(255,255,255,0.42);
+  transform: none;
+}
+
+  .contact-item:hover i{
+  opacity: 1;
+}
+
+
+.contact-label{
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+  display: block;
+}
+
+
+.contact-value{
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--white);
+}
+
+
+.contact-item.no-link{
+  cursor: default;
+}
+
+  .contact-item{
+  background: rgba(255,255,255,0.015);
+  transition:
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+.contact-item:hover{
+  background: rgba(255,255,255,0.08); /* ilumina todo */
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-1px);
+}
+
+  .contact-item:hover .contact-value{
+  color: #fff;
+}
+
+  
+ /* ===== ABOUT – BASE (PORTÁTIL) ===== */
+
+#about .content{
+  max-width: 1035px;
+}
+
+#about p{
+  max-width: 740px;
+}
+
+  /* ===== ABOUT – PANTALLA GRANDE ===== */
+@media (min-width: 1920px){
+
+  #about .content{
+    max-width: 1600px;
+  }
+
+  #about p{
+    max-width: 964px; /* ← AQUÍ se hace más ancho */
+  }
+
+  .about-layout{
+    gap: 80px;
+  }
+
+  .about-image img{
+    width: 380px;
+  }
+}
+
+ 
+/* ===== AJUSTE ALTURA H2 – PANTALLA GRANDE ===== */
+@media (min-width: 1920px){
+
+#about h2{
+    margin-top: -230px;
+  }
+  
+  #portfolio h2{
+    margin-top: -263px;
+  }
+
+  
+
+  #skills h2{
+    margin-top: -180px;
+  }
+
+
+  /* ===== CONTACT – PREMIUM ENTRANCE ===== */
+
+.contact-item{
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);
+  animation: contactReveal 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* Stagger suave */
+.contact-item:nth-child(1){ animation-delay: .15s; }
+.contact-item:nth-child(2){ animation-delay: .30s; }
+.contact-item:nth-child(3){ animation-delay: .45s; }
+
+@keyframes contactReveal{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+
+}
+
+/* ===== AJUSTE LÍNEAS DECORATIVAS – PANTALLA GRANDE ===== */
+@media (min-width: 1920px){
+
+  nav a{
+    padding-bottom: 6px;
+  }
+
+  nav a::after{
+    bottom: 0;
+  }
+
+  .lang-switch button{
+    padding-bottom: 6px;
+  }
+
+  .lang-switch button::after{
+    bottom: 0;
+  }
+}
+
+
+/* ===== AJUSTE SOBRE MI – SOLO PANTALLA GRANDE ===== */
+@media (min-width: 1920px){
+  #about .content{
+    gap: -15px;
+  }
+}
+
+@media (max-width: 768px){
+  .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+ /* ===== SKILLS BLOCK ===== */
+
+.skills-block{
+  margin-top: 30px;
+}
+
+.skills-block:first-of-type{
+  margin-top: 6px;    /* ← mucho más cerca del h2 */
+}
+.skills-title{
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+/* ===== GRID ===== */
+
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+/* ===== SKILL ITEM ===== */
+
+.skill-item{
+  height: 44px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.3px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--white);
+
+  background: transparent;
+  transition:
+    border-color .3s ease,
+    background .3s ease,
+    transform .3s ease;
+}
+
+
+.skill-item:hover{
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);  /* hover más sutil */
+}
+
+
+/* items anchos */
+
+
+  /* ===== CONTACT ENTRY ANIMATION ===== */
+
+.contact-item{
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: contactIn 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay: .6s;   /* ← espera inicial como el resto del contenido */
+}
+
+/* Delays progresivos (se suman al delay base) */
+.contact-item:nth-child(1){ animation-delay: .6s; }
+.contact-item:nth-child(2){ animation-delay: .75s; }
+.contact-item:nth-child(3){ animation-delay: .9s; }
+
+@keyframes contactIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);  
+  }
+}
+
+
+
+
+  /* ===== SKILLS BLOCK ENTRY ===== */
+
+.skills-block{
+  opacity: 0;
+  transform: translateY(14px);
+  animation: skillsBlockIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.skills-1{ animation-delay: .6s; }
+.skills-2{ animation-delay: .85s; }
+.skills-3{ animation-delay: 1.1s; }
+
+@keyframes skillsBlockIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== SCROLL SOLO PARA CV ===== */
+
+
+
+
+/* ===== CV BLOCKS ===== */
+
+.cv-content{
+  gap: 36px;
+  padding-bottom: 320px;   /* ⬅️ más margen inferior */
+
+}
+
+
+  
+.cv-block{
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 22px;
+  align-items: flex-start;
+  z-index: 6; /* puntos y texto por encima */
+
+
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: cvIn .9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+  .cv-content::before{
+  content: "";
+  position: absolute;
+  left: 14px;        /* ⬅️ dentro de la columna timeline */
+  top: 250px;
+  bottom: 320px;       /* ⬅️ MISMO valor que padding-bottom */
+  height: calc(100% - 655px);
+  width: 1.4px;
+  background: rgba(255,255,255,0.22);
+  pointer-events: none;
+  z-index: 5;                          /* ⬅️ CLAVE */
+
+  transform: scaleY(0);
+  transform-origin: top;        /* ⬅️ crece hacia abajo */
+  animation: cvLineIn 1.5s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay: .35s;
+
+}
+
+  .cv-block:first-of-type::before{
+  display: none;
+  height: 6px; /* centro del punto */
+
+}
+
+  
+
+
+.cv-marker{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: 6px;
+  justify-self: center;   /* ✅ CENTRO REAL DEL GRID */
+
+}
+
+/* Texto */
+.cv-text h3{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cv-text span{
+  display: block;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.cv-text p{
+  max-width: 560px;
+}
+
+/* ===== ANIMACIÓN ===== */
+
+@keyframes cvIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== STAGGER ===== */
+
+.cv-1{ animation-delay: .4s; }
+.cv-2{ animation-delay: .6s; }
+.cv-3{ animation-delay: .8s; }
+.cv-4{ animation-delay: 1s; }
+
+  /* ===== CV TIMELINE LINE ===== */
+
+.cv-content{
+  position: relative;
+
+}
+
+
+ 
+ #cv .content{
+  margin-left: clamp(120px, 16vw, 240px); /* ⬅️ más a la izquierda */
+}
+
+@keyframes cvLineIn{
+  to{
+    transform: scaleY(1);
+  }
+}
+
+
+@keyframes cvLineInGlow{
+  0%{
+    transform: scaleY(0);
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+  }
+
+  65%{
+    transform: scaleY(1);
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.6),
+      0 0 20px rgba(255,255,255,0.35);
+  }
+
+  100%{
+    transform: scaleY(1);
+    box-shadow:
+      0 0 6px rgba(255,255,255,0.25);
+  }
+}
+
+
+  
+  
+</style>
+</head>
+
+<body>
+
+<div class="bg-layer"></div>
+<div class="section-fade"></div>
+
+<header>
+  <div class="logo" id="logo-home">L · BIB</div>
+
+  <nav>
+    <a class="active" onclick="changeSection('home',this)" data-i18n="nav_home">Inicio</a>
+    <a onclick="changeSection('about',this)" data-i18n="nav_about">Sobre mí</a>
+    <a onclick="changeSection('portfolio',this)" data-i18n="nav_portfolio">Portfolio</a>
+    <a onclick="changeSection('cv',this)" data-i18n="nav_cv">CV</a>
+    <a onclick="changeSection('skills',this)" data-i18n="nav_skills">Habilidades</a>
+    <a onclick="changeSection('contact',this)" data-i18n="nav_contact">Contacto</a>
+  </nav>
+
+  <div class="lang-switch">
+    <button class="active" onclick="changeLang('es')">ES</button>
+    <button onclick="changeLang('en')">EN</button>
+  </div>
+</header>
+
+<section id="home" class="section active">
+  <div class="content">
+    <h1 class="fade-up">
+      <span class="title-line" data-i18n="home_title_1">Diseño Industrial</span>
+      <span class="title-line" data-i18n="home_title_2">y Desarrollo de Producto</span>
+    </h1>
+
+    <p class="fade-up delay-1" data-i18n="home_sub">
+      Perfil técnico y creativo enfocado en producto.
+    </p>
+
+    <button class="btn fade-up delay-2" data-i18n="home_btn" onclick="changeSection('portfolio', this)">
+      Ver proyectos
+    </button>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="content">
+    <h2 class="fade-up" data-i18n="about_title">Sobre mí</h2>
+
+    <div class="about-layout">
+      <p class="fade-up delay-1" data-i18n="about_text">
+        Hola, soy Luis, tengo 24 años y soy estudiante de Diseño Industrial en la UPV, actualmente en mi último año. Vivo en Valencia y me considero una persona con una mente ecléctica y perfeccionista, siempre interesada en encontrar el equilibrio entre lo técnico y lo estético. Desde pequeño he tenido curiosidad por entender cómo funcionan las cosas, y mi formación profesional en el sector de la electricidad me permitió adquirir una base técnica sólida que hoy aplico al diseño y desarrollo de producto. Disfruto especialmente del proceso completo de diseño, desde la idea inicial hasta la definición técnica y el detalle final, y tengo una necesidad constante de estar creando y resolviendo. Si algo no me sale, no paro hasta encontrar la solución, porque para mí el proceso es tan importante como el resultado final. Como dato curioso, me interesa especialmente el campo de la impresión 3D, ya que me permite experimentar con el diseño y validar conceptos de la forma más rápida y precisa.
+      </p>
+
+      <div class="about-image photo-in">
+        <img src="foto.jpg" alt="Foto de Luis">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="section">
+  <div class="content">
+    <h2 class="fade-up" data-i18n="portfolio_title">Portfolio</h2>
+
+    <p class="fade-up delay-1" data-i18n="portfolio_description">
+      A continuación, te presento algunos de los proyectos más destacados en los que he trabajado, donde cada uno refleja mi enfoque creativo, técnico y mi atención al detalle.
+    </p>
+
+    <div class="project-gallery fade-up delay-2">
+      <div class="project-item">
+        <img src="proyecto1.jpg" alt="Proyecto 1" class="project-img">
+        <div class="project-overlay">
+          <h3>Diseño de Lámpara Moderna</h3>
+          <p>Un diseño único que fusiona funcionalidad y estética, inspirado en formas orgánicas.</p>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <img src="proyecto2.jpg" alt="Proyecto 2" class="project-img">
+        <div class="project-overlay">
+          <h3>Mobiliario para Oficina</h3>
+          <p>Creación de mobiliario ergonómico con materiales sostenibles, enfocado en la productividad.</p>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <img src="proyecto3.jpg" alt="Proyecto 3" class="project-img">
+        <div class="project-overlay">
+          <h3>Rediseño de Producto</h3>
+          <p>Optimización de producto para mejorar su funcionalidad y experiencia del usuario.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cv" class="section">
+  <div class="content cv-content">
+
+    <h2 class="fade-up">Currículum Vitae</h2>
+
+    <div class="cv-block cv-1">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Grado en Diseño Industrial</h3>
+        <span>Universidad Politécnica de Valencia · 2022–2026</span>
+        <p>
+          Formación en diseño de producto, procesos de fabricación,
+          desarrollo técnico y prototipado.
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-block cv-2">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Formación Profesional en Electricidad</h3>
+        <span>Base técnica aplicada al diseño</span>
+        <p>
+          Conocimientos sólidos en sistemas eléctricos,
+          lectura de planos y procesos industriales.
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-block cv-3">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Prácticas en Sixay</h3>
+        <span>Diseño de mobiliario · 2025</span>
+        <p>
+          Desarrollo de mobiliario a medida, definición técnica,
+          optimización de componentes y trabajo en equipo.
+        </p>
+      </div>
+    </div>
+
+    <div class="cv-block cv-4">
+      <div class="cv-marker"></div>
+      <div class="cv-text">
+        <h3>Perfil Técnico</h3>
+        <span>CAD · Prototipado · Impresión 3D</span>
+        <p>
+          Experiencia en herramientas de modelado 3D,
+          validación de concepto y desarrollo de producto.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="skills" class="section">
+  <div class="content">
+    <h2 class="fade-up">Habilidades</h2>
+
+    <!-- MODELADO 3D -->
+<div class="skills-block skills-1">
+      <h3 class="skills-title">Modelado 3D</h3>
+      <div class="skills-grid">
+        <div class="skill-item">Inventor</div>
+        <div class="skill-item">Fusion 360</div>
+        <div class="skill-item">SolidWorks</div>
+        <div class="skill-item">3ds Max</div>
+        <div class="skill-item">AutoCAD</div>
+      </div>
+    </div>
+
+    <!-- DISEÑO GRÁFICO -->
+<div class="skills-block skills-2">
+      <h3 class="skills-title">Diseño gráfico y web</h3>
+      <div class="skills-grid">
+        <div class="skill-item">Animate</div>
+        <div class="skill-item">Photoshop</div>
+        <div class="skill-item">Illustrator</div>
+        <div class="skill-item">InDesign</div>
+        <div class="skill-item">Github</div>
+      </div>
+    </div>
+
+    <!-- TÉCNICA & PROCESOS -->
+<div class="skills-block skills-3">
+      <h3 class="skills-title">Técnica y procesos</h3>
+      <div class="skills-grid">
+        <div class="skill-item skill-wide">Prototipado</div>
+        <div class="skill-item skill-wide">Impresión 3D</div>
+        <div class="skill-item skill-wide">Corte láser</div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+ <section id="contact" class="section">
+  <div class="content">
+    <h2 class="fade-up">Contacto</h2>
+
+    <div class="contact-grid">
+
+      
+      <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">luisblascoibanezberbel@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank" class="contact-item">
+        <i class="fab fa-linkedin-in"></i>
+        <div>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/luisblasiber</span>
+        </div>
+      </a>
+
+       <div class="contact-item no-link">
+        <i class="fas fa-phone-alt"></i>
+        <div>
+          <span class="contact-label">Teléfono</span>
+          <span class="contact-value">+34 630 511 806</span>
+       </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  © 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial
+</footer>
+
+<script>
+let currentLang = 'es';
+
+const translations = {
+  es:{
+    nav_home:"Inicio",
+    nav_about:"Sobre mí",
+    nav_portfolio:"Portfolio",
+    portfolio_title: "Portfolio",
+    cv_title: "Currículum Vitae",
+    nav_cv:"CV",
+    nav_skills:"Habilidades",
+    nav_contact:"Contacto",
+    home_title_1:"Diseño Industrial",
+    home_title_2:"y Desarrollo de Producto",
+    home_sub:"Perfil técnico y creativo enfocado en producto.",
+    home_btn:"Ver proyectos",
+    about_title:"Sobre mí",
+    about_text:"Hola, soy Luis, tengo 24 años y soy estudiante de Diseño Industrial en la UPV, actualmente en mi último año. Vivo en Valencia y me considero una persona con una mente ecléctica y perfeccionista, siempre interesada en encontrar el equilibrio entre lo técnico y lo estético. Desde pequeño he tenido curiosidad por entender cómo funcionan las cosas, y mi formación profesional en el sector de la electricidad me permitió adquirir una base técnica sólida que hoy aplico al diseño y desarrollo de producto. Disfruto especialmente del proceso completo de diseño, desde la idea inicial hasta la definición técnica y el detalle final, y tengo una necesidad constante de estar creando y resolviendo. Si algo no me sale, no paro hasta encontrar la solución, porque para mí el proceso es tan importante como el resultado final. Como dato curioso, me interesa especialmente el campo de la impresión 3D, ya que me permite experimentar con el diseño y validar conceptos de la forma más rápida y precisa.",
+    footer:"© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniería en diseño industrial"
+  },
+  en:{
+    nav_home:"Home",
+    nav_about:"About",
+    nav_portfolio:"Portfolio",
+    portfolio_title: "Portfolio",
+    cv_title: "Curriculum Vitae",
+    nav_cv:"CV",
+    nav_skills:"Skills",
+    nav_contact:"Contact",
+    home_title_1:"Industrial Design",
+    home_title_2:"and Product Development",
+    home_sub:"Technical and creative profile focused on product.",
+    home_btn:"View projects",
+    about_title:"About me",
+    about_text:"Hi, I’m Luis, I’m 24 years old and an Industrial Design student at UPV, currently in my final year. I live in Valencia and consider myself an eclectic and perfectionist person, always interested in finding the balance between technical precision and aesthetics. From an early age, I’ve been curious about how things work, and my vocational training in the electrical sector gave me a solid technical foundation that I now apply to product design and development. I especially enjoy the complete design process, from the initial idea to technical definition and final detailing, and I have a constant need to keep creating and solving problems. If something doesn’t work, I don’t stop until I find the solution, because for me the process is just as important as the final result. As a curious fact, I’m particularly interested in the field of 3D printing, as it allows me to directly experiment with design and validate concepts in the fastest and most precise way.",
+    footer:"© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Design Engineering"
+  }
+};
+
+function resetAnimations(scope=document){
+  scope.querySelectorAll('.fade-up, .photo-in').forEach(el=>{
+    const c = el.className;
+    el.className = c.replace(/fade-up|delay-1|delay-2|photo-in/g,'').trim();
+    void el.offsetHeight; // force reflow
+    el.className = c;
+  });
+
+  scope.querySelectorAll('nav a').forEach((el, index) => {
+  el.style.animation = 'none';
+  void el.offsetHeight;
+  el.style.animation = `navIn 0.55s ease forwards ${index * 0.08}s`;
+});
+
+
+const button = scope.querySelector('.btn');
+if (button) {
+  button.style.animation = 'none';
+  void button.offsetHeight;
+  button.style.animation =
+    'btnIn 0.6s cubic-bezier(.4,0,.2,1) forwards 0.8s';
+}
+
+
+  // Reset language button animation (from right)
+  const langButtons = scope.querySelectorAll('.lang-switch button');
+  langButtons.forEach((btn, index) => {
+    btn.style.animation = 'none';
+    void btn.offsetHeight;
+    btn.style.animation = `langFadeRight 1s cubic-bezier(.4,0,.2,1) forwards`; // Apply same timing for both buttons
+  });
+
+  // Reset logo animation (same as initial entry)
+  const logo = scope.querySelector('.logo');
+  logo.style.animation = 'none'; 
+  void logo.offsetHeight; // force reflow
+  logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reapply the same animation on language change
+
+  // Reset header animation
+  scope.querySelectorAll('header').forEach(el => {
+    el.style.animation = 'none';
+    void el.offsetHeight;
+    el.style.animation = '';
+  });
+
+  // Reset footer animation (triggered on button click)
+  scope.querySelectorAll('footer').forEach(el => {
+    el.style.animation = 'none';
+    void el.offsetHeight; 
+    el.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Apply same animation for all footers
+    el.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
+  });
+}
+
+function changeLang(lang){
+  if(lang === currentLang) return;
+  currentLang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.textContent = translations[lang][el.dataset.i18n];
+  });
+
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-switch button[onclick*="${lang}"]`).classList.add('active');
+
+  resetAnimations(); // Reset animations when changing language
+}
+
+function changeSection(id, link) {
+  // Verificar si ya estamos en la misma sección
+  if (document.getElementById(id).classList.contains('active')) return;
+
+  // Desactivar todas las secciones
+  document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+  // Activar la sección correspondiente
+  document.getElementById(id).classList.add('active');
+  // Desactivar la clase active en todos los enlaces
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  // Activar la clase active en el enlace correspondiente
+  link.classList.add('active'); // Aseguramos que el enlace activo tiene la línea debajo
+  
+  // Si es la sección de Portfolio, aplicamos la clase active al enlace de Portfolio
+  if (id === 'portfolio') {
+    const portfolioLink = document.querySelector('nav a:nth-child(3)');
+    portfolioLink.classList.add('active'); // Asegura que la línea decorativa esté activa
+  }
+  
+  // Ocultar el logo en todas las secciones excepto Home
+  const logo = document.getElementById('logo-home');
+  if (id !== 'home') {
+    logo.style.visibility = 'hidden';
+  } else {
+    logo.style.visibility = 'visible';
+    // Reaplicar la animación al logo cuando se entra en Home
+    logo.style.animation = 'none'; // Para reiniciar la animación
+    void logo.offsetHeight; // Fuerza el reflujo del DOM
+    logo.style.animation = 'logoInLeft 1s cubic-bezier(.4,0,.2,1) forwards'; // Reaplica la animación de entrada
+  }
+
+  // Mostrar el footer con animación cada vez que se cambie de sección
+  const footer = document.querySelector('footer');
+  footer.style.animation = 'none';
+  void footer.offsetHeight; // Fuerza el reflujo del DOM
+  footer.style.animation = 'footerIn 1.4s cubic-bezier(.4,0,.2,1) forwards'; // Duración igual a la animación de entrada
+  footer.style.animationDelay = '1.5s'; // Retraso reducido a 1.5 segundos
+}
+
+
+
+  
+</script>
+
+</body>
+</html>
