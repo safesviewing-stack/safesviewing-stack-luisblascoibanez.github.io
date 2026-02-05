@@ -334,7 +334,18 @@ nav{
   </section>
 
   <!-- JS -->
-  <script>
+ <script>
+  /* ===============================
+     FORZAR INICIO EN HOME
+  =============================== */
+  window.addEventListener('load', () => {
+    // Elimina cualquier anchor de la URL
+    history.replaceState(null, null, window.location.pathname);
+
+    // Fuerza scroll al inicio
+    window.scrollTo(0, 0);
+  });
+
   /* ===============================
      SCROLL REVEAL
   =============================== */
@@ -347,25 +358,39 @@ nav{
   reveals.forEach(el => observer.observe(el));
 
   /* ===============================
-     HOME SCROLL CONTROL
+     HOME LINK CONTROL
   =============================== */
   const homeLink = document.querySelector('a[href="#home"]');
-
-  homeLink.addEventListener('click', e => {
-    e.preventDefault();
-
-    // Fuerza el scroll exactamente al inicio
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  if (homeLink) {
+    homeLink.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
+  }
+
+  /* ===============================
+     CURSOR EDITORIAL
+  =============================== */
+  const cursor = document.querySelector('.cursor');
+  const interactive = document.querySelectorAll('a, .project');
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
   });
 
-  // Seguridad extra: nunca permitir scroll negativo
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 0) {
-      window.scrollTo(0, 0);
-    }
+  interactive.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.opacity = 1;
+      cursor.style.transform = 'translate(-50%, -50%) scale(1.4)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.opacity = 0;
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
   });
 </script>
 
