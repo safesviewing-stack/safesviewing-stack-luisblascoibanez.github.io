@@ -12,6 +12,7 @@
   --bg:#0b0b0d;
   --fg:#ffffff;
   --muted:rgba(255,255,255,.6);
+  --soft:rgba(255,255,255,.12);
 }
 
 *{
@@ -21,12 +22,16 @@
   font-family:Inter, system-ui, sans-serif;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:var(--bg);
   color:var(--fg);
 }
 
-/* ===== LAYOUT ===== */
+/* ===== HEADER ===== */
 
 header{
   position:fixed;
@@ -35,7 +40,9 @@ header{
   padding:36px 48px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   z-index:10;
+  background:linear-gradient(var(--bg), transparent);
 }
 
 nav{
@@ -49,12 +56,35 @@ nav{
 nav a{
   color:var(--fg);
   text-decoration:none;
-  opacity:.7;
+  opacity:.5;
+  position:relative;
+  transition:.3s;
 }
 
+nav a.active,
 nav a:hover{
   opacity:1;
 }
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:100%;
+  height:1px;
+  background:var(--fg);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.3s;
+}
+
+nav a.active::after,
+nav a:hover::after{
+  transform:scaleX(1);
+}
+
+/* ===== SECTIONS ===== */
 
 section{
   min-height:100vh;
@@ -64,6 +94,19 @@ section{
   max-width:900px;
   margin-left:clamp(120px,16vw,240px);
   padding-top:200px;
+}
+
+/* ===== REVEAL ===== */
+
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:1s cubic-bezier(.22,.61,.36,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -78,15 +121,15 @@ h1{
 h2{
   font-size:28px;
   font-weight:500;
-  margin-bottom:32px;
+  margin-bottom:36px;
 }
 
 h3{
-  font-size:14px;
+  font-size:13px;
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--muted);
-  margin-bottom:24px;
+  margin-bottom:28px;
 }
 
 p{
@@ -109,7 +152,15 @@ p{
 }
 
 .cv-item{
-  margin-bottom:22px;
+  margin-bottom:26px;
+  padding-left:18px;
+  border-left:1px solid transparent;
+  transition:.35s ease;
+}
+
+.cv-item:hover{
+  border-color:var(--soft);
+  padding-left:24px;
 }
 
 .cv-item strong{
@@ -123,6 +174,33 @@ p{
   font-size:14px;
   color:var(--muted);
   line-height:1.6;
+}
+
+/* ===== CONTACT ===== */
+
+.contact a{
+  display:inline-block;
+  color:var(--fg);
+  text-decoration:none;
+  margin-bottom:12px;
+  position:relative;
+}
+
+.contact a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:100%;
+  height:1px;
+  background:var(--fg);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.3s;
+}
+
+.contact a:hover::after{
+  transform:scaleX(1);
 }
 
 /* ===== FOOTER ===== */
@@ -141,68 +219,53 @@ footer{
 <header>
   <div>L · B</div>
   <nav>
-    <a href="#home">Inicio</a>
+    <a href="#home" class="active">Inicio</a>
     <a href="#about">Sobre mí</a>
     <a href="#cv">CV</a>
     <a href="#contact">Contacto</a>
   </nav>
 </header>
 
-<!-- HOME -->
 <section id="home">
   <div class="content">
-    <h1>Industrial Design & Product Development</h1>
-    <p>
+    <h1 class="reveal">Industrial Design & Product Development</h1>
+    <p class="reveal">
       Perfil técnico y creativo enfocado en producto, con base en ingeniería,
       atención al detalle y una aproximación funcional y estética al diseño.
     </p>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="content">
-    <h2>Sobre mí</h2>
-    <p>
+    <h2 class="reveal">Sobre mí</h2>
+    <p class="reveal">
       Soy Luis Blasco, estudiante de Ingeniería en Diseño Industrial en la UPV.
-      Mi formación técnica en electricidad me ha dado una base sólida para
-      abordar el diseño desde una perspectiva realista, constructiva y
-      orientada a fabricación. Me interesa especialmente el desarrollo de
-      producto, el prototipado y la impresión 3D.
+      Mi formación técnica en electricidad me permite abordar el diseño desde
+      una perspectiva realista, constructiva y orientada a fabricación.
     </p>
   </div>
 </section>
 
-<!-- CV -->
 <section id="cv">
   <div class="content">
-    <h2>Currículum Vitae</h2>
+    <h2 class="reveal">Currículum Vitae</h2>
 
-    <div class="cv-block">
+    <div class="cv-block reveal">
       <h3>Formación académica</h3>
 
       <div class="cv-item">
         <strong>Universidad Politécnica de Valencia (UPV)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2024 – Actualidad</span>
+        <span>Grado en Ingeniería en Diseño Industrial · 2024 – Actualidad</span>
       </div>
 
       <div class="cv-item">
         <strong>Universitat Jaume I de Castellón (UJI)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2021 – 2024</span>
-      </div>
-
-      <div class="cv-item">
-        <strong>Escuelas San José de Valencia</strong>
-        <span>Grado Superior en Instalaciones Electrotécnicas y Automatizadas · 2019 – 2021</span>
-      </div>
-
-      <div class="cv-item">
-        <strong>Escuelas San José de Valencia</strong>
-        <span>Grado Medio en Instalaciones Eléctricas y Automáticas · 2017 – 2019</span>
+        <span>Grado en Ingeniería en Diseño Industrial · 2021 – 2024</span>
       </div>
     </div>
 
-    <div class="cv-block">
+    <div class="cv-block reveal">
       <h3>Prácticas profesionales</h3>
 
       <div class="cv-item">
@@ -212,20 +275,19 @@ footer{
 
       <div class="cv-item">
         <strong>Autrial</strong>
-        <span>Montaje y mantenimiento de cuadros eléctricos e instalaciones</span>
+        <span>Montaje y mantenimiento de cuadros eléctricos</span>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="content">
-    <h2>Contacto</h2>
-    <p>
-      luisblascoibanezberbel@gmail.com<br>
-      linkedin.com/in/luisblasiber<br>
+  <div class="content contact">
+    <h2 class="reveal">Contacto</h2>
+    <p class="reveal">
+      <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a><br>
+      <a href="https://linkedin.com/in/luisblasiber" target="_blank">LinkedIn</a><br>
       +34 630 511 806
     </p>
   </div>
@@ -234,6 +296,37 @@ footer{
 <footer>
   © 2026 · Luis Blasco · Industrial Design
 </footer>
+
+<script>
+/* Reveal on scroll */
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{ threshold:0.15 });
+
+reveals.forEach(el=>observer.observe(el));
+
+/* Active nav */
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+
+window.addEventListener('scroll', ()=>{
+  let current = '';
+  sections.forEach(section=>{
+    const top = section.offsetTop - 240;
+    if(scrollY >= top) current = section.id;
+  });
+
+  navLinks.forEach(link=>{
+    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+  });
+});
+</script>
 
 </body>
 </html>
