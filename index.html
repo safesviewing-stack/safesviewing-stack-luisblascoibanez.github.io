@@ -22,9 +22,7 @@
   font-family:Inter, system-ui, sans-serif;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 
 body{
   background:var(--bg);
@@ -62,9 +60,7 @@ nav a{
 }
 
 nav a.active,
-nav a:hover{
-  opacity:1;
-}
+nav a:hover{ opacity:1; }
 
 nav a::after{
   content:"";
@@ -80,15 +76,11 @@ nav a::after{
 }
 
 nav a.active::after,
-nav a:hover::after{
-  transform:scaleX(1);
-}
+nav a:hover::after{ transform:scaleX(1); }
 
 /* ===== SECTIONS ===== */
 
-section{
-  min-height:100vh;
-}
+section{ min-height:100vh; }
 
 .content{
   max-width:900px;
@@ -100,7 +92,7 @@ section{
 
 .reveal{
   opacity:0;
-  transform:translateY(24px);
+  transform:translateY(28px);
   transition:1s cubic-bezier(.22,.61,.36,1);
 }
 
@@ -121,7 +113,7 @@ h1{
 h2{
   font-size:28px;
   font-weight:500;
-  margin-bottom:36px;
+  margin-bottom:40px;
 }
 
 h3{
@@ -141,8 +133,50 @@ p{
 
 /* ===== HOME ===== */
 
-#home p{
-  margin-top:24px;
+.hero-image{
+  margin-top:64px;
+  max-width:520px;
+}
+
+.hero-image img{
+  width:100%;
+  border-radius:20px;
+  filter:contrast(1.05);
+}
+
+/* ===== ABOUT ===== */
+
+.about-grid{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:72px;
+  align-items:start;
+}
+
+.about-photo img{
+  width:260px;
+  border-radius:18px;
+  filter:grayscale(.1);
+}
+
+/* ===== PORTFOLIO ===== */
+
+.portfolio-grid{
+  margin-top:56px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:36px;
+}
+
+.portfolio-grid img{
+  width:100%;
+  border-radius:20px;
+  transition:.5s cubic-bezier(.22,.61,.36,1);
+}
+
+.portfolio-grid img:hover{
+  transform:scale(1.03);
+  filter:brightness(1.05);
 }
 
 /* ===== CV ===== */
@@ -152,15 +186,8 @@ p{
 }
 
 .cv-item{
-  margin-bottom:26px;
-  padding-left:18px;
-  border-left:1px solid transparent;
+  margin-bottom:24px;
   transition:.35s ease;
-}
-
-.cv-item:hover{
-  border-color:var(--soft);
-  padding-left:24px;
 }
 
 .cv-item strong{
@@ -182,7 +209,7 @@ p{
   display:inline-block;
   color:var(--fg);
   text-decoration:none;
-  margin-bottom:12px;
+  margin-bottom:14px;
   position:relative;
 }
 
@@ -199,9 +226,7 @@ p{
   transition:.3s;
 }
 
-.contact a:hover::after{
-  transform:scaleX(1);
-}
+.contact a:hover::after{ transform:scaleX(1); }
 
 /* ===== FOOTER ===== */
 
@@ -221,11 +246,13 @@ footer{
   <nav>
     <a href="#home" class="active">Inicio</a>
     <a href="#about">Sobre mí</a>
+    <a href="#portfolio">Portfolio</a>
     <a href="#cv">CV</a>
     <a href="#contact">Contacto</a>
   </nav>
 </header>
 
+<!-- HOME -->
 <section id="home">
   <div class="content">
     <h1 class="reveal">Industrial Design & Product Development</h1>
@@ -233,20 +260,46 @@ footer{
       Perfil técnico y creativo enfocado en producto, con base en ingeniería,
       atención al detalle y una aproximación funcional y estética al diseño.
     </p>
+
+    <div class="hero-image reveal">
+      <img src="reloj1.jpg" alt="Diseño de reloj">
+    </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <div class="content">
-    <h2 class="reveal">Sobre mí</h2>
-    <p class="reveal">
-      Soy Luis Blasco, estudiante de Ingeniería en Diseño Industrial en la UPV.
-      Mi formación técnica en electricidad me permite abordar el diseño desde
-      una perspectiva realista, constructiva y orientada a fabricación.
-    </p>
+  <div class="content about-grid">
+    <div>
+      <h2 class="reveal">Sobre mí</h2>
+      <p class="reveal">
+        Soy Luis Blasco, estudiante de Ingeniería en Diseño Industrial en la UPV.
+        Mi formación técnica en electricidad me permite abordar el diseño desde
+        una perspectiva realista, constructiva y orientada a fabricación.
+      </p>
+    </div>
+
+    <div class="about-photo reveal">
+      <img src="foto.jpg" alt="Foto de Luis">
+    </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="content">
+    <h2 class="reveal">Portfolio</h2>
+
+    <div class="portfolio-grid reveal">
+      <img src="brazo1.jpg" alt="Brazo mecánico">
+      <img src="lampara2.jpg" alt="Lámpara">
+      <img src="secador3.jpg" alt="Secador">
+      <img src="secado2.jpg" alt="Proceso de secado">
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
 <section id="cv">
   <div class="content">
     <h2 class="reveal">Currículum Vitae</h2>
@@ -256,12 +309,22 @@ footer{
 
       <div class="cv-item">
         <strong>Universidad Politécnica de Valencia (UPV)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial · 2024 – Actualidad</span>
+        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2024 – Actualidad</span>
       </div>
 
       <div class="cv-item">
         <strong>Universitat Jaume I de Castellón (UJI)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial · 2021 – 2024</span>
+        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2021 – 2024</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Escuelas San José de Valencia</strong>
+        <span>Grado Superior en Instalaciones Electrotécnicas y Automatizadas · 2019 – 2021</span>
+      </div>
+
+      <div class="cv-item">
+        <strong>Escuelas San José de Valencia</strong>
+        <span>Grado Medio en Instalaciones Eléctricas y Automáticas · 2017 – 2019</span>
       </div>
     </div>
 
@@ -275,13 +338,13 @@ footer{
 
       <div class="cv-item">
         <strong>Autrial</strong>
-        <span>Montaje y mantenimiento de cuadros eléctricos</span>
+        <span>Montaje y mantenimiento de cuadros eléctricos e instalaciones</span>
       </div>
     </div>
-
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="content contact">
     <h2 class="reveal">Contacto</h2>
@@ -300,7 +363,6 @@ footer{
 <script>
 /* Reveal on scroll */
 const reveals = document.querySelectorAll('.reveal');
-
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -308,7 +370,6 @@ const observer = new IntersectionObserver(entries=>{
     }
   });
 },{ threshold:0.15 });
-
 reveals.forEach(el=>observer.observe(el));
 
 /* Active nav */
@@ -318,7 +379,7 @@ const navLinks = document.querySelectorAll('nav a');
 window.addEventListener('scroll', ()=>{
   let current = '';
   sections.forEach(section=>{
-    const top = section.offsetTop - 240;
+    const top = section.offsetTop - 260;
     if(scrollY >= top) current = section.id;
   });
 
