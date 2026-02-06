@@ -455,15 +455,7 @@ footer{
   padding-left: 22px;
 }
 
-.cv-column::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  bottom:6px;
-  width:1px;
-  background:rgba(255,255,255,0.25);
-}
+
 
 .cv-column h3{
   font-size: 12px;
@@ -478,16 +470,7 @@ footer{
   padding-left: 14px;
 }
 
-.cv-column li::before{
-  content:"";
-  position:absolute;
-  left:-22px;
-  top:6px;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#fff;
-}
+
 
 .cv-column li strong{
   display:block;
@@ -836,15 +819,7 @@ footer{
   padding-left: 28px;
 }
 
-.cv-block::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  bottom:6px;
-  width:1px;
-  background:rgba(255,255,255,0.25);
-}
+
 
 .cv-block h3{
   font-size: 12px;
@@ -860,16 +835,7 @@ footer{
   margin-bottom: 18px;
 }
 
-.cv-block li::before{
-  content:"";
-  position:absolute;
-  left:-28px;
-  top:7px;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#fff;
-}
+
 
 .cv-block strong{
   display:block;
@@ -894,16 +860,9 @@ footer{
   margin-top: 20px;
 }
 
-/* Eliminar puntos del timeline */
-.cv-block li::before{
-  display: none;
-}
 
-/* ===== CV – AJUSTE POSICIÓN DE PUNTOS ===== */
 
-.cv-block li::before{
-  left: -30px;   /* antes estaba más cerca */
-}
+
 
 /* ===== CV – ELIMINAR PUNTO DEFINITIVAMENTE ===== */
 
@@ -936,6 +895,12 @@ footer{
   height:7px;
   border-radius:50%;
   background:#fff;
+}
+
+/* ===== CV – ELIMINAR TODOS LOS PUNTOS ===== */
+#cv *::before{
+  content: none !important;
+  display: none !important;
 }
 
   
