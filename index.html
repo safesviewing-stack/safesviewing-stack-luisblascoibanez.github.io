@@ -913,6 +913,30 @@ footer{
   display: none !important;
 }
 
+/* ===== CV – ELIMINAR LÍNEA ===== */
+
+#cv .cv-block::before{
+  display: none;
+}
+
+/* ===== CV – PUNTO ALINEADO CON TÍTULO ===== */
+
+#cv .cv-block h3{
+  position: relative;
+  padding-left: 24px;
+}
+
+#cv .cv-block h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  transform: translateY(-50%);
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+}
 
   
 </style>
