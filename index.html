@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Blasco — Diseñador Industrial</title>
+<title>Luis Blasco — Industrial Designer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
-  --bg:#0d0d0d;
-  --text:#f5f5f5;
-  --muted:#888;
-  --accent:#c6a85b;
+  --bg:#0b0b0b;
+  --text:#f1f1f1;
+  --muted:#777;
+  --accent:#c4a14d;
 }
 
 body{
@@ -24,150 +24,162 @@ body{
   overflow-x:hidden;
 }
 
-/* LOADER */
+/* Loader */
 .loader{
   position:fixed;
-  width:100%;
-  height:100%;
+  inset:0;
   background:var(--bg);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   z-index:9999;
-  transition:opacity 1s ease;
+  transition:1s ease;
 }
-.loader h1{
+.loader span{
   font-family:'Playfair Display',serif;
   font-size:2rem;
-  letter-spacing:2px;
-  animation:fadeIn 2s ease forwards;
+  letter-spacing:4px;
+  animation:letterSpacing 2s ease forwards;
 }
-@keyframes fadeIn{
-  0%{opacity:0;letter-spacing:10px;}
-  100%{opacity:1;letter-spacing:2px;}
+@keyframes letterSpacing{
+  0%{letter-spacing:20px;opacity:0;}
+  100%{letter-spacing:4px;opacity:1;}
 }
 
-/* NAV */
+/* Scroll progress bar */
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  background:var(--accent);
+  width:0%;
+  z-index:10000;
+}
+
+/* Header */
 header{
   position:fixed;
   width:100%;
-  padding:30px 8%;
+  padding:30px 10%;
   display:flex;
   justify-content:space-between;
+  transition:.4s;
   z-index:100;
-  transition:0.4s;
 }
 header.scrolled{
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.6);
 }
+
+/* Nav */
 nav a{
   margin-left:30px;
   text-decoration:none;
   color:var(--text);
-  font-size:0.9rem;
+  font-size:.85rem;
+  letter-spacing:1px;
   position:relative;
 }
 nav a::after{
   content:"";
   position:absolute;
-  bottom:-5px;
+  bottom:-6px;
   left:0;
   width:0%;
   height:1px;
   background:var(--accent);
-  transition:0.3s;
+  transition:.3s;
 }
 nav a:hover::after{width:100%;}
 
-/* SECTIONS */
+/* Sections */
 section{
   min-height:100vh;
-  padding:150px 12%;
+  padding:160px 14%;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
 
-/* HERO */
+/* Hero */
 #hero h1{
   font-family:'Playfair Display',serif;
-  font-size:4.5rem;
+  font-size:5rem;
   line-height:1.1;
+  overflow:hidden;
+}
+.word{
+  display:inline-block;
+  transform:translateY(100%);
+  opacity:0;
 }
 #hero p{
-  margin-top:25px;
-  font-size:1.2rem;
+  margin-top:30px;
   color:var(--muted);
+  font-size:1.2rem;
 }
 
-/* REVEAL ANIMATION */
+/* Reveal */
 .reveal{
   opacity:0;
-  transform:translateY(60px);
-  transition:all 1.2s cubic-bezier(.19,1,.22,1);
+  transform:translateY(80px);
+  transition:1.2s cubic-bezier(.19,1,.22,1);
 }
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
 
-/* PORTFOLIO */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:60px;
-  margin-top:80px;
-}
+/* Portfolio */
 .project{
-  overflow:hidden;
+  margin-top:80px;
 }
 .project img{
   width:100%;
-  transition:transform 1s ease;
+  transition:1.2s ease;
 }
 .project:hover img{
-  transform:scale(1.05);
+  transform:scale(1.03);
 }
 .project h3{
   margin-top:20px;
   font-weight:400;
+  font-size:1.3rem;
 }
 
-/* BUTTON */
+/* Button */
 .btn{
   margin-top:40px;
   padding:14px 35px;
   border:1px solid var(--accent);
   background:none;
   color:var(--accent);
-  font-size:0.9rem;
   cursor:pointer;
-  transition:0.4s;
+  transition:.4s;
 }
 .btn:hover{
   background:var(--accent);
-  color:#000;
+  color:black;
 }
 
-/* FOOTER */
+/* Footer */
 footer{
   text-align:center;
-  padding:60px;
+  padding:80px;
   color:var(--muted);
-  font-size:0.8rem;
+  font-size:.8rem;
 }
 </style>
 </head>
 
 <body>
 
-<div class="loader">
-  <h1>Luis Blasco</h1>
-</div>
+<div class="loader"><span>Luis Blasco</span></div>
+<div class="progress"></div>
 
 <header id="header">
-  <div><strong>LB</strong></div>
+  <div>LB</div>
   <nav>
     <a href="#about">Sobre mí</a>
     <a href="#portfolio">Portfolio</a>
@@ -177,37 +189,34 @@ footer{
 </header>
 
 <section id="hero">
-  <h1 class="reveal">Luis Blasco Ibañez Berbel</h1>
-  <p class="reveal">Diseñador Industrial · Valencia · 24 años</p>
+  <h1 id="animatedTitle">Luis Blasco Ibañez Berbel</h1>
+  <p>Industrial Designer · Valencia · 24 años</p>
 </section>
 
 <section id="about">
   <h2 class="reveal">Sobre mí</h2>
   <p class="reveal">
-    Graduado en Diseño Industrial por la UPV de Valencia.
-    Inicié mi formación en la UJI de Castellón y la complementé con una FP en Electricidad.
-    Combino visión técnica y sensibilidad estética para diseñar productos funcionales,
-    coherentes y técnicamente sólidos.
+    Graduado en Diseño Industrial por la UPV.
+    Formación inicial en la UJI y FP en Electricidad.
+    Desarrollo productos con equilibrio entre ingeniería y estética.
   </p>
 </section>
 
 <section id="portfolio">
   <h2 class="reveal">Proyectos</h2>
-  <div class="grid">
-    <div class="project reveal">
-      <img src="https://via.placeholder.com/800x500">
-      <h3>Proyecto 01</h3>
-    </div>
-    <div class="project reveal">
-      <img src="https://via.placeholder.com/800x500">
-      <h3>Proyecto 02</h3>
-    </div>
+  <div class="project reveal">
+    <img src="https://via.placeholder.com/1000x600">
+    <h3>Proyecto 01 — Diseño de Producto</h3>
+  </div>
+  <div class="project reveal">
+    <img src="https://via.placeholder.com/1000x600">
+    <h3>Proyecto 02 — Sistema Técnico</h3>
   </div>
 </section>
 
 <section id="cv">
   <h2 class="reveal">Curriculum</h2>
-  <p class="reveal">Grado en Diseño Industrial — UPV Valencia</p>
+  <p class="reveal">Grado en Diseño Industrial — UPV</p>
   <p class="reveal">Inicio en UJI Castellón</p>
   <p class="reveal">FP Electricidad</p>
 </section>
@@ -218,10 +227,11 @@ footer{
 </section>
 
 <footer>
-  © 2026 Luis Blasco Ibañez Berbel — Diseñador Industrial
+  © 2026 Luis Blasco — Industrial Designer
 </footer>
 
 <script>
+
 /* Loader */
 window.addEventListener("load",()=>{
   setTimeout(()=>{
@@ -232,21 +242,47 @@ window.addEventListener("load",()=>{
   },1500);
 });
 
-/* Scroll reveal */
-function reveal(){
-  document.querySelectorAll(".reveal").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight - 100){
-      el.classList.add("active");
-    }
-  });
-}
-window.addEventListener("scroll",reveal);
+/* Scroll progress */
+window.addEventListener("scroll",()=>{
+  let winScroll=document.documentElement.scrollTop;
+  let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.querySelector(".progress").style.width=(winScroll/height)*100+"%";
+});
 
 /* Navbar blur */
 window.addEventListener("scroll",()=>{
   document.getElementById("header")
   .classList.toggle("scrolled",window.scrollY>50);
 });
+
+/* Reveal animation */
+function reveal(){
+  document.querySelectorAll(".reveal").forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-100){
+      el.classList.add("active");
+    }
+  });
+}
+window.addEventListener("scroll",reveal);
+
+/* Word animation hero */
+const title=document.getElementById("animatedTitle");
+const words=title.innerText.split(" ");
+title.innerHTML="";
+words.forEach((word,i)=>{
+  let span=document.createElement("span");
+  span.classList.add("word");
+  span.style.transition=`1s ${i*0.15}s`;
+  span.innerText=word+" ";
+  title.appendChild(span);
+});
+setTimeout(()=>{
+  document.querySelectorAll(".word").forEach(w=>{
+    w.style.transform="translateY(0)";
+    w.style.opacity="1";
+  });
+},1800);
+
 </script>
 
 </body>
