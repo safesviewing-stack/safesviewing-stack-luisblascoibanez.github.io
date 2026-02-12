@@ -1,233 +1,253 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Luis Blasco Ibañez Berbel</title>
-  <style>
-    /* Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luis Blasco — Diseñador Industrial</title>
 
-    /* Variables de color */
-    :root {
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --accent: #e63946;
-      --gray: #555;
-      --lightgray: #f4f4f4;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(255,255,255,0.95);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      z-index: 100;
-    }
-    header nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-size: 0.9rem;
-      color: var(--text);
-      font-weight: bold;
-    }
-    header nav a:hover { color: var(--accent); }
+:root{
+  --bg:#0d0d0d;
+  --text:#f5f5f5;
+  --muted:#888;
+  --accent:#c6a85b;
+}
 
-    section {
-      padding: 6rem 2rem;
-      min-height: 100vh;
-    }
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-    /* Hero */
-    #hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    #hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-weight: 900;
-    }
-    #hero p {
-      font-size: 1.2rem;
-      color: var(--gray);
-    }
+/* LOADER */
+.loader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:opacity 1s ease;
+}
+.loader h1{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  letter-spacing:2px;
+  animation:fadeIn 2s ease forwards;
+}
+@keyframes fadeIn{
+  0%{opacity:0;letter-spacing:10px;}
+  100%{opacity:1;letter-spacing:2px;}
+}
 
-    /* Sobre mí */
-    #about .container {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    #about img {
-      max-width: 300px;
-      border-radius: 8px;
-      border: 3px solid var(--accent);
-    }
-    #about .text {
-      max-width: 600px;
-    }
+/* NAV */
+header{
+  position:fixed;
+  width:100%;
+  padding:30px 8%;
+  display:flex;
+  justify-content:space-between;
+  z-index:100;
+  transition:0.4s;
+}
+header.scrolled{
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(10px);
+}
+nav a{
+  margin-left:30px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:0.9rem;
+  position:relative;
+}
+nav a::after{
+  content:"";
+  position:absolute;
+  bottom:-5px;
+  left:0;
+  width:0%;
+  height:1px;
+  background:var(--accent);
+  transition:0.3s;
+}
+nav a:hover::after{width:100%;}
 
-    /* Portfolio */
-    #portfolio .grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-    }
-    .project-card {
-      border-radius: 6px;
-      background: var(--lightgray);
-      padding: 1rem;
-      transition: transform 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-    }
-    .project-card img {
-      width: 100%;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-    .project-card h3 {
-      margin-top: 1rem;
-    }
-    .project-card p {
-      font-size: 0.9rem;
-      color: var(--gray);
-    }
+/* SECTIONS */
+section{
+  min-height:100vh;
+  padding:150px 12%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-    /* CV */
-    #cv ul {
-      list-style: none;
-      margin-top: 1rem;
-    }
-    #cv li {
-      margin-bottom: 0.8rem;
-    }
-    #cv li span { font-weight: bold; color: var(--accent); }
+/* HERO */
+#hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:4.5rem;
+  line-height:1.1;
+}
+#hero p{
+  margin-top:25px;
+  font-size:1.2rem;
+  color:var(--muted);
+}
 
-    /* Contacto */
-    #contact form {
-      max-width: 500px;
-      margin: auto;
-      display: grid;
-      gap: 1rem;
-    }
-    #contact input, #contact textarea {
-      padding: 0.8rem;
-      border: 1px solid var(--gray);
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    #contact button {
-      padding: 0.9rem;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 4px;
-    }
+/* REVEAL ANIMATION */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:all 1.2s cubic-bezier(.19,1,.22,1);
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-      color: var(--gray);
-      font-size: 0.8rem;
-    }
-  </style>
+/* PORTFOLIO */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:60px;
+  margin-top:80px;
+}
+.project{
+  overflow:hidden;
+}
+.project img{
+  width:100%;
+  transition:transform 1s ease;
+}
+.project:hover img{
+  transform:scale(1.05);
+}
+.project h3{
+  margin-top:20px;
+  font-weight:400;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:40px;
+  padding:14px 35px;
+  border:1px solid var(--accent);
+  background:none;
+  color:var(--accent);
+  font-size:0.9rem;
+  cursor:pointer;
+  transition:0.4s;
+}
+.btn:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:60px;
+  color:var(--muted);
+  font-size:0.8rem;
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="logo"><strong>Luis Blasco</strong></div>
-    <nav>
-      <a href="#hero">Inicio</a>
-      <a href="#about">Sobre mí</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#cv">Curriculum</a>
-      <a href="#contact">Contacto</a>
-    </nav>
-  </header>
 
-  <!-- Hero -->
-  <section id="hero">
-    <h1>Hola, soy Luis Blasco</h1>
-    <p>Diseñador industrial graduado en la UPV - Valencia</p>
-  </section>
+<div class="loader">
+  <h1>Luis Blasco</h1>
+</div>
 
-  <!-- Sobre mí -->
-  <section id="about">
-    <div class="container">
-      <img src="https://via.placeholder.com/300" alt="Foto Luis">
-      <div class="text">
-        <h2>Sobre mí</h2>
-        <p>Tengo 24 años, soy de Valencia y me apasiona el diseño industrial. Combiné mis estudios con una formación en electricidad para profundizar en soluciones funcionales.</p>
-        <p>Estudié inicialmente en la UJI de Castellón y terminé mi grado en la UPV de Valencia.</p>
-      </div>
+<header id="header">
+  <div><strong>LB</strong></div>
+  <nav>
+    <a href="#about">Sobre mí</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contacto</a>
+  </nav>
+</header>
+
+<section id="hero">
+  <h1 class="reveal">Luis Blasco Ibañez Berbel</h1>
+  <p class="reveal">Diseñador Industrial · Valencia · 24 años</p>
+</section>
+
+<section id="about">
+  <h2 class="reveal">Sobre mí</h2>
+  <p class="reveal">
+    Graduado en Diseño Industrial por la UPV de Valencia.
+    Inicié mi formación en la UJI de Castellón y la complementé con una FP en Electricidad.
+    Combino visión técnica y sensibilidad estética para diseñar productos funcionales,
+    coherentes y técnicamente sólidos.
+  </p>
+</section>
+
+<section id="portfolio">
+  <h2 class="reveal">Proyectos</h2>
+  <div class="grid">
+    <div class="project reveal">
+      <img src="https://via.placeholder.com/800x500">
+      <h3>Proyecto 01</h3>
     </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <h2>Portfolio</h2>
-    <div class="grid">
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400" alt="Proyecto 1">
-        <h3>Proyecto 1</h3>
-        <p>Descripción corta del proyecto.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400" alt="Proyecto 2">
-        <h3>Proyecto 2</h3>
-        <p>Descripción corta del proyecto.</p>
-      </div>
+    <div class="project reveal">
+      <img src="https://via.placeholder.com/800x500">
+      <h3>Proyecto 02</h3>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CV -->
-  <section id="cv">
-    <h2>Curriculum</h2>
-    <ul>
-      <li><span>Educación:</span> Grado en Diseño Industrial - UPV, FP Electricidad</li>
-      <li><span>Habilidades:</span> CAD, modelado 3D, prototipado</li>
-    </ul>
-  </section>
+<section id="cv">
+  <h2 class="reveal">Curriculum</h2>
+  <p class="reveal">Grado en Diseño Industrial — UPV Valencia</p>
+  <p class="reveal">Inicio en UJI Castellón</p>
+  <p class="reveal">FP Electricidad</p>
+</section>
 
-  <!-- Contacto -->
-  <section id="contact">
-    <h2>Contacto</h2>
-    <form>
-      <input type="text" placeholder="Tu nombre">
-      <input type="email" placeholder="Tu email">
-      <textarea rows="4" placeholder="Mensaje"></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
+<section id="contact">
+  <h2 class="reveal">Contacto</h2>
+  <button class="btn reveal">Enviar mensaje</button>
+</section>
 
-  <footer>
-    © 2026 Luis Blasco Ibañez Berbel — Portfolio
-  </footer>
+<footer>
+  © 2026 Luis Blasco Ibañez Berbel — Diseñador Industrial
+</footer>
+
+<script>
+/* Loader */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.querySelector(".loader").style.opacity="0";
+    setTimeout(()=>{
+      document.querySelector(".loader").style.display="none";
+    },1000);
+  },1500);
+});
+
+/* Scroll reveal */
+function reveal(){
+  document.querySelectorAll(".reveal").forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight - 100){
+      el.classList.add("active");
+    }
+  });
+}
+window.addEventListener("scroll",reveal);
+
+/* Navbar blur */
+window.addEventListener("scroll",()=>{
+  document.getElementById("header")
+  .classList.toggle("scrolled",window.scrollY>50);
+});
+</script>
+
 </body>
 </html>
