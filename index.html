@@ -1,393 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Luis Blasco · Industrial Design</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Luis Blasco Ibañez Berbel</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    /* Variables de color */
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --accent: #e63946;
+      --gray: #555;
+      --lightgray: #f4f4f4;
+    }
 
-<style>
-:root{
-  --bg:#0b0b0d;
-  --fg:#ffffff;
-  --muted:rgba(255,255,255,.6);
-  --soft:rgba(255,255,255,.12);
-}
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter, system-ui, sans-serif;
-}
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.95);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+    header nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: bold;
+    }
+    header nav a:hover { color: var(--accent); }
 
-html{ scroll-behavior:smooth; }
+    section {
+      padding: 6rem 2rem;
+      min-height: 100vh;
+    }
 
-body{
-  background:var(--bg);
-  color:var(--fg);
-}
+    /* Hero */
+    #hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    #hero p {
+      font-size: 1.2rem;
+      color: var(--gray);
+    }
 
-/* ===== HEADER ===== */
+    /* Sobre mí */
+    #about .container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    #about img {
+      max-width: 300px;
+      border-radius: 8px;
+      border: 3px solid var(--accent);
+    }
+    #about .text {
+      max-width: 600px;
+    }
 
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:36px 48px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:10;
-  background:linear-gradient(var(--bg), transparent);
-}
+    /* Portfolio */
+    #portfolio .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    }
+    .project-card {
+      border-radius: 6px;
+      background: var(--lightgray);
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+    }
+    .project-card img {
+      width: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .project-card h3 {
+      margin-top: 1rem;
+    }
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
 
-nav{
-  display:flex;
-  gap:36px;
-  font-size:11px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
+    /* CV */
+    #cv ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    #cv li {
+      margin-bottom: 0.8rem;
+    }
+    #cv li span { font-weight: bold; color: var(--accent); }
 
-nav a{
-  color:var(--fg);
-  text-decoration:none;
-  opacity:.5;
-  position:relative;
-  transition:.3s;
-}
+    /* Contacto */
+    #contact form {
+      max-width: 500px;
+      margin: auto;
+      display: grid;
+      gap: 1rem;
+    }
+    #contact input, #contact textarea {
+      padding: 0.8rem;
+      border: 1px solid var(--gray);
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    #contact button {
+      padding: 0.9rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+    }
 
-nav a.active,
-nav a:hover{ opacity:1; }
-
-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:100%;
-  height:1px;
-  background:var(--fg);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:.3s;
-}
-
-nav a.active::after,
-nav a:hover::after{ transform:scaleX(1); }
-
-/* ===== SECTIONS ===== */
-
-section{ min-height:100vh; }
-
-.content{
-  max-width:900px;
-  margin-left:clamp(120px,16vw,240px);
-  padding-top:200px;
-}
-
-/* ===== REVEAL ===== */
-
-.reveal{
-  opacity:0;
-  transform:translateY(28px);
-  transition:1s cubic-bezier(.22,.61,.36,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-
-/* ===== TYPOGRAPHY ===== */
-
-h1{
-  font-size:48px;
-  font-weight:500;
-  max-width:14ch;
-  line-height:1.25;
-}
-
-h2{
-  font-size:28px;
-  font-weight:500;
-  margin-bottom:40px;
-}
-
-h3{
-  font-size:13px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:28px;
-}
-
-p{
-  font-size:15px;
-  line-height:1.8;
-  color:var(--muted);
-  max-width:620px;
-}
-
-/* ===== HOME ===== */
-
-.hero-image{
-  margin-top:64px;
-  max-width:520px;
-}
-
-.hero-image img{
-  width:100%;
-  border-radius:20px;
-  filter:contrast(1.05);
-}
-
-/* ===== ABOUT ===== */
-
-.about-grid{
-  display:grid;
-  grid-template-columns: 1fr auto;
-  gap:72px;
-  align-items:start;
-}
-
-.about-photo img{
-  width:260px;
-  border-radius:18px;
-  filter:grayscale(.1);
-}
-
-/* ===== PORTFOLIO ===== */
-
-.portfolio-grid{
-  margin-top:56px;
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:36px;
-}
-
-.portfolio-grid img{
-  width:100%;
-  border-radius:20px;
-  transition:.5s cubic-bezier(.22,.61,.36,1);
-}
-
-.portfolio-grid img:hover{
-  transform:scale(1.03);
-  filter:brightness(1.05);
-}
-
-/* ===== CV ===== */
-
-.cv-block{
-  margin-bottom:72px;
-}
-
-.cv-item{
-  margin-bottom:24px;
-  transition:.35s ease;
-}
-
-.cv-item strong{
-  font-weight:500;
-  font-size:15px;
-  display:block;
-  margin-bottom:4px;
-}
-
-.cv-item span{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-/* ===== CONTACT ===== */
-
-.contact a{
-  display:inline-block;
-  color:var(--fg);
-  text-decoration:none;
-  margin-bottom:14px;
-  position:relative;
-}
-
-.contact a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-  width:100%;
-  height:1px;
-  background:var(--fg);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:.3s;
-}
-
-.contact a:hover::after{ transform:scaleX(1); }
-
-/* ===== FOOTER ===== */
-
-footer{
-  padding:48px;
-  font-size:11px;
-  letter-spacing:.08em;
-  color:var(--muted);
-}
-</style>
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <div class="logo"><strong>Luis Blasco</strong></div>
+    <nav>
+      <a href="#hero">Inicio</a>
+      <a href="#about">Sobre mí</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#cv">Curriculum</a>
+      <a href="#contact">Contacto</a>
+    </nav>
+  </header>
 
-<header>
-  <div>L · B</div>
-  <nav>
-    <a href="#home" class="active">Inicio</a>
-    <a href="#about">Sobre mí</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">Contacto</a>
-  </nav>
-</header>
+  <!-- Hero -->
+  <section id="hero">
+    <h1>Hola, soy Luis Blasco</h1>
+    <p>Diseñador industrial graduado en la UPV - Valencia</p>
+  </section>
 
-<!-- HOME -->
-<section id="home">
-  <div class="content">
-    <h1 class="reveal">Industrial Design & Product Development</h1>
-    <p class="reveal">
-      Perfil técnico y creativo enfocado en producto, con base en ingeniería,
-      atención al detalle y una aproximación funcional y estética al diseño.
-    </p>
-
-    <div class="hero-image reveal">
-      <img src="reloj1.jpg" alt="Diseño de reloj">
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="content about-grid">
-    <div>
-      <h2 class="reveal">Sobre mí</h2>
-      <p class="reveal">
-        Soy Luis Blasco, estudiante de Ingeniería en Diseño Industrial en la UPV.
-        Mi formación técnica en electricidad me permite abordar el diseño desde
-        una perspectiva realista, constructiva y orientada a fabricación.
-      </p>
-    </div>
-
-    <div class="about-photo reveal">
-      <img src="foto.jpg" alt="Foto de Luis">
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="content">
-    <h2 class="reveal">Portfolio</h2>
-
-    <div class="portfolio-grid reveal">
-      <img src="brazo1.jpg" alt="Brazo mecánico">
-      <img src="lampara2.jpg" alt="Lámpara">
-      <img src="secador3.jpg" alt="Secador">
-      <img src="secado2.jpg" alt="Proceso de secado">
-    </div>
-  </div>
-</section>
-
-<!-- CV -->
-<section id="cv">
-  <div class="content">
-    <h2 class="reveal">Currículum Vitae</h2>
-
-    <div class="cv-block reveal">
-      <h3>Formación académica</h3>
-
-      <div class="cv-item">
-        <strong>Universidad Politécnica de Valencia (UPV)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2024 – Actualidad</span>
-      </div>
-
-      <div class="cv-item">
-        <strong>Universitat Jaume I de Castellón (UJI)</strong>
-        <span>Grado en Ingeniería en Diseño Industrial y Desarrollo de Productos · 2021 – 2024</span>
-      </div>
-
-      <div class="cv-item">
-        <strong>Escuelas San José de Valencia</strong>
-        <span>Grado Superior en Instalaciones Electrotécnicas y Automatizadas · 2019 – 2021</span>
-      </div>
-
-      <div class="cv-item">
-        <strong>Escuelas San José de Valencia</strong>
-        <span>Grado Medio en Instalaciones Eléctricas y Automáticas · 2017 – 2019</span>
+  <!-- Sobre mí -->
+  <section id="about">
+    <div class="container">
+      <img src="https://via.placeholder.com/300" alt="Foto Luis">
+      <div class="text">
+        <h2>Sobre mí</h2>
+        <p>Tengo 24 años, soy de Valencia y me apasiona el diseño industrial. Combiné mis estudios con una formación en electricidad para profundizar en soluciones funcionales.</p>
+        <p>Estudié inicialmente en la UJI de Castellón y terminé mi grado en la UPV de Valencia.</p>
       </div>
     </div>
+  </section>
 
-    <div class="cv-block reveal">
-      <h3>Prácticas profesionales</h3>
-
-      <div class="cv-item">
-        <strong>Elecnor</strong>
-        <span>Mantenimiento de equipos eléctricos en instalaciones universitarias</span>
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400" alt="Proyecto 1">
+        <h3>Proyecto 1</h3>
+        <p>Descripción corta del proyecto.</p>
       </div>
-
-      <div class="cv-item">
-        <strong>Autrial</strong>
-        <span>Montaje y mantenimiento de cuadros eléctricos e instalaciones</span>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400" alt="Proyecto 2">
+        <h3>Proyecto 2</h3>
+        <p>Descripción corta del proyecto.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="content contact">
-    <h2 class="reveal">Contacto</h2>
-    <p class="reveal">
-      <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a><br>
-      <a href="https://linkedin.com/in/luisblasiber" target="_blank">LinkedIn</a><br>
-      +34 630 511 806
-    </p>
-  </div>
-</section>
+  <!-- CV -->
+  <section id="cv">
+    <h2>Curriculum</h2>
+    <ul>
+      <li><span>Educación:</span> Grado en Diseño Industrial - UPV, FP Electricidad</li>
+      <li><span>Habilidades:</span> CAD, modelado 3D, prototipado</li>
+    </ul>
+  </section>
 
-<footer>
-  © 2026 · Luis Blasco · Industrial Design
-</footer>
+  <!-- Contacto -->
+  <section id="contact">
+    <h2>Contacto</h2>
+    <form>
+      <input type="text" placeholder="Tu nombre">
+      <input type="email" placeholder="Tu email">
+      <textarea rows="4" placeholder="Mensaje"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
 
-<script>
-/* Reveal on scroll */
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-},{ threshold:0.15 });
-reveals.forEach(el=>observer.observe(el));
-
-/* Active nav */
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('nav a');
-
-window.addEventListener('scroll', ()=>{
-  let current = '';
-  sections.forEach(section=>{
-    const top = section.offsetTop - 260;
-    if(scrollY >= top) current = section.id;
-  });
-
-  navLinks.forEach(link=>{
-    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-  });
-});
-</script>
-
+  <footer>
+    © 2026 Luis Blasco Ibañez Berbel — Portfolio
+  </footer>
 </body>
 </html>
