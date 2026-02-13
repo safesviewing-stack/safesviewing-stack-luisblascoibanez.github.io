@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Borbala Major · Industrial Design Engineer</title>
+<title>MB · Industrial Design Engineer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -69,10 +69,7 @@ nav li{
   transition:.3s;
 }
 
-nav li:hover{
-  color:#fff;
-}
-
+nav li:hover,
 nav li.active{
   color:#fff;
 }
@@ -90,6 +87,26 @@ nav li::after{
 
 nav li:hover::after{
   width:100%;
+}
+
+.lang{
+  display:flex;
+  gap:6px;
+}
+
+.lang button{
+  background:transparent;
+  border:1px solid #444;
+  color:#888;
+  font-size:10px;
+  padding:4px 8px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.lang button.active{
+  border-color:#3a86ff;
+  color:#fff;
 }
 
 /* ================= LAYOUT ================= */
@@ -111,35 +128,31 @@ section.active{display:block}
   padding:100px 0;
 }
 
-/* ================= HERO ================= */
-.hero{
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-}
-
-.hero-box{
-  max-width:700px;
-}
-
+/* ================= TYPO ================= */
 h1{
-  font-size:38px;
+  font-size:36px;
   font-weight:600;
   margin-bottom:20px;
-  color:#ffffff;
+  color:#fff;
 }
 
 h2{
   font-size:18px;
-  font-weight:500;
   margin-bottom:10px;
-  color:#ffffff;
+  color:#fff;
 }
 
 p{
   font-size:15px;
   line-height:1.7;
   color:#b5b5b5;
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:80vh;
+  display:flex;
+  align-items:center;
 }
 
 .hero-cta{
@@ -175,11 +188,6 @@ p{
 .secondary:hover{
   border-color:#3a86ff;
   color:#fff;
-}
-
-/* ================= ABOUT ================= */
-.about-content{
-  max-width:700px;
 }
 
 /* ================= CV ================= */
@@ -224,18 +232,6 @@ p{
   margin-bottom:15px;
 }
 
-.portfolio-content span{
-  font-size:12px;
-  color:#888;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-/* ================= CONTACT ================= */
-#contact p{
-  margin-bottom:10px;
-}
-
 /* ================= FOOTER ================= */
 footer{
   text-align:center;
@@ -263,6 +259,11 @@ footer{
         <li class="tab" data-tab="contact">Contacto</li>
       </ul>
     </nav>
+
+    <div class="lang">
+      <button id="btn-es" class="active">ES</button>
+      <button id="btn-en">EN</button>
+    </div>
   </div>
 </header>
 
@@ -270,9 +271,9 @@ footer{
 
 <section id="home" class="active">
   <div class="container hero">
-    <div class="hero-box">
-      <h1>Industrial Design Portfolio</h1>
-      <p>Diseño estratégico, técnico y funcional enfocado en productos con carácter y precisión.</p>
+    <div>
+      <h1 id="hero-title">Industrial Design Portfolio</h1>
+      <p id="hero-sub">Diseño estratégico, técnico y funcional enfocado en productos sólidos.</p>
 
       <div class="hero-cta">
         <a class="btn primary tab" data-tab="cv">Ver CV</a>
@@ -284,62 +285,40 @@ footer{
 
 <section id="about">
   <div class="container spaced">
-    <h1>Sobre mí</h1>
-    <div class="about-content">
-      <p>
-        Diseñador industrial con enfoque técnico y estructural. 
-        Combino ingeniería, procesos de fabricación y pensamiento estratégico 
-        para desarrollar productos funcionales, eficientes y estéticamente sólidos.
-      </p>
-    </div>
+    <h1 id="about-title">Sobre mí</h1>
+    <p id="about-text">
+      Diseñador industrial con enfoque técnico y estructural. Combino ingeniería, procesos de fabricación y pensamiento estratégico para desarrollar productos funcionales y eficientes.
+    </p>
   </div>
 </section>
 
 <section id="cv">
   <div class="container spaced">
-    <h1>Currículum</h1>
+    <h1 id="cv-title">Currículum</h1>
 
     <div class="cv-block">
-      <h2>Grado en Ingeniería de Diseño Industrial</h2>
-      <p>Formación interdisciplinar en diseño de producto y procesos industriales.</p>
+      <h2 id="cv-edu-title">Grado en Ingeniería de Diseño Industrial</h2>
+      <p id="cv-edu-text">Formación interdisciplinar en diseño de producto y procesos industriales.</p>
     </div>
 
     <div class="cv-block">
-      <h2>Experiencia en empresa Sixay</h2>
-      <p>Desarrollo de mobiliario, optimización técnica y colaboración multidisciplinar.</p>
+      <h2 id="cv-exp-title">Experiencia profesional</h2>
+      <p id="cv-exp-text">Desarrollo de mobiliario y optimización técnica en entorno profesional.</p>
     </div>
 
-    <a href="curriculum.pdf" class="cv-download-btn">Descargar CV</a>
+    <a href="curriculum.pdf" class="cv-download-btn" id="cv-download">Descargar CV</a>
   </div>
 </section>
 
 <section id="portfolio">
   <div class="container spaced">
-    <h1>Portfolio</h1>
-
-    <div class="portfolio-grid">
-      <div class="portfolio-item">
-        <img src="profile5.jpg">
-        <div class="portfolio-content">
-          <h2>BAORI</h2>
-          <span>Espacio colectivo</span>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <img src="profile6.jpg">
-        <div class="portfolio-content">
-          <h2>LUMORA</h2>
-          <span>Iluminación</span>
-        </div>
-      </div>
-    </div>
+    <h1 id="portfolio-title">Portfolio</h1>
   </div>
 </section>
 
 <section id="contact">
   <div class="container spaced">
-    <h1>Contacto</h1>
+    <h1 id="contact-title">Contacto</h1>
     <p>📧 majorbori@gmail.com</p>
     <p>📞 +36 30 820 3716</p>
   </div>
@@ -347,11 +326,13 @@ footer{
 
 </main>
 
-<footer>
+<footer id="footer-text">
 © 2026 · Industrial Design Engineer
 </footer>
 
 <script>
+
+/* ================= NAVIGATION ================= */
 document.querySelectorAll(".tab").forEach(tab=>{
   tab.addEventListener("click",()=>{
     document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
@@ -359,213 +340,51 @@ document.querySelectorAll(".tab").forEach(tab=>{
 
     document.querySelectorAll("nav li").forEach(li=>li.classList.remove("active"));
     if(tab.tagName==="LI") tab.classList.add("active");
-  });
-});
-</script>
 
-
-<script>
-
-/* =========================================
-   NAVEGACIÓN ENTRE SECCIONES
-========================================= */
-
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-
-    // 1. Cambiar sección
-    document.querySelectorAll("section").forEach(section =>
-      section.classList.remove("active")
-    );
-
-    const targetSection = document.getElementById(tab.dataset.tab);
-    if (targetSection) {
-      targetSection.classList.add("active");
+    if(tab.dataset.tab==="cv" && tab.classList.contains("primary")){
+      setTimeout(()=>{
+        document.getElementById("cv-download").scrollIntoView({behavior:"smooth"});
+      },400);
     }
-
-    // 2. Marcar activo en menú
-    document.querySelectorAll("nav li").forEach(li =>
-      li.classList.remove("active")
-    );
-
-    if (tab.tagName === "LI") {
-      tab.classList.add("active");
-    }
-
-    // 3. Scroll automático al botón del CV
-    if (tab.dataset.tab === "cv" && tab.classList.contains("primary")) {
-      setTimeout(() => {
-        const downloadBtn = document.querySelector(".cv-download-btn");
-        if (downloadBtn) {
-          downloadBtn.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-        }
-      }, 600);
-    }
-
   });
 });
 
-
-/* =========================================
-   ACTIVAR SECCIÓN SI HAY HASH (#portfolio)
-========================================= */
-
-(function () {
-  const hash = window.location.hash.replace("#", "");
-
-  if (hash) {
-    document.querySelectorAll("section").forEach(sec =>
-      sec.classList.remove("active")
-    );
-
-    const target = document.getElementById(hash);
-    if (target) {
-      target.classList.add("active");
-
-      document.querySelectorAll("nav li").forEach(li =>
-        li.classList.remove("active")
-      );
-
-      const navItem = document.querySelector(`[data-tab="${hash}"]`);
-      if (navItem) navItem.classList.add("active");
-
-      history.replaceState(null, "", "index.html");
-    }
-  }
-})();
-
-
-/* =========================================
-   SISTEMA MULTIIDIOMA
-========================================= */
-
+/* ================= MULTILANGUAGE ================= */
 const content = {
-  es: {
-    navHome: "Inicio",
-    navAbout: "Sobre mí",
-    navCv: "Currículum",
-    navPortfolio: "Portfolio",
-    navContact: "Contacto",
-
-    heroTitle: "Industrial Design Portfolio",
-    heroSub: "Diseño estratégico, técnico y funcional enfocado en productos con carácter y precisión.",
-    heroBtnCv: "Ver CV",
-    heroBtnContact: "Contactar",
-
-    aboutTitle: "Sobre mí",
-    aboutText: "Diseñador industrial con enfoque técnico y estructural. Combino ingeniería, procesos de fabricación y pensamiento estratégico para desarrollar productos funcionales, eficientes y estéticamente sólidos.",
-
-    cvTitle: "Currículum",
-    cvEdu: "Grado en Ingeniería de Diseño Industrial",
-    cvEduText: "Formación interdisciplinar en diseño de producto y procesos industriales.",
-    cvExp: "Experiencia en empresa Sixay",
-    cvExpText: "Desarrollo de mobiliario, optimización técnica y colaboración multidisciplinar.",
-    cvDownload: "Descargar CV",
-
-    portfolioTitle: "Portfolio",
-    contactTitle: "Contacto",
-    footer: "© 2026 · Industrial Design Engineer"
+  es:{
+    nav:["Inicio","Sobre mí","Currículum","Portfolio","Contacto"],
+    heroTitle:"Industrial Design Portfolio",
+    heroSub:"Diseño estratégico, técnico y funcional enfocado en productos sólidos.",
+    about:"Sobre mí",
+    contact:"Contacto"
   },
-
-  en: {
-    navHome: "Home",
-    navAbout: "About",
-    navCv: "Curriculum",
-    navPortfolio: "Portfolio",
-    navContact: "Contact",
-
-    heroTitle: "Industrial Design Portfolio",
-    heroSub: "Strategic, technical and functional design focused on strong and precise products.",
-    heroBtnCv: "View CV",
-    heroBtnContact: "Contact",
-
-    aboutTitle: "About",
-    aboutText: "Industrial designer with a technical and structural mindset. I combine engineering, manufacturing processes and strategic thinking to develop functional and solid products.",
-
-    cvTitle: "Curriculum Vitae",
-    cvEdu: "Bachelor in Industrial Design Engineering",
-    cvEduText: "Interdisciplinary training in product design and industrial processes.",
-    cvExp: "Professional experience at Sixay",
-    cvExpText: "Furniture development, technical optimization and multidisciplinary collaboration.",
-    cvDownload: "Download CV",
-
-    portfolioTitle: "Portfolio",
-    contactTitle: "Contact",
-    footer: "© 2026 · Industrial Design Engineer"
+  en:{
+    nav:["Home","About","Curriculum","Portfolio","Contact"],
+    heroTitle:"Industrial Design Portfolio",
+    heroSub:"Strategic and technical design focused on solid products.",
+    about:"About",
+    contact:"Contact"
   }
 };
 
-
-/* =========================================
-   FUNCIÓN CAMBIO DE IDIOMA
-========================================= */
-
-function setLang(lang) {
-
+function setLang(lang){
   const c = content[lang];
 
-  // NAV
-  document.querySelector('[data-tab="home"]').innerText = c.navHome;
-  document.querySelector('[data-tab="about"]').innerText = c.navAbout;
-  document.querySelector('[data-tab="cv"]').innerText = c.navCv;
-  document.querySelector('[data-tab="portfolio"]').innerText = c.navPortfolio;
-  document.querySelector('[data-tab="contact"]').innerText = c.navContact;
+  document.querySelectorAll("nav li").forEach((li,i)=>li.innerText=c.nav[i]);
+  document.getElementById("hero-title").innerText=c.heroTitle;
+  document.getElementById("hero-sub").innerText=c.heroSub;
+  document.getElementById("about-title").innerText=c.about;
+  document.getElementById("contact-title").innerText=c.contact;
 
-  // HERO
-  document.querySelector("#home h1").innerText = c.heroTitle;
-  document.querySelector("#home p").innerText = c.heroSub;
-  document.querySelector(".primary").innerText = c.heroBtnCv;
-  document.querySelector(".secondary").innerText = c.heroBtnContact;
-
-  // ABOUT
-  document.querySelector("#about h1").innerText = c.aboutTitle;
-  document.querySelector("#about p").innerText = c.aboutText;
-
-  // CV
-  document.querySelector("#cv h1").innerText = c.cvTitle;
-
-  const cvBlocks = document.querySelectorAll(".cv-block");
-  cvBlocks[0].querySelector("h2").innerText = c.cvEdu;
-  cvBlocks[0].querySelector("p").innerText = c.cvEduText;
-  cvBlocks[1].querySelector("h2").innerText = c.cvExp;
-  cvBlocks[1].querySelector("p").innerText = c.cvExpText;
-
-  document.querySelector(".cv-download-btn").innerText = c.cvDownload;
-
-  // PORTFOLIO
-  document.querySelector("#portfolio h1").innerText = c.portfolioTitle;
-
-  // CONTACT
-  document.querySelector("#contact h1").innerText = c.contactTitle;
-
-  // FOOTER
-  document.querySelector("footer").innerText = c.footer;
-
-  // BOTONES ACTIVOS
-  document.getElementById("btn-es").classList.toggle("active", lang === "es");
-  document.getElementById("btn-en").classList.toggle("active", lang === "en");
+  document.getElementById("btn-es").classList.toggle("active",lang==="es");
+  document.getElementById("btn-en").classList.toggle("active",lang==="en");
 }
-
-
-/* =========================================
-   INICIALIZACIÓN
-========================================= */
 
 setLang("es");
-
-const btnEs = document.getElementById("btn-es");
-const btnEn = document.getElementById("btn-en");
-
-if (btnEs && btnEn) {
-  btnEs.addEventListener("click", () => setLang("es"));
-  btnEn.addEventListener("click", () => setLang("en"));
-}
+document.getElementById("btn-es").onclick=()=>setLang("es");
+document.getElementById("btn-en").onclick=()=>setLang("en");
 
 </script>
 
-  
 </body>
 </html>
