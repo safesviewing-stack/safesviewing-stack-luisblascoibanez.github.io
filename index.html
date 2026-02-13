@@ -363,5 +363,209 @@ document.querySelectorAll(".tab").forEach(tab=>{
 });
 </script>
 
+
+<script>
+
+/* =========================================
+   NAVEGACIÓN ENTRE SECCIONES
+========================================= */
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+
+    // 1. Cambiar sección
+    document.querySelectorAll("section").forEach(section =>
+      section.classList.remove("active")
+    );
+
+    const targetSection = document.getElementById(tab.dataset.tab);
+    if (targetSection) {
+      targetSection.classList.add("active");
+    }
+
+    // 2. Marcar activo en menú
+    document.querySelectorAll("nav li").forEach(li =>
+      li.classList.remove("active")
+    );
+
+    if (tab.tagName === "LI") {
+      tab.classList.add("active");
+    }
+
+    // 3. Scroll automático al botón del CV
+    if (tab.dataset.tab === "cv" && tab.classList.contains("primary")) {
+      setTimeout(() => {
+        const downloadBtn = document.querySelector(".cv-download-btn");
+        if (downloadBtn) {
+          downloadBtn.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }
+      }, 600);
+    }
+
+  });
+});
+
+
+/* =========================================
+   ACTIVAR SECCIÓN SI HAY HASH (#portfolio)
+========================================= */
+
+(function () {
+  const hash = window.location.hash.replace("#", "");
+
+  if (hash) {
+    document.querySelectorAll("section").forEach(sec =>
+      sec.classList.remove("active")
+    );
+
+    const target = document.getElementById(hash);
+    if (target) {
+      target.classList.add("active");
+
+      document.querySelectorAll("nav li").forEach(li =>
+        li.classList.remove("active")
+      );
+
+      const navItem = document.querySelector(`[data-tab="${hash}"]`);
+      if (navItem) navItem.classList.add("active");
+
+      history.replaceState(null, "", "index.html");
+    }
+  }
+})();
+
+
+/* =========================================
+   SISTEMA MULTIIDIOMA
+========================================= */
+
+const content = {
+  es: {
+    navHome: "Inicio",
+    navAbout: "Sobre mí",
+    navCv: "Currículum",
+    navPortfolio: "Portfolio",
+    navContact: "Contacto",
+
+    heroTitle: "Industrial Design Portfolio",
+    heroSub: "Diseño estratégico, técnico y funcional enfocado en productos con carácter y precisión.",
+    heroBtnCv: "Ver CV",
+    heroBtnContact: "Contactar",
+
+    aboutTitle: "Sobre mí",
+    aboutText: "Diseñador industrial con enfoque técnico y estructural. Combino ingeniería, procesos de fabricación y pensamiento estratégico para desarrollar productos funcionales, eficientes y estéticamente sólidos.",
+
+    cvTitle: "Currículum",
+    cvEdu: "Grado en Ingeniería de Diseño Industrial",
+    cvEduText: "Formación interdisciplinar en diseño de producto y procesos industriales.",
+    cvExp: "Experiencia en empresa Sixay",
+    cvExpText: "Desarrollo de mobiliario, optimización técnica y colaboración multidisciplinar.",
+    cvDownload: "Descargar CV",
+
+    portfolioTitle: "Portfolio",
+    contactTitle: "Contacto",
+    footer: "© 2026 · Industrial Design Engineer"
+  },
+
+  en: {
+    navHome: "Home",
+    navAbout: "About",
+    navCv: "Curriculum",
+    navPortfolio: "Portfolio",
+    navContact: "Contact",
+
+    heroTitle: "Industrial Design Portfolio",
+    heroSub: "Strategic, technical and functional design focused on strong and precise products.",
+    heroBtnCv: "View CV",
+    heroBtnContact: "Contact",
+
+    aboutTitle: "About",
+    aboutText: "Industrial designer with a technical and structural mindset. I combine engineering, manufacturing processes and strategic thinking to develop functional and solid products.",
+
+    cvTitle: "Curriculum Vitae",
+    cvEdu: "Bachelor in Industrial Design Engineering",
+    cvEduText: "Interdisciplinary training in product design and industrial processes.",
+    cvExp: "Professional experience at Sixay",
+    cvExpText: "Furniture development, technical optimization and multidisciplinary collaboration.",
+    cvDownload: "Download CV",
+
+    portfolioTitle: "Portfolio",
+    contactTitle: "Contact",
+    footer: "© 2026 · Industrial Design Engineer"
+  }
+};
+
+
+/* =========================================
+   FUNCIÓN CAMBIO DE IDIOMA
+========================================= */
+
+function setLang(lang) {
+
+  const c = content[lang];
+
+  // NAV
+  document.querySelector('[data-tab="home"]').innerText = c.navHome;
+  document.querySelector('[data-tab="about"]').innerText = c.navAbout;
+  document.querySelector('[data-tab="cv"]').innerText = c.navCv;
+  document.querySelector('[data-tab="portfolio"]').innerText = c.navPortfolio;
+  document.querySelector('[data-tab="contact"]').innerText = c.navContact;
+
+  // HERO
+  document.querySelector("#home h1").innerText = c.heroTitle;
+  document.querySelector("#home p").innerText = c.heroSub;
+  document.querySelector(".primary").innerText = c.heroBtnCv;
+  document.querySelector(".secondary").innerText = c.heroBtnContact;
+
+  // ABOUT
+  document.querySelector("#about h1").innerText = c.aboutTitle;
+  document.querySelector("#about p").innerText = c.aboutText;
+
+  // CV
+  document.querySelector("#cv h1").innerText = c.cvTitle;
+
+  const cvBlocks = document.querySelectorAll(".cv-block");
+  cvBlocks[0].querySelector("h2").innerText = c.cvEdu;
+  cvBlocks[0].querySelector("p").innerText = c.cvEduText;
+  cvBlocks[1].querySelector("h2").innerText = c.cvExp;
+  cvBlocks[1].querySelector("p").innerText = c.cvExpText;
+
+  document.querySelector(".cv-download-btn").innerText = c.cvDownload;
+
+  // PORTFOLIO
+  document.querySelector("#portfolio h1").innerText = c.portfolioTitle;
+
+  // CONTACT
+  document.querySelector("#contact h1").innerText = c.contactTitle;
+
+  // FOOTER
+  document.querySelector("footer").innerText = c.footer;
+
+  // BOTONES ACTIVOS
+  document.getElementById("btn-es").classList.toggle("active", lang === "es");
+  document.getElementById("btn-en").classList.toggle("active", lang === "en");
+}
+
+
+/* =========================================
+   INICIALIZACIÓN
+========================================= */
+
+setLang("es");
+
+const btnEs = document.getElementById("btn-es");
+const btnEn = document.getElementById("btn-en");
+
+if (btnEs && btnEn) {
+  btnEs.addEventListener("click", () => setLang("es"));
+  btnEn.addEventListener("click", () => setLang("en"));
+}
+
+</script>
+
+  
 </body>
 </html>
