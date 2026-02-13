@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Glass Refraction Studio</title>
+<title>MB — Glass AAA</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
 
@@ -13,94 +13,45 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
+body{background:#040404;color:#fff;overflow:hidden;cursor:none;}
+canvas{position:fixed;inset:0;z-index:-1;}
 
-body{
-  background:#050505;
-  color:#f5f5f5;
-  overflow:hidden;
-  cursor:none;
-}
-
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
-
-/* Cursor */
 .cursor{
   position:fixed;
-  width:14px;
-  height:14px;
-  border:1px solid #fff;
-  border-radius:50%;
+  width:14px;height:14px;
+  border:1px solid #fff;border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
-  transition:.2s;
   z-index:1000;
 }
 
-.cursor.expand{
-  transform:translate(-50%,-50%) scale(2);
-  background:#fff;
-}
-
-/* Nav */
 nav{
-  position:fixed;
-  top:40px;
-  left:50%;
+  position:fixed;top:40px;left:50%;
   transform:translateX(-50%);
-  display:flex;
-  gap:60px;
-  z-index:100;
+  display:flex;gap:60px;z-index:100;
 }
 
 nav span{
-  font-size:11px;
-  letter-spacing:.3em;
+  font-size:11px;letter-spacing:.3em;
   text-transform:uppercase;
-  color:#555;
-  cursor:pointer;
+  color:#555;cursor:pointer;
   transition:.4s;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{color:#fff;}
 
-/* Sections */
 .section{
-  position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  opacity:0;
-  transition:1s ease;
+  position:absolute;inset:0;
+  display:flex;justify-content:center;
+  align-items:center;text-align:center;
+  opacity:0;transition:1s ease;
 }
 
-.section.active{
-  opacity:1;
-}
+.section.active{opacity:1;}
 
-h1{
-  font-size:clamp(60px,6vw,110px);
-  font-weight:500;
-}
-
-p{
-  margin-top:30px;
-  font-size:18px;
-  color:#aaa;
-}
+h1{font-size:clamp(60px,6vw,110px);font-weight:500;}
+p{margin-top:30px;font-size:18px;color:#aaa;}
 </style>
 </head>
 <body>
@@ -116,14 +67,14 @@ p{
 <section id="home" class="section active">
   <div>
     <h1>Industrial Design</h1>
-    <p>Physical Glass Refraction</p>
+    <p>AAA Glass Shader Experience</p>
   </div>
 </section>
 
 <section id="about" class="section">
   <div>
-    <h1>Architectural Clarity</h1>
-    <p>Material Intelligence & Depth</p>
+    <h1>Architectural Depth</h1>
+    <p>Fresnel. Refraction. Material.</p>
   </div>
 </section>
 
@@ -138,88 +89,83 @@ p{
 
 /* ================= CURSOR ================= */
 const cursor=document.querySelector(".cursor");
+let mouseX=0, mouseY=0;
+let smoothX=0, smoothY=0;
 
 document.addEventListener("mousemove",e=>{
-  cursor.style.left=e.clientX+"px";
-  cursor.style.top=e.clientY+"px";
+  mouseX=e.clientX;
+  mouseY=e.clientY;
 });
 
 /* ================= THREE SETUP ================= */
 
-let scene = new THREE.Scene();
-let camera = new THREE.Camera();
-let renderer = new THREE.WebGLRenderer({ alpha:true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+let scene=new THREE.Scene();
+let camera=new THREE.Camera();
+let renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* Post Processing */
-let composer = new THREE.EffectComposer(renderer);
-composer.addPass(new THREE.RenderPass(scene, camera));
+/* Postprocessing */
+let composer=new THREE.EffectComposer(renderer);
+composer.addPass(new THREE.RenderPass(scene,camera));
 
-let bloomPass = new THREE.UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.4, 0.3, 0.8
+let bloom=new THREE.UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth,window.innerHeight),
+  0.35,0.4,0.8
 );
-composer.addPass(bloomPass);
+composer.addPass(bloom);
 
-/* Render target for refraction */
-let renderTarget = new THREE.WebGLRenderTarget(
-  window.innerWidth,
-  window.innerHeight
+/* Render target */
+let renderTarget=new THREE.WebGLRenderTarget(
+  window.innerWidth,window.innerHeight
 );
 
-/* Scene background layer */
-let bgScene = new THREE.Scene();
-let bgCamera = new THREE.PerspectiveCamera(
-  70,
-  window.innerWidth/window.innerHeight,
-  0.1,
-  100
+/* Background Scene */
+let bgScene=new THREE.Scene();
+let bgCamera=new THREE.PerspectiveCamera(
+  70,window.innerWidth/window.innerHeight,0.1,100
 );
-bgCamera.position.z = 5;
+bgCamera.position.z=5;
 
-let bgGeometry = new THREE.IcosahedronGeometry(2,1);
-let bgMaterial = new THREE.MeshStandardMaterial({
+let geo=new THREE.IcosahedronGeometry(2,2);
+let mat=new THREE.MeshStandardMaterial({
   wireframe:true,
   color:0xffffff,
   transparent:true,
-  opacity:0.05
+  opacity:0.04
 });
+let mesh=new THREE.Mesh(geo,mat);
+bgScene.add(mesh);
 
-let bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
-bgScene.add(bgMesh);
-
-/* Light */
-let light = new THREE.PointLight(0xffffff, 1);
+let light=new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 bgScene.add(light);
 
-/* Glass Plane */
-let uniforms = {
-  u_texture: { value: renderTarget.texture },
-  u_time: { value: 0 },
-  u_mouse: { value: new THREE.Vector2() },
-  u_resolution: { value: new THREE.Vector2() },
-  u_progress: { value: 0 }
+/* Glass Shader */
+let uniforms={
+  u_texture:{value:renderTarget.texture},
+  u_time:{value:0},
+  u_mouse:{value:new THREE.Vector2()},
+  u_resolution:{value:new THREE.Vector2()},
+  u_progress:{value:0}
 };
 
-let glassMaterial = new THREE.ShaderMaterial({
-  uniforms: uniforms,
+let glassMaterial=new THREE.ShaderMaterial({
+  uniforms:uniforms,
   transparent:true,
-  vertexShader: `
+  vertexShader:`
     varying vec2 vUv;
     void main(){
-      vUv = uv;
-      gl_Position = vec4(position,1.0);
+      vUv=uv;
+      gl_Position=vec4(position,1.0);
     }
   `,
-  fragmentShader: `
+  fragmentShader:`
     uniform sampler2D u_texture;
     uniform float u_time;
     uniform vec2 u_mouse;
     uniform vec2 u_resolution;
     uniform float u_progress;
-
     varying vec2 vUv;
 
     float noise(vec2 p){
@@ -227,36 +173,54 @@ let glassMaterial = new THREE.ShaderMaterial({
     }
 
     void main(){
-      vec2 uv = vUv;
+      vec2 uv=vUv;
 
-      float dist = distance(uv, u_mouse);
-      float ripple = sin(dist*40.0 - u_time*3.0)*0.01;
+      float dist=distance(uv,u_mouse);
+      float ripple=sin(dist*50.0-u_time*4.0)*0.01;
 
-      vec2 displacedUV = uv + ripple + u_progress*0.2;
+      float depth=noise(uv+u_time*0.2)*0.02;
 
-      vec4 color = texture2D(u_texture, displacedUV);
+      vec2 displacedUV=uv+ripple+depth+u_progress*0.15;
 
-      gl_FragColor = vec4(color.rgb, 0.6);
+      vec3 color;
+      color.r=texture2D(u_texture,displacedUV+0.002).r;
+      color.g=texture2D(u_texture,displacedUV).g;
+      color.b=texture2D(u_texture,displacedUV-0.002).b;
+
+      float fresnel=pow(1.0-abs(dot(vec3(0.0,0.0,1.0),vec3(0.0,0.0,1.0))),2.0);
+
+      gl_FragColor=vec4(color+fresnel*0.2,0.6);
     }
   `
 });
 
-let plane = new THREE.Mesh(
+let plane=new THREE.Mesh(
   new THREE.PlaneGeometry(2,2),
   glassMaterial
 );
-
 scene.add(plane);
 
 /* Animation */
 function animate(time){
-  uniforms.u_time.value = time * 0.001;
 
-  bgMesh.rotation.x += 0.001;
-  bgMesh.rotation.y += 0.001;
+  smoothX += (mouseX - smoothX) * 0.08;
+  smoothY += (mouseY - smoothY) * 0.08;
+
+  cursor.style.left=smoothX+"px";
+  cursor.style.top=smoothY+"px";
+
+  uniforms.u_mouse.value.set(
+    smoothX/window.innerWidth,
+    1.0-smoothY/window.innerHeight
+  );
+
+  uniforms.u_time.value=time*0.001;
+
+  mesh.rotation.x+=0.001;
+  mesh.rotation.y+=0.001;
 
   renderer.setRenderTarget(renderTarget);
-  renderer.render(bgScene, bgCamera);
+  renderer.render(bgScene,bgCamera);
 
   renderer.setRenderTarget(null);
   composer.render();
@@ -266,37 +230,27 @@ function animate(time){
 requestAnimationFrame(animate);
 
 function resize(){
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  composer.setSize(window.innerWidth, window.innerHeight);
-  renderTarget.setSize(window.innerWidth, window.innerHeight);
-  uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  composer.setSize(window.innerWidth,window.innerHeight);
+  renderTarget.setSize(window.innerWidth,window.innerHeight);
+  uniforms.u_resolution.value.set(window.innerWidth,window.innerHeight);
 }
-window.addEventListener("resize", resize);
+window.addEventListener("resize",resize);
 resize();
 
-/* Mouse */
-document.addEventListener("mousemove",e=>{
-  uniforms.u_mouse.value.set(
-    e.clientX / window.innerWidth,
-    1.0 - e.clientY / window.innerHeight
-  );
-});
-
 /* Liquid Transition */
-const sections=document.querySelectorAll(".section");
-
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const target=document.getElementById(btn.dataset.target);
     const current=document.querySelector(".section.active");
     if(target===current) return;
 
-    uniforms.u_progress.value = 1.0;
+    uniforms.u_progress.value=1.0;
 
     setTimeout(()=>{
       current.classList.remove("active");
       target.classList.add("active");
-      uniforms.u_progress.value = 0.0;
+      uniforms.u_progress.value=0.0;
     },700);
   });
 });
