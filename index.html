@@ -18,35 +18,48 @@
 }
 
 body{
-  background:#111;
-  color:#d8d8d8;
-  overflow-x:hidden;
-  position:relative;
+  background:#0d0d0d;
+  color:#eaeaea;
+  overflow:hidden;
+  cursor:none;
 }
 
-/* ===== Cement Texture ===== */
+/* ===== Film Grain ===== */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:3px 3px;
-  opacity:.25;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.05;
   pointer-events:none;
-  z-index:-1;
+  z-index:999;
 }
 
-/* ================= LOADER ================= */
+/* ================= CUSTOM CURSOR ================= */
+.cursor{
+  position:fixed;
+  width:12px;
+  height:12px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:transform .15s ease, background .3s ease;
+  z-index:1000;
+}
+
+.cursor.expand{
+  transform:translate(-50%,-50%) scale(2);
+  background:#fff;
+}
+
+/* ================= LOADER FADE ================= */
 .loader{
   position:fixed;
   inset:0;
-  background:#111;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  transition:opacity .8s ease;
+  background:#000;
+  z-index:2000;
+  transition:opacity 1s ease;
 }
 
 .loader.hidden{
@@ -54,289 +67,178 @@ body::before{
   pointer-events:none;
 }
 
-.loader-line{
-  width:120px;
-  height:1px;
-  background:#fff;
-  animation:loading 1.4s ease-in-out infinite;
-}
-
-@keyframes loading{
-  0%{transform:scaleX(0);}
-  50%{transform:scaleX(1);}
-  100%{transform:scaleX(0);}
-}
-
 /* ================= HEADER ================= */
 header{
   position:fixed;
-  top:0;
   width:100%;
-  height:70px;
-  background:rgba(17,17,17,0.95);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid #1f1f1f;
+  top:0;
+  height:80px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   z-index:100;
 }
 
-.nav{
-  max-width:1300px;
-  width:90%;
-  height:100%;
-  margin:auto;
+nav{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  gap:60px;
 }
 
-.logo{
-  font-weight:500;
-  font-size:13px;
-  letter-spacing:.2em;
-  color:#fff;
-}
-
-nav ul{
-  display:flex;
-  gap:50px;
-  list-style:none;
-}
-
-nav li{
-  font-size:10px;
-  letter-spacing:.2em;
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
   text-transform:uppercase;
-  color:#666;
+  color:#555;
   cursor:pointer;
   transition:.4s;
 }
 
-nav li:hover,
-nav li.active{
+nav span:hover{
   color:#fff;
 }
 
-/* ================= SECTIONS ================= */
-main{
-  padding-top:70px;
-}
-
-section{
-  min-height:100vh;
+/* ================= FULLSCREEN SECTIONS ================= */
+.section{
+  height:100vh;
+  width:100%;
   display:flex;
+  justify-content:center;
   align-items:center;
+  text-align:center;
+  position:absolute;
+  inset:0;
   opacity:0;
-  transform:translateY(40px);
-  transition:opacity 1s ease, transform 1s ease;
+  transition:opacity 1.2s ease;
 }
 
-section.active{
+.section.active{
   opacity:1;
-  transform:translateY(0);
-}
-
-.container{
-  width:90%;
-  max-width:1300px;
-  margin:auto;
-}
-
-/* ================= JAPANESE TEXT ANIMATION ================= */
-.line{
-  overflow:hidden;
-}
-
-.line span{
-  display:inline-block;
-  transform:translateY(100%);
-  opacity:0;
-  animation:reveal 1.2s ease forwards;
-}
-
-.line:nth-child(1) span{animation-delay:.2s;}
-.line:nth-child(2) span{animation-delay:.5s;}
-.line:nth-child(3) span{animation-delay:.8s;}
-
-@keyframes reveal{
-  to{
-    transform:translateY(0);
-    opacity:1;
-  }
+  z-index:1;
 }
 
 /* ================= TYPO ================= */
 h1{
-  font-size:52px;
+  font-size:64px;
   font-weight:500;
-  line-height:1.1;
-  color:#fff;
+  letter-spacing:-0.02em;
 }
 
 p{
-  font-size:16px;
-  line-height:1.9;
-  color:#9a9a9a;
+  font-size:18px;
+  color:#aaa;
   margin-top:30px;
-  max-width:600px;
+  max-width:700px;
 }
 
-/* ================= SWISS GRID ================= */
-.grid{
-  display:grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap:120px;
-}
-
-.grid-reverse{
-  grid-template-columns:1.4fr 1fr;
-}
-
-/* ================= BUTTON ================= */
-.btn{
-  margin-top:50px;
-  display:inline-block;
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#fff;
-  border-bottom:1px solid #fff;
-  padding-bottom:5px;
-  text-decoration:none;
-  transition:.4s;
-}
-
-.btn:hover{
-  opacity:.6;
-}
-
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  padding:60px 0;
-  font-size:10px;
-  letter-spacing:.2em;
-  color:#555;
-  border-top:1px solid #1f1f1f;
-}
-
-/* ================= SCROLL REVEAL ================= */
-.reveal{
+/* ================= FADE TO BLACK ================= */
+.fade{
+  position:fixed;
+  inset:0;
+  background:#000;
+  pointer-events:none;
   opacity:0;
-  transform:translateY(50px);
-  transition:1.2s ease;
+  transition:opacity .6s ease;
+  z-index:1500;
 }
 
-.reveal.visible{
+.fade.active{
   opacity:1;
-  transform:translateY(0);
 }
 
 </style>
 </head>
 <body>
 
-<div class="loader">
-  <div class="loader-line"></div>
-</div>
+<div class="loader"></div>
+<div class="fade"></div>
+<div class="cursor"></div>
 
 <header>
-  <div class="nav">
-    <div class="logo">MB · INDUSTRIAL DESIGN</div>
-    <nav>
-      <ul>
-        <li class="tab active" data-tab="home">Inicio</li>
-        <li class="tab" data-tab="about">Sobre mí</li>
-        <li class="tab" data-tab="contact">Contacto</li>
-      </ul>
-    </nav>
-  </div>
+  <nav>
+    <span data-target="home">Home</span>
+    <span data-target="about">About</span>
+    <span data-target="contact">Contact</span>
+  </nav>
 </header>
 
-<main>
+<!-- SECTIONS -->
 
-<!-- HOME -->
-<section id="home" class="active">
-  <div class="container grid">
-    <div>
-      <div class="line"><h1><span>Industrial</span></h1></div>
-      <div class="line"><h1><span>Design</span></h1></div>
-      <div class="line"><h1><span>Portfolio</span></h1></div>
-    </div>
-
-    <div class="reveal">
-      <p>
-        Diseño estructural y técnico enfocado en precisión,
-        materialidad y coherencia formal.
-      </p>
-      <a class="btn tab" data-tab="about">Explorar</a>
-    </div>
+<div id="home" class="section active">
+  <div>
+    <h1 id="typeText"></h1>
+    <p>Precision. Material. Silence.</p>
   </div>
-</section>
+</div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container grid grid-reverse">
-    <div class="reveal">
-      <h1>Sobre mí</h1>
-      <p>
-        Diseñador industrial con mentalidad arquitectónica.
-        Desarrollo productos sólidos desde el concepto hasta la fabricación.
-      </p>
-    </div>
-    <div></div>
+<div id="about" class="section">
+  <div>
+    <h1>Industrial Design Studio</h1>
+    <p>
+      Conceptual development, structural clarity,
+      architectural discipline applied to product design.
+    </p>
   </div>
-</section>
+</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <h1 class="reveal">Contacto</h1>
-    <p class="reveal">majorbori@gmail.com</p>
+<div id="contact" class="section">
+  <div>
+    <h1>Contact</h1>
+    <p>majorbori@gmail.com</p>
   </div>
-</section>
-
-</main>
-
-<footer>
-© 2026 · Industrial Design Engineer
-</footer>
+</div>
 
 <script>
 
-/* ===== Loader ===== */
+/* ================= LOADER ================= */
 window.addEventListener("load",()=>{
   setTimeout(()=>{
     document.querySelector(".loader").classList.add("hidden");
-  },900);
+  },1000);
 });
 
-/* ===== Section Transition ===== */
-document.querySelectorAll(".tab").forEach(tab=>{
-  tab.addEventListener("click",()=>{
-    const current=document.querySelector("section.active");
-    const next=document.getElementById(tab.dataset.tab);
-    if(!next) return;
+/* ================= TYPEWRITER ================= */
+const text="Industrial Design";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typeText").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,70);
+  }
+}
+type();
 
-    current.classList.remove("active");
-    setTimeout(()=>{ next.classList.add("active"); },200);
-
-    document.querySelectorAll("nav li").forEach(li=>li.classList.remove("active"));
-    if(tab.tagName==="LI") tab.classList.add("active");
-  });
+/* ================= CUSTOM CURSOR ================= */
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove",e=>{
+  cursor.style.left=e.clientX+"px";
+  cursor.style.top=e.clientY+"px";
 });
 
-/* ===== Scroll Reveal ===== */
-const reveals=document.querySelectorAll(".reveal");
+document.querySelectorAll("span").forEach(el=>{
+  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
+  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
+});
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
+/* ================= FADE TRANSITION ================= */
+const fade=document.querySelector(".fade");
+
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const target=document.getElementById(btn.dataset.target);
+    const current=document.querySelector(".section.active");
+
+    if(target===current) return;
+
+    fade.classList.add("active");
+
+    setTimeout(()=>{
+      current.classList.remove("active");
+      target.classList.add("active");
+      fade.classList.remove("active");
+    },600);
   });
-},{threshold:.2});
-
-reveals.forEach(el=>observer.observe(el));
+});
 
 </script>
 
