@@ -37,6 +37,13 @@ body::before{
   z-index:10;
 }
 
+/* ================= WEBGL CANVAS ================= */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
 /* ================= CUSTOM CURSOR ================= */
 .cursor{
   position:fixed;
@@ -53,6 +60,30 @@ body::before{
 .cursor.expand{
   transform:translate(-50%,-50%) scale(2);
   background:#fff;
+}
+
+/* ================= NAV ================= */
+nav{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:60px;
+  z-index:100;
+}
+
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#555;
+  cursor:pointer;
+  transition:.4s;
+}
+
+nav span:hover{
+  color:#fff;
 }
 
 /* ================= SECTIONS ================= */
@@ -83,7 +114,7 @@ p{
   line-height:1.8;
 }
 
-/* ================= SCROLL REVEAL ================= */
+/* ================= REVEAL ================= */
 .reveal{
   opacity:0;
   transform:translateY(80px);
@@ -95,7 +126,7 @@ p{
   transform:translateY(0);
 }
 
-/* ================= MOTION BLUR ================= */
+/* ================= BLUR TRANSITION ================= */
 .blur{
   filter:blur(20px);
   opacity:0;
@@ -103,6 +134,11 @@ p{
 }
 
 /* ================= PROJECTS HORIZONTAL ================= */
+.projects{
+  position:relative;
+  overflow:hidden;
+}
+
 .projects-wrapper{
   display:flex;
   width:300vw;
@@ -119,30 +155,6 @@ p{
   letter-spacing:.1em;
 }
 
-/* ================= NAV ================= */
-nav{
-  position:fixed;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:60px;
-  z-index:100;
-}
-
-nav span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#555;
-  cursor:pointer;
-  transition:.4s;
-}
-
-nav span:hover{
-  color:#fff;
-}
-
 /* ================= FOOTER ================= */
 footer{
   text-align:center;
@@ -151,12 +163,6 @@ footer{
   letter-spacing:.2em;
   color:#555;
   border-top:1px solid #1c1c1c;
-}
-
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
 }
 
 </style>
@@ -191,7 +197,7 @@ canvas{
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section">
+<section id="projects" class="section projects">
   <div class="projects-wrapper">
     <div class="project">BAORI</div>
     <div class="project">NODE</div>
@@ -252,25 +258,41 @@ window.addEventListener("resize",()=>{
 
 /* ================= CUSTOM CURSOR ================= */
 const cursor=document.querySelector(".cursor");
+
 document.addEventListener("mousemove",e=>{
   cursor.style.left=e.clientX+"px";
   cursor.style.top=e.clientY+"px";
 });
 
+document.querySelectorAll("nav span").forEach(el=>{
+  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
+  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
+});
+
 /* ================= TYPE ANIMATION ================= */
 const text="Industrial Design Studio";
-let i=0;
-function type(){
-  if(i<text.length){
-    document.getElementById("typeText").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,50);
-  }
-}
-type();
+const typeContainer=document.getElementById("typeText");
+
+text.split("").forEach((char,i)=>{
+  const span=document.createElement("span");
+  span.textContent=char;
+  span.style.opacity="0";
+  span.style.display="inline-block";
+  span.style.transform="translateY(40px)";
+  span.style.transition=`all .6s ease ${i*0.03}s`;
+  typeContainer.appendChild(span);
+});
+
+setTimeout(()=>{
+  typeContainer.querySelectorAll("span").forEach(span=>{
+    span.style.opacity="1";
+    span.style.transform="translateY(0)";
+  });
+},200);
 
 /* ================= SCROLL REVEAL ================= */
 const reveals=document.querySelectorAll(".reveal");
+
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -278,13 +300,14 @@ const observer=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.2});
+
 reveals.forEach(el=>observer.observe(el));
 
-/* ================= NAV TRANSITION ================= */
+/* ================= NAV SMOOTH ================= */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const target=document.getElementById(btn.dataset.target);
-    target.scrollIntoView({behavior:"smooth"});
+    document.getElementById(btn.dataset.target)
+      .scrollIntoView({behavior:"smooth"});
   });
 });
 
