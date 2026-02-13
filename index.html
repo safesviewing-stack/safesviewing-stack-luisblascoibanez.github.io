@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Liquid Refraction Studio</title>
+<title>MB — Glass Refraction Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
 
@@ -13,7 +13,6 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -22,7 +21,7 @@
 }
 
 body{
-  background:#070707;
+  background:#050505;
   color:#f5f5f5;
   overflow:hidden;
   cursor:none;
@@ -102,7 +101,6 @@ p{
   font-size:18px;
   color:#aaa;
 }
-
 </style>
 </head>
 <body>
@@ -118,14 +116,14 @@ p{
 <section id="home" class="section active">
   <div>
     <h1>Industrial Design</h1>
-    <p>Liquid Refraction Experience</p>
+    <p>Physical Glass Refraction</p>
   </div>
 </section>
 
 <section id="about" class="section">
   <div>
     <h1>Architectural Clarity</h1>
-    <p>Glass. Material. Structure.</p>
+    <p>Material Intelligence & Depth</p>
   </div>
 </section>
 
@@ -154,62 +152,115 @@ let renderer = new THREE.WebGLRenderer({ alpha:true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* Post-processing */
+/* Post Processing */
 let composer = new THREE.EffectComposer(renderer);
-let renderPass = new THREE.RenderPass(scene, camera);
-composer.addPass(renderPass);
+composer.addPass(new THREE.RenderPass(scene, camera));
 
 let bloomPass = new THREE.UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.5,
-  0.4,
-  0.85
+  0.4, 0.3, 0.8
 );
 composer.addPass(bloomPass);
 
-/* Uniforms */
+/* Render target for refraction */
+let renderTarget = new THREE.WebGLRenderTarget(
+  window.innerWidth,
+  window.innerHeight
+);
+
+/* Scene background layer */
+let bgScene = new THREE.Scene();
+let bgCamera = new THREE.PerspectiveCamera(
+  70,
+  window.innerWidth/window.innerHeight,
+  0.1,
+  100
+);
+bgCamera.position.z = 5;
+
+let bgGeometry = new THREE.IcosahedronGeometry(2,1);
+let bgMaterial = new THREE.MeshStandardMaterial({
+  wireframe:true,
+  color:0xffffff,
+  transparent:true,
+  opacity:0.05
+});
+
+let bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+bgScene.add(bgMesh);
+
+/* Light */
+let light = new THREE.PointLight(0xffffff, 1);
+light.position.set(5,5,5);
+bgScene.add(light);
+
+/* Glass Plane */
 let uniforms = {
-  u_time: { value: 0.0 },
-  u_resolution: { value: new THREE.Vector2() },
+  u_texture: { value: renderTarget.texture },
+  u_time: { value: 0 },
   u_mouse: { value: new THREE.Vector2() },
-  u_progress: { value: 0.0 }
+  u_resolution: { value: new THREE.Vector2() },
+  u_progress: { value: 0 }
 };
 
-let material = new THREE.ShaderMaterial({
+let glassMaterial = new THREE.ShaderMaterial({
   uniforms: uniforms,
+  transparent:true,
   vertexShader: `
+    varying vec2 vUv;
     void main(){
+      vUv = uv;
       gl_Position = vec4(position,1.0);
     }
   `,
   fragmentShader: `
+    uniform sampler2D u_texture;
     uniform float u_time;
-    uniform vec2 u_resolution;
     uniform vec2 u_mouse;
+    uniform vec2 u_resolution;
     uniform float u_progress;
 
+    varying vec2 vUv;
+
+    float noise(vec2 p){
+      return sin(p.x*10.0)*sin(p.y*10.0);
+    }
+
     void main(){
+      vec2 uv = vUv;
 
-      vec2 st = gl_FragCoord.xy / u_resolution.xy;
-      float dist = distance(st, u_mouse);
+      float dist = distance(uv, u_mouse);
+      float ripple = sin(dist*40.0 - u_time*3.0)*0.01;
 
-      float ripple = sin(dist * 40.0 - u_time * 3.0) * 0.02;
-      float displacement = ripple + u_progress * 0.3;
+      vec2 displacedUV = uv + ripple + u_progress*0.2;
 
-      vec3 color = vec3(0.05 + displacement);
+      vec4 color = texture2D(u_texture, displacedUV);
 
-      gl_FragColor = vec4(color,1.0);
+      gl_FragColor = vec4(color.rgb, 0.6);
     }
   `
 });
 
-let geometry = new THREE.PlaneGeometry(2,2);
-let mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+let plane = new THREE.Mesh(
+  new THREE.PlaneGeometry(2,2),
+  glassMaterial
+);
 
+scene.add(plane);
+
+/* Animation */
 function animate(time){
   uniforms.u_time.value = time * 0.001;
+
+  bgMesh.rotation.x += 0.001;
+  bgMesh.rotation.y += 0.001;
+
+  renderer.setRenderTarget(renderTarget);
+  renderer.render(bgScene, bgCamera);
+
+  renderer.setRenderTarget(null);
   composer.render();
+
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
@@ -217,28 +268,27 @@ requestAnimationFrame(animate);
 function resize(){
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
+  renderTarget.setSize(window.innerWidth, window.innerHeight);
   uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
 }
 window.addEventListener("resize", resize);
 resize();
 
-document.addEventListener("mousemove", e=>{
+/* Mouse */
+document.addEventListener("mousemove",e=>{
   uniforms.u_mouse.value.set(
     e.clientX / window.innerWidth,
     1.0 - e.clientY / window.innerHeight
   );
 });
 
-/* ================= LIQUID TRANSITION ================= */
-
+/* Liquid Transition */
 const sections=document.querySelectorAll(".section");
 
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-
     const target=document.getElementById(btn.dataset.target);
     const current=document.querySelector(".section.active");
-
     if(target===current) return;
 
     uniforms.u_progress.value = 1.0;
@@ -247,7 +297,7 @@ document.querySelectorAll("nav span").forEach(btn=>{
       current.classList.remove("active");
       target.classList.add("active");
       uniforms.u_progress.value = 0.0;
-    },600);
+    },700);
   });
 });
 
