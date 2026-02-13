@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MB — Industrial Design</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MB — Industrial Design Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
 
-/* ================= BASE ================= */
+/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
@@ -24,16 +25,16 @@ body{
   cursor:none;
 }
 
-/* ===== Film Grain ===== */
+/* ================= FILM GRAIN ================= */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size:3px 3px;
-  opacity:.2;
+  opacity:.15;
   pointer-events:none;
-  z-index:999;
+  z-index:10;
 }
 
 /* ================= CUSTOM CURSOR ================= */
@@ -64,21 +65,25 @@ body::before{
   position:relative;
 }
 
+.content{
+  max-width:900px;
+}
+
 /* ================= TYPO ================= */
 h1{
-  font-size:clamp(48px,6vw,80px);
+  font-size:clamp(48px,6vw,90px);
   font-weight:500;
-  line-height:1.1;
+  line-height:1.05;
 }
 
 p{
+  margin-top:30px;
   font-size:18px;
   color:#999;
-  margin-top:30px;
-  max-width:700px;
+  line-height:1.8;
 }
 
-/* ================= SCROLL ANIMATION ================= */
+/* ================= SCROLL REVEAL ================= */
 .reveal{
   opacity:0;
   transform:translateY(80px);
@@ -90,41 +95,68 @@ p{
   transform:translateY(0);
 }
 
-/* ================= PARALLAX IMAGE ================= */
-.parallax{
-  position:absolute;
-  width:60%;
-  height:60%;
-  background:#111;
-  top:20%;
-  right:10%;
-  z-index:-1;
-  transform:translateY(0);
-  transition:transform .2s ease-out;
-  filter:grayscale(100%) contrast(110%);
+/* ================= MOTION BLUR ================= */
+.blur{
+  filter:blur(20px);
+  opacity:0;
+  transition:0.8s ease;
 }
 
-/* ================= FADE IN HERO ================= */
-.hero{
-  text-align:center;
+/* ================= PROJECTS HORIZONTAL ================= */
+.projects-wrapper{
+  display:flex;
+  width:300vw;
+  transition:transform 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-.hero h1{
-  animation:fadeUp 1.8s ease forwards;
+.project{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:50px;
+  letter-spacing:.1em;
 }
 
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
+/* ================= NAV ================= */
+nav{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:60px;
+  z-index:100;
 }
 
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#555;
+  cursor:pointer;
+  transition:.4s;
+}
+
+nav span:hover{
+  color:#fff;
+}
+
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
   padding:80px 0;
   font-size:12px;
-  color:#555;
   letter-spacing:.2em;
+  color:#555;
   border-top:1px solid #1c1c1c;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
 }
 
 </style>
@@ -133,35 +165,45 @@ footer{
 
 <div class="cursor"></div>
 
+<nav>
+  <span data-target="home">Home</span>
+  <span data-target="about">About</span>
+  <span data-target="projects">Projects</span>
+  <span data-target="contact">Contact</span>
+</nav>
+
 <!-- HERO -->
-<section class="section hero">
-  <div>
-    <h1>Industrial Design</h1>
-    <p class="reveal">
-      Precision, material intelligence, structural clarity.
-    </p>
+<section id="home" class="section">
+  <div class="content">
+    <h1 id="typeText"></h1>
+    <p class="reveal">Precision. Material. Structural clarity.</p>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="section">
-  <div>
-    <h1 class="reveal">Architectural Approach</h1>
+<section id="about" class="section">
+  <div class="content">
+    <h1 class="reveal">Architectural Product Design</h1>
     <p class="reveal">
-      We design products with spatial awareness, engineering discipline
-      and silent confidence.
+      Concept to production. Silent confidence through engineering discipline.
     </p>
   </div>
-  <div class="parallax"></div>
 </section>
 
-<!-- PHILOSOPHY -->
-<section class="section">
-  <div>
-    <h1 class="reveal">Material. Silence. Function.</h1>
-    <p class="reveal">
-      Minimalism is not aesthetic reduction — it is structural necessity.
-    </p>
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="projects-wrapper">
+    <div class="project">BAORI</div>
+    <div class="project">NODE</div>
+    <div class="project">LUMORA</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="content">
+    <h1 class="reveal">Contact</h1>
+    <p class="reveal">majorbori@gmail.com</p>
   </div>
 </section>
 
@@ -169,7 +211,44 @@ footer{
 MB STUDIO — INDUSTRIAL DESIGN
 </footer>
 
+<audio id="ambient" loop>
+  <source src="ambient.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+
+/* ================= WEBGL BACKGROUND ================= */
+let scene = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+let renderer = new THREE.WebGLRenderer({ alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+camera.position.z = 5;
+
+let geometry = new THREE.IcosahedronGeometry(2,1);
+let material = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  wireframe:true,
+  opacity:0.04,
+  transparent:true
+});
+
+let mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+function animate(){
+  requestAnimationFrame(animate);
+  mesh.rotation.x += 0.001;
+  mesh.rotation.y += 0.001;
+  renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
 /* ================= CUSTOM CURSOR ================= */
 const cursor=document.querySelector(".cursor");
@@ -178,15 +257,20 @@ document.addEventListener("mousemove",e=>{
   cursor.style.top=e.clientY+"px";
 });
 
-/* Expand on links */
-document.querySelectorAll("h1, p").forEach(el=>{
-  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
-  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
-});
+/* ================= TYPE ANIMATION ================= */
+const text="Industrial Design Studio";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typeText").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,50);
+  }
+}
+type();
 
 /* ================= SCROLL REVEAL ================= */
 const reveals=document.querySelectorAll(".reveal");
-
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -194,18 +278,30 @@ const observer=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.2});
-
 reveals.forEach(el=>observer.observe(el));
 
-/* ================= PARALLAX ================= */
-const parallax=document.querySelector(".parallax");
-
-window.addEventListener("scroll",()=>{
-  const scrollY=window.scrollY;
-  if(parallax){
-    parallax.style.transform=`translateY(${scrollY * 0.2}px)`;
-  }
+/* ================= NAV TRANSITION ================= */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const target=document.getElementById(btn.dataset.target);
+    target.scrollIntoView({behavior:"smooth"});
+  });
 });
+
+/* ================= PROJECT SLIDER ================= */
+let currentProject=0;
+const wrapper=document.querySelector(".projects-wrapper");
+
+document.getElementById("projects").addEventListener("click",()=>{
+  currentProject++;
+  if(currentProject>2) currentProject=0;
+  wrapper.style.transform=`translateX(-${currentProject*100}vw)`;
+});
+
+/* ================= AUDIO ================= */
+document.body.addEventListener("click",()=>{
+  document.getElementById("ambient").play();
+},{once:true});
 
 </script>
 
