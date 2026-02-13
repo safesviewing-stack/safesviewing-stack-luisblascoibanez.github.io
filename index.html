@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Industrial Design Studio</title>
+<title>MB — Liquid Studio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
 
-/* ================= RESET ================= */
+/* ================= BASE ================= */
 *{
   margin:0;
   padding:0;
@@ -19,32 +19,19 @@
 }
 
 body{
-  background:#0b0b0b;
+  background:#0a0a0a;
   color:#eaeaea;
-  overflow-x:hidden;
+  overflow:hidden;
   cursor:none;
 }
 
-/* ================= FILM GRAIN ================= */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:3px 3px;
-  opacity:.15;
-  pointer-events:none;
-  z-index:10;
-}
-
-/* ================= WEBGL CANVAS ================= */
 canvas{
   position:fixed;
   inset:0;
   z-index:-1;
 }
 
-/* ================= CUSTOM CURSOR ================= */
+/* ================= CURSOR ================= */
 .cursor{
   position:fixed;
   width:14px;
@@ -53,7 +40,7 @@ canvas{
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
-  transition:transform .2s ease, background .3s ease;
+  transition:.2s;
   z-index:1000;
 }
 
@@ -88,81 +75,29 @@ nav span:hover{
 
 /* ================= SECTIONS ================= */
 .section{
-  min-height:100vh;
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0 10%;
-  position:relative;
+  text-align:center;
+  opacity:0;
+  transition:1s ease;
 }
 
-.content{
-  max-width:900px;
+.section.active{
+  opacity:1;
 }
 
-/* ================= TYPO ================= */
 h1{
-  font-size:clamp(48px,6vw,90px);
+  font-size:clamp(50px,6vw,100px);
   font-weight:500;
-  line-height:1.05;
 }
 
 p{
   margin-top:30px;
   font-size:18px;
-  color:#999;
-  line-height:1.8;
-}
-
-/* ================= REVEAL ================= */
-.reveal{
-  opacity:0;
-  transform:translateY(80px);
-  transition:1.4s cubic-bezier(.2,.7,.1,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ================= BLUR TRANSITION ================= */
-.blur{
-  filter:blur(20px);
-  opacity:0;
-  transition:0.8s ease;
-}
-
-/* ================= PROJECTS HORIZONTAL ================= */
-.projects{
-  position:relative;
-  overflow:hidden;
-}
-
-.projects-wrapper{
-  display:flex;
-  width:300vw;
-  transition:transform 1.2s cubic-bezier(.2,.7,.1,1);
-}
-
-.project{
-  width:100vw;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:50px;
-  letter-spacing:.1em;
-}
-
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  padding:80px 0;
-  font-size:12px;
-  letter-spacing:.2em;
-  color:#555;
-  border-top:1px solid #1c1c1c;
+  color:#aaa;
 }
 
 </style>
@@ -174,87 +109,31 @@ footer{
 <nav>
   <span data-target="home">Home</span>
   <span data-target="about">About</span>
-  <span data-target="projects">Projects</span>
   <span data-target="contact">Contact</span>
 </nav>
 
-<!-- HERO -->
-<section id="home" class="section">
-  <div class="content">
-    <h1 id="typeText"></h1>
-    <p class="reveal">Precision. Material. Structural clarity.</p>
+<section id="home" class="section active">
+  <div>
+    <h1>Industrial Design</h1>
+    <p>Liquid. Material. Structure.</p>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="section">
-  <div class="content">
-    <h1 class="reveal">Architectural Product Design</h1>
-    <p class="reveal">
-      Concept to production. Silent confidence through engineering discipline.
-    </p>
+  <div>
+    <h1>Architectural Thinking</h1>
+    <p>Engineering clarity meets spatial awareness.</p>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="section projects">
-  <div class="projects-wrapper">
-    <div class="project">BAORI</div>
-    <div class="project">NODE</div>
-    <div class="project">LUMORA</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
 <section id="contact" class="section">
-  <div class="content">
-    <h1 class="reveal">Contact</h1>
-    <p class="reveal">majorbori@gmail.com</p>
+  <div>
+    <h1>Contact</h1>
+    <p>majorbori@gmail.com</p>
   </div>
 </section>
-
-<footer>
-MB STUDIO — INDUSTRIAL DESIGN
-</footer>
-
-<audio id="ambient" loop>
-  <source src="ambient.mp3" type="audio/mpeg">
-</audio>
 
 <script>
-
-/* ================= WEBGL BACKGROUND ================= */
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-let renderer = new THREE.WebGLRenderer({ alpha:true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-camera.position.z = 5;
-
-let geometry = new THREE.IcosahedronGeometry(2,1);
-let material = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
-  wireframe:true,
-  opacity:0.04,
-  transparent:true
-});
-
-let mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
-
-function animate(){
-  requestAnimationFrame(animate);
-  mesh.rotation.x += 0.001;
-  mesh.rotation.y += 0.001;
-  renderer.render(scene,camera);
-}
-animate();
-
-window.addEventListener("resize",()=>{
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
 
 /* ================= CUSTOM CURSOR ================= */
 const cursor=document.querySelector(".cursor");
@@ -264,67 +143,87 @@ document.addEventListener("mousemove",e=>{
   cursor.style.top=e.clientY+"px";
 });
 
-document.querySelectorAll("nav span").forEach(el=>{
-  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
-  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
-});
+/* ================= SHADER BACKGROUND ================= */
 
-/* ================= TYPE ANIMATION ================= */
-const text="Industrial Design Studio";
-const typeContainer=document.getElementById("typeText");
+let scene = new THREE.Scene();
+let camera = new THREE.Camera();
+camera.position.z = 1;
 
-text.split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity="0";
-  span.style.display="inline-block";
-  span.style.transform="translateY(40px)";
-  span.style.transition=`all .6s ease ${i*0.03}s`;
-  typeContainer.appendChild(span);
-});
+let renderer = new THREE.WebGLRenderer({ alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-setTimeout(()=>{
-  typeContainer.querySelectorAll("span").forEach(span=>{
-    span.style.opacity="1";
-    span.style.transform="translateY(0)";
-  });
-},200);
+let uniforms = {
+  u_time: { value: 0.0 },
+  u_resolution: { value: new THREE.Vector2() },
+  u_mouse: { value: new THREE.Vector2() }
+};
 
-/* ================= SCROLL REVEAL ================= */
-const reveals=document.querySelectorAll(".reveal");
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
+let material = new THREE.ShaderMaterial({
+  uniforms: uniforms,
+  vertexShader: `
+    void main() {
+      gl_Position = vec4(position, 1.0);
     }
-  });
-},{threshold:0.2});
+  `,
+  fragmentShader: `
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
 
-reveals.forEach(el=>observer.observe(el));
+    void main(){
+      vec2 st = gl_FragCoord.xy / u_resolution.xy;
+      float dist = distance(st, u_mouse);
+      float wave = sin(dist * 20.0 - u_time * 2.0);
+      float strength = 0.02 / dist;
 
-/* ================= NAV SMOOTH ================= */
+      vec3 color = vec3(0.05 + wave * strength);
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `
+});
+
+let geometry = new THREE.PlaneGeometry(2,2);
+let mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+function animate(time){
+  uniforms.u_time.value = time * 0.001;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+function resize(){
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+}
+window.addEventListener("resize", resize);
+resize();
+
+document.addEventListener("mousemove", e=>{
+  uniforms.u_mouse.value.set(
+    e.clientX / window.innerWidth,
+    1.0 - e.clientY / window.innerHeight
+  );
+});
+
+/* ================= LIQUID TRANSITION ================= */
+const sections=document.querySelectorAll(".section");
+
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.getElementById(btn.dataset.target)
-      .scrollIntoView({behavior:"smooth"});
+    const target=document.getElementById(btn.dataset.target);
+    const current=document.querySelector(".section.active");
+    if(target===current) return;
+
+    current.classList.remove("active");
+    setTimeout(()=>{
+      target.classList.add("active");
+    },300);
   });
 });
-
-/* ================= PROJECT SLIDER ================= */
-let currentProject=0;
-const wrapper=document.querySelector(".projects-wrapper");
-
-document.getElementById("projects").addEventListener("click",()=>{
-  currentProject++;
-  if(currentProject>2) currentProject=0;
-  wrapper.style.transform=`translateX(-${currentProject*100}vw)`;
-});
-
-/* ================= AUDIO ================= */
-document.body.addEventListener("click",()=>{
-  document.getElementById("ambient").play();
-},{once:true});
 
 </script>
 
