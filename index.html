@@ -10,12 +10,28 @@
 
 <style>
 
-/* ================= RESET ================= */
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
-body{background:#0a0a0a;color:#f5f5f5;overflow-x:hidden;cursor:none;}
-canvas{position:fixed;inset:0;z-index:-1;}
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
 
-/* ================= LOADER ================= */
+body{
+  background:#0a0a0a;
+  color:#f5f5f5;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* ===== LOADER ===== */
 .loader{
   position:fixed;
   inset:0;
@@ -33,35 +49,32 @@ canvas{position:fixed;inset:0;z-index:-1;}
 }
 
 .loader span{
-  font-size:14px;
-  letter-spacing:.3em;
+  font-size:13px;
+  letter-spacing:.35em;
   text-transform:uppercase;
   color:#777;
 }
 
-/* ================= CURSOR ================= */
+/* ===== CURSOR ===== */
 .cursor{
   position:fixed;
-  width:8px;height:8px;
+  width:8px;
+  height:8px;
   border:1px solid #fff;
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:1000;
-  transition:.2s;
 }
 
-.cursor.expand{
-  transform:translate(-50%,-50%) scale(3);
-  background:#fff;
-}
-
-/* ================= NAV ================= */
+/* ===== NAV ===== */
 nav{
   position:fixed;
-  top:40px;left:50%;
+  top:40px;
+  left:50%;
   transform:translateX(-50%);
-  display:flex;gap:60px;
+  display:flex;
+  gap:60px;
   z-index:100;
 }
 
@@ -74,19 +87,22 @@ nav span{
   transition:.4s;
 }
 
-nav span:hover{color:#fff;}
+nav span:hover{
+  color:#fff;
+}
 
-/* ================= SECTIONS ================= */
+/* ===== SECTIONS ===== */
 .section{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   padding:0 10%;
-  position:relative;
 }
 
-.content{max-width:900px;}
+.content{
+  max-width:900px;
+}
 
 h1{
   font-size:clamp(70px,6vw,120px);
@@ -102,7 +118,7 @@ p{
   line-height:1.6;
 }
 
-/* ================= REVEAL ================= */
+/* ===== REVEAL ===== */
 .reveal{
   opacity:0;
   transform:translateY(80px);
@@ -114,37 +130,7 @@ p{
   transform:translateY(0);
 }
 
-/* ================= PROJECTS ================= */
-.projects{
-  display:flex;
-  overflow:hidden;
-  position:relative;
-}
-
-.project{
-  min-width:100vw;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:60px;
-  position:relative;
-}
-
-.project::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,transparent,#0a0a0a);
-  opacity:.4;
-}
-
-.project h2{
-  position:relative;
-  z-index:10;
-}
-
-/* ================= FOOTER ================= */
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:100px 0;
@@ -164,8 +150,7 @@ footer{
 <nav>
   <span data-scroll="0">Home</span>
   <span data-scroll="1">Studio</span>
-  <span data-scroll="2">Projects</span>
-  <span data-scroll="3">Contact</span>
+  <span data-scroll="2">Contact</span>
 </nav>
 
 <section class="section">
@@ -184,12 +169,6 @@ footer{
   </div>
 </section>
 
-<section class="section projects">
-  <div class="project"><h2>BAORI</h2></div>
-  <div class="project"><h2>NODE</h2></div>
-  <div class="project"><h2>LUMORA</h2></div>
-</section>
-
 <section class="section">
   <div class="content">
     <h1 class="reveal">Contact</h1>
@@ -203,106 +182,163 @@ MB STUDIO — INDUSTRIAL DESIGN
 
 <script>
 
-/* ===== LOADER ===== */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.querySelector(".loader").classList.add("fade");
-  },1000);
+/* ================= LOADER + ENTRADA ================= */
+
+const loader = document.querySelector(".loader");
+
+window.addEventListener("load", () => {
+
+  document.body.style.opacity = "0";
+  document.body.style.transition = "opacity 1.6s cubic-bezier(.2,.7,.1,1)";
+
+  setTimeout(() => {
+    document.body.style.opacity = "1";
+  }, 100);
+
+  setTimeout(() => {
+    loader.classList.add("fade");
+  }, 900);
+
 });
 
-/* ===== CURSOR ===== */
-const cursor=document.querySelector(".cursor");
-let mx=0,my=0,sx=0,sy=0;
 
-document.addEventListener("mousemove",e=>{
-  mx=e.clientX;my=e.clientY;
+/* ================= CURSOR DINÁMICO ================= */
+
+const cursor = document.querySelector(".cursor");
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
+let lastX = 0;
+let lastY = 0;
+
+let velocity = 0;
+
+document.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  const dx = mouseX - lastX;
+  const dy = mouseY - lastY;
+  velocity = Math.sqrt(dx * dx + dy * dy);
+
+  lastX = mouseX;
+  lastY = mouseY;
 });
 
-function cursorLoop(){
-  sx+=(mx-sx)*0.08;
-  sy+=(my-sy)*0.08;
-  cursor.style.left=sx+"px";
-  cursor.style.top=sy+"px";
-  requestAnimationFrame(cursorLoop);
+function animateCursor() {
+
+  const dynamicSpeed = 0.08 + Math.min(velocity * 0.02, 0.35);
+
+  posX += (mouseX - posX) * dynamicSpeed;
+  posY += (mouseY - posY) * dynamicSpeed;
+
+  cursor.style.left = posX + "px";
+  cursor.style.top = posY + "px";
+
+  requestAnimationFrame(animateCursor);
 }
-cursorLoop();
 
-/* ===== HERO TYPE ===== */
-const text="Industrial Design";
-const hero=document.getElementById("heroTitle");
+animateCursor();
 
-text.split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity="0";
-  span.style.display="inline-block";
-  span.style.transform="translateY(50px)";
-  span.style.transition=`all .6s ease ${i*0.04}s`;
+
+/* ================= HERO TYPE ANIMATION ================= */
+
+const hero = document.getElementById("heroTitle");
+const text = "Industrial Design";
+
+text.split("").forEach((char, i) => {
+  const span = document.createElement("span");
+  span.textContent = char;
+  span.style.opacity = "0";
+  span.style.display = "inline-block";
+  span.style.transform = "translateY(60px)";
+  span.style.transition = `all .8s cubic-bezier(.2,.7,.1,1) ${i * 0.05}s`;
   hero.appendChild(span);
 });
 
-setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(s=>{
-    s.style.opacity="1";
-    s.style.transform="translateY(0)";
+setTimeout(() => {
+  hero.querySelectorAll("span").forEach(span => {
+    span.style.opacity = "1";
+    span.style.transform = "translateY(0)";
   });
-},300);
+}, 1200);
 
-/* ===== SCROLL REVEAL ===== */
-const reveals=document.querySelectorAll(".reveal");
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
+
+/* ================= SCROLL REVEAL ================= */
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
       entry.target.classList.add("visible");
     }
   });
-},{threshold:0.2});
-reveals.forEach(el=>observer.observe(el));
+}, { threshold: 0.2 });
 
-/* ===== THREE BACKGROUND ===== */
-let scene=new THREE.Scene();
-let camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
-camera.position.z=4;
+reveals.forEach(el => observer.observe(el));
 
-let renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+/* ================= THREE BACKGROUND ================= */
+
+let scene = new THREE.Scene();
+
+let camera = new THREE.PerspectiveCamera(
+  60,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  100
+);
+
+camera.position.z = 4;
+
+let renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 document.body.appendChild(renderer.domElement);
 
-let geo=new THREE.IcosahedronGeometry(1.8,2);
-let mat=new THREE.MeshStandardMaterial({
-  wireframe:true,
-  color:0xffffff,
-  transparent:true,
-  opacity:0.05
+let geometry = new THREE.IcosahedronGeometry(1.8, 2);
+
+let material = new THREE.MeshStandardMaterial({
+  wireframe: true,
+  color: 0xffffff,
+  transparent: true,
+  opacity: 0.05
 });
-let mesh=new THREE.Mesh(geo,mat);
+
+let mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-let light=new THREE.PointLight(0xffffff,1);
-light.position.set(5,5,5);
+let light = new THREE.PointLight(0xffffff, 1);
+light.position.set(5, 5, 5);
 scene.add(light);
 
-function animate(){
-  mesh.rotation.x+=0.0015;
-  mesh.rotation.y+=0.0015;
-  renderer.render(scene,camera);
+function animate() {
+  mesh.rotation.x += 0.0015;
+  mesh.rotation.y += 0.0015;
+  renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
+
 animate();
 
-window.addEventListener("resize",()=>{
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  camera.aspect=window.innerWidth/window.innerHeight;
+window.addEventListener("resize", () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
 
-/* ===== NAV SCROLL ===== */
-document.querySelectorAll("nav span").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
+
+/* ================= NAV SCROLL ================= */
+
+document.querySelectorAll("nav span").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const index = btn.dataset.scroll;
     document.querySelectorAll(".section")[index]
-      .scrollIntoView({behavior:"smooth"});
+      .scrollIntoView({ behavior: "smooth" });
   });
 });
 
