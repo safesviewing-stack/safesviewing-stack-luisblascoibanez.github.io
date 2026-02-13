@@ -3,64 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB Studio — Winner Potential</title>
+<title>MB — Industrial Design Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
-body{background:#0a0a0a;color:#f5f5f5;overflow-x:hidden;cursor:none;}
-canvas{position:fixed;inset:0;z-index:-1;}
-
-.loader{
-  position:fixed;inset:0;background:#0a0a0a;
-  display:flex;justify-content:center;align-items:center;
-  z-index:2000;transition:1.2s ease;
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
 }
 
-.loader.fade{opacity:0;pointer-events:none;}
-
-.loader span{
-  font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:#777;
+body{
+  background:#0b0b0b;
+  color:#eaeaea;
+  overflow-x:hidden;
+  cursor:none;
 }
 
+/* ================= FILM GRAIN ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:3px 3px;
+  opacity:.15;
+  pointer-events:none;
+  z-index:10;
+}
+
+/* ================= CUSTOM CURSOR ================= */
 .cursor{
-  position:fixed;width:8px;height:8px;
-  border:1px solid #fff;border-radius:50%;
-  pointer-events:none;z-index:1000;
+  position:fixed;
+  width:14px;
+  height:14px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
   transform:translate(-50%,-50%);
+  transition:transform .2s ease, background .3s ease;
+  z-index:1000;
 }
 
-nav{
-  position:fixed;top:40px;left:50%;
-  transform:translateX(-50%);
-  display:flex;gap:60px;z-index:100;
+.cursor.expand{
+  transform:translate(-50%,-50%) scale(2);
+  background:#fff;
 }
 
-nav span{
-  font-size:11px;letter-spacing:.3em;
-  text-transform:uppercase;color:#555;
-  cursor:pointer;transition:.4s;
-}
-
-nav span:hover{color:#fff;}
-
+/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
-  display:flex;justify-content:center;align-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:0 10%;
   position:relative;
 }
 
-.content{max-width:900px;}
+.content{
+  max-width:900px;
+}
 
+/* ================= TYPO ================= */
 h1{
-  font-size:clamp(70px,6vw,120px);
+  font-size:clamp(48px,6vw,90px);
   font-weight:500;
   line-height:1.05;
 }
@@ -68,110 +79,131 @@ h1{
 p{
   margin-top:30px;
   font-size:18px;
-  color:#aaa;
-  max-width:600px;
-  line-height:1.6;
+  color:#999;
+  line-height:1.8;
 }
 
-/* ===== Projects ===== */
-.projects{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
+/* ================= SCROLL REVEAL ================= */
+.reveal{
+  opacity:0;
+  transform:translateY(80px);
+  transition:1.4s cubic-bezier(.2,.7,.1,1);
 }
 
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= MOTION BLUR ================= */
+.blur{
+  filter:blur(20px);
+  opacity:0;
+  transition:0.8s ease;
+}
+
+/* ================= PROJECTS HORIZONTAL ================= */
 .projects-wrapper{
   display:flex;
-  height:100%;
+  width:300vw;
+  transition:transform 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
 .project{
-  min-width:100vw;
+  width:100vw;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  position:relative;
+  font-size:50px;
+  letter-spacing:.1em;
 }
 
-.project img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0.7;
-  transition:opacity .6s ease, transform 1s ease;
+/* ================= NAV ================= */
+nav{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:60px;
+  z-index:100;
 }
 
-.project.active img{
-  opacity:1;
-  transform:scale(1.05);
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#555;
+  cursor:pointer;
+  transition:.4s;
 }
 
-.project h2{
-  position:absolute;
-  font-size:60px;
-  z-index:10;
+nav span:hover{
+  color:#fff;
 }
 
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
-  padding:100px 0;
+  padding:80px 0;
   font-size:12px;
   letter-spacing:.2em;
   color:#555;
   border-top:1px solid #1c1c1c;
 }
 
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
 </style>
 </head>
 <body>
 
-<div class="loader"><span>MB STUDIO</span></div>
 <div class="cursor"></div>
 
 <nav>
-  <span data-scroll="0">Home</span>
-  <span data-scroll="1">Studio</span>
-  <span data-scroll="2">Projects</span>
-  <span data-scroll="3">Contact</span>
+  <span data-target="home">Home</span>
+  <span data-target="about">About</span>
+  <span data-target="projects">Projects</span>
+  <span data-target="contact">Contact</span>
 </nav>
 
-<section class="section hero">
+<!-- HERO -->
+<section id="home" class="section">
   <div class="content">
-    <h1 class="hero-title">Industrial Design</h1>
-    <p>Material intelligence meets architectural clarity.</p>
+    <h1 id="typeText"></h1>
+    <p class="reveal">Precision. Material. Structural clarity.</p>
   </div>
 </section>
 
-<section class="section studio">
+<!-- ABOUT -->
+<section id="about" class="section">
   <div class="content">
-    <h1>Spatial Systems</h1>
-    <p>
-      Products conceived as controlled volumes, precise in proportion and silent in expression.
+    <h1 class="reveal">Architectural Product Design</h1>
+    <p class="reveal">
+      Concept to production. Silent confidence through engineering discipline.
     </p>
   </div>
 </section>
 
-<section class="projects">
+<!-- PROJECTS -->
+<section id="projects" class="section">
   <div class="projects-wrapper">
-    <div class="project active">
-      <img src="https://picsum.photos/1920/1080?random=1">
-      <h2>BAORI</h2>
-    </div>
-    <div class="project">
-      <img src="https://picsum.photos/1920/1080?random=2">
-      <h2>NODE</h2>
-    </div>
-    <div class="project">
-      <img src="https://picsum.photos/1920/1080?random=3">
-      <h2>LUMORA</h2>
-    </div>
+    <div class="project">BAORI</div>
+    <div class="project">NODE</div>
+    <div class="project">LUMORA</div>
   </div>
 </section>
 
-<section class="section contact">
+<!-- CONTACT -->
+<section id="contact" class="section">
   <div class="content">
-    <h1>Contact</h1>
-    <p>majorbori@gmail.com</p>
+    <h1 class="reveal">Contact</h1>
+    <p class="reveal">majorbori@gmail.com</p>
   </div>
 </section>
 
@@ -179,102 +211,97 @@ footer{
 MB STUDIO — INDUSTRIAL DESIGN
 </footer>
 
+<audio id="ambient" loop>
+  <source src="ambient.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 
-/* ===== LOADER ===== */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.querySelector(".loader").classList.add("fade");
-  },1000);
-});
-
-/* ===== CURSOR ===== */
-const cursor=document.querySelector(".cursor");
-let mx=0,my=0,sx=0,sy=0;
-
-document.addEventListener("mousemove",e=>{
-  mx=e.clientX;my=e.clientY;
-});
-
-function cursorLoop(){
-  sx+=(mx-sx)*0.08;
-  sy+=(my-sy)*0.08;
-  cursor.style.left=sx+"px";
-  cursor.style.top=sy+"px";
-  requestAnimationFrame(cursorLoop);
-}
-cursorLoop();
-
-/* ===== THREE BACKGROUND ===== */
-let scene=new THREE.Scene();
-let camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
-camera.position.z=4;
-
-let renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+/* ================= WEBGL BACKGROUND ================= */
+let scene = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+let renderer = new THREE.WebGLRenderer({ alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+camera.position.z = 5;
 
-let geo=new THREE.IcosahedronGeometry(1.8,2);
-let mat=new THREE.MeshStandardMaterial({
+let geometry = new THREE.IcosahedronGeometry(2,1);
+let material = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
   wireframe:true,
-  color:0xffffff,
-  transparent:true,
-  opacity:0.04
+  opacity:0.04,
+  transparent:true
 });
-let mesh=new THREE.Mesh(geo,mat);
+
+let mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-let light=new THREE.PointLight(0xffffff,1);
-light.position.set(5,5,5);
-scene.add(light);
-
 function animate(){
-  mesh.rotation.x+=0.001;
-  mesh.rotation.y+=0.001;
-  renderer.render(scene,camera);
   requestAnimationFrame(animate);
+  mesh.rotation.x += 0.001;
+  mesh.rotation.y += 0.001;
+  renderer.render(scene,camera);
 }
 animate();
 
-/* ===== GSAP ===== */
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.from(".hero-title",{
-  y:100,
-  opacity:0,
-  duration:1.4,
-  ease:"power3.out"
+window.addEventListener("resize",()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-/* Horizontal Projects */
-let sections=gsap.utils.toArray(".project");
+/* ================= CUSTOM CURSOR ================= */
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove",e=>{
+  cursor.style.left=e.clientX+"px";
+  cursor.style.top=e.clientY+"px";
+});
 
-gsap.to(sections,{
-  xPercent:-100*(sections.length-1),
-  ease:"none",
-  scrollTrigger:{
-    trigger:".projects",
-    pin:true,
-    scrub:1,
-    snap:1/(sections.length-1),
-    end:()=>"+=" + document.querySelector(".projects-wrapper").offsetWidth,
-    onUpdate:(self)=>{
-      let index=Math.round(self.progress*(sections.length-1));
-      sections.forEach(s=>s.classList.remove("active"));
-      sections[index].classList.add("active");
-    }
+/* ================= TYPE ANIMATION ================= */
+const text="Industrial Design Studio";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typeText").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,50);
   }
-});
+}
+type();
 
-/* Nav Scroll */
+/* ================= SCROLL REVEAL ================= */
+const reveals=document.querySelectorAll(".reveal");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:0.2});
+reveals.forEach(el=>observer.observe(el));
+
+/* ================= NAV TRANSITION ================= */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
-    document.querySelectorAll("section")[index]
-      .scrollIntoView({behavior:"smooth"});
+    const target=document.getElementById(btn.dataset.target);
+    target.scrollIntoView({behavior:"smooth"});
   });
 });
+
+/* ================= PROJECT SLIDER ================= */
+let currentProject=0;
+const wrapper=document.querySelector(".projects-wrapper");
+
+document.getElementById("projects").addEventListener("click",()=>{
+  currentProject++;
+  if(currentProject>2) currentProject=0;
+  wrapper.style.transform=`translateX(-${currentProject*100}vw)`;
+});
+
+/* ================= AUDIO ================= */
+document.body.addEventListener("click",()=>{
+  document.getElementById("ambient").play();
+},{once:true});
 
 </script>
 
