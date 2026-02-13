@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>MB · Industrial Design Engineer</title>
+<title>MB · Industrial Design</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ================= RESET ================= */
+/* ================= BASE ================= */
 *{
   margin:0;
   padding:0;
@@ -18,33 +18,47 @@
 }
 
 body{
-  background:#0e0f10;
-  color:#d4d4d4;
+  background:#111;
+  color:#d8d8d8;
   overflow-x:hidden;
+  position:relative;
+}
+
+/* ===== Cement Texture ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:3px 3px;
+  opacity:.25;
+  pointer-events:none;
+  z-index:-1;
 }
 
 /* ================= LOADER ================= */
 .loader{
   position:fixed;
   inset:0;
-  background:#0e0f10;
+  background:#111;
   display:flex;
   justify-content:center;
   align-items:center;
   z-index:9999;
-  transition:opacity .8s ease, visibility .8s ease;
+  transition:opacity .8s ease;
 }
 
 .loader.hidden{
   opacity:0;
-  visibility:hidden;
+  pointer-events:none;
 }
 
 .loader-line{
   width:120px;
   height:1px;
-  background:#3a86ff;
-  animation:loading 1.5s ease-in-out infinite;
+  background:#fff;
+  animation:loading 1.4s ease-in-out infinite;
 }
 
 @keyframes loading{
@@ -59,14 +73,14 @@ header{
   top:0;
   width:100%;
   height:70px;
-  background:rgba(14,15,16,0.95);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid #1c1f22;
+  background:rgba(17,17,17,0.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid #1f1f1f;
   z-index:100;
 }
 
 .nav{
-  max-width:1200px;
+  max-width:1300px;
   width:90%;
   height:100%;
   margin:auto;
@@ -76,45 +90,29 @@ header{
 }
 
 .logo{
-  font-weight:600;
-  font-size:14px;
-  letter-spacing:.15em;
+  font-weight:500;
+  font-size:13px;
+  letter-spacing:.2em;
   color:#fff;
 }
 
-/* ================= NAV ================= */
 nav ul{
   display:flex;
-  gap:40px;
+  gap:50px;
   list-style:none;
 }
 
 nav li{
-  font-size:11px;
-  letter-spacing:.15em;
+  font-size:10px;
+  letter-spacing:.2em;
   text-transform:uppercase;
+  color:#666;
   cursor:pointer;
-  color:#777;
   transition:.4s;
 }
 
 nav li:hover,
 nav li.active{
-  color:#fff;
-}
-
-/* ================= LANGUAGE ================= */
-.lang button{
-  background:none;
-  border:none;
-  color:#666;
-  font-size:11px;
-  letter-spacing:.1em;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.lang button.active{
   color:#fff;
 }
 
@@ -124,105 +122,119 @@ main{
 }
 
 section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
   opacity:0;
   transform:translateY(40px);
-  transition:opacity .8s ease, transform .8s ease;
-  min-height:100vh;
-  display:none;
+  transition:opacity 1s ease, transform 1s ease;
 }
 
 section.active{
-  display:flex;
-  align-items:center;
   opacity:1;
   transform:translateY(0);
 }
 
 .container{
   width:90%;
-  max-width:1100px;
+  max-width:1300px;
   margin:auto;
+}
+
+/* ================= JAPANESE TEXT ANIMATION ================= */
+.line{
+  overflow:hidden;
+}
+
+.line span{
+  display:inline-block;
+  transform:translateY(100%);
+  opacity:0;
+  animation:reveal 1.2s ease forwards;
+}
+
+.line:nth-child(1) span{animation-delay:.2s;}
+.line:nth-child(2) span{animation-delay:.5s;}
+.line:nth-child(3) span{animation-delay:.8s;}
+
+@keyframes reveal{
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
 }
 
 /* ================= TYPO ================= */
 h1{
-  font-size:42px;
-  font-weight:600;
-  margin-bottom:20px;
+  font-size:52px;
+  font-weight:500;
+  line-height:1.1;
   color:#fff;
-  letter-spacing:-0.02em;
 }
 
 p{
   font-size:16px;
-  line-height:1.8;
-  color:#aaa;
-  max-width:700px;
-}
-
-/* ================= BUTTONS ================= */
-.hero-cta{
-  margin-top:40px;
-  display:flex;
-  gap:20px;
-}
-
-.btn{
-  padding:14px 30px;
-  font-size:11px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.4s ease;
-}
-
-.primary{
-  background:#3a86ff;
-  color:#fff;
-}
-
-.primary:hover{
-  background:#2f6ed6;
-}
-
-.secondary{
-  border:1px solid #333;
-  color:#aaa;
-}
-
-.secondary:hover{
-  border-color:#3a86ff;
-  color:#fff;
-}
-
-/* ================= CV ================= */
-.cv-block{
-  border-left:2px solid #3a86ff;
-  padding-left:20px;
+  line-height:1.9;
+  color:#9a9a9a;
   margin-top:30px;
+  max-width:600px;
+}
+
+/* ================= SWISS GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap:120px;
+}
+
+.grid-reverse{
+  grid-template-columns:1.4fr 1fr;
+}
+
+/* ================= BUTTON ================= */
+.btn{
+  margin-top:50px;
+  display:inline-block;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#fff;
+  border-bottom:1px solid #fff;
+  padding-bottom:5px;
+  text-decoration:none;
+  transition:.4s;
+}
+
+.btn:hover{
+  opacity:.6;
 }
 
 /* ================= FOOTER ================= */
 footer{
   text-align:center;
-  padding:40px 0;
-  font-size:11px;
-  letter-spacing:.1em;
-  color:#666;
-  border-top:1px solid #1c1f22;
+  padding:60px 0;
+  font-size:10px;
+  letter-spacing:.2em;
+  color:#555;
+  border-top:1px solid #1f1f1f;
 }
 
-/* ================= SMOOTH TRANSITIONS ================= */
-html{
-  scroll-behavior:smooth;
+/* ================= SCROLL REVEAL ================= */
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1.2s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="loader">
   <div class="loader-line"></div>
 </div>
@@ -230,71 +242,56 @@ html{
 <header>
   <div class="nav">
     <div class="logo">MB · INDUSTRIAL DESIGN</div>
-
     <nav>
       <ul>
         <li class="tab active" data-tab="home">Inicio</li>
         <li class="tab" data-tab="about">Sobre mí</li>
-        <li class="tab" data-tab="cv">Currículum</li>
         <li class="tab" data-tab="contact">Contacto</li>
       </ul>
     </nav>
-
-    <div class="lang">
-      <button id="btn-es" class="active">ES</button>
-      <button id="btn-en">EN</button>
-    </div>
   </div>
 </header>
 
 <main>
 
+<!-- HOME -->
 <section id="home" class="active">
-  <div class="container">
-    <h1 id="hero-title">Industrial Design Portfolio</h1>
-    <p id="hero-sub">
-      Diseño técnico, estratégico y estructural enfocado en productos sólidos,
-      precisos y funcionales.
-    </p>
+  <div class="container grid">
+    <div>
+      <div class="line"><h1><span>Industrial</span></h1></div>
+      <div class="line"><h1><span>Design</span></h1></div>
+      <div class="line"><h1><span>Portfolio</span></h1></div>
+    </div>
 
-    <div class="hero-cta">
-      <a class="btn primary tab" data-tab="cv">Ver CV</a>
-      <a class="btn secondary tab" data-tab="contact">Contactar</a>
+    <div class="reveal">
+      <p>
+        Diseño estructural y técnico enfocado en precisión,
+        materialidad y coherencia formal.
+      </p>
+      <a class="btn tab" data-tab="about">Explorar</a>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <div class="container">
-    <h1 id="about-title">Sobre mí</h1>
-    <p id="about-text">
-      Diseñador industrial con mentalidad estructural y enfoque técnico.
-      Combino ingeniería, fabricación y pensamiento estratégico para desarrollar
-      productos funcionales y coherentes.
-    </p>
+  <div class="container grid grid-reverse">
+    <div class="reveal">
+      <h1>Sobre mí</h1>
+      <p>
+        Diseñador industrial con mentalidad arquitectónica.
+        Desarrollo productos sólidos desde el concepto hasta la fabricación.
+      </p>
+    </div>
+    <div></div>
   </div>
 </section>
 
-<section id="cv">
-  <div class="container">
-    <h1>Currículum</h1>
-
-    <div class="cv-block">
-      <h2>Ingeniería en Diseño Industrial</h2>
-      <p>Formación interdisciplinar en desarrollo de producto y procesos industriales.</p>
-    </div>
-
-    <div class="cv-block">
-      <h2>Experiencia profesional</h2>
-      <p>Desarrollo técnico, optimización estructural y colaboración multidisciplinar.</p>
-    </div>
-  </div>
-</section>
-
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <h1 id="contact-title">Contacto</h1>
-    <p>majorbori@gmail.com</p>
+    <h1 class="reveal">Contacto</h1>
+    <p class="reveal">majorbori@gmail.com</p>
   </div>
 </section>
 
@@ -306,67 +303,40 @@ html{
 
 <script>
 
-/* ================= LOADER ================= */
+/* ===== Loader ===== */
 window.addEventListener("load",()=>{
   setTimeout(()=>{
     document.querySelector(".loader").classList.add("hidden");
-  },800);
+  },900);
 });
 
-/* ================= TRANSICIÓN SUAVE ENTRE SECCIONES ================= */
+/* ===== Section Transition ===== */
 document.querySelectorAll(".tab").forEach(tab=>{
   tab.addEventListener("click",()=>{
-
-    const current = document.querySelector("section.active");
-    const next = document.getElementById(tab.dataset.tab);
-
+    const current=document.querySelector("section.active");
+    const next=document.getElementById(tab.dataset.tab);
     if(!next) return;
 
     current.classList.remove("active");
-
-    setTimeout(()=>{
-      next.classList.add("active");
-    },200);
+    setTimeout(()=>{ next.classList.add("active"); },200);
 
     document.querySelectorAll("nav li").forEach(li=>li.classList.remove("active"));
     if(tab.tagName==="LI") tab.classList.add("active");
   });
 });
 
-/* ================= MULTILANG ================= */
-const content={
-  es:{
-    nav:["Inicio","Sobre mí","Currículum","Contacto"],
-    hero:"Industrial Design Portfolio",
-    sub:"Diseño técnico, estratégico y estructural enfocado en productos sólidos, precisos y funcionales.",
-    about:"Sobre mí",
-    contact:"Contacto"
-  },
-  en:{
-    nav:["Home","About","Curriculum","Contact"],
-    hero:"Industrial Design Portfolio",
-    sub:"Technical and strategic design focused on precise and solid products.",
-    about:"About",
-    contact:"Contact"
-  }
-};
+/* ===== Scroll Reveal ===== */
+const reveals=document.querySelectorAll(".reveal");
 
-function setLang(lang){
-  const c=content[lang];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:.2});
 
-  document.querySelectorAll("nav li").forEach((li,i)=>li.innerText=c.nav[i]);
-  document.getElementById("hero-title").innerText=c.hero;
-  document.getElementById("hero-sub").innerText=c.sub;
-  document.getElementById("about-title").innerText=c.about;
-  document.getElementById("contact-title").innerText=c.contact;
-
-  document.getElementById("btn-es").classList.toggle("active",lang==="es");
-  document.getElementById("btn-en").classList.toggle("active",lang==="en");
-}
-
-setLang("es");
-document.getElementById("btn-es").onclick=()=>setLang("es");
-document.getElementById("btn-en").onclick=()=>setLang("en");
+reveals.forEach(el=>observer.observe(el));
 
 </script>
 
