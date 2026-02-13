@@ -3,85 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB Studio — Industrial Design</title>
+<title>MB Studio — Gold Edition</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
 
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
 body{background:#0a0a0a;color:#f5f5f5;overflow-x:hidden;cursor:none;}
 canvas{position:fixed;inset:0;z-index:-1;}
 
-/* ================= LOADER ================= */
 .loader{
-  position:fixed;
-  inset:0;
-  background:#0a0a0a;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
-  transition:1.2s ease;
+  position:fixed;inset:0;background:#0a0a0a;
+  display:flex;justify-content:center;align-items:center;
+  z-index:2000;transition:1.2s ease;
 }
 
-.loader.fade{
-  opacity:0;
-  pointer-events:none;
-}
+.loader.fade{opacity:0;pointer-events:none;}
 
 .loader span{
-  font-size:14px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#777;
+  font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:#777;
 }
 
-/* ================= CURSOR ================= */
 .cursor{
-  position:fixed;
-  width:8px;height:8px;
-  border:1px solid #fff;
-  border-radius:50%;
-  pointer-events:none;
+  position:fixed;width:8px;height:8px;
+  border:1px solid #fff;border-radius:50%;
+  pointer-events:none;z-index:1000;
   transform:translate(-50%,-50%);
-  z-index:1000;
   transition:.2s;
 }
 
-.cursor.expand{
-  transform:translate(-50%,-50%) scale(3);
-  background:#fff;
-}
-
-/* ================= NAV ================= */
 nav{
-  position:fixed;
-  top:40px;left:50%;
+  position:fixed;top:40px;left:50%;
   transform:translateX(-50%);
-  display:flex;gap:60px;
-  z-index:100;
+  display:flex;gap:60px;z-index:100;
 }
 
 nav span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#555;
-  cursor:pointer;
-  transition:.4s;
+  font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;color:#555;
+  cursor:pointer;transition:.4s;
 }
 
 nav span:hover{color:#fff;}
 
-/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display:flex;justify-content:center;align-items:center;
   padding:0 10%;
   position:relative;
 }
@@ -102,49 +74,26 @@ p{
   line-height:1.6;
 }
 
-/* ================= REVEAL ================= */
-.reveal{
-  opacity:0;
-  transform:translateY(80px);
-  transition:1.4s cubic-bezier(.2,.7,.1,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ================= PROJECTS ================= */
+/* Projects Horizontal */
 .projects{
-  display:flex;
-  overflow:hidden;
   position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.projects-wrapper{
+  display:flex;
+  height:100%;
 }
 
 .project{
   min-width:100vw;
-  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:60px;
-  position:relative;
 }
 
-.project::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,transparent,#0a0a0a);
-  opacity:.4;
-}
-
-.project h2{
-  position:relative;
-  z-index:10;
-}
-
-/* ================= FOOTER ================= */
 footer{
   text-align:center;
   padding:100px 0;
@@ -168,32 +117,34 @@ footer{
   <span data-scroll="3">Contact</span>
 </nav>
 
-<section class="section">
+<section class="section hero">
   <div class="content">
-    <h1 id="heroTitle"></h1>
-    <p class="reveal">Material intelligence meets architectural clarity.</p>
+    <h1 class="hero-title">Industrial Design</h1>
+    <p>Material intelligence meets architectural clarity.</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section studio">
   <div class="content">
-    <h1 class="reveal">Spatial Systems</h1>
-    <p class="reveal">
+    <h1>Spatial Systems</h1>
+    <p>
       Products conceived as controlled volumes, precise in proportion and silent in expression.
     </p>
   </div>
 </section>
 
-<section class="section projects">
-  <div class="project"><h2>BAORI</h2></div>
-  <div class="project"><h2>NODE</h2></div>
-  <div class="project"><h2>LUMORA</h2></div>
+<section class="projects">
+  <div class="projects-wrapper">
+    <div class="project">BAORI</div>
+    <div class="project">NODE</div>
+    <div class="project">LUMORA</div>
+  </div>
 </section>
 
-<section class="section">
+<section class="section contact">
   <div class="content">
-    <h1 class="reveal">Contact</h1>
-    <p class="reveal">majorbori@gmail.com</p>
+    <h1>Contact</h1>
+    <p>majorbori@gmail.com</p>
   </div>
 </section>
 
@@ -227,38 +178,6 @@ function cursorLoop(){
 }
 cursorLoop();
 
-/* ===== HERO TYPE ===== */
-const text="Industrial Design";
-const hero=document.getElementById("heroTitle");
-
-text.split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity="0";
-  span.style.display="inline-block";
-  span.style.transform="translateY(50px)";
-  span.style.transition=`all .6s ease ${i*0.04}s`;
-  hero.appendChild(span);
-});
-
-setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(s=>{
-    s.style.opacity="1";
-    s.style.transform="translateY(0)";
-  });
-},300);
-
-/* ===== SCROLL REVEAL ===== */
-const reveals=document.querySelectorAll(".reveal");
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
-  });
-},{threshold:0.2});
-reveals.forEach(el=>observer.observe(el));
-
 /* ===== THREE BACKGROUND ===== */
 let scene=new THREE.Scene();
 let camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
@@ -291,17 +210,59 @@ function animate(){
 }
 animate();
 
-window.addEventListener("resize",()=>{
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  camera.aspect=window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
+/* ===== GSAP SCROLL ===== */
+gsap.registerPlugin(ScrollTrigger);
+
+/* Hero Fade In */
+gsap.from(".hero-title",{
+  y:100,
+  opacity:0,
+  duration:1.4,
+  ease:"power3.out"
 });
 
-/* ===== NAV SCROLL ===== */
+/* Studio Reveal */
+gsap.from(".studio h1",{
+  scrollTrigger:{
+    trigger:".studio",
+    start:"top 80%"
+  },
+  y:100,
+  opacity:0,
+  duration:1.2
+});
+
+/* Horizontal Projects */
+let sections=gsap.utils.toArray(".project");
+
+gsap.to(sections,{
+  xPercent:-100*(sections.length-1),
+  ease:"none",
+  scrollTrigger:{
+    trigger:".projects",
+    pin:true,
+    scrub:1,
+    snap:1/(sections.length-1),
+    end:()=>"+=" + document.querySelector(".projects-wrapper").offsetWidth
+  }
+});
+
+/* Contact Reveal */
+gsap.from(".contact h1",{
+  scrollTrigger:{
+    trigger:".contact",
+    start:"top 80%"
+  },
+  y:100,
+  opacity:0,
+  duration:1.2
+});
+
+/* Nav Scroll */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const index=btn.dataset.scroll;
-    document.querySelectorAll(".section")[index]
+    document.querySelectorAll("section")[index]
       .scrollIntoView({behavior:"smooth"});
   });
 });
