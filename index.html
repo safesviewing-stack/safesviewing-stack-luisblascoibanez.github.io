@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Glass AAA</title>
+<title>MB — Experimental Glass Engine</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
 
@@ -14,16 +14,14 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
-body{background:#040404;color:#fff;overflow:hidden;cursor:none;}
+body{background:#000;color:#fff;overflow:hidden;cursor:none;}
 canvas{position:fixed;inset:0;z-index:-1;}
 
 .cursor{
-  position:fixed;
-  width:14px;height:14px;
+  position:fixed;width:14px;height:14px;
   border:1px solid #fff;border-radius:50%;
-  pointer-events:none;
+  pointer-events:none;z-index:1000;
   transform:translate(-50%,-50%);
-  z-index:1000;
 }
 
 nav{
@@ -34,9 +32,8 @@ nav{
 
 nav span{
   font-size:11px;letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#555;cursor:pointer;
-  transition:.4s;
+  text-transform:uppercase;color:#555;
+  cursor:pointer;transition:.4s;
 }
 
 nav span:hover{color:#fff;}
@@ -66,15 +63,15 @@ p{margin-top:30px;font-size:18px;color:#aaa;}
 
 <section id="home" class="section active">
   <div>
-    <h1>Industrial Design</h1>
-    <p>AAA Glass Shader Experience</p>
+    <h1>Experimental Glass</h1>
+    <p>AAA Interactive Morph Engine</p>
   </div>
 </section>
 
 <section id="about" class="section">
   <div>
-    <h1>Architectural Depth</h1>
-    <p>Fresnel. Refraction. Material.</p>
+    <h1>Morphing Geometry</h1>
+    <p>Particles suspended in glass</p>
   </div>
 </section>
 
@@ -89,64 +86,84 @@ p{margin-top:30px;font-size:18px;color:#aaa;}
 
 /* ================= CURSOR ================= */
 const cursor=document.querySelector(".cursor");
-let mouseX=0, mouseY=0;
-let smoothX=0, smoothY=0;
+let mx=0,my=0,sx=0,sy=0;
 
 document.addEventListener("mousemove",e=>{
-  mouseX=e.clientX;
-  mouseY=e.clientY;
+  mx=e.clientX;my=e.clientY;
 });
 
 /* ================= THREE SETUP ================= */
 
 let scene=new THREE.Scene();
-let camera=new THREE.Camera();
+let camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.1,100);
+camera.position.z=5;
+
 let renderer=new THREE.WebGLRenderer({alpha:true});
 renderer.setSize(window.innerWidth,window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* Postprocessing */
+/* Composer */
 let composer=new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene,camera));
-
-let bloom=new THREE.UnrealBloomPass(
+composer.addPass(new THREE.UnrealBloomPass(
   new THREE.Vector2(window.innerWidth,window.innerHeight),
-  0.35,0.4,0.8
-);
-composer.addPass(bloom);
+  0.4,0.4,0.8
+));
 
-/* Render target */
-let renderTarget=new THREE.WebGLRenderTarget(
-  window.innerWidth,window.innerHeight
-);
+/* Morph Geometry */
+let ico=new THREE.IcosahedronGeometry(1.8,3);
+let sphere=new THREE.SphereGeometry(1.8,64,64);
 
-/* Background Scene */
-let bgScene=new THREE.Scene();
-let bgCamera=new THREE.PerspectiveCamera(
-  70,window.innerWidth/window.innerHeight,0.1,100
-);
-bgCamera.position.z=5;
+let morphGeo=ico.clone();
+morphGeo.morphAttributes.position=[sphere.attributes.position];
 
-let geo=new THREE.IcosahedronGeometry(2,2);
-let mat=new THREE.MeshStandardMaterial({
-  wireframe:true,
+let morphMaterial=new THREE.MeshStandardMaterial({
   color:0xffffff,
+  wireframe:true,
   transparent:true,
-  opacity:0.04
+  opacity:0.15
 });
-let mesh=new THREE.Mesh(geo,mat);
-bgScene.add(mesh);
 
+let morphMesh=new THREE.Mesh(morphGeo,morphMaterial);
+morphMesh.morphTargetInfluences=[0];
+scene.add(morphMesh);
+
+/* Particles */
+let particlesGeo=new THREE.BufferGeometry();
+let particlesCount=800;
+
+let positions=new Float32Array(particlesCount*3);
+
+for(let i=0;i<particlesCount;i++){
+  positions[i*3]=(Math.random()-0.5)*4;
+  positions[i*3+1]=(Math.random()-0.5)*4;
+  positions[i*3+2]=(Math.random()-0.5)*4;
+}
+
+particlesGeo.setAttribute("position",new THREE.BufferAttribute(positions,3));
+
+let particlesMat=new THREE.PointsMaterial({
+  color:0xffffff,
+  size:0.02,
+  transparent:true,
+  opacity:0.5
+});
+
+let particles=new THREE.Points(particlesGeo,particlesMat);
+scene.add(particles);
+
+/* Light */
 let light=new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
-bgScene.add(light);
+scene.add(light);
 
-/* Glass Shader */
+/* Glass Plane */
+let renderTarget=new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
+
 let uniforms={
   u_texture:{value:renderTarget.texture},
   u_time:{value:0},
   u_mouse:{value:new THREE.Vector2()},
-  u_resolution:{value:new THREE.Vector2()},
   u_progress:{value:0}
 };
 
@@ -164,81 +181,75 @@ let glassMaterial=new THREE.ShaderMaterial({
     uniform sampler2D u_texture;
     uniform float u_time;
     uniform vec2 u_mouse;
-    uniform vec2 u_resolution;
     uniform float u_progress;
     varying vec2 vUv;
 
     float noise(vec2 p){
-      return sin(p.x*10.0)*sin(p.y*10.0);
+      return sin(p.x*20.0+u_time)*sin(p.y*20.0+u_time);
     }
 
     void main(){
       vec2 uv=vUv;
 
-      float dist=distance(uv,u_mouse);
-      float ripple=sin(dist*50.0-u_time*4.0)*0.01;
+      float ripple=sin(distance(uv,u_mouse)*60.0-u_time*5.0)*0.01;
+      float depth=noise(uv)*0.02;
 
-      float depth=noise(uv+u_time*0.2)*0.02;
+      vec2 disp=uv+ripple+depth+u_progress*0.2;
 
-      vec2 displacedUV=uv+ripple+depth+u_progress*0.15;
+      vec3 col;
+      col.r=texture2D(u_texture,disp+0.002).r;
+      col.g=texture2D(u_texture,disp).g;
+      col.b=texture2D(u_texture,disp-0.002).b;
 
-      vec3 color;
-      color.r=texture2D(u_texture,displacedUV+0.002).r;
-      color.g=texture2D(u_texture,displacedUV).g;
-      color.b=texture2D(u_texture,displacedUV-0.002).b;
+      float fresnel=pow(1.0-dot(vec3(0,0,1),vec3(0,0,1)),3.0);
 
-      float fresnel=pow(1.0-abs(dot(vec3(0.0,0.0,1.0),vec3(0.0,0.0,1.0))),2.0);
-
-      gl_FragColor=vec4(color+fresnel*0.2,0.6);
+      gl_FragColor=vec4(col+fresnel*0.3,0.7);
     }
   `
 });
 
-let plane=new THREE.Mesh(
-  new THREE.PlaneGeometry(2,2),
-  glassMaterial
-);
+let plane=new THREE.Mesh(new THREE.PlaneGeometry(2,2),glassMaterial);
 scene.add(plane);
 
 /* Animation */
-function animate(time){
+function animate(t){
 
-  smoothX += (mouseX - smoothX) * 0.08;
-  smoothY += (mouseY - smoothY) * 0.08;
+  sx+=(mx-sx)*0.08;
+  sy+=(my-sy)*0.08;
 
-  cursor.style.left=smoothX+"px";
-  cursor.style.top=smoothY+"px";
+  cursor.style.left=sx+"px";
+  cursor.style.top=sy+"px";
 
   uniforms.u_mouse.value.set(
-    smoothX/window.innerWidth,
-    1.0-smoothY/window.innerHeight
+    sx/window.innerWidth,
+    1.0-sy/window.innerHeight
   );
 
-  uniforms.u_time.value=time*0.001;
+  uniforms.u_time.value=t*0.001;
 
-  mesh.rotation.x+=0.001;
-  mesh.rotation.y+=0.001;
+  morphMesh.rotation.x+=0.002;
+  morphMesh.rotation.y+=0.002;
+
+  particles.rotation.y+=0.0008;
 
   renderer.setRenderTarget(renderTarget);
-  renderer.render(bgScene,bgCamera);
-
+  renderer.render(scene,camera);
   renderer.setRenderTarget(null);
+
   composer.render();
 
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
 
-function resize(){
+/* Resize */
+window.addEventListener("resize",()=>{
   renderer.setSize(window.innerWidth,window.innerHeight);
   composer.setSize(window.innerWidth,window.innerHeight);
   renderTarget.setSize(window.innerWidth,window.innerHeight);
-  uniforms.u_resolution.value.set(window.innerWidth,window.innerHeight);
-}
-window.addEventListener("resize",resize);
-resize();
+});
 
-/* Liquid Transition */
+/* Section Portal Transition */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const target=document.getElementById(btn.dataset.target);
@@ -247,11 +258,14 @@ document.querySelectorAll("nav span").forEach(btn=>{
 
     uniforms.u_progress.value=1.0;
 
+    morphMesh.morphTargetInfluences[0]=1;
+
     setTimeout(()=>{
       current.classList.remove("active");
       target.classList.add("active");
-      uniforms.u_progress.value=0.0;
-    },700);
+      uniforms.u_progress.value=0;
+      morphMesh.morphTargetInfluences[0]=0;
+    },900);
   });
 });
 
