@@ -3,88 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Experimental Glass Engine</title>
+<title>MB Studio — Industrial Design</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
 <style>
+
+/* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
-body{background:#000;color:#fff;overflow:hidden;cursor:none;}
+body{background:#050505;color:#f5f5f5;overflow:hidden;cursor:none;}
 canvas{position:fixed;inset:0;z-index:-1;}
 
+/* ===== CURSOR ===== */
 .cursor{
-  position:fixed;width:14px;height:14px;
-  border:1px solid #fff;border-radius:50%;
-  pointer-events:none;z-index:1000;
+  position:fixed;
+  width:12px;height:12px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
   transform:translate(-50%,-50%);
+  z-index:1000;
+  transition:.2s;
 }
 
+.cursor.expand{
+  transform:translate(-50%,-50%) scale(2);
+  background:#fff;
+}
+
+/* ===== NAV ===== */
 nav{
-  position:fixed;top:40px;left:50%;
+  position:fixed;
+  top:40px;left:50%;
   transform:translateX(-50%);
-  display:flex;gap:60px;z-index:100;
+  display:flex;gap:60px;
+  z-index:100;
 }
 
 nav span{
-  font-size:11px;letter-spacing:.3em;
-  text-transform:uppercase;color:#555;
-  cursor:pointer;transition:.4s;
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#555;
+  cursor:pointer;
+  transition:.4s;
 }
 
 nav span:hover{color:#fff;}
 
+/* ===== SECTIONS ===== */
 .section{
   position:absolute;inset:0;
-  display:flex;justify-content:center;
-  align-items:center;text-align:center;
-  opacity:0;transition:1s ease;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  transition:1.2s cubic-bezier(.2,.7,.1,1);
 }
 
 .section.active{opacity:1;}
 
-h1{font-size:clamp(60px,6vw,110px);font-weight:500;}
-p{margin-top:30px;font-size:18px;color:#aaa;}
+h1{
+  font-size:clamp(60px,6vw,110px);
+  font-weight:500;
+  letter-spacing:-0.02em;
+}
+
+p{
+  margin-top:30px;
+  font-size:18px;
+  color:#aaa;
+  max-width:600px;
+  line-height:1.6;
+}
+
+/* ===== FADE OVERLAY ===== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:.8s ease;
+  z-index:50;
+}
+
+.overlay.active{opacity:1;}
+
 </style>
 </head>
 <body>
 
 <div class="cursor"></div>
+<div class="overlay"></div>
 
 <nav>
   <span data-target="home">Home</span>
-  <span data-target="about">About</span>
+  <span data-target="about">Studio</span>
   <span data-target="contact">Contact</span>
 </nav>
 
 <section id="home" class="section active">
-  <div>
-    <h1>Experimental Glass</h1>
-    <p>AAA Interactive Morph Engine</p>
-  </div>
+  <h1 id="title">Industrial Design</h1>
+  <p>Material intelligence meets architectural clarity.</p>
 </section>
 
 <section id="about" class="section">
-  <div>
-    <h1>Morphing Geometry</h1>
-    <p>Particles suspended in glass</p>
-  </div>
+  <h1>Minimal Architecture</h1>
+  <p>
+    We design products as spatial systems — controlled, silent and structural.
+  </p>
 </section>
 
 <section id="contact" class="section">
-  <div>
-    <h1>Contact</h1>
-    <p>majorbori@gmail.com</p>
-  </div>
+  <h1>Contact</h1>
+  <p>majorbori@gmail.com</p>
 </section>
 
 <script>
 
-/* ================= CURSOR ================= */
+/* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,sx=0,sy=0;
 
@@ -92,127 +132,52 @@ document.addEventListener("mousemove",e=>{
   mx=e.clientX;my=e.clientY;
 });
 
-/* ================= THREE SETUP ================= */
+document.querySelectorAll("nav span").forEach(el=>{
+  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
+  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
+});
+
+/* ===== THREE BACKGROUND ===== */
 
 let scene=new THREE.Scene();
-let camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.1,100);
-camera.position.z=5;
+let camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
+camera.position.z=4;
 
-let renderer=new THREE.WebGLRenderer({alpha:true});
+let renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
 renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 document.body.appendChild(renderer.domElement);
 
-/* Composer */
-let composer=new THREE.EffectComposer(renderer);
-composer.addPass(new THREE.RenderPass(scene,camera));
-composer.addPass(new THREE.UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth,window.innerHeight),
-  0.4,0.4,0.8
-));
-
-/* Morph Geometry */
-let ico=new THREE.IcosahedronGeometry(1.8,3);
-let sphere=new THREE.SphereGeometry(1.8,64,64);
-
-let morphGeo=ico.clone();
-morphGeo.morphAttributes.position=[sphere.attributes.position];
-
-let morphMaterial=new THREE.MeshStandardMaterial({
+/* Orbital geometry */
+let geometry=new THREE.IcosahedronGeometry(1.5,2);
+let material=new THREE.MeshStandardMaterial({
   color:0xffffff,
   wireframe:true,
   transparent:true,
-  opacity:0.15
+  opacity:0.08
 });
+let mesh=new THREE.Mesh(geometry,material);
+scene.add(mesh);
 
-let morphMesh=new THREE.Mesh(morphGeo,morphMaterial);
-morphMesh.morphTargetInfluences=[0];
-scene.add(morphMesh);
-
-/* Particles */
-let particlesGeo=new THREE.BufferGeometry();
-let particlesCount=800;
-
-let positions=new Float32Array(particlesCount*3);
-
-for(let i=0;i<particlesCount;i++){
-  positions[i*3]=(Math.random()-0.5)*4;
-  positions[i*3+1]=(Math.random()-0.5)*4;
-  positions[i*3+2]=(Math.random()-0.5)*4;
-}
-
-particlesGeo.setAttribute("position",new THREE.BufferAttribute(positions,3));
-
-let particlesMat=new THREE.PointsMaterial({
-  color:0xffffff,
-  size:0.02,
-  transparent:true,
-  opacity:0.5
-});
-
-let particles=new THREE.Points(particlesGeo,particlesMat);
-scene.add(particles);
-
-/* Light */
 let light=new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 scene.add(light);
 
-/* Glass Plane */
-let renderTarget=new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
+/* Audio reactive */
+let audioContext=new (window.AudioContext||window.webkitAudioContext)();
+let analyser=audioContext.createAnalyser();
+analyser.fftSize=64;
 
-let uniforms={
-  u_texture:{value:renderTarget.texture},
-  u_time:{value:0},
-  u_mouse:{value:new THREE.Vector2()},
-  u_progress:{value:0}
-};
-
-let glassMaterial=new THREE.ShaderMaterial({
-  uniforms:uniforms,
-  transparent:true,
-  vertexShader:`
-    varying vec2 vUv;
-    void main(){
-      vUv=uv;
-      gl_Position=vec4(position,1.0);
-    }
-  `,
-  fragmentShader:`
-    uniform sampler2D u_texture;
-    uniform float u_time;
-    uniform vec2 u_mouse;
-    uniform float u_progress;
-    varying vec2 vUv;
-
-    float noise(vec2 p){
-      return sin(p.x*20.0+u_time)*sin(p.y*20.0+u_time);
-    }
-
-    void main(){
-      vec2 uv=vUv;
-
-      float ripple=sin(distance(uv,u_mouse)*60.0-u_time*5.0)*0.01;
-      float depth=noise(uv)*0.02;
-
-      vec2 disp=uv+ripple+depth+u_progress*0.2;
-
-      vec3 col;
-      col.r=texture2D(u_texture,disp+0.002).r;
-      col.g=texture2D(u_texture,disp).g;
-      col.b=texture2D(u_texture,disp-0.002).b;
-
-      float fresnel=pow(1.0-dot(vec3(0,0,1),vec3(0,0,1)),3.0);
-
-      gl_FragColor=vec4(col+fresnel*0.3,0.7);
-    }
-  `
+navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+  let source=audioContext.createMediaStreamSource(stream);
+  source.connect(analyser);
 });
 
-let plane=new THREE.Mesh(new THREE.PlaneGeometry(2,2),glassMaterial);
-scene.add(plane);
+/* Animate */
+let dataArray=new Uint8Array(analyser.frequencyBinCount);
 
-/* Animation */
-function animate(t){
+function animate(){
+  requestAnimationFrame(animate);
 
   sx+=(mx-sx)*0.08;
   sy+=(my-sy)*0.08;
@@ -220,52 +185,40 @@ function animate(t){
   cursor.style.left=sx+"px";
   cursor.style.top=sy+"px";
 
-  uniforms.u_mouse.value.set(
-    sx/window.innerWidth,
-    1.0-sy/window.innerHeight
-  );
+  analyser.getByteFrequencyData(dataArray);
+  let avg=dataArray.reduce((a,b)=>a+b)/dataArray.length;
 
-  uniforms.u_time.value=t*0.001;
+  mesh.rotation.x+=0.002+avg*0.00001;
+  mesh.rotation.y+=0.002+avg*0.00001;
 
-  morphMesh.rotation.x+=0.002;
-  morphMesh.rotation.y+=0.002;
-
-  particles.rotation.y+=0.0008;
-
-  renderer.setRenderTarget(renderTarget);
   renderer.render(scene,camera);
-  renderer.setRenderTarget(null);
-
-  composer.render();
-
-  requestAnimationFrame(animate);
 }
-requestAnimationFrame(animate);
+animate();
 
 /* Resize */
 window.addEventListener("resize",()=>{
   renderer.setSize(window.innerWidth,window.innerHeight);
-  composer.setSize(window.innerWidth,window.innerHeight);
-  renderTarget.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
 });
 
-/* Section Portal Transition */
+/* ===== TRANSITIONS ===== */
+const overlay=document.querySelector(".overlay");
+const sections=document.querySelectorAll(".section");
+
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const target=document.getElementById(btn.dataset.target);
     const current=document.querySelector(".section.active");
     if(target===current) return;
 
-    uniforms.u_progress.value=1.0;
-
-    morphMesh.morphTargetInfluences[0]=1;
+    overlay.classList.add("active");
 
     setTimeout(()=>{
       current.classList.remove("active");
       target.classList.add("active");
-      uniforms.u_progress.value=0;
-      morphMesh.morphTargetInfluences[0]=0;
-    },900);
+      overlay.classList.remove("active");
+    },800);
   });
 });
 
