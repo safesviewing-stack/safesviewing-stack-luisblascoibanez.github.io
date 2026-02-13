@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB Studio — Industrial Design</title>
+<title>Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
@@ -23,36 +23,14 @@ body{
   color:#f5f5f5;
   overflow-x:hidden;
   cursor:none;
+  opacity:0;
+  transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
 canvas{
   position:fixed;
   inset:0;
   z-index:-1;
-}
-
-/* ===== LOADER ===== */
-.loader{
-  position:fixed;
-  inset:0;
-  background:#0a0a0a;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
-  transition:1.2s ease;
-}
-
-.loader.fade{
-  opacity:0;
-  pointer-events:none;
-}
-
-.loader span{
-  font-size:13px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  color:#777;
 }
 
 /* ===== CURSOR ===== */
@@ -121,8 +99,8 @@ p{
 /* ===== REVEAL ===== */
 .reveal{
   opacity:0;
-  transform:translateY(80px);
-  transition:1.4s cubic-bezier(.2,.7,.1,1);
+  transform:translateY(60px);
+  transition:1.2s cubic-bezier(.2,.7,.1,1);
 }
 
 .reveal.visible{
@@ -144,7 +122,6 @@ footer{
 </head>
 <body>
 
-<div class="loader"><span>MB STUDIO</span></div>
 <div class="cursor"></div>
 
 <nav>
@@ -177,28 +154,15 @@ footer{
 </section>
 
 <footer>
-MB STUDIO — INDUSTRIAL DESIGN
+INDUSTRIAL DESIGN
 </footer>
 
 <script>
 
-/* ================= LOADER + ENTRADA ================= */
-
-const loader = document.querySelector(".loader");
+/* ================= ENTRADA LIMPIA ================= */
 
 window.addEventListener("load", () => {
-
-  document.body.style.opacity = "0";
-  document.body.style.transition = "opacity 1.6s cubic-bezier(.2,.7,.1,1)";
-
-  setTimeout(() => {
-    document.body.style.opacity = "1";
-  }, 100);
-
-  setTimeout(() => {
-    loader.classList.add("fade");
-  }, 900);
-
+  document.body.style.opacity = "1";
 });
 
 
@@ -213,7 +177,6 @@ let posY = 0;
 
 let lastX = 0;
 let lastY = 0;
-
 let velocity = 0;
 
 document.addEventListener("mousemove", e => {
@@ -230,7 +193,7 @@ document.addEventListener("mousemove", e => {
 
 function animateCursor() {
 
-  const dynamicSpeed = 0.08 + Math.min(velocity * 0.02, 0.35);
+  const dynamicSpeed = 0.12 + Math.min(velocity * 0.02, 0.35);
 
   posX += (mouseX - posX) * dynamicSpeed;
   posY += (mouseY - posY) * dynamicSpeed;
@@ -244,7 +207,7 @@ function animateCursor() {
 animateCursor();
 
 
-/* ================= HERO TYPE ANIMATION ================= */
+/* ================= HERO TYPE (MÁS RÁPIDO) ================= */
 
 const hero = document.getElementById("heroTitle");
 const text = "Industrial Design";
@@ -254,8 +217,8 @@ text.split("").forEach((char, i) => {
   span.textContent = char;
   span.style.opacity = "0";
   span.style.display = "inline-block";
-  span.style.transform = "translateY(60px)";
-  span.style.transition = `all .8s cubic-bezier(.2,.7,.1,1) ${i * 0.05}s`;
+  span.style.transform = "translateY(40px)";
+  span.style.transition = `all .5s cubic-bezier(.2,.7,.1,1) ${i * 0.025}s`;
   hero.appendChild(span);
 });
 
@@ -264,7 +227,7 @@ setTimeout(() => {
     span.style.opacity = "1";
     span.style.transform = "translateY(0)";
   });
-}, 1200);
+}, 200);
 
 
 /* ================= SCROLL REVEAL ================= */
