@@ -3,51 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MB — Industrial Design Studio</title>
+<title>MB Studio — Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
 
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
+body{background:#050505;color:#f5f5f5;overflow:hidden;cursor:none;}
+canvas{position:fixed;inset:0;z-index:-1;}
 
-body{
-  background:#0b0b0b;
-  color:#eaeaea;
-  overflow-x:hidden;
-  cursor:none;
-}
-
-/* ================= FILM GRAIN ================= */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:3px 3px;
-  opacity:.15;
-  pointer-events:none;
-  z-index:10;
-}
-
-/* ================= CUSTOM CURSOR ================= */
+/* ===== CURSOR ===== */
 .cursor{
   position:fixed;
-  width:14px;
-  height:14px;
+  width:12px;height:12px;
   border:1px solid #fff;
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
-  transition:transform .2s ease, background .3s ease;
   z-index:1000;
+  transition:.2s;
 }
 
 .cursor.expand{
@@ -55,78 +32,12 @@ body::before{
   background:#fff;
 }
 
-/* ================= SECTIONS ================= */
-.section{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:0 10%;
-  position:relative;
-}
-
-.content{
-  max-width:900px;
-}
-
-/* ================= TYPO ================= */
-h1{
-  font-size:clamp(48px,6vw,90px);
-  font-weight:500;
-  line-height:1.05;
-}
-
-p{
-  margin-top:30px;
-  font-size:18px;
-  color:#999;
-  line-height:1.8;
-}
-
-/* ================= SCROLL REVEAL ================= */
-.reveal{
-  opacity:0;
-  transform:translateY(80px);
-  transition:1.4s cubic-bezier(.2,.7,.1,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ================= MOTION BLUR ================= */
-.blur{
-  filter:blur(20px);
-  opacity:0;
-  transition:0.8s ease;
-}
-
-/* ================= PROJECTS HORIZONTAL ================= */
-.projects-wrapper{
-  display:flex;
-  width:300vw;
-  transition:transform 1.2s cubic-bezier(.2,.7,.1,1);
-}
-
-.project{
-  width:100vw;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:50px;
-  letter-spacing:.1em;
-}
-
-/* ================= NAV ================= */
+/* ===== NAV ===== */
 nav{
   position:fixed;
-  top:40px;
-  left:50%;
+  top:40px;left:50%;
   transform:translateX(-50%);
-  display:flex;
-  gap:60px;
+  display:flex;gap:60px;
   z-index:100;
 }
 
@@ -139,169 +50,177 @@ nav span{
   transition:.4s;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{color:#fff;}
 
-/* ================= FOOTER ================= */
-footer{
+/* ===== SECTIONS ===== */
+.section{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  padding:80px 0;
-  font-size:12px;
-  letter-spacing:.2em;
-  color:#555;
-  border-top:1px solid #1c1c1c;
+  opacity:0;
+  transition:1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-canvas{
+.section.active{opacity:1;}
+
+h1{
+  font-size:clamp(60px,6vw,110px);
+  font-weight:500;
+  letter-spacing:-0.02em;
+}
+
+p{
+  margin-top:30px;
+  font-size:18px;
+  color:#aaa;
+  max-width:600px;
+  line-height:1.6;
+}
+
+/* ===== FADE OVERLAY ===== */
+.overlay{
   position:fixed;
   inset:0;
-  z-index:-1;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:.8s ease;
+  z-index:50;
 }
+
+.overlay.active{opacity:1;}
 
 </style>
 </head>
 <body>
 
 <div class="cursor"></div>
+<div class="overlay"></div>
 
 <nav>
   <span data-target="home">Home</span>
-  <span data-target="about">About</span>
-  <span data-target="projects">Projects</span>
+  <span data-target="about">Studio</span>
   <span data-target="contact">Contact</span>
 </nav>
 
-<!-- HERO -->
-<section id="home" class="section">
-  <div class="content">
-    <h1 id="typeText"></h1>
-    <p class="reveal">Precision. Material. Structural clarity.</p>
-  </div>
+<section id="home" class="section active">
+  <h1 id="title">Industrial Design</h1>
+  <p>Material intelligence meets architectural clarity.</p>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="section">
-  <div class="content">
-    <h1 class="reveal">Architectural Product Design</h1>
-    <p class="reveal">
-      Concept to production. Silent confidence through engineering discipline.
-    </p>
-  </div>
+  <h1>Minimal Architecture</h1>
+  <p>
+    We design products as spatial systems — controlled, silent and structural.
+  </p>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="section">
-  <div class="projects-wrapper">
-    <div class="project">BAORI</div>
-    <div class="project">NODE</div>
-    <div class="project">LUMORA</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
 <section id="contact" class="section">
-  <div class="content">
-    <h1 class="reveal">Contact</h1>
-    <p class="reveal">majorbori@gmail.com</p>
-  </div>
+  <h1>Contact</h1>
+  <p>majorbori@gmail.com</p>
 </section>
-
-<footer>
-MB STUDIO — INDUSTRIAL DESIGN
-</footer>
-
-<audio id="ambient" loop>
-  <source src="ambient.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 
-/* ================= WEBGL BACKGROUND ================= */
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-let renderer = new THREE.WebGLRenderer({ alpha:true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-camera.position.z = 5;
+/* ===== CURSOR ===== */
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,sx=0,sy=0;
 
-let geometry = new THREE.IcosahedronGeometry(2,1);
-let material = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
-  wireframe:true,
-  opacity:0.04,
-  transparent:true
+document.addEventListener("mousemove",e=>{
+  mx=e.clientX;my=e.clientY;
 });
 
-let mesh = new THREE.Mesh(geometry, material);
+document.querySelectorAll("nav span").forEach(el=>{
+  el.addEventListener("mouseenter",()=>cursor.classList.add("expand"));
+  el.addEventListener("mouseleave",()=>cursor.classList.remove("expand"));
+});
+
+/* ===== THREE BACKGROUND ===== */
+
+let scene=new THREE.Scene();
+let camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
+camera.position.z=4;
+
+let renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+document.body.appendChild(renderer.domElement);
+
+/* Orbital geometry */
+let geometry=new THREE.IcosahedronGeometry(1.5,2);
+let material=new THREE.MeshStandardMaterial({
+  color:0xffffff,
+  wireframe:true,
+  transparent:true,
+  opacity:0.08
+});
+let mesh=new THREE.Mesh(geometry,material);
 scene.add(mesh);
+
+let light=new THREE.PointLight(0xffffff,1);
+light.position.set(5,5,5);
+scene.add(light);
+
+/* Audio reactive */
+let audioContext=new (window.AudioContext||window.webkitAudioContext)();
+let analyser=audioContext.createAnalyser();
+analyser.fftSize=64;
+
+navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+  let source=audioContext.createMediaStreamSource(stream);
+  source.connect(analyser);
+});
+
+/* Animate */
+let dataArray=new Uint8Array(analyser.frequencyBinCount);
 
 function animate(){
   requestAnimationFrame(animate);
-  mesh.rotation.x += 0.001;
-  mesh.rotation.y += 0.001;
+
+  sx+=(mx-sx)*0.08;
+  sy+=(my-sy)*0.08;
+
+  cursor.style.left=sx+"px";
+  cursor.style.top=sy+"px";
+
+  analyser.getByteFrequencyData(dataArray);
+  let avg=dataArray.reduce((a,b)=>a+b)/dataArray.length;
+
+  mesh.rotation.x+=0.002+avg*0.00001;
+  mesh.rotation.y+=0.002+avg*0.00001;
+
   renderer.render(scene,camera);
 }
 animate();
 
+/* Resize */
 window.addEventListener("resize",()=>{
-  camera.aspect = window.innerWidth/window.innerHeight;
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-/* ================= CUSTOM CURSOR ================= */
-const cursor=document.querySelector(".cursor");
-document.addEventListener("mousemove",e=>{
-  cursor.style.left=e.clientX+"px";
-  cursor.style.top=e.clientY+"px";
-});
+/* ===== TRANSITIONS ===== */
+const overlay=document.querySelector(".overlay");
+const sections=document.querySelectorAll(".section");
 
-/* ================= TYPE ANIMATION ================= */
-const text="Industrial Design Studio";
-let i=0;
-function type(){
-  if(i<text.length){
-    document.getElementById("typeText").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,50);
-  }
-}
-type();
-
-/* ================= SCROLL REVEAL ================= */
-const reveals=document.querySelectorAll(".reveal");
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
-  });
-},{threshold:0.2});
-reveals.forEach(el=>observer.observe(el));
-
-/* ================= NAV TRANSITION ================= */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const target=document.getElementById(btn.dataset.target);
-    target.scrollIntoView({behavior:"smooth"});
+    const current=document.querySelector(".section.active");
+    if(target===current) return;
+
+    overlay.classList.add("active");
+
+    setTimeout(()=>{
+      current.classList.remove("active");
+      target.classList.add("active");
+      overlay.classList.remove("active");
+    },800);
   });
 });
-
-/* ================= PROJECT SLIDER ================= */
-let currentProject=0;
-const wrapper=document.querySelector(".projects-wrapper");
-
-document.getElementById("projects").addEventListener("click",()=>{
-  currentProject++;
-  if(currentProject>2) currentProject=0;
-  wrapper.style.transform=`translateX(-${currentProject*100}vw)`;
-});
-
-/* ================= AUDIO ================= */
-document.body.addEventListener("click",()=>{
-  document.getElementById("ambient").play();
-},{once:true});
 
 </script>
 
