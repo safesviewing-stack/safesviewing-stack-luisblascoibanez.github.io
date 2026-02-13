@@ -2,250 +2,365 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<title>Borbala Major · Industrial Design Engineer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Blasco — Industrial Designer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
 
-:root{
-  --bg:#f7f6f2;
-  --text:#111;
-  --muted:#666;
-  --line:#e5e3dc;
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
 }
 
 body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
+  background:#0f1113;
+  color:#d6d6d6;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
+/* ================= HEADER ================= */
 header{
   position:fixed;
+  top:0;
   width:100%;
-  padding:30px 10%;
-  display:flex;
-  justify-content:space-between;
-  background:rgba(247,246,242,0.9);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--line);
+  height:70px;
+  background:#14171a;
+  border-bottom:1px solid #1f2327;
   z-index:100;
 }
 
-header a{
-  text-decoration:none;
-  color:var(--text);
-  font-size:.85rem;
-  margin-left:30px;
+.nav{
+  max-width:1200px;
+  width:90%;
+  height:100%;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-section{
-  padding:160px 10%;
-}
-
-.hero{
-  padding-top:220px;
-}
-
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:4.5rem;
+.logo{
   font-weight:600;
+  font-size:14px;
+  letter-spacing:.08em;
+  color:#ffffff;
 }
 
-.hero p{
-  margin-top:20px;
-  color:var(--muted);
+nav ul{
+  display:flex;
+  gap:36px;
+  list-style:none;
 }
 
-.projects{
-  border-top:1px solid var(--line);
+nav li{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  color:#999;
+  position:relative;
+  transition:.3s;
 }
 
-.project{
-  margin-bottom:120px;
-  text-decoration:none;
-  color:inherit;
-  display:block;
+nav li:hover{
+  color:#fff;
 }
 
-.project img{
+nav li.active{
+  color:#fff;
+}
+
+nav li::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:2px;
+  background:#3a86ff;
+  transition:.3s;
+}
+
+nav li:hover::after{
   width:100%;
+}
+
+/* ================= LAYOUT ================= */
+main{
+  padding-top:70px;
+  flex-grow:1;
+}
+
+section{display:none}
+section.active{display:block}
+
+.container{
+  width:90%;
+  max-width:1100px;
+  margin:auto;
+}
+
+.spaced{
+  padding:100px 0;
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:80vh;
+  display:flex;
+  align-items:center;
+}
+
+.hero-box{
+  max-width:700px;
+}
+
+h1{
+  font-size:38px;
+  font-weight:600;
   margin-bottom:20px;
-  transition:.6s ease;
+  color:#ffffff;
 }
 
-.project:hover img{
-  transform:scale(1.02);
+h2{
+  font-size:18px;
+  font-weight:500;
+  margin-bottom:10px;
+  color:#ffffff;
 }
 
-.project h2{
-  font-family:'Playfair Display',serif;
-  font-size:2rem;
+p{
+  font-size:15px;
+  line-height:1.7;
+  color:#b5b5b5;
+}
+
+.hero-cta{
+  margin-top:30px;
+  display:flex;
+  gap:16px;
+}
+
+.btn{
+  padding:14px 28px;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.primary{
+  background:#3a86ff;
+  color:#fff;
+}
+
+.primary:hover{
+  background:#2f6ed6;
+}
+
+.secondary{
+  border:1px solid #444;
+  color:#ccc;
+}
+
+.secondary:hover{
+  border-color:#3a86ff;
+  color:#fff;
+}
+
+/* ================= ABOUT ================= */
+.about-content{
+  max-width:700px;
+}
+
+/* ================= CV ================= */
+.cv-block{
+  border-left:3px solid #3a86ff;
+  padding-left:20px;
+  margin-bottom:40px;
+}
+
+.cv-download-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 24px;
+  background:#3a86ff;
+  color:#fff;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.1em;
+}
+
+/* ================= PORTFOLIO ================= */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+
+.portfolio-item{
+  border:1px solid #1f2327;
+  padding:20px;
+  transition:.3s;
+}
+
+.portfolio-item:hover{
+  border-color:#3a86ff;
+  transform:translateY(-5px);
+}
+
+.portfolio-item img{
+  width:100%;
+  margin-bottom:15px;
+}
+
+.portfolio-content span{
+  font-size:12px;
+  color:#888;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+/* ================= CONTACT ================= */
+#contact p{
   margin-bottom:10px;
 }
 
-.project p{
-  color:var(--muted);
-}
-
-.about{
-  border-top:1px solid var(--line);
-  max-width:800px;
-}
-
-.about h2{
-  font-family:'Playfair Display',serif;
-  font-size:2rem;
-  margin-bottom:40px;
-}
-
-.about p{
-  margin-bottom:20px;
-  color:#444;
-}
-
-.about-highlight{
-  margin-top:40px;
-  font-weight:500;
-}
-
-.contact{
-  border-top:1px solid var(--line);
-}
-
-.contact h2{
-  font-family:'Playfair Display',serif;
-  font-size:2rem;
-  margin-bottom:40px;
-}
-
-.contact a{
-  display:block;
-  margin-bottom:15px;
-  text-decoration:none;
-  color:var(--text);
-}
-
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
-  padding:80px 0;
-  font-size:.8rem;
-  color:var(--muted);
-  border-top:1px solid var(--line);
+  padding:20px;
+  font-size:11px;
+  color:#777;
+  border-top:1px solid #1f2327;
+  margin-top:60px;
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-.reveal.active{
-  opacity:1;
-  transform:translateY(0);
-}
-
-@media(max-width:900px){
-  .hero h1{
-    font-size:3rem;
-  }
-}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div><strong>Luis Blasco</strong></div>
-  <nav>
-    <a href="#work">Proyectos</a>
-    <a href="#about">Sobre mí</a>
-    <a href="#contact">Contacto</a>
-  </nav>
+  <div class="nav">
+    <div class="logo">MB · Industrial Design</div>
+
+    <nav>
+      <ul>
+        <li class="tab active" data-tab="home">Inicio</li>
+        <li class="tab" data-tab="about">Sobre mí</li>
+        <li class="tab" data-tab="cv">Currículum</li>
+        <li class="tab" data-tab="portfolio">Portfolio</li>
+        <li class="tab" data-tab="contact">Contacto</li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<section class="hero reveal">
-  <h1>Luis Blasco</h1>
-  <p>Industrial Design · Function · Structure · Material</p>
+<main>
+
+<section id="home" class="active">
+  <div class="container hero">
+    <div class="hero-box">
+      <h1>Industrial Design Portfolio</h1>
+      <p>Diseño estratégico, técnico y funcional enfocado en productos con carácter y precisión.</p>
+
+      <div class="hero-cta">
+        <a class="btn primary tab" data-tab="cv">Ver CV</a>
+        <a class="btn secondary tab" data-tab="contact">Contactar</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="work" class="projects">
-  <a href="#" class="project reveal">
-    <img src="https://via.placeholder.com/1200x700">
-    <h2>Sistema Modular</h2>
-    <p>Desarrollo estructural optimizado para producción industrial.</p>
-  </a>
-
-  <a href="#" class="project reveal">
-    <img src="https://via.placeholder.com/1200x700">
-    <h2>Mecanismo Compacto</h2>
-    <p>Solución técnica enfocada en eficiencia y ensamblaje.</p>
-  </a>
-
-  <a href="#" class="project reveal">
-    <img src="https://via.placeholder.com/1200x700">
-    <h2>Producto Formal</h2>
-    <p>Exploración material con coherencia estructural.</p>
-  </a>
-
-  <a href="#" class="project reveal">
-    <img src="https://via.placeholder.com/1200x700">
-    <h2>Concepto Experimental</h2>
-    <p>Propuesta contemporánea con viabilidad industrial.</p>
-  </a>
+<section id="about">
+  <div class="container spaced">
+    <h1>Sobre mí</h1>
+    <div class="about-content">
+      <p>
+        Diseñador industrial con enfoque técnico y estructural. 
+        Combino ingeniería, procesos de fabricación y pensamiento estratégico 
+        para desarrollar productos funcionales, eficientes y estéticamente sólidos.
+      </p>
+    </div>
+  </div>
 </section>
 
-<section id="about" class="about reveal">
-  <h2>Sobre mí</h2>
+<section id="cv">
+  <div class="container spaced">
+    <h1>Currículum</h1>
 
-  <p>
-    Soy diseñador industrial graduado en la UPV de Valencia,
-    con formación inicial en la UJI y base técnica en electricidad.
-  </p>
+    <div class="cv-block">
+      <h2>Grado en Ingeniería de Diseño Industrial</h2>
+      <p>Formación interdisciplinar en diseño de producto y procesos industriales.</p>
+    </div>
 
-  <p>
-    Mi enfoque combina estructura y forma, desarrollando productos
-    donde la lógica constructiva y la claridad formal trabajan juntas.
-  </p>
+    <div class="cv-block">
+      <h2>Experiencia en empresa Sixay</h2>
+      <p>Desarrollo de mobiliario, optimización técnica y colaboración multidisciplinar.</p>
+    </div>
 
-  <p>
-    Me interesa el diseño como proceso: analizar, iterar y materializar
-    soluciones viables, optimizadas y coherentes.
-  </p>
-
-  <p class="about-highlight">
-    Busco incorporarme a un estudio donde pueda aportar criterio técnico
-    y sensibilidad contemporánea en el desarrollo de producto.
-  </p>
+    <a href="curriculum.pdf" class="cv-download-btn">Descargar CV</a>
+  </div>
 </section>
 
-<section id="contact" class="contact reveal">
-  <h2>Contacto</h2>
-  <a href="mailto:tucorreo@email.com">tucorreo@email.com</a>
-  <a href="#">LinkedIn</a>
-  <a href="#">Descargar CV</a>
-  <p>Valencia, España</p>
+<section id="portfolio">
+  <div class="container spaced">
+    <h1>Portfolio</h1>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="profile5.jpg">
+        <div class="portfolio-content">
+          <h2>BAORI</h2>
+          <span>Espacio colectivo</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="profile6.jpg">
+        <div class="portfolio-content">
+          <h2>LUMORA</h2>
+          <span>Iluminación</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<section id="contact">
+  <div class="container spaced">
+    <h1>Contacto</h1>
+    <p>📧 majorbori@gmail.com</p>
+    <p>📞 +36 30 820 3716</p>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  © 2026 Luis Blasco — Industrial Designer
+© 2026 · Industrial Design Engineer
 </footer>
 
 <script>
-function reveal(){
-  document.querySelectorAll(".reveal").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("active");
-    }
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(tab.dataset.tab).classList.add("active");
+
+    document.querySelectorAll("nav li").forEach(li=>li.classList.remove("active"));
+    if(tab.tagName==="LI") tab.classList.add("active");
   });
-}
-window.addEventListener("scroll",reveal);
-window.addEventListener("load",reveal);
+});
 </script>
 
 </body>
