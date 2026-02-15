@@ -78,10 +78,19 @@ nav span:hover{
   padding:0 10%;
 }
 
-.content{
+/* ===== CONTENT VARIANTS ===== */
+.content-center{
   max-width:900px;
+  text-align:center;
 }
 
+.content-left{
+  max-width:900px;
+  width:100%;
+  margin-left:0;
+}
+
+/* ===== TYPO ===== */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
@@ -158,9 +167,9 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- ===== INICIO ===== -->
+<!-- ===== INICIO (CENTRADO) ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-center">
     <h1 id="heroTitle"></h1>
     <p class="reveal">
       Diseño industrial con enfoque arquitectónico y precisión estructural.
@@ -168,22 +177,21 @@ footer{
   </div>
 </section>
 
-<!-- ===== SOBRE MÍ ===== -->
+<!-- ===== SOBRE MÍ (ALINEADO IZQUIERDA) ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
       Trabajo desde la estructura, el material y la proporción, buscando soluciones
-      claras, funcionales y duraderas. Me interesa el diseño entendido como sistema,
-      donde cada decisión tiene un propósito.
+      claras, funcionales y duraderas.
     </p>
   </div>
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
 
     <div class="grid reveal">
@@ -205,7 +213,7 @@ footer{
 
 <!-- ===== CV ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
       Formación en ingeniería de diseño industrial, experiencia en desarrollo de
@@ -216,7 +224,7 @@ footer{
 
 <!-- ===== CONTACTO ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
   </div>
