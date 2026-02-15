@@ -73,15 +73,23 @@ nav span:hover{
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:center;   /* centra el bloque */
+  justify-content:center;
   align-items:center;
   padding:0 10%;
 }
 
+/* CONTENIDO GENERAL (IZQUIERDA) */
 .content{
   max-width:900px;
   width:100%;
-  text-align:left;          /* 🔴 CLAVE: todo alineado a la izquierda */
+  text-align:left;
+}
+
+/* CONTENIDO HERO (CENTRO) */
+.content-hero{
+  max-width:900px;
+  width:100%;
+  text-align:center;
 }
 
 h1{
@@ -102,6 +110,12 @@ p{
   color:#aaa;
   max-width:640px;
   line-height:1.7;
+}
+
+/* Ajuste párrafo hero */
+.content-hero p{
+  margin-left:auto;
+  margin-right:auto;
 }
 
 /* ===== PORTFOLIO GRID ===== */
@@ -160,9 +174,9 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- ===== INICIO ===== -->
+<!-- ===== INICIO (HERO CENTRADO) ===== -->
 <section class="section">
-  <div class="content">
+  <div class="content-hero">
     <h1 id="heroTitle"></h1>
     <p class="reveal">
       Diseño industrial con enfoque arquitectónico y precisión estructural.
