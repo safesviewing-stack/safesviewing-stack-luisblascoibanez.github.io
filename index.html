@@ -10,6 +10,10 @@
 
 <style>
 
+:root{
+  --content-width: 900px;
+}
+
 /* ===== RESET ===== */
 *{
   margin:0;
@@ -73,23 +77,25 @@ nav span:hover{
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:0 10%;
 }
 
-/* CONTENIDO GENERAL (IZQUIERDA) */
-.content{
-  max-width:900px;
+/* CONTENEDOR MAESTRO */
+.container{
   width:100%;
-  text-align:left;
+  max-width:var(--content-width);
+  margin:0 auto;
+  padding:0 20px;
 }
 
-/* CONTENIDO HERO (CENTRO) */
-.content-hero{
-  max-width:900px;
-  width:100%;
+/* HERO */
+.hero{
   text-align:center;
+}
+
+/* RESTO */
+.left{
+  text-align:left;
 }
 
 h1{
@@ -112,13 +118,7 @@ p{
   line-height:1.7;
 }
 
-/* Ajuste párrafo hero */
-.content-hero p{
-  margin-left:auto;
-  margin-right:auto;
-}
-
-/* ===== PORTFOLIO GRID ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -147,7 +147,7 @@ p{
 .reveal.visible{
   opacity:1;
   transform:translateY(0);
-  filter:blur(0px);
+  filter:blur(0);
 }
 
 /* ===== FOOTER ===== */
@@ -174,9 +174,9 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- ===== INICIO (HERO CENTRADO) ===== -->
+<!-- ===== INICIO ===== -->
 <section class="section">
-  <div class="content-hero">
+  <div class="container hero">
     <h1 id="heroTitle"></h1>
     <p class="reveal">
       Diseño industrial con enfoque arquitectónico y precisión estructural.
@@ -186,7 +186,7 @@ footer{
 
 <!-- ===== SOBRE MÍ ===== -->
 <section class="section">
-  <div class="content">
+  <div class="container left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
@@ -198,7 +198,7 @@ footer{
 
 <!-- ===== PORTFOLIO ===== -->
 <section class="section">
-  <div class="content">
+  <div class="container left">
     <h1 class="reveal">Portfolio</h1>
 
     <div class="grid reveal">
@@ -220,7 +220,7 @@ footer{
 
 <!-- ===== CV ===== -->
 <section class="section">
-  <div class="content">
+  <div class="container left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
       Formación en ingeniería de diseño industrial, experiencia en desarrollo de
@@ -231,7 +231,7 @@ footer{
 
 <!-- ===== CONTACTO ===== -->
 <section class="section">
-  <div class="content">
+  <div class="container left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
   </div>
@@ -248,124 +248,96 @@ window.addEventListener("load",()=>{
   document.body.style.opacity="1";
 });
 
-/* ===== CURSOR DINÁMICO ===== */
+/* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
-
-let mouseX=0,mouseY=0;
-let posX=0,posY=0;
-let lastX=0,lastY=0;
-let velocity=0;
+let mx=0,my=0,px=0,py=0,lx=0,ly=0,v=0;
 
 document.addEventListener("mousemove",e=>{
-  mouseX=e.clientX;
-  mouseY=e.clientY;
-
-  const dx=mouseX-lastX;
-  const dy=mouseY-lastY;
-  velocity=Math.sqrt(dx*dx+dy*dy);
-
-  lastX=mouseX;
-  lastY=mouseY;
+  mx=e.clientX; my=e.clientY;
+  v=Math.hypot(mx-lx,my-ly);
+  lx=mx; ly=my;
 });
 
-function animateCursor(){
-  const dynamicSpeed=0.12+Math.min(velocity*0.02,0.35);
-  posX+=(mouseX-posX)*dynamicSpeed;
-  posY+=(mouseY-posY)*dynamicSpeed;
+(function loop(){
+  const speed=0.12+Math.min(v*0.02,0.35);
+  px+=(mx-px)*speed;
+  py+=(my-py)*speed;
+  cursor.style.left=px+"px";
+  cursor.style.top=py+"px";
+  requestAnimationFrame(loop);
+})();
 
-  cursor.style.left=posX+"px";
-  cursor.style.top=posY+"px";
-
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-/* ===== HERO TYPE CON BLUR ===== */
+/* ===== HERO TYPE ===== */
 const hero=document.getElementById("heroTitle");
 const text="Industrial Design";
 
-text.split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity="0";
-  span.style.display="inline-block";
-  span.style.transform="translateY(40px)";
-  span.style.filter="blur(8px)";
-  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(span);
+text.split("").forEach((c,i)=>{
+  const s=document.createElement("span");
+  s.textContent=c;
+  s.style.opacity=0;
+  s.style.display="inline-block";
+  s.style.transform="translateY(40px)";
+  s.style.filter="blur(8px)";
+  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(s);
 });
 
 setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(span=>{
-    span.style.opacity="1";
-    span.style.transform="translateY(0)";
-    span.style.filter="blur(0px)";
+  hero.querySelectorAll("span").forEach(s=>{
+    s.style.opacity=1;
+    s.style.transform="translateY(0)";
+    s.style.filter="blur(0)";
   });
 },200);
 
 /* ===== SCROLL REVEAL ===== */
-const reveals=document.querySelectorAll(".reveal");
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
-  });
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible"));
 },{threshold:0.2});
-
-reveals.forEach(el=>observer.observe(el));
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
 /* ===== THREE BACKGROUND ===== */
-let scene=new THREE.Scene();
-let camera=new THREE.PerspectiveCamera(
-  60,
-  window.innerWidth/window.innerHeight,
-  0.1,
-  100
-);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=4;
 
-let renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 document.body.appendChild(renderer.domElement);
 
-let geometry=new THREE.IcosahedronGeometry(1.8,2);
-let material=new THREE.MeshStandardMaterial({
-  wireframe:true,
-  color:0xffffff,
-  transparent:true,
-  opacity:0.05
-});
-let mesh=new THREE.Mesh(geometry,material);
+const mesh=new THREE.Mesh(
+  new THREE.IcosahedronGeometry(1.8,2),
+  new THREE.MeshStandardMaterial({
+    wireframe:true,
+    color:0xffffff,
+    transparent:true,
+    opacity:0.05
+  })
+);
 scene.add(mesh);
 
-let light=new THREE.PointLight(0xffffff,1);
+const light=new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 scene.add(light);
 
-function animate(){
+(function animate(){
   mesh.rotation.x+=0.0015;
   mesh.rotation.y+=0.0015;
   renderer.render(scene,camera);
   requestAnimationFrame(animate);
-}
-animate();
+})();
 
 window.addEventListener("resize",()=>{
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  camera.aspect=window.innerWidth/window.innerHeight;
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
 });
 
-/* ===== NAV SCROLL ===== */
-document.querySelectorAll("nav span").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
-    document.querySelectorAll(".section")[index]
-      .scrollIntoView({behavior:"smooth"});
-  });
+/* ===== NAV ===== */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
 </script>
