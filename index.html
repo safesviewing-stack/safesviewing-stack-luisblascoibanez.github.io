@@ -27,7 +27,7 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-/* ===== BACKGROUND CANVAS ===== */
+/* ===== BACKGROUND ===== */
 canvas{
   position:fixed;
   inset:0;
@@ -46,7 +46,7 @@ canvas{
   z-index:1000;
 }
 
-/* ===== NAV (FLOATING HEADER) ===== */
+/* ===== HEADER ===== */
 nav{
   position:fixed;
   top:0;
@@ -74,8 +74,8 @@ nav span{
   text-transform:uppercase;
   color:#aaa;
   cursor:pointer;
+  padding-top:4px;
   transition:.4s;
-  padding-top:4px; /* ↓ ajuste fino vertical */
 }
 
 nav span:hover{
@@ -134,7 +134,7 @@ p{
   margin-left:0.35vw;
 }
 
-/* ===== PORTFOLIO GRID ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -190,15 +190,15 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
+<!-- INICIO -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">
-      Diseño industrial con enfoque arquitectónico y precisión estructural.
-    </p>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
+<!-- SOBRE MI -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
@@ -209,6 +209,7 @@ footer{
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
@@ -220,6 +221,7 @@ footer{
   </div>
 </section>
 
+<!-- CV -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
@@ -229,6 +231,7 @@ footer{
   </div>
 </section>
 
+<!-- CONTACTO -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
@@ -239,86 +242,115 @@ footer{
 <footer>INDUSTRIAL DESIGN</footer>
 
 <script>
+
+/* ===== FADE IN ===== */
 window.addEventListener("load",()=>document.body.style.opacity="1");
 
-/* Cursor */
-const c=document.querySelector(".cursor");
+/* ===== CURSOR ===== */
+const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
+
 addEventListener("mousemove",e=>{
   mx=e.clientX; my=e.clientY;
-  v=Math.hypot(mx-lx,my-ly); lx=mx; ly=my;
+  v=Math.hypot(mx-lx,my-ly);
+  lx=mx; ly=my;
 });
-(function anim(){
+
+(function animateCursor(){
   const s=0.12+Math.min(v*0.02,0.35);
   x+=(mx-x)*s; y+=(my-y)*s;
-  c.style.left=x+"px"; c.style.top=y+"px";
-  requestAnimationFrame(anim);
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
+  requestAnimationFrame(animateCursor);
 })();
 
-/* Hero text */
-const h=document.getElementById("heroTitle");
-"Industrial Design".split("").forEach((ch,i)=>{
-  const s=document.createElement("span");
-  s.textContent=ch;
-  s.style.opacity=0;
-  s.style.display="inline-block";
-  s.style.transform="translateY(40px)";
-  s.style.filter="blur(8px)";
-  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  h.appendChild(s);
+/* ===== HERO TEXT ===== */
+const hero=document.getElementById("heroTitle");
+"Industrial Design".split("").forEach((c,i)=>{
+  const span=document.createElement("span");
+  span.textContent=c;
+  span.style.opacity=0;
+  span.style.display="inline-block";
+  span.style.transform="translateY(40px)";
+  span.style.filter="blur(8px)";
+  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(span);
 });
-setTimeout(()=>h.querySelectorAll("span").forEach(s=>{
-  s.style.opacity=1; s.style.transform="translateY(0)"; s.style.filter="blur(0)";
-}),200);
 
-/* Reveal */
-const obs=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible")),{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+setTimeout(()=>{
+  hero.querySelectorAll("span").forEach(s=>{
+    s.style.opacity=1;
+    s.style.transform="translateY(0)";
+    s.style.filter="blur(0)";
+  });
+},200);
 
-/* Nav scroll effect */
+/* ===== REVEAL ===== */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("visible"));
+},{threshold:.2});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* ===== HEADER BLUR ===== */
 addEventListener("scroll",()=>{
-  const n=document.querySelector("nav");
+  const nav=document.querySelector("nav");
   if(scrollY>40){
-    n.style.background="rgba(10,10,10,0.65)";
-    n.style.backdropFilter="blur(16px)";
+    nav.style.background="rgba(10,10,10,0.65)";
+    nav.style.backdropFilter="blur(16px)";
   }else{
-    n.style.background="rgba(10,10,10,0.45)";
-    n.style.backdropFilter="blur(12px)";
+    nav.style.background="rgba(10,10,10,0.45)";
+    nav.style.backdropFilter="blur(12px)";
   }
 });
 
-/* Nav scroll */
-document.querySelectorAll("nav span").forEach(b=>{
-  b.onclick=()=>document.querySelectorAll(".section")[b.dataset.scroll]
-    .scrollIntoView({behavior:"smooth"});
+/* ===== NAV SCROLL CON OFFSET ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const section=document.querySelectorAll(".section")[btn.dataset.scroll];
+    const headerHeight=document.querySelector("nav").offsetHeight;
+    const offset=headerHeight+40;
+    const y=section.getBoundingClientRect().top+window.pageYOffset-offset;
+
+    window.scrollTo({
+      top:y,
+      behavior:"smooth"
+    });
+  });
 });
 
-/* Three background */
+/* ===== THREE BACKGROUND ===== */
 const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
-cam.position.z=4;
-const r=new THREE.WebGLRenderer({alpha:true});
-r.setSize(innerWidth,innerHeight);
-r.setPixelRatio(Math.min(devicePixelRatio,2));
-document.body.appendChild(r.domElement);
-const m=new THREE.Mesh(
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+camera.position.z=4;
+
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(renderer.domElement);
+
+const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
   new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
 );
-scene.add(m);
-const l=new THREE.PointLight(0xffffff,1);
-l.position.set(5,5,5);
-scene.add(l);
-(function loop(){
-  m.rotation.x+=.0015; m.rotation.y+=.0015;
-  r.render(scene,cam);
-  requestAnimationFrame(loop);
+scene.add(mesh);
+
+const light=new THREE.PointLight(0xffffff,1);
+light.position.set(5,5,5);
+scene.add(light);
+
+(function animate(){
+  mesh.rotation.x+=.0015;
+  mesh.rotation.y+=.0015;
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
 })();
+
 onresize=()=>{
-  r.setSize(innerWidth,innerHeight);
-  cam.aspect=innerWidth/innerHeight;
-  cam.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
 };
+
 </script>
 
 </body>
