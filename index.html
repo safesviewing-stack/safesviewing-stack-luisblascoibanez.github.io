@@ -10,13 +10,7 @@
 
 <style>
 
-/* ================= SISTEMA ================= */
-:root{
-  --column-width: 900px;
-  --column-padding: 20px;
-}
-
-/* ================= RESET ================= */
+/* ===== RESET ===== */
 *{
   margin:0;
   padding:0;
@@ -33,14 +27,13 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-/* ================= BACKGROUND ================= */
 canvas{
   position:fixed;
   inset:0;
   z-index:-1;
 }
 
-/* ================= CURSOR ================= */
+/* ===== CURSOR ===== */
 .cursor{
   position:fixed;
   width:8px;
@@ -52,7 +45,7 @@ canvas{
   z-index:1000;
 }
 
-/* ================= NAV ================= */
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:40px;
@@ -72,30 +65,21 @@ nav span{
   transition:.4s;
 }
 
-nav span:hover{ color:#fff; }
-
-/* ================= COLUMNA MAESTRA ================= */
-.page{
-  max-width:var(--column-width);
-  margin:0 auto;
-  padding:0 var(--column-padding);
+nav span:hover{
+  color:#fff;
 }
 
-/* ================= SECTIONS ================= */
+/* ===== SECTIONS ===== */
 .section{
   min-height:100vh;
   display:flex;
+  justify-content:center;
   align-items:center;
+  padding:0 10%;
 }
 
-/* ================= HERO ================= */
-.hero{
-  text-align:center;
-}
-
-/* ================= CONTENIDO ================= */
-.left{
-  text-align:left;
+.content{
+  max-width:900px;
 }
 
 h1{
@@ -118,7 +102,7 @@ p{
   line-height:1.7;
 }
 
-/* ================= GRID ================= */
+/* ===== PORTFOLIO GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -136,7 +120,7 @@ p{
   transform:translateY(-8px);
 }
 
-/* ================= ANIMACIONES ================= */
+/* ===== CINEMATIC REVEAL ===== */
 .reveal{
   opacity:0;
   transform:translateY(60px);
@@ -147,10 +131,10 @@ p{
 .reveal.visible{
   opacity:1;
   transform:translateY(0);
-  filter:blur(0);
+  filter:blur(0px);
 }
 
-/* ================= FOOTER ================= */
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:100px 0;
@@ -174,9 +158,9 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- ================= INICIO ================= -->
+<!-- ===== INICIO ===== -->
 <section class="section">
-  <div class="page hero">
+  <div class="content">
     <h1 id="heroTitle"></h1>
     <p class="reveal">
       Diseño industrial con enfoque arquitectónico y precisión estructural.
@@ -184,21 +168,22 @@ footer{
   </div>
 </section>
 
-<!-- ================= SOBRE MÍ ================= -->
+<!-- ===== SOBRE MÍ ===== -->
 <section class="section">
-  <div class="page left">
+  <div class="content">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
       Trabajo desde la estructura, el material y la proporción, buscando soluciones
-      claras, funcionales y duraderas.
+      claras, funcionales y duraderas. Me interesa el diseño entendido como sistema,
+      donde cada decisión tiene un propósito.
     </p>
   </div>
 </section>
 
-<!-- ================= PORTFOLIO ================= -->
+<!-- ===== PORTFOLIO ===== -->
 <section class="section">
-  <div class="page left">
+  <div class="content">
     <h1 class="reveal">Portfolio</h1>
 
     <div class="grid reveal">
@@ -218,9 +203,9 @@ footer{
   </div>
 </section>
 
-<!-- ================= CV ================= -->
+<!-- ===== CV ===== -->
 <section class="section">
-  <div class="page left">
+  <div class="content">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
       Formación en ingeniería de diseño industrial, experiencia en desarrollo de
@@ -229,9 +214,9 @@ footer{
   </div>
 </section>
 
-<!-- ================= CONTACTO ================= -->
+<!-- ===== CONTACTO ===== -->
 <section class="section">
-  <div class="page left">
+  <div class="content">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
   </div>
@@ -243,104 +228,129 @@ INDUSTRIAL DESIGN
 
 <script>
 
-/* ================= ENTRADA ================= */
+/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>{
   document.body.style.opacity="1";
 });
 
-/* ================= CURSOR ================= */
+/* ===== CURSOR DINÁMICO ===== */
 const cursor=document.querySelector(".cursor");
-let mx=0,my=0,px=0,py=0,lx=0,ly=0,v=0;
+
+let mouseX=0,mouseY=0;
+let posX=0,posY=0;
+let lastX=0,lastY=0;
+let velocity=0;
 
 document.addEventListener("mousemove",e=>{
-  mx=e.clientX; my=e.clientY;
-  v=Math.hypot(mx-lx,my-ly);
-  lx=mx; ly=my;
+  mouseX=e.clientX;
+  mouseY=e.clientY;
+
+  const dx=mouseX-lastX;
+  const dy=mouseY-lastY;
+  velocity=Math.sqrt(dx*dx+dy*dy);
+
+  lastX=mouseX;
+  lastY=mouseY;
 });
 
-(function loop(){
-  const speed=0.12+Math.min(v*0.02,0.35);
-  px+=(mx-px)*speed;
-  py+=(my-py)*speed;
-  cursor.style.left=px+"px";
-  cursor.style.top=py+"px";
-  requestAnimationFrame(loop);
-})();
+function animateCursor(){
+  const dynamicSpeed=0.12+Math.min(velocity*0.02,0.35);
+  posX+=(mouseX-posX)*dynamicSpeed;
+  posY+=(mouseY-posY)*dynamicSpeed;
 
-/* ================= HERO TYPE ================= */
+  cursor.style.left=posX+"px";
+  cursor.style.top=posY+"px";
+
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+/* ===== HERO TYPE CON BLUR ===== */
 const hero=document.getElementById("heroTitle");
 const text="Industrial Design";
 
-text.split("").forEach((c,i)=>{
-  const s=document.createElement("span");
-  s.textContent=c;
-  s.style.opacity=0;
-  s.style.display="inline-block";
-  s.style.transform="translateY(40px)";
-  s.style.filter="blur(8px)";
-  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(s);
+text.split("").forEach((char,i)=>{
+  const span=document.createElement("span");
+  span.textContent=char;
+  span.style.opacity="0";
+  span.style.display="inline-block";
+  span.style.transform="translateY(40px)";
+  span.style.filter="blur(8px)";
+  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(span);
 });
 
 setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(s=>{
-    s.style.opacity=1;
-    s.style.transform="translateY(0)";
-    s.style.filter="blur(0)";
+  hero.querySelectorAll("span").forEach(span=>{
+    span.style.opacity="1";
+    span.style.transform="translateY(0)";
+    span.style.filter="blur(0px)";
   });
 },200);
 
-/* ================= SCROLL REVEAL ================= */
+/* ===== SCROLL REVEAL ===== */
+const reveals=document.querySelectorAll(".reveal");
+
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
   });
 },{threshold:0.2});
 
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+reveals.forEach(el=>observer.observe(el));
 
-/* ================= THREE BACKGROUND ================= */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
+/* ===== THREE BACKGROUND ===== */
+let scene=new THREE.Scene();
+let camera=new THREE.PerspectiveCamera(
+  60,
+  window.innerWidth/window.innerHeight,
+  0.1,
+  100
+);
 camera.position.z=4;
 
-const renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+let renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 document.body.appendChild(renderer.domElement);
 
-const mesh=new THREE.Mesh(
-  new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({
-    wireframe:true,
-    color:0xffffff,
-    transparent:true,
-    opacity:0.05
-  })
-);
+let geometry=new THREE.IcosahedronGeometry(1.8,2);
+let material=new THREE.MeshStandardMaterial({
+  wireframe:true,
+  color:0xffffff,
+  transparent:true,
+  opacity:0.05
+});
+let mesh=new THREE.Mesh(geometry,material);
 scene.add(mesh);
 
-const light=new THREE.PointLight(0xffffff,1);
+let light=new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 scene.add(light);
 
-(function animate(){
+function animate(){
   mesh.rotation.x+=0.0015;
   mesh.rotation.y+=0.0015;
   renderer.render(scene,camera);
   requestAnimationFrame(animate);
-})();
+}
+animate();
 
 window.addEventListener("resize",()=>{
-  renderer.setSize(innerWidth,innerHeight);
-  camera.aspect=innerWidth/innerHeight;
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
 });
 
-/* ================= NAV ================= */
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
+/* ===== NAV SCROLL ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const index=btn.dataset.scroll;
+    document.querySelectorAll(".section")[index]
+      .scrollIntoView({behavior:"smooth"});
+  });
 });
 
 </script>
