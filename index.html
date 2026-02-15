@@ -27,7 +27,7 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-/* ===== BACKGROUND CANVAS ===== */
+/* ===== CANVAS ===== */
 canvas{
   position:fixed;
   inset:0;
@@ -46,7 +46,7 @@ canvas{
   z-index:1000;
 }
 
-/* ===== NAV (FLOATING HEADER) ===== */
+/* ===== HEADER ===== */
 nav{
   position:fixed;
   top:0;
@@ -65,7 +65,7 @@ nav{
   -webkit-backdrop-filter:blur(12px);
 
   z-index:100;
-  transition:background .4s ease, backdrop-filter .4s ease;
+  transition:.4s;
 }
 
 nav span{
@@ -77,29 +77,24 @@ nav span{
   transition:.4s;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{ color:#fff; }
 
 /* ===== SECTIONS ===== */
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:120px 10% 0; /* espacio para el header */
+  padding:120px 10% 0;
 }
 
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
-  text-align:left;
   margin-left:1vw;
 }
 
 .content-left{
   max-width:900px;
-  width:100%;
   margin-left:6vw;
 }
 
@@ -115,9 +110,8 @@ h1{
 }
 
 h2{
-  font-size:32px;
+  font-size:42px;
   font-weight:400;
-  margin-bottom:20px;
 }
 
 p{
@@ -126,30 +120,7 @@ p{
   color:#aaa;
   max-width:640px;
   line-height:1.7;
-}
-
-/* Texto ligeramente desplazado */
-.content-left p,
-.content-center p{
   margin-left:0.35vw;
-}
-
-/* ===== PORTFOLIO GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:40px;
-  margin-top:40px;
-}
-
-.project{
-  border-top:1px solid #222;
-  padding-top:20px;
-  transition:.4s;
-}
-
-.project:hover{
-  transform:translateY(-8px);
 }
 
 /* ===== REVEAL ===== */
@@ -164,6 +135,25 @@ p{
   opacity:1;
   transform:translateY(0);
   filter:blur(0);
+}
+
+/* ===== PORTFOLIO HORIZONTAL ===== */
+.portfolio-wrapper{
+  width:100%;
+  overflow:hidden;
+}
+
+.portfolio-track{
+  display:flex;
+  gap:8vw;
+  will-change:transform;
+  transition:transform 1s cubic-bezier(.2,.7,.1,1);
+}
+
+.project{
+  min-width:70vw;
+  border-top:1px solid #222;
+  padding-top:20px;
 }
 
 /* ===== FOOTER ===== */
@@ -194,9 +184,7 @@ footer{
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">
-      Diseño industrial con enfoque arquitectónico y precisión estructural.
-    </p>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
@@ -206,25 +194,27 @@ footer{
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
-      Trabajo desde la estructura, el material y la proporción, buscando soluciones
-      claras, funcionales y duraderas.
+      Trabajo desde la estructura, el material y la proporción.
     </p>
   </div>
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
-<section class="section">
-  <div class="content-left">
+<section class="section" id="portfolioSection">
+  <div class="content-left portfolio-wrapper">
     <h1 class="reveal">Portfolio</h1>
-    <div class="grid reveal">
+
+    <div class="portfolio-track" id="portfolioTrack">
       <div class="project">
         <h2>BAORI</h2>
         <p>Espacio colectivo modular.</p>
       </div>
+
       <div class="project">
         <h2>NODE</h2>
         <p>Sistema estructural minimal.</p>
       </div>
+
       <div class="project">
         <h2>LUMORA</h2>
         <p>Iluminación arquitectónica.</p>
@@ -238,8 +228,7 @@ footer{
   <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
-      Formación en ingeniería de diseño industrial, experiencia en desarrollo de
-      producto, diseño técnico y optimización estructural.
+      Formación en ingeniería de diseño industrial y experiencia en desarrollo de producto.
     </p>
   </div>
 </section>
@@ -252,16 +241,12 @@ footer{
   </div>
 </section>
 
-<footer>
-INDUSTRIAL DESIGN
-</footer>
+<footer>INDUSTRIAL DESIGN</footer>
 
 <script>
 
-/* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+/* ===== PAGE LOAD ===== */
+window.onload=()=>document.body.style.opacity=1;
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
@@ -302,28 +287,45 @@ setTimeout(()=>{
   });
 },200);
 
-/* ===== SCROLL REVEAL ===== */
-const obs=new IntersectionObserver(e=>{
+/* ===== REVEAL ===== */
+const observer=new IntersectionObserver(e=>{
   e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible"));
 },{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-
-/* ===== NAV BLUR ON SCROLL ===== */
-window.addEventListener("scroll",()=>{
-  const nav=document.querySelector("nav");
-  if(scrollY>40){
-    nav.style.background="rgba(10,10,10,0.75)";
-    nav.style.backdropFilter="blur(18px)";
-  }else{
-    nav.style.background="rgba(10,10,10,0.55)";
-    nav.style.backdropFilter="blur(12px)";
-  }
-});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAV SCROLL ===== */
 document.querySelectorAll("nav span").forEach(b=>{
   b.onclick=()=>document.querySelectorAll(".section")[b.dataset.scroll]
     .scrollIntoView({behavior:"smooth"});
+});
+
+/* ===== PORTFOLIO HORIZONTAL SCROLL ===== */
+const track=document.getElementById("portfolioTrack");
+const section=document.getElementById("portfolioSection");
+let xScroll=0,maxX=0,active=false;
+
+function updateMax(){
+  maxX=track.scrollWidth-innerWidth;
+}
+updateMax(); addEventListener("resize",updateMax);
+
+new IntersectionObserver(e=>{
+  active=e[0].isIntersecting;
+},{threshold:.6}).observe(section);
+
+addEventListener("wheel",e=>{
+  if(!active) return;
+  e.preventDefault();
+  xScroll+=e.deltaY*0.8;
+  xScroll=Math.max(0,Math.min(xScroll,maxX));
+  track.style.transform=`translateX(${-xScroll}px)`;
+},{passive:false});
+
+/* ===== HEADER BLUR ===== */
+addEventListener("scroll",()=>{
+  nav.style.background=scrollY>40
+    ?"rgba(10,10,10,0.75)"
+    :"rgba(10,10,10,0.55)";
 });
 
 /* ===== THREE BACKGROUND ===== */
@@ -338,7 +340,7 @@ document.body.appendChild(renderer.domElement);
 
 const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
+  new THREE.MeshStandardMaterial({wireframe:true,opacity:.05,transparent:true})
 );
 scene.add(mesh);
 
@@ -353,7 +355,7 @@ scene.add(light);
   requestAnimationFrame(animate);
 })();
 
-window.onresize=()=>{
+onresize=()=>{
   renderer.setSize(innerWidth,innerHeight);
   camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
