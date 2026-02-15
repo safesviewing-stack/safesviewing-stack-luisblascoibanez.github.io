@@ -27,6 +27,7 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
+/* ===== BACKGROUND CANVAS ===== */
 canvas{
   position:fixed;
   inset:0;
@@ -45,22 +46,33 @@ canvas{
   z-index:1000;
 }
 
-/* ===== NAV ===== */
+/* ===== NAV (FLOATING HEADER) ===== */
 nav{
   position:fixed;
-  top:40px;
+  top:0;
   left:50%;
   transform:translateX(-50%);
+  width:100%;
+  height:80px;
+
   display:flex;
+  justify-content:center;
+  align-items:center;
   gap:50px;
+
+  background:rgba(10,10,10,0.55);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
   z-index:100;
+  transition:background .4s ease, backdrop-filter .4s ease;
 }
 
 nav span{
   font-size:11px;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:#555;
+  color:#777;
   cursor:pointer;
   transition:.4s;
 }
@@ -75,10 +87,10 @@ nav span:hover{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:0 10%;
+  padding:120px 10% 0; /* espacio para el header */
 }
 
-/* ===== CONTENT VARIANTS ===== */
+/* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
   text-align:left;
@@ -116,7 +128,7 @@ p{
   line-height:1.7;
 }
 
-/* 👉 MICRO AJUSTE FINAL */
+/* Texto ligeramente desplazado */
 .content-left p,
 .content-center p{
   margin-left:0.35vw;
@@ -140,7 +152,7 @@ p{
   transform:translateY(-8px);
 }
 
-/* ===== CINEMATIC REVEAL ===== */
+/* ===== REVEAL ===== */
 .reveal{
   opacity:0;
   transform:translateY(60px);
@@ -151,13 +163,13 @@ p{
 .reveal.visible{
   opacity:1;
   transform:translateY(0);
-  filter:blur(0px);
+  filter:blur(0);
 }
 
 /* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:100px 0;
+  padding:120px 0;
   font-size:12px;
   letter-spacing:.2em;
   color:#555;
@@ -204,7 +216,6 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
-
     <div class="grid reveal">
       <div class="project">
         <h2>BAORI</h2>
@@ -252,125 +263,101 @@ window.addEventListener("load",()=>{
   document.body.style.opacity="1";
 });
 
-/* ===== CURSOR DINÁMICO ===== */
+/* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
-
-let mouseX=0,mouseY=0;
-let posX=0,posY=0;
-let lastX=0,lastY=0;
-let velocity=0;
+let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
 
 document.addEventListener("mousemove",e=>{
-  mouseX=e.clientX;
-  mouseY=e.clientY;
-
-  const dx=mouseX-lastX;
-  const dy=mouseY-lastY;
-  velocity=Math.sqrt(dx*dx+dy*dy);
-
-  lastX=mouseX;
-  lastY=mouseY;
+  mx=e.clientX; my=e.clientY;
+  v=Math.hypot(mx-lx,my-ly);
+  lx=mx; ly=my;
 });
 
-function animateCursor(){
-  const dynamicSpeed=0.12+Math.min(velocity*0.02,0.35);
-  posX+=(mouseX-posX)*dynamicSpeed;
-  posY+=(mouseY-posY)*dynamicSpeed;
-
-  cursor.style.left=posX+"px";
-  cursor.style.top=posY+"px";
-
+(function animateCursor(){
+  const s=0.12+Math.min(v*0.02,0.35);
+  x+=(mx-x)*s; y+=(my-y)*s;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
-}
-animateCursor();
+})();
 
-/* ===== HERO TYPE ===== */
+/* ===== HERO TEXT ===== */
 const hero=document.getElementById("heroTitle");
-const text="Industrial Design";
-
-text.split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity="0";
-  span.style.display="inline-block";
-  span.style.transform="translateY(40px)";
-  span.style.filter="blur(8px)";
-  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(span);
+"Industrial Design".split("").forEach((c,i)=>{
+  const s=document.createElement("span");
+  s.textContent=c;
+  s.style.opacity=0;
+  s.style.display="inline-block";
+  s.style.transform="translateY(40px)";
+  s.style.filter="blur(8px)";
+  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(s);
 });
 
 setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(span=>{
-    span.style.opacity="1";
-    span.style.transform="translateY(0)";
-    span.style.filter="blur(0px)";
+  hero.querySelectorAll("span").forEach(s=>{
+    s.style.opacity=1;
+    s.style.transform="translateY(0)";
+    s.style.filter="blur(0)";
   });
 },200);
 
 /* ===== SCROLL REVEAL ===== */
-const reveals=document.querySelectorAll(".reveal");
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible"));
+},{threshold:.2});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
-  });
-},{threshold:0.2});
-
-reveals.forEach(el=>observer.observe(el));
-
-/* ===== THREE BACKGROUND ===== */
-let scene=new THREE.Scene();
-let camera=new THREE.PerspectiveCamera(
-  60,
-  window.innerWidth/window.innerHeight,
-  0.1,
-  100
-);
-camera.position.z=4;
-
-let renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-document.body.appendChild(renderer.domElement);
-
-let geometry=new THREE.IcosahedronGeometry(1.8,2);
-let material=new THREE.MeshStandardMaterial({
-  wireframe:true,
-  color:0xffffff,
-  transparent:true,
-  opacity:0.05
-});
-let mesh=new THREE.Mesh(geometry,material);
-scene.add(mesh);
-
-let light=new THREE.PointLight(0xffffff,1);
-light.position.set(5,5,5);
-scene.add(light);
-
-function animate(){
-  mesh.rotation.x+=0.0015;
-  mesh.rotation.y+=0.0015;
-  renderer.render(scene,camera);
-  requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener("resize",()=>{
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  camera.aspect=window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
+/* ===== NAV BLUR ON SCROLL ===== */
+window.addEventListener("scroll",()=>{
+  const nav=document.querySelector("nav");
+  if(scrollY>40){
+    nav.style.background="rgba(10,10,10,0.75)";
+    nav.style.backdropFilter="blur(18px)";
+  }else{
+    nav.style.background="rgba(10,10,10,0.55)";
+    nav.style.backdropFilter="blur(12px)";
+  }
 });
 
 /* ===== NAV SCROLL ===== */
-document.querySelectorAll("nav span").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
-    document.querySelectorAll(".section")[index]
-      .scrollIntoView({behavior:"smooth"});
-  });
+document.querySelectorAll("nav span").forEach(b=>{
+  b.onclick=()=>document.querySelectorAll(".section")[b.dataset.scroll]
+    .scrollIntoView({behavior:"smooth"});
 });
+
+/* ===== THREE BACKGROUND ===== */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+camera.position.z=4;
+
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(renderer.domElement);
+
+const mesh=new THREE.Mesh(
+  new THREE.IcosahedronGeometry(1.8,2),
+  new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
+);
+scene.add(mesh);
+
+const light=new THREE.PointLight(0xffffff,1);
+light.position.set(5,5,5);
+scene.add(light);
+
+(function animate(){
+  mesh.rotation.x+=.0015;
+  mesh.rotation.y+=.0015;
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+})();
+
+window.onresize=()=>{
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+};
 
 </script>
 
