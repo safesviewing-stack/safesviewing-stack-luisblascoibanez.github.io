@@ -190,15 +190,17 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- INICIO -->
+<!-- ===== INICIO ===== -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
+    <p class="reveal">
+      Diseño industrial con enfoque arquitectónico y precisión estructural.
+    </p>
   </div>
 </section>
 
-<!-- SOBRE MI -->
+<!-- ===== SOBRE MÍ ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
@@ -209,7 +211,7 @@ footer{
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- ===== PORTFOLIO ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
@@ -221,7 +223,7 @@ footer{
   </div>
 </section>
 
-<!-- CV -->
+<!-- ===== CV ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
@@ -231,7 +233,7 @@ footer{
   </div>
 </section>
 
-<!-- CONTACTO -->
+<!-- ===== CONTACTO ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
@@ -243,7 +245,7 @@ footer{
 
 <script>
 
-/* ===== FADE IN ===== */
+/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>document.body.style.opacity="1");
 
 /* ===== CURSOR ===== */
@@ -258,7 +260,8 @@ addEventListener("mousemove",e=>{
 
 (function animateCursor(){
   const s=0.12+Math.min(v*0.02,0.35);
-  x+=(mx-x)*s; y+=(my-y)*s;
+  x+=(mx-x)*s;
+  y+=(my-y)*s;
   cursor.style.left=x+"px";
   cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
@@ -267,14 +270,14 @@ addEventListener("mousemove",e=>{
 /* ===== HERO TEXT ===== */
 const hero=document.getElementById("heroTitle");
 "Industrial Design".split("").forEach((c,i)=>{
-  const span=document.createElement("span");
-  span.textContent=c;
-  span.style.opacity=0;
-  span.style.display="inline-block";
-  span.style.transform="translateY(40px)";
-  span.style.filter="blur(8px)";
-  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(span);
+  const s=document.createElement("span");
+  s.textContent=c;
+  s.style.opacity=0;
+  s.style.display="inline-block";
+  s.style.transform="translateY(40px)";
+  s.style.filter="blur(8px)";
+  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(s);
 });
 
 setTimeout(()=>{
@@ -285,13 +288,14 @@ setTimeout(()=>{
   });
 },200);
 
-/* ===== REVEAL ===== */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("visible"));
+/* ===== SCROLL REVEAL ===== */
+const observer=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible"));
 },{threshold:.2});
+
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== HEADER BLUR ===== */
+/* ===== HEADER SCROLL EFFECT ===== */
 addEventListener("scroll",()=>{
   const nav=document.querySelector("nav");
   if(scrollY>40){
@@ -303,13 +307,13 @@ addEventListener("scroll",()=>{
   }
 });
 
-/* ===== NAV SCROLL CON OFFSET ===== */
+/* ===== NAV SCROLL WITH OFFSET ===== */
+const headerOffset = 100;
+
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const section=document.querySelectorAll(".section")[btn.dataset.scroll];
-    const headerHeight=document.querySelector("nav").offsetHeight;
-    const offset=headerHeight+40;
-    const y=section.getBoundingClientRect().top+window.pageYOffset-offset;
+    const y=section.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
     window.scrollTo({
       top:y,
@@ -330,7 +334,12 @@ document.body.appendChild(renderer.domElement);
 
 const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
+  new THREE.MeshStandardMaterial({
+    wireframe:true,
+    color:0xffffff,
+    transparent:true,
+    opacity:.05
+  })
 );
 scene.add(mesh);
 
