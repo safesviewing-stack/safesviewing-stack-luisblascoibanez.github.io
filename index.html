@@ -52,7 +52,7 @@ nav{
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:60px;
+  gap:50px;
   z-index:100;
 }
 
@@ -98,8 +98,8 @@ p{
   margin-top:20px;
   font-size:18px;
   color:#aaa;
-  max-width:600px;
-  line-height:1.6;
+  max-width:640px;
+  line-height:1.7;
 }
 
 /* ===== PORTFOLIO GRID ===== */
@@ -152,16 +152,32 @@ footer{
 
 <nav>
   <span data-scroll="0">Inicio</span>
-  <span data-scroll="1">Portfolio</span>
-  <span data-scroll="2">CV</span>
-  <span data-scroll="3">Contacto</span>
+  <span data-scroll="1">Sobre mí</span>
+  <span data-scroll="2">Portfolio</span>
+  <span data-scroll="3">CV</span>
+  <span data-scroll="4">Contacto</span>
 </nav>
 
 <!-- ===== INICIO ===== -->
 <section class="section">
   <div class="content">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
+    <p class="reveal">
+      Diseño industrial con enfoque arquitectónico y precisión estructural.
+    </p>
+  </div>
+</section>
+
+<!-- ===== SOBRE MÍ ===== -->
+<section class="section">
+  <div class="content">
+    <h1 class="reveal">Sobre mí</h1>
+    <p class="reveal">
+      Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
+      Trabajo desde la estructura, el material y la proporción, buscando soluciones
+      claras, funcionales y duraderas. Me interesa el diseño entendido como sistema,
+      donde cada decisión tiene un propósito.
+    </p>
   </div>
 </section>
 
@@ -192,8 +208,8 @@ footer{
   <div class="content">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
-      Formación en ingeniería de diseño industrial, experiencia en desarrollo
-      de producto, optimización estructural y diseño técnico.
+      Formación en ingeniería de diseño industrial, experiencia en desarrollo de
+      producto, diseño técnico y optimización estructural.
     </p>
   </div>
 </section>
@@ -212,7 +228,7 @@ INDUSTRIAL DESIGN
 
 <script>
 
-/* ===== ENTRADA LIMPIA ===== */
+/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>{
   document.body.style.opacity="1";
 });
@@ -249,7 +265,7 @@ function animateCursor(){
 }
 animateCursor();
 
-/* ===== HERO TYPE CON BLUR CINEMÁTICO ===== */
+/* ===== HERO TYPE CON BLUR ===== */
 const hero=document.getElementById("heroTitle");
 const text="Industrial Design";
 
