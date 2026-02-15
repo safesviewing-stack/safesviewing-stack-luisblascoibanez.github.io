@@ -11,7 +11,7 @@
 <style>
 
 :root{
-  --content-width: 900px;
+  --page-width: 900px;
 }
 
 /* ===== RESET ===== */
@@ -69,8 +69,13 @@ nav span{
   transition:.4s;
 }
 
-nav span:hover{
-  color:#fff;
+nav span:hover{ color:#fff; }
+
+/* ===== PAGE COLUMN (CLAVE) ===== */
+.page{
+  max-width:var(--page-width);
+  margin:0 auto;
+  padding:0 20px;
 }
 
 /* ===== SECTIONS ===== */
@@ -78,14 +83,6 @@ nav span:hover{
   min-height:100vh;
   display:flex;
   align-items:center;
-}
-
-/* CONTENEDOR MAESTRO */
-.container{
-  width:100%;
-  max-width:var(--content-width);
-  margin:0 auto;
-  padding:0 20px;
 }
 
 /* HERO */
@@ -176,7 +173,7 @@ footer{
 
 <!-- ===== INICIO ===== -->
 <section class="section">
-  <div class="container hero">
+  <div class="page hero">
     <h1 id="heroTitle"></h1>
     <p class="reveal">
       Diseño industrial con enfoque arquitectónico y precisión estructural.
@@ -186,7 +183,7 @@ footer{
 
 <!-- ===== SOBRE MÍ ===== -->
 <section class="section">
-  <div class="container left">
+  <div class="page left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
@@ -198,7 +195,7 @@ footer{
 
 <!-- ===== PORTFOLIO ===== -->
 <section class="section">
-  <div class="container left">
+  <div class="page left">
     <h1 class="reveal">Portfolio</h1>
 
     <div class="grid reveal">
@@ -220,7 +217,7 @@ footer{
 
 <!-- ===== CV ===== -->
 <section class="section">
-  <div class="container left">
+  <div class="page left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
       Formación en ingeniería de diseño industrial, experiencia en desarrollo de
@@ -231,7 +228,7 @@ footer{
 
 <!-- ===== CONTACTO ===== -->
 <section class="section">
-  <div class="container left">
+  <div class="page left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
   </div>
