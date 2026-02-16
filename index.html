@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
+
 /* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
 
@@ -26,60 +27,145 @@ canvas{position:fixed;inset:0;z-index:-1;}
 
 /* ===== CURSOR ===== */
 .cursor{
-  position:fixed;width:8px;height:8px;border:1px solid #fff;border-radius:50%;
-  pointer-events:none;transform:translate(-50%,-50%);z-index:1000;
+  position:fixed;
+  width:8px;height:8px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:1000;
 }
 
 /* ===== HEADER ===== */
 nav{
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;height:80px;display:flex;justify-content:center;align-items:center;gap:50px;
-  background:rgba(10,10,10,0.45);backdrop-filter:blur(12px);
-  z-index:100;transition:background .4s ease, backdrop-filter .4s ease;
+  width:100%;height:80px;
+  display:flex;justify-content:center;align-items:center;gap:50px;
+  background:rgba(10,10,10,0.45);
+  backdrop-filter:blur(12px);
+  z-index:100;
+  transition:background .4s ease, backdrop-filter .4s ease;
 }
 
 nav span{
-  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:#aaa;cursor:pointer;transition:.4s;padding-top:4px;
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#aaa;
+  cursor:pointer;
+  transition:.4s;
+  padding-top:4px;
 }
 nav span:hover{color:#fff;}
 
 /* ===== SECTIONS ===== */
 .section{
-  min-height:100vh;display:flex;justify-content:center;align-items:center;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   padding:120px 10% 0;
 }
 
 /* ===== CONTENT ===== */
 .content-center{max-width:900px;text-align:left;margin-left:1vw;}
-.content-left{max-width:900px;width:100%;margin-left:6vw;}
+.content-left{max-width:1100px;width:100%;margin-left:6vw;}
+
+/* ===== SOBRE MÍ LAYOUT ===== */
+.about-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:60px;
+  align-items:start;
+}
+
+/* ===== FOTO ===== */
+.about-photo{
+  width:100%;
+  max-width:360px;
+  opacity:.9;
+  filter:grayscale(100%);
+  transition:.6s;
+}
+
+.about-photo:hover{
+  opacity:1;
+  filter:grayscale(0%);
+}
 
 /* ===== TYPO ===== */
-h1{font-size:clamp(70px,6vw,120px);font-weight:500;line-height:1.05;}
-.content-center h1{font-size:clamp(84px,7vw,140px);}
-h2{font-size:30px;font-weight:400;margin-bottom:18px;}
-p{
-  margin-top:18px;font-size:16.5px;color:#aaa;max-width:620px;line-height:1.65;
+h1{
+  font-size:clamp(70px,6vw,120px);
+  font-weight:500;
+  line-height:1.05;
 }
-.content-left p,.content-center p{margin-left:0.35vw;}
+
+.content-center h1{
+  font-size:clamp(84px,7vw,140px);
+}
+
+h2{
+  font-size:30px;
+  font-weight:400;
+  margin-bottom:18px;
+}
+
+p{
+  margin-top:18px;
+  font-size:16.5px;
+  color:#aaa;
+  max-width:620px;
+  line-height:1.65;
+}
+
+.content-left p,
+.content-center p{margin-left:0.35vw;}
 
 /* ===== GRID ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:36px;margin-top:36px;}
-.project{border-top:1px solid #222;padding-top:18px;transition:.4s;}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:36px;
+  margin-top:36px;
+}
+
+.project{
+  border-top:1px solid #222;
+  padding-top:18px;
+  transition:.4s;
+}
 .project:hover{transform:translateY(-8px);}
 
 /* ===== REVEAL ===== */
 .reveal{
-  opacity:0;transform:translateY(60px);filter:blur(8px);
+  opacity:0;
+  transform:translateY(60px);
+  filter:blur(8px);
   transition:1.2s cubic-bezier(.2,.7,.1,1);
 }
-.reveal.visible{opacity:1;transform:translateY(0);filter:blur(0);}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
 
 /* ===== FOOTER ===== */
 footer{
-  text-align:center;padding:120px 0;font-size:12px;letter-spacing:.2em;
-  color:#aaa;border-top:1px solid #1c1c1c;
+  text-align:center;
+  padding:120px 0;
+  font-size:12px;
+  letter-spacing:.2em;
+  color:#aaa;
+  border-top:1px solid #1c1c1c;
 }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .about-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -104,17 +190,23 @@ footer{
 
 <!-- ===== SOBRE MÍ ===== -->
 <section class="section">
-  <div class="content-left">
-    <h1 class="reveal">Sobre mí</h1>
-    <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios
-      en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la
-      Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad.
-      <br><br>
-      Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada
-      proyecto. Mis principales intereses son la impresión 3D aplicada al prototipado y,
-      actualmente, el diseño y desarrollo de páginas web.
-    </p>
+  <div class="content-left about-grid">
+    
+    <div>
+      <h1 class="reveal">Sobre mí</h1>
+      <p class="reveal">
+        Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios
+        en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la
+        Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad.
+        <br><br>
+        Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada
+        proyecto. Mis principales intereses son la impresión 3D aplicada al prototipado y,
+        actualmente, el diseño y desarrollo de páginas web.
+      </p>
+    </div>
+
+    <img src="foto.jpg" alt="Sobre mí" class="about-photo reveal">
+
   </div>
 </section>
 
@@ -152,14 +244,14 @@ footer{
 <footer>INDUSTRIAL DESIGN</footer>
 
 <script>
-/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>document.body.style.opacity="1");
 
-/* ===== CURSOR ===== */
+/* Cursor */
 const c=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
 addEventListener("mousemove",e=>{
-  mx=e.clientX;my=e.clientY;v=Math.hypot(mx-lx,my-ly);lx=mx;ly=my;
+  mx=e.clientX;my=e.clientY;
+  v=Math.hypot(mx-lx,my-ly);lx=mx;ly=my;
 });
 (function loop(){
   const s=0.12+Math.min(v*0.02,0.35);
@@ -168,70 +260,74 @@ addEventListener("mousemove",e=>{
   requestAnimationFrame(loop);
 })();
 
-/* ===== HERO TEXT ===== */
+/* Hero text */
 const h=document.getElementById("heroTitle");
 "Industrial Design".split("").forEach((ch,i)=>{
   const sp=document.createElement("span");
-  sp.textContent=ch;sp.style.opacity=0;sp.style.display="inline-block";
-  sp.style.transform="translateY(40px)";sp.style.filter="blur(8px)";
+  sp.textContent=ch;
+  sp.style.opacity=0;
+  sp.style.display="inline-block";
+  sp.style.transform="translateY(40px)";
+  sp.style.filter="blur(8px)";
   sp.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
   h.appendChild(sp);
 });
 setTimeout(()=>h.querySelectorAll("span").forEach(sp=>{
-  sp.style.opacity=1;sp.style.transform="translateY(0)";sp.style.filter="blur(0)";
+  sp.style.opacity=1;
+  sp.style.transform="translateY(0)";
+  sp.style.filter="blur(0)";
 }),200);
 
-/* ===== SCROLL REVEAL ===== */
+/* Reveal */
 const obs=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible")),{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
-/* ===== HEADER BLUR ON SCROLL ===== */
+/* Header scroll */
 addEventListener("scroll",()=>{
   const n=document.querySelector("nav");
-  if(scrollY>40){n.style.background="rgba(10,10,10,0.65)";n.style.backdropFilter="blur(16px)";}
-  else{n.style.background="rgba(10,10,10,0.45)";n.style.backdropFilter="blur(12px)";}
+  if(scrollY>40){
+    n.style.background="rgba(10,10,10,0.65)";
+    n.style.backdropFilter="blur(16px)";
+  }else{
+    n.style.background="rgba(10,10,10,0.45)";
+    n.style.backdropFilter="blur(12px)";
+  }
 });
 
-/* ===== NAV SCROLL WITH OFFSET ===== */
+/* Nav scroll with offset */
 document.querySelectorAll("nav span").forEach(btn=>{
-  btn.addEventListener("click",()=>{
+  btn.onclick=()=>{
     const section=document.querySelectorAll(".section")[btn.dataset.scroll];
     const headerHeight=document.querySelector("nav").offsetHeight;
-    const offset=-100; // ← aplicado
-
-    const targetY=
-      section.getBoundingClientRect().top +
-      window.pageYOffset -
-      headerHeight -
-      offset;
-
-    window.scrollTo({top:targetY,behavior:"smooth"});
-  });
+    const offset=-100;
+    const y=section.getBoundingClientRect().top+pageYOffset-headerHeight-offset;
+    scrollTo({top:y,behavior:"smooth"});
+  };
 });
 
-/* ===== THREE BACKGROUND ===== */
+/* Three background */
 const scene=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
 cam.position.z=4;
-const renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-document.body.appendChild(renderer.domElement);
+const r=new THREE.WebGLRenderer({alpha:true});
+r.setSize(innerWidth,innerHeight);
+r.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(r.domElement);
 const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
   new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
 );
 scene.add(mesh);
-const light=new THREE.PointLight(0xffffff,1);
-light.position.set(5,5,5);
-scene.add(light);
+const l=new THREE.PointLight(0xffffff,1);
+l.position.set(5,5,5);
+scene.add(l);
 (function anim(){
   mesh.rotation.x+=.0015;mesh.rotation.y+=.0015;
-  renderer.render(scene,cam);
+  r.render(scene,cam);
   requestAnimationFrame(anim);
 })();
 onresize=()=>{
-  renderer.setSize(innerWidth,innerHeight);
+  r.setSize(innerWidth,innerHeight);
   cam.aspect=innerWidth/innerHeight;
   cam.updateProjectionMatrix();
 };
