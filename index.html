@@ -73,9 +73,7 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{ color:#fff; }
 
 /* ===== SECTIONS ===== */
 .section{
@@ -86,13 +84,13 @@ nav span:hover{
   padding:120px 10% 0;
 }
 
-/* CONTACTO */
+/* CONTACTO — ajuste ultra fino */
 .section.contact{
   padding-top:120px;
 }
 
 .section.contact .content-left{
-  margin-top:-140px;
+  margin-top:-125px; /* ← cambio mínimo */
 }
 
 /* ===== CONTENT ===== */
@@ -214,9 +212,7 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
@@ -258,26 +254,20 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
-  });
+  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
 },{threshold:.2});
-
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-
     const index = btn.dataset.scroll;
 
-    // INICIO → arriba
     if(index === "0"){
       window.scrollTo({ top:0, behavior:"smooth" });
       return;
     }
 
-    // CONTACTO → FINAL REAL
     if(index === "4"){
       requestAnimationFrame(()=>{
         window.scrollTo({
@@ -288,10 +278,8 @@ document.querySelectorAll("nav span").forEach(btn=>{
       return;
     }
 
-    // RESTO DE SECCIONES
     const section = document.querySelectorAll(".section")[index];
     const title = section.querySelector("h1");
-
     const offset = 180;
 
     window.scrollTo({
