@@ -61,7 +61,6 @@ nav{
   background:rgba(10,10,10,0.45);
   backdrop-filter:blur(12px);
   z-index:100;
-  transition:background .4s ease, backdrop-filter .4s ease;
 }
 
 nav span{
@@ -74,8 +73,11 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{
-  color:#fff;
+nav span:hover{ color:#fff; }
+
+nav span.disabled{
+  opacity:0.35;
+  pointer-events:none;
 }
 
 /* ===== SECTIONS ===== */
@@ -111,41 +113,13 @@ h1{
   font-size:clamp(84px,7vw,140px);
 }
 
-h2{
-  font-size:30px;
-  font-weight:400;
-  margin-bottom:18px;
-}
-
 p{
   margin-top:18px;
-  font-size:16.5px;
+  font-size:16px;
   color:#aaa;
   max-width:620px;
   line-height:1.65;
-}
-
-.content-left p,
-.content-center p{
   margin-left:0.35vw;
-}
-
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:36px;
-  margin-top:36px;
-}
-
-.project{
-  border-top:1px solid #222;
-  padding-top:18px;
-  transition:.4s;
-}
-
-.project:hover{
-  transform:translateY(-8px);
 }
 
 /* ===== REVEAL ===== */
@@ -186,7 +160,7 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- ===== INICIO ===== -->
+<!-- INICIO -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
@@ -194,42 +168,35 @@ footer{
   </div>
 </section>
 
-<!-- ===== SOBRE MÍ ===== -->
+<!-- SOBRE MI -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
+      Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
       Universitat Politècnica de València (UPV) y Universitat Jaume I (UJI), con FP en electricidad.
       Interesado en impresión 3D aplicada al prototipado y en el diseño y desarrollo de páginas web.
     </p>
   </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
+<!-- PORTFOLIO -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
-    <div class="grid reveal">
-      <div class="project"><h2>BAORI</h2><p>Espacio colectivo modular.</p></div>
-      <div class="project"><h2>NODE</h2><p>Sistema estructural minimal.</p></div>
-      <div class="project"><h2>LUMORA</h2><p>Iluminación arquitectónica.</p></div>
-    </div>
+    <p class="reveal">Selección de proyectos de diseño industrial.</p>
   </div>
 </section>
 
-<!-- ===== CV ===== -->
+<!-- CV -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
-    <p class="reveal">
-      Formación en ingeniería de diseño industrial, experiencia en desarrollo de producto
-      y diseño técnico.
-    </p>
+    <p class="reveal">Formación académica y experiencia profesional.</p>
   </div>
 </section>
 
-<!-- ===== CONTACTO ===== -->
+<!-- CONTACTO -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
@@ -242,95 +209,85 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>document.body.style.opacity="1");
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 /* ===== CURSOR ===== */
-const c=document.querySelector(".cursor");
-let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,x=0,y=0;
 
 addEventListener("mousemove",e=>{
-  mx=e.clientX; my=e.clientY;
-  v=Math.hypot(mx-lx,my-ly);
-  lx=mx; ly=my;
+  mx=e.clientX;
+  my=e.clientY;
 });
 
 (function animateCursor(){
-  const s=0.12+Math.min(v*0.02,0.35);
-  x+=(mx-x)*s;
-  y+=(my-y)*s;
-  c.style.left=x+"px";
-  c.style.top=y+"px";
+  x+=(mx-x)*0.2;
+  y+=(my-y)*0.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
 })();
 
 /* ===== HERO TEXT ===== */
-const h=document.getElementById("heroTitle");
-"Industrial Design".split("").forEach((ch,i)=>{
+const hero=document.getElementById("heroTitle");
+"Industrial Design".split("").forEach((char,i)=>{
   const span=document.createElement("span");
-  span.textContent=ch;
+  span.textContent=char;
   span.style.opacity=0;
   span.style.display="inline-block";
   span.style.transform="translateY(40px)";
   span.style.filter="blur(8px)";
   span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  h.appendChild(span);
+  hero.appendChild(span);
 });
 
 setTimeout(()=>{
-  h.querySelectorAll("span").forEach(span=>{
+  hero.querySelectorAll("span").forEach(span=>{
     span.style.opacity=1;
     span.style.transform="translateY(0)";
     span.style.filter="blur(0)";
   });
 },200);
 
-/* ===== SCROLL REVEAL ===== */
+/* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
   });
 },{threshold:.2});
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== HEADER BLUR ===== */
-addEventListener("scroll",()=>{
-  const n=document.querySelector("nav");
-  if(scrollY>40){
-    n.style.background="rgba(10,10,10,0.65)";
-    n.style.backdropFilter="blur(16px)";
-  }else{
-    n.style.background="rgba(10,10,10,0.45)";
-    n.style.backdropFilter="blur(12px)";
-  }
-});
-
-/* ===== NAV SCROLL – TÍTULOS ALINEADOS ===== */
+/* ===== NAVIGATION (UN SOLO MOVIMIENTO) ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const section=document.querySelectorAll(".section")[btn.dataset.scroll];
+
+    const index=btn.dataset.scroll;
+
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
+      btn.classList.add("disabled");
+      return;
+    }
+
+    const section=document.querySelectorAll(".section")[index];
     const title=section.querySelector("h1");
 
-    const fixedTitlePosition=160; // todos los títulos caen aquí
+    const offset=180;
+    const targetY=title.offsetTop-offset;
 
-    const targetY=
-      title.getBoundingClientRect().top +
-      window.pageYOffset -
-      fixedTitlePosition;
+    window.scrollTo({top:targetY,behavior:"smooth"});
+    btn.classList.add("disabled");
 
-    window.scrollTo({
-      top:targetY,
-      behavior:"smooth"
-    });
-  });
+  },{ once:true });
 });
 
 /* ===== THREE BACKGROUND ===== */
 const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
-cam.position.z=4;
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
+camera.position.z=4;
 
 const renderer=new THREE.WebGLRenderer({alpha:true});
 renderer.setSize(innerWidth,innerHeight);
@@ -339,7 +296,12 @@ document.body.appendChild(renderer.domElement);
 
 const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
+  new THREE.MeshStandardMaterial({
+    wireframe:true,
+    color:0xffffff,
+    opacity:.05,
+    transparent:true
+  })
 );
 scene.add(mesh);
 
@@ -350,14 +312,14 @@ scene.add(light);
 (function animate(){
   mesh.rotation.x+=.0015;
   mesh.rotation.y+=.0015;
-  renderer.render(scene,cam);
+  renderer.render(scene,camera);
   requestAnimationFrame(animate);
 })();
 
 onresize=()=>{
   renderer.setSize(innerWidth,innerHeight);
-  cam.aspect=innerWidth/innerHeight;
-  cam.updateProjectionMatrix();
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
 };
 
 </script>
