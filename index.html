@@ -72,59 +72,75 @@ nav span:hover{ color:#fff; }
   min-height:100vh;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
   padding:120px 10% 0;
 }
 
 /* ===== HERO ===== */
+.section:first-of-type{
+  align-items:center;
+}
+
 .section:first-of-type .content-center{
   margin-top:-70px;
-}
-
-/* ===== CONTACTO ===== */
-.section.contact{
-  padding-top:120px;
-}
-
-.section.contact .content-left{
-  margin-top:-170px;
 }
 
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
   text-align:left;
-  margin-left:1vw;
 }
 
 .content-left{
   max-width:900px;
   width:100%;
-  margin-left:4.3vw;
 }
 
 /* ===== ABOUT ===== */
 .about-wrapper{
-  display:flex;
-  align-items:flex-start;
-  gap:40px;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  column-gap:40px;
+  align-items:start;
 }
 
+.about-left{
+  display:flex;
+  flex-direction:column;
+}
+
+.about-left h1{
+  margin-bottom:32px;
+}
+
+/* Texto */
 .about-text{
-  text-align:justify;
-  max-width:450px;
-  margin-top:0;
+  font-size:15px;
+  color:#aaa;
+  line-height:1.6;
+  margin-left:0.35vw;
 }
 
 .about-text + .about-text{
   margin-top:18px;
 }
 
-.about-wrapper img{
+/* Foto alineada al baseline real */
+.about-photo{
   max-width:260px;
   height:auto;
   display:block;
-  margin-top:28px; /* ← foto bajada */
+  margin-top:calc(1em * 1.6);
+  transform:translateY(40px);
+  filter:brightness(.85);
+  transition:
+    transform 1.2s cubic-bezier(.2,.7,.1,1),
+    filter 1.2s cubic-bezier(.2,.7,.1,1);
+}
+
+.about-photo.visible{
+  transform:translateY(0);
+  filter:brightness(1);
 }
 
 /* ===== TYPO ===== */
@@ -143,7 +159,6 @@ p{
   font-size:15px;
   color:#aaa;
   line-height:1.6;
-  margin-left:0.35vw;
 }
 
 /* ===== REVEAL ===== */
@@ -168,6 +183,17 @@ footer{
   letter-spacing:.18em;
   color:#cfcfcf;
   border-top:1px solid #1c1c1c;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .about-wrapper{
+    grid-template-columns:1fr;
+  }
+
+  .about-photo{
+    margin-top:40px;
+  }
 }
 
 </style>
@@ -196,28 +222,24 @@ footer{
 <section class="section">
   <div class="content-left about-wrapper">
 
-    <div>
+    <div class="about-left">
       <h1 class="reveal">Sobre mí</h1>
 
       <p class="reveal about-text">
         Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis
         estudios universitarios en la Universitat Politècnica de València (UPV) y en la
-        Universitat Jaume I (UJI) durante los primeros años de formación. Además, cuento con
-        una formación profesional en electricidad, lo que me ha proporcionado una base
-        técnica sólida y una comprensión profunda de los procesos constructivos y funcionales.
+        Universitat Jaume I (UJI). Además, cuento con una formación profesional en electricidad,
+        lo que me ha proporcionado una base técnica sólida.
       </p>
 
       <p class="reveal about-text">
-        Me considero una persona muy detallista y organizada, con una fuerte orientación a la
-        calidad: hasta que una tarea no está perfectamente resuelta, no doy el trabajo por
-        terminado. Como principal afición, me apasiona el mundo de la impresión 3D,
-        especialmente aplicada al prototipado y al desarrollo de producto. Actualmente,
-        también estoy profundizando en la creación y el diseño de páginas web, combinando
-        diseño, estructura y experiencia de usuario.
+        Me considero una persona detallista y organizada, con una fuerte orientación a la
+        calidad. Me apasiona la impresión 3D aplicada al prototipado y el desarrollo de
+        producto, y actualmente profundizo en el diseño y desarrollo de interfaces web.
       </p>
     </div>
 
-    <img src="foto.jpg" alt="Foto">
+    <img src="foto.jpg" alt="Foto" class="about-photo reveal">
 
   </div>
 </section>
@@ -239,7 +261,7 @@ footer{
 </section>
 
 <!-- CONTACTO -->
-<section class="section contact">
+<section class="section">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">luis.blasco@email.com</p>
@@ -253,7 +275,9 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
@@ -274,36 +298,40 @@ addEventListener("mousemove",e=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
+  });
 },{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== NAVIGATION ===== */
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
+
+/* ===== NAV ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const index = btn.dataset.scroll;
+    const index=btn.dataset.scroll;
 
-    if(index === "0"){
-      window.scrollTo({ top:0, behavior:"smooth" });
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
       return;
     }
 
-    if(index === "4"){
-      requestAnimationFrame(()=>{
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior:"smooth"
-        });
+    if(index==="4"){
+      window.scrollTo({
+        top:document.documentElement.scrollHeight,
+        behavior:"smooth"
       });
       return;
     }
 
     const section=document.querySelectorAll(".section")[index];
     const title=section.querySelector("h1");
-    const offset=180;
 
     window.scrollTo({
-      top:title.offsetTop-offset,
+      top:title.offsetTop-160,
       behavior:"smooth"
     });
   });
