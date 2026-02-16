@@ -126,13 +126,13 @@ p{
   margin-top:18px;
   font-size:15px;
   color:#aaa;
-  max-width:500px;
+  max-width:480px; /* ⬅ texto más estrecho */
   line-height:1.6;
   margin-left:0.35vw;
   text-align:justify;
 }
 
-/* ===== ABOUT (LAYOUT HONESTO) ===== */
+/* ===== ABOUT (LAYOUT EDITORIAL) ===== */
 .about{
   display:block;
 }
@@ -144,11 +144,11 @@ p{
 .about-content{
   display:flex;
   align-items:flex-start;
-  gap:32px; /* ⬅ aire controlado */
+  gap:32px;
 }
 
 .about-text{
-  max-width:500px;
+  max-width:480px;
 }
 
 .about-photo{
@@ -157,7 +157,7 @@ p{
 }
 
 .about-photo img{
-  width:260px;
+  width:300px; /* ⬅ foto más grande */
   height:auto;
   border-radius:0;
   filter:grayscale(100%) contrast(1.05);
@@ -194,7 +194,7 @@ p{
   }
 
   .about-photo img{
-    width:220px;
+    width:240px;
   }
 }
 
