@@ -132,8 +132,16 @@ p{
   text-align:justify;
 }
 
-/* ===== ABOUT ===== */
+/* ===== ABOUT (EDITORIAL) ===== */
 .about{
+  display:block;
+}
+
+.about-title{
+  margin-bottom:60px;
+}
+
+.about-content{
   display:flex;
   align-items:flex-start;
   gap:80px;
@@ -171,9 +179,13 @@ p{
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  .about{
+  .about-content{
     flex-direction:column;
     gap:40px;
+  }
+
+  .about-title{
+    margin-bottom:40px;
   }
 
   .about-photo img{
@@ -217,24 +229,28 @@ footer{
 <section class="section">
   <div class="content-left about">
 
-    <div class="about-text">
-      <h1 class="reveal">Sobre mí</h1>
-      <p class="reveal">
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Mi perfil combina una sólida formación
-        técnica —reforzada por una FP en electricidad— con una marcada sensibilidad estética y atención al detalle.
-        Me considero una persona meticulosa y perfeccionista, con una mentalidad ecléctica que disfruta del proceso
-        de diseño desde el análisis hasta la resolución final. Me interesa especialmente el diseño industrial con
-        enfoque estructural y arquitectónico, así como la aplicación de tecnologías como la impresión 3D y la
-        fabricación digital. Entiendo el diseño como una disciplina transversal, donde lo técnico y lo creativo
-        se integran para dar respuesta a necesidades reales mediante soluciones claras, funcionales y bien
-        fundamentadas.
-      </p>
-    </div>
+    <h1 class="reveal about-title">Sobre mí</h1>
 
-    <div class="about-photo reveal">
-      <img src="foto.jpg" alt="Foto personal de Luis Blasco">
-    </div>
+    <div class="about-content">
 
+      <div class="about-text reveal">
+        <p>
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. Mi perfil combina una sólida formación
+          técnica —reforzada por una FP en electricidad— con una marcada sensibilidad estética y atención al detalle.
+          Me considero una persona meticulosa y perfeccionista, con una mentalidad ecléctica que disfruta del proceso
+          de diseño desde el análisis hasta la resolución final. Me interesa especialmente el diseño industrial con
+          enfoque estructural y arquitectónico, así como la aplicación de tecnologías como la impresión 3D y la
+          fabricación digital. Entiendo el diseño como una disciplina transversal, donde lo técnico y lo creativo
+          se integran para dar respuesta a necesidades reales mediante soluciones claras, funcionales y bien
+          fundamentadas.
+        </p>
+      </div>
+
+      <div class="about-photo reveal">
+        <img src="foto.jpg" alt="Foto personal de Luis Blasco">
+      </div>
+
+    </div>
   </div>
 </section>
 
