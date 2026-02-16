@@ -73,9 +73,7 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{ color:#fff; }
 
 /* ===== SECTIONS ===== */
 .section{
@@ -84,6 +82,11 @@ nav span:hover{
   justify-content:center;
   align-items:center;
   padding:120px 10% 0;
+}
+
+/* Contacto: subir un poco más */
+.section.contact{
+  padding-top:60px;
 }
 
 /* ===== CONTENT ===== */
@@ -161,9 +164,7 @@ footer{
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">
-      Diseño industrial con enfoque arquitectónico y precisión estructural.
-    </p>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
@@ -174,7 +175,7 @@ footer{
     <p class="reveal">
       Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
       Universitat Politècnica de València (UPV) y Universitat Jaume I (UJI), con FP en electricidad.
-      Interesado en impresión 3D aplicada al prototipado y en la creación de páginas web.
+      Interesado en impresión 3D aplicada al prototipado y en el diseño y desarrollo de páginas web.
     </p>
   </div>
 </section>
@@ -183,9 +184,7 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
-    <p class="reveal">
-      Selección de proyectos de diseño industrial con enfoque técnico y conceptual.
-    </p>
+    <p class="reveal">Selección de proyectos de diseño industrial.</p>
   </div>
 </section>
 
@@ -193,14 +192,12 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
-    <p class="reveal">
-      Formación académica y experiencia profesional en diseño y desarrollo de producto.
-    </p>
+    <p class="reveal">Formación académica y experiencia profesional.</p>
   </div>
 </section>
 
 <!-- CONTACTO -->
-<section class="section">
+<section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
@@ -212,17 +209,14 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
 
 addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
+  mx=e.clientX; my=e.clientY;
 });
 
 (function animateCursor(){
@@ -256,17 +250,13 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
-  });
+  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
 },{threshold:.2});
-
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-
     const index=btn.dataset.scroll;
 
     if(index==="0"){
@@ -278,10 +268,8 @@ document.querySelectorAll("nav span").forEach(btn=>{
     const title=section.querySelector("h1");
 
     const offset=180;
-    const targetY=title.offsetTop-offset;
-
     window.scrollTo({
-      top:targetY,
+      top:title.offsetTop-offset,
       behavior:"smooth"
     });
   });
