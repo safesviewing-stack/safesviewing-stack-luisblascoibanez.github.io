@@ -223,8 +223,7 @@ footer{
   <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
-      Formación en ingeniería de diseño industrial, experiencia en desarrollo de producto
-      y diseño técnico.
+      Formación en ingeniería de diseño industrial y experiencia en desarrollo de producto.
     </p>
   </div>
 </section>
@@ -275,7 +274,6 @@ const h=document.getElementById("heroTitle");
   span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
   h.appendChild(span);
 });
-
 setTimeout(()=>{
   h.querySelectorAll("span").forEach(span=>{
     span.style.opacity=1;
@@ -292,7 +290,6 @@ const observer=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.2});
-
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== HEADER BLUR ===== */
@@ -307,22 +304,29 @@ addEventListener("scroll",()=>{
   }
 });
 
-/* ===== NAV SCROLL – TÍTULOS ALINEADOS ===== */
+/* ===== NAV SCROLL LOGIC ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const section=document.querySelectorAll(".section")[btn.dataset.scroll];
-    const title=section.querySelector("h1");
+    const index = btn.dataset.scroll;
 
-    const fixedTitlePosition=140; // todos los títulos caen aquí
+    // INICIO → arriba del todo
+    if(index === "0"){
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-    const targetY=
+    const section = document.querySelectorAll(".section")[index];
+    const title = section.querySelector("h1");
+    const fixedTitlePosition = 180; // ← más abajo que antes
+
+    const targetY =
       title.getBoundingClientRect().top +
       window.pageYOffset -
       fixedTitlePosition;
 
     window.scrollTo({
-      top:targetY,
-      behavior:"smooth"
+      top: targetY,
+      behavior: "smooth"
     });
   });
 });
