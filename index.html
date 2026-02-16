@@ -27,6 +27,13 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
+/* ===== BACKGROUND ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
 /* ===== CURSOR ===== */
 .cursor{
   position:fixed;
@@ -63,6 +70,7 @@ nav span{
   color:#ccc;
   cursor:pointer;
   transition:.4s;
+  padding-top:6px;
 }
 
 nav span:hover{ color:#fff; }
@@ -82,6 +90,10 @@ nav span:hover{ color:#fff; }
 }
 
 /* ===== CONTACTO ===== */
+.section.contact{
+  padding-top:120px;
+}
+
 .section.contact .content-left{
   margin-top:-165px;
 }
@@ -89,6 +101,8 @@ nav span:hover{ color:#fff; }
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
+  text-align:left;
+  margin-left:1vw;
 }
 
 .content-left{
@@ -104,16 +118,29 @@ h1{
   line-height:1.05;
 }
 
+.content-center h1{
+  font-size:clamp(84px,7vw,140px);
+}
+
 p{
   margin-top:18px;
   font-size:15px;
   color:#aaa;
   max-width:480px;
   line-height:1.6;
+  margin-left:0.35vw;
   text-align:justify;
 }
 
 /* ===== ABOUT ===== */
+.about{
+  display:block;
+}
+
+.about-title{
+  margin-bottom:2px;
+}
+
 .about-content{
   display:flex;
   align-items:flex-start;
@@ -132,6 +159,7 @@ p{
 .about-photo img{
   width:290px;
   height:auto;
+  border-radius:0;
   filter:grayscale(100%) contrast(1.05);
   opacity:0.9;
 }
@@ -148,6 +176,36 @@ p{
   opacity:1;
   transform:translateY(0);
   filter:blur(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .about-content{
+    flex-direction:column;
+    gap:40px;
+  }
+
+  .about-title{
+    margin-bottom:10px;
+  }
+
+  .about-photo{
+    margin-top:0;
+  }
+
+  .about-photo img{
+    width:240px;
+  }
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:48px 0 36px;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#cfcfcf;
+  border-top:1px solid #1c1c1c;
 }
 
 </style>
@@ -174,9 +232,9 @@ p{
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left">
+  <div class="content-left about">
 
-    <h1 class="reveal">Sobre mí</h1>
+    <h1 class="reveal about-title">Sobre mí</h1>
 
     <div class="about-content">
 
@@ -195,16 +253,66 @@ p{
       </div>
 
       <div class="about-photo reveal">
-        <img src="foto.jpg" alt="Foto personal">
+        <img src="foto.jpg" alt="Foto personal de Luis Blasco">
       </div>
 
     </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="content-left">
+    <h1 class="reveal">Portfolio</h1>
+    <p class="reveal">Selección de proyectos de diseño industrial.</p>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="content-left">
+    <h1 class="reveal">CV</h1>
+    <p class="reveal">Formación académica y experiencia profesional.</p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section contact">
+  <div class="content-left">
+    <h1 class="reveal">Contacto</h1>
+    <p class="reveal">luis.blasco@email.com</p>
+  </div>
+</section>
+
+<footer>
+© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniero en diseño industrial
+</footer>
+
 <script>
 
-/* HERO TEXT */
+/* ===== ENTRADA ===== */
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
+
+/* ===== CURSOR ===== */
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,x=0,y=0;
+
+addEventListener("mousemove",e=>{
+  mx=e.clientX;
+  my=e.clientY;
+});
+
+(function animateCursor(){
+  x+=(mx-x)*0.2;
+  y+=(my-y)*0.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
+  requestAnimationFrame(animateCursor);
+})();
+
+/* ===== HERO TEXT ===== */
 const hero=document.getElementById("heroTitle");
 "Industrial Design".split("").forEach((char,i)=>{
   const span=document.createElement("span");
@@ -213,7 +321,7 @@ const hero=document.getElementById("heroTitle");
   span.style.display="inline-block";
   span.style.transform="translateY(40px)";
   span.style.filter="blur(8px)";
-  span.style.transition=`all .5s ease ${i*0.03}s`;
+  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
   hero.appendChild(span);
 });
 
@@ -225,14 +333,45 @@ setTimeout(()=>{
   });
 },200);
 
-/* REVEAL */
+/* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
   });
 },{threshold:.2});
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* ===== NAVIGATION ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const index=btn.dataset.scroll;
+
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+
+    if(index==="4"){
+      window.scrollTo({
+        top:document.documentElement.scrollHeight,
+        behavior:"smooth"
+      });
+      return;
+    }
+
+    const section=document.querySelectorAll(".section")[index];
+    const title=section.querySelector("h1");
+    const offset=180;
+
+    window.scrollTo({
+      top:title.offsetTop-offset,
+      behavior:"smooth"
+    });
+  });
+});
 
 </script>
 
