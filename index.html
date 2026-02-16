@@ -84,9 +84,13 @@ nav span:hover{ color:#fff; }
   padding:120px 10% 0;
 }
 
-/* Contacto más arriba */
+/* CONTACTO: SUBIR DE VERDAD */
 .section.contact{
-  padding-top:60px;
+  padding-top:120px;
+}
+
+.section.contact .content-left{
+  margin-top:-140px; /* ← AJUSTE REAL */
 }
 
 /* ===== CONTENT ===== */
@@ -174,8 +178,7 @@ footer{
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
-      Universitat Politècnica de València (UPV) y Universitat Jaume I (UJI), con FP en electricidad.
-      Interesado en impresión 3D aplicada al prototipado y en el diseño y desarrollo de páginas web.
+      UPV y UJI, con FP en electricidad. Interesado en impresión 3D y desarrollo web.
     </p>
   </div>
 </section>
@@ -274,44 +277,6 @@ document.querySelectorAll("nav span").forEach(btn=>{
     });
   });
 });
-
-/* ===== THREE BACKGROUND ===== */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
-camera.position.z=4;
-
-const renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-document.body.appendChild(renderer.domElement);
-
-const mesh=new THREE.Mesh(
-  new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({
-    wireframe:true,
-    color:0xffffff,
-    opacity:.05,
-    transparent:true
-  })
-);
-scene.add(mesh);
-
-const light=new THREE.PointLight(0xffffff,1);
-light.position.set(5,5,5);
-scene.add(light);
-
-(function animate(){
-  mesh.rotation.x+=.0015;
-  mesh.rotation.y+=.0015;
-  renderer.render(scene,camera);
-  requestAnimationFrame(animate);
-})();
-
-onresize=()=>{
-  renderer.setSize(innerWidth,innerHeight);
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-};
 
 </script>
 
