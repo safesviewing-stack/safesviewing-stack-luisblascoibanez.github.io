@@ -112,15 +112,19 @@ nav span:hover{ color:#fff; }
 
 .about-text{
   text-align:justify;
-  max-width:520px;
+  max-width:500px; /* ↓ ancho reducido para ambos párrafos */
   margin-top:0;
+}
+
+.about-text + .about-text{
+  margin-top:18px;
 }
 
 .about-wrapper img{
   max-width:260px;
   height:auto;
   display:block;
-  margin-top:6px; /* alineación óptica con primera línea */
+  margin-top:6px; /* alineación con primera línea */
 }
 
 /* ===== TYPO ===== */
@@ -135,7 +139,6 @@ h1{
 }
 
 p{
-  margin-top:18px;
   font-size:15px;
   color:#aaa;
   line-height:1.6;
@@ -183,7 +186,7 @@ footer{
 <!-- INICIO -->
 <section class="section">
   <div class="content-center">
-    <h1 id="heroTitle">Industrial Design</h1>
+    <h1>Industrial Design</h1>
     <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
@@ -194,13 +197,16 @@ footer{
 
     <div>
       <h1 class="reveal">Sobre mí</h1>
+
       <p class="reveal about-text">
         Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis
         estudios universitarios en la Universitat Politècnica de València (UPV) y en la
         Universitat Jaume I (UJI) durante los primeros años de formación. Además, cuento con
         una formación profesional en electricidad, lo que me ha proporcionado una base
         técnica sólida y una comprensión profunda de los procesos constructivos y funcionales.
-        <br><br>
+      </p>
+
+      <p class="reveal about-text">
         Me considero una persona muy detallista y organizada, con una fuerte orientación a la
         calidad: hasta que una tarea no está perfectamente resuelta, no doy el trabajo por
         terminado. Como principal afición, me apasiona el mundo de la impresión 3D,
