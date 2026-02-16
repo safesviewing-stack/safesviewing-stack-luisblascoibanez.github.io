@@ -6,6 +6,7 @@
 <title>Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
@@ -132,14 +133,37 @@ p{
   text-align:justify;
 }
 
-.contact p a{
+/* ===== CONTACT LINKS ===== */
+.contact-list{
+  margin-top:22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.contact-list a{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:15px;
   color:#aaa;
   text-decoration:none;
   transition:.3s;
 }
 
-.contact p a:hover{
+.contact-list i{
+  font-size:14px;
+  width:18px;
+  text-align:center;
+  opacity:.7;
+}
+
+.contact-list a:hover{
   color:#fff;
+}
+
+.contact-list a:hover i{
+  opacity:1;
 }
 
 /* ===== ABOUT ===== */
@@ -290,11 +314,24 @@ footer{
 <section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
-    <p class="reveal">
-      <a href="https://www.linkedin.com/in/tu-perfil" target="_blank">LinkedIn</a><br>
-      <a href="mailto:tucorreo@gmail.com">tucorreo@gmail.com</a><br>
-      <a href="tel:+34600000000">+34 600 000 000</a>
-    </p>
+
+    <div class="contact-list reveal">
+      <a href="https://www.linkedin.com/in/tu-perfil" target="_blank">
+        <i class="fa-brands fa-linkedin-in"></i>
+        LinkedIn
+      </a>
+
+      <a href="mailto:tucorreo@gmail.com">
+        <i class="fa-regular fa-envelope"></i>
+        tucorreo@gmail.com
+      </a>
+
+      <a href="tel:+34600000000">
+        <i class="fa-solid fa-phone"></i>
+        +34 600 000 000
+      </a>
+    </div>
+
   </div>
 </section>
 
