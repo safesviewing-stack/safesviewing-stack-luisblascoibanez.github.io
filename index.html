@@ -99,6 +99,10 @@ nav span:hover{ color:#fff; }
   margin-top:-165px;
 }
 
+.section.contact h1{
+  margin-top:18px; /* ⬅ ajuste solicitado */
+}
+
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
@@ -267,11 +271,9 @@ footer{
 <!-- SOBRE MI -->
 <section class="section">
   <div class="content-left about">
-
     <h1 class="reveal about-title">Sobre mí</h1>
 
     <div class="about-content">
-
       <div class="about-text reveal">
         <p>
           Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona enfocada en un
@@ -289,7 +291,6 @@ footer{
       <div class="about-photo reveal">
         <img src="foto.jpg" alt="Foto personal de Luis Blasco">
       </div>
-
     </div>
   </div>
 </section>
@@ -317,21 +318,15 @@ footer{
 
     <div class="contact-list reveal">
       <a href="https://www.linkedin.com/in/tu-perfil" target="_blank">
-        <i class="fa-brands fa-linkedin-in"></i>
-        LinkedIn
+        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
       </a>
-
       <a href="mailto:tucorreo@gmail.com">
-        <i class="fa-regular fa-envelope"></i>
-        tucorreo@gmail.com
+        <i class="fa-regular fa-envelope"></i> tucorreo@gmail.com
       </a>
-
       <a href="tel:+34600000000">
-        <i class="fa-solid fa-phone"></i>
-        +34 600 000 000
+        <i class="fa-solid fa-phone"></i> +34 600 000 000
       </a>
     </div>
-
   </div>
 </section>
 
@@ -340,26 +335,16 @@ footer{
 </footer>
 
 <script>
-
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
-
-addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
-});
-
+addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
 (function animateCursor(){
-  x+=(mx-x)*0.2;
-  y+=(my-y)*0.2;
-  cursor.style.left=x+"px";
-  cursor.style.top=y+"px";
+  x+=(mx-x)*0.2; y+=(my-y)*0.2;
+  cursor.style.left=x+"px"; cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
 })();
 
@@ -375,7 +360,6 @@ const hero=document.getElementById("heroTitle");
   span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
   hero.appendChild(span);
 });
-
 setTimeout(()=>{
   hero.querySelectorAll("span").forEach(span=>{
     span.style.opacity=1;
@@ -386,44 +370,21 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("visible");
-    }
-  });
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
 },{threshold:.2});
-
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const index=btn.dataset.scroll;
-
-    if(index==="0"){
-      window.scrollTo({top:0,behavior:"smooth"});
-      return;
-    }
-
-    if(index==="4"){
-      window.scrollTo({
-        top:document.documentElement.scrollHeight,
-        behavior:"smooth"
-      });
-      return;
-    }
-
+    if(index==="0"){ window.scrollTo({top:0,behavior:"smooth"}); return; }
+    if(index==="4"){ window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}); return; }
     const section=document.querySelectorAll(".section")[index];
     const title=section.querySelector("h1");
-    const offset=180;
-
-    window.scrollTo({
-      top:title.offsetTop-offset,
-      behavior:"smooth"
-    });
+    window.scrollTo({ top:title.offsetTop-180, behavior:"smooth" });
   });
 });
-
 </script>
 
 </body>
