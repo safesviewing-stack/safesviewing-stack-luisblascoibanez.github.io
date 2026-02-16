@@ -39,7 +39,7 @@ body{
   z-index:1000;
 }
 
-/* ===== HEADER ===== */
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:0;
@@ -71,21 +71,13 @@ nav span:hover{ color:#fff; }
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
   padding:120px 10% 0;
 }
 
 /* ===== CONTENT ===== */
-.content-center{
-  max-width:900px;
-}
-
-.content-left{
-  max-width:900px;
-  width:100%;
-  margin-left:6vw;
-}
+.content-center{ max-width:900px; }
+.content-left{ max-width:900px; width:100%; margin-left:6vw; }
 
 /* ===== TYPO ===== */
 h1{
@@ -121,45 +113,71 @@ p{
   opacity:.9;
 }
 
-/* ===== CONTACT (ORIGINAL) ===== */
+/* ===== CONTACT – MICRO DIAGRAM ===== */
 .contact-list{
-  margin-top:26px;
+  margin-top:30px;
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:22px;
 }
 
 .contact-item{
   display:flex;
   align-items:center;
-  gap:20px;
-  color:#aaa;
+  gap:26px;
   text-decoration:none;
-  font-size:15px;
+  color:#aaa;
   transition:.4s;
 }
 
-.contact-icon{
-  width:34px;
-  height:34px;
-  border:1px solid rgba(255,255,255,.25);
+/* icon container */
+.contact-diagram{
+  position:relative;
+  width:42px;
+  height:42px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:11px;
-  letter-spacing:.2em;
   color:#fff;
+  font-size:11px;
+  letter-spacing:.25em;
   opacity:.6;
   transition:.4s;
+  transform:rotate(0deg);
 }
 
+/* square */
+.contact-diagram::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(255,255,255,.35);
+}
+
+/* construction line */
+.contact-diagram::after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:1px;
+  background:rgba(255,255,255,.35);
+  bottom:-8px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+/* hover */
 .contact-item:hover{
   color:#fff;
 }
 
-.contact-item:hover .contact-icon{
+.contact-item:hover .contact-diagram{
   opacity:1;
-  border-color:#fff;
+  transform:rotate(-6deg);
+}
+
+.contact-label{
+  font-size:15px;
 }
 
 /* ===== REVEAL ===== */
@@ -200,7 +218,7 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- INICIO -->
+<!-- HERO -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
@@ -236,20 +254,22 @@ footer{
     <h1 class="reveal">Contacto</h1>
 
     <div class="contact-list reveal">
+
       <a class="contact-item" href="https://www.linkedin.com/in/tu-perfil" target="_blank">
-        <div class="contact-icon">IN</div>
-        LinkedIn
+        <div class="contact-diagram">IN</div>
+        <div class="contact-label">LinkedIn</div>
       </a>
 
       <a class="contact-item" href="mailto:tucorreo@gmail.com">
-        <div class="contact-icon">@</div>
-        tucorreo@gmail.com
+        <div class="contact-diagram">@</div>
+        <div class="contact-label">tucorreo@gmail.com</div>
       </a>
 
       <a class="contact-item" href="tel:+34600000000">
-        <div class="contact-icon">T</div>
-        +34 600 000 000
+        <div class="contact-diagram">T</div>
+        <div class="contact-label">+34 600 000 000</div>
       </a>
+
     </div>
   </div>
 </section>
