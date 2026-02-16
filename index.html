@@ -111,6 +111,17 @@ nav span:hover{ color:#fff; }
   margin-left:6vw;
 }
 
+/* ===== ABOUT ===== */
+.about-wrapper{
+  display:flex;
+  align-items:flex-start;
+  gap:40px;
+}
+
+.about-text{
+  text-align:justify;
+}
+
 /* ===== TYPO ===== */
 h1{
   font-size:clamp(70px,6vw,120px);
@@ -179,12 +190,28 @@ footer{
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left">
-    <h1 class="reveal">Sobre mí</h1>
-    <p class="reveal">
-      Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
-      UPV y UJI, con FP en electricidad. Interés en impresión 3D y desarrollo web.
-    </p>
+  <div class="content-left about-wrapper">
+
+    <div>
+      <h1 class="reveal">Sobre mí</h1>
+      <p class="reveal about-text">
+        Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis
+        estudios universitarios en la Universitat Politècnica de València (UPV) y en la
+        Universitat Jaume I (UJI) durante los primeros años de formación. Además, cuento con
+        una formación profesional en electricidad, lo que me ha proporcionado una base
+        técnica sólida y una comprensión profunda de los procesos constructivos y funcionales.
+        <br><br>
+        Me considero una persona muy detallista y organizada, con una fuerte orientación a la
+        calidad: hasta que una tarea no está perfectamente resuelta, no doy el trabajo por
+        terminado. Como principal afición, me apasiona el mundo de la impresión 3D,
+        especialmente aplicada al prototipado y al desarrollo de producto. Actualmente,
+        también estoy profundizando en la creación y el diseño de páginas web, combinando
+        diseño, estructura y experiencia de usuario.
+      </p>
+    </div>
+
+    <img src="foto.jpg" alt="Foto" class="reveal">
+
   </div>
 </section>
 
