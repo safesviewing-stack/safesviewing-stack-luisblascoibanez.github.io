@@ -323,7 +323,7 @@ document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const section=document.querySelectorAll(".section")[btn.dataset.scroll];
     const headerHeight=document.querySelector("nav").offsetHeight;
-    const offset=-10; // ← aplicado
+    const offset=-70; // ← ajuste aplicado
 
     const targetY=
       section.getBoundingClientRect().top +
