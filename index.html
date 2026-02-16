@@ -132,13 +132,13 @@ p{
   text-align:justify;
 }
 
-/* ===== ABOUT (AJUSTE FINO) ===== */
+/* ===== ABOUT ===== */
 .about{
   display:block;
 }
 
 .about-title{
-  margin-bottom:32px; /* ⬅ antes 60px */
+  margin-bottom:18px;
 }
 
 .about-content{
@@ -185,7 +185,7 @@ p{
   }
 
   .about-title{
-    margin-bottom:24px;
+    margin-bottom:16px;
   }
 
   .about-photo img{
@@ -232,7 +232,6 @@ footer{
     <h1 class="reveal about-title">Sobre mí</h1>
 
     <div class="about-content">
-
       <div class="about-text reveal">
         <p>
           Ingeniero en diseño industrial de 24 años, con base en Valencia. Mi perfil combina una sólida formación
@@ -249,8 +248,8 @@ footer{
       <div class="about-photo reveal">
         <img src="foto.jpg" alt="Foto personal de Luis Blasco">
       </div>
-
     </div>
+
   </div>
 </section>
 
@@ -285,7 +284,9 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
@@ -327,26 +328,29 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
+  });
 },{threshold:.2});
+
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const index = btn.dataset.scroll;
+    const index=btn.dataset.scroll;
 
-    if(index === "0"){
-      window.scrollTo({ top:0, behavior:"smooth" });
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
       return;
     }
 
-    if(index === "4"){
-      requestAnimationFrame(()=>{
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior:"smooth"
-        });
+    if(index==="4"){
+      window.scrollTo({
+        top:document.documentElement.scrollHeight,
+        behavior:"smooth"
       });
       return;
     }
