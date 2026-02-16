@@ -120,10 +120,16 @@ nav span:hover{ color:#fff; }
 
 .about-text{
   text-align:justify;
+  max-width:520px; /* ↓ texto más estrecho */
+}
+
+/* quitar margen superior para alinear con la foto */
+.about-text{
+  margin-top:0;
 }
 
 .about-wrapper img{
-  max-width:260px;   /* ajuste de tamaño */
+  max-width:260px;
   height:auto;
   display:block;
 }
@@ -143,7 +149,6 @@ p{
   margin-top:18px;
   font-size:15px;
   color:#aaa;
-  max-width:620px;
   line-height:1.6;
   margin-left:0.35vw;
 }
