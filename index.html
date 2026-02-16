@@ -46,7 +46,7 @@ canvas{
   z-index:1000;
 }
 
-/* ===== NAV (FLOATING HEADER) ===== */
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:0;
@@ -54,16 +54,13 @@ nav{
   transform:translateX(-50%);
   width:100%;
   height:80px;
-
   display:flex;
   justify-content:center;
   align-items:center;
   gap:50px;
-
   background:rgba(10,10,10,0.45);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-
   z-index:100;
   transition:background .4s ease, backdrop-filter .4s ease;
 }
@@ -75,7 +72,7 @@ nav span{
   color:#aaa;
   cursor:pointer;
   transition:.4s;
-  padding-top:4px; /* ↓ ajuste fino vertical */
+  padding-top:4px;
 }
 
 nav span:hover{
@@ -134,7 +131,7 @@ p{
   margin-left:0.35vw;
 }
 
-/* ===== PORTFOLIO GRID ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -190,6 +187,7 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
+<!-- ===== INICIO ===== -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
@@ -199,16 +197,19 @@ footer{
   </div>
 </section>
 
+<!-- ===== SOBRE MÍ ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Diseñadora industrial con formación técnica y sensibilidad arquitectónica.
-      Trabajo desde la estructura, el material y la proporción.
+      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios universitarios en la Universitat Politècnica de València (UPV), completando mis primeros años de formación en la Universitat Jaume I (UJI). Además, cuento con una formación profesional en electricidad, que ha reforzado mi enfoque técnico y mi comprensión práctica de los procesos y sistemas constructivos.<br><br>
+      Me considero una persona muy detallista y organizada. Afronto cada proyecto con un alto nivel de exigencia personal y no doy por finalizada una tarea hasta alcanzar un resultado preciso y coherente, tanto a nivel funcional como estético. Creo que la calidad del diseño reside en la atención al detalle y en la correcta ejecución de cada decisión.<br><br>
+      Como principal afición, me interesa especialmente el mundo de la impresión 3D, tanto desde el punto de vista del prototipado como de la experimentación técnica. Paralelamente, en la actualidad estoy desarrollando un interés creciente por la creación de páginas web, explorando la relación entre diseño, estructura y experiencia digital.
     </p>
   </div>
 </section>
 
+<!-- ===== PORTFOLIO ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
@@ -220,15 +221,18 @@ footer{
   </div>
 </section>
 
+<!-- ===== CV ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
-      Formación en ingeniería de diseño industrial y experiencia en desarrollo de producto.
+      Formación en ingeniería de diseño industrial, experiencia en desarrollo de producto,
+      diseño técnico y optimización estructural.
     </p>
   </div>
 </section>
 
+<!-- ===== CONTACTO ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
@@ -268,7 +272,9 @@ const h=document.getElementById("heroTitle");
   h.appendChild(s);
 });
 setTimeout(()=>h.querySelectorAll("span").forEach(s=>{
-  s.style.opacity=1; s.style.transform="translateY(0)"; s.style.filter="blur(0)";
+  s.style.opacity=1;
+  s.style.transform="translateY(0)";
+  s.style.filter="blur(0)";
 }),200);
 
 /* Reveal */
