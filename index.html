@@ -83,6 +83,10 @@ nav span:hover{ color:#fff; }
   margin-left:6vw;
 }
 
+.content-center{
+  max-width:900px;
+}
+
 /* ===== TYPO ===== */
 h1{
   font-size:clamp(70px,6vw,120px);
@@ -99,44 +103,78 @@ p{
   text-align:justify;
 }
 
+/* ===== ABOUT ===== */
+.about-content{
+  display:flex;
+  align-items:flex-start;
+  gap:32px;
+}
+
+.about-text{ max-width:480px; }
+
+.about-photo{
+  margin-top:23px;
+}
+
+.about-photo img{
+  width:288px;
+  filter:grayscale(100%) contrast(1.05);
+  opacity:.9;
+}
+
 /* ===== CONTACT ===== */
 .contact{
   padding-top:120px;
 }
 
 .contact-wrapper{
-  margin-top:40px;
   display:flex;
   flex-direction:column;
-  gap:22px;
+  gap:36px;
+}
+
+.contact-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
 }
 
 .contact-item{
-  font-size:15px;
-  letter-spacing:.02em;
-  color:#aaa;
   display:flex;
   align-items:center;
-  gap:14px;
-  cursor:pointer;
-  transition:.35s cubic-bezier(.2,.7,.1,1);
+  gap:16px;
+  font-size:15px;
+  color:#aaa;
+  text-decoration:none;
+  width:fit-content;
+  transition:.35s;
 }
 
 .contact-item span{
-  font-size:13px;
-  letter-spacing:.18em;
-  color:#666;
-  min-width:80px;
-}
-
-.contact-item a{
-  color:inherit;
-  text-decoration:none;
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#777;
+  min-width:90px;
 }
 
 .contact-item:hover{
   color:#fff;
   transform:translateX(6px);
+}
+
+/* ===== REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  filter:blur(8px);
+  transition:1.2s cubic-bezier(.2,.7,.1,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
 }
 
 /* ===== FOOTER ===== */
@@ -163,34 +201,60 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- CONTACTO -->
-<section class="section contact">
+<!-- INICIO -->
+<section class="section">
+  <div class="content-center">
+    <h1 id="heroTitle"></h1>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section class="section">
   <div class="content-left">
 
-    <h1>Contacto</h1>
+    <h1 class="reveal">Sobre mí</h1>
 
-    <div class="contact-wrapper">
-
-      <div class="contact-item">
-        <span>LINKEDIN</span>
-        <a href="https://www.linkedin.com/in/tuusuario" target="_blank">
-          linkedin.com/in/tuusuario
-        </a>
+    <div class="about-content reveal">
+      <div class="about-text">
+        <p>
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico y flexible, con formación
+          en la Universidad Politécnica de Valencia, inicio en la Universitat Jaume I y un Erasmus en la Middlesex
+          University de Londres. Cuento además con una FP en electricidad, lo que refuerza mi enfoque técnico.
+          Disfruto del proceso de diseño desde lo conceptual hasta la producción final, con soluciones consistentes.
+        </p>
       </div>
 
-      <div class="contact-item">
-        <span>EMAIL</span>
-        <a href="mailto:luis.blasco@email.com">
-          luis.blasco@email.com
-        </a>
+      <div class="about-photo">
+        <img src="foto.jpg" alt="Foto personal">
       </div>
+    </div>
 
-      <div class="contact-item">
-        <span>TEL</span>
-        <a href="tel:+34600123456">
-          +34 600 123 456
-        </a>
-      </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section contact">
+  <div class="content-left contact-wrapper">
+
+    <h1 class="reveal">Contacto</h1>
+
+    <div class="contact-list reveal">
+
+      <a class="contact-item" href="https://www.linkedin.com/in/tuusuario" target="_blank">
+        <span>LinkedIn</span>
+        linkedin.com/in/tuusuario
+      </a>
+
+      <a class="contact-item" href="mailto:tucorreo@gmail.com">
+        <span>Email</span>
+        tucorreo@gmail.com
+      </a>
+
+      <a class="contact-item" href="tel:+34600000000">
+        <span>Teléfono</span>
+        +34 600 000 000
+      </a>
 
     </div>
 
@@ -204,26 +268,60 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>document.body.style.opacity="1");
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
-let mx=0,my=0,x=0,y=0;
+let x=0,y=0,mx=0,my=0;
 
 addEventListener("mousemove",e=>{
   mx=e.clientX;
   my=e.clientY;
 });
 
-(function animateCursor(){
+(function loop(){
   x+=(mx-x)*0.2;
   y+=(my-y)*0.2;
   cursor.style.left=x+"px";
   cursor.style.top=y+"px";
-  requestAnimationFrame(animateCursor);
+  requestAnimationFrame(loop);
 })();
+
+/* ===== HERO TEXT ===== */
+const hero=document.getElementById("heroTitle");
+"Industrial Design".split("").forEach((c,i)=>{
+  const s=document.createElement("span");
+  s.textContent=c;
+  s.style.opacity=0;
+  s.style.display="inline-block";
+  s.style.transform="translateY(40px)";
+  s.style.filter="blur(8px)";
+  s.style.transition=`.5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(s);
+});
+
+setTimeout(()=>{
+  hero.querySelectorAll("span").forEach(s=>{
+    s.style.opacity=1;
+    s.style.transform="translateY(0)";
+    s.style.filter="blur(0)";
+  });
+},200);
+
+/* ===== REVEAL ===== */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible"));
+},{threshold:.2});
+
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+/* ===== NAV ===== */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>window.scrollTo({
+    top:document.querySelectorAll(".section")[i].offsetTop-120,
+    behavior:"smooth"
+  });
+});
 
 </script>
 
