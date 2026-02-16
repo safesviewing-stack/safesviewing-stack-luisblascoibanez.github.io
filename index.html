@@ -27,7 +27,6 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-/* ===== BACKGROUND CANVAS ===== */
 canvas{
   position:fixed;
   inset:0;
@@ -113,17 +112,17 @@ h1{
 }
 
 h2{
-  font-size:32px;
+  font-size:30px;
   font-weight:400;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 p{
-  margin-top:20px;
-  font-size:18px;
+  margin-top:18px;
+  font-size:16.5px; /* ↓ tamaño reducido */
   color:#aaa;
-  max-width:640px;
-  line-height:1.7;
+  max-width:620px;
+  line-height:1.65;
 }
 
 .content-left p,
@@ -135,13 +134,13 @@ p{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:40px;
-  margin-top:40px;
+  gap:36px;
+  margin-top:36px;
 }
 
 .project{
   border-top:1px solid #222;
-  padding-top:20px;
+  padding-top:18px;
   transition:.4s;
 }
 
@@ -202,9 +201,9 @@ footer{
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios universitarios en la Universitat Politècnica de València (UPV), completando mis primeros años de formación en la Universitat Jaume I (UJI). Además, cuento con una formación profesional en electricidad, que ha reforzado mi enfoque técnico y mi comprensión práctica de los procesos y sistemas constructivos.<br><br>
-      Me considero una persona muy detallista y organizada. Afronto cada proyecto con un alto nivel de exigencia personal y no doy por finalizada una tarea hasta alcanzar un resultado preciso y coherente, tanto a nivel funcional como estético. Creo que la calidad del diseño reside en la atención al detalle y en la correcta ejecución de cada decisión.<br><br>
-      Como principal afición, me interesa especialmente el mundo de la impresión 3D, tanto desde el punto de vista del prototipado como de la experimentación técnica. Paralelamente, en la actualidad estoy desarrollando un interés creciente por la creación de páginas web, explorando la relación entre diseño, estructura y experiencia digital.
+      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad, que refuerza mi enfoque técnico y práctico.
+      <br><br>
+      Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada proyecto. No doy por finalizada una tarea hasta alcanzar un resultado preciso, funcional y bien resuelto. Como principales intereses, destaco la impresión 3D aplicada al prototipado y, actualmente, el diseño y desarrollo de páginas web.
     </p>
   </div>
 </section>
@@ -281,7 +280,7 @@ setTimeout(()=>h.querySelectorAll("span").forEach(s=>{
 const obs=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible")),{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
-/* Nav scroll effect */
+/* Nav scroll */
 addEventListener("scroll",()=>{
   const n=document.querySelector("nav");
   if(scrollY>40){
@@ -293,7 +292,6 @@ addEventListener("scroll",()=>{
   }
 });
 
-/* Nav scroll */
 document.querySelectorAll("nav span").forEach(b=>{
   b.onclick=()=>document.querySelectorAll(".section")[b.dataset.scroll]
     .scrollIntoView({behavior:"smooth"});
