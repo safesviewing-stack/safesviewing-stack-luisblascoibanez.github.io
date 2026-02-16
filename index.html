@@ -27,13 +27,6 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
-/* ===== BACKGROUND ===== */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
-
 /* ===== CURSOR ===== */
 .cursor{
   position:fixed;
@@ -70,7 +63,6 @@ nav span{
   color:#ccc;
   cursor:pointer;
   transition:.4s;
-  padding-top:6px;
 }
 
 nav span:hover{ color:#fff; }
@@ -90,10 +82,6 @@ nav span:hover{ color:#fff; }
 }
 
 /* ===== CONTACTO ===== */
-.section.contact{
-  padding-top:120px;
-}
-
 .section.contact .content-left{
   margin-top:-165px;
 }
@@ -101,8 +89,6 @@ nav span:hover{ color:#fff; }
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
-  text-align:left;
-  margin-left:1vw;
 }
 
 .content-left{
@@ -118,29 +104,16 @@ h1{
   line-height:1.05;
 }
 
-.content-center h1{
-  font-size:clamp(84px,7vw,140px);
-}
-
 p{
   margin-top:18px;
   font-size:15px;
   color:#aaa;
   max-width:480px;
   line-height:1.6;
-  margin-left:0.35vw;
   text-align:justify;
 }
 
 /* ===== ABOUT ===== */
-.about{
-  display:block;
-}
-
-.about-title{
-  margin-bottom:2px;
-}
-
 .about-content{
   display:flex;
   align-items:flex-start;
@@ -159,7 +132,6 @@ p{
 .about-photo img{
   width:290px;
   height:auto;
-  border-radius:0;
   filter:grayscale(100%) contrast(1.05);
   opacity:0.9;
 }
@@ -176,36 +148,6 @@ p{
   opacity:1;
   transform:translateY(0);
   filter:blur(0);
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  .about-content{
-    flex-direction:column;
-    gap:40px;
-  }
-
-  .about-title{
-    margin-bottom:10px;
-  }
-
-  .about-photo{
-    margin-top:0;
-  }
-
-  .about-photo img{
-    width:240px;
-  }
-}
-
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:48px 0 36px;
-  font-size:11px;
-  letter-spacing:.18em;
-  color:#cfcfcf;
-  border-top:1px solid #1c1c1c;
 }
 
 </style>
@@ -232,88 +174,37 @@ footer{
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left about">
+  <div class="content-left">
 
-    <h1 class="reveal about-title">Sobre mí</h1>
+    <h1 class="reveal">Sobre mí</h1>
 
     <div class="about-content">
 
       <div class="about-text reveal">
         <p>
-          Ingeniero en diseño industrial de 24 años, con base en Valencia. Mi perfil combina una sólida formación
-          técnica —reforzada por una FP en electricidad— con una fuerte sensibilidad estética y una atención constante
-          al detalle. Soy una persona meticulosa y perfeccionista, con una mentalidad curiosa y ecléctica, y disfruto
-          especialmente del proceso de diseño desde la idea inicial hasta su materialización final. Me interesa el
-          diseño industrial con enfoque estructural y arquitectónico, así como el uso de tecnologías como la impresión
-          3D y la fabricación digital para explorar, validar y optimizar soluciones a lo largo del proceso. Valoro
-          tanto el análisis técnico como la parte conceptual del diseño, entendiendo cada proyecto como una
-          oportunidad para aprender y mejorar. Concibo el diseño como una herramienta para responder a necesidades
-          reales, donde lo técnico y lo creativo se integran de forma honesta, funcional y coherente, siempre con
-          especial atención al uso, al contexto y a las personas.
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona enfocada en un
+          único campo o disciplina concreta, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse a
+          distintos entornos y formas de trabajo. No me sitúo ni en un extremo puramente artístico ni en uno
+          estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar ambas dimensiones
+          del diseño. Cuento con una formación profesional en electricidad, que me ha proporcionado una base técnica
+          sólida y una forma de pensar práctica y estructurada, complementada por una sensibilidad estética y una
+          atención constante al detalle. Disfruto del proceso de diseño desde el análisis inicial hasta la
+          materialización final, entendiendo cada proyecto como una oportunidad para aprender, adaptarse al contexto
+          y desarrollar soluciones coherentes, funcionales y honestas.
         </p>
       </div>
 
       <div class="about-photo reveal">
-        <img src="foto.jpg" alt="Foto personal de Luis Blasco">
+        <img src="foto.jpg" alt="Foto personal">
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section class="section">
-  <div class="content-left">
-    <h1 class="reveal">Portfolio</h1>
-    <p class="reveal">Selección de proyectos de diseño industrial.</p>
-  </div>
-</section>
-
-<!-- CV -->
-<section class="section">
-  <div class="content-left">
-    <h1 class="reveal">CV</h1>
-    <p class="reveal">Formación académica y experiencia profesional.</p>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section contact">
-  <div class="content-left">
-    <h1 class="reveal">Contacto</h1>
-    <p class="reveal">luis.blasco@email.com</p>
-  </div>
-</section>
-
-<footer>
-© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniero en diseño industrial
-</footer>
-
 <script>
 
-/* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
-
-/* ===== CURSOR ===== */
-const cursor=document.querySelector(".cursor");
-let mx=0,my=0,x=0,y=0;
-
-addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
-});
-
-(function animateCursor(){
-  x+=(mx-x)*0.2;
-  y+=(my-y)*0.2;
-  cursor.style.left=x+"px";
-  cursor.style.top=y+"px";
-  requestAnimationFrame(animateCursor);
-})();
-
-/* ===== HERO TEXT ===== */
+/* HERO TEXT */
 const hero=document.getElementById("heroTitle");
 "Industrial Design".split("").forEach((char,i)=>{
   const span=document.createElement("span");
@@ -322,7 +213,7 @@ const hero=document.getElementById("heroTitle");
   span.style.display="inline-block";
   span.style.transform="translateY(40px)";
   span.style.filter="blur(8px)";
-  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  span.style.transition=`all .5s ease ${i*0.03}s`;
   hero.appendChild(span);
 });
 
@@ -334,45 +225,14 @@ setTimeout(()=>{
   });
 },200);
 
-/* ===== REVEAL ===== */
+/* REVEAL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("visible");
-    }
+    if(e.isIntersecting) e.target.classList.add("visible");
   });
 },{threshold:.2});
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-/* ===== NAVIGATION ===== */
-document.querySelectorAll("nav span").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
-
-    if(index==="0"){
-      window.scrollTo({top:0,behavior:"smooth"});
-      return;
-    }
-
-    if(index==="4"){
-      window.scrollTo({
-        top:document.documentElement.scrollHeight,
-        behavior:"smooth"
-      });
-      return;
-    }
-
-    const section=document.querySelectorAll(".section")[index];
-    const title=section.querySelector("h1");
-    const offset=180;
-
-    window.scrollTo({
-      top:title.offsetTop-offset,
-      behavior:"smooth"
-    });
-  });
-});
 
 </script>
 
