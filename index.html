@@ -144,7 +144,7 @@ p{
 .about-content{
   display:flex;
   align-items:flex-start;
-  gap:40px;
+  gap:28px; /* ⬅ espacio texto–foto reducido */
 }
 
 .about-text{
@@ -154,7 +154,6 @@ p{
 .about-photo{
   flex-shrink:0;
   margin-top:20px;
-  margin-left:-60px; /* ⬅ desplazamiento claro */
 }
 
 .about-photo img{
@@ -192,7 +191,6 @@ p{
 
   .about-photo{
     margin-top:0;
-    margin-left:0;
   }
 
   .about-photo img{
@@ -290,7 +288,90 @@ footer{
 </footer>
 
 <script>
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
+
+/* ===== ENTRADA ===== */
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
+
+/* ===== CURSOR ===== */
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,x=0,y=0;
+
+addEventListener("mousemove",e=>{
+  mx=e.clientX;
+  my=e.clientY;
+});
+
+(function animateCursor(){
+  x+=(mx-x)*0.2;
+  y+=(my-y)*0.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
+  requestAnimationFrame(animateCursor);
+})();
+
+/* ===== HERO TEXT ===== */
+const hero=document.getElementById("heroTitle");
+"Industrial Design".split("").forEach((char,i)=>{
+  const span=document.createElement("span");
+  span.textContent=char;
+  span.style.opacity=0;
+  span.style.display="inline-block";
+  span.style.transform="translateY(40px)";
+  span.style.filter="blur(8px)";
+  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(span);
+});
+
+setTimeout(()=>{
+  hero.querySelectorAll("span").forEach(span=>{
+    span.style.opacity=1;
+    span.style.transform="translateY(0)";
+    span.style.filter="blur(0)";
+  });
+},200);
+
+/* ===== REVEAL ===== */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
+  });
+},{threshold:.2});
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* ===== NAVIGATION ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const index=btn.dataset.scroll;
+
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+
+    if(index==="4"){
+      window.scrollTo({
+        top:document.documentElement.scrollHeight,
+        behavior:"smooth"
+      });
+      return;
+    }
+
+    const section=document.querySelectorAll(".section")[index];
+    const title=section.querySelector("h1");
+    const offset=180;
+
+    window.scrollTo({
+      top:title.offsetTop-offset,
+      behavior:"smooth"
+    });
+  });
+});
+
 </script>
 
 </body>
