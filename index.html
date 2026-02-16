@@ -73,7 +73,9 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{ color:#fff; }
+nav span:hover{
+  color:#fff;
+}
 
 /* ===== SECTIONS ===== */
 .section{
@@ -84,13 +86,13 @@ nav span:hover{ color:#fff; }
   padding:120px 10% 0;
 }
 
-/* CONTACTO: SUBIR DE VERDAD */
+/* CONTACTO */
 .section.contact{
   padding-top:120px;
 }
 
 .section.contact .content-left{
-  margin-top:-140px; /* ← AJUSTE REAL */
+  margin-top:-140px;
 }
 
 /* ===== CONTENT ===== */
@@ -212,14 +214,17 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
 
 addEventListener("mousemove",e=>{
-  mx=e.clientX; my=e.clientY;
+  mx=e.clientX;
+  my=e.clientY;
 });
 
 (function animateCursor(){
@@ -253,27 +258,45 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
+  });
 },{threshold:.2});
+
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 /* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const index=btn.dataset.scroll;
 
-    if(index==="0"){
-      window.scrollTo({top:0,behavior:"smooth"});
+    const index = btn.dataset.scroll;
+
+    // INICIO → arriba
+    if(index === "0"){
+      window.scrollTo({ top:0, behavior:"smooth" });
       return;
     }
 
-    const section=document.querySelectorAll(".section")[index];
-    const title=section.querySelector("h1");
+    // CONTACTO → FINAL REAL
+    if(index === "4"){
+      requestAnimationFrame(()=>{
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth"
+        });
+      });
+      return;
+    }
 
-    const offset=180;
+    // RESTO DE SECCIONES
+    const section = document.querySelectorAll(".section")[index];
+    const title = section.querySelector("h1");
+
+    const offset = 180;
+
     window.scrollTo({
-      top:title.offsetTop-offset,
-      behavior:"smooth"
+      top: title.offsetTop - offset,
+      behavior: "smooth"
     });
   });
 });
