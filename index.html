@@ -45,7 +45,7 @@ canvas{
   z-index:1000;
 }
 
-/* ===== NAV ===== */
+/* ===== HEADER ===== */
 nav{
   position:fixed;
   top:0;
@@ -59,7 +59,6 @@ nav{
   gap:50px;
   background:rgba(10,10,10,0.45);
   backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
   z-index:100;
   transition:background .4s ease, backdrop-filter .4s ease;
 }
@@ -119,7 +118,7 @@ h2{
 
 p{
   margin-top:18px;
-  font-size:16.5px; /* ↓ tamaño reducido */
+  font-size:16.5px;
   color:#aaa;
   max-width:620px;
   line-height:1.65;
@@ -190,20 +189,21 @@ footer{
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">
-      Diseño industrial con enfoque arquitectónico y precisión estructural.
-    </p>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
-<!-- ===== SOBRE MÍ ===== -->
+<!-- ===== SOBRE MI ===== -->
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad, que refuerza mi enfoque técnico y práctico.
-      <br><br>
-      Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada proyecto. No doy por finalizada una tarea hasta alcanzar un resultado preciso, funcional y bien resuelto. Como principales intereses, destaco la impresión 3D aplicada al prototipado y, actualmente, el diseño y desarrollo de páginas web.
+      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios
+      en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la
+      Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad.<br><br>
+      Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada
+      proyecto. Mis principales intereses son la impresión 3D aplicada al prototipado y,
+      actualmente, el diseño y desarrollo de páginas web.
     </p>
   </div>
 </section>
@@ -225,8 +225,8 @@ footer{
   <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">
-      Formación en ingeniería de diseño industrial, experiencia en desarrollo de producto,
-      diseño técnico y optimización estructural.
+      Formación en ingeniería de diseño industrial, experiencia en desarrollo de producto
+      y diseño técnico.
     </p>
   </div>
 </section>
@@ -242,23 +242,25 @@ footer{
 <footer>INDUSTRIAL DESIGN</footer>
 
 <script>
+
+/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>document.body.style.opacity="1");
 
-/* Cursor */
+/* ===== CURSOR ===== */
 const c=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
 addEventListener("mousemove",e=>{
   mx=e.clientX; my=e.clientY;
   v=Math.hypot(mx-lx,my-ly); lx=mx; ly=my;
 });
-(function anim(){
+(function loop(){
   const s=0.12+Math.min(v*0.02,0.35);
   x+=(mx-x)*s; y+=(my-y)*s;
   c.style.left=x+"px"; c.style.top=y+"px";
-  requestAnimationFrame(anim);
+  requestAnimationFrame(loop);
 })();
 
-/* Hero text */
+/* ===== HERO TEXT ===== */
 const h=document.getElementById("heroTitle");
 "Industrial Design".split("").forEach((ch,i)=>{
   const s=document.createElement("span");
@@ -276,11 +278,11 @@ setTimeout(()=>h.querySelectorAll("span").forEach(s=>{
   s.style.filter="blur(0)";
 }),200);
 
-/* Reveal */
+/* ===== SCROLL REVEAL ===== */
 const obs=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible")),{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
-/* Nav scroll */
+/* ===== HEADER BLUR ON SCROLL ===== */
 addEventListener("scroll",()=>{
   const n=document.querySelector("nav");
   if(scrollY>40){
@@ -292,12 +294,18 @@ addEventListener("scroll",()=>{
   }
 });
 
-document.querySelectorAll("nav span").forEach(b=>{
-  b.onclick=()=>document.querySelectorAll(".section")[b.dataset.scroll]
-    .scrollIntoView({behavior:"smooth"});
+/* ===== NAV SCROLL WITH OFFSET ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const section=document.querySelectorAll(".section")[btn.dataset.scroll];
+    const header=document.querySelector("nav").offsetHeight;
+    const offset=40; // controla cuánto sube el título
+    const y=section.getBoundingClientRect().top + window.pageYOffset - header - offset;
+    window.scrollTo({top:y,behavior:"smooth"});
+  });
 });
 
-/* Three background */
+/* ===== THREE BACKGROUND ===== */
 const scene=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,100);
 cam.position.z=4;
@@ -313,16 +321,17 @@ scene.add(m);
 const l=new THREE.PointLight(0xffffff,1);
 l.position.set(5,5,5);
 scene.add(l);
-(function loop(){
+(function anim3D(){
   m.rotation.x+=.0015; m.rotation.y+=.0015;
   r.render(scene,cam);
-  requestAnimationFrame(loop);
+  requestAnimationFrame(anim3D);
 })();
 onresize=()=>{
   r.setSize(innerWidth,innerHeight);
   cam.aspect=innerWidth/innerHeight;
   cam.updateProjectionMatrix();
 };
+
 </script>
 
 </body>
