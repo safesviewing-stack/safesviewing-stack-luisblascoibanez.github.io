@@ -60,7 +60,6 @@ nav{
   gap:50px;
   background:rgba(10,10,10,0.45);
   backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
   z-index:100;
   transition:background .4s ease, backdrop-filter .4s ease;
 }
@@ -191,9 +190,7 @@ footer{
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
-    <p class="reveal">
-      Diseño industrial con enfoque arquitectónico y precisión estructural.
-    </p>
+    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
@@ -202,13 +199,9 @@ footer{
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios
-      en la Universitat Politècnica de València (UPV), tras completar mis primeros años en la
-      Universitat Jaume I (UJI), y cuento además con una formación profesional en electricidad.
-      <br><br>
-      Me considero una persona detallista y organizada, con un alto nivel de exigencia en cada
-      proyecto. Mis principales intereses son la impresión 3D aplicada al prototipado y,
-      actualmente, el diseño y desarrollo de páginas web.
+      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
+      Universitat Politècnica de València (UPV) y Universitat Jaume I (UJI), con FP en electricidad.
+      Interesado en impresión 3D aplicada al prototipado y en el diseño y desarrollo de páginas web.
     </p>
   </div>
 </section>
@@ -249,20 +242,16 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>document.body.style.opacity="1");
 
 /* ===== CURSOR ===== */
 const c=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0,v=0,lx=0,ly=0;
 
 addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
+  mx=e.clientX; my=e.clientY;
   v=Math.hypot(mx-lx,my-ly);
-  lx=mx;
-  ly=my;
+  lx=mx; ly=my;
 });
 
 (function animateCursor(){
@@ -306,7 +295,7 @@ const observer=new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== HEADER BLUR ON SCROLL ===== */
+/* ===== HEADER BLUR ===== */
 addEventListener("scroll",()=>{
   const n=document.querySelector("nav");
   if(scrollY>40){
@@ -318,18 +307,18 @@ addEventListener("scroll",()=>{
   }
 });
 
-/* ===== NAV SCROLL WITH OFFSET ===== */
+/* ===== NAV SCROLL – TÍTULOS ALINEADOS ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const section=document.querySelectorAll(".section")[btn.dataset.scroll];
-    const headerHeight=document.querySelector("nav").offsetHeight;
-    const offset=20; // ← ajuste aplicado
+    const title=section.querySelector("h1");
+
+    const fixedTitlePosition=140; // todos los títulos caen aquí
 
     const targetY=
-      section.getBoundingClientRect().top +
+      title.getBoundingClientRect().top +
       window.pageYOffset -
-      headerHeight -
-      offset;
+      fixedTitlePosition;
 
     window.scrollTo({
       top:targetY,
@@ -350,12 +339,7 @@ document.body.appendChild(renderer.domElement);
 
 const mesh=new THREE.Mesh(
   new THREE.IcosahedronGeometry(1.8,2),
-  new THREE.MeshStandardMaterial({
-    wireframe:true,
-    color:0xffffff,
-    opacity:.05,
-    transparent:true
-  })
+  new THREE.MeshStandardMaterial({wireframe:true,color:0xffffff,opacity:.05,transparent:true})
 );
 scene.add(mesh);
 
