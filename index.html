@@ -6,7 +6,6 @@
 <title>Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
 
@@ -25,13 +24,6 @@ body{
   cursor:none;
   opacity:0;
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
-}
-
-/* ===== BACKGROUND ===== */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
 }
 
 /* ===== CURSOR ===== */
@@ -120,11 +112,7 @@ nav span:hover{ color:#fff; }
 
 .about-text{
   text-align:justify;
-  max-width:520px; /* ↓ texto más estrecho */
-}
-
-/* quitar margen superior para alinear con la foto */
-.about-text{
+  max-width:520px;
   margin-top:0;
 }
 
@@ -132,6 +120,7 @@ nav span:hover{ color:#fff; }
   max-width:260px;
   height:auto;
   display:block;
+  margin-top:6px; /* alineación óptica con primera línea */
 }
 
 /* ===== TYPO ===== */
@@ -194,7 +183,7 @@ footer{
 <!-- INICIO -->
 <section class="section">
   <div class="content-center">
-    <h1 id="heroTitle"></h1>
+    <h1 id="heroTitle">Industrial Design</h1>
     <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
@@ -221,7 +210,7 @@ footer{
       </p>
     </div>
 
-    <img src="foto.jpg" alt="Foto" class="reveal">
+    <img src="foto.jpg" alt="Foto">
 
   </div>
 </section>
@@ -275,27 +264,6 @@ addEventListener("mousemove",e=>{
   cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
 })();
-
-/* ===== HERO TEXT ===== */
-const hero=document.getElementById("heroTitle");
-"Industrial Design".split("").forEach((char,i)=>{
-  const span=document.createElement("span");
-  span.textContent=char;
-  span.style.opacity=0;
-  span.style.display="inline-block";
-  span.style.transform="translateY(40px)";
-  span.style.filter="blur(8px)";
-  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(span);
-});
-
-setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(span=>{
-    span.style.opacity=1;
-    span.style.transform="translateY(0)";
-    span.style.filter="blur(0)";
-  });
-},200);
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
