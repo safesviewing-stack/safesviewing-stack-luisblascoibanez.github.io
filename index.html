@@ -58,7 +58,7 @@ nav{
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,0.45);
+  background:rgba(10,10,10,0.4);
   backdrop-filter:blur(12px);
   z-index:100;
 }
@@ -67,10 +67,10 @@ nav span{
   font-size:11px;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:#aaa;
+  color:#ccc;
   cursor:pointer;
   transition:.4s;
-  padding-top:4px;
+  padding-top:6px;
 }
 
 nav span:hover{ color:#fff; }
@@ -84,9 +84,9 @@ nav span:hover{ color:#fff; }
   padding:120px 10% 0;
 }
 
-/* ===== HERO (Industrial Design) ===== */
+/* ===== HERO ===== */
 .section:first-of-type .content-center{
-  margin-top:-70px; /* ↑ SUBIDO MÁS */
+  margin-top:-70px;
 }
 
 /* ===== CONTACTO ===== */
@@ -124,10 +124,10 @@ h1{
 
 p{
   margin-top:18px;
-  font-size:16px;
+  font-size:15px;
   color:#aaa;
   max-width:620px;
-  line-height:1.65;
+  line-height:1.6;
   margin-left:0.35vw;
 }
 
@@ -148,10 +148,10 @@ p{
 /* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:60px 0 40px;
+  padding:48px 0 36px;   /* equilibrado */
   font-size:11px;
-  letter-spacing:.2em;
-  color:#aaa;
+  letter-spacing:.18em;
+  color:#cfcfcf;
   border-top:1px solid #1c1c1c;
 }
 
@@ -183,7 +183,7 @@ footer{
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
       Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
-      UPV y UJI, con FP en electricidad. Interesado en impresión 3D y desarrollo web.
+      UPV y UJI, con FP en electricidad. Interés en impresión 3D y desarrollo web.
     </p>
   </div>
 </section>
@@ -208,11 +208,13 @@ footer{
 <section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
-    <p class="reveal">majorbori@gmail.com</p>
+    <p class="reveal">luis.blasco@email.com</p>
   </div>
 </section>
 
-<footer>INDUSTRIAL DESIGN</footer>
+<footer>
+© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniero en diseño industrial y desarrollo de productos
+</footer>
 
 <script>
 
@@ -277,19 +279,19 @@ document.querySelectorAll("nav span").forEach(btn=>{
       requestAnimationFrame(()=>{
         window.scrollTo({
           top: document.documentElement.scrollHeight,
-          behavior: "smooth"
+          behavior:"smooth"
         });
       });
       return;
     }
 
-    const section = document.querySelectorAll(".section")[index];
-    const title = section.querySelector("h1");
-    const offset = 180;
+    const section=document.querySelectorAll(".section")[index];
+    const title=section.querySelector("h1");
+    const offset=180;
 
     window.scrollTo({
-      top: title.offsetTop - offset,
-      behavior: "smooth"
+      top:title.offsetTop-offset,
+      behavior:"smooth"
     });
   });
 });
