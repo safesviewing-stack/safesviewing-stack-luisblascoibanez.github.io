@@ -74,9 +74,7 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{ color:#fff; }
 
 /* ===== SECTIONS ===== */
 .section{
@@ -144,9 +142,7 @@ p{
   transition:.4s;
 }
 
-.project:hover{
-  transform:translateY(-8px);
-}
+.project:hover{ transform:translateY(-8px); }
 
 /* ===== REVEAL ===== */
 .reveal{
@@ -199,7 +195,7 @@ footer{
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
     <p class="reveal">
-      Soy ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
+      Ingeniero en diseño industrial de 24 años, con base en Valencia. Formación en la
       Universitat Politècnica de València (UPV) y Universitat Jaume I (UJI), con FP en electricidad.
       Interesado en impresión 3D aplicada al prototipado y en el diseño y desarrollo de páginas web.
     </p>
@@ -241,7 +237,7 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>document.body.style.opacity="1");
+window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* ===== CURSOR ===== */
 const c=document.querySelector(".cursor");
@@ -253,13 +249,11 @@ addEventListener("mousemove",e=>{
   lx=mx; ly=my;
 });
 
-(function animateCursor(){
+(function cursorAnim(){
   const s=0.12+Math.min(v*0.02,0.35);
-  x+=(mx-x)*s;
-  y+=(my-y)*s;
-  c.style.left=x+"px";
-  c.style.top=y+"px";
-  requestAnimationFrame(animateCursor);
+  x+=(mx-x)*s; y+=(my-y)*s;
+  c.style.left=x+"px"; c.style.top=y+"px";
+  requestAnimationFrame(cursorAnim);
 })();
 
 /* ===== HERO TEXT ===== */
@@ -274,6 +268,7 @@ const h=document.getElementById("heroTitle");
   span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
   h.appendChild(span);
 });
+
 setTimeout(()=>{
   h.querySelectorAll("span").forEach(span=>{
     span.style.opacity=1;
@@ -284,11 +279,7 @@ setTimeout(()=>{
 
 /* ===== SCROLL REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
-  });
+  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("visible"));
 },{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
@@ -304,30 +295,34 @@ addEventListener("scroll",()=>{
   }
 });
 
-/* ===== NAV SCROLL LOGIC ===== */
+/* ===== NAV SCROLL (PRIMER CLIC MÁS ABAJO) ===== */
+let firstNavigation=true;
+
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const index = btn.dataset.scroll;
 
-    // INICIO → arriba del todo
-    if(index === "0"){
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    const index=btn.dataset.scroll;
+
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
       return;
     }
 
-    const section = document.querySelectorAll(".section")[index];
-    const title = section.querySelector("h1");
-    const fixedTitlePosition = 180; // ← más abajo que antes
+    const section=document.querySelectorAll(".section")[index];
+    const title=section.querySelector("h1");
 
-    const targetY =
+    const firstOffset=220;
+    const normalOffset=180;
+    const offset=firstNavigation?firstOffset:normalOffset;
+
+    const targetY=
       title.getBoundingClientRect().top +
       window.pageYOffset -
-      fixedTitlePosition;
+      offset;
 
-    window.scrollTo({
-      top: targetY,
-      behavior: "smooth"
-    });
+    window.scrollTo({top:targetY,behavior:"smooth"});
+
+    firstNavigation=false;
   });
 });
 
