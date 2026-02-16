@@ -73,11 +73,8 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{ color:#fff; }
-
-nav span.disabled{
-  opacity:0.35;
-  pointer-events:none;
+nav span:hover{
+  color:#fff;
 }
 
 /* ===== SECTIONS ===== */
@@ -260,7 +257,7 @@ const observer=new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== NAVIGATION (UN SOLO MOVIMIENTO) ===== */
+/* ===== NAVIGATION (SIN BLOQUEO) ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
 
@@ -268,7 +265,6 @@ document.querySelectorAll("nav span").forEach(btn=>{
 
     if(index==="0"){
       window.scrollTo({top:0,behavior:"smooth"});
-      btn.classList.add("disabled");
       return;
     }
 
@@ -278,10 +274,12 @@ document.querySelectorAll("nav span").forEach(btn=>{
     const offset=180;
     const targetY=title.offsetTop-offset;
 
-    window.scrollTo({top:targetY,behavior:"smooth"});
-    btn.classList.add("disabled");
+    window.scrollTo({
+      top:targetY,
+      behavior:"smooth"
+    });
 
-  },{ once:true });
+  });
 });
 
 /* ===== THREE BACKGROUND ===== */
