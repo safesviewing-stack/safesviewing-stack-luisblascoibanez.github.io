@@ -9,7 +9,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
-
 /* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
 
@@ -27,13 +26,8 @@ canvas{position:fixed;inset:0;z-index:-1;}
 
 /* ===== CURSOR ===== */
 .cursor{
-  position:fixed;
-  width:8px;height:8px;
-  border:1px solid #fff;
-  border-radius:50%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:1000;
+  position:fixed;width:8px;height:8px;border:1px solid #fff;border-radius:50%;
+  pointer-events:none;transform:translate(-50%,-50%);z-index:1000;
 }
 
 /* ===== HEADER ===== */
@@ -48,13 +42,8 @@ nav{
 }
 
 nav span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#aaa;
-  cursor:pointer;
-  transition:.4s;
-  padding-top:4px;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:#aaa;cursor:pointer;transition:.4s;padding-top:4px;
 }
 nav span:hover{color:#fff;}
 
@@ -74,20 +63,25 @@ nav span:hover{color:#fff;}
 /* ===== SOBRE MÍ LAYOUT ===== */
 .about-grid{
   display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:60px;
+  grid-template-columns:1fr 0.9fr; /* más pegado */
+  gap:40px; /* menos aire */
   align-items:start;
+}
+
+/* ===== TEXTO SOBRE MÍ ===== */
+.about-text{
+  max-width:520px;           /* más estrecho */
+  text-align:justify;        /* justificado */
 }
 
 /* ===== FOTO ===== */
 .about-photo{
   width:100%;
-  max-width:360px;
+  max-width:340px;
   opacity:.9;
   filter:grayscale(100%);
   transition:.6s;
 }
-
 .about-photo:hover{
   opacity:1;
   filter:grayscale(0%);
@@ -100,21 +94,13 @@ h1{
   line-height:1.05;
 }
 
-.content-center h1{
-  font-size:clamp(84px,7vw,140px);
-}
-
-h2{
-  font-size:30px;
-  font-weight:400;
-  margin-bottom:18px;
-}
+.content-center h1{font-size:clamp(84px,7vw,140px);}
+h2{font-size:30px;font-weight:400;margin-bottom:18px;}
 
 p{
   margin-top:18px;
   font-size:16.5px;
   color:#aaa;
-  max-width:620px;
   line-height:1.65;
 }
 
@@ -164,8 +150,10 @@ footer{
   .about-grid{
     grid-template-columns:1fr;
   }
+  .about-photo{
+    margin-top:40px;
+  }
 }
-
 </style>
 </head>
 <body>
@@ -192,7 +180,7 @@ footer{
 <section class="section">
   <div class="content-left about-grid">
     
-    <div>
+    <div class="about-text">
       <h1 class="reveal">Sobre mí</h1>
       <p class="reveal">
         Soy ingeniero en diseño industrial de 24 años, con base en Valencia. He cursado mis estudios
