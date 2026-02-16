@@ -6,6 +6,7 @@
 <title>Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
@@ -27,6 +28,13 @@ body{
   transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
 }
 
+/* ===== BACKGROUND ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
 /* ===== CURSOR ===== */
 .cursor{
   position:fixed;
@@ -39,7 +47,7 @@ body{
   z-index:1000;
 }
 
-/* ===== NAV ===== */
+/* ===== HEADER ===== */
 nav{
   position:fixed;
   top:0;
@@ -51,7 +59,7 @@ nav{
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,.4);
+  background:rgba(10,10,10,0.4);
   backdrop-filter:blur(12px);
   z-index:100;
 }
@@ -63,6 +71,7 @@ nav span{
   color:#ccc;
   cursor:pointer;
   transition:.4s;
+  padding-top:6px;
 }
 
 nav span:hover{ color:#fff; }
@@ -81,9 +90,19 @@ nav span:hover{ color:#fff; }
   margin-top:-70px;
 }
 
+/* ===== CONTACTO ===== */
+.section.contact{
+  padding-top:120px;
+}
+
+.section.contact .content-left{
+  margin-top:-165px;
+}
+
 /* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
+  text-align:left;
   margin-left:1vw;
 }
 
@@ -110,55 +129,73 @@ p{
   color:#aaa;
   max-width:480px;
   line-height:1.6;
+  margin-left:0.35vw;
   text-align:justify;
 }
 
-/* ===== ABOUT ===== */
-.about-content{
+/* ===== CONTACT LINKS ===== */
+.contact-list{
+  margin-top:22px;
   display:flex;
-  align-items:flex-start;
-  gap:32px;
+  flex-direction:column;
+  gap:14px;
 }
 
-.about-text{ max-width:480px; }
-
-.about-photo{
-  margin-top:23px;
-  flex-shrink:0;
-}
-
-.about-photo img{
-  width:288px;
-  filter:grayscale(100%) contrast(1.05);
-  opacity:.9;
-}
-
-/* ===== CONTACT EDITORIAL ===== */
-.contact-block{
-  margin-top:28px;
-}
-
-.contact-item{
-  margin-bottom:24px;
-}
-
-.contact-label{
-  font-size:10px;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:#777;
-  margin-bottom:6px;
-}
-
-.contact-value a{
+.contact-list a{
+  display:flex;
+  align-items:center;
+  gap:14px;
   font-size:15px;
   color:#aaa;
   text-decoration:none;
   transition:.3s;
 }
 
-.contact-value a:hover{
+.contact-list i{
+  font-size:14px;
+  width:18px;
+  text-align:center;
+  opacity:.7;
+}
+
+.contact-list a:hover{
   color:#fff;
+}
+
+.contact-list a:hover i{
+  opacity:1;
+}
+
+/* ===== ABOUT ===== */
+.about{
+  display:block;
+}
+
+.about-title{
+  margin-bottom:2px;
+}
+
+.about-content{
+  display:flex;
+  align-items:flex-start;
+  gap:32px;
+}
+
+.about-text{
+  max-width:480px;
+}
+
+.about-photo{
+  flex-shrink:0;
+  margin-top:23px;
+}
+
+.about-photo img{
+  width:288px;
+  height:auto;
+  border-radius:0;
+  filter:grayscale(100%) contrast(1.05);
+  opacity:0.9;
 }
 
 /* ===== REVEAL ===== */
@@ -173,6 +210,26 @@ p{
   opacity:1;
   transform:translateY(0);
   filter:blur(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .about-content{
+    flex-direction:column;
+    gap:40px;
+  }
+
+  .about-title{
+    margin-bottom:10px;
+  }
+
+  .about-photo{
+    margin-top:0;
+  }
+
+  .about-photo img{
+    width:240px;
+  }
 }
 
 /* ===== FOOTER ===== */
@@ -199,7 +256,7 @@ footer{
   <span data-scroll="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
+<!-- INICIO -->
 <section class="section">
   <div class="content-center">
     <h1 id="heroTitle"></h1>
@@ -209,12 +266,13 @@ footer{
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left">
+  <div class="content-left about">
 
-    <h1 class="reveal">Sobre mí</h1>
+    <h1 class="reveal about-title">Sobre mí</h1>
 
-    <div class="about-content reveal">
-      <div class="about-text">
+    <div class="about-content">
+
+      <div class="about-text reveal">
         <p>
           Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona enfocada en un
           único campo o disciplina concreta, sino alguien con un perfil ecléctico y flexible, capaz de adaptarse a
@@ -222,16 +280,17 @@ footer{
           estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar ambas dimensiones
           del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación en
           la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex University de
-          Londres. Cuento además con una formación profesional en electricidad. Disfruto del proceso de diseño desde
-          lo conceptual hasta la producción final, con soluciones consistentes.
+          Londres. Cuento además con una formación profesional en electricidad, que me ha aportado una base técnica
+          sólida y una forma de pensar práctica. Disfruto del proceso de diseño desde lo conceptual hasta la
+          producción final, con soluciones consistentes.
         </p>
       </div>
 
-      <div class="about-photo">
-        <img src="foto.jpg" alt="Foto personal">
+      <div class="about-photo reveal">
+        <img src="foto.jpg" alt="Foto personal de Luis Blasco">
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -252,37 +311,27 @@ footer{
 </section>
 
 <!-- CONTACTO -->
-<section class="section">
+<section class="section contact">
   <div class="content-left">
-
     <h1 class="reveal">Contacto</h1>
 
-    <div class="contact-block reveal">
+    <div class="contact-list reveal">
+      <a href="https://www.linkedin.com/in/tu-perfil" target="_blank">
+        <i class="fa-brands fa-linkedin-in"></i>
+        LinkedIn
+      </a>
 
-      <div class="contact-item">
-        <div class="contact-label">LinkedIn</div>
-        <div class="contact-value">
-          <a href="https://www.linkedin.com/in/tu-perfil" target="_blank">
-            linkedin.com/in/tu-perfil
-          </a>
-        </div>
-      </div>
+      <a href="mailto:tucorreo@gmail.com">
+        <i class="fa-regular fa-envelope"></i>
+        tucorreo@gmail.com
+      </a>
 
-      <div class="contact-item">
-        <div class="contact-label">Email</div>
-        <div class="contact-value">
-          <a href="mailto:tucorreo@gmail.com">tucorreo@gmail.com</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-label">Teléfono</div>
-        <div class="contact-value">
-          <a href="tel:+34600000000">+34 600 000 000</a>
-        </div>
-      </div>
-
+      <a href="tel:+34600000000">
+        <i class="fa-solid fa-phone"></i>
+        +34 600 000 000
+      </a>
     </div>
+
   </div>
 </section>
 
@@ -292,8 +341,10 @@ footer{
 
 <script>
 
-/* ===== LOAD ===== */
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
+/* ===== ENTRADA ===== */
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
@@ -314,41 +365,60 @@ addEventListener("mousemove",e=>{
 
 /* ===== HERO TEXT ===== */
 const hero=document.getElementById("heroTitle");
-"Industrial Design".split("").forEach((c,i)=>{
-  const s=document.createElement("span");
-  s.textContent=c;
-  s.style.opacity=0;
-  s.style.display="inline-block";
-  s.style.transform="translateY(40px)";
-  s.style.filter="blur(8px)";
-  s.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
-  hero.appendChild(s);
+"Industrial Design".split("").forEach((char,i)=>{
+  const span=document.createElement("span");
+  span.textContent=char;
+  span.style.opacity=0;
+  span.style.display="inline-block";
+  span.style.transform="translateY(40px)";
+  span.style.filter="blur(8px)";
+  span.style.transition=`all .5s cubic-bezier(.2,.7,.1,1) ${i*0.025}s`;
+  hero.appendChild(span);
 });
 
 setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(s=>{
-    s.style.opacity=1;
-    s.style.transform="translateY(0)";
-    s.style.filter="blur(0)";
+  hero.querySelectorAll("span").forEach(span=>{
+    span.style.opacity=1;
+    span.style.transform="translateY(0)";
+    span.style.filter="blur(0)";
   });
 },200);
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
   });
 },{threshold:.2});
 
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== NAV ===== */
+/* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    const i=btn.dataset.scroll;
-    const sections=document.querySelectorAll(".section");
+    const index=btn.dataset.scroll;
+
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+
+    if(index==="4"){
+      window.scrollTo({
+        top:document.documentElement.scrollHeight,
+        behavior:"smooth"
+      });
+      return;
+    }
+
+    const section=document.querySelectorAll(".section")[index];
+    const title=section.querySelector("h1");
+    const offset=180;
+
     window.scrollTo({
-      top:sections[i].offsetTop-180,
+      top:title.offsetTop-offset,
       behavior:"smooth"
     });
   });
