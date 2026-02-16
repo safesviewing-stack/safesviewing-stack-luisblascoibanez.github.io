@@ -132,7 +132,7 @@ p{
   text-align:justify;
 }
 
-/* ===== ABOUT ===== */
+/* ===== ABOUT (CORRECCIÓN REAL) ===== */
 .about{
   display:block;
 }
@@ -144,11 +144,11 @@ p{
 .about-content{
   display:flex;
   align-items:flex-start;
-  gap:28px; /* ⬅ espacio texto–foto reducido */
+  gap:24px; /* ahora sí funciona */
 }
 
 .about-text{
-  flex:1;
+  max-width:500px; /* ⬅ controla el layout */
 }
 
 .about-photo{
