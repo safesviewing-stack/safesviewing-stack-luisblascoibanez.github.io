@@ -73,9 +73,7 @@ nav span{
   padding-top:4px;
 }
 
-nav span:hover{
-  color:#fff;
-}
+nav span:hover{ color:#fff; }
 
 /* ===== SECTIONS ===== */
 .section{
@@ -84,6 +82,11 @@ nav span:hover{
   justify-content:center;
   align-items:center;
   padding:120px 10% 0;
+}
+
+/* Contacto: subir título */
+.section.contact{
+  padding-top:80px; /* ↓ antes 120px */
 }
 
 /* ===== CONTENT ===== */
@@ -133,10 +136,10 @@ p{
   filter:blur(0);
 }
 
-/* ===== FOOTER (ACORTADO) ===== */
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:60px 0 40px; /* ↓ más corto */
+  padding:60px 0 40px;
   font-size:11px;
   letter-spacing:.2em;
   color:#aaa;
@@ -194,7 +197,7 @@ footer{
 </section>
 
 <!-- CONTACTO -->
-<section class="section">
+<section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
     <p class="reveal">majorbori@gmail.com</p>
@@ -206,17 +209,14 @@ footer{
 <script>
 
 /* ===== ENTRADA ===== */
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
-});
+window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
 
 addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
+  mx=e.clientX; my=e.clientY;
 });
 
 (function animateCursor(){
@@ -250,17 +250,13 @@ setTimeout(()=>{
 
 /* ===== REVEAL ===== */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
-  });
+  entries.forEach(e=>e.isIntersecting && e.target.classList.add("visible"));
 },{threshold:.2});
-
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* ===== NAVIGATION (SIN BLOQUEO) ===== */
+/* ===== NAVIGATION ===== */
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
-
     const index=btn.dataset.scroll;
 
     if(index==="0"){
@@ -272,13 +268,10 @@ document.querySelectorAll("nav span").forEach(btn=>{
     const title=section.querySelector("h1");
 
     const offset=180;
-    const targetY=title.offsetTop-offset;
-
     window.scrollTo({
-      top:targetY,
+      top:title.offsetTop-offset,
       behavior:"smooth"
     });
-
   });
 });
 
