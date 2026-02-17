@@ -8,57 +8,230 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 /* ========= RESET ========= */
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
 
 /* ========= BODY ========= */
-body{background:#0a0a0a;color:#f5f5f5}
+body{
+  background:#0a0a0a;
+  color:#f5f5f5;
+}
 
 /* ========= NAV ========= */
 nav{
-  position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;height:80px;
-  display:flex;justify-content:center;align-items:center;gap:50px;
-  background:rgba(10,10,10,.45);backdrop-filter:blur(12px);z-index:100
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:80px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:50px;
+  background:rgba(10,10,10,.45);
+  backdrop-filter:blur(12px);
+  z-index:100;
 }
-nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;cursor:pointer}
+
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#bbb;
+  cursor:pointer;
+}
 
 /* ========= SECTIONS ========= */
-.section{min-height:100vh;padding:180px 10vw 160px 22vw;display:flex}
+.section{
+  min-height:100vh;
+  padding:180px 10vw 160px 22vw;
+  display:flex;
+}
 
 /* ========= HERO ========= */
-.hero{align-items:center}
-.hero h1{font-size:clamp(80px,7vw,140px);line-height:1.05}
-.hero-sub{margin-top:24px;padding-left:8px;font-size:14px;letter-spacing:.25em;color:#777}
+.hero{
+  align-items:center;
+}
+
+.hero h1{
+  font-size:clamp(80px,7vw,140px);
+  line-height:1.05;
+}
+
+.hero-sub{
+  margin-top:24px;
+  padding-left:8px;
+  font-size:14px;
+  letter-spacing:.25em;
+  color:#777;
+}
 
 /* ========= ABOUT ========= */
-.about{display:flex;gap:40px;margin-top:20px}
-.about p{max-width:700px;color:#aaa;line-height:1.6}
-.about img{width:300px;height:400px;object-fit:cover;opacity:.9}
+.about{
+  display:flex;
+  gap:40px;
+  margin-top:20px;
+}
+
+.about p{
+  max-width:700px;
+  color:#aaa;
+  line-height:1.6;
+}
+
+.about img{
+  width:300px;
+  height:400px;
+  object-fit:cover;
+  opacity:.9;
+}
 
 /* ========= PORTFOLIO ========= */
-.portfolio-carousel{
-  display:flex;gap:48px;overflow-x:auto;
-  scrollbar-width:thin;scrollbar-color:#444 transparent
+.portfolio-wrapper{
+  margin-top:40px;
 }
-.portfolio-carousel::-webkit-scrollbar{height:6px}
-.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
-.project-card{min-width:460px;height:260px;background:#222;opacity:0;transform:translateY(12px);transition:.8s}
-.project-card.is-visible{opacity:1;transform:translateY(0)}
+
+.portfolio-carousel{
+  display:flex;
+  gap:48px;
+  overflow-x:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
+}
+
+.portfolio-carousel::-webkit-scrollbar{
+  height:6px;
+}
+
+.portfolio-carousel::-webkit-scrollbar-thumb{
+  background:#444;
+  border-radius:6px;
+}
+
+.project-card{
+  min-width:460px;
+  flex-shrink:0;
+  opacity:0;
+  transform:translateY(12px);
+  transition:.8s;
+}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.project-image{
+  height:260px;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.project-card h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-card span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
 
 /* ========= CV ========= */
-.cv-section{position:relative}
-.cv-title{position:sticky;top:180px;width:260px}
-.cv-line{position:sticky;top:180px;margin-left:40px;width:2px;height:60vh;background:#222}
-.cv-line-fill{position:absolute;bottom:0;width:100%;height:0;background:#777}
-.cv-scroll{margin-left:120px;display:flex;flex-direction:column;gap:180px;padding-bottom:200px}
-.cv-block{max-width:520px;opacity:0;transform:translateY(60px)}
-.cv-block h3{font-size:18px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
-.cv-item{margin-bottom:18px}
-.cv-item strong{font-size:15px;font-weight:500}
-.cv-item span{display:block;font-size:13px;color:#888;margin-top:2px}
-.cv-dot{position:absolute;left:-49px;top:6px;width:10px;height:10px;border-radius:50%;background:#777;opacity:.2}
-.cv-block.active .cv-dot{opacity:1}
+.cv-section{
+  position:relative;
+}
+
+.cv-title{
+  position:sticky;
+  top:180px;
+  width:260px;
+}
+
+.cv-line{
+  position:sticky;
+  top:180px;
+  margin-left:40px;
+  width:2px;
+  height:60vh;
+  background:#222;
+}
+
+.cv-line-fill{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:0;
+  background:#777;
+}
+
+.cv-scroll{
+  margin-left:120px;
+  display:flex;
+  flex-direction:column;
+  gap:180px;
+  padding-bottom:200px;
+}
+
+.cv-block{
+  max-width:520px;
+  opacity:0;
+  transform:translateY(60px);
+}
+
+.cv-block h3{
+  font-size:18px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.cv-item{
+  margin-bottom:18px;
+}
+
+.cv-item strong{
+  font-size:15px;
+  font-weight:500;
+}
+
+.cv-item span{
+  display:block;
+  font-size:13px;
+  color:#888;
+  margin-top:2px;
+}
+
+.cv-dot{
+  position:absolute;
+  left:-49px;
+  top:6px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#777;
+  opacity:.2;
+}
+
+.cv-block.active .cv-dot{
+  opacity:1;
+}
+
 </style>
 </head>
 
@@ -73,12 +246,15 @@ nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;
 
 <section class="section hero">
   <div>
-    <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
+    <h1>
+      Luis<br>
+      Blasco-Ibáñez<br>
+      Berbel
+    </h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
   </div>
 </section>
 
-<!-- ========= SOBRE MÍ (TEXTO ORIGINAL COMPLETO) ========= -->
 <section class="section">
   <div>
     <h1>Sobre mí</h1>
@@ -95,7 +271,7 @@ nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;
         práctica. Disfruto de todo el proceso de diseño, desde la fase de análisis hasta la
         materialización final del producto.
       </p>
-      <img src="foto.jpg">
+      <img src="foto.jpg" alt="Foto personal">
     </div>
   </div>
 </section>
@@ -103,17 +279,42 @@ nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;
 <section class="section">
   <div>
     <h1>Portfolio</h1>
-    <div class="portfolio-carousel">
-      <div class="project-card"></div>
-      <div class="project-card"></div>
-      <div class="project-card"></div>
+
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+
+        <a class="project-card">
+          <div class="project-image"><img src="brazo1.jpg"></div>
+          <h2>NODE</h2>
+          <span>Proyecto final de grado</span>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="reloj1.jpg"></div>
+          <h2>Sixay · Cómoda</h2>
+          <span>Diseño de mobiliario</span>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="secador2.jpg"></div>
+          <h2>Exploración material</h2>
+          <span>Proyecto experimental</span>
+        </a>
+
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section cv-section">
-  <div class="cv-title"><h1>CV</h1></div>
-  <div class="cv-line"><div class="cv-line-fill" id="cvLineFill"></div></div>
+
+  <div class="cv-title">
+    <h1>CV</h1>
+  </div>
+
+  <div class="cv-line">
+    <div class="cv-line-fill" id="cvLineFill"></div>
+  </div>
 
   <div class="cv-scroll">
 
@@ -152,16 +353,20 @@ nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;
 </section>
 
 <script>
+/* Navegación */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+  btn.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
+/* Portfolio */
 document.querySelectorAll(".project-card").forEach(card=>{
   new IntersectionObserver(e=>{
     card.classList.toggle("is-visible",e[0].isIntersecting);
   }).observe(card);
 });
 
+/* CV progreso */
 const cvBlocks=document.querySelectorAll(".cv-block");
 const lineFill=document.getElementById("cvLineFill");
 
