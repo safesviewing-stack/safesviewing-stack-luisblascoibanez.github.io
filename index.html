@@ -115,6 +115,7 @@ h1{
 
 p{
   margin-top:8px;
+  margin-left:-16px;     /* ⬅ textos un poco más a la izquierda */
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -131,7 +132,7 @@ p{
 }
 
 .about img{
-  width:300px;          /* ⬅ imagen más grande */
+  width:300px;
   height:390px;
   margin-top:16px;
   object-fit:cover;
@@ -218,13 +219,6 @@ p{
   margin-top:16px;
 }
 
-.contact-statement p{
-  margin-top:0;
-  font-size:17px;
-  line-height:1.7;
-  color:#bdbdbd;
-}
-
 /* ========= FOOTER ========= */
 .footer-wrapper{
   flex:1;
@@ -295,38 +289,12 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-
     <div class="portfolio-group">
       <a class="project main" href="node.html">
         <span>Proyecto principal</span>
         <h3>NODE — Sistema modular</h3>
       </a>
     </div>
-
-    <div class="portfolio-group">
-      <a class="project secondary" href="sixay.html">
-        <span>Mobiliario</span>
-        <h3>Sixay — Cómoda personalizada</h3>
-      </a>
-
-      <a class="project secondary" href="#">
-        <span>Producto</span>
-        <h3>Luminaria técnica — Desarrollo conceptual</h3>
-      </a>
-    </div>
-
-    <div class="portfolio-group">
-      <a class="project minor" href="#">
-        <span>Exploración</span>
-        <h3>Sistema de ensamblaje sin fijaciones</h3>
-      </a>
-
-      <a class="project minor" href="#">
-        <span>Investigación</span>
-        <h3>Materiales y procesos industriales</h3>
-      </a>
-    </div>
-
   </div>
 </section>
 
@@ -342,7 +310,7 @@ p{
   </div>
 </section>
 
-<!-- CONTACTO / STATEMENT -->
+<!-- CONTACTO -->
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
@@ -350,8 +318,7 @@ p{
       <p>
         Busco entornos donde el diseño se entienda como un proceso completo: análisis, estructura,
         decisión y materialización. Me interesan proyectos donde la claridad conceptual y la lógica
-        constructiva tengan tanto peso como la forma final. Disponible para oportunidades profesionales,
-        colaboraciones o conversaciones honestas sobre diseño y proceso.
+        constructiva tengan tanto peso como la forma final.
       </p>
     </div>
   </div>
