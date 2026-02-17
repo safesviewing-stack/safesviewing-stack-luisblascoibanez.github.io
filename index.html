@@ -96,17 +96,6 @@ h1{
   line-height:1.05;
 }
 
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:8px;
-  padding-left:8px;
-  font-size:15px;
-  color:#aaa;
-  max-width:700px;
-  line-height:1.6;
-  text-align:justify;
-}
-
 /* ========= ABOUT ========= */
 .about{
   display:flex;
@@ -132,17 +121,6 @@ h1{
   padding-right:120px;
 }
 
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(to right, rgba(10,10,10,0), rgba(10,10,10,1));
-}
-
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -153,20 +131,8 @@ h1{
   scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
-}
-
 .project-card{
   min-width:460px;
-  flex-shrink:0;
-  text-decoration:none;
-  color:inherit;
   opacity:0;
   transform:translateY(12px);
   transition:opacity .8s ease, transform .8s ease;
@@ -184,7 +150,7 @@ h1{
   padding-left:48px;
 }
 
-/* línea vertical */
+/* línea */
 .cv-wrapper::before{
   content:"";
   position:absolute;
@@ -202,9 +168,18 @@ h1{
   transform:scaleY(1);
 }
 
+/* bloques */
 .cv-block{
   position:relative;
   margin-bottom:56px;
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+
+.cv-block.is-visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .cv-block::before{
@@ -220,7 +195,6 @@ h1{
 
 .cv-block h3{
   font-size:18px;
-  font-weight:500;
   letter-spacing:.12em;
   text-transform:uppercase;
   margin-bottom:20px;
@@ -233,21 +207,17 @@ h1{
 .cv-item strong{
   display:block;
   font-size:15px;
-  font-weight:500;
 }
 
 .cv-item span{
-  display:block;
   font-size:13px;
   color:#888;
-  margin-top:2px;
 }
 
 .cv-item p{
   margin-top:6px;
   font-size:14px;
   color:#aaa;
-  max-width:680px;
 }
 
 /* ========= FOOTER ========= */
@@ -273,37 +243,8 @@ h1{
 
 <section class="section hero">
   <div class="section-block">
-    <h1>
-      Luis<br>
-      <span class="hero-surname">Blasco-Ibáñez</span><br>
-      Berbel
-    </h1>
+    <h1>Luis<br><span class="hero-surname">Blasco-Ibáñez</span><br>Berbel</h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-block">
-    <h1>Sobre mí</h1>
-    <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico, técnico y
-        adaptable. Formación universitaria en diseño combinada con experiencia real en el sector
-        eléctrico, lo que me permite abordar proyectos desde una visión constructiva y aplicada.
-      </p>
-      <img src="foto.jpg" alt="Foto personal">
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-block">
-    <h1>Portfolio</h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <!-- proyectos intactos -->
-      </div>
-    </div>
   </div>
 </section>
 
@@ -315,18 +256,9 @@ h1{
 
       <div class="cv-block">
         <h3>Formación</h3>
-        <div class="cv-item">
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Jaume I</span>
-        </div>
-        <div class="cv-item">
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Politècnica de València</span>
-        </div>
-        <div class="cv-item">
-          <strong>Programa Erasmus</strong>
-          <span>Londres</span>
-        </div>
+        <div class="cv-item"><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Jaume I</span></div>
+        <div class="cv-item"><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Politècnica de València</span></div>
+        <div class="cv-item"><strong>Programa Erasmus</strong><span>Londres</span></div>
       </div>
 
       <div class="cv-block">
@@ -334,18 +266,12 @@ h1{
         <div class="cv-item">
           <strong>Técnico electricista</strong>
           <span>Autrial</span>
-          <p>
-            Trabajos de instalación, mantenimiento y montaje eléctrico en entornos industriales,
-            interpretación de esquemas y resolución técnica en obra.
-          </p>
+          <p>Instalaciones y mantenimiento eléctrico industrial.</p>
         </div>
         <div class="cv-item">
           <strong>Técnico electricista</strong>
           <span>Elecnor</span>
-          <p>
-            Experiencia en instalaciones eléctricas, trabajo en equipo en proyectos de gran escala
-            y aplicación de criterios de seguridad y calidad.
-          </p>
+          <p>Trabajo en instalaciones eléctricas y proyectos de gran escala.</p>
         </div>
       </div>
 
@@ -372,35 +298,34 @@ h1{
 </section>
 
 <script>
+/* nav */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
   });
 });
 
-/* portfolio animation */
-const carousel=document.querySelector(".portfolio-carousel");
-const cards=document.querySelectorAll(".project-card");
+/* CV animations */
+const cvWrapper=document.querySelector(".cv-wrapper");
+const cvBlocks=document.querySelectorAll(".cv-block");
 
-const cardObserver=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    entry.target.classList.toggle("is-visible",entry.isIntersecting);
-  });
-},{root:carousel,threshold:0.3});
-
-cards.forEach(card=>cardObserver.observe(card));
-
-/* CV line animation */
-const cv=document.querySelector(".cv-wrapper");
 const cvObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      cv.classList.add("is-visible");
+      cvWrapper.classList.add("is-visible");
     }
+  });
+},{threshold:0.2});
+
+cvObserver.observe(cvWrapper);
+
+const blockObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    entry.target.classList.toggle("is-visible",entry.isIntersecting);
   });
 },{threshold:0.3});
 
-cvObserver.observe(cv);
+cvBlocks.forEach(block=>blockObserver.observe(block));
 </script>
 
 </body>
