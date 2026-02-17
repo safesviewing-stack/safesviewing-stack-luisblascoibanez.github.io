@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luis Blasco — Industrial Design</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ========= RESET ========= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+:root{
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+
+/* ========= BODY ========= */
+body{
+  background:#0a0a0a;
+  color:#f5f5f5;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  cursor:none;
+}
+
+/* ========= CURSOR ========= */
+.cursor{
+  position:fixed;
+  width:8px;
+  height:8px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:1000;
+}
+
+/* ========= NAV ========= */
+nav{
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:80px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:50px;
+  background:rgba(10,10,10,.4);
+  backdrop-filter:blur(12px);
+  z-index:100;
+}
+
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#bbb;
+  cursor:pointer;
+}
+
+/* ========= SECTIONS (EDITORIAL) ========= */
+.section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  justify-content:flex-start;
+
+  /* layout desplazado */
+  padding:180px 10vw 160px 17vw;
+
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+}
+
+/* ========= SECTION BLOCK ========= */
+.section-block{
+  position:sticky;
+  top:260px;
+  max-width:900px;
+}
+
+/* ========= HERO (EXCEPCIÓN) ========= */
+.section.hero{
+  padding:0;                     /* ⬅ anula desplazamiento */
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.section.hero .section-block{
+  position:static;
+}
+
+.section.hero h1{
+  font-size:clamp(80px,7vw,140px);
+}
+
+.hero-sub{
+  margin-top:24px;
+  font-size:13px;
+  letter-spacing:.25em;
+  color:#777;
+}
+
+/* ========= TYPO ========= */
+h1{
+  font-size:clamp(70px,6vw,120px);
+  font-weight:500;
+  line-height:1.05;
+}
+
+p{
+  margin-top:28px;
+  font-size:15px;
+  color:#aaa;
+  max-width:520px;
+  line-height:1.6;
+  text-align:justify;
+}
+
+/* ========= ABOUT ========= */
+.about{
+  display:flex;
+  gap:40px;
+  margin-top:28px;
+}
+
+.about img{
+  width:288px;
+  filter:grayscale(100%) contrast(1.05);
+  opacity:.9;
+}
+
+/* ========= PORTFOLIO ========= */
+.project{
+  display:block;
+  margin-top:36px;
+  text-decoration:none;
+  color:inherit;
+}
+
+.project span{
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#777;
+}
+
+.project h3{
+  margin-top:8px;
+  font-size:20px;
+  font-weight:500;
+}
+
+/* ========= CONTACTO (CIERRE FINAL) ========= */
+.section.contact{
+  padding:180px 10vw 0 17vw;
+  display:flex;
+  flex-direction:column;
+}
+
+.section.contact .section-block{
+  position:static;
+}
+
+.footer-wrapper{
+  flex:1;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:20px;
+}
+
+.footer{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#cfcfcf;
+  text-align:center;
+}
+
+/* ========= REDUCED MOTION ========= */
+@media (prefers-reduced-motion:reduce){
+  *{
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor"></div>
+
+<nav>
+  <span data-i="0">Inicio</span>
+  <span data-i="1">Sobre mí</span>
+  <span data-i="2">Portfolio</span>
+  <span data-i="3">CV</span>
+  <span data-i="4">Contacto</span>
+</nav>
+
+<!-- HERO -->
+<section class="section hero">
+  <div class="section-block">
+    <h1>Industrial Design</h1>
+    <div class="hero-sub">Structure · Process · Clarity</div>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section class="section">
+  <div class="section-block">
+    <h1>Sobre mí</h1>
+    <div class="about">
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño.
+        <br><br>
+        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
+        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
+        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
+        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+        desde lo conceptual hasta la producción final, con soluciones consistentes.
+      </p>
+      <img src="foto.jpg" alt="Foto personal">
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <a class="project" href="node.html">
+      <span>Proyecto principal</span>
+      <h3>NODE — Sistema modular</h3>
+    </a>
+    <a class="project" href="sixay.html">
+      <span>Mobiliario</span>
+      <h3>Sixay — Cómoda personalizada</h3>
+    </a>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <p>UPV · UJI · Middlesex University · Sixay</p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section contact">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <p>Email · Teléfono · LinkedIn</p>
+  </div>
+
+  <div class="footer-wrapper">
+    <div class="footer">
+      © 2026 · Luis Blasco — Industrial Design
+    </div>
+  </div>
+</section>
+
+<script>
+/* CURSOR */
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,x=0,y=0;
+
+addEventListener("mousemove",e=>{
+  mx=e.clientX;
+  my=e.clientY;
+});
+
+(function loop(){
+  x+=(mx-x)*.2;
+  y+=(my-y)*.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
+  requestAnimationFrame(loop);
+})();
+
+/* NAV */
+document.querySelectorAll("nav span").forEach((btn,i)=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth"});
+  });
+});
+</script>
+
+</body>
+</html>
