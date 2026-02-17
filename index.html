@@ -98,6 +98,17 @@ h1{
   line-height:1.05;
 }
 
+/* ========= TEXT ========= */
+.section-block p{
+  margin-top:8px;
+  padding-left:8px;
+  font-size:15px;
+  color:#aaa;
+  max-width:600px;
+  line-height:1.6;
+  text-align:justify;
+}
+
 /* ========= ABOUT ========= */
 .about{
   display:flex;
@@ -131,21 +142,9 @@ h1{
   transition:transform .8s ease;
 }
 
-/* Proyecto clicable */
 .project{
   min-width:520px;
-}
-
-.project a{
-  display:block;
-  text-decoration:none;
-  color:inherit;
-  transition:opacity .3s ease, transform .3s ease;
-}
-
-.project a:hover{
-  opacity:.85;
-  transform:translateX(2px);
+  scroll-snap-align:start;
 }
 
 .project h2{
@@ -166,8 +165,6 @@ h1{
 .project p{
   margin-top:12px;
   max-width:520px;
-  font-size:15px;
-  color:#aaa;
 }
 
 /* ========= FOOTER ========= */
@@ -213,8 +210,10 @@ h1{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico y adaptable,
-        con interés por todo el proceso de diseño desde la fase del análisis hasta la materialización.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. Disfruto de todo el proceso de diseño desde la fase
+        del análisis hasta la materialización.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
@@ -230,51 +229,29 @@ h1{
       <div class="carousel-track" id="carouselTrack">
 
         <div class="project">
-          <a href="node.html">
-            <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
-            <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
-          </a>
+          <h2>NODE</h2>
+          <span>Proyecto final de grado</span>
+          <p>
+            Sistema modular de mobiliario orientado a la adaptabilidad espacial y a la optimización
+            de procesos productivos.
+          </p>
         </div>
 
         <div class="project">
-          <a href="sixay.html">
-            <h2>Sixay · Cómoda personalizada</h2>
-            <span>Diseño de mobiliario</span>
-            <p>Desarrollo completo de una cómoda a medida, del análisis a la fabricación.</p>
-          </a>
+          <h2>Sixay · Cómoda personalizada</h2>
+          <span>Diseño de mobiliario</span>
+          <p>
+            Desarrollo completo de una cómoda a medida, desde el análisis del usuario hasta la
+            fabricación.
+          </p>
         </div>
 
         <div class="project">
-          <a href="experimental.html">
-            <h2>Proyecto experimental</h2>
-            <span>Exploración formal</span>
-            <p>Investigación sobre materialidad, proporción y lenguaje formal.</p>
-          </a>
-        </div>
-
-        <div class="project">
-          <a href="node-sistema.html">
-            <h2>NODE · Sistema modular</h2>
-            <span>Investigación tipológica</span>
-            <p>Profundización en sistemas constructivos y modularidad aplicada.</p>
-          </a>
-        </div>
-
-        <div class="project">
-          <a href="luminaria.html">
-            <h2>Luminaria experimental</h2>
-            <span>Diseño de producto</span>
-            <p>Exploración de luz, estructura y ensamblaje en objeto funcional.</p>
-          </a>
-        </div>
-
-        <div class="project">
-          <a href="objeto-tecnico.html">
-            <h2>Objeto técnico</h2>
-            <span>Electricidad / prototipo</span>
-            <p>Desarrollo de un objeto funcional con base técnica y enfoque práctico.</p>
-          </a>
+          <h2>Proyecto experimental</h2>
+          <span>Exploración formal</span>
+          <p>
+            Investigación sobre materialidad, proporción y lenguaje formal aplicada a objeto cotidiano.
+          </p>
         </div>
 
       </div>
