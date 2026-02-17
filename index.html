@@ -63,7 +63,7 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= HERO (CENTRADO LIMPIO) ========= */
+/* ========= HERO ========= */
 .section.hero{
   min-height:100vh;
   scroll-snap-align:start;
@@ -71,7 +71,12 @@ nav span{
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding-top:80px; /* compensa el nav */
+  padding-top:80px;
+}
+
+/* ⬅ desplazamiento solo del contenido del hero */
+.hero-inner{
+  transform:translateX(-6vw);
 }
 
 .section.hero h1{
@@ -210,7 +215,7 @@ p{
 
 <!-- HERO -->
 <section class="section hero">
-  <div>
+  <div class="hero-inner">
     <h1>IndustrialDesign</h1>
     <div class="hero-sub">Structure · Process · Clarity</div>
   </div>
@@ -227,12 +232,6 @@ p{
         a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
         ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
         ambas dimensiones del diseño.
-        <br><br>
-        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
-        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
-        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
-        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde lo conceptual hasta la producción final, con soluciones consistentes.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
@@ -246,10 +245,6 @@ p{
     <a class="project" href="node.html">
       <span>Proyecto principal</span>
       <h3>NODE — Sistema modular</h3>
-    </a>
-    <a class="project" href="sixay.html">
-      <span>Mobiliario</span>
-      <h3>Sixay — Cómoda personalizada</h3>
     </a>
   </div>
 </section>
