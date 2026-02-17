@@ -9,7 +9,7 @@
 
 <style>
 
-/* ================= RESET ================= */
+/* ========== RESET ========== */
 *{
   margin:0;
   padding:0;
@@ -21,16 +21,16 @@
   --ease:cubic-bezier(.2,.7,.1,1);
 }
 
+/* ========== BODY / SCROLL ========== */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  overflow-x:hidden;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
   cursor:none;
-  opacity:0;
-  transition:opacity 1.2s var(--ease);
 }
 
-/* ================= CURSOR ================= */
+/* ========== CURSOR ========== */
 .cursor{
   position:fixed;
   width:8px;
@@ -42,7 +42,7 @@ body{
   z-index:1000;
 }
 
-/* ================= NAV ================= */
+/* ========== NAV ========== */
 nav{
   position:fixed;
   top:0;
@@ -67,18 +67,35 @@ nav span{
   cursor:pointer;
 }
 
-/* ================= LAYOUT ================= */
+/* ========== SECTIONS ========== */
 .section{
   min-height:100vh;
+  scroll-snap-align:start;
   display:grid;
-  grid-template-columns: 240px 1fr;
-  padding:120px 8vw 0;
+  grid-template-columns:240px 1fr;
+  padding:140px 8vw 140px;
+  
+  /* 🔥 FADING MASK */
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }
 
-/* ================= TITLE COLUMN ================= */
+/* ========== TITLE COLUMN ========== */
 .section-title{
   position:sticky;
-  top:140px;
+  top:160px;
   height:fit-content;
 }
 
@@ -88,21 +105,23 @@ nav span{
   line-height:1.05;
 }
 
-/* ================= CONTENT COLUMN ================= */
+/* ========== CONTENT COLUMN ========== */
 .section-content{
   padding-left:80px;
+  max-width:720px;
 }
 
-/* ================= HERO ================= */
+/* ========== HERO ========== */
 .hero{
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
+  grid-template-columns:1fr;
 }
 
 .hero h1{
-  position:static;
+  font-size:clamp(80px,7vw,140px);
 }
 
 .hero-sub{
@@ -112,9 +131,8 @@ nav span{
   color:#777;
 }
 
-/* ================= TEXT ================= */
+/* ========== TEXT ========== */
 p{
-  margin-top:18px;
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -122,7 +140,7 @@ p{
   text-align:justify;
 }
 
-/* ================= ABOUT ================= */
+/* ========== ABOUT ========== */
 .about{
   display:flex;
   gap:32px;
@@ -134,12 +152,12 @@ p{
   opacity:.9;
 }
 
-/* ================= PORTFOLIO ================= */
+/* ========== PORTFOLIO ========== */
 .project{
+  display:block;
   margin-bottom:44px;
   text-decoration:none;
   color:inherit;
-  display:block;
 }
 
 .project span{
@@ -155,26 +173,22 @@ p{
   font-weight:500;
 }
 
-/* ================= FOOTER ================= */
+/* ========== FOOTER ========== */
 footer{
   text-align:center;
-  padding:80px 0 120px;
+  padding:100px 0 140px;
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
   border-top:1px solid #1c1c1c;
 }
 
-/* ================= REVEAL ================= */
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s var(--ease);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion:reduce){
+  *{
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
 }
 
 </style>
@@ -205,7 +219,7 @@ footer{
     <h1>Sobre mí</h1>
   </div>
 
-  <div class="section-content reveal">
+  <div class="section-content">
     <div class="about">
       <p>
         Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
@@ -224,7 +238,7 @@ footer{
     <h1>Portfolio</h1>
   </div>
 
-  <div class="section-content reveal">
+  <div class="section-content">
     <a class="project" href="node.html">
       <span>Proyecto principal</span>
       <h3>NODE — Sistema modular</h3>
@@ -243,7 +257,7 @@ footer{
     <h1>CV</h1>
   </div>
 
-  <div class="section-content reveal">
+  <div class="section-content">
     <p>UPV · UJI · Middlesex University · Sixay</p>
   </div>
 </section>
@@ -254,7 +268,7 @@ footer{
     <h1>Contacto</h1>
   </div>
 
-  <div class="section-content reveal">
+  <div class="section-content">
     <p>Email · Teléfono · LinkedIn</p>
   </div>
 </section>
@@ -264,19 +278,26 @@ footer{
 </footer>
 
 <script>
-window.addEventListener("load",()=>{
-  document.body.style.opacity="1";
+/* CURSOR */
+const cursor=document.querySelector(".cursor");
+let mx=0,my=0,x=0,y=0;
+
+addEventListener("mousemove",e=>{
+  mx=e.clientX;
+  my=e.clientY;
 });
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
-  });
-},{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+(function loop(){
+  x+=(mx-x)*.2;
+  y+=(my-y)*.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
+  requestAnimationFrame(loop);
+})();
 
-document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.addEventListener("click",()=>{
+/* NAVIGATION */
+document.querySelectorAll("nav span").forEach((btn,i)=>{
+  btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
       .scrollIntoView({behavior:"smooth"});
   });
