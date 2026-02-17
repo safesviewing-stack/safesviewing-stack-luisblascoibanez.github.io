@@ -136,6 +136,7 @@ nav span{
 
 .cv-title h1{
   font-size:clamp(70px,6vw,120px);
+  transition:none;
 }
 
 /* --- LÍNEA DE PROGRESO --- */
@@ -154,7 +155,6 @@ nav span{
   width:100%;
   height:0%;
   background:#777;
-  transition:height .1s linear;
 }
 
 /* --- CONTENIDO --- */
@@ -205,7 +205,6 @@ nav span{
   border-radius:50%;
   background:#777;
   opacity:.2;
-  transition:opacity .2s;
 }
 
 .cv-block.active .cv-dot{
@@ -255,11 +254,11 @@ nav span{
   </div>
 </section>
 
-<!-- ========= CV STICKY + LÍNEA ========= -->
+<!-- ========= CV STICKY + PROGRESO ========= -->
 <section class="section cv-section">
 
   <div class="cv-title">
-    <h1>CV</h1>
+    <h1 id="cvTitle">CV</h1>
   </div>
 
   <div class="cv-line">
@@ -306,7 +305,8 @@ nav span{
 
 /* Navegación */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+  btn.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
 /* Portfolio */
@@ -316,9 +316,10 @@ document.querySelectorAll(".project-card").forEach(card=>{
   }).observe(card);
 });
 
-/* CV progreso */
+/* CV progreso + animación de título */
 const cvBlocks=document.querySelectorAll(".cv-block");
 const lineFill=document.getElementById("cvLineFill");
+const cvTitle=document.getElementById("cvTitle");
 
 window.addEventListener("scroll",()=>{
   const vh=window.innerHeight;
@@ -339,7 +340,17 @@ window.addEventListener("scroll",()=>{
     }
   });
 
+  /* Línea */
   lineFill.style.height=`${maxProgress*100}%`;
+
+  /* TÍTULO CV */
+  const titleShift = 20 * maxProgress;
+  const titleOpacity = 0.6 + 0.4 * maxProgress;
+  const titleTracking = 0.3 - 0.15 * maxProgress;
+
+  cvTitle.style.transform = `translateY(${titleShift}px)`;
+  cvTitle.style.opacity = titleOpacity;
+  cvTitle.style.letterSpacing = `${titleTracking}em`;
 });
 
 </script>
