@@ -63,7 +63,7 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS (DEFAULT) ========= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -81,24 +81,28 @@ nav span{
 
 /* ========= HERO (INICIO) ========= */
 .section.hero{
-  padding:0;                         /* ⬅ sistema propio */
+  padding:0;
   justify-content:flex-start;
   align-items:center;
 }
 
 .section.hero .section-block{
   position:static;
-  padding-left:18vw;                 /* ⬅ margen distinto al resto */
+  padding-left:18vw;
 }
 
-/* HERO TITLE */
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
   text-align:left;
 }
 
-/* HERO SUB */
+/* fuerza que Blasco-Ibáñez no se rompa */
+.hero-surname{
+  white-space:nowrap;
+}
+
+/* ========= HERO SUB ========= */
 .hero-sub{
   margin-top:24px;
   width:100%;
@@ -115,7 +119,7 @@ h1{
   line-height:1.05;
 }
 
-/* ========= TEXTOS GENERALES ========= */
+/* ========= TEXTOS ========= */
 .section-block p{
   margin-top:8px;
   padding-left:8px;
@@ -145,69 +149,6 @@ h1{
   object-fit:cover;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
-}
-
-/* ========= PORTFOLIO ========= */
-.portfolio-group{
-  margin-top:48px;
-}
-
-.project{
-  display:block;
-  text-decoration:none;
-  color:inherit;
-}
-
-.project.main{
-  margin-top:48px;
-}
-
-.project.main span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#999;
-}
-
-.project.main h3{
-  margin-top:12px;
-  font-size:28px;
-  font-weight:500;
-}
-
-.project.secondary{
-  margin-top:32px;
-}
-
-.project.secondary span{
-  font-size:11px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#777;
-}
-
-.project.secondary h3{
-  margin-top:8px;
-  font-size:20px;
-  font-weight:500;
-}
-
-.project.minor{
-  margin-top:24px;
-}
-
-.project.minor span{
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#666;
-}
-
-.project.minor h3{
-  margin-top:6px;
-  font-size:17px;
-  font-weight:400;
-  color:#aaa;
 }
 
 /* ========= CONTACT ========= */
@@ -241,14 +182,6 @@ h1{
   color:#cfcfcf;
 }
 
-/* ========= REDUCED MOTION ========= */
-@media (prefers-reduced-motion:reduce){
-  *{
-    scroll-behavior:auto !important;
-    transition:none !important;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -268,93 +201,12 @@ h1{
   <div class="section-block">
     <h1>
       Luis<br>
-      Blasco-Ibáñez<br>
+      <span class="hero-surname">Blasco-Ibáñez</span><br>
       Berbel
     </h1>
     <div class="hero-sub">Structure · Process · Clarity</div>
   </div>
 </section>
-
-<!-- SOBRE MI -->
-<section class="section">
-  <div class="section-block">
-    <h1>Sobre mí</h1>
-    <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        del proceso de diseño desde el análisis hasta la materialización.
-      </p>
-      <img src="foto.jpg" alt="Foto personal">
-    </div>
-  </div>
-</section>
-
-<!-- CV -->
-<section class="section">
-  <div class="section-block">
-    <h1>CV</h1>
-    <p>
-      Ingeniería en Diseño Industrial · UPV. Formación previa en electricidad. Experiencia en mobiliario
-      a medida, desarrollo de producto, conceptualización, modelado 3D y prototipado. Interés en sistemas
-      constructivos, diseño racional y procesos industriales.
-    </p>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section contact">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact-statement">
-      <p>
-        Busco entornos donde el diseño se entienda como un proceso completo: análisis, estructura,
-        decisión y materialización. Me interesan proyectos donde la claridad conceptual y la lógica
-        constructiva tengan tanto peso como la forma final. Disponible para oportunidades profesionales,
-        colaboraciones o conversaciones honestas sobre diseño y proceso.
-      </p>
-    </div>
-  </div>
-
-  <div class="footer-wrapper">
-    <div class="footer">
-      © 2026 · Luis Blasco — Industrial Design
-    </div>
-  </div>
-</section>
-
-<script>
-/* CURSOR */
-const cursor=document.querySelector(".cursor");
-let mx=0,my=0,x=0,y=0;
-
-addEventListener("mousemove",e=>{
-  mx=e.clientX;
-  my=e.clientY;
-});
-
-(function loop(){
-  x+=(mx-x)*.2;
-  y+=(my-y)*.2;
-  cursor.style.left=x+"px";
-  cursor.style.top=y+"px";
-  requestAnimationFrame(loop);
-})();
-
-/* NAV */
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-  });
-});
-</script>
 
 </body>
 </html>
