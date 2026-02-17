@@ -161,12 +161,11 @@ h1{
   padding-bottom:20px;
   scroll-behavior:smooth;
 
-  /* Firefox */
   scrollbar-width:thin;
   scrollbar-color:#444 transparent;
 }
 
-/* Scrollbar WebKit (Chrome, Safari, Edge) */
+/* Scrollbar WebKit */
 .portfolio-carousel::-webkit-scrollbar{
   height:6px;
 }
@@ -178,10 +177,6 @@ h1{
 .portfolio-carousel::-webkit-scrollbar-thumb{
   background-color:#444;
   border-radius:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb:hover{
-  background-color:#666;
 }
 
 /* Proyecto */
@@ -230,7 +225,12 @@ h1{
   filter:grayscale(0%) contrast(1.1);
 }
 
-/* Texto */
+/* Texto proyecto (desplazado a la derecha) */
+.project-card h2,
+.project-card span{
+  padding-left:8px;          /* ⬅ ajuste solicitado */
+}
+
 .project-card h2{
   font-size:28px;
   font-weight:400;
