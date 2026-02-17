@@ -152,13 +152,16 @@ h1{
   background:#333;
 }
 
+/* Proyecto como link */
 .project-card{
   min-width:440px;
   flex-shrink:0;
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
   transition:transform .4s ease;
 }
 
-/* Hover card */
 .project-card:hover{
   transform:translateY(-4px);
 }
@@ -181,7 +184,6 @@ h1{
   transition:filter .4s ease;
 }
 
-/* Hover imagen */
 .project-card:hover .project-image img{
   filter:grayscale(0%) contrast(1.1);
 }
@@ -275,7 +277,7 @@ h1{
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
 
-        <div class="project-card">
+        <a href="node.html" class="project-card">
           <div class="project-image">
             <img src="brazo1.jpg" alt="Proyecto NODE">
           </div>
@@ -285,9 +287,9 @@ h1{
             Sistema modular de mobiliario orientado a la adaptabilidad espacial
             y a la racionalización productiva.
           </p>
-        </div>
+        </a>
 
-        <div class="project-card">
+        <a href="sixay.html" class="project-card">
           <div class="project-image">
             <img src="reloj1.jpg" alt="Cómoda Sixay">
           </div>
@@ -297,9 +299,9 @@ h1{
             Desarrollo completo de una cómoda a medida,
             desde el análisis hasta la fabricación.
           </p>
-        </div>
+        </a>
 
-        <div class="project-card">
+        <a href="exploracion.html" class="project-card">
           <div class="project-image">
             <img src="secador2.jpg" alt="Exploración material">
           </div>
@@ -309,9 +311,9 @@ h1{
             Investigación formal y constructiva aplicada
             a un objeto de uso cotidiano.
           </p>
-        </div>
+        </a>
 
-        <div class="project-card">
+        <a href="conceptual.html" class="project-card">
           <div class="project-image"></div>
           <h2>Proyecto conceptual</h2>
           <span>Diseño de producto</span>
@@ -319,7 +321,7 @@ h1{
             Desarrollo de una propuesta conceptual centrada
             en el análisis del uso y la lógica constructiva.
           </p>
-        </div>
+        </a>
 
       </div>
     </div>
