@@ -23,7 +23,6 @@ body{
   color:#f5f5f5;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
-  /* cursor restaurado */
 }
 
 /* ========= NAV ========= */
@@ -128,8 +127,8 @@ h1{
 }
 
 .about img{
-  width:300px;
-  height:390px;
+  width:340px;        /* ⬅ imagen escalada */
+  height:440px;
   margin-top:16px;
   object-fit:cover;
   filter:grayscale(100%) contrast(1.05);
@@ -205,7 +204,7 @@ h1{
         tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
         Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
         electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde el análisis de la idea hasta la materialización.
+        de todo el proceso de diseño desde la fase de análisis de la idea hasta la materialización.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
@@ -213,7 +212,6 @@ h1{
 </section>
 
 <script>
-/* NAV SCROLL */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
