@@ -235,6 +235,7 @@ h1{
   gap:80px;
 }
 
+/* línea */
 .cv-wrapper::before{
   content:"";
   position:absolute;
@@ -242,7 +243,15 @@ h1{
   top:0;
   bottom:0;
   width:1px;
-  background:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.15);
+  transform:scaleY(0);
+  transform-origin:top;
+  transition:transform 1.2s ease;
+}
+
+/* activa al entrar */
+.cv-wrapper.is-visible::before{
+  transform:scaleY(1);
 }
 
 .cv-block{
@@ -396,7 +405,7 @@ h1{
   <div class="section-block">
     <h1>CV</h1>
 
-    <div class="cv-wrapper">
+    <div class="cv-wrapper" id="cv">
 
       <div class="cv-block">
         <h3>Formación</h3>
@@ -435,16 +444,30 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
   });
 });
 
+/* portfolio cards */
 const carousel=document.querySelector(".portfolio-carousel");
 const cards=document.querySelectorAll(".project-card");
 
-const observer=new IntersectionObserver((entries)=>{
+const cardObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     entry.target.classList.toggle("is-visible",entry.isIntersecting);
   });
 },{root:carousel,threshold:0.3});
 
-cards.forEach(card=>observer.observe(card));
+cards.forEach(card=>cardObserver.observe(card));
+
+/* CV line */
+const cv=document.querySelector(".cv-wrapper");
+
+const cvObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      cv.classList.add("is-visible");
+    }
+  });
+},{threshold:0.3});
+
+cvObserver.observe(cv);
 </script>
 
 </body>
