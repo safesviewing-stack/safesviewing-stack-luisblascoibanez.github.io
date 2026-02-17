@@ -155,42 +155,24 @@ h1{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:16px;
+  padding-bottom:20px;
   scroll-behavior:smooth;
 
-  scrollbar-width:thin;
-  scrollbar-color:#555 transparent;
+  /* === SCROLLBAR RESTAURADO === */
+  scrollbar-width: thin;
+  scrollbar-color:#444 transparent;
 }
 
-/* ===== Scrollbar WebKit ===== */
 .portfolio-carousel::-webkit-scrollbar{
-  height:4px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-track{
-  background:transparent;
+  height:6px;
 }
 
 .portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#555;
-  border-radius:4px;
-  transition:
-    background .25s ease,
-    box-shadow .25s ease,
-    transform .25s ease;
+  background:#444;
+  border-radius:6px;
 }
 
-.portfolio-carousel::-webkit-scrollbar-thumb:hover{
-  background:#777;
-  box-shadow:0 0 0 1px rgba(255,255,255,.08);
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb:active{
-  background:#999;
-  transform:scaleY(1.6);
-}
-
-/* ========= PROJECT ========= */
+/* ========= PROYECTO ========= */
 .project-card{
   min-width:460px;
   flex-shrink:0;
