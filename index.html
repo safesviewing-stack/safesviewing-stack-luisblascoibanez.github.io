@@ -3,19 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Industrial Design</title>
+<title>Luis Blasco — Industrial Design</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 
-/* ===== RESET ===== */
+/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
   font-family:"Inter",sans-serif;
+}
+
+:root{
+  --ease:cubic-bezier(.2,.7,.1,1);
 }
 
 body{
@@ -24,10 +28,10 @@ body{
   overflow-x:hidden;
   cursor:none;
   opacity:0;
-  transition:opacity 1.2s cubic-bezier(.2,.7,.1,1);
+  transition:opacity 1.2s var(--ease);
 }
 
-/* ===== CURSOR ===== */
+/* ================= CURSOR ================= */
 .cursor{
   position:fixed;
   width:8px;
@@ -37,9 +41,33 @@ body{
   pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:1000;
+  transition:
+    width .25s var(--ease),
+    height .25s var(--ease),
+    background .25s var(--ease);
 }
 
-/* ===== NAV ===== */
+.cursor.active{
+  width:56px;
+  height:56px;
+  background:rgba(255,255,255,.05);
+}
+
+.cursor span{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:9px;
+  letter-spacing:.3em;
+  opacity:0;
+  transition:.25s var(--ease);
+}
+
+.cursor.active span{ opacity:1; }
+
+/* ================= NAV ================= */
 nav{
   position:fixed;
   top:0;
@@ -60,14 +88,14 @@ nav span{
   font-size:11px;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:#ccc;
+  color:#bbb;
   cursor:pointer;
   transition:.3s;
 }
 
 nav span:hover{ color:#fff; }
 
-/* ===== SECTIONS ===== */
+/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
   display:flex;
@@ -82,33 +110,26 @@ nav span:hover{ color:#fff; }
 
 .content-left{
   max-width:900px;
-  width:100%;
   margin-left:6vw;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .section:first-of-type .content-center{
   margin-top:-70px;
 }
 
-/* ===== CONTACT ===== */
-.section.contact .content-left{
-  margin-top:-165px;
+.hero-sub{
+  margin-top:24px;
+  font-size:13px;
+  letter-spacing:.25em;
+  color:#777;
 }
 
-.section.contact h1{
-  margin-top:62px;
-}
-
-/* ===== TYPO ===== */
+/* ================= TYPO ================= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
-}
-
-.content-center h1{
-  font-size:clamp(84px,7vw,140px);
 }
 
 p{
@@ -120,14 +141,10 @@ p{
   text-align:justify;
 }
 
-/* ===== ABOUT ===== */
+/* ================= ABOUT ================= */
 .about-content{
   display:flex;
   gap:32px;
-}
-
-.about-text{
-  max-width:480px;
 }
 
 .about-photo{
@@ -140,25 +157,28 @@ p{
   opacity:.9;
 }
 
-/* ===== PORTFOLIO ===== */
+/* ================= PORTFOLIO ================= */
 .portfolio-list{
-  margin-top:42px;
+  margin-top:48px;
   display:flex;
   flex-direction:column;
-  gap:36px;
-  max-width:700px;
+  gap:44px;
+  max-width:720px;
 }
 
 .project{
-  display:block;
   text-decoration:none;
   color:inherit;
-  padding:6px 0;
-  transition:.35s cubic-bezier(.2,.7,.1,1);
+  transition:.4s var(--ease);
+}
+
+.project.hero{
+  padding-left:12px;
+  border-left:1px solid #333;
 }
 
 .project:hover{
-  transform:translateX(6px);
+  transform:translateX(8px);
 }
 
 .project span{
@@ -169,22 +189,51 @@ p{
 }
 
 .project h3{
-  font-size:18px;
-  font-weight:500;
-  color:#f0f0f0;
   margin-top:6px;
+  font-size:20px;
+  font-weight:500;
 }
 
 .project p{
   font-size:14px;
   max-width:520px;
-  margin-top:8px;
 }
 
-/* ===== CV ===== */
+/* ================= CV ================= */
+.cv-block{
+  margin-top:42px;
+  max-width:700px;
+}
+
+.cv-section{
+  margin-bottom:36px;
+}
+
+.cv-section h3{
+  font-size:13px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#777;
+  margin-bottom:10px;
+}
+
+.cv-item{
+  margin-bottom:14px;
+}
+
+.cv-item strong{
+  font-weight:500;
+  color:#f0f0f0;
+}
+
+.cv-item span{
+  display:block;
+  font-size:13px;
+  color:#777;
+}
+
 .cv-link{
-  margin-top:26px;
-  font-size:14px;
+  margin-top:24px;
 }
 
 .cv-link a{
@@ -192,15 +241,12 @@ p{
   text-decoration:none;
   border-bottom:1px solid #333;
   padding-bottom:2px;
-  transition:.3s;
 }
 
-.cv-link a:hover{
-  color:#fff;
-  border-color:#666;
-}
+/* ================= CONTACT ================= */
+.section.contact .content-left{ margin-top:-165px; }
+.section.contact h1{ margin-top:62px; }
 
-/* ===== CONTACT ===== */
 .contact-list{
   margin-top:22px;
   display:flex;
@@ -217,17 +263,12 @@ p{
   text-decoration:none;
 }
 
-.contact-list i{
-  width:18px;
-  opacity:.7;
-}
-
-/* ===== REVEAL ===== */
+/* ================= REVEAL ================= */
 .reveal{
   opacity:0;
   transform:translateY(60px);
   filter:blur(8px);
-  transition:1.2s cubic-bezier(.2,.7,.1,1);
+  transition:1.2s var(--ease);
 }
 
 .reveal.visible{
@@ -236,35 +277,30 @@ p{
   filter:none;
 }
 
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:48px 0 36px;
-  font-size:11px;
-  letter-spacing:.18em;
-  color:#cfcfcf;
-  border-top:1px solid #1c1c1c;
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; }
 }
 
 </style>
 </head>
 <body>
 
-<div class="cursor"></div>
+<div class="cursor"><span>VIEW</span></div>
 
 <nav>
-  <span data-scroll="0">Inicio</span>
-  <span data-scroll="1">Sobre mí</span>
-  <span data-scroll="2">Portfolio</span>
-  <span data-scroll="3">CV</span>
-  <span data-scroll="4">Contacto</span>
+  <span data-i="0">Inicio</span>
+  <span data-i="1">Sobre mí</span>
+  <span data-i="2">Portfolio</span>
+  <span data-i="3">CV</span>
+  <span data-i="4">Contacto</span>
 </nav>
 
-<!-- INICIO -->
+<!-- HERO -->
 <section class="section">
   <div class="content-center">
-    <h1>Industrial Design</h1>
-    <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
+    <h1 class="reveal">Industrial Design</h1>
+    <div class="hero-sub reveal">Structure · Process · Clarity</div>
   </div>
 </section>
 
@@ -272,22 +308,16 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
-
     <div class="about-content">
-      <div class="about-text reveal">
-        <p>
-          Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-          enfocada en un campo fijo, sino alguien con un perfil ecléctico y flexible, capaz de adaptarse
-          a distintos entornos. No me sitúo ni en un extremo puramente artístico ni estrictamente técnico,
-          sino en un punto intermedio.
-          He estudiado en la UPV, con formación inicial en la UJI y un Erasmus en Middlesex University.
-          Cuento además con una FP en electricidad. Disfruto del proceso de diseño desde lo conceptual
-          hasta la producción final, con soluciones consistentes.
-        </p>
-      </div>
-
+      <p class="reveal">
+        Ingeniero en diseño industrial con perfil ecléctico y adaptable. No me sitúo
+        en un extremo artístico ni técnico, sino en un punto intermedio que conecta
+        ambos. Formación en la UPV, inicio en la UJI y Erasmus en Middlesex University.
+        FP en electricidad como base técnica. Disfruto del diseño desde lo conceptual
+        hasta la producción final, con soluciones consistentes.
+      </p>
       <div class="about-photo reveal">
-        <img src="foto.jpg" alt="Foto personal">
+        <img src="foto.jpg">
       </div>
     </div>
   </div>
@@ -297,28 +327,25 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Portfolio</h1>
-    <p class="reveal">Selección de proyectos de diseño industrial.</p>
 
     <div class="portfolio-list">
-
-      <a href="node.html" class="project reveal">
-        <span>Producto · Sistema</span>
+      <a href="node.html" class="project hero reveal">
+        <span>Proyecto principal</span>
         <h3>NODE — Sistema modular</h3>
-        <p>Sistema modular centrado en estructura, repetición y fabricación.</p>
+        <p>Estructura, repetición y fabricación racional.</p>
       </a>
 
       <a href="sixay.html" class="project reveal">
         <span>Mobiliario · A medida</span>
         <h3>Sixay — Cómoda personalizada</h3>
-        <p>Proyecto real de diseño y producción durante prácticas profesionales.</p>
+        <p>Diseño y producción para cliente real.</p>
       </a>
 
       <a href="impresion3d.html" class="project reveal">
-        <span>Investigación · Tecnología</span>
-        <h3>Impresión 3D aplicada al producto</h3>
-        <p>Exploración de fabricación aditiva aplicada a producto industrial.</p>
+        <span>Investigación</span>
+        <h3>Impresión 3D aplicada</h3>
+        <p>Fabricación aditiva en producto industrial.</p>
       </a>
-
     </div>
   </div>
 </section>
@@ -327,10 +354,23 @@ footer{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">CV</h1>
-    <p class="reveal">Formación académica y experiencia profesional.</p>
 
-    <div class="cv-link reveal">
-      <a href="Luis_Blasco_CV.pdf" download>Descargar CV (PDF)</a>
+    <div class="cv-block reveal">
+      <div class="cv-section">
+        <h3>Formación</h3>
+        <div class="cv-item"><strong>UPV</strong><span>Ingeniería en Diseño Industrial</span></div>
+        <div class="cv-item"><strong>UJI</strong><span>Inicio de estudios</span></div>
+        <div class="cv-item"><strong>Middlesex University</strong><span>Erasmus</span></div>
+      </div>
+
+      <div class="cv-section">
+        <h3>Experiencia</h3>
+        <div class="cv-item"><strong>Sixay</strong><span>Diseño de mobiliario</span></div>
+      </div>
+
+      <div class="cv-link">
+        <a href="Luis_Blasco_CV.pdf" download>Descargar CV (PDF)</a>
+      </div>
     </div>
   </div>
 </section>
@@ -339,57 +379,58 @@ footer{
 <section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
-
     <div class="contact-list reveal">
-      <a href="mailto:luisblascoibanezberbel@gmail.com">
-        <i class="fa-regular fa-envelope"></i> luisblascoibanezberbel@gmail.com
-      </a>
-      <a href="tel:+34630511806">
-        <i class="fa-solid fa-phone"></i> +34 630 511 806
-      </a>
-      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank">
-        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
-      </a>
+      <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a>
+      <a href="tel:+34630511806">Teléfono</a>
+      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank">LinkedIn</a>
     </div>
   </div>
 </section>
 
 <footer>
-© 2026 · Luis Blasco-Ibáñez Berbel · Ingeniero en diseño industrial
+© 2026 · Luis Blasco — Industrial Design
 </footer>
 
 <script>
-
-/* ===== ENTRADA ===== */
+/* FADE IN */
 window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
-/* ===== CURSOR ===== */
+/* CURSOR */
 const cursor=document.querySelector(".cursor");
+const cursorText=cursor.querySelector("span");
 let mx=0,my=0,x=0,y=0;
+
 addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
+
 (function loop(){
   x+=(mx-x)*.2; y+=(my-y)*.2;
-  cursor.style.left=x+"px"; cursor.style.top=y+"px";
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
   requestAnimationFrame(loop);
 })();
 
-/* ===== REVEAL ===== */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
-},{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-
-/* ===== NAVIGATION ===== */
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.addEventListener("click",()=>{
-    const sections=document.querySelectorAll(".section");
-    window.scrollTo({
-      top:sections[i].offsetTop-180,
-      behavior:"smooth"
-    });
+document.querySelectorAll(".project").forEach(p=>{
+  p.addEventListener("mouseenter",()=>{
+    cursor.classList.add("active");
+  });
+  p.addEventListener("mouseleave",()=>{
+    cursor.classList.remove("active");
   });
 });
 
+/* REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+/* NAV */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth",block:"start"});
+  });
+});
 </script>
 
 </body>
