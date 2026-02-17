@@ -130,13 +130,21 @@ h1{
   opacity:.9;
 }
 
-/* ========= PORTFOLIO ========= */
-.portfolio{
-  margin-top:24px;
+/* ========= PORTFOLIO CARRUSEL ========= */
+.carousel{
+  margin-top:32px;
+  overflow:hidden;
+}
+
+.carousel-track{
+  display:flex;
+  gap:80px;
+  transition:transform .8s ease;
 }
 
 .project{
-  margin-top:48px;
+  min-width:520px;
+  scroll-snap-align:start;
 }
 
 .project h2{
@@ -155,7 +163,8 @@ h1{
 }
 
 .project p{
-  max-width:640px;
+  margin-top:12px;
+  max-width:520px;
 }
 
 /* ========= FOOTER ========= */
@@ -181,8 +190,6 @@ h1{
   <span data-i="0">Inicio</span>
   <span data-i="1">Sobre mí</span>
   <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
 </nav>
 
 <!-- HERO -->
@@ -205,13 +212,8 @@ h1{
       <p>
         Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
         enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde la fase del análisis hasta la materialización.
+        a distintos entornos y contextos de trabajo. Disfruto de todo el proceso de diseño desde la fase
+        del análisis hasta la materialización.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
@@ -223,46 +225,58 @@ h1{
   <div class="section-block">
     <h1>Portfolio</h1>
 
-    <div class="portfolio">
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
 
-      <div class="project">
-        <h2>NODE</h2>
-        <span>Proyecto final de grado</span>
-        <p>
-          Sistema modular de mobiliario orientado a la adaptabilidad espacial y a la optimización
-          de procesos productivos mediante soluciones constructivas racionalizadas.
-        </p>
+        <div class="project">
+          <h2>NODE</h2>
+          <span>Proyecto final de grado</span>
+          <p>
+            Sistema modular de mobiliario orientado a la adaptabilidad espacial y a la optimización
+            de procesos productivos.
+          </p>
+        </div>
+
+        <div class="project">
+          <h2>Sixay · Cómoda personalizada</h2>
+          <span>Diseño de mobiliario</span>
+          <p>
+            Desarrollo completo de una cómoda a medida, desde el análisis del usuario hasta la
+            fabricación.
+          </p>
+        </div>
+
+        <div class="project">
+          <h2>Proyecto experimental</h2>
+          <span>Exploración formal</span>
+          <p>
+            Investigación sobre materialidad, proporción y lenguaje formal aplicada a objeto cotidiano.
+          </p>
+        </div>
+
       </div>
-
-      <div class="project">
-        <h2>Sixay · Cómoda personalizada</h2>
-        <span>Diseño de mobiliario · Prácticas</span>
-        <p>
-          Desarrollo completo de una cómoda a medida, desde el análisis del usuario y el contexto
-          hasta la definición técnica y la fabricación.
-        </p>
-      </div>
-
-      <div class="project">
-        <h2>Proyecto experimental</h2>
-        <span>Concepto / exploración formal</span>
-        <p>
-          Investigación sobre materialidad, proporción y lenguaje formal aplicada a un objeto de
-          uso cotidiano.
-        </p>
-      </div>
-
     </div>
   </div>
 </section>
 
 <script>
+/* NAV SCROLL */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
       .scrollIntoView({behavior:"smooth"});
   });
 });
+
+/* CAROUSEL AUTOPLAY */
+const track = document.getElementById("carouselTrack");
+let index = 0;
+
+setInterval(()=>{
+  index = (index + 1) % track.children.length;
+  const offset = track.children[index].offsetLeft;
+  track.style.transform = `translateX(${-offset}px)`;
+},5000);
 </script>
 
 </body>
