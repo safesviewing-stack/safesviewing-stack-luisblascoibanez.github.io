@@ -162,24 +162,29 @@ h1{
   scroll-behavior:smooth;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#333;
-}
-
-/* Proyecto */
+/* ========= PROYECTOS ========= */
 .project-card{
   min-width:440px;
   flex-shrink:0;
   text-decoration:none;
   color:inherit;
   cursor:pointer;
-  transition:transform .4s ease;
+
+  /* estado inicial fundido */
+  opacity:0;
+  transform:translateY(12px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
 }
 
+/* visible */
+.project-card.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* hover se mantiene */
 .project-card:hover{
   transform:translateY(-4px);
 }
@@ -301,10 +306,7 @@ h1{
           </div>
           <h2>NODE</h2>
           <span>Proyecto final de grado</span>
-          <p>
-            Sistema modular de mobiliario orientado a la adaptabilidad espacial
-            y a la racionalización productiva.
-          </p>
+          <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
         </a>
 
         <a href="sixay.html" class="project-card">
@@ -313,10 +315,7 @@ h1{
           </div>
           <h2>Sixay · Cómoda</h2>
           <span>Diseño de mobiliario</span>
-          <p>
-            Desarrollo completo de una cómoda a medida,
-            desde el análisis hasta la fabricación.
-          </p>
+          <p>Desarrollo completo de una cómoda a medida.</p>
         </a>
 
         <a href="exploracion.html" class="project-card">
@@ -325,20 +324,14 @@ h1{
           </div>
           <h2>Exploración material</h2>
           <span>Proyecto experimental</span>
-          <p>
-            Investigación formal y constructiva aplicada
-            a un objeto de uso cotidiano.
-          </p>
+          <p>Investigación formal y constructiva.</p>
         </a>
 
         <a href="conceptual.html" class="project-card">
           <div class="project-image"></div>
           <h2>Proyecto conceptual</h2>
           <span>Diseño de producto</span>
-          <p>
-            Desarrollo de una propuesta conceptual centrada
-            en el análisis del uso y la lógica constructiva.
-          </p>
+          <p>Propuesta centrada en el análisis del uso.</p>
         </a>
 
       </div>
@@ -347,6 +340,7 @@ h1{
 </section>
 
 <script>
+/* NAV SCROLL */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
@@ -354,11 +348,28 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
   });
 });
 
+/* SCROLL HORIZONTAL */
 const carousel = document.querySelector(".portfolio-carousel");
 carousel.addEventListener("wheel",(e)=>{
   e.preventDefault();
   carousel.scrollLeft += e.deltaY;
 },{ passive:false });
+
+/* FADE IN PROYECTOS */
+const cards = document.querySelectorAll(".project-card");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("is-visible");
+    }
+  });
+},{
+  root: carousel,
+  threshold: 0.3
+});
+
+cards.forEach(card=>observer.observe(card));
 </script>
 
 </body>
