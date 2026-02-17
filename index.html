@@ -82,18 +82,18 @@ nav span{
 /* ========= HERO ========= */
 .section.hero{
   padding:0;
-  justify-content:center;
+  justify-content:flex-start;   /* ⬅ ya no centrado */
   align-items:center;
-  text-align:center;
 }
 
 .section.hero .section-block{
   position:static;
+  padding-left:22vw;            /* ⬅ alineado con columna editorial */
 }
 
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
-  text-align:center;
+  text-align:left;              /* ⬅ a la izquierda */
   white-space:nowrap;
 }
 
@@ -102,6 +102,7 @@ nav span{
   font-size:13px;
   letter-spacing:.25em;
   color:#777;
+  text-align:left;
 }
 
 /* ========= TYPO ========= */
