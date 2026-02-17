@@ -69,7 +69,7 @@ nav span{
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-  padding:180px 10vw 160px 24vw;   /* ⬅ margen izquierdo aumentado */
+  padding:180px 10vw 160px 22vw;
 }
 
 /* ========= SECTION BLOCK ========= */
@@ -88,7 +88,7 @@ nav span{
 
 .section.hero .section-block{
   position:static;
-  padding-left:24vw;             /* ⬅ sincronizado con columnas */
+  padding-left:22vw;
 }
 
 .section.hero h1{
@@ -113,9 +113,10 @@ h1{
   line-height:1.05;
 }
 
-p{
+/* ⬅ desplazamiento editorial del texto */
+.section-block p{
   margin-top:8px;
-  margin-left:-16px;
+  padding-left:24px;          /* ⬅ texto más a la izquierda */
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -205,7 +206,7 @@ p{
 
 /* ========= CONTACT ========= */
 .section.contact{
-  padding:180px 10vw 0 24vw;     /* ⬅ margen izquierdo aumentado */
+  padding:180px 10vw 0 22vw;
   display:flex;
   flex-direction:column;
 }
@@ -225,7 +226,7 @@ p{
   display:flex;
   align-items:flex-end;
   justify-content:flex-start;
-  padding:0 0 20px 24vw;        /* ⬅ alineado */
+  padding:0 0 20px 22vw;
 }
 
 .footer{
@@ -285,19 +286,6 @@ p{
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Portfolio</h1>
-    <div class="portfolio-group">
-      <a class="project main" href="node.html">
-        <span>Proyecto principal</span>
-        <h3>NODE — Sistema modular</h3>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- CV -->
 <section class="section">
   <div class="section-block">
@@ -318,7 +306,8 @@ p{
       <p>
         Busco entornos donde el diseño se entienda como un proceso completo: análisis, estructura,
         decisión y materialización. Me interesan proyectos donde la claridad conceptual y la lógica
-        constructiva tengan tanto peso como la forma final.
+        constructiva tengan tanto peso como la forma final. Disponible para oportunidades profesionales,
+        colaboraciones o conversaciones honestas sobre diseño y proceso.
       </p>
     </div>
   </div>
