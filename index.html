@@ -67,6 +67,29 @@ nav span{
   cursor:pointer;
 }
 
+/* ========= HERO (CENTRADO REAL) ========= */
+.section.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  scroll-snap-align:start;
+}
+
+.hero h1{
+  font-size:clamp(90px,8vw,150px);
+  font-weight:500;
+  line-height:1;
+}
+
+.hero-sub{
+  margin-top:24px;
+  font-size:13px;
+  letter-spacing:.25em;
+  color:#777;
+}
+
 /* ========= SECTIONS (EDITORIAL) ========= */
 .section{
   min-height:100vh;
@@ -96,30 +119,6 @@ nav span{
   position:sticky;
   top:260px;
   max-width:900px;
-}
-
-/* ========= HERO (EXCEPCIÓN) ========= */
-.section.hero{
-  padding:0;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.section.hero .section-block{
-  position:static;
-}
-
-.section.hero h1{
-  font-size:clamp(80px,7vw,140px);
-}
-
-/* ========= SUB ========= */
-.hero-sub{
-  margin-top:24px;
-  font-size:13px;
-  letter-spacing:.25em;
-  color:#777;
 }
 
 /* ========= TYPO ========= */
@@ -172,7 +171,7 @@ p{
   font-weight:500;
 }
 
-/* ========= CONTACTO (CIERRE FINAL) ========= */
+/* ========= CONTACTO ========= */
 .section.contact{
   padding:180px 10vw 0 17vw;
   display:flex;
@@ -222,7 +221,7 @@ p{
 
 <!-- HERO -->
 <section class="section hero">
-  <div class="section-block">
+  <div>
     <h1>IndustrialDesign</h1>
     <div class="hero-sub">Structure · Process · Clarity</div>
   </div>
