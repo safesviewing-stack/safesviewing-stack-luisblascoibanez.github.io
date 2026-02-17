@@ -23,7 +23,20 @@ body{
   color:#f5f5f5;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
-  cursor:none;
+  cursor:none; /* ocultamos cursor nativo */
+}
+
+/* ========= CURSOR PERSONALIZADO ========= */
+.cursor{
+  position:fixed;
+  width:10px;
+  height:10px;
+  border:1px solid #fff;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:1000;
+  mix-blend-mode:difference;
 }
 
 /* ========= NAV ========= */
@@ -82,6 +95,7 @@ nav span{
   font-size:clamp(100px,8.5vw,180px);
   font-weight:500;
   line-height:1;
+  white-space:nowrap; /* ⬅ UNA SOLA LÍNEA */
 }
 
 /* ========= TYPO ========= */
@@ -114,7 +128,7 @@ p{
 .about img{
   width:288px;
   margin-left:24px;
-  margin-top:8px; /* ⬅ imagen un poco más arriba */
+  margin-top:8px;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
 }
@@ -156,6 +170,9 @@ p{
 </style>
 </head>
 <body>
+
+<!-- CURSOR -->
+<div class="cursor"></div>
 
 <nav>
   <span data-index="0">Inicio</span>
@@ -227,7 +244,25 @@ p{
 </section>
 
 <script>
-/* ========= NAVIGATION ========= */
+/* ========= CURSOR ========= */
+const cursor = document.querySelector(".cursor");
+let x = 0, y = 0, mx = 0, my = 0;
+
+window.addEventListener("mousemove", e => {
+  mx = e.clientX;
+  my = e.clientY;
+});
+
+function animateCursor(){
+  x += (mx - x) * 0.2;
+  y += (my - y) * 0.2;
+  cursor.style.left = x + "px";
+  cursor.style.top = y + "px";
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+/* ========= NAV ========= */
 const buttons = document.querySelectorAll("nav span");
 const sections = document.querySelectorAll(".section");
 
