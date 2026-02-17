@@ -56,7 +56,7 @@ nav span{
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-  padding:180px 10vw 160px 22vw;
+  padding:180px 10vw 160px 22vw; /* ⬅ margen izquierdo común */
 }
 
 /* ========= SECTION BLOCK ========= */
@@ -68,16 +68,15 @@ nav span{
 
 /* ========= HERO ========= */
 .section.hero{
-  padding:0;
-  justify-content:flex-start;
+  padding:180px 10vw 160px 22vw; /* ⬅ igual que el resto */
   align-items:center;
 }
 
 .section.hero .section-block{
   position:static;
-  padding-left:18vw;
 }
 
+/* ========= HERO TITLE ========= */
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
@@ -88,6 +87,7 @@ nav span{
   white-space:nowrap;
 }
 
+/* ========= HERO SUB ========= */
 .hero-sub{
   margin-top:24px;
   width:100%;
@@ -104,6 +104,7 @@ h1{
   line-height:1.05;
 }
 
+/* ========= TEXT ========= */
 .section-block p{
   margin-top:8px;
   padding-left:8px;
@@ -125,7 +126,6 @@ h1{
   max-width:700px;
 }
 
-/* imagen ligeramente más pequeña */
 .about img{
   width:300px;
   height:400px;
