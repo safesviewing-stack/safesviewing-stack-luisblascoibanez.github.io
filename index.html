@@ -17,10 +17,6 @@
   font-family:"Inter",sans-serif;
 }
 
-:root{
-  --nav-height:80px;
-}
-
 /* ========= BODY ========= */
 body{
   background:#0a0a0a;
@@ -49,7 +45,7 @@ nav{
   left:50%;
   transform:translateX(-50%);
   width:100%;
-  height:var(--nav-height);
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -67,18 +63,18 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= HERO (CENTRO REAL) ========= */
-.section.hero{
-  height:calc(100vh - var(--nav-height));
-  margin-top:var(--nav-height);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+/* ========= HERO ABSOLUTO ========= */
+.hero-fixed{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
   text-align:center;
-  scroll-snap-align:start;
+  z-index:2;
+  pointer-events:none;
 }
 
-.hero h1{
+.hero-fixed h1{
   font-size:clamp(90px,8vw,150px);
   font-weight:500;
   line-height:1;
@@ -91,7 +87,7 @@ nav span{
   color:#777;
 }
 
-/* ========= SECTIONS (EDITORIAL) ========= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -212,13 +208,11 @@ p{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
-<section class="section hero">
-  <div>
-    <h1>IndustrialDesign</h1>
-    <div class="hero-sub">Structure · Process · Clarity</div>
-  </div>
-</section>
+<!-- HERO ABSOLUTO -->
+<div class="hero-fixed">
+  <h1>IndustrialDesign</h1>
+  <div class="hero-sub">Structure · Process · Clarity</div>
+</div>
 
 <!-- SOBRE MI -->
 <section class="section">
@@ -297,14 +291,6 @@ addEventListener("mousemove",e=>{
   cursor.style.top=y+"px";
   requestAnimationFrame(loop);
 })();
-
-/* NAV */
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-  });
-});
 </script>
 
 </body>
