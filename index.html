@@ -149,6 +149,18 @@ p{
   max-width:700px;
 }
 
+.project{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  padding:6px 0;
+  transition:.35s cubic-bezier(.2,.7,.1,1);
+}
+
+.project:hover{
+  transform:translateX(6px);
+}
+
 .project span{
   font-size:11px;
   letter-spacing:.25em;
@@ -160,14 +172,35 @@ p{
   font-size:18px;
   font-weight:500;
   color:#f0f0f0;
+  margin-top:6px;
 }
 
 .project p{
   font-size:14px;
   max-width:520px;
+  margin-top:8px;
 }
 
-/* ===== CONTACT LIST ===== */
+/* ===== CV ===== */
+.cv-link{
+  margin-top:26px;
+  font-size:14px;
+}
+
+.cv-link a{
+  color:#aaa;
+  text-decoration:none;
+  border-bottom:1px solid #333;
+  padding-bottom:2px;
+  transition:.3s;
+}
+
+.cv-link a:hover{
+  color:#fff;
+  border-color:#666;
+}
+
+/* ===== CONTACT ===== */
 .contact-list{
   margin-top:22px;
   display:flex;
@@ -230,7 +263,7 @@ footer{
 <!-- INICIO -->
 <section class="section">
   <div class="content-center">
-    <h1 id="heroTitle">Industrial Design</h1>
+    <h1>Industrial Design</h1>
     <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
@@ -245,15 +278,11 @@ footer{
         <p>
           Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
           enfocada en un campo fijo, sino alguien con un perfil ecléctico y flexible, capaz de adaptarse
-          a distintos entornos y contextos profesionales. No me sitúo ni en un extremo puramente
-          artístico ni estrictamente técnico, sino en un punto intermedio que me permite comprender y
-          conectar ambas dimensiones del diseño.
-          <br><br>
-          He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
-          en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
-          University de Londres. Cuento además con una formación profesional en electricidad, que me ha
-          aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-          desde lo conceptual hasta la producción final, con soluciones consistentes.
+          a distintos entornos. No me sitúo ni en un extremo puramente artístico ni estrictamente técnico,
+          sino en un punto intermedio.
+          He estudiado en la UPV, con formación inicial en la UJI y un Erasmus en Middlesex University.
+          Cuento además con una FP en electricidad. Disfruto del proceso de diseño desde lo conceptual
+          hasta la producción final, con soluciones consistentes.
         </p>
       </div>
 
@@ -271,23 +300,25 @@ footer{
     <p class="reveal">Selección de proyectos de diseño industrial.</p>
 
     <div class="portfolio-list">
-      <div class="project reveal">
+
+      <a href="node.html" class="project reveal">
         <span>Producto · Sistema</span>
         <h3>NODE — Sistema modular</h3>
-        <p>Proyecto final centrado en estructura, modularidad y fabricación.</p>
-      </div>
+        <p>Sistema modular centrado en estructura, repetición y fabricación.</p>
+      </a>
 
-      <div class="project reveal">
+      <a href="sixay.html" class="project reveal">
         <span>Mobiliario · A medida</span>
         <h3>Sixay — Cómoda personalizada</h3>
-        <p>Diseño y desarrollo de mobiliario para cliente real.</p>
-      </div>
+        <p>Proyecto real de diseño y producción durante prácticas profesionales.</p>
+      </a>
 
-      <div class="project reveal">
+      <a href="impresion3d.html" class="project reveal">
         <span>Investigación · Tecnología</span>
-        <h3>Impresión 3D aplicada</h3>
-        <p>Exploración de fabricación aditiva en producto industrial.</p>
-      </div>
+        <h3>Impresión 3D aplicada al producto</h3>
+        <p>Exploración de fabricación aditiva aplicada a producto industrial.</p>
+      </a>
+
     </div>
   </div>
 </section>
@@ -297,6 +328,10 @@ footer{
   <div class="content-left">
     <h1 class="reveal">CV</h1>
     <p class="reveal">Formación académica y experiencia profesional.</p>
+
+    <div class="cv-link reveal">
+      <a href="Luis_Blasco_CV.pdf" download>Descargar CV (PDF)</a>
+    </div>
   </div>
 </section>
 
@@ -345,14 +380,11 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
 /* ===== NAVIGATION ===== */
-document.querySelectorAll("nav span").forEach(btn=>{
+document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
-    const index=parseInt(btn.dataset.scroll);
     const sections=document.querySelectorAll(".section");
-    const offset=180;
-
     window.scrollTo({
-      top:sections[index].offsetTop-offset,
+      top:sections[i].offsetTop-180,
       behavior:"smooth"
     });
   });
