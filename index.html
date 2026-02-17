@@ -158,11 +158,11 @@ h1{
   padding-bottom:16px;
   scroll-behavior:smooth;
 
-  scrollbar-width:thin;                 /* Firefox */
+  scrollbar-width:thin;
   scrollbar-color:#555 transparent;
 }
 
-/* ===== Scrollbar WebKit (Chrome, Edge, Safari) ===== */
+/* ===== Scrollbar WebKit ===== */
 .portfolio-carousel::-webkit-scrollbar{
   height:4px;
 }
@@ -174,10 +174,20 @@ h1{
 .portfolio-carousel::-webkit-scrollbar-thumb{
   background:#555;
   border-radius:4px;
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
 }
 
 .portfolio-carousel::-webkit-scrollbar-thumb:hover{
   background:#777;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08);
+}
+
+.portfolio-carousel::-webkit-scrollbar-thumb:active{
+  background:#999;
+  transform:scaleY(1.6);
 }
 
 /* ========= PROJECT ========= */
