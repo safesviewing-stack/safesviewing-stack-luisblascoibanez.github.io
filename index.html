@@ -65,44 +65,44 @@ nav span{
   text-transform:uppercase;
   color:#bbb;
   cursor:pointer;
-  transition:.3s;
 }
 
-nav span:hover{ color:#fff; }
-
-/* ================= SECTIONS ================= */
+/* ================= LAYOUT ================= */
 .section{
   min-height:100vh;
-  display:flex;
-  align-items:flex-start;
-  padding:120px 10% 0;
+  display:grid;
+  grid-template-columns: 240px 1fr;
+  padding:120px 8vw 0;
 }
 
-.content-left{
-  max-width:900px;
-  margin-left:10vw;
-  position:relative;
-}
-
-.content-center{
-  max-width:900px;
-  margin:0 auto;
-  text-align:center;
-}
-
-/* ================= TITLES (KEY PART) ================= */
-.section h1{
+/* ================= TITLE COLUMN ================= */
+.section-title{
   position:sticky;
-  top:140px;              /* ⬅ MISMA ALTURA PARA TODOS */
+  top:140px;
+  height:fit-content;
+}
+
+.section-title h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
-  z-index:2;
+}
+
+/* ================= CONTENT COLUMN ================= */
+.section-content{
+  padding-left:80px;
 }
 
 /* ================= HERO ================= */
-.section:first-of-type{
+.hero{
+  display:flex;
   justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  position:static;
 }
 
 .hero-sub{
@@ -117,50 +117,29 @@ p{
   margin-top:18px;
   font-size:15px;
   color:#aaa;
-  max-width:480px;
+  max-width:520px;
   line-height:1.6;
   text-align:justify;
 }
 
 /* ================= ABOUT ================= */
-.about-content{
+.about{
   display:flex;
   gap:32px;
-  margin-top:120px; /* espacio bajo el título sticky */
 }
 
-.about-photo{
-  margin-top:23px;
-}
-
-.about-photo img{
+.about img{
   width:288px;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
 }
 
 /* ================= PORTFOLIO ================= */
-.portfolio-list{
-  margin-top:120px;
-  display:flex;
-  flex-direction:column;
-  gap:44px;
-  max-width:720px;
-}
-
 .project{
+  margin-bottom:44px;
   text-decoration:none;
   color:inherit;
-  transition:.4s var(--ease);
-}
-
-.project.hero{
-  padding-left:12px;
-  border-left:1px solid #333;
-}
-
-.project:hover{
-  transform:translateX(8px);
+  display:block;
 }
 
 .project span{
@@ -176,64 +155,10 @@ p{
   font-weight:500;
 }
 
-.project p{
-  font-size:14px;
-  max-width:520px;
-}
-
-/* ================= CV ================= */
-.cv-block{
-  margin-top:120px;
-  max-width:700px;
-}
-
-.cv-section{
-  margin-bottom:36px;
-}
-
-.cv-section h3{
-  font-size:13px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#777;
-  margin-bottom:10px;
-}
-
-.cv-item{
-  margin-bottom:14px;
-}
-
-.cv-item strong{
-  font-weight:500;
-  color:#f0f0f0;
-}
-
-.cv-item span{
-  display:block;
-  font-size:13px;
-  color:#777;
-}
-
-/* ================= CONTACT ================= */
-.section.contact .content-left{ margin-top:-165px; }
-
-.contact-list{
-  margin-top:120px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.contact-list a{
-  font-size:15px;
-  color:#aaa;
-  text-decoration:none;
-}
-
 /* ================= FOOTER ================= */
 footer{
   text-align:center;
-  padding:64px 0 96px;
+  padding:80px 0 120px;
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
@@ -243,15 +168,13 @@ footer{
 /* ================= REVEAL ================= */
 .reveal{
   opacity:0;
-  transform:translateY(60px);
-  filter:blur(8px);
-  transition:1.2s var(--ease);
+  transform:translateY(40px);
+  transition:1s var(--ease);
 }
 
 .reveal.visible{
   opacity:1;
   transform:none;
-  filter:none;
 }
 
 </style>
@@ -269,98 +192,70 @@ footer{
 </nav>
 
 <!-- HERO -->
-<section class="section">
-  <div class="content-center">
-    <h1 class="reveal">Industrial Design</h1>
-    <div class="hero-sub reveal">Structure · Process · Clarity</div>
+<section class="section hero">
+  <div>
+    <h1>Industrial Design</h1>
+    <div class="hero-sub">Structure · Process · Clarity</div>
   </div>
 </section>
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left">
-    <h1 class="reveal">Sobre mí</h1>
+  <div class="section-title">
+    <h1>Sobre mí</h1>
+  </div>
 
-    <div class="about-content reveal">
+  <div class="section-content reveal">
+    <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico y flexible, capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño.
-        <br><br>
-        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
-        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
-        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
-        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde lo conceptual hasta la producción final, con soluciones consistentes.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
+        flexible y adaptable. Formación en la UPV, inicio en la UJI y Erasmus en Middlesex
+        University. FP en electricidad como base técnica. Diseño desde lo conceptual hasta
+        la producción final, con soluciones consistentes.
       </p>
-
-      <div class="about-photo">
-        <img src="foto.jpg" alt="Foto personal">
-      </div>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="section">
-  <div class="content-left">
-    <h1 class="reveal">Portfolio</h1>
+  <div class="section-title">
+    <h1>Portfolio</h1>
+  </div>
 
-    <div class="portfolio-list reveal">
-      <a href="node.html" class="project hero">
-        <span>Proyecto principal</span>
-        <h3>NODE — Sistema modular</h3>
-        <p>Estructura, repetición y fabricación racional.</p>
-      </a>
+  <div class="section-content reveal">
+    <a class="project" href="node.html">
+      <span>Proyecto principal</span>
+      <h3>NODE — Sistema modular</h3>
+    </a>
 
-      <a href="sixay.html" class="project">
-        <span>Mobiliario · A medida</span>
-        <h3>Sixay — Cómoda personalizada</h3>
-        <p>Diseño y producción para cliente real.</p>
-      </a>
-
-      <a href="impresion3d.html" class="project">
-        <span>Investigación</span>
-        <h3>Impresión 3D aplicada</h3>
-        <p>Fabricación aditiva en producto industrial.</p>
-      </a>
-    </div>
+    <a class="project" href="sixay.html">
+      <span>Mobiliario</span>
+      <h3>Sixay — Cómoda personalizada</h3>
+    </a>
   </div>
 </section>
 
 <!-- CV -->
 <section class="section">
-  <div class="content-left">
-    <h1 class="reveal">CV</h1>
+  <div class="section-title">
+    <h1>CV</h1>
+  </div>
 
-    <div class="cv-block reveal">
-      <div class="cv-section">
-        <h3>Formación</h3>
-        <div class="cv-item"><strong>UPV</strong><span>Ingeniería en Diseño Industrial</span></div>
-        <div class="cv-item"><strong>UJI</strong><span>Inicio de estudios</span></div>
-        <div class="cv-item"><strong>Middlesex University</strong><span>Erasmus</span></div>
-      </div>
-
-      <div class="cv-section">
-        <h3>Experiencia</h3>
-        <div class="cv-item"><strong>Sixay</strong><span>Diseño de mobiliario</span></div>
-      </div>
-    </div>
+  <div class="section-content reveal">
+    <p>UPV · UJI · Middlesex University · Sixay</p>
   </div>
 </section>
 
 <!-- CONTACTO -->
-<section class="section contact">
-  <div class="content-left">
-    <h1 class="reveal">Contacto</h1>
+<section class="section">
+  <div class="section-title">
+    <h1>Contacto</h1>
+  </div>
 
-    <div class="contact-list reveal">
-      <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a>
-      <a href="tel:+34630511806">Teléfono</a>
-      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank">LinkedIn</a>
-    </div>
+  <div class="section-content reveal">
+    <p>Email · Teléfono · LinkedIn</p>
   </div>
 </section>
 
@@ -369,31 +264,21 @@ footer{
 </footer>
 
 <script>
-window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
-
-const cursor=document.querySelector(".cursor");
-let mx=0,my=0,x=0,y=0;
-addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
-(function loop(){
-  x+=(mx-x)*.2; y+=(my-y)*.2;
-  cursor.style.left=x+"px";
-  cursor.style.top=y+"px";
-  requestAnimationFrame(loop);
-})();
+window.addEventListener("load",()=>{
+  document.body.style.opacity="1";
+});
 
 const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
-},{threshold:.15});
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
+  });
+},{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.addEventListener("click",()=>{
-    if(i===4){
-      window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
-    }else{
-      document.querySelectorAll(".section")[i]
-        .scrollIntoView({behavior:"smooth",block:"start"});
-    }
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth"});
   });
 });
 </script>
