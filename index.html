@@ -155,7 +155,12 @@ h1{
 .project-card{
   min-width:440px;
   flex-shrink:0;
-  transition:transform .35s ease;
+  transition:transform .4s ease;
+}
+
+/* Hover card */
+.project-card:hover{
+  transform:translateY(-4px);
 }
 
 /* Imagen proyecto */
@@ -172,16 +177,12 @@ h1{
   height:100%;
   object-fit:cover;
   display:block;
-  filter:grayscale(100%) contrast(1.05);
-  transition:filter .35s ease;
+  filter:grayscale(100%) contrast(1);
+  transition:filter .4s ease;
 }
 
-/* HOVER SUTIL */
-.project-card:hover{
-  transform:translateY(-4px);
-}
-
-.project-card:hover img{
+/* Hover imagen */
+.project-card:hover .project-image img{
   filter:grayscale(0%) contrast(1.1);
 }
 
