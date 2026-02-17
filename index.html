@@ -80,7 +80,7 @@ nav span{
 }
 
 .section.hero h1{
-  font-size:clamp(100px,8.5vw,180px); /* ⬅ MÁS GRANDE */
+  font-size:clamp(100px,8.5vw,180px);
   font-weight:500;
   line-height:1;
 }
@@ -108,13 +108,13 @@ p{
 }
 
 .about p{
-  max-width:600px;               /* ⬅ TEXTO MÁS ANCHO */
+  max-width:600px;
   margin-top:0;
 }
 
 .about img{
   width:288px;
-  margin-left:24px;              /* ⬅ FOTO A LA DERECHA */
+  margin-left:24px;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
 }
@@ -158,11 +158,11 @@ p{
 <body>
 
 <nav>
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Sobre mí</span>
-  <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
+  <span data-index="0">Inicio</span>
+  <span data-index="1">Sobre mí</span>
+  <span data-index="2">Portfolio</span>
+  <span data-index="3">CV</span>
+  <span data-index="4">Contacto</span>
 </nav>
 
 <!-- HERO -->
@@ -226,6 +226,32 @@ p{
     </div>
   </div>
 </section>
+
+<script>
+/* ========= NAVIGATION ========= */
+const buttons = document.querySelectorAll("nav span");
+const sections = document.querySelectorAll(".section");
+
+buttons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const index = btn.dataset.index;
+
+    if(index === "4"){
+      // contacto → final real
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+      return;
+    }
+
+    sections[index].scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+});
+</script>
 
 </body>
 </html>
