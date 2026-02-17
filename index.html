@@ -132,9 +132,26 @@ h1{
 
 /* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
+  position:relative;
   margin-top:32px;
   overflow:hidden;
-  padding-right:120px; /* ⬅ más margen derecho */
+  padding-right:120px;
+}
+
+/* Gradiente indicador */
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(
+    to right,
+    rgba(10,10,10,0),
+    rgba(10,10,10,1)
+  );
 }
 
 .portfolio-carousel{
