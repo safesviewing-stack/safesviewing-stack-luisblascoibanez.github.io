@@ -56,7 +56,7 @@ nav span{
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-  padding:180px 10vw 160px 22vw; /* ⬅ margen izquierdo común */
+  padding:180px 10vw 160px 22vw;
 }
 
 /* ========= SECTION BLOCK ========= */
@@ -68,15 +68,10 @@ nav span{
 
 /* ========= HERO ========= */
 .section.hero{
-  padding:180px 10vw 160px 22vw; /* ⬅ igual que el resto */
   align-items:center;
 }
 
-.section.hero .section-block{
-  position:static;
-}
-
-/* ========= HERO TITLE ========= */
+/* HERO TITLE */
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
@@ -87,11 +82,10 @@ nav span{
   white-space:nowrap;
 }
 
-/* ========= HERO SUB ========= */
+/* HERO SUB — alineado a la izquierda */
 .hero-sub{
   margin-top:24px;
-  width:100%;
-  text-align:center;
+  text-align:left;      /* ⬅ cambio clave */
   font-size:13px;
   letter-spacing:.25em;
   color:#777;
