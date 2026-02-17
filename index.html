@@ -39,7 +39,7 @@ nav{
   gap:50px;
   background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
-  z-index:100;
+  z-index:200;
 }
 
 nav span{
@@ -145,6 +145,7 @@ h1{
   width:120px;
   height:100%;
   pointer-events:none;
+  z-index:1;
   background:linear-gradient(
     to right,
     rgba(10,10,10,0),
@@ -152,7 +153,7 @@ h1{
   );
 }
 
-/* Carrusel sin scrollbar */
+/* Carrusel */
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -177,7 +178,7 @@ h1{
   color:#888;
   font-size:42px;
   cursor:pointer;
-  z-index:30;
+  z-index:100;              /* ⬅ AHORA POR ENCIMA DE TODO */
   transition:color .2s ease;
 }
 
@@ -185,7 +186,7 @@ h1{
   color:#fff;
 }
 
-/* Flecha izquierda (AL BORDE DEL CARRUSEL) */
+/* Flecha izquierda */
 .portfolio-arrow.left{
   left:0;
   transform:translate(-50%,-50%);
