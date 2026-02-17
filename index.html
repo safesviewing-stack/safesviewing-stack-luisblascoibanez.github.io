@@ -73,7 +73,9 @@ nav span{
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-  padding:140px 10vw;
+
+  /* ⬅ DESPLAZAMIENTO A LA DERECHA */
+  padding:140px 12vw 140px 14vw;
 
   -webkit-mask-image:linear-gradient(
     to bottom,
@@ -94,7 +96,7 @@ nav span{
 /* ========= SECTION BLOCK ========= */
 .section-block{
   position:sticky;
-  top:220px; /* ⬅ TÍTULOS DEFINITIVAMENTE MÁS ABAJO */
+  top:220px;
   max-width:900px;
 }
 
@@ -172,7 +174,7 @@ p{
 
 /* ========= CONTACTO (CIERRE FINAL) ========= */
 .section.contact{
-  padding:140px 10vw 0;
+  padding:140px 12vw 0 14vw;
   display:flex;
   flex-direction:column;
 }
@@ -181,13 +183,13 @@ p{
   position:static;
 }
 
-/* Footer pegado abajo */
+/* Footer al final */
 .footer-wrapper{
   flex:1;
   display:flex;
-  align-items:flex-end;     /* ⬅ BAJADO HASTA EL FINAL */
+  align-items:flex-end;
   justify-content:center;
-  padding-bottom:40px;      /* pequeño aire final */
+  padding-bottom:40px;
 }
 
 .footer{
@@ -277,7 +279,7 @@ p{
   </div>
 </section>
 
-<!-- CONTACTO + FOOTER FINAL -->
+<!-- CONTACTO -->
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
