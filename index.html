@@ -74,8 +74,8 @@ nav span{
   display:flex;
   justify-content:flex-start;
 
-  /* ⬅ DESPLAZAMIENTO A LA DERECHA */
-  padding:140px 12vw 140px 14vw;
+  /* ⬇️⬅️ MÁS ABAJO + MÁS A LA DERECHA */
+  padding:180px 10vw 160px 17vw;
 
   -webkit-mask-image:linear-gradient(
     to bottom,
@@ -96,7 +96,7 @@ nav span{
 /* ========= SECTION BLOCK ========= */
 .section-block{
   position:sticky;
-  top:220px;
+  top:260px; /* ⬇️ TÍTULOS MÁS ABAJO */
   max-width:900px;
 }
 
@@ -130,7 +130,7 @@ h1{
 }
 
 p{
-  margin-top:24px;
+  margin-top:28px;
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -141,8 +141,8 @@ p{
 /* ========= ABOUT ========= */
 .about{
   display:flex;
-  gap:32px;
-  margin-top:24px;
+  gap:40px;
+  margin-top:28px;
 }
 
 .about img{
@@ -154,7 +154,7 @@ p{
 /* ========= PORTFOLIO ========= */
 .project{
   display:block;
-  margin-top:32px;
+  margin-top:36px;
   text-decoration:none;
   color:inherit;
 }
@@ -167,14 +167,14 @@ p{
 }
 
 .project h3{
-  margin-top:6px;
+  margin-top:8px;
   font-size:20px;
   font-weight:500;
 }
 
 /* ========= CONTACTO (CIERRE FINAL) ========= */
 .section.contact{
-  padding:140px 12vw 0 14vw;
+  padding:180px 10vw 0 17vw;
   display:flex;
   flex-direction:column;
 }
@@ -183,13 +183,13 @@ p{
   position:static;
 }
 
-/* Footer al final */
+/* Footer completamente abajo */
 .footer-wrapper{
   flex:1;
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding-bottom:40px;
+  padding-bottom:20px; /* final seco */
 }
 
 .footer{
