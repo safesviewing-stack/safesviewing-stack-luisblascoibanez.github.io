@@ -133,7 +133,7 @@ h1{
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
-  padding:0 80px; /* espacio para flechas */
+  padding:0 80px;
 }
 
 .portfolio-carousel{
@@ -161,7 +161,11 @@ h1{
   font-size:18px;
   background:rgba(10,10,10,.6);
   backdrop-filter:blur(6px);
-  transition:background .3s ease, color .3s ease, border .3s ease;
+  transition:
+    opacity .3s ease,
+    background .3s ease,
+    color .3s ease,
+    border .3s ease;
   z-index:10;
 }
 
@@ -171,12 +175,12 @@ h1{
   border-color:#fff;
 }
 
-.carousel-arrow.left{
-  left:16px;
-}
+.carousel-arrow.left{ left:16px; }
+.carousel-arrow.right{ right:16px; }
 
-.carousel-arrow.right{
-  right:16px;
+.carousel-arrow.hidden{
+  opacity:0;
+  pointer-events:none;
 }
 
 /* ========= PROYECTO ========= */
@@ -200,9 +204,7 @@ h1{
   transform:translateY(-4px);
 }
 
-.project-inner{
-  width:100%;
-}
+.project-inner{ width:100%; }
 
 .project-image{
   height:260px;
@@ -417,6 +419,8 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
 
 const carousel = document.querySelector(".portfolio-carousel");
 const cards = document.querySelectorAll(".project-card");
+const leftArrow = document.querySelector(".carousel-arrow.left");
+const rightArrow = document.querySelector(".carousel-arrow.right");
 
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -435,13 +439,32 @@ cards.forEach(card=>observer.observe(card));
 
 const scrollAmount = 480;
 
-document.querySelector(".carousel-arrow.left").addEventListener("click",()=>{
+function updateArrows(){
+  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+  if(carousel.scrollLeft <= 0){
+    leftArrow.classList.add("hidden");
+  }else{
+    leftArrow.classList.remove("hidden");
+  }
+
+  if(carousel.scrollLeft >= maxScroll - 1){
+    rightArrow.classList.add("hidden");
+  }else{
+    rightArrow.classList.remove("hidden");
+  }
+}
+
+leftArrow.addEventListener("click",()=>{
   carousel.scrollBy({ left:-scrollAmount, behavior:"smooth" });
 });
 
-document.querySelector(".carousel-arrow.right").addEventListener("click",()=>{
+rightArrow.addEventListener("click",()=>{
   carousel.scrollBy({ left:scrollAmount, behavior:"smooth" });
 });
+
+carousel.addEventListener("scroll", updateArrows);
+window.addEventListener("load", updateArrows);
 </script>
 
 </body>
