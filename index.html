@@ -152,7 +152,7 @@ h1{
   );
 }
 
-/* Carrusel */
+/* Carrusel (SIN BARRA) */
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -161,17 +161,12 @@ h1{
   scroll-behavior:smooth;
   margin-left:-12px;
 
-  scrollbar-width:thin;
-  scrollbar-color:#444 transparent;
+  /* eliminar scrollbar */
+  scrollbar-width:none;          /* Firefox */
 }
 
 .portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
+  display:none;                  /* Chrome / Safari / Edge */
 }
 
 /* Flechas */
@@ -239,7 +234,7 @@ h1{
   filter:grayscale(0%);
 }
 
-/* Texto proyecto alineado con imagen */
+/* Texto alineado con imagen */
 .project-card h2,
 .project-card span,
 .project-card p{
