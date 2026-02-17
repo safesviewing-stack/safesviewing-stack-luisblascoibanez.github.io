@@ -9,7 +9,7 @@
 
 <style>
 
-/* ================= RESET ================= */
+/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -17,27 +17,23 @@
   font-family:"Inter",sans-serif;
 }
 
-/* ================= VARIABLES ================= */
-:root{
-  --nav-height:80px;
-  --section-left:16vw;
-}
-
-/* ================= BODY ================= */
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  overflow-y:auto;
+  overflow-y:scroll;
   scroll-snap-type:y mandatory;
+  cursor:none;
 }
 
-/* ================= NAV ================= */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
-  left:0;
+  left:50%;
+  transform:translateX(-50%);
   width:100%;
-  height:var(--nav-height);
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -55,46 +51,39 @@ nav span{
   cursor:pointer;
 }
 
-/* ================= SECTIONS ================= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-  padding:180px 10vw 160px var(--section-left);
+  padding:180px 10vw 160px 17vw;
 }
 
-/* ================= HERO ================= */
+/* ========= SECTION BLOCK ========= */
+.section-block{
+  position:sticky;
+  top:260px;
+  max-width:900px;
+}
+
+/* ========= HERO ========= */
 .section.hero{
-  padding-top:var(--nav-height);
-  padding-left:0;
-  padding-right:0;
+  padding:0;
   justify-content:center;
   align-items:center;
   text-align:center;
 }
 
+.section.hero .section-block{
+  position:static;
+}
+
 .section.hero h1{
-  font-size:clamp(90px,8vw,150px);
-  font-weight:500;
-  line-height:1;
+  font-size:clamp(80px,7vw,140px);
 }
 
-.hero-sub{
-  margin-top:24px;
-  font-size:13px;
-  letter-spacing:.25em;
-  color:#777;
-}
-
-/* ================= SECTION BLOCK ================= */
-.section-block{
-  position:sticky;
-  top:240px;
-  max-width:900px;
-}
-
-/* ================= TYPO ================= */
+/* ========= TYPO ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
@@ -102,7 +91,6 @@ h1{
 }
 
 p{
-  margin-top:28px;
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -110,11 +98,16 @@ p{
   text-align:justify;
 }
 
-/* ================= ABOUT ================= */
+/* ========= ABOUT ========= */
 .about{
   display:flex;
-  gap:40px;
-  margin-top:28px;
+  gap:32px;
+  margin-top:12px;              /* ⬅ MENOS ESPACIO */
+  align-items:flex-start;       /* ⬅ FOTO ALINEADA CON 1ª LÍNEA */
+}
+
+.about p{
+  margin-top:0;                 /* ⬅ TEXTO SUBE */
 }
 
 .about img{
@@ -123,7 +116,7 @@ p{
   opacity:.9;
 }
 
-/* ================= PORTFOLIO ================= */
+/* ========= PORTFOLIO ========= */
 .project{
   display:block;
   margin-top:36px;
@@ -131,22 +124,9 @@ p{
   color:inherit;
 }
 
-.project span{
-  font-size:11px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#777;
-}
-
-.project h3{
-  margin-top:8px;
-  font-size:20px;
-  font-weight:500;
-}
-
-/* ================= CONTACTO ================= */
+/* ========= CONTACTO ========= */
 .section.contact{
-  padding-bottom:0;
+  padding:180px 10vw 0 17vw;
   display:flex;
   flex-direction:column;
 }
@@ -155,14 +135,19 @@ p{
   position:static;
 }
 
-/* ================= FOOTER ================= */
+.footer-wrapper{
+  flex:1;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:20px;
+}
+
 .footer{
-  margin-top:auto;
-  padding:60px 0 40px;
-  text-align:center;
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
+  text-align:center;
 }
 
 </style>
@@ -179,9 +164,8 @@ p{
 
 <!-- HERO -->
 <section class="section hero">
-  <div>
-    <h1>IndustrialDesign</h1>
-    <div class="hero-sub">Structure · Process · Clarity</div>
+  <div class="section-block">
+    <h1>Industrial Design</h1>
   </div>
 </section>
 
@@ -189,18 +173,20 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
+
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Me considero una persona
-        ecléctica y flexible, capaz de adaptarme a distintos entornos y contextos de trabajo.
-        No me sitúo en un extremo puramente artístico ni estrictamente técnico, sino en un punto
-        intermedio donde ambas dimensiones se complementan.
-        <br><br>
-        He estudiado en la Universidad Politécnica de Valencia, tras iniciar mi formación en la
-        Universitat Jaume I de Castellón, y completarla con un programa Erasmus en la Middlesex
-        University de Londres. Además, cuento con una formación profesional en electricidad,
-        que me aporta una base técnica sólida y una visión práctica del diseño.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
+        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
+        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
+        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+        desde lo conceptual hasta la producción final, con soluciones consistentes.
       </p>
+
       <img src="foto.jpg" alt="Foto personal">
     </div>
   </div>
@@ -210,14 +196,7 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-    <a class="project" href="node.html">
-      <span>Proyecto principal</span>
-      <h3>NODE — Sistema modular</h3>
-    </a>
-    <a class="project" href="sixay.html">
-      <span>Mobiliario</span>
-      <h3>Sixay — Cómoda personalizada</h3>
-    </a>
+    <a class="project" href="#">NODE — Sistema modular</a>
   </div>
 </section>
 
@@ -233,26 +212,15 @@ p{
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
-    <p>
-      luisblascoibanezberbel@gmail.com<br>
-      +34 630 51 18 06<br>
-      linkedin.com/in/luisblasiber
-    </p>
+    <p>Email · Teléfono · LinkedIn</p>
   </div>
 
-  <div class="footer">
-    © 2026 · Luis Blasco — Industrial Design
+  <div class="footer-wrapper">
+    <div class="footer">
+      © 2026 · Luis Blasco — Industrial Design
+    </div>
   </div>
 </section>
-
-<script>
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-  });
-});
-</script>
 
 </body>
 </html>
