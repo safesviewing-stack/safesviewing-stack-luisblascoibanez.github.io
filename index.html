@@ -9,7 +9,7 @@
 
 <style>
 
-/* ========== RESET ========== */
+/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -21,7 +21,7 @@
   --ease:cubic-bezier(.2,.7,.1,1);
 }
 
-/* ========== BODY / SCROLL ========== */
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -30,7 +30,7 @@ body{
   cursor:none;
 }
 
-/* ========== CURSOR ========== */
+/* ========= CURSOR ========= */
 .cursor{
   position:fixed;
   width:8px;
@@ -42,7 +42,7 @@ body{
   z-index:1000;
 }
 
-/* ========== NAV ========== */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -67,7 +67,7 @@ nav span{
   cursor:pointer;
 }
 
-/* ========== SECTIONS ========== */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -91,21 +91,14 @@ nav span{
   );
 }
 
-/* ========== SECTION BLOCK ========== */
+/* ========= SECTION BLOCK ========= */
 .section-block{
   position:sticky;
   top:140px;
   max-width:900px;
 }
 
-/* CONTACTO: convierte el bloque en columna */
-.section.contact .section-block{
-  display:flex;
-  flex-direction:column;
-  min-height:calc(100vh - 140px);
-}
-
-/* ========== HERO ========== */
+/* ========= HERO ========= */
 .hero{
   justify-content:center;
   align-items:center;
@@ -127,7 +120,7 @@ nav span{
   color:#777;
 }
 
-/* ========== TYPO ========== */
+/* ========= TYPO ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
@@ -143,7 +136,7 @@ p{
   text-align:justify;
 }
 
-/* ========== ABOUT ========== */
+/* ========= ABOUT ========= */
 .about{
   display:flex;
   gap:32px;
@@ -156,7 +149,7 @@ p{
   opacity:.9;
 }
 
-/* ========== PORTFOLIO ========== */
+/* ========= PORTFOLIO ========= */
 .project{
   display:block;
   margin-top:32px;
@@ -177,19 +170,34 @@ p{
   font-weight:500;
 }
 
-/* ========== FOOTER (CENTERED BOTTOM) ========== */
+/* ========= CONTACTO (CIERRE) ========= */
+.section.contact{
+  padding:140px 10vw 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+.section.contact .section-block{
+  position:static;
+}
+
+/* Footer centrado en página */
+.footer-wrapper{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
 .footer{
-  margin-top:auto;              /* ⬅ empuja al fondo */
-  padding-top:32px;
-  padding-bottom:32px;
-  border-top:1px solid #1c1c1c;
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
-  text-align:center;            /* ⬅ centrado */
+  text-align:center;
 }
 
-/* ========== REDUCED MOTION ========== */
+/* ========= REDUCED MOTION ========= */
 @media (prefers-reduced-motion:reduce){
   *{
     scroll-behavior:auto !important;
@@ -269,12 +277,14 @@ p{
   </div>
 </section>
 
-<!-- CONTACTO + FOOTER -->
+<!-- CONTACTO + FOOTER FINAL -->
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
     <p>Email · Teléfono · LinkedIn</p>
+  </div>
 
+  <div class="footer-wrapper">
     <div class="footer">
       © 2026 · Luis Blasco — Industrial Design
     </div>
