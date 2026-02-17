@@ -160,7 +160,6 @@ h1{
   padding-bottom:20px;
   scroll-behavior:smooth;
   margin-left:-12px;
-
   scrollbar-width:none;
 }
 
@@ -186,9 +185,20 @@ h1{
   color:#fff;
 }
 
-/* Flecha izquierda */
+/* Flecha izquierda exterior */
 .portfolio-arrow.left{
   left:-56px;
+}
+
+/* Flecha izquierda interior (NUEVA) */
+.portfolio-arrow.left-inner{
+  left:8px;
+  opacity:.6;
+  font-size:40px;
+}
+
+.portfolio-arrow.left-inner:hover{
+  opacity:1;
 }
 
 /* Flecha derecha */
@@ -322,8 +332,10 @@ h1{
     <h1>Portfolio</h1>
 
     <div class="portfolio-wrapper">
-      <!-- Flecha izquierda -->
+      <!-- Flecha izquierda exterior -->
       <button class="portfolio-arrow left" aria-label="Anterior">‹</button>
+      <!-- Flecha izquierda interior (NUEVA) -->
+      <button class="portfolio-arrow left-inner" aria-label="Anterior">‹</button>
       <!-- Flecha derecha -->
       <button class="portfolio-arrow right" aria-label="Siguiente">›</button>
 
@@ -370,8 +382,10 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
 
 const carousel=document.querySelector(".portfolio-carousel");
 
-document.querySelector(".portfolio-arrow.left").onclick=
-  ()=>carousel.scrollBy({left:-480,behavior:"smooth"});
+document.querySelectorAll(".portfolio-arrow.left, .portfolio-arrow.left-inner")
+  .forEach(btn=>{
+    btn.onclick=()=>carousel.scrollBy({left:-480,behavior:"smooth"});
+  });
 
 document.querySelector(".portfolio-arrow.right").onclick=
   ()=>carousel.scrollBy({left:480,behavior:"smooth"});
