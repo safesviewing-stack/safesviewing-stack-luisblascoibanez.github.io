@@ -71,7 +71,6 @@ nav span{
   align-items:center;
 }
 
-/* HERO TITLE */
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
@@ -83,12 +82,11 @@ nav span{
   white-space:nowrap;
 }
 
-/* HERO SUB */
 .hero-sub{
   margin-top:24px;
   padding-left:8px;
   text-align:left;
-  font-size:14px;          /* ⬅ un poco más grande */
+  font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
@@ -132,20 +130,32 @@ h1{
   opacity:.9;
 }
 
-/* ========= CONTACT ========= */
-.section.contact{
-  padding:180px 10vw 0 22vw;
-  display:flex;
-  flex-direction:column;
+/* ========= PORTFOLIO ========= */
+.portfolio{
+  margin-top:24px;
 }
 
-.section.contact .section-block{
-  position:static;
+.project{
+  margin-top:48px;
 }
 
-.contact-statement{
-  max-width:600px;
-  margin-top:16px;
+.project h2{
+  font-size:28px;
+  font-weight:400;
+  color:#f0f0f0;
+}
+
+.project span{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
+.project p{
+  max-width:640px;
 }
 
 /* ========= FOOTER ========= */
@@ -204,6 +214,44 @@ h1{
         de todo el proceso de diseño desde la fase del análisis hasta la materialización.
       </p>
       <img src="foto.jpg" alt="Foto personal">
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+
+    <div class="portfolio">
+
+      <div class="project">
+        <h2>NODE</h2>
+        <span>Proyecto final de grado</span>
+        <p>
+          Sistema modular de mobiliario orientado a la adaptabilidad espacial y a la optimización
+          de procesos productivos mediante soluciones constructivas racionalizadas.
+        </p>
+      </div>
+
+      <div class="project">
+        <h2>Sixay · Cómoda personalizada</h2>
+        <span>Diseño de mobiliario · Prácticas</span>
+        <p>
+          Desarrollo completo de una cómoda a medida, desde el análisis del usuario y el contexto
+          hasta la definición técnica y la fabricación.
+        </p>
+      </div>
+
+      <div class="project">
+        <h2>Proyecto experimental</h2>
+        <span>Concepto / exploración formal</span>
+        <p>
+          Investigación sobre materialidad, proporción y lenguaje formal aplicada a un objeto de
+          uso cotidiano.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
