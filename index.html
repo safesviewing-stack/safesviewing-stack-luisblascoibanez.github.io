@@ -100,7 +100,7 @@ nav span:hover{ color:#fff; }
 }
 
 .section.contact h1{
-  margin-top:58px;
+  margin-top:62px; /* ⬅ bajado un poco más */
 }
 
 /* ===== CONTENT ===== */
@@ -317,14 +317,19 @@ footer{
     <h1 class="reveal">Contacto</h1>
 
     <div class="contact-list reveal">
-      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank">
-        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
-      </a>
       <a href="mailto:luisblascoibanezberbel@gmail.com">
-        <i class="fa-regular fa-envelope"></i> luisblascoibanezberbel@gmail.com
+        <i class="fa-regular fa-envelope"></i>
+        luisblascoibanezberbel@gmail.com
       </a>
+
       <a href="tel:+34630511806">
-        <i class="fa-solid fa-phone"></i> +34 630 511 806
+        <i class="fa-solid fa-phone"></i>
+        +34 630 511 806
+      </a>
+
+      <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank">
+        <i class="fa-brands fa-linkedin-in"></i>
+        LinkedIn
       </a>
     </div>
   </div>
@@ -341,8 +346,10 @@ const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
 addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
 (function animateCursor(){
-  x+=(mx-x)*0.2; y+=(my-y)*0.2;
-  cursor.style.left=x+"px"; cursor.style.top=y+"px";
+  x+=(mx-x)*0.2;
+  y+=(my-y)*0.2;
+  cursor.style.left=x+"px";
+  cursor.style.top=y+"px";
   requestAnimationFrame(animateCursor);
 })();
 
@@ -366,18 +373,29 @@ setTimeout(()=>{
 },200);
 
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
+  });
 },{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 document.querySelectorAll("nav span").forEach(btn=>{
   btn.addEventListener("click",()=>{
     const index=btn.dataset.scroll;
-    if(index==="0"){ window.scrollTo({top:0,behavior:"smooth"}); return; }
-    if(index==="4"){ window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}); return; }
+    if(index==="0"){
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+    if(index==="4"){
+      window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});
+      return;
+    }
     const section=document.querySelectorAll(".section")[index];
     const title=section.querySelector("h1");
-    window.scrollTo({ top:title.offsetTop-180, behavior:"smooth" });
+    window.scrollTo({
+      top:title.offsetTop-180,
+      behavior:"smooth"
+    });
   });
 });
 </script>
