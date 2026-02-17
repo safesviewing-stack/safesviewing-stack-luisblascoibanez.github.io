@@ -67,30 +67,13 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS (EDITORIAL) ========= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-
-  /* desplazamiento editorial aumentado */
   padding:180px 10vw 160px 22vw;
-
-  -webkit-mask-image:linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 18%,
-    black 82%,
-    transparent 100%
-  );
-  mask-image:linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 18%,
-    black 82%,
-    transparent 100%
-  );
 }
 
 /* ========= SECTION BLOCK ========= */
@@ -100,7 +83,7 @@ nav span{
   max-width:900px;
 }
 
-/* ========= HERO (EXCEPCIÓN) ========= */
+/* ========= HERO ========= */
 .section.hero{
   padding:0;
   justify-content:center;
@@ -131,7 +114,7 @@ h1{
 }
 
 p{
-  margin-top:28px;
+  margin-top:16px;            /* ⬅ texto más cerca del título */
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -143,11 +126,14 @@ p{
 .about{
   display:flex;
   gap:40px;
-  margin-top:28px;
+  margin-top:16px;
+  align-items:flex-start;     /* ⬅ alineación con primera línea */
 }
 
 .about img{
-  width:288px;
+  width:260px;
+  height:340px;               /* ⬅ altura reducida */
+  object-fit:cover;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
 }
@@ -235,17 +221,7 @@ p{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño.
-        <br><br>
-        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
-        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
-        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
-        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde lo conceptual hasta la producción final, con soluciones consistentes.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia, con un perfil ecléctico, flexible y adaptable a distintos contextos de trabajo. No me sitúo en un extremo puramente artístico ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación en la Universitat Jaume I de Castellón y completarlos con un programa Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño desde lo conceptual hasta la producción final, buscando siempre soluciones consistentes, claras y bien estructuradas.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
