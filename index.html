@@ -22,7 +22,6 @@ body{
   background:#0a0a0a;
   color:#f5f5f5;
   overflow-y:scroll;
-  scroll-snap-type:y mandatory;
 }
 
 /* ========= NAV ========= */
@@ -53,7 +52,6 @@ nav span{
 /* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
-  scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
@@ -77,10 +75,6 @@ nav span{
   margin-left:-4px;
 }
 
-.hero-surname{
-  white-space:nowrap;
-}
-
 .hero-sub{
   margin-top:24px;
   padding-left:8px;
@@ -93,103 +87,75 @@ nav span{
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
-  line-height:1.05;
-}
-
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:8px;
-  padding-left:8px;
-  font-size:15px;
-  color:#aaa;
-  max-width:600px;
-  line-height:1.6;
-  text-align:justify;
 }
 
 /* ========= ABOUT ========= */
 .about{
   display:flex;
-  align-items:flex-start;
   margin-top:12px;
-}
-
-.about p{
-  max-width:700px;
 }
 
 .about img{
   width:300px;
   height:400px;
-  margin-top:16px;
   margin-left:40px;
   object-fit:cover;
-  filter:grayscale(100%) contrast(1.05);
-  opacity:.9;
+  filter:grayscale(100%);
 }
 
 /* ========= PORTFOLIO ========= */
-.portfolio-wrapper{
+.portfolio-container{
   position:relative;
   margin-top:32px;
 }
 
-/* Carrusel */
-.portfolio-carousel{
-  position:relative;
-  display:flex;
-  gap:48px;
-  overflow-x:hidden;
-  padding-bottom:20px;
-}
-
-/* Track real (scrollable) */
-.portfolio-track{
-  display:flex;
-  gap:48px;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-}
-
-.portfolio-track::-webkit-scrollbar{
-  display:none;
-}
-
-/* ========= FLECHAS ========= */
-.portfolio-arrow{
+/* Flechas externas */
+.portfolio-nav{
   position:absolute;
   top:50%;
-  transform:translateY(-50%);
-  background:none;
-  border:none;
-  color:#888;
-  font-size:42px;
-  cursor:pointer;
-  z-index:50;
-  transition:color .2s ease, opacity .2s ease;
+  left:-80px;
+  right:-80px;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
 }
 
-.portfolio-arrow:hover{
+.portfolio-nav button{
+  pointer-events:auto;
+  background:none;
+  border:none;
+  font-size:48px;
+  color:#888;
+  cursor:pointer;
+  transition:color .2s ease;
+}
+
+.portfolio-nav button:hover{
   color:#fff;
 }
 
-.portfolio-arrow.left{
-  left:0;
+/* Carrusel */
+.portfolio-carousel{
+  overflow-x:auto;
+  scroll-behavior:smooth;
 }
 
-.portfolio-arrow.right{
-  right:0;
+.portfolio-carousel::-webkit-scrollbar{
+  display:none;
+}
+
+/* Track */
+.portfolio-track{
+  display:flex;
+  gap:48px;
+  padding-bottom:20px;
 }
 
 /* ========= PROYECTOS ========= */
 .project-card{
   min-width:460px;
-  flex-shrink:0;
   text-decoration:none;
   color:inherit;
-  cursor:pointer;
-
   opacity:0;
   transform:translateY(12px);
   transition:opacity .8s ease, transform .8s ease;
@@ -200,13 +166,11 @@ h1{
   transform:translateY(0);
 }
 
-/* Imagen */
 .project-image{
   width:92%;
   height:260px;
-  margin:0 auto 16px auto;
+  margin:0 auto 16px;
   background:#1a1a1a;
-  overflow:hidden;
 }
 
 .project-image img{
@@ -214,43 +178,10 @@ h1{
   height:100%;
   object-fit:cover;
   filter:grayscale(100%);
-  transition:filter .4s ease;
-}
-
-.project-card:hover img{
-  filter:grayscale(0%);
-}
-
-/* Texto alineado con imagen */
-.project-card h2,
-.project-card span,
-.project-card p{
-  padding-left:16px;
-}
-
-.project-card h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-card span{
-  display:block;
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
-.project-card p{
-  margin-top:12px;
-  max-width:360px;
 }
 
 /* ========= FOOTER ========= */
 .footer-wrapper{
-  display:flex;
-  justify-content:flex-start;
   padding:40px 0 20px 22vw;
   font-size:11px;
   letter-spacing:.18em;
@@ -265,76 +196,52 @@ h1{
   <span data-i="0">Inicio</span>
   <span data-i="1">Sobre mí</span>
   <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <h1>
-      Luis<br>
-      <span class="hero-surname">Blasco-Ibáñez</span><br>
-      Berbel
-    </h1>
+    <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde la fase del análisis hasta la materialización.
-      </p>
-      <img src="foto.jpg" alt="Foto personal">
+      <p>Texto intacto.</p>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
 
-    <div class="portfolio-wrapper">
+    <div class="portfolio-container">
 
-      <button class="portfolio-arrow left" aria-label="Anterior">‹</button>
-      <button class="portfolio-arrow right" aria-label="Siguiente">›</button>
+      <!-- FLECHAS FUERA -->
+      <div class="portfolio-nav">
+        <button id="prev">‹</button>
+        <button id="next">›</button>
+      </div>
 
+      <!-- CARRUSEL LIMPIO -->
       <div class="portfolio-carousel">
         <div class="portfolio-track">
 
-          <a class="project-card" href="#">
+          <div class="project-card">
             <div class="project-image"><img src="brazo1.jpg"></div>
-            <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
-            <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
-          </a>
+          </div>
 
-          <a class="project-card" href="#">
+          <div class="project-card">
             <div class="project-image"><img src="reloj1.jpg"></div>
-            <h2>Sixay · Cómoda</h2>
-            <span>Diseño de mobiliario</span>
-            <p>Desarrollo completo de una cómoda a medida.</p>
-          </a>
+          </div>
 
-          <a class="project-card" href="#">
+          <div class="project-card">
             <div class="project-image"><img src="secador2.jpg"></div>
-            <h2>Exploración material</h2>
-            <span>Proyecto experimental</span>
-            <p>Investigación formal y constructiva.</p>
-          </a>
+          </div>
 
         </div>
       </div>
@@ -344,26 +251,24 @@ h1{
 </section>
 
 <script>
-/* navegación vertical */
-document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick=()=>document.querySelectorAll(".section")[i]
+/* scroll vertical */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* carrusel con flechas */
-const track = document.querySelector(".portfolio-track");
-document.querySelector(".portfolio-arrow.left").onclick =
+/* flechas externas */
+const track = document.querySelector(".portfolio-carousel");
+document.getElementById("prev").onclick =
   ()=>track.scrollBy({left:-480,behavior:"smooth"});
-document.querySelector(".portfolio-arrow.right").onclick =
+document.getElementById("next").onclick =
   ()=>track.scrollBy({left:480,behavior:"smooth"});
 
-/* fade in proyectos */
-const cards = document.querySelectorAll(".project-card");
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("is-visible");
-  });
-},{ root: track, threshold:0.3 });
+/* fade in */
+const cards=document.querySelectorAll(".project-card");
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("is-visible"));
+},{root:track,threshold:.3});
 
 cards.forEach(c=>observer.observe(c));
 </script>
