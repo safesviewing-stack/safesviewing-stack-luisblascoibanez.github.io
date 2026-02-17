@@ -155,15 +155,18 @@ h1{
 .project-card{
   min-width:440px;
   flex-shrink:0;
+  cursor:pointer;
   transition:transform .35s ease;
 }
 
-/* Imagen proyecto */
+.project-card:hover{
+  transform:translateY(-4px);
+}
+
 .project-image{
   width:100%;
   height:240px;
   margin-bottom:16px;
-  background:#1a1a1a;
   overflow:hidden;
 }
 
@@ -171,25 +174,17 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
   filter:grayscale(100%) contrast(1.05);
   transition:filter .35s ease;
-}
-
-/* HOVER SUTIL */
-.project-card:hover{
-  transform:translateY(-4px);
 }
 
 .project-card:hover img{
   filter:grayscale(0%) contrast(1.1);
 }
 
-/* Texto proyecto */
 .project-card h2{
   font-size:28px;
   font-weight:400;
-  color:#f0f0f0;
 }
 
 .project-card span{
@@ -204,6 +199,51 @@ h1{
 .project-card p{
   margin-top:12px;
   max-width:360px;
+}
+
+/* ========= PROJECT OVERLAY ========= */
+.project-overlay{
+  position:fixed;
+  inset:0;
+  background:#0a0a0a;
+  z-index:200;
+  display:none;
+  overflow-y:auto;
+}
+
+.project-overlay.active{
+  display:block;
+}
+
+.project-content{
+  padding:160px 22vw 120px 22vw;
+}
+
+.project-content h1{
+  font-size:80px;
+}
+
+.project-content span{
+  display:block;
+  margin-top:12px;
+  font-size:13px;
+  letter-spacing:.25em;
+  color:#777;
+}
+
+.project-content p{
+  margin-top:32px;
+  max-width:680px;
+}
+
+.close-btn{
+  position:fixed;
+  top:40px;
+  right:40px;
+  font-size:12px;
+  letter-spacing:.2em;
+  cursor:pointer;
+  color:#aaa;
 }
 
 /* ========= FOOTER ========= */
@@ -250,18 +290,8 @@ h1{
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde la fase del análisis hasta la materialización.
-      </p>
-      <img src="foto.jpg" alt="Foto personal">
+      <p>…</p>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -274,50 +304,25 @@ h1{
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
 
-        <div class="project-card">
-          <div class="project-image">
-            <img src="brazo1.jpg" alt="Proyecto NODE">
-          </div>
+        <div class="project-card" data-title="NODE" data-type="Proyecto final de grado">
+          <div class="project-image"><img src="brazo1.jpg"></div>
           <h2>NODE</h2>
           <span>Proyecto final de grado</span>
-          <p>
-            Sistema modular de mobiliario orientado a la adaptabilidad espacial
-            y a la racionalización productiva.
-          </p>
+          <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
         </div>
 
-        <div class="project-card">
-          <div class="project-image">
-            <img src="reloj1.jpg" alt="Cómoda Sixay">
-          </div>
+        <div class="project-card" data-title="Sixay · Cómoda" data-type="Diseño de mobiliario">
+          <div class="project-image"><img src="reloj1.jpg"></div>
           <h2>Sixay · Cómoda</h2>
           <span>Diseño de mobiliario</span>
-          <p>
-            Desarrollo completo de una cómoda a medida,
-            desde el análisis hasta la fabricación.
-          </p>
+          <p>Desarrollo completo de una cómoda a medida.</p>
         </div>
 
-        <div class="project-card">
-          <div class="project-image">
-            <img src="secador2.jpg" alt="Exploración material">
-          </div>
+        <div class="project-card" data-title="Exploración material" data-type="Proyecto experimental">
+          <div class="project-image"><img src="secador2.jpg"></div>
           <h2>Exploración material</h2>
           <span>Proyecto experimental</span>
-          <p>
-            Investigación formal y constructiva aplicada
-            a un objeto de uso cotidiano.
-          </p>
-        </div>
-
-        <div class="project-card">
-          <div class="project-image"></div>
-          <h2>Proyecto conceptual</h2>
-          <span>Diseño de producto</span>
-          <p>
-            Desarrollo de una propuesta conceptual centrada
-            en el análisis del uso y la lógica constructiva.
-          </p>
+          <p>Investigación formal y constructiva.</p>
         </div>
 
       </div>
@@ -325,21 +330,46 @@ h1{
   </div>
 </section>
 
+<!-- PROJECT OVERLAY -->
+<div class="project-overlay" id="overlay">
+  <div class="close-btn" id="close">CERRAR</div>
+  <div class="project-content">
+    <h1 id="overlayTitle"></h1>
+    <span id="overlayType"></span>
+    <p>
+      Aquí irá el desarrollo completo del proyecto: contexto, proceso,
+      decisiones, imágenes, prototipos y conclusiones.
+    </p>
+  </div>
+</div>
+
 <script>
-/* NAV SCROLL */
+/* NAV */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
   });
 });
 
-/* SCROLL HORIZONTAL */
-const carousel = document.querySelector(".portfolio-carousel");
-carousel.addEventListener("wheel",(e)=>{
-  e.preventDefault();
-  carousel.scrollLeft += e.deltaY;
-},{ passive:false });
+/* OVERLAY */
+const cards = document.querySelectorAll(".project-card");
+const overlay = document.getElementById("overlay");
+const title = document.getElementById("overlayTitle");
+const type = document.getElementById("overlayType");
+const close = document.getElementById("close");
+
+cards.forEach(card=>{
+  card.addEventListener("click",()=>{
+    title.textContent = card.dataset.title;
+    type.textContent = card.dataset.type;
+    overlay.classList.add("active");
+  });
+});
+
+close.addEventListener("click",()=>overlay.classList.remove("active"));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") overlay.classList.remove("active");
+});
 </script>
 
 </body>
