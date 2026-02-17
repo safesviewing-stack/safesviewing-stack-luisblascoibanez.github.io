@@ -133,22 +133,7 @@ h1{
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
-  padding-right:120px;
-}
-
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(
-    to right,
-    rgba(10,10,10,0),
-    rgba(10,10,10,1)
-  );
+  padding:0 80px; /* espacio para flechas */
 }
 
 .portfolio-carousel{
@@ -157,19 +142,41 @@ h1{
   overflow-x:auto;
   padding-bottom:20px;
   scroll-behavior:smooth;
-
-  /* === SCROLLBAR RESTAURADO === */
-  scrollbar-width: thin;
-  scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
+/* ========= FLECHAS ========= */
+.carousel-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border:1px solid #444;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:#ddd;
+  font-size:18px;
+  background:rgba(10,10,10,.6);
+  backdrop-filter:blur(6px);
+  transition:background .3s ease, color .3s ease, border .3s ease;
+  z-index:10;
 }
 
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
+.carousel-arrow:hover{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+}
+
+.carousel-arrow.left{
+  left:16px;
+}
+
+.carousel-arrow.right{
+  right:16px;
 }
 
 /* ========= PROYECTO ========= */
@@ -268,20 +275,6 @@ h1{
   color:#aaa;
 }
 
-/* ========= FOOTER ========= */
-.footer-wrapper{
-  flex:1;
-  display:flex;
-  align-items:flex-end;
-  padding:0 0 20px 22vw;
-}
-
-.footer{
-  font-size:11px;
-  letter-spacing:.18em;
-  color:#cfcfcf;
-}
-
 </style>
 </head>
 
@@ -331,6 +324,10 @@ h1{
     <h1>Portfolio</h1>
 
     <div class="portfolio-wrapper">
+
+      <div class="carousel-arrow left">&#10094;</div>
+      <div class="carousel-arrow right">&#10095;</div>
+
       <div class="portfolio-carousel">
 
         <a href="node.html" class="project-card">
@@ -381,15 +378,12 @@ h1{
     <h1>CV</h1>
 
     <div class="cv-wrapper">
-
       <div class="cv-block">
         <h3>Formación</h3>
-
         <div class="cv-item">
           <strong>Ingeniería en Diseño Industrial</strong>
           <span>Universidad Politécnica de Valencia</span>
         </div>
-
         <div class="cv-item">
           <strong>Formación Profesional en Electricidad</strong>
           <span>España</span>
@@ -398,21 +392,17 @@ h1{
 
       <div class="cv-block">
         <h3>Experiencia</h3>
-
         <div class="cv-item">
           <strong>Diseño de mobiliario</strong>
           <span>Proyecto académico y profesional</span>
           <p>Desarrollo de producto, definición constructiva y resolución técnica.</p>
         </div>
-
         <div class="cv-item">
           <strong>Proyectos de diseño industrial</strong>
           <span>Universidad / Prácticas</span>
           <p>Proceso completo desde análisis hasta prototipado.</p>
         </div>
-
       </div>
-
     </div>
   </div>
 </section>
@@ -442,6 +432,16 @@ const observer = new IntersectionObserver((entries)=>{
 });
 
 cards.forEach(card=>observer.observe(card));
+
+const scrollAmount = 480;
+
+document.querySelector(".carousel-arrow.left").addEventListener("click",()=>{
+  carousel.scrollBy({ left:-scrollAmount, behavior:"smooth" });
+});
+
+document.querySelector(".carousel-arrow.right").addEventListener("click",()=>{
+  carousel.scrollBy({ left:scrollAmount, behavior:"smooth" });
+});
 </script>
 
 </body>
