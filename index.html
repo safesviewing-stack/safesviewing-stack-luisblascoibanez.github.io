@@ -137,6 +137,24 @@ h1{
   padding-right:120px;
 }
 
+/* FADE IZQUIERDO */
+.portfolio-wrapper::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  z-index:5;
+  background:linear-gradient(
+    to left,
+    rgba(10,10,10,0),
+    rgba(10,10,10,1)
+  );
+}
+
+/* FADE DERECHO */
 .portfolio-wrapper::after{
   content:"";
   position:absolute;
@@ -145,6 +163,7 @@ h1{
   width:120px;
   height:100%;
   pointer-events:none;
+  z-index:5;
   background:linear-gradient(
     to right,
     rgba(10,10,10,0),
