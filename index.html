@@ -67,14 +67,12 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS (EDITORIAL) ========= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
-
-  /* layout desplazado */
   padding:180px 10vw 160px 17vw;
 
   -webkit-mask-image:linear-gradient(
@@ -100,9 +98,9 @@ nav span{
   max-width:900px;
 }
 
-/* ========= HERO (EXCEPCIÓN) ========= */
+/* ========= HERO ========= */
 .section.hero{
-  padding:0;                     /* ⬅ anula desplazamiento */
+  padding:0;
   justify-content:center;
   align-items:center;
   text-align:center;
@@ -113,7 +111,7 @@ nav span{
 }
 
 .section.hero h1{
-  font-size:clamp(80px,7vw,140px);
+  font-size:clamp(68px,6vw,120px); /* ⬅ REDUCIDO */
 }
 
 .hero-sub{
@@ -173,7 +171,7 @@ p{
   font-weight:500;
 }
 
-/* ========= CONTACTO (CIERRE FINAL) ========= */
+/* ========= CONTACTO ========= */
 .section.contact{
   padding:180px 10vw 0 17vw;
   display:flex;
