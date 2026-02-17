@@ -22,21 +22,19 @@ body{
   background:#0a0a0a;
   color:#f5f5f5;
   overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  cursor:none; /* ocultamos cursor nativo */
+  cursor:none;
 }
 
-/* ========= CURSOR PERSONALIZADO ========= */
+/* ========= CURSOR ========= */
 .cursor{
   position:fixed;
-  width:10px;
-  height:10px;
-  border:1px solid #fff;
+  width:14px;
+  height:14px;
+  border:2px solid #fff;
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
-  z-index:1000;
-  mix-blend-mode:difference;
+  z-index:9999;
 }
 
 /* ========= NAV ========= */
@@ -67,7 +65,6 @@ nav span{
 /* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
-  scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
   padding:180px 10vw 160px 17vw;
@@ -77,7 +74,7 @@ nav span{
 .section-block{
   position:sticky;
   top:260px;
-  max-width:1000px;
+  max-width:1100px;
 }
 
 /* ========= HERO ========= */
@@ -95,7 +92,7 @@ nav span{
   font-size:clamp(100px,8.5vw,180px);
   font-weight:500;
   line-height:1;
-  white-space:nowrap; /* ⬅ UNA SOLA LÍNEA */
+  white-space:nowrap;
 }
 
 /* ========= TYPO ========= */
@@ -108,37 +105,33 @@ h1{
 p{
   font-size:15px;
   color:#aaa;
-  line-height:1.6;
+  line-height:1.55;
   text-align:justify;
 }
 
-/* ========= ABOUT ========= */
+/* ========= ABOUT (BLOQUE CLAVE) ========= */
 .about{
   display:flex;
+  align-items:stretch;          /* ⬅ MISMA ALTURA */
   gap:32px;
   margin-top:12px;
-  align-items:flex-start;
+  margin-left:-24px;            /* ⬅ DESPLAZADO A LA IZQUIERDA */
 }
 
 .about p{
-  max-width:620px;
-  margin-top:0;
+  max-width:640px;
+  margin:0;
+  display:flex;
+  align-items:flex-start;
 }
 
+/* La imagen define la altura del bloque */
 .about img{
   width:288px;
-  margin-left:24px;
-  margin-top:8px;
+  height:auto;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
-}
-
-/* ========= PORTFOLIO ========= */
-.project{
-  display:block;
-  margin-top:36px;
-  text-decoration:none;
-  color:inherit;
+  flex-shrink:0;
 }
 
 /* ========= CONTACTO ========= */
@@ -171,7 +164,6 @@ p{
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor"></div>
 
 <nav>
@@ -196,36 +188,11 @@ p{
 
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño.
-        <br><br>
-        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
-        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
-        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
-        aportado una base técnica sólida y una forma de pensar práctica.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia, con una formación híbrida que combina una base técnica sólida —reforzada por una FP en electricidad— y una aproximación al diseño más conceptual y estructural. No me considero una persona enfocada en un único campo, sino alguien con un perfil ecléctico, flexible y adaptable a distintos entornos de trabajo, capaz de moverme entre lo técnico y lo creativo sin encasillarme en ninguno de los extremos. He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciarlos en la Universitat Jaume I de Castellón, y ampliarlos mediante un programa Erasmus en la Middlesex University de Londres, lo que me ha permitido desarrollar una visión abierta del diseño como proceso, entendiendo cada proyecto como un equilibrio entre contexto, decisiones y producción final.
       </p>
 
       <img src="foto.jpg" alt="Foto personal">
     </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Portfolio</h1>
-    <a class="project" href="#">NODE — Sistema modular</a>
-  </div>
-</section>
-
-<!-- CV -->
-<section class="section">
-  <div class="section-block">
-    <h1>CV</h1>
-    <p>UPV · UJI · Middlesex University · Sixay</p>
   </div>
 </section>
 
@@ -246,44 +213,20 @@ p{
 <script>
 /* ========= CURSOR ========= */
 const cursor = document.querySelector(".cursor");
-let x = 0, y = 0, mx = 0, my = 0;
+let mx=0,my=0,x=0,y=0;
 
-window.addEventListener("mousemove", e => {
-  mx = e.clientX;
-  my = e.clientY;
+window.addEventListener("mousemove",e=>{
+  mx=e.clientX;
+  my=e.clientY;
 });
 
-function animateCursor(){
-  x += (mx - x) * 0.2;
-  y += (my - y) * 0.2;
+(function animate(){
+  x += (mx - x) * 0.25;
+  y += (my - y) * 0.25;
   cursor.style.left = x + "px";
-  cursor.style.top = y + "px";
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-/* ========= NAV ========= */
-const buttons = document.querySelectorAll("nav span");
-const sections = document.querySelectorAll(".section");
-
-buttons.forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const index = btn.dataset.index;
-
-    if(index === "4"){
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-      });
-      return;
-    }
-
-    sections[index].scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
-});
+  cursor.style.top  = y + "px";
+  requestAnimationFrame(animate);
+})();
 </script>
 
 </body>
