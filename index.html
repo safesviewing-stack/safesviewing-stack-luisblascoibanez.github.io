@@ -7,7 +7,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <style>
 
@@ -40,7 +39,7 @@ body{
   z-index:1000;
 }
 
-/* ===== HEADER ===== */
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:0;
@@ -52,7 +51,7 @@ nav{
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,0.4);
+  background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
   z-index:100;
 }
@@ -63,8 +62,7 @@ nav span{
   text-transform:uppercase;
   color:#ccc;
   cursor:pointer;
-  transition:.4s;
-  padding-top:6px;
+  transition:.3s;
 }
 
 nav span:hover{ color:#fff; }
@@ -73,30 +71,10 @@ nav span:hover{ color:#fff; }
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
   padding:120px 10% 0;
 }
 
-/* ===== HERO ===== */
-.section:first-of-type .content-center{
-  margin-top:-70px;
-}
-
-/* ===== CONTACTO ===== */
-.section.contact{
-  padding-top:120px;
-}
-
-.section.contact .content-left{
-  margin-top:-165px;
-}
-
-.section.contact h1{
-  margin-top:62px;
-}
-
-/* ===== CONTENT ===== */
 .content-center{
   max-width:900px;
   margin-left:1vw;
@@ -106,6 +84,20 @@ nav span:hover{ color:#fff; }
   max-width:900px;
   width:100%;
   margin-left:6vw;
+}
+
+/* ===== HERO ===== */
+.section:first-of-type .content-center{
+  margin-top:-70px;
+}
+
+/* ===== CONTACT ===== */
+.section.contact .content-left{
+  margin-top:-165px;
+}
+
+.section.contact h1{
+  margin-top:62px;
 }
 
 /* ===== TYPO ===== */
@@ -129,10 +121,6 @@ p{
 }
 
 /* ===== ABOUT ===== */
-.about{
-  display:block;
-}
-
 .about-content{
   display:flex;
   gap:32px;
@@ -149,7 +137,7 @@ p{
 .about-photo img{
   width:288px;
   filter:grayscale(100%) contrast(1.05);
-  opacity:0.9;
+  opacity:.9;
 }
 
 /* ===== PORTFOLIO ===== */
@@ -159,12 +147,6 @@ p{
   flex-direction:column;
   gap:36px;
   max-width:700px;
-}
-
-.project{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
 }
 
 .project span{
@@ -185,7 +167,7 @@ p{
   max-width:520px;
 }
 
-/* ===== CONTACT ===== */
+/* ===== CONTACT LIST ===== */
 .contact-list{
   margin-top:22px;
   display:flex;
@@ -217,8 +199,8 @@ p{
 
 .reveal.visible{
   opacity:1;
-  transform:translateY(0);
-  filter:blur(0);
+  transform:none;
+  filter:none;
 }
 
 /* ===== FOOTER ===== */
@@ -248,25 +230,30 @@ footer{
 <!-- INICIO -->
 <section class="section">
   <div class="content-center">
-    <h1 id="heroTitle"></h1>
+    <h1 id="heroTitle">Industrial Design</h1>
     <p class="reveal">Diseño industrial con enfoque arquitectónico y precisión estructural.</p>
   </div>
 </section>
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="content-left about">
+  <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
 
     <div class="about-content">
       <div class="about-text reveal">
         <p>
-          Ingeniero en diseño industrial de 24 años, con base en Valencia. Me considero una persona
-          ecléctica y flexible, capaz de adaptarse a distintos entornos. No me sitúo ni en un extremo
-          puramente artístico ni estrictamente técnico, sino en un punto intermedio. He estudiado en
-          la UPV, con formación inicial en la UJI y un Erasmus en Middlesex University. Cuento además
-          con una FP en electricidad. Disfruto del proceso de diseño desde lo conceptual hasta la
-          producción final, con soluciones consistentes.
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+          enfocada en un campo fijo, sino alguien con un perfil ecléctico y flexible, capaz de adaptarse
+          a distintos entornos y contextos profesionales. No me sitúo ni en un extremo puramente
+          artístico ni estrictamente técnico, sino en un punto intermedio que me permite comprender y
+          conectar ambas dimensiones del diseño.
+          <br><br>
+          He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
+          en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
+          University de Londres. Cuento además con una formación profesional en electricidad, que me ha
+          aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+          desde lo conceptual hasta la producción final, con soluciones consistentes.
         </p>
       </div>
 
@@ -287,19 +274,19 @@ footer{
       <div class="project reveal">
         <span>Producto · Sistema</span>
         <h3>NODE — Sistema modular</h3>
-        <p>Sistema modular desarrollado como proyecto final, enfocado en estructura y fabricación.</p>
+        <p>Proyecto final centrado en estructura, modularidad y fabricación.</p>
       </div>
 
       <div class="project reveal">
         <span>Mobiliario · A medida</span>
         <h3>Sixay — Cómoda personalizada</h3>
-        <p>Proyecto real de diseño y producción durante prácticas profesionales.</p>
+        <p>Diseño y desarrollo de mobiliario para cliente real.</p>
       </div>
 
       <div class="project reveal">
         <span>Investigación · Tecnología</span>
-        <h3>Impresión 3D aplicada al producto</h3>
-        <p>Exploración de fabricación aditiva aplicada a producto industrial.</p>
+        <h3>Impresión 3D aplicada</h3>
+        <p>Exploración de fabricación aditiva en producto industrial.</p>
       </div>
     </div>
   </div>
@@ -337,37 +324,40 @@ footer{
 </footer>
 
 <script>
+
+/* ===== ENTRADA ===== */
 window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
+/* ===== CURSOR ===== */
 const cursor=document.querySelector(".cursor");
 let mx=0,my=0,x=0,y=0;
 addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
-(function animate(){
-  x+=(mx-x)*0.2; y+=(my-y)*0.2;
+(function loop(){
+  x+=(mx-x)*.2; y+=(my-y)*.2;
   cursor.style.left=x+"px"; cursor.style.top=y+"px";
-  requestAnimationFrame(animate);
+  requestAnimationFrame(loop);
 })();
 
-const hero=document.getElementById("heroTitle");
-"Industrial Design".split("").forEach((c,i)=>{
-  const s=document.createElement("span");
-  s.textContent=c;
-  s.style.opacity=0;
-  s.style.transform="translateY(40px)";
-  s.style.transition=`.5s ${i*0.03}s`;
-  hero.appendChild(s);
-});
-setTimeout(()=>{
-  hero.querySelectorAll("span").forEach(s=>{
-    s.style.opacity=1;
-    s.style.transform="translateY(0)";
-  });
-},200);
-
-const observer=new IntersectionObserver(entries=>{
+/* ===== REVEAL ===== */
+const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
 },{threshold:.2});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+/* ===== NAVIGATION ===== */
+document.querySelectorAll("nav span").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const index=parseInt(btn.dataset.scroll);
+    const sections=document.querySelectorAll(".section");
+    const offset=180;
+
+    window.scrollTo({
+      top:sections[index].offsetTop-offset,
+      behavior:"smooth"
+    });
+  });
+});
+
 </script>
 
 </body>
