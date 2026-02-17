@@ -77,9 +77,7 @@ nav span{
   margin-left:-4px;
 }
 
-.hero-surname{
-  white-space:nowrap;
-}
+.hero-surname{ white-space:nowrap; }
 
 .hero-sub{
   margin-top:24px;
@@ -114,9 +112,7 @@ h1{
   margin-top:12px;
 }
 
-.about p{
-  max-width:700px;
-}
+.about p{ max-width:700px; }
 
 .about img{
   width:300px;
@@ -144,11 +140,7 @@ h1{
   width:120px;
   height:100%;
   pointer-events:none;
-  background:linear-gradient(
-    to right,
-    rgba(10,10,10,0),
-    rgba(10,10,10,1)
-  );
+  background:linear-gradient(to right, rgba(10,10,10,0), rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
@@ -161,10 +153,7 @@ h1{
   scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
+.portfolio-carousel::-webkit-scrollbar{ height:6px; }
 .portfolio-carousel::-webkit-scrollbar-thumb{
   background:#444;
   border-radius:6px;
@@ -186,13 +175,7 @@ h1{
   transform:translateY(0);
 }
 
-.project-card:hover{
-  transform:translateY(-4px);
-}
-
-.project-inner{
-  width:100%;
-}
+.project-card:hover{ transform:translateY(-4px); }
 
 .project-image{
   height:260px;
@@ -207,23 +190,7 @@ h1{
   transition:transform .4s ease;
 }
 
-.project-card:hover .project-image img{
-  transform:scale(1.03);
-}
-
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  display:block;
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
+.project-card:hover img{ transform:scale(1.03); }
 
 /* ========= CV ========= */
 .cv-wrapper{
@@ -231,6 +198,17 @@ h1{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:80px;
+}
+
+.cv-block{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+
+.cv-block.is-visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .cv-block h3{
@@ -242,7 +220,12 @@ h1{
 }
 
 .cv-item{
-  margin-bottom:24px;
+  margin-bottom:20px;
+  transition:transform .3s ease, color .3s ease;
+}
+
+.cv-item:hover{
+  transform:translateX(6px);
 }
 
 .cv-item strong{
@@ -287,11 +270,7 @@ h1{
 
 <section class="section hero">
   <div class="section-block">
-    <h1>
-      Luis<br>
-      <span class="hero-surname">Blasco-Ibáñez</span><br>
-      Berbel
-    </h1>
+    <h1>Luis<br><span class="hero-surname">Blasco-Ibáñez</span><br>Berbel</h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
   </div>
 </section>
@@ -301,17 +280,11 @@ h1{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde la fase del análisis hasta la materialización.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico, flexible y
+        adaptable, situado entre lo técnico y lo conceptual. Disfruto del proceso completo de diseño,
+        desde el análisis hasta la materialización.
       </p>
-      <img src="foto.jpg" alt="Foto personal">
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -321,39 +294,8 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-
-        <a href="node.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image"><img src="brazo1.jpg"></div>
-            <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
-          </div>
-        </a>
-
-        <a href="sixay.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image"><img src="reloj1.jpg"></div>
-            <h2>Sixay · Cómoda</h2>
-            <span>Diseño de mobiliario</span>
-          </div>
-        </a>
-
-        <a href="exploracion.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image"><img src="secador2.jpg"></div>
-            <h2>Exploración material</h2>
-            <span>Proyecto experimental</span>
-          </div>
-        </a>
-
-        <a href="conceptual.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image"></div>
-            <h2>Proyecto conceptual</h2>
-            <span>Diseño de producto</span>
-          </div>
-        </a>
-
+        <a href="#" class="project-card"><div class="project-image"></div></a>
+        <a href="#" class="project-card"><div class="project-image"></div></a>
       </div>
     </div>
   </div>
@@ -364,33 +306,17 @@ h1{
     <h1>CV</h1>
 
     <div class="cv-wrapper">
-
       <div class="cv-block">
         <h3>Formación</h3>
-        <div class="cv-item">
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Jaume I · Castellón</span>
-        </div>
-        <div class="cv-item">
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universidad Politécnica de Valencia</span>
-        </div>
-        <div class="cv-item">
-          <strong>Programa Erasmus</strong>
-          <span>Londres</span>
-        </div>
+        <div class="cv-item"><strong>UJI</strong><span>Castellón</span></div>
+        <div class="cv-item"><strong>UPV</strong><span>Valencia</span></div>
+        <div class="cv-item"><strong>Erasmus</strong><span>Londres</span></div>
       </div>
 
       <div class="cv-block">
         <h3>Experiencia</h3>
-        <div class="cv-item">
-          <strong>Sector eléctrico</strong>
-          <span>Autrial</span>
-        </div>
-        <div class="cv-item">
-          <strong>Sector eléctrico</strong>
-          <span>Elecnor</span>
-        </div>
+        <div class="cv-item"><strong>Autrial</strong><span>Sector eléctrico</span></div>
+        <div class="cv-item"><strong>Elecnor</strong><span>Sector eléctrico</span></div>
       </div>
 
       <div class="cv-block">
@@ -402,15 +328,10 @@ h1{
 
       <div class="cv-block">
         <h3>Software</h3>
-        <div class="cv-item"><strong>Rhinoceros</strong></div>
-        <div class="cv-item"><strong>AutoCAD</strong></div>
-        <div class="cv-item"><strong>Inventor</strong></div>
-        <div class="cv-item"><strong>SolidWorks</strong></div>
-        <div class="cv-item"><strong>Fusion 360</strong></div>
-        <div class="cv-item"><strong>Sinutrain</strong></div>
-        <div class="cv-item"><strong>3ds Max</strong></div>
+        <div class="cv-item"><strong>Rhino · AutoCAD · Inventor</strong></div>
+        <div class="cv-item"><strong>SolidWorks · Fusion 360</strong></div>
+        <div class="cv-item"><strong>Sinutrain · 3ds Max</strong></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -418,21 +339,24 @@ h1{
 <script>
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
   });
 });
 
+/* Portfolio animation */
 const carousel=document.querySelector(".portfolio-carousel");
 const cards=document.querySelectorAll(".project-card");
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    entry.target.classList.toggle("is-visible",entry.isIntersecting);
-  });
+const cardObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{root:carousel,threshold:0.3});
+cards.forEach(c=>cardObserver.observe(c));
 
-cards.forEach(card=>observer.observe(card));
+/* CV animation */
+const cvBlocks=document.querySelectorAll(".cv-block");
+const cvObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:0.3});
+cvBlocks.forEach(b=>cvObserver.observe(b));
 </script>
 
 </body>
