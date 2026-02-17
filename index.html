@@ -103,19 +103,21 @@ nav span:hover{ color:#fff; }
   padding:120px 10% 0;
 }
 
-.content-center{
-  max-width:900px;
-  margin-left:1vw;
-}
-
+/* desplazamiento general a la derecha */
 .content-left{
   max-width:900px;
-  margin-left:6vw;
+  margin-left:10vw;
+}
+
+.content-center{
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
 }
 
 /* ================= HERO ================= */
-.section:first-of-type .content-center{
-  margin-top:-70px;
+.section:first-of-type{
+  justify-content:center;
 }
 
 .hero-sub{
@@ -145,6 +147,10 @@ p{
 .about-content{
   display:flex;
   gap:32px;
+}
+
+.about-text{
+  max-width:480px;
 }
 
 .about-photo{
@@ -263,6 +269,16 @@ p{
   text-decoration:none;
 }
 
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:64px 0 96px;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#cfcfcf;
+  border-top:1px solid #1c1c1c;
+}
+
 /* ================= REVEAL ================= */
 .reveal{
   opacity:0;
@@ -308,16 +324,26 @@ p{
 <section class="section">
   <div class="content-left">
     <h1 class="reveal">Sobre mí</h1>
+
     <div class="about-content">
-      <p class="reveal">
-        Ingeniero en diseño industrial con perfil ecléctico y adaptable. No me sitúo
-        en un extremo artístico ni técnico, sino en un punto intermedio que conecta
-        ambos. Formación en la UPV, inicio en la UJI y Erasmus en Middlesex University.
-        FP en electricidad como base técnica. Disfruto del diseño desde lo conceptual
-        hasta la producción final, con soluciones consistentes.
-      </p>
+      <div class="about-text reveal">
+        <p>
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+          enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+          a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+          ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+          ambas dimensiones del diseño.
+          <br><br>
+          He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
+          en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
+          University de Londres. Cuento además con una formación profesional en electricidad, que me ha
+          aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+          desde lo conceptual hasta la producción final, con soluciones consistentes.
+        </p>
+      </div>
+
       <div class="about-photo reveal">
-        <img src="foto.jpg">
+        <img src="foto.jpg" alt="Foto personal">
       </div>
     </div>
   </div>
@@ -379,6 +405,7 @@ p{
 <section class="section contact">
   <div class="content-left">
     <h1 class="reveal">Contacto</h1>
+
     <div class="contact-list reveal">
       <a href="mailto:luisblascoibanezberbel@gmail.com">Email</a>
       <a href="tel:+34630511806">Teléfono</a>
@@ -397,26 +424,14 @@ window.addEventListener("load",()=>{ document.body.style.opacity="1"; });
 
 /* CURSOR */
 const cursor=document.querySelector(".cursor");
-const cursorText=cursor.querySelector("span");
 let mx=0,my=0,x=0,y=0;
-
 addEventListener("mousemove",e=>{ mx=e.clientX; my=e.clientY; });
-
 (function loop(){
   x+=(mx-x)*.2; y+=(my-y)*.2;
   cursor.style.left=x+"px";
   cursor.style.top=y+"px";
   requestAnimationFrame(loop);
 })();
-
-document.querySelectorAll(".project").forEach(p=>{
-  p.addEventListener("mouseenter",()=>{
-    cursor.classList.add("active");
-  });
-  p.addEventListener("mouseleave",()=>{
-    cursor.classList.remove("active");
-  });
-});
 
 /* REVEAL */
 const obs=new IntersectionObserver(entries=>{
@@ -427,8 +442,12 @@ document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 /* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.addEventListener("click",()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth",block:"start"});
+    if(i===4){
+      window.scrollTo({ top:document.body.scrollHeight, behavior:"smooth" });
+    }else{
+      document.querySelectorAll(".section")[i]
+        .scrollIntoView({behavior:"smooth",block:"start"});
+    }
   });
 });
 </script>
