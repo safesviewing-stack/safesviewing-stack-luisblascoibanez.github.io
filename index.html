@@ -71,53 +71,43 @@ nav span{
 .section{
   min-height:100vh;
   scroll-snap-align:start;
-  display:grid;
-  grid-template-columns:240px 1fr;
-  padding:140px 8vw 140px;
+  display:flex;
+  justify-content:flex-start;
+  padding:140px 10vw;
   
-  /* 🔥 FADING MASK */
+  /* fade arriba / abajo */
   -webkit-mask-image:linear-gradient(
     to bottom,
     transparent 0%,
-    black 15%,
-    black 85%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
   mask-image:linear-gradient(
     to bottom,
     transparent 0%,
-    black 15%,
-    black 85%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
 }
 
-/* ========== TITLE COLUMN ========== */
-.section-title{
+/* ========== SECTION BLOCK (KEY) ========== */
+.section-block{
   position:sticky;
-  top:160px;
-  height:fit-content;
-}
-
-.section-title h1{
-  font-size:clamp(70px,6vw,120px);
-  font-weight:500;
-  line-height:1.05;
-}
-
-/* ========== CONTENT COLUMN ========== */
-.section-content{
-  padding-left:80px;
-  max-width:720px;
+  top:140px;
+  max-width:900px;
 }
 
 /* ========== HERO ========== */
 .hero{
-  display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  grid-template-columns:1fr;
+}
+
+.hero .section-block{
+  position:static;
 }
 
 .hero h1{
@@ -131,8 +121,15 @@ nav span{
   color:#777;
 }
 
-/* ========== TEXT ========== */
+/* ========== TYPO ========== */
+h1{
+  font-size:clamp(70px,6vw,120px);
+  font-weight:500;
+  line-height:1.05;
+}
+
 p{
+  margin-top:24px;
   font-size:15px;
   color:#aaa;
   max-width:520px;
@@ -144,6 +141,7 @@ p{
 .about{
   display:flex;
   gap:32px;
+  margin-top:24px;
 }
 
 .about img{
@@ -155,7 +153,7 @@ p{
 /* ========== PORTFOLIO ========== */
 .project{
   display:block;
-  margin-bottom:44px;
+  margin-top:32px;
   text-decoration:none;
   color:inherit;
 }
@@ -207,7 +205,7 @@ footer{
 
 <!-- HERO -->
 <section class="section hero">
-  <div>
+  <div class="section-block">
     <h1>Industrial Design</h1>
     <div class="hero-sub">Structure · Process · Clarity</div>
   </div>
@@ -215,30 +213,34 @@ footer{
 
 <!-- SOBRE MI -->
 <section class="section">
-  <div class="section-title">
+  <div class="section-block">
     <h1>Sobre mí</h1>
-  </div>
 
-  <div class="section-content">
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        flexible y adaptable. Formación en la UPV, inicio en la UJI y Erasmus en Middlesex
-        University. FP en electricidad como base técnica. Diseño desde lo conceptual hasta
-        la producción final, con soluciones consistentes.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño.
+        <br><br>
+        He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación
+        en la Universitat Jaume I de Castellón, y completarlos con un programa Erasmus en la Middlesex
+        University de Londres. Cuento además con una formación profesional en electricidad, que me ha
+        aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+        desde lo conceptual hasta la producción final, con soluciones consistentes.
       </p>
-      <img src="foto.jpg">
+
+      <img src="foto.jpg" alt="Foto personal">
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="section">
-  <div class="section-title">
+  <div class="section-block">
     <h1>Portfolio</h1>
-  </div>
 
-  <div class="section-content">
     <a class="project" href="node.html">
       <span>Proyecto principal</span>
       <h3>NODE — Sistema modular</h3>
@@ -253,22 +255,16 @@ footer{
 
 <!-- CV -->
 <section class="section">
-  <div class="section-title">
+  <div class="section-block">
     <h1>CV</h1>
-  </div>
-
-  <div class="section-content">
     <p>UPV · UJI · Middlesex University · Sixay</p>
   </div>
 </section>
 
 <!-- CONTACTO -->
 <section class="section">
-  <div class="section-title">
+  <div class="section-block">
     <h1>Contacto</h1>
-  </div>
-
-  <div class="section-content">
     <p>Email · Teléfono · LinkedIn</p>
   </div>
 </section>
@@ -295,7 +291,7 @@ addEventListener("mousemove",e=>{
   requestAnimationFrame(loop);
 })();
 
-/* NAVIGATION */
+/* NAV */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
