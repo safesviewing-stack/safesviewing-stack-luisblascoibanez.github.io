@@ -17,10 +17,6 @@
   font-family:"Inter",sans-serif;
 }
 
-:root{
-  --ease:cubic-bezier(.2,.7,.1,1);
-}
-
 /* ========= BODY ========= */
 body{
   background:#0a0a0a;
@@ -133,7 +129,7 @@ p{
 .about img{
   width:260px;
   height:340px;
-  margin-top:12px;          /* ⬅ un poquitín más arriba */
+  margin-top:20px;
   object-fit:cover;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
@@ -160,7 +156,7 @@ p{
   font-weight:500;
 }
 
-/* ========= CONTACTO ========= */
+/* ========= CONTACT ========= */
 .section.contact{
   padding:180px 10vw 0 22vw;
   display:flex;
@@ -171,19 +167,19 @@ p{
   position:static;
 }
 
+/* ========= FOOTER ========= */
 .footer-wrapper{
   flex:1;
   display:flex;
   align-items:flex-end;
-  justify-content:center;
-  padding-bottom:20px;
+  justify-content:flex-start;     /* ⬅ más a la izquierda */
+  padding:0 0 20px 22vw;          /* ⬅ alineado con columna */
 }
 
 .footer{
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
-  text-align:center;
 }
 
 /* ========= REDUCED MOTION ========= */
@@ -233,14 +229,32 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
+
     <a class="project" href="node.html">
       <span>Proyecto principal</span>
       <h3>NODE — Sistema modular</h3>
     </a>
+
     <a class="project" href="sixay.html">
       <span>Mobiliario</span>
       <h3>Sixay — Cómoda personalizada</h3>
     </a>
+
+    <a class="project" href="#">
+      <span>Producto</span>
+      <h3>Luminaria técnica — Desarrollo conceptual</h3>
+    </a>
+
+    <a class="project" href="#">
+      <span>Exploración</span>
+      <h3>Sistema de ensamblaje sin fijaciones</h3>
+    </a>
+
+    <a class="project" href="#">
+      <span>Investigación</span>
+      <h3>Materiales y procesos industriales</h3>
+    </a>
+
   </div>
 </section>
 
@@ -248,7 +262,9 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-    <p>UPV · UJI · Middlesex University · Sixay</p>
+    <p>
+      Formación en Ingeniería en Diseño Industrial en la Universidad Politécnica de Valencia, con inicio en la Universitat Jaume I de Castellón y experiencia internacional mediante programa Erasmus en Middlesex University (Londres). Formación profesional previa en electricidad, con enfoque técnico y práctico. Experiencia en desarrollo de producto, mobiliario a medida, conceptualización, modelado 3D, prototipado y procesos industriales. Interés especial en sistemas constructivos, diseño racional y soluciones estructuralmente coherentes.
+    </p>
   </div>
 </section>
 
@@ -256,7 +272,9 @@ p{
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
-    <p>Email · Teléfono · LinkedIn</p>
+    <p>
+      Actualmente disponible para oportunidades profesionales, prácticas o colaboraciones relacionadas con diseño industrial, desarrollo de producto y sistemas. Interesado en entornos donde el proceso, la estructura y la claridad conceptual sean parte central del trabajo. Para contacto directo, propuestas o más información, puedes escribirme o encontrarme en LinkedIn.
+    </p>
   </div>
 
   <div class="footer-wrapper">
