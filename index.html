@@ -258,13 +258,6 @@ h1{
   margin-top:2px;
 }
 
-.cv-item p{
-  margin-top:6px;
-  padding-left:0;
-  font-size:14px;
-  color:#aaa;
-}
-
 /* ========= FOOTER ========= */
 .footer-wrapper{
   flex:1;
@@ -326,15 +319,12 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
 
         <a href="node.html" class="project-card">
           <div class="project-inner">
-            <div class="project-image">
-              <img src="brazo1.jpg" alt="Proyecto NODE">
-            </div>
+            <div class="project-image"><img src="brazo1.jpg"></div>
             <h2>NODE</h2>
             <span>Proyecto final de grado</span>
           </div>
@@ -342,9 +332,7 @@ h1{
 
         <a href="sixay.html" class="project-card">
           <div class="project-inner">
-            <div class="project-image">
-              <img src="reloj1.jpg" alt="Cómoda Sixay">
-            </div>
+            <div class="project-image"><img src="reloj1.jpg"></div>
             <h2>Sixay · Cómoda</h2>
             <span>Diseño de mobiliario</span>
           </div>
@@ -352,9 +340,7 @@ h1{
 
         <a href="exploracion.html" class="project-card">
           <div class="project-inner">
-            <div class="project-image">
-              <img src="secador2.jpg" alt="Exploración material">
-            </div>
+            <div class="project-image"><img src="secador2.jpg"></div>
             <h2>Exploración material</h2>
             <span>Proyecto experimental</span>
           </div>
@@ -382,55 +368,35 @@ h1{
       <div class="cv-block">
         <h3>Formación</h3>
         <div class="cv-item">
-          <strong>Ingeniería en Diseño Industrial</strong>
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>Universitat Jaume I · Castellón</span>
+        </div>
+        <div class="cv-item">
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
           <span>Universidad Politécnica de Valencia</span>
         </div>
         <div class="cv-item">
           <strong>Programa Erasmus</strong>
-          <span>Middlesex University · Londres</span>
-        </div>
-        <div class="cv-item">
-          <strong>Formación Profesional en Electricidad</strong>
-          <span>España</span>
-        </div>
-      </div>
-
-      <div class="cv-block">
-        <h3>Experiencia</h3>
-        <div class="cv-item">
-          <strong>Diseño de mobiliario</strong>
-          <span>Proyecto académico y profesional</span>
-          <p>Desarrollo de producto, definición constructiva y resolución técnica.</p>
-        </div>
-        <div class="cv-item">
-          <strong>Proyectos de diseño industrial</strong>
-          <span>Universidad / Prácticas</span>
-          <p>Proceso completo desde análisis hasta prototipado.</p>
+          <span>Londres</span>
         </div>
       </div>
 
       <div class="cv-block">
         <h3>Idiomas</h3>
-        <div class="cv-item">
-          <strong>Español</strong>
-          <span>Nativo</span>
-        </div>
-        <div class="cv-item">
-          <strong>Inglés</strong>
-          <span>Avanzado</span>
-        </div>
+        <div class="cv-item"><strong>Español</strong><span>Nativo</span></div>
+        <div class="cv-item"><strong>Inglés</strong><span>Avanzado</span></div>
+        <div class="cv-item"><strong>Húngaro</strong><span>Nativo</span></div>
       </div>
 
       <div class="cv-block">
         <h3>Software</h3>
-        <div class="cv-item">
-          <strong>Rhinoceros · Fusion 360</strong>
-          <span>Modelado y desarrollo de producto</span>
-        </div>
-        <div class="cv-item">
-          <strong>KeyShot · Adobe Suite</strong>
-          <span>Visualización y comunicación</span>
-        </div>
+        <div class="cv-item"><strong>Rhinoceros</strong></div>
+        <div class="cv-item"><strong>AutoCAD</strong></div>
+        <div class="cv-item"><strong>Inventor</strong></div>
+        <div class="cv-item"><strong>SolidWorks</strong></div>
+        <div class="cv-item"><strong>Fusion 360</strong></div>
+        <div class="cv-item"><strong>Sinutrain</strong></div>
+        <div class="cv-item"><strong>3ds Max</strong></div>
       </div>
 
     </div>
@@ -445,21 +411,14 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
   });
 });
 
-const carousel = document.querySelector(".portfolio-carousel");
-const cards = document.querySelectorAll(".project-card");
+const carousel=document.querySelector(".portfolio-carousel");
+const cards=document.querySelectorAll(".project-card");
 
-const observer = new IntersectionObserver((entries)=>{
+const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("is-visible");
-    }else{
-      entry.target.classList.remove("is-visible");
-    }
+    entry.target.classList.toggle("is-visible",entry.isIntersecting);
   });
-},{
-  root:carousel,
-  threshold:0.3
-});
+},{root:carousel,threshold:0.3});
 
 cards.forEach(card=>observer.observe(card));
 </script>
