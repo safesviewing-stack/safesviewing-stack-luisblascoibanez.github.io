@@ -132,39 +132,54 @@ h1{
 .portfolio-wrapper{
   position:relative;
   margin-top:32px;
-  padding-right:120px;
 }
 
-/* Gradiente derecho (hint de scroll) */
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(
-    to right,
-    rgba(10,10,10,0),
-    rgba(10,10,10,1)
-  );
-}
-
-/* Carrusel SIN flechas */
+/* Carrusel */
 .portfolio-carousel{
+  position:relative;
+  display:flex;
+  gap:48px;
+  overflow-x:hidden;
+  padding-bottom:20px;
+}
+
+/* Track real (scrollable) */
+.portfolio-track{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:20px;
   scroll-behavior:smooth;
-  margin-left:-12px;
-
   scrollbar-width:none;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
+.portfolio-track::-webkit-scrollbar{
   display:none;
+}
+
+/* ========= FLECHAS ========= */
+.portfolio-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:#888;
+  font-size:42px;
+  cursor:pointer;
+  z-index:50;
+  transition:color .2s ease, opacity .2s ease;
+}
+
+.portfolio-arrow:hover{
+  color:#fff;
+}
+
+.portfolio-arrow.left{
+  left:0;
+}
+
+.portfolio-arrow.right{
+  right:0;
 }
 
 /* ========= PROYECTOS ========= */
@@ -293,60 +308,64 @@ h1{
     <h1>Portfolio</h1>
 
     <div class="portfolio-wrapper">
+
+      <button class="portfolio-arrow left" aria-label="Anterior">‹</button>
+      <button class="portfolio-arrow right" aria-label="Siguiente">›</button>
+
       <div class="portfolio-carousel">
+        <div class="portfolio-track">
 
-        <a class="project-card" href="#">
-          <div class="project-image"><img src="brazo1.jpg" alt=""></div>
-          <h2>NODE</h2>
-          <span>Proyecto final de grado</span>
-          <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
-        </a>
+          <a class="project-card" href="#">
+            <div class="project-image"><img src="brazo1.jpg"></div>
+            <h2>NODE</h2>
+            <span>Proyecto final de grado</span>
+            <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
+          </a>
 
-        <a class="project-card" href="#">
-          <div class="project-image"><img src="reloj1.jpg" alt=""></div>
-          <h2>Sixay · Cómoda</h2>
-          <span>Diseño de mobiliario</span>
-          <p>Desarrollo completo de una cómoda a medida.</p>
-        </a>
+          <a class="project-card" href="#">
+            <div class="project-image"><img src="reloj1.jpg"></div>
+            <h2>Sixay · Cómoda</h2>
+            <span>Diseño de mobiliario</span>
+            <p>Desarrollo completo de una cómoda a medida.</p>
+          </a>
 
-        <a class="project-card" href="#">
-          <div class="project-image"><img src="secador2.jpg" alt=""></div>
-          <h2>Exploración material</h2>
-          <span>Proyecto experimental</span>
-          <p>Investigación formal y constructiva.</p>
-        </a>
+          <a class="project-card" href="#">
+            <div class="project-image"><img src="secador2.jpg"></div>
+            <h2>Exploración material</h2>
+            <span>Proyecto experimental</span>
+            <p>Investigación formal y constructiva.</p>
+          </a>
 
-        <a class="project-card" href="#">
-          <div class="project-image"></div>
-          <h2>Proyecto conceptual</h2>
-          <span>Diseño de producto</span>
-          <p>Propuesta centrada en el análisis del uso.</p>
-        </a>
-
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <script>
+/* navegación vertical */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick = () =>
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
+  btn.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
-const cards = document.querySelectorAll(".project-card");
-const carousel = document.querySelector(".portfolio-carousel");
+/* carrusel con flechas */
+const track = document.querySelector(".portfolio-track");
+document.querySelector(".portfolio-arrow.left").onclick =
+  ()=>track.scrollBy({left:-480,behavior:"smooth"});
+document.querySelector(".portfolio-arrow.right").onclick =
+  ()=>track.scrollBy({left:480,behavior:"smooth"});
 
+/* fade in proyectos */
+const cards = document.querySelectorAll(".project-card");
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("is-visible");
-    }
+    if(e.isIntersecting) e.target.classList.add("is-visible");
   });
-},{ root: carousel, threshold: 0.3 });
+},{ root: track, threshold:0.3 });
 
-cards.forEach(card=>observer.observe(card));
+cards.forEach(c=>observer.observe(c));
 </script>
 
 </body>
