@@ -136,69 +136,24 @@ p{
 }
 
 /* ========= PORTFOLIO ========= */
-.portfolio-group{
-  margin-top:48px;
-}
-
 .project{
   display:block;
+  margin-top:36px;
   text-decoration:none;
   color:inherit;
 }
 
-/* proyecto principal */
-.project.main{
-  margin-top:48px;
-}
-
-.project.main span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#999;
-}
-
-.project.main h3{
-  margin-top:12px;
-  font-size:28px;
-  font-weight:500;
-}
-
-/* secundarios */
-.project.secondary{
-  margin-top:32px;
-}
-
-.project.secondary span{
+.project span{
   font-size:11px;
   letter-spacing:.25em;
   text-transform:uppercase;
   color:#777;
 }
 
-.project.secondary h3{
+.project h3{
   margin-top:8px;
   font-size:20px;
   font-weight:500;
-}
-
-/* exploraciones */
-.project.minor{
-  margin-top:24px;
-}
-
-.project.minor span{
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#666;
-}
-
-.project.minor h3{
-  margin-top:6px;
-  font-size:17px;
-  font-weight:400;
-  color:#aaa;
 }
 
 /* ========= CONTACT ========= */
@@ -212,25 +167,13 @@ p{
   position:static;
 }
 
-.contact-statement{
-  max-width:520px;
-  margin-top:16px;
-}
-
-.contact-statement p{
-  margin-top:0;
-  font-size:17px;
-  line-height:1.7;
-  color:#bdbdbd;
-}
-
 /* ========= FOOTER ========= */
 .footer-wrapper{
   flex:1;
   display:flex;
   align-items:flex-end;
-  justify-content:flex-start;
-  padding:0 0 20px 22vw;
+  justify-content:flex-start;     /* ⬅ más a la izquierda */
+  padding:0 0 20px 22vw;          /* ⬅ alineado con columna */
 }
 
 .footer{
@@ -275,7 +218,7 @@ p{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia, con un perfil ecléctico, flexible y adaptable a distintos contextos de trabajo. No me sitúo en un extremo puramente artístico ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar ambas dimensiones del diseño. Formación en la Universidad Politécnica de Valencia, con experiencia internacional en Middlesex University (Londres) y base técnica en electricidad. Interesado en sistemas, procesos y soluciones estructuralmente coherentes.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia, con un perfil ecléctico, flexible y adaptable a distintos contextos de trabajo. No me sitúo en un extremo puramente artístico ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia, tras iniciar mi formación en la Universitat Jaume I de Castellón y completarlos con un programa Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño desde lo conceptual hasta la producción final, buscando siempre soluciones consistentes, claras y bien estructuradas.
       </p>
       <img src="foto.jpg" alt="Foto personal">
     </div>
@@ -287,36 +230,30 @@ p{
   <div class="section-block">
     <h1>Portfolio</h1>
 
-    <div class="portfolio-group">
-      <a class="project main" href="node.html">
-        <span>Proyecto principal</span>
-        <h3>NODE — Sistema modular</h3>
-      </a>
-    </div>
+    <a class="project" href="node.html">
+      <span>Proyecto principal</span>
+      <h3>NODE — Sistema modular</h3>
+    </a>
 
-    <div class="portfolio-group">
-      <a class="project secondary" href="sixay.html">
-        <span>Mobiliario</span>
-        <h3>Sixay — Cómoda personalizada</h3>
-      </a>
+    <a class="project" href="sixay.html">
+      <span>Mobiliario</span>
+      <h3>Sixay — Cómoda personalizada</h3>
+    </a>
 
-      <a class="project secondary" href="#">
-        <span>Producto</span>
-        <h3>Luminaria técnica — Desarrollo conceptual</h3>
-      </a>
-    </div>
+    <a class="project" href="#">
+      <span>Producto</span>
+      <h3>Luminaria técnica — Desarrollo conceptual</h3>
+    </a>
 
-    <div class="portfolio-group">
-      <a class="project minor" href="#">
-        <span>Exploración</span>
-        <h3>Sistema de ensamblaje sin fijaciones</h3>
-      </a>
+    <a class="project" href="#">
+      <span>Exploración</span>
+      <h3>Sistema de ensamblaje sin fijaciones</h3>
+    </a>
 
-      <a class="project minor" href="#">
-        <span>Investigación</span>
-        <h3>Materiales y procesos industriales</h3>
-      </a>
-    </div>
+    <a class="project" href="#">
+      <span>Investigación</span>
+      <h3>Materiales y procesos industriales</h3>
+    </a>
 
   </div>
 </section>
@@ -326,20 +263,18 @@ p{
   <div class="section-block">
     <h1>CV</h1>
     <p>
-      Ingeniería en Diseño Industrial · UPV. Formación previa en electricidad. Experiencia en mobiliario a medida, desarrollo de producto, conceptualización, modelado 3D y prototipado. Interés en sistemas constructivos, diseño racional y procesos industriales.
+      Formación en Ingeniería en Diseño Industrial en la Universidad Politécnica de Valencia, con inicio en la Universitat Jaume I de Castellón y experiencia internacional mediante programa Erasmus en Middlesex University (Londres). Formación profesional previa en electricidad, con enfoque técnico y práctico. Experiencia en desarrollo de producto, mobiliario a medida, conceptualización, modelado 3D, prototipado y procesos industriales. Interés especial en sistemas constructivos, diseño racional y soluciones estructuralmente coherentes.
     </p>
   </div>
 </section>
 
-<!-- CONTACTO / STATEMENT -->
+<!-- CONTACTO -->
 <section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
-    <div class="contact-statement">
-      <p>
-        Busco entornos donde el diseño se entienda como un proceso completo: análisis, estructura, decisión y materialización. Me interesan proyectos donde la claridad conceptual y la lógica constructiva tengan tanto peso como la forma final. Disponible para oportunidades profesionales, colaboraciones o conversaciones honestas sobre diseño y proceso.
-      </p>
-    </div>
+    <p>
+      Actualmente disponible para oportunidades profesionales, prácticas o colaboraciones relacionadas con diseño industrial, desarrollo de producto y sistemas. Interesado en entornos donde el proceso, la estructura y la claridad conceptual sean parte central del trabajo. Para contacto directo, propuestas o más información, puedes escribirme o encontrarme en LinkedIn.
+    </p>
   </div>
 
   <div class="footer-wrapper">
