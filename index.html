@@ -155,10 +155,32 @@ h1{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:20px;
+  padding-bottom:16px;
   scroll-behavior:smooth;
+
+  scrollbar-width:thin;                 /* Firefox */
+  scrollbar-color:#555 transparent;
 }
 
+/* ===== Scrollbar WebKit (Chrome, Edge, Safari) ===== */
+.portfolio-carousel::-webkit-scrollbar{
+  height:4px;
+}
+
+.portfolio-carousel::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+.portfolio-carousel::-webkit-scrollbar-thumb{
+  background:#555;
+  border-radius:4px;
+}
+
+.portfolio-carousel::-webkit-scrollbar-thumb:hover{
+  background:#777;
+}
+
+/* ========= PROJECT ========= */
 .project-card{
   min-width:460px;
   flex-shrink:0;
