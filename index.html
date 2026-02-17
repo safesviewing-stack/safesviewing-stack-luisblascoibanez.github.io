@@ -21,7 +21,6 @@
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  scroll-behavior:smooth;
 }
 
 /* ========= NAV ========= */
@@ -36,7 +35,7 @@ nav{
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,.4);
+  background:rgba(10,10,10,.45);
   backdrop-filter:blur(12px);
   z-index:100;
 }
@@ -52,26 +51,19 @@ nav span{
 /* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
-  display:flex;
   padding:180px 10vw 160px 22vw;
-}
-
-/* ========= SECTION BLOCK ========= */
-.section-block{
-  max-width:1100px;
+  display:flex;
 }
 
 /* ========= HERO ========= */
-.section.hero{
+.hero{
   align-items:center;
 }
 
-.section.hero h1{
+.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
 }
-
-.hero-surname{ white-space:nowrap; }
 
 .hero-sub{
   margin-top:24px;
@@ -81,42 +73,27 @@ nav span{
   color:#777;
 }
 
-/* ========= TYPO ========= */
-h1{
-  font-size:clamp(70px,6vw,120px);
-  font-weight:500;
-  line-height:1.05;
-}
-
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:8px;
-  padding-left:8px;
-  font-size:15px;
-  color:#aaa;
-  max-width:700px;
-  line-height:1.6;
-}
-
 /* ========= ABOUT ========= */
 .about{
   display:flex;
+  gap:40px;
   margin-top:20px;
+}
+
+.about p{
+  max-width:700px;
+  color:#aaa;
+  line-height:1.6;
 }
 
 .about img{
   width:300px;
   height:400px;
-  margin-left:40px;
   object-fit:cover;
   opacity:.9;
 }
 
-/* ========= PORTFOLIO ========= */
-.portfolio-wrapper{
-  margin-top:40px;
-}
-
+/* ========= PORTFOLIO (intacto) ========= */
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -144,23 +121,40 @@ h1{
 }
 
 /* ========= CV ========= */
-.cv-wrapper{
-  margin-top:40px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
+.cv-section{
+  position:relative;
+}
+
+.cv-title{
+  position:sticky;
+  top:180px;
+  width:300px;
+}
+
+.cv-title h1{
+  font-size:clamp(70px,6vw,120px);
+}
+
+.cv-scroll{
+  margin-left:340px;
+  display:flex;
+  flex-direction:column;
+  gap:160px;
+  padding-bottom:200px;
 }
 
 .cv-block{
-  transform:translateY(40px);
+  max-width:520px;
   opacity:0;
+  transform:translateY(60px);
+  transition:opacity .2s linear, transform .2s linear;
 }
 
 .cv-block h3{
   font-size:18px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  margin-bottom:20px;
+  margin-bottom:24px;
 }
 
 .cv-item{
@@ -169,18 +163,14 @@ h1{
 
 .cv-item strong{
   font-size:15px;
+  font-weight:500;
 }
 
 .cv-item span{
+  display:block;
   font-size:13px;
   color:#888;
-}
-
-/* ========= FOOTER ========= */
-.footer{
-  padding:40px;
-  font-size:11px;
-  color:#777;
+  margin-top:2px;
 }
 
 </style>
@@ -196,72 +186,76 @@ h1{
 </nav>
 
 <section class="section hero">
-  <div class="section-block">
-    <h1>Luis<br><span class="hero-surname">Blasco-Ibáñez</span><br>Berbel</h1>
+  <div>
+    <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-block">
+  <div>
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>Ingeniero en diseño industrial con formación técnica en electricidad y perfil híbrido entre lo conceptual y lo técnico.</p>
+      <p>
+        Ingeniero en diseño industrial con formación técnica en electricidad y un perfil híbrido
+        entre lo conceptual y lo técnico. Formación en UJI, UPV y Erasmus en Londres.
+      </p>
       <img src="foto.jpg">
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-block">
+  <div>
     <h1>Portfolio</h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <div class="project-card"></div>
-        <div class="project-card"></div>
-      </div>
+    <div class="portfolio-carousel">
+      <div class="project-card"></div>
+      <div class="project-card"></div>
+      <div class="project-card"></div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="section-block">
+<!-- ========= CV STICKY ========= -->
+<section class="section cv-section">
+  <div class="cv-title">
     <h1>CV</h1>
+  </div>
 
-    <div class="cv-wrapper">
+  <div class="cv-scroll">
 
-      <div class="cv-block">
-        <h3>Formación</h3>
-        <div class="cv-item"><strong>UJI</strong><span>Castellón</span></div>
-        <div class="cv-item"><strong>UPV</strong><span>Valencia</span></div>
-        <div class="cv-item"><strong>Erasmus</strong><span>Londres</span></div>
-      </div>
-
-      <div class="cv-block">
-        <h3>Experiencia</h3>
-        <div class="cv-item"><strong>Autrial</strong><span>Sector eléctrico</span></div>
-        <div class="cv-item"><strong>Elecnor</strong><span>Sector eléctrico</span></div>
-      </div>
-
-      <div class="cv-block">
-        <h3>Idiomas</h3>
-        <div class="cv-item"><strong>Español</strong><span>Nativo</span></div>
-        <div class="cv-item"><strong>Inglés</strong><span>Avanzado</span></div>
-        <div class="cv-item"><strong>Húngaro</strong><span>Nativo</span></div>
-      </div>
-
-      <div class="cv-block">
-        <h3>Software</h3>
-        <div class="cv-item"><strong>Rhino · AutoCAD · Inventor</strong></div>
-        <div class="cv-item"><strong>SolidWorks · Fusion 360</strong></div>
-        <div class="cv-item"><strong>Sinutrain · 3ds Max</strong></div>
-      </div>
-
+    <div class="cv-block">
+      <h3>Formación</h3>
+      <div class="cv-item"><strong>Grado en Diseño Industrial</strong><span>UJI · Castellón</span></div>
+      <div class="cv-item"><strong>Grado en Diseño Industrial</strong><span>UPV · Valencia</span></div>
+      <div class="cv-item"><strong>Erasmus</strong><span>Londres</span></div>
     </div>
+
+    <div class="cv-block">
+      <h3>Experiencia</h3>
+      <div class="cv-item"><strong>Autrial</strong><span>Sector eléctrico</span></div>
+      <div class="cv-item"><strong>Elecnor</strong><span>Sector eléctrico</span></div>
+    </div>
+
+    <div class="cv-block">
+      <h3>Idiomas</h3>
+      <div class="cv-item"><strong>Español</strong><span>Nativo</span></div>
+      <div class="cv-item"><strong>Inglés</strong><span>Avanzado</span></div>
+      <div class="cv-item"><strong>Húngaro</strong><span>Nativo</span></div>
+    </div>
+
+    <div class="cv-block">
+      <h3>Software</h3>
+      <div class="cv-item"><strong>Rhino · AutoCAD · Inventor</strong></div>
+      <div class="cv-item"><strong>SolidWorks · Fusion 360</strong></div>
+      <div class="cv-item"><strong>Sinutrain · 3ds Max</strong></div>
+    </div>
+
   </div>
 </section>
 
 <script>
+
 /* Navegación */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
@@ -274,7 +268,7 @@ document.querySelectorAll(".project-card").forEach(card=>{
   }).observe(card);
 });
 
-/* CV transición continua */
+/* CV bloques que pasan */
 const cvBlocks=document.querySelectorAll(".cv-block");
 
 window.addEventListener("scroll",()=>{
@@ -282,12 +276,13 @@ window.addEventListener("scroll",()=>{
 
   cvBlocks.forEach(block=>{
     const rect=block.getBoundingClientRect();
-    const progress=1-Math.min(Math.max(rect.top/vh,0),1);
+    const progress=1-Math.min(Math.max(rect.top/(vh*0.8),0),1);
 
     block.style.opacity=progress;
-    block.style.transform=`translateY(${40*(1-progress)}px)`;
+    block.style.transform=`translateY(${60*(1-progress)}px)`;
   });
 });
+
 </script>
 
 </body>
