@@ -67,14 +67,14 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
+/* ========= SECTIONS (EDITORIAL) ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
   justify-content:flex-start;
 
-  /* ⬇️⬅️ MÁS ABAJO + MÁS A LA DERECHA */
+  /* layout desplazado */
   padding:180px 10vw 160px 17vw;
 
   -webkit-mask-image:linear-gradient(
@@ -96,22 +96,23 @@ nav span{
 /* ========= SECTION BLOCK ========= */
 .section-block{
   position:sticky;
-  top:260px; /* ⬇️ TÍTULOS MÁS ABAJO */
+  top:260px;
   max-width:900px;
 }
 
-/* ========= HERO ========= */
-.hero{
+/* ========= HERO (EXCEPCIÓN) ========= */
+.section.hero{
+  padding:0;                     /* ⬅ anula desplazamiento */
   justify-content:center;
   align-items:center;
   text-align:center;
 }
 
-.hero .section-block{
+.section.hero .section-block{
   position:static;
 }
 
-.hero h1{
+.section.hero h1{
   font-size:clamp(80px,7vw,140px);
 }
 
@@ -183,13 +184,12 @@ p{
   position:static;
 }
 
-/* Footer completamente abajo */
 .footer-wrapper{
   flex:1;
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding-bottom:20px; /* final seco */
+  padding-bottom:20px;
 }
 
 .footer{
@@ -233,7 +233,6 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
-
     <div class="about">
       <p>
         Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
@@ -248,7 +247,6 @@ p{
         aportado una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
         desde lo conceptual hasta la producción final, con soluciones consistentes.
       </p>
-
       <img src="foto.jpg" alt="Foto personal">
     </div>
   </div>
@@ -258,12 +256,10 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-
     <a class="project" href="node.html">
       <span>Proyecto principal</span>
       <h3>NODE — Sistema modular</h3>
     </a>
-
     <a class="project" href="sixay.html">
       <span>Mobiliario</span>
       <h3>Sixay — Cómoda personalizada</h3>
