@@ -74,8 +74,7 @@ nav span{
   display:flex;
   justify-content:flex-start;
   padding:140px 10vw;
-  
-  /* fade arriba / abajo */
+
   -webkit-mask-image:linear-gradient(
     to bottom,
     transparent 0%,
@@ -97,6 +96,13 @@ nav span{
   position:sticky;
   top:140px;
   max-width:900px;
+}
+
+/* CONTACTO: convierte el bloque en columna */
+.section.contact .section-block{
+  display:flex;
+  flex-direction:column;
+  min-height:calc(100vh - 140px);
 }
 
 /* ========== HERO ========== */
@@ -171,14 +177,16 @@ p{
   font-weight:500;
 }
 
-/* ========== FOOTER (NOW INSIDE CONTACT) ========== */
+/* ========== FOOTER (CENTERED BOTTOM) ========== */
 .footer{
-  margin-top:64px;
-  padding-top:24px;
+  margin-top:auto;              /* ⬅ empuja al fondo */
+  padding-top:32px;
+  padding-bottom:32px;
   border-top:1px solid #1c1c1c;
   font-size:11px;
   letter-spacing:.18em;
   color:#cfcfcf;
+  text-align:center;            /* ⬅ centrado */
 }
 
 /* ========== REDUCED MOTION ========== */
@@ -262,7 +270,7 @@ p{
 </section>
 
 <!-- CONTACTO + FOOTER -->
-<section class="section">
+<section class="section contact">
   <div class="section-block">
     <h1>Contacto</h1>
     <p>Email · Teléfono · LinkedIn</p>
