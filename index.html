@@ -152,7 +152,7 @@ h1{
   );
 }
 
-/* Carrusel (SIN BARRA) */
+/* Carrusel sin scrollbar */
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -161,15 +161,14 @@ h1{
   scroll-behavior:smooth;
   margin-left:-12px;
 
-  /* eliminar scrollbar */
-  scrollbar-width:none;          /* Firefox */
+  scrollbar-width:none;
 }
 
 .portfolio-carousel::-webkit-scrollbar{
-  display:none;                  /* Chrome / Safari / Edge */
+  display:none;
 }
 
-/* Flechas */
+/* ========= FLECHAS ========= */
 .portfolio-arrow{
   position:absolute;
   top:50%;
@@ -179,23 +178,25 @@ h1{
   color:#888;
   font-size:48px;
   cursor:pointer;
-  z-index:20;
-  transition:color .2s ease;
+  z-index:30;
+  transition:color .2s ease, opacity .2s ease;
 }
 
 .portfolio-arrow:hover{
   color:#fff;
 }
 
+/* Flecha izquierda */
 .portfolio-arrow.left{
-  left:-48px;
+  left:-56px;
 }
 
+/* Flecha derecha */
 .portfolio-arrow.right{
   right:32px;
 }
 
-/* Proyecto */
+/* ========= PROYECTOS ========= */
 .project-card{
   min-width:460px;
   flex-shrink:0;
@@ -321,8 +322,10 @@ h1{
     <h1>Portfolio</h1>
 
     <div class="portfolio-wrapper">
-      <button class="portfolio-arrow left">‹</button>
-      <button class="portfolio-arrow right">›</button>
+      <!-- Flecha izquierda -->
+      <button class="portfolio-arrow left" aria-label="Anterior">‹</button>
+      <!-- Flecha derecha -->
+      <button class="portfolio-arrow right" aria-label="Siguiente">›</button>
 
       <div class="portfolio-carousel">
 
@@ -366,14 +369,17 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
 });
 
 const carousel=document.querySelector(".portfolio-carousel");
+
 document.querySelector(".portfolio-arrow.left").onclick=
   ()=>carousel.scrollBy({left:-480,behavior:"smooth"});
+
 document.querySelector(".portfolio-arrow.right").onclick=
   ()=>carousel.scrollBy({left:480,behavior:"smooth"});
 
-const observer=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add("is-visible"))
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("is-visible"));
 },{root:carousel,threshold:.3});
+
 document.querySelectorAll(".project-card").forEach(c=>observer.observe(c));
 </script>
 
