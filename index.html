@@ -63,7 +63,7 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
+/* ========= SECTIONS (DEFAULT) ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -79,26 +79,26 @@ nav span{
   max-width:900px;
 }
 
-/* ========= HERO ========= */
+/* ========= HERO (INICIO) ========= */
 .section.hero{
-  padding:0;
+  padding:0;                         /* ⬅ sistema propio */
   justify-content:flex-start;
   align-items:center;
 }
 
 .section.hero .section-block{
   position:static;
-  padding-left:22vw;
+  padding-left:18vw;                 /* ⬅ margen distinto al resto */
 }
 
-/* hero title multiline */
+/* HERO TITLE */
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
-  text-align:left;
   line-height:1.05;
+  text-align:left;
 }
 
-/* ========= HERO SUB ========= */
+/* HERO SUB */
 .hero-sub{
   margin-top:24px;
   width:100%;
@@ -115,7 +115,7 @@ h1{
   line-height:1.05;
 }
 
-/* ========= TEXTOS ========= */
+/* ========= TEXTOS GENERALES ========= */
 .section-block p{
   margin-top:8px;
   padding-left:8px;
