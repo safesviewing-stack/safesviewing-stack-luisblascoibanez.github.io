@@ -63,18 +63,18 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= HERO ABSOLUTO ========= */
-.hero-fixed{
-  position:fixed;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
+/* ========= HERO (CENTRADO LIMPIO) ========= */
+.section.hero{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  z-index:2;
-  pointer-events:none;
+  padding-top:80px; /* compensa el nav */
 }
 
-.hero-fixed h1{
+.section.hero h1{
   font-size:clamp(90px,8vw,150px);
   font-weight:500;
   line-height:1;
@@ -208,11 +208,13 @@ p{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO ABSOLUTO -->
-<div class="hero-fixed">
-  <h1>IndustrialDesign</h1>
-  <div class="hero-sub">Structure · Process · Clarity</div>
-</div>
+<!-- HERO -->
+<section class="section hero">
+  <div>
+    <h1>IndustrialDesign</h1>
+    <div class="hero-sub">Structure · Process · Clarity</div>
+  </div>
+</section>
 
 <!-- SOBRE MI -->
 <section class="section">
