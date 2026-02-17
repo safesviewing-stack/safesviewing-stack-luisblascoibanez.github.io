@@ -162,15 +162,14 @@ h1{
   scroll-behavior:smooth;
 }
 
-/* ========= PROYECTOS ========= */
+/* Proyecto */
 .project-card{
-  min-width:440px;
+  min-width:480px;           /* ⬅ un poco más ancho */
   flex-shrink:0;
   text-decoration:none;
   color:inherit;
   cursor:pointer;
 
-  /* estado inicial fundido */
   opacity:0;
   transform:translateY(12px);
   transition:
@@ -178,13 +177,11 @@ h1{
     transform .8s ease;
 }
 
-/* visible */
 .project-card.is-visible{
   opacity:1;
   transform:translateY(0);
 }
 
-/* hover se mantiene */
 .project-card:hover{
   transform:translateY(-4px);
 }
@@ -192,7 +189,7 @@ h1{
 /* Imagen */
 .project-image{
   width:100%;
-  height:240px;
+  height:280px;              /* ⬅ imagen más grande */
   margin-bottom:16px;
   background:#1a1a1a;
   overflow:hidden;
@@ -340,7 +337,6 @@ h1{
 </section>
 
 <script>
-/* NAV SCROLL */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i]
@@ -348,16 +344,13 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
   });
 });
 
-/* SCROLL HORIZONTAL */
 const carousel = document.querySelector(".portfolio-carousel");
 carousel.addEventListener("wheel",(e)=>{
   e.preventDefault();
   carousel.scrollLeft += e.deltaY;
 },{ passive:false });
 
-/* FADE IN PROYECTOS */
 const cards = document.querySelectorAll(".project-card");
-
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
