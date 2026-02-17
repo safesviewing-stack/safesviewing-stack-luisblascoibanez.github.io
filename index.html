@@ -8,209 +8,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 /* ========= RESET ========= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
 /* ========= BODY ========= */
-body{
-  background:#0a0a0a;
-  color:#f5f5f5;
-}
+body{background:#0a0a0a;color:#f5f5f5}
 
 /* ========= NAV ========= */
 nav{
-  position:fixed;
-  top:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  height:80px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:50px;
-  background:rgba(10,10,10,.45);
-  backdrop-filter:blur(12px);
-  z-index:100;
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;height:80px;
+  display:flex;justify-content:center;align-items:center;gap:50px;
+  background:rgba(10,10,10,.45);backdrop-filter:blur(12px);z-index:100
 }
-
-nav span{
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:#bbb;
-  cursor:pointer;
-}
+nav span{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#bbb;cursor:pointer}
 
 /* ========= SECTIONS ========= */
-.section{
-  min-height:100vh;
-  padding:180px 10vw 160px 22vw;
-  display:flex;
-}
+.section{min-height:100vh;padding:180px 10vw 160px 22vw;display:flex}
 
 /* ========= HERO ========= */
-.hero{
-  align-items:center;
-}
-
-.hero h1{
-  font-size:clamp(80px,7vw,140px);
-  line-height:1.05;
-}
-
-.hero-sub{
-  margin-top:24px;
-  padding-left:8px;
-  font-size:14px;
-  letter-spacing:.25em;
-  color:#777;
-}
+.hero{align-items:center}
+.hero h1{font-size:clamp(80px,7vw,140px);line-height:1.05}
+.hero-sub{margin-top:24px;padding-left:8px;font-size:14px;letter-spacing:.25em;color:#777}
 
 /* ========= ABOUT ========= */
-.about{
-  display:flex;
-  gap:40px;
-  margin-top:20px;
-}
+.about{display:flex;gap:40px;margin-top:20px}
+.about p{max-width:700px;color:#aaa;line-height:1.6}
+.about img{width:300px;height:400px;object-fit:cover;opacity:.9}
 
-.about p{
-  max-width:700px;
-  color:#aaa;
-  line-height:1.6;
-}
-
-.about img{
-  width:300px;
-  height:400px;
-  object-fit:cover;
-  opacity:.9;
-}
-
-/* ========= PORTFOLIO (base funcional) ========= */
+/* ========= PORTFOLIO ========= */
 .portfolio-carousel{
-  display:flex;
-  gap:48px;
-  overflow-x:auto;
-  scrollbar-width:thin;
-  scrollbar-color:#444 transparent;
+  display:flex;gap:48px;overflow-x:auto;
+  scrollbar-width:thin;scrollbar-color:#444 transparent
 }
-
-.portfolio-carousel::-webkit-scrollbar{ height:6px; }
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
-}
-
-.project-card{
-  min-width:460px;
-  height:260px;
-  background:#222;
-  opacity:0;
-  transform:translateY(12px);
-  transition:.8s;
-}
-
-.project-card.is-visible{
-  opacity:1;
-  transform:translateY(0);
-}
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
+.project-card{min-width:460px;height:260px;background:#222;opacity:0;transform:translateY(12px);transition:.8s}
+.project-card.is-visible{opacity:1;transform:translateY(0)}
 
 /* ========= CV ========= */
-.cv-section{
-  position:relative;
-}
-
-/* --- TÍTULO STICKY --- */
-.cv-title{
-  position:sticky;
-  top:180px;
-  width:260px;
-}
-
-.cv-title h1{
-  font-size:clamp(70px,6vw,120px);
-  transition:none;
-}
-
-/* --- LÍNEA DE PROGRESO --- */
-.cv-line{
-  position:sticky;
-  top:180px;
-  margin-left:40px;
-  width:2px;
-  height:60vh;
-  background:#222;
-}
-
-.cv-line-fill{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:0%;
-  background:#777;
-}
-
-/* --- CONTENIDO --- */
-.cv-scroll{
-  margin-left:120px;
-  display:flex;
-  flex-direction:column;
-  gap:180px;
-  padding-bottom:200px;
-}
-
-.cv-block{
-  max-width:520px;
-  opacity:0;
-  transform:translateY(60px);
-}
-
-.cv-block h3{
-  font-size:18px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:24px;
-}
-
-.cv-item{
-  margin-bottom:18px;
-}
-
-.cv-item strong{
-  font-size:15px;
-  font-weight:500;
-}
-
-.cv-item span{
-  display:block;
-  font-size:13px;
-  color:#888;
-  margin-top:2px;
-}
-
-/* --- PUNTO DE BLOQUE --- */
-.cv-dot{
-  position:absolute;
-  left:-49px;
-  top:6px;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#777;
-  opacity:.2;
-}
-
-.cv-block.active .cv-dot{
-  opacity:1;
-}
-
+.cv-section{position:relative}
+.cv-title{position:sticky;top:180px;width:260px}
+.cv-line{position:sticky;top:180px;margin-left:40px;width:2px;height:60vh;background:#222}
+.cv-line-fill{position:absolute;bottom:0;width:100%;height:0;background:#777}
+.cv-scroll{margin-left:120px;display:flex;flex-direction:column;gap:180px;padding-bottom:200px}
+.cv-block{max-width:520px;opacity:0;transform:translateY(60px)}
+.cv-block h3{font-size:18px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+.cv-item{margin-bottom:18px}
+.cv-item strong{font-size:15px;font-weight:500}
+.cv-item span{display:block;font-size:13px;color:#888;margin-top:2px}
+.cv-dot{position:absolute;left:-49px;top:6px;width:10px;height:10px;border-radius:50%;background:#777;opacity:.2}
+.cv-block.active .cv-dot{opacity:1}
 </style>
 </head>
 
@@ -230,13 +78,22 @@ nav span{
   </div>
 </section>
 
+<!-- ========= SOBRE MÍ (TEXTO ORIGINAL COMPLETO) ========= -->
 <section class="section">
   <div>
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial con formación técnica en electricidad y un perfil híbrido
-        entre lo conceptual y lo técnico.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuando posteriormente en la Universidad Politécnica de Valencia, y completándolos con
+        un programa Erasmus en la Middlesex University de Londres. Cuento además con una formación
+        profesional en electricidad, que me ha aportado una base técnica sólida y una forma de pensar
+        práctica. Disfruto de todo el proceso de diseño, desde la fase de análisis hasta la
+        materialización final del producto.
       </p>
       <img src="foto.jpg">
     </div>
@@ -254,16 +111,9 @@ nav span{
   </div>
 </section>
 
-<!-- ========= CV STICKY + PROGRESO ========= -->
 <section class="section cv-section">
-
-  <div class="cv-title">
-    <h1 id="cvTitle">CV</h1>
-  </div>
-
-  <div class="cv-line">
-    <div class="cv-line-fill" id="cvLineFill"></div>
-  </div>
+  <div class="cv-title"><h1>CV</h1></div>
+  <div class="cv-line"><div class="cv-line-fill" id="cvLineFill"></div></div>
 
   <div class="cv-scroll">
 
@@ -302,24 +152,18 @@ nav span{
 </section>
 
 <script>
-
-/* Navegación */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
-  btn.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
+  btn.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
 });
 
-/* Portfolio */
 document.querySelectorAll(".project-card").forEach(card=>{
   new IntersectionObserver(e=>{
     card.classList.toggle("is-visible",e[0].isIntersecting);
   }).observe(card);
 });
 
-/* CV progreso + animación de título */
 const cvBlocks=document.querySelectorAll(".cv-block");
 const lineFill=document.getElementById("cvLineFill");
-const cvTitle=document.getElementById("cvTitle");
 
 window.addEventListener("scroll",()=>{
   const vh=window.innerHeight;
@@ -340,19 +184,8 @@ window.addEventListener("scroll",()=>{
     }
   });
 
-  /* Línea */
   lineFill.style.height=`${maxProgress*100}%`;
-
-  /* TÍTULO CV */
-  const titleShift = 20 * maxProgress;
-  const titleOpacity = 0.6 + 0.4 * maxProgress;
-  const titleTracking = 0.3 - 0.15 * maxProgress;
-
-  cvTitle.style.transform = `translateY(${titleShift}px)`;
-  cvTitle.style.opacity = titleOpacity;
-  cvTitle.style.letterSpacing = `${titleTracking}em`;
 });
-
 </script>
 
 </body>
