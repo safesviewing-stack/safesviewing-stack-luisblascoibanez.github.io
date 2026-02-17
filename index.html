@@ -63,7 +63,7 @@ nav span{
 .section-block{
   position:sticky;
   top:260px;
-  max-width:900px;
+  max-width:1100px; /* ⬅ permite texto más ancho */
 }
 
 /* ========= HERO ========= */
@@ -117,19 +117,21 @@ h1{
 /* ========= ABOUT ========= */
 .about{
   display:flex;
-  gap:56px;
-  margin-top:12px;
   align-items:flex-start;
+  margin-top:12px;
 }
 
+/* ⬅ texto más ancho */
 .about p{
-  max-width:680px;
+  max-width:740px;
 }
 
+/* ⬅ imagen desplazada a la derecha */
 .about img{
   width:340px;
   height:440px;
   margin-top:16px;
+  margin-left:40px;
   object-fit:cover;
   filter:grayscale(100%) contrast(1.05);
   opacity:.9;
