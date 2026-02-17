@@ -96,22 +96,15 @@ h1{
   line-height:1.05;
 }
 
-h2{
-  font-size:22px;
-  font-weight:400;
-  margin-top:40px;
-}
-
-.cv-item{
-  margin-top:16px;
-  max-width:700px;
+/* ========= TEXT ========= */
+.section-block p{
+  margin-top:8px;
+  padding-left:8px;
+  font-size:15px;
   color:#aaa;
+  max-width:600px;
   line-height:1.6;
-}
-
-.cv-item strong{
-  color:#f0f0f0;
-  font-weight:400;
+  text-align:justify;
 }
 
 /* ========= ABOUT ========= */
@@ -166,7 +159,6 @@ h2{
   scroll-behavior:smooth;
 }
 
-/* ========= PROYECTO ========= */
 .project-card{
   min-width:460px;
   flex-shrink:0;
@@ -181,6 +173,86 @@ h2{
 .project-card.is-visible{
   opacity:1;
   transform:translateY(0);
+}
+
+.project-card:hover{
+  transform:translateY(-4px);
+}
+
+.project-inner{
+  width:100%;
+}
+
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s ease;
+}
+
+.project-card:hover .project-image img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
+/* ========= CV ========= */
+.cv-wrapper{
+  margin-top:32px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:80px;
+}
+
+.cv-block h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#f0f0f0;
+}
+
+.cv-item{
+  margin-top:20px;
+}
+
+.cv-item strong{
+  display:block;
+  font-size:15px;
+  font-weight:500;
+  color:#f5f5f5;
+}
+
+.cv-item span{
+  display:block;
+  font-size:13px;
+  color:#888;
+  margin-top:2px;
+}
+
+.cv-item p{
+  margin-top:6px;
+  padding-left:0;
+  font-size:14px;
+  color:#aaa;
 }
 
 /* ========= FOOTER ========= */
@@ -209,7 +281,6 @@ h2{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>
@@ -221,7 +292,6 @@ h2{
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
@@ -231,53 +301,62 @@ h2{
         enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
         a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
         ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universidad Politécnica de Valencia,
-        tras iniciar mi formación en la Universitat Jaume I de Castellón, y completarlos con un programa
-        Erasmus en la Middlesex University de Londres. Cuento además con una formación profesional en
-        electricidad, que me ha aportado una base técnica sólida y una forma de pensar práctica. Disfruto
-        de todo el proceso de diseño desde la fase del análisis hasta la materialización.
+        ambas dimensiones del diseño.
       </p>
-      <img src="foto.jpg" alt="Foto personal">
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-    <!-- (igual que antes, omitido aquí por brevedad visual) -->
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <!-- proyectos -->
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CV -->
+<!-- ========= CV SECTION ========= -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
 
-    <h2>Perfil</h2>
-    <div class="cv-item">
-      Diseñador industrial con enfoque analítico y técnico, interesado en el proceso completo de diseño,
-      desde la investigación hasta la materialización.
-    </div>
+    <div class="cv-wrapper">
 
-    <h2>Formación</h2>
-    <div class="cv-item">
-      <strong>Grado en Ingeniería en Diseño Industrial</strong><br>
-      Universidad Politécnica de Valencia
-    </div>
+      <div class="cv-block">
+        <h3>Formación</h3>
 
-    <h2>Experiencia</h2>
-    <div class="cv-item">
-      <strong>Prácticas y proyectos académicos</strong><br>
-      Desarrollo de proyectos de diseño de producto y mobiliario.
-    </div>
+        <div class="cv-item">
+          <strong>Ingeniería en Diseño Industrial</strong>
+          <span>Universidad Politécnica de Valencia</span>
+        </div>
 
-    <h2>Habilidades</h2>
-    <div class="cv-item">
-      Diseño de producto · Desarrollo conceptual · Pensamiento técnico · Trabajo en equipo
-    </div>
+        <div class="cv-item">
+          <strong>Formación Profesional en Electricidad</strong>
+          <span>España</span>
+        </div>
+      </div>
 
+      <div class="cv-block">
+        <h3>Experiencia</h3>
+
+        <div class="cv-item">
+          <strong>Diseño de mobiliario</strong>
+          <span>Proyecto académico y profesional</span>
+          <p>Desarrollo de producto, definición constructiva y resolución técnica.</p>
+        </div>
+
+        <div class="cv-item">
+          <strong>Proyectos de diseño industrial</strong>
+          <span>Universidad / Prácticas</span>
+          <p>Proceso completo desde análisis hasta prototipado.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
