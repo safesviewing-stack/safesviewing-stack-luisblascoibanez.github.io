@@ -74,7 +74,6 @@ nav span{
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
-  text-align:left;
   margin-left:-4px;
 }
 
@@ -85,17 +84,9 @@ nav span{
 .hero-sub{
   margin-top:24px;
   padding-left:8px;
-  text-align:left;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
-}
-
-/* ========= TYPO ========= */
-h1{
-  font-size:clamp(70px,6vw,120px);
-  font-weight:500;
-  line-height:1.05;
 }
 
 /* ========= ABOUT ========= */
@@ -121,34 +112,44 @@ h1{
 
 /* ========= PORTFOLIO CARRUSEL ========= */
 .carousel{
-  margin-top:32px;
+  margin-top:40px;
   overflow:hidden;
 }
 
 .carousel-track{
   display:flex;
-  gap:80px;
+  gap:100px;
   transition:transform .8s ease;
 }
 
-/* Proyecto clicable */
+/* Proyecto */
 .project{
-  min-width:520px;
+  min-width:720px;
 }
 
 .project a{
   display:block;
-  text-decoration:none;
   color:inherit;
-  transition:opacity .3s ease, transform .3s ease;
+  text-decoration:none;
 }
 
-.project a:hover{
-  opacity:.85;
-  transform:translateX(2px);
+/* Imagen grande */
+.project img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  filter:grayscale(100%) contrast(1.05);
+  transition:filter .4s ease, transform .4s ease;
 }
 
+.project a:hover img{
+  filter:grayscale(0%) contrast(1.05);
+  transform:scale(1.01);
+}
+
+/* Texto proyecto */
 .project h2{
+  margin-top:18px;
   font-size:28px;
   font-weight:400;
   color:#f0f0f0;
@@ -165,7 +166,7 @@ h1{
 
 .project p{
   margin-top:12px;
-  max-width:520px;
+  max-width:640px;
   font-size:15px;
   color:#aaa;
 }
@@ -175,7 +176,6 @@ h1{
   flex:1;
   display:flex;
   align-items:flex-end;
-  justify-content:flex-start;
   padding:0 0 20px 22vw;
 }
 
@@ -231,6 +231,7 @@ h1{
 
         <div class="project">
           <a href="node.html">
+            <img src="img/node.jpg" alt="NODE">
             <h2>NODE</h2>
             <span>Proyecto final de grado</span>
             <p>Sistema modular de mobiliario orientado a la adaptabilidad espacial.</p>
@@ -239,6 +240,7 @@ h1{
 
         <div class="project">
           <a href="sixay.html">
+            <img src="img/sixay.jpg" alt="Sixay">
             <h2>Sixay · Cómoda personalizada</h2>
             <span>Diseño de mobiliario</span>
             <p>Desarrollo completo de una cómoda a medida, del análisis a la fabricación.</p>
@@ -247,6 +249,7 @@ h1{
 
         <div class="project">
           <a href="experimental.html">
+            <img src="img/experimental.jpg" alt="Proyecto experimental">
             <h2>Proyecto experimental</h2>
             <span>Exploración formal</span>
             <p>Investigación sobre materialidad, proporción y lenguaje formal.</p>
@@ -254,26 +257,20 @@ h1{
         </div>
 
         <div class="project">
-          <a href="node-sistema.html">
-            <h2>NODE · Sistema modular</h2>
-            <span>Investigación tipológica</span>
-            <p>Profundización en sistemas constructivos y modularidad aplicada.</p>
-          </a>
-        </div>
-
-        <div class="project">
           <a href="luminaria.html">
+            <img src="img/luminaria.jpg" alt="Luminaria experimental">
             <h2>Luminaria experimental</h2>
             <span>Diseño de producto</span>
-            <p>Exploración de luz, estructura y ensamblaje en objeto funcional.</p>
+            <p>Exploración de luz, estructura y ensamblaje.</p>
           </a>
         </div>
 
         <div class="project">
           <a href="objeto-tecnico.html">
+            <img src="img/objeto.jpg" alt="Objeto técnico">
             <h2>Objeto técnico</h2>
             <span>Electricidad / prototipo</span>
-            <p>Desarrollo de un objeto funcional con base técnica y enfoque práctico.</p>
+            <p>Objeto funcional con base técnica y enfoque práctico.</p>
           </a>
         </div>
 
