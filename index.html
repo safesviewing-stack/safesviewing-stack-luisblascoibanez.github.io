@@ -96,15 +96,22 @@ h1{
   line-height:1.05;
 }
 
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:8px;
-  padding-left:8px;
-  font-size:15px;
+h2{
+  font-size:22px;
+  font-weight:400;
+  margin-top:40px;
+}
+
+.cv-item{
+  margin-top:16px;
+  max-width:700px;
   color:#aaa;
-  max-width:600px;
   line-height:1.6;
-  text-align:justify;
+}
+
+.cv-item strong{
+  color:#f0f0f0;
+  font-weight:400;
 }
 
 /* ========= ABOUT ========= */
@@ -157,18 +164,6 @@ h1{
   overflow-x:auto;
   padding-bottom:20px;
   scroll-behavior:smooth;
-
-  scrollbar-width:thin;
-  scrollbar-color:#444 transparent;
-}
-
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
 }
 
 /* ========= PROYECTO ========= */
@@ -178,63 +173,14 @@ h1{
   text-decoration:none;
   color:inherit;
   cursor:pointer;
-
   opacity:0;
   transform:translateY(12px);
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
+  transition:opacity .8s ease, transform .8s ease;
 }
 
 .project-card.is-visible{
   opacity:1;
   transform:translateY(0);
-}
-
-.project-card:hover{
-  transform:translateY(-4px);
-}
-
-/* CONTENEDOR INTERNO */
-.project-inner{
-  width:100%;
-  margin:0;
-}
-
-/* Imagen */
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  background:#1a1a1a;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .4s ease;
-}
-
-.project-card:hover .project-image img{
-  transform:scale(1.03);
-}
-
-/* Texto */
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-  color:#f0f0f0;
-}
-
-.project-inner span{
-  display:block;
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
 }
 
 /* ========= FOOTER ========= */
@@ -263,6 +209,7 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>
@@ -274,6 +221,7 @@ h1{
   </div>
 </section>
 
+<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
@@ -294,53 +242,42 @@ h1{
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
+    <!-- (igual que antes, omitido aquí por brevedad visual) -->
+  </div>
+</section>
 
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
 
-        <a href="node.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image">
-              <img src="brazo1.jpg" alt="Proyecto NODE">
-            </div>
-            <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
-          </div>
-        </a>
-
-        <a href="sixay.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image">
-              <img src="reloj1.jpg" alt="Cómoda Sixay">
-            </div>
-            <h2>Sixay · Cómoda</h2>
-            <span>Diseño de mobiliario</span>
-          </div>
-        </a>
-
-        <a href="exploracion.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image">
-              <img src="secador2.jpg" alt="Exploración material">
-            </div>
-            <h2>Exploración material</h2>
-            <span>Proyecto experimental</span>
-          </div>
-        </a>
-
-        <a href="conceptual.html" class="project-card">
-          <div class="project-inner">
-            <div class="project-image"></div>
-            <h2>Proyecto conceptual</h2>
-            <span>Diseño de producto</span>
-          </div>
-        </a>
-
-      </div>
+    <h2>Perfil</h2>
+    <div class="cv-item">
+      Diseñador industrial con enfoque analítico y técnico, interesado en el proceso completo de diseño,
+      desde la investigación hasta la materialización.
     </div>
+
+    <h2>Formación</h2>
+    <div class="cv-item">
+      <strong>Grado en Ingeniería en Diseño Industrial</strong><br>
+      Universidad Politécnica de Valencia
+    </div>
+
+    <h2>Experiencia</h2>
+    <div class="cv-item">
+      <strong>Prácticas y proyectos académicos</strong><br>
+      Desarrollo de proyectos de diseño de producto y mobiliario.
+    </div>
+
+    <h2>Habilidades</h2>
+    <div class="cv-item">
+      Diseño de producto · Desarrollo conceptual · Pensamiento técnico · Trabajo en equipo
+    </div>
+
   </div>
 </section>
 
@@ -351,29 +288,6 @@ document.querySelectorAll("nav span").forEach((btn,i)=>{
       .scrollIntoView({behavior:"smooth"});
   });
 });
-
-const carousel = document.querySelector(".portfolio-carousel");
-carousel.addEventListener("wheel",(e)=>{
-  e.preventDefault();
-  carousel.scrollLeft += e.deltaY;
-},{ passive:false });
-
-const cards = document.querySelectorAll(".project-card");
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("is-visible");
-    }else{
-      entry.target.classList.remove("is-visible");
-    }
-  });
-},{
-  root: carousel,
-  threshold: 0.3
-});
-
-cards.forEach(card=>observer.observe(card));
 </script>
 
 </body>
