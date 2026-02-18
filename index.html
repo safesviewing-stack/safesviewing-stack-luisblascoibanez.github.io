@@ -168,35 +168,6 @@ h1{
   transform:none;
 }
 
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .4s ease;
-}
-
-.project-card:hover img{
-  transform:scale(1.03);
-}
-
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
 /* ========= CV ========= */
 .timeline{
   position:relative;
@@ -206,7 +177,7 @@ h1{
 
 /* ========= CONTACTO — FRAMER ========= */
 .contact-framer{
-  margin-top:60px;
+  margin-top:24px; /* ← CAMBIO: antes 60px */
   display:flex;
   flex-direction:column;
   gap:18px;
@@ -300,7 +271,7 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-        <!-- tus proyectos aquí (los que ya tenías) -->
+        <!-- proyectos -->
       </div>
     </div>
   </div>
@@ -309,9 +280,7 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-    <div class="timeline">
-      <!-- timeline completo como antes -->
-    </div>
+    <div class="timeline"></div>
   </div>
 </section>
 
@@ -319,6 +288,7 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact-framer">
+
       <a href="tel:+34600000000" class="contact-card">
         <div class="contact-left">
           <span>Teléfono</span>
@@ -342,6 +312,7 @@ h1{
         </div>
         <div class="contact-arrow">→</div>
       </a>
+
     </div>
   </div>
 </section>
@@ -351,13 +322,6 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
-},{threshold:.2});
-
-document.querySelectorAll(".project-card,.timeline-item")
-  .forEach(el=>observer.observe(el));
 </script>
 
 </body>
