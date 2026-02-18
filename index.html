@@ -163,35 +163,6 @@ h1{
   transform:none;
 }
 
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .4s ease;
-}
-
-.project-card:hover img{
-  transform:scale(1.03);
-}
-
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
 /* ========= CV ========= */
 .timeline{
   position:relative;
@@ -199,50 +170,7 @@ h1{
   padding-left:60px;
 }
 
-.timeline-line{
-  position:absolute;
-  left:20px;
-  top:0;
-  width:1px;
-  height:0;
-  background:linear-gradient(#fff,#777);
-  transition:height .25s ease-out;
-}
-
-.timeline-item{
-  position:relative;
-  margin-bottom:80px;
-  max-width:520px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.8s ease;
-}
-
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:-44px;
-  top:50%;
-  transform:translateY(-50%);
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-}
-
-.timeline-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
-}
-
-/* ========= CONTACTO — FRAMER FINO ========= */
+/* ========= CONTACTO ========= */
 .contact-framer{
   margin-top:60px;
   display:flex;
@@ -269,33 +197,16 @@ h1{
   background:rgba(255,255,255,.055);
 }
 
-.contact-left{
+/* ========= FOOTER ========= */
+footer{
+  height:140px;
   display:flex;
-  flex-direction:column;
-}
-
-.contact-left span{
-  font-size:11px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
-.contact-left strong{
-  margin-top:6px;
-  font-size:19px;
-  font-weight:400;
-}
-
-.contact-arrow{
-  font-size:17px;
+  justify-content:center;
+  align-items:center;
   color:#666;
-  transition:.35s ease;
-}
-
-.contact-card:hover .contact-arrow{
-  transform:translateX(4px);
-  color:#aaa;
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
 }
 
 </style>
@@ -323,15 +234,8 @@ h1{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
-        desde la fase de análisis hasta la materialización.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
+        técnico y creativo, con formación en UJI, UPV y Erasmus en Londres.
       </p>
       <img src="foto.jpg" alt="">
     </div>
@@ -342,9 +246,7 @@ h1{
   <div class="section-block">
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <!-- proyectos -->
-      </div>
+      <div class="portfolio-carousel"></div>
     </div>
   </div>
 </section>
@@ -352,69 +254,24 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-    <div class="timeline">
-      <div class="timeline-line" id="timelineLine"></div>
-    </div>
+    <div class="timeline"></div>
   </div>
 </section>
 
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
-
     <div class="contact-framer">
-
-      <a href="tel:+34600000000" class="contact-card">
-        <div class="contact-left">
-          <span>Teléfono</span>
-          <strong>+34 600 000 000</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-
-      <a href="mailto:luis@example.com" class="contact-card">
-        <div class="contact-left">
-          <span>Email</span>
-          <strong>luis@example.com</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-
-      <a href="https://www.linkedin.com" target="_blank" class="contact-card">
-        <div class="contact-left">
-          <span>LinkedIn</span>
-          <strong>Perfil profesional</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-
+      <a href="tel:+34600000000" class="contact-card">+34 600 000 000</a>
+      <a href="mailto:luis@example.com" class="contact-card">luis@example.com</a>
+      <a href="https://www.linkedin.com" class="contact-card">LinkedIn</a>
     </div>
   </div>
 </section>
 
-<script>
-document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
-});
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
-},{threshold:.2});
-
-document.querySelectorAll(".project-card,.timeline-item")
-  .forEach(el=>observer.observe(el));
-
-const timeline=document.querySelector(".timeline");
-const line=document.getElementById("timelineLine");
-
-window.addEventListener("scroll",()=>{
-  if(!timeline||!line) return;
-  const rect=timeline.getBoundingClientRect();
-  const visible=Math.min(window.innerHeight-rect.top,rect.height);
-  line.style.height=Math.max(0,visible)+"px";
-});
-</script>
+<footer>
+  © 2026 · Luis Blasco — Industrial Design
+</footer>
 
 </body>
 </html>
