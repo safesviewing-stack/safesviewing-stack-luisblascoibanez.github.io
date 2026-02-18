@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -17,7 +15,6 @@
   font-family:"Inter",sans-serif;
 }
 
-/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -25,7 +22,6 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -50,23 +46,19 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
-  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
 }
 
-/* ========= SECTION BLOCK ========= */
 .section-block{
   position:sticky;
   top:260px;
   max-width:900px;
 }
 
-/* ========= HERO ========= */
 .section.hero{
   align-items:center;
 }
@@ -77,10 +69,6 @@ nav span{
   margin-left:-4px;
 }
 
-.hero-surname{
-  white-space:nowrap;
-}
-
 .hero-sub{
   margin-top:24px;
   padding-left:4px;
@@ -89,44 +77,34 @@ nav span{
   color:#777;
 }
 
-/* ========= TYPO ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
-  line-height:1.05;
 }
 
-/* ========= ABOUT ========= */
 .about{
   display:flex;
-  align-items:flex-start;
   margin-top:12px;
 }
 
 .about img{
   width:300px;
   height:400px;
-  margin-top:16px;
   margin-left:40px;
   object-fit:cover;
   opacity:.9;
 }
 
-/* ========= PORTFOLIO ========= */
+/* ========= PORTFOLIO (INTACTO) ========= */
 .portfolio-wrapper{
-  position:relative;
   margin-top:32px;
   margin-left:8px;
-  overflow:hidden;
-  padding-right:120px;
 }
 
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:20px;
-  scroll-behavior:smooth;
   scrollbar-width:thin;
   scrollbar-color:#444 transparent;
 }
@@ -135,12 +113,12 @@ h1{
   min-width:460px;
   opacity:0;
   transform:translateY(12px);
-  transition:opacity .8s ease, transform .8s ease;
+  transition:.8s ease;
 }
 
 .project-card.is-visible{
   opacity:1;
-  transform:translateY(0);
+  transform:none;
 }
 
 /* ========= CV ========= */
@@ -150,7 +128,6 @@ h1{
   padding-left:48px;
 }
 
-/* línea */
 .cv-wrapper::before{
   content:"";
   position:absolute;
@@ -168,18 +145,19 @@ h1{
   transform:scaleY(1);
 }
 
-/* bloques */
 .cv-block{
   position:relative;
   margin-bottom:56px;
   opacity:0;
   transform:translateY(16px);
-  transition:opacity .8s ease, transform .8s ease;
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
 }
 
 .cv-block.is-visible{
   opacity:1;
-  transform:translateY(0);
+  transform:none;
 }
 
 .cv-block::before{
@@ -219,15 +197,6 @@ h1{
   font-size:14px;
   color:#aaa;
 }
-
-/* ========= FOOTER ========= */
-.footer-wrapper{
-  flex:1;
-  display:flex;
-  align-items:flex-end;
-  padding:0 0 20px 22vw;
-}
-
 </style>
 </head>
 
@@ -235,15 +204,13 @@ h1{
 
 <nav>
   <span data-i="0">Inicio</span>
-  <span data-i="1">Sobre mí</span>
-  <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
+  <span data-i="1">Portfolio</span>
+  <span data-i="2">CV</span>
 </nav>
 
 <section class="section hero">
   <div class="section-block">
-    <h1>Luis<br><span class="hero-surname">Blasco-Ibáñez</span><br>Berbel</h1>
+    <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
     <div class="hero-sub">Portfolio | Diseño industrial</div>
   </div>
 </section>
@@ -263,16 +230,8 @@ h1{
 
       <div class="cv-block">
         <h3>Experiencia profesional</h3>
-        <div class="cv-item">
-          <strong>Técnico electricista</strong>
-          <span>Autrial</span>
-          <p>Instalaciones y mantenimiento eléctrico industrial.</p>
-        </div>
-        <div class="cv-item">
-          <strong>Técnico electricista</strong>
-          <span>Elecnor</span>
-          <p>Trabajo en instalaciones eléctricas y proyectos de gran escala.</p>
-        </div>
+        <div class="cv-item"><strong>Técnico electricista</strong><span>Autrial</span></div>
+        <div class="cv-item"><strong>Técnico electricista</strong><span>Elecnor</span></div>
       </div>
 
       <div class="cv-block">
@@ -298,17 +257,23 @@ h1{
 </section>
 
 <script>
-/* nav */
+/* navegación */
 document.querySelectorAll("nav span").forEach((btn,i)=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
   });
 });
 
-/* CV animations */
+/* CV animaciones */
 const cvWrapper=document.querySelector(".cv-wrapper");
 const cvBlocks=document.querySelectorAll(".cv-block");
 
+/* delay automático */
+cvBlocks.forEach((block,i)=>{
+  block.style.transitionDelay = `${i * 120}ms`;
+});
+
+/* línea */
 const cvObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -319,6 +284,7 @@ const cvObserver=new IntersectionObserver((entries)=>{
 
 cvObserver.observe(cvWrapper);
 
+/* bloques */
 const blockObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     entry.target.classList.toggle("is-visible",entry.isIntersecting);
