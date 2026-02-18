@@ -93,7 +93,7 @@ h1{
   padding-left:8px;
   font-size:15px;
   color:#aaa;
-  max-width:600px; /* 🔧 AJUSTE */
+  max-width:565px;
   line-height:1.6;
   text-align:justify;
 }
@@ -140,19 +140,14 @@ h1{
   overflow-x:auto;
   padding-bottom:20px;
   scroll-behavior:smooth;
-  scrollbar-width:thin;
-  scrollbar-color:#444 transparent;
 }
-
-.portfolio-carousel::-webkit-scrollbar{height:6px}
-.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
 
 .project-card{
   min-width:460px;
   text-decoration:none;
   color:inherit;
   opacity:0;
-  transform:translateY(12px);
+  transform:translateY(16px);
   transition:opacity .8s ease, transform .8s ease;
 }
 
@@ -178,18 +173,6 @@ h1{
   transform:scale(1.03);
 }
 
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
 /* CV */
 .timeline{
   position:relative;
@@ -197,8 +180,47 @@ h1{
   padding-left:60px;
 }
 
+.timeline-line{
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
+  background:linear-gradient(#fff,#777);
+  transition:height .4s ease-out;
+}
+
 .timeline-item{
+  position:relative;
+  margin-bottom:80px;
   max-width:460px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-44px;
+  top:50%;
+  transform:translateY(-50%);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.timeline-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
 }
 
 /* CONTACT */
@@ -208,6 +230,23 @@ h1{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
   padding-left:8px;
+}
+
+.contact a{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:28px;
+  border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#f5f5f5;
+  text-decoration:none;
+  transition:.35s ease;
+}
+
+.contact a:hover{
+  transform:translateY(-4px);
 }
 </style>
 </head>
@@ -241,18 +280,76 @@ h1{
         ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
         continuado en la Universitat Politècnica de València y completado con un programa Erasmus
         en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde el periodo de desarrollo hasta la materialización terminal.
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de estudio hasta la materialización final.
       </p>
-      <img src="foto.jpg" alt="">
+      <img src="foto.jpg">
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <a class="project-card"><div class="project-image"><img src="brazo1.jpg"></div></a>
+        <a class="project-card"><div class="project-image"><img src="reloj1.jpg"></div></a>
+        <a class="project-card"><div class="project-image"><img src="secador2.jpg"></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+      <div class="timeline-item"><div class="timeline-card">Universitat Jaume I</div></div>
+      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
+      <div class="timeline-item"><div class="timeline-card">Erasmus · Londres</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:luis@example.com">luis@example.com</a>
     </div>
   </div>
 </section>
 
 <script>
+/* NAV */
+const sections = document.querySelectorAll(".section");
 document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
+  b.onclick=()=>sections[i].scrollIntoView({behavior:"smooth"});
+});
+
+/* INTERSECTION OBSERVER */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("is-visible");
+  });
+},{threshold:0.25});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+
+/* TIMELINE LINE */
+const line = document.getElementById("timelineLine");
+const timeline = document.querySelector(".timeline");
+
+window.addEventListener("scroll",()=>{
+  const r = timeline.getBoundingClientRect();
+  const h = Math.min(window.innerHeight - r.top, r.height);
+  line.style.height = Math.max(0,h)+"px";
 });
 </script>
 
