@@ -93,7 +93,7 @@ h1{
   padding-left:8px;
   font-size:15px;
   color:#aaa;
-  max-width:560px; /* 🔧 REDUCIDO */
+  max-width:560px;
   line-height:1.6;
   text-align:justify;
 }
@@ -102,7 +102,7 @@ h1{
 .about{
   display:flex;
   align-items:flex-start;
-  gap:48px; /* 🔧 ACOMPAÑAMIENTO */
+  gap:48px;
   margin-top:12px;
 }
 
@@ -111,7 +111,7 @@ h1{
   height:400px;
   object-fit:cover;
   opacity:.9;
-  margin-left:0; /* 🔧 */
+  margin-top:24px; /* FOTO BAJADA */
 }
 
 /* PORTFOLIO */
@@ -123,25 +123,173 @@ h1{
   padding-right:120px;
 }
 
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
+}
+
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
   padding-bottom:20px;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
+}
+
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
+
+.project-card{
+  min-width:460px;
+  text-decoration:none;
+  color:inherit;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s ease;
+}
+
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
 }
 
 /* CV */
-.timeline-item{
-  max-width:460px;
+.timeline{
+  position:relative;
+  margin-top:60px;
+  padding-left:60px;
 }
 
-/* CONTACT */
+.timeline-line{
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
+  background:linear-gradient(#fff,#777);
+  transition:height .3s ease-out;
+}
+
+.timeline-item{
+  position:relative;
+  margin-bottom:80px;
+  max-width:460px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-44px;
+  top:50%;
+  transform:translateY(-50%);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.timeline-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+}
+
+.timeline-card h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
+
+.timeline-card span{
+  font-size:13px;
+  color:#888;
+}
+
+/* CONTACT FRAMER */
 .contact{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
   padding-left:8px;
+}
+
+.contact a{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:28px;
+  border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#f5f5f5;
+  text-decoration:none;
+  transition:.35s ease;
+}
+
+.contact a span{
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#888;
+}
+
+.contact a:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 </style>
 </head>
@@ -156,6 +304,7 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -163,6 +312,7 @@ h1{
   </div>
 </section>
 
+<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
@@ -183,10 +333,90 @@ h1{
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+
+        <a href="node.html" class="project-card">
+          <div class="project-image"><img src="brazo1.jpg" alt=""></div>
+          <div class="project-inner"><h2>NODE</h2><span>Proyecto final de grado</span></div>
+        </a>
+
+        <a href="sixay.html" class="project-card">
+          <div class="project-image"><img src="reloj1.jpg" alt=""></div>
+          <div class="project-inner"><h2>Sixay · Cómoda</h2><span>Diseño de mobiliario</span></div>
+        </a>
+
+        <a href="exploracion.html" class="project-card">
+          <div class="project-image"><img src="secador2.jpg" alt=""></div>
+          <div class="project-inner"><h2>Exploración material</h2><span>Proyecto experimental</span></div>
+        </a>
+
+        <a href="conceptual.html" class="project-card">
+          <div class="project-image"><img src="conceptual.jpg" alt=""></div>
+          <div class="project-inner"><h2>Proyecto conceptual</h2><span>Diseño de producto</span></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Jaume I</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Politècnica de València</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Programa Erasmus</strong><span>Londres</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>Español · Inglés · Húngaro</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Software</h3><strong>Rhino · AutoCAD · Inventor · SolidWorks</strong><span>Fusion 360 · Sinutrain · 3ds Max</span></div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<span>Perfil profesional</span></a>
+    </div>
+  </div>
+</section>
+
 <script>
+/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
+});
+
+/* OBSERVER */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+
+/* TIMELINE LINE */
+const line=document.getElementById("timelineLine");
+const timeline=document.querySelector(".timeline");
+
+window.addEventListener("scroll",()=>{
+  const r=timeline.getBoundingClientRect();
+  const h=Math.min(window.innerHeight-r.top,r.height);
+  line.style.height=Math.max(0,h)+"px";
 });
 </script>
 
