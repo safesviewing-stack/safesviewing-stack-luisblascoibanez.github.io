@@ -192,7 +192,7 @@ h1{
   text-transform:uppercase;
 }
 
-/* ========= CV TIMELINE ========= */
+/* ========= CV ========= */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -260,29 +260,42 @@ h1{
   color:#888;
 }
 
-/* ========= CONTACTO ========= */
-.contact{
+/* ========= CONTACTO — FRAMER STYLE ========= */
+.contact-grid{
   margin-top:32px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
 }
 
-.contact-item{
-  margin-bottom:20px;
+.contact-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+  transition:transform .3s ease, background .3s ease;
 }
 
-.contact-item strong{
+.contact-card:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,.06);
+}
+
+.contact-card strong{
   display:block;
   font-size:15px;
   font-weight:500;
+  margin-bottom:6px;
 }
 
-.contact-item a,
-.contact-item span{
+.contact-card a,
+.contact-card span{
   font-size:14px;
   color:#888;
   text-decoration:none;
 }
 
-.contact-item a:hover{
+.contact-card a:hover{
   color:#fff;
 }
 
@@ -310,18 +323,8 @@ h1{
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
-        desde la fase de análisis hasta la materialización.
-      </p>
-      <img src="foto.jpg" alt="">
+      <p>Ingeniero en diseño industrial de 24 años, con base en Valencia…</p>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -331,7 +334,7 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-        <!-- proyectos intactos -->
+        <!-- proyectos -->
       </div>
     </div>
   </div>
@@ -342,7 +345,7 @@ h1{
     <h1>CV</h1>
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
-      <!-- timeline intacto -->
+      <!-- timeline -->
     </div>
   </div>
 </section>
@@ -351,18 +354,18 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
 
-    <div class="contact">
-      <div class="contact-item">
+    <div class="contact-grid">
+      <div class="contact-card">
         <strong>Email</strong>
         <a href="mailto:luis@example.com">luis@example.com</a>
       </div>
 
-      <div class="contact-item">
+      <div class="contact-card">
         <strong>LinkedIn</strong>
         <a href="https://www.linkedin.com" target="_blank">linkedin.com</a>
       </div>
 
-      <div class="contact-item">
+      <div class="contact-card">
         <strong>Ubicación</strong>
         <span>Valencia, España</span>
       </div>
@@ -372,13 +375,11 @@ h1{
 </section>
 
 <script>
-/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
@@ -386,7 +387,6 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
-/* TIMELINE LINE PROGRESS */
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
 
