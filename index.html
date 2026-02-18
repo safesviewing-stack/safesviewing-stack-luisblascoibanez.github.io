@@ -301,7 +301,6 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -309,60 +308,49 @@ h1{
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
-        desde la fase de estudio hasta la materialización final.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico, flexible y
+        adaptable a distintos contextos. Formación en UJI, UPV y Erasmus en Londres, con base técnica
+        en electricidad. Disfruto de todo el proceso de diseño desde la fase de estudio hasta la
+        materialización final.
       </p>
       <img src="foto.jpg">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel" id="portfolioCarousel">
 
-        <a class="project-card"><div class="project-image"><img src="1.jpg"></div><div class="project-inner"><h2>NODE</h2><span>Proyecto final de grado</span></div></a>
-        <a class="project-card"><div class="project-image"><img src="2.jpg"></div><div class="project-inner"><h2>Sixay</h2><span>Diseño de mobiliario</span></div></a>
-        <a class="project-card"><div class="project-image"><img src="3.jpg"></div><div class="project-inner"><h2>Exploración</h2><span>Proyecto experimental</span></div></a>
+        <a class="project-card"><div class="project-image"><img src="1.jpg"></div><div class="project-inner"><h2>NODE</h2><span>Proyecto final</span></div></a>
+        <a class="project-card"><div class="project-image"><img src="2.jpg"></div><div class="project-inner"><h2>Sixay</h2><span>Mobiliario</span></div></a>
+        <a class="project-card"><div class="project-image"><img src="3.jpg"></div><div class="project-inner"><h2>Exploración</h2><span>Experimental</span></div></a>
 
       </div>
     </div>
   </div>
 </section>
 
-<!-- CV -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI</strong><span>Diseño Industrial</span></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UPV</strong><span>Diseño Industrial</span></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Erasmus</h3><strong>Londres</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI · UPV · Londres</strong></div></div>
       <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>Español · Inglés · Húngaro</strong></div></div>
 
     </div>
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
@@ -400,7 +388,7 @@ window.addEventListener("scroll",()=>{
   line.style.height=Math.max(0,h)+"px";
 });
 
-/* ===== SCROLL HORIZONTAL SUAVE ===== */
+/* ===== SCROLL HORIZONTAL SUAVE + CLAMP ===== */
 const carousel = document.getElementById("portfolioCarousel");
 let current = 0;
 let target = 0;
@@ -408,7 +396,9 @@ const ease = 0.08;
 
 carousel.addEventListener("wheel", e=>{
   e.preventDefault();
+  const max = carousel.scrollWidth - carousel.clientWidth;
   target += e.deltaY * 1.2;
+  target = Math.max(0, Math.min(target, max));
 },{passive:false});
 
 function animate(){
