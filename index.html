@@ -93,7 +93,7 @@ h1{
   padding-left:8px;
   font-size:15px;
   color:#aaa;
-  max-width:600px;
+  max-width:565px;
   line-height:1.6;
   text-align:justify;
 }
@@ -190,24 +190,72 @@ h1{
   text-transform:uppercase;
 }
 
-/* CV */
+/* ===== CV ===== */
 .timeline{
   position:relative;
   margin-top:60px;
   padding-left:60px;
 }
 
-.timeline-item{
-  max-width:460px;
+.timeline-line{
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
+  background:linear-gradient(#fff,#777);
+  transition:height .3s ease-out;
 }
 
-/* CONTACT */
-.contact{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
-  padding-left:8px;
+.timeline-item{
+  position:relative;
+  margin-bottom:80px;
+  max-width:460px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-44px;
+  top:50%;
+  transform:translateY(-50%);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.timeline-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+}
+
+.timeline-card h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
+
+.timeline-card span{
+  font-size:13px;
+  color:#888;
 }
 </style>
 </head>
@@ -219,7 +267,6 @@ h1{
   <span data-i="1">Sobre mí</span>
   <span data-i="2">Portfolio</span>
   <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
 </nav>
 
 <!-- HERO -->
@@ -243,8 +290,8 @@ h1{
         ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
         continuado en la Universitat Politècnica de València y completado con un programa Erasmus
         en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde el periodo de desarrollo hasta la materialización terminal.
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de estudio hasta la materialización final.
       </p>
       <img src="foto.jpg" alt="">
     </div>
@@ -283,6 +330,56 @@ h1{
   </div>
 </section>
 
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Universitat Jaume I</strong>
+          <span>Grado en Ingeniería en Diseño Industrial</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Universitat Politècnica de València</strong>
+          <span>Grado en Ingeniería en Diseño Industrial</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Programa Erasmus</strong>
+          <span>Londres</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Idiomas</h3>
+          <strong>Español · Inglés · Húngaro</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Software</h3>
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
+          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <script>
 /* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
@@ -295,8 +392,18 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".project-card")
+document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
+
+/* TIMELINE LINE */
+const line=document.getElementById("timelineLine");
+const timeline=document.querySelector(".timeline");
+
+window.addEventListener("scroll",()=>{
+  const r=timeline.getBoundingClientRect();
+  const h=Math.min(window.innerHeight-r.top,r.height);
+  line.style.height=Math.max(0,h)+"px";
+});
 </script>
 
 </body>
