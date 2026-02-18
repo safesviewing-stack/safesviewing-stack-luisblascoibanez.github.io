@@ -133,11 +133,7 @@ h1{
   width:120px;
   height:100%;
   pointer-events:none;
-  background:linear-gradient(
-    to right,
-    rgba(10,10,10,0),
-    rgba(10,10,10,1)
-  );
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
@@ -150,14 +146,8 @@ h1{
   scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
-}
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
 
 .project-card{
   min-width:460px;
@@ -202,7 +192,7 @@ h1{
   text-transform:uppercase;
 }
 
-/* ========= CV ========= */
+/* ========= CV TIMELINE ========= */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -250,6 +240,24 @@ h1{
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
   padding:28px;
+}
+
+.timeline-card h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
+
+.timeline-card span{
+  font-size:13px;
+  color:#888;
 }
 
 /* ========= CONTACTO ========= */
@@ -326,14 +334,11 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
 
         <a href="node.html" class="project-card">
-          <div class="project-image">
-            <img src="brazo1.jpg" alt="">
-          </div>
+          <div class="project-image"><img src="brazo1.jpg" alt=""></div>
           <div class="project-inner">
             <h2>NODE</h2>
             <span>Proyecto final de grado</span>
@@ -341,9 +346,7 @@ h1{
         </a>
 
         <a href="sixay.html" class="project-card">
-          <div class="project-image">
-            <img src="reloj1.jpg" alt="">
-          </div>
+          <div class="project-image"><img src="reloj1.jpg" alt=""></div>
           <div class="project-inner">
             <h2>Sixay · Cómoda</h2>
             <span>Diseño de mobiliario</span>
@@ -351,9 +354,7 @@ h1{
         </a>
 
         <a href="exploracion.html" class="project-card">
-          <div class="project-image">
-            <img src="secador2.jpg" alt="">
-          </div>
+          <div class="project-image"><img src="secador2.jpg" alt=""></div>
           <div class="project-inner">
             <h2>Exploración material</h2>
             <span>Proyecto experimental</span>
@@ -377,23 +378,47 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
       <div class="timeline-item">
-        <div class="timeline-card">UJI</div>
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>Universitat Jaume I</span>
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-card">UPV</div>
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>Universitat Politècnica de València</span>
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-card">Erasmus Londres</div>
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Programa Erasmus</strong>
+          <span>Londres</span>
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-card">Idiomas · Software</div>
+        <div class="timeline-card">
+          <h3>Idiomas</h3>
+          <strong>Español · Inglés · Húngaro</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Software</h3>
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
+          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+        </div>
       </div>
 
     </div>
