@@ -8,21 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ========= RESET ========= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
   scroll-snap-type:y mandatory;
 }
 
-/* NAV */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;left:50%;
   transform:translateX(-50%);
-  height:80px;
   width:100%;
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -39,7 +41,7 @@ nav span{
   cursor:pointer;
 }
 
-/* SECTIONS */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 22vw;
@@ -50,14 +52,17 @@ nav span{
   max-width:1100px;
 }
 
-/* TITLES */
+/* ========= TITLES ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
+  line-height:1.05;
 }
 
-/* HERO */
-.hero h1{font-size:clamp(80px,7vw,140px)}
+/* ========= HERO ========= */
+.hero h1{
+  font-size:clamp(80px,7vw,140px);
+}
 .hero-sub{
   margin-top:24px;
   font-size:14px;
@@ -65,53 +70,56 @@ h1{
   color:#777;
 }
 
-/* ABOUT */
-.about{display:flex;margin-top:12px}
-.about p{max-width:700px;color:#aaa;line-height:1.6}
-.about img{width:300px;height:400px;margin-left:40px;object-fit:cover}
+/* ========= ABOUT ========= */
+.about{
+  display:flex;
+  margin-top:12px;
+}
+.about p{
+  max-width:700px;
+  color:#aaa;
+  line-height:1.6;
+}
+.about img{
+  width:300px;
+  height:400px;
+  margin-left:40px;
+  object-fit:cover;
+}
 
-/* ===== PORTFOLIO ===== */
+/* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
 }
-
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
   cursor:grab;
   user-select:none;
-  scroll-behavior:auto;
 }
-
-.portfolio-carousel.grabbing{cursor:grabbing}
-
 .project-card{
   min-width:460px;
   opacity:.4;
   transform:scale(.96);
   transition:.4s ease;
 }
-
 .project-card.active{
   opacity:1;
   transform:scale(1);
 }
-
 .project-image{
   position:relative;
   height:260px;
   overflow:hidden;
 }
-
 .project-image img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
-
 .project-overlay{
   position:absolute;
   inset:0;
@@ -122,19 +130,25 @@ h1{
   opacity:0;
   transition:.3s ease;
 }
-
 .project-card.active .project-overlay{opacity:1}
-
 .project-inner h2{
   margin-top:20px;
   font-size:28px;
   font-weight:400;
 }
 
-/* ===== CV ===== */
-.timeline{margin-top:60px;padding-left:60px;position:relative}
+/* ========= CV ========= */
+.timeline{
+  margin-top:60px;
+  padding-left:60px;
+  position:relative;
+}
 .timeline-line{
-  position:absolute;left:20px;top:0;width:1px;height:0;
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
   background:linear-gradient(#fff,#777);
 }
 .timeline-item{
@@ -143,14 +157,19 @@ h1{
   transform:translateY(20px);
   transition:.8s ease;
 }
-.timeline-item.is-visible{opacity:1;transform:none}
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
 .timeline-item::before{
   content:"";
   position:absolute;
   left:-44px;
   top:50%;
   transform:translateY(-50%);
-  width:10px;height:10px;border-radius:50%;
+  width:10px;
+  height:10px;
+  border-radius:50%;
   background:#fff;
 }
 .timeline-card{
@@ -159,7 +178,7 @@ h1{
   padding:28px;
 }
 
-/* CONTACT */
+/* ========= CONTACT ========= */
 .contact a{
   display:block;
   font-size:18px;
@@ -167,7 +186,90 @@ h1{
   text-decoration:none;
   margin-bottom:16px;
 }
-.contact a:hover{color:#fff}
+
+/* ============================= */
+/* ========= TABLET ========= */
+/* ============================= */
+@media (max-width:1199px){
+  .section{
+    padding:160px 8vw 140px 12vw;
+  }
+  .section-block{
+    top:200px;
+  }
+  .project-card{
+    min-width:380px;
+  }
+  .about{
+    flex-direction:column;
+  }
+  .about img{
+    margin:32px 0 0 0;
+    width:100%;
+    height:auto;
+  }
+}
+
+/* ============================= */
+/* ========= MOBILE ========= */
+/* ============================= */
+@media (max-width:767px){
+  nav{
+    gap:24px;
+    height:64px;
+  }
+
+  .section{
+    padding:120px 6vw 100px 6vw;
+  }
+
+  .section-block{
+    position:static;
+  }
+
+  h1{
+    font-size:clamp(44px,10vw,64px);
+  }
+
+  .hero h1{
+    font-size:clamp(52px,12vw,72px);
+  }
+
+  .about img{
+    width:100%;
+    height:auto;
+  }
+
+  .portfolio-carousel{
+    gap:24px;
+  }
+
+  .project-card{
+    min-width:280px;
+  }
+
+  .project-image{
+    height:200px;
+  }
+
+  .timeline{
+    padding-left:0;
+  }
+
+  .timeline-line{
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  .timeline-item::before{
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  .timeline-card{
+    margin-top:24px;
+  }
+}
 </style>
 </head>
 
@@ -203,7 +305,6 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel" id="carousel">
-
         <div class="project-card">
           <div class="project-image">
             <img src="brazo1.jpg">
@@ -211,7 +312,6 @@ h1{
           </div>
           <div class="project-inner"><h2>NODE</h2></div>
         </div>
-
         <div class="project-card">
           <div class="project-image">
             <img src="reloj1.jpg">
@@ -219,7 +319,6 @@ h1{
           </div>
           <div class="project-inner"><h2>Sixay · Cómoda</h2></div>
         </div>
-
       </div>
     </div>
   </div>
@@ -254,45 +353,29 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* ===== DRAG SCROLL (CORRECTO) ===== */
+/* DRAG SCROLL */
 const carousel=document.getElementById("carousel");
-let isDragging=false;
-let startX=0;
-let startScroll=0;
+let dragging=false,startX,scrollStart;
 
 carousel.addEventListener("pointerdown",e=>{
-  isDragging=true;
-  carousel.classList.add("grabbing");
+  dragging=true;
   startX=e.clientX;
-  startScroll=carousel.scrollLeft;
+  scrollStart=carousel.scrollLeft;
   carousel.setPointerCapture(e.pointerId);
 });
-
 carousel.addEventListener("pointermove",e=>{
-  if(!isDragging) return;
-  const dx=e.clientX-startX;
-  carousel.scrollLeft=startScroll-dx;
+  if(!dragging)return;
+  carousel.scrollLeft=scrollStart-(e.clientX-startX);
 });
-
-carousel.addEventListener("pointerup",()=>{
-  isDragging=false;
-  carousel.classList.remove("grabbing");
-});
-
-carousel.addEventListener("pointerleave",()=>{
-  isDragging=false;
-  carousel.classList.remove("grabbing");
-});
+carousel.addEventListener("pointerup",()=>dragging=false);
+carousel.addEventListener("pointerleave",()=>dragging=false);
 
 /* ACTIVE CARD */
 function updateActive(){
   const center=window.innerWidth/2;
   document.querySelectorAll(".project-card").forEach(card=>{
     const r=card.getBoundingClientRect();
-    card.classList.toggle(
-      "active",
-      Math.abs(r.left+r.width/2-center)<200
-    );
+    card.classList.toggle("active",Math.abs(r.left+r.width/2-center)<180);
   });
 }
 carousel.addEventListener("scroll",updateActive);
