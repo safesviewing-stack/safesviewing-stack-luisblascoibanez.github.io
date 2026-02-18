@@ -8,35 +8,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ========= RESET ========= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
-/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
-/* ========= NAV ========= */
+/* NAV */
 nav{
   position:fixed;
-  top:0;
-  left:50%;
+  top:0;left:50%;
   transform:translateX(-50%);
-  width:100%;
   height:80px;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
+  background:rgba(10,10,10,.4);
   z-index:100;
 }
-
 nav span{
   font-size:11px;
   letter-spacing:.3em;
@@ -45,46 +39,38 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
+/* SECTIONS */
 .section{
   min-height:100vh;
-  scroll-snap-align:start;
   padding:180px 10vw 160px 22vw;
 }
-
 .section-block{
   position:sticky;
   top:260px;
   max-width:1100px;
 }
 
-/* ========= TITLES ========= */
+/* TITLES */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
-  line-height:1.05;
 }
 
-/* ========= HERO ========= */
-.hero h1{
-  font-size:clamp(80px,7vw,140px);
-  margin-left:-4px;
-}
-
+/* HERO */
+.hero h1{font-size:clamp(80px,7vw,140px)}
 .hero-sub{
   margin-top:24px;
-  padding-left:4px;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
 
-/* ========= ABOUT ========= */
+/* ABOUT */
 .about{display:flex;margin-top:12px}
 .about p{max-width:700px;color:#aaa;line-height:1.6}
 .about img{width:300px;height:400px;margin-left:40px;object-fit:cover}
 
-/* ========= PORTFOLIO ========= */
+/* ===== PORTFOLIO ===== */
 .portfolio-wrapper{
   margin-top:32px;
   margin-left:8px;
@@ -96,17 +82,17 @@ h1{
   gap:48px;
   overflow-x:auto;
   cursor:grab;
-  scroll-behavior:smooth;
+  user-select:none;
+  scroll-behavior:auto;
 }
 
 .portfolio-carousel.grabbing{cursor:grabbing}
 
 .project-card{
   min-width:460px;
-  position:relative;
-  transition:.4s ease;
   opacity:.4;
   transform:scale(.96);
+  transition:.4s ease;
 }
 
 .project-card.active{
@@ -124,7 +110,6 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:.6s ease;
 }
 
 .project-overlay{
@@ -135,7 +120,7 @@ h1{
   align-items:flex-end;
   padding:24px;
   opacity:0;
-  transition:.4s ease;
+  transition:.3s ease;
 }
 
 .project-card.active .project-overlay{opacity:1}
@@ -146,12 +131,11 @@ h1{
   font-weight:400;
 }
 
-/* ========= CV ========= */
+/* ===== CV ===== */
 .timeline{margin-top:60px;padding-left:60px;position:relative}
 .timeline-line{
   position:absolute;left:20px;top:0;width:1px;height:0;
   background:linear-gradient(#fff,#777);
-  transition:height .25s ease-out;
 }
 .timeline-item{
   margin-bottom:80px;
@@ -175,22 +159,15 @@ h1{
   padding:28px;
 }
 
-/* ========= CONTACT ========= */
-.contact{
-  margin-top:40px;
-}
-
+/* CONTACT */
 .contact a{
   display:block;
   font-size:18px;
   color:#ddd;
-  margin-bottom:16px;
   text-decoration:none;
-  transition:.3s ease;
+  margin-bottom:16px;
 }
-
 .contact a:hover{color:#fff}
-
 </style>
 </head>
 
@@ -265,7 +242,7 @@ h1{
     <h1>Contacto</h1>
     <div class="contact">
       <a href="mailto:luis@email.com">luis@email.com</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="#">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -277,40 +254,53 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* DRAG SCROLL */
+/* ===== DRAG SCROLL (CORRECTO) ===== */
 const carousel=document.getElementById("carousel");
-let isDown=false,startX,scrollLeft;
+let isDragging=false;
+let startX=0;
+let startScroll=0;
 
-carousel.addEventListener("mousedown",e=>{
-  isDown=true;
+carousel.addEventListener("pointerdown",e=>{
+  isDragging=true;
   carousel.classList.add("grabbing");
-  startX=e.pageX-carousel.offsetLeft;
-  scrollLeft=carousel.scrollLeft;
+  startX=e.clientX;
+  startScroll=carousel.scrollLeft;
+  carousel.setPointerCapture(e.pointerId);
 });
-carousel.addEventListener("mouseleave",()=>isDown=false);
-carousel.addEventListener("mouseup",()=>isDown=false);
-carousel.addEventListener("mousemove",e=>{
-  if(!isDown)return;
-  e.preventDefault();
-  const x=e.pageX-carousel.offsetLeft;
-  carousel.scrollLeft=scrollLeft-(x-startX)*1.2;
+
+carousel.addEventListener("pointermove",e=>{
+  if(!isDragging) return;
+  const dx=e.clientX-startX;
+  carousel.scrollLeft=startScroll-dx;
+});
+
+carousel.addEventListener("pointerup",()=>{
+  isDragging=false;
+  carousel.classList.remove("grabbing");
+});
+
+carousel.addEventListener("pointerleave",()=>{
+  isDragging=false;
+  carousel.classList.remove("grabbing");
 });
 
 /* ACTIVE CARD */
 function updateActive(){
-  const cards=[...document.querySelectorAll(".project-card")];
   const center=window.innerWidth/2;
-  cards.forEach(card=>{
+  document.querySelectorAll(".project-card").forEach(card=>{
     const r=card.getBoundingClientRect();
-    card.classList.toggle("active",Math.abs(r.left+r.width/2-center)<200);
+    card.classList.toggle(
+      "active",
+      Math.abs(r.left+r.width/2-center)<200
+    );
   });
 }
 carousel.addEventListener("scroll",updateActive);
 updateActive();
 
 /* TIMELINE LINE */
-const line=document.getElementById("timelineLine");
 const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
 window.addEventListener("scroll",()=>{
   const r=timeline.getBoundingClientRect();
   line.style.height=Math.max(0,Math.min(window.innerHeight-r.top,r.height))+"px";
