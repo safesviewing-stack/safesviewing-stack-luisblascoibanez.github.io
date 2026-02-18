@@ -107,11 +107,11 @@ h1{
 }
 
 .about img{
-  width:300px;
-  height:400px;
+  width:360px;          /* 🔧 MÁS GRANDE */
+  height:480px;         /* 🔧 MÁS GRANDE */
   object-fit:cover;
   opacity:.9;
-  margin-top:12px; /* 🔧 SUBIDA UN POCO */
+  margin-top:12px;
 }
 
 /* PORTFOLIO */
@@ -197,99 +197,17 @@ h1{
   padding-left:60px;
 }
 
-.timeline-line{
-  position:absolute;
-  left:20px;
-  top:0;
-  width:1px;
-  height:0;
-  background:linear-gradient(#fff,#777);
-  transition:height .3s ease-out;
-}
-
 .timeline-item{
-  position:relative;
-  margin-bottom:80px;
   max-width:460px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.8s ease;
 }
 
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:-44px;
-  top:50%;
-  transform:translateY(-50%);
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-}
-
-.timeline-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
-}
-
-.timeline-card h3{
-  font-size:18px;
-  font-weight:500;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:16px;
-}
-
-.timeline-card strong{
-  display:block;
-  font-size:16px;
-}
-
-.timeline-card span{
-  font-size:13px;
-  color:#888;
-}
-
-/* CONTACT FRAMER */
+/* CONTACT */
 .contact{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
   padding-left:8px;
-}
-
-.contact a{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:28px;
-  border-radius:20px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  color:#f5f5f5;
-  text-decoration:none;
-  transition:.35s ease;
-}
-
-.contact a span{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:#888;
-}
-
-.contact a:hover{
-  transform:translateY(-4px);
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 </style>
 </head>
