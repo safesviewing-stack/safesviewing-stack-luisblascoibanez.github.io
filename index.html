@@ -8,17 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
-/* ================= BODY ================= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
   scroll-snap-type:y mandatory;
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:0;left:50%;
@@ -41,7 +39,7 @@ nav span{
   cursor:pointer;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 22vw;
@@ -52,14 +50,14 @@ nav span{
   max-width:1100px;
 }
 
-/* ================= TITLES ================= */
+/* TITLES */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero h1{font-size:clamp(80px,7vw,140px)}
 .hero-sub{
   margin-top:24px;
@@ -68,12 +66,12 @@ h1{
   color:#777;
 }
 
-/* ================= ABOUT ================= */
+/* ABOUT */
 .about{display:flex;margin-top:12px}
 .about p{max-width:700px;color:#aaa;line-height:1.6}
 .about img{width:300px;height:400px;margin-left:40px;object-fit:cover}
 
-/* ================= PORTFOLIO ================= */
+/* PORTFOLIO */
 .portfolio-wrapper{margin-top:32px;margin-left:8px;overflow:hidden}
 .portfolio-carousel{
   display:flex;
@@ -82,7 +80,6 @@ h1{
   cursor:grab;
   user-select:none;
 }
-.portfolio-carousel.grabbing{cursor:grabbing}
 .project-card{
   min-width:460px;
   opacity:.4;
@@ -105,76 +102,94 @@ h1{
 .project-card.active .project-overlay{opacity:1}
 .project-inner h2{margin-top:20px;font-size:28px;font-weight:400}
 
-/* ================= CV ================= */
-.timeline{margin-top:60px;padding-left:60px;position:relative}
+/* ================= CV (RESTAURADO) ================= */
+.timeline{
+  position:relative;
+  margin-top:60px;
+  padding-left:60px;
+}
 .timeline-line{
-  position:absolute;left:20px;top:0;width:1px;height:0;
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
   background:linear-gradient(#fff,#777);
+  transition:height .25s ease-out;
 }
 .timeline-item{
+  position:relative;
   margin-bottom:80px;
+  max-width:520px;
   opacity:0;
   transform:translateY(20px);
   transition:.8s ease;
 }
-.timeline-item.is-visible{opacity:1;transform:none}
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
 .timeline-item::before{
   content:"";
   position:absolute;
   left:-44px;
   top:50%;
   transform:translateY(-50%);
-  width:10px;height:10px;border-radius:50%;
+  width:10px;
+  height:10px;
+  border-radius:50%;
   background:#fff;
 }
 .timeline-card{
   background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
   padding:28px;
 }
+.timeline-card h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
+.timeline-card span{
+  font-size:13px;
+  color:#888;
+}
 
-/* ================= CONTACT (NUEVO) ================= */
+/* ================= CONTACTO (FRAMER) ================= */
 .contact{
-  margin-top:40px;
+  margin-top:60px;
   display:flex;
   flex-direction:column;
-  gap:28px;
+  gap:48px;
 }
-
-.contact a{
-  font-size:26px;
+.contact::before{
+  content:"";
+  width:120px;
+  height:1px;
+  background:rgba(255,255,255,.15);
+}
+.contact-item{
+  font-size:clamp(28px,3vw,42px);
   font-weight:400;
-  color:#ddd;
+  color:#eee;
   text-decoration:none;
-  position:relative;
   width:fit-content;
   opacity:0;
-  transform:translateY(16px);
-  transition:
-    opacity .8s ease,
-    transform .8s ease,
-    color .3s ease;
+  transform:translateY(24px);
+  transition:opacity .9s ease, transform .9s ease, color .3s ease;
 }
-
-.contact a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:#fff;
-  transition:.3s ease;
-}
-
-.contact a:hover{color:#fff}
-.contact a:hover::after{width:100%}
-
-.contact a.is-visible{
+.contact-item:hover{color:#fff}
+.contact-item.is-visible{
   opacity:1;
   transform:none;
 }
-
 </style>
 </head>
 
@@ -210,7 +225,6 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel" id="carousel">
-
         <div class="project-card">
           <div class="project-image">
             <img src="brazo1.jpg">
@@ -218,15 +232,6 @@ h1{
           </div>
           <div class="project-inner"><h2>NODE</h2></div>
         </div>
-
-        <div class="project-card">
-          <div class="project-image">
-            <img src="reloj1.jpg">
-            <div class="project-overlay"><span>Mobiliario</span></div>
-          </div>
-          <div class="project-inner"><h2>Sixay · Cómoda</h2></div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -237,9 +242,46 @@ h1{
     <h1>CV</h1>
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
-      <div class="timeline-item"><div class="timeline-card">UJI</div></div>
-      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
-      <div class="timeline-item"><div class="timeline-card">Erasmus · Londres</div></div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>Universitat Jaume I</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>Universitat Politècnica de València</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Programa Erasmus</strong>
+          <span>Londres</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Idiomas</h3>
+          <strong>Español · Inglés · Húngaro</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Software</h3>
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
+          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -248,8 +290,8 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact">
-      <a href="mailto:luis@email.com">luis@email.com</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a class="contact-item" href="mailto:luis@email.com">luis@email.com</a>
+      <a class="contact-item" href="https://linkedin.com" target="_blank">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -263,13 +305,15 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
 
 /* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("is-visible");
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add("is-visible"),i*120);
+    }
   });
-},{threshold:.2});
+},{threshold:.3});
 
 document
-  .querySelectorAll(".timeline-item,.contact a")
+  .querySelectorAll(".timeline-item,.contact-item")
   .forEach(el=>observer.observe(el));
 
 /* TIMELINE LINE */
