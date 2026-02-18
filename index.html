@@ -39,7 +39,7 @@ nav{
   gap:50px;
   background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
-  z-index:1000;
+  z-index:100;
 }
 
 nav span{
@@ -163,6 +163,35 @@ h1{
   transform:none;
 }
 
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s ease;
+}
+
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
 /* ========= CV ========= */
 .timeline{
   position:relative;
@@ -177,11 +206,21 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
+  transition:height .25s ease-out;
 }
 
 .timeline-item{
   position:relative;
   margin-bottom:80px;
+  max-width:520px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
 }
 
 .timeline-item::before{
@@ -203,51 +242,7 @@ h1{
   padding:28px;
 }
 
-.timeline-card h3{
-  font-size:18px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:12px;
-}
-
-.timeline-card strong{
-  display:block;
-  font-size:16px;
-}
-
-.timeline-card span{
-  font-size:13px;
-  color:#888;
-}
-
-/* ========= BOTÓN DESCARGA CV (NUEVO) ========= */
-.cv-download{
-  margin-top:32px;
-  padding-left:8px;
-}
-
-.cv-download a{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 22px;
-  border-radius:999px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
-  color:#f5f5f5;
-  font-size:14px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  text-decoration:none;
-  transition:.3s ease;
-}
-
-.cv-download a:hover{
-  background:rgba(255,255,255,.08);
-  transform:translateY(-1px);
-}
-
-/* ========= CONTACTO ========= */
+/* ========= CONTACTO — FRAMER FINO ========= */
 .contact-framer{
   margin-top:60px;
   display:flex;
@@ -274,6 +269,11 @@ h1{
   background:rgba(255,255,255,.055);
 }
 
+.contact-left{
+  display:flex;
+  flex-direction:column;
+}
+
 .contact-left span{
   font-size:11px;
   letter-spacing:.18em;
@@ -290,6 +290,12 @@ h1{
 .contact-arrow{
   font-size:17px;
   color:#666;
+  transition:.35s ease;
+}
+
+.contact-card:hover .contact-arrow{
+  transform:translateX(4px);
+  color:#aaa;
 }
 
 </style>
@@ -305,7 +311,6 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -313,21 +318,26 @@ h1{
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        técnico y creativo, con formación en diseño industrial y electricidad.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de análisis hasta la materialización.
       </p>
       <img src="foto.jpg" alt="">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
@@ -339,48 +349,45 @@ h1{
   </div>
 </section>
 
-<!-- CV -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-
-    <!-- BOTÓN DESCARGA -->
-    <div class="cv-download">
-      <a href="cv-luis-blasco.pdf" download>
-        Descargar CV detallado
-      </a>
-    </div>
-
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
-      <!-- timeline items -->
     </div>
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
+
     <div class="contact-framer">
+
       <a href="tel:+34600000000" class="contact-card">
         <div class="contact-left">
           <span>Teléfono</span>
           <strong>+34 600 000 000</strong>
         </div>
+        <div class="contact-arrow">→</div>
       </a>
+
       <a href="mailto:luis@example.com" class="contact-card">
         <div class="contact-left">
           <span>Email</span>
           <strong>luis@example.com</strong>
         </div>
+        <div class="contact-arrow">→</div>
       </a>
+
       <a href="https://www.linkedin.com" target="_blank" class="contact-card">
         <div class="contact-left">
           <span>LinkedIn</span>
           <strong>Perfil profesional</strong>
         </div>
+        <div class="contact-arrow">→</div>
       </a>
+
     </div>
   </div>
 </section>
@@ -390,6 +397,13 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
 
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
