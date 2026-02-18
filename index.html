@@ -76,18 +76,32 @@ h1{
 
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
+  margin-left:-4px;
 }
 
 .hero-sub{
   margin-top:24px;
+  padding-left:4px;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
 
+/* TEXT */
+.section-block p{
+  margin-top:8px;
+  padding-left:8px;
+  font-size:15px;
+  color:#aaa;
+  max-width:700px;
+  line-height:1.6;
+  text-align:justify;
+}
+
 /* ABOUT */
 .about{
   display:flex;
+  align-items:flex-start;
   margin-top:12px;
 }
 
@@ -99,43 +113,44 @@ h1{
   opacity:.9;
 }
 
-.section-block p{
-  font-size:15px;
-  color:#aaa;
-  max-width:700px;
-  line-height:1.6;
-  text-align:justify;
-}
-
 /* PORTFOLIO */
 .portfolio-wrapper{
+  position:relative;
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
   padding-right:120px;
-  position:relative;
 }
 
 .portfolio-wrapper::after{
   content:"";
   position:absolute;
-  right:0;
   top:0;
+  right:0;
   width:120px;
   height:100%;
-  background:linear-gradient(to right,rgba(10,10,10,0),#0a0a0a);
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
+  padding-bottom:20px;
 }
 
 .project-card{
   min-width:460px;
   text-decoration:none;
   color:inherit;
+  opacity:0;
+  transform:translateY(12px);
+  transition:.8s ease;
+}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
 }
 
 .project-image{
@@ -164,12 +179,20 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
-  transition:height .4s ease;
 }
 
 .timeline-item{
   position:relative;
   margin-bottom:80px;
+  max-width:520px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
 }
 
 .timeline-item::before{
@@ -214,6 +237,7 @@ h1{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
+  padding-left:8px;
 }
 
 .contact a{
@@ -221,20 +245,8 @@ h1{
   border-radius:20px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  text-decoration:none;
   color:#f5f5f5;
-  transition:.3s ease;
-}
-
-.contact a span{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:#888;
-}
-
-.contact a:hover{
-  transform:translateY(-4px);
+  text-decoration:none;
 }
 </style>
 </head>
@@ -261,9 +273,9 @@ h1{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico, flexible y
-        técnico-creativo. Formación en UJI, UPV y Erasmus en Londres. Formación profesional en
-        electricidad y enfoque completo del proceso de diseño.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
+        técnico y creativo, formado en UJI, UPV y Erasmus en Londres, con formación
+        profesional en electricidad.
       </p>
       <img src="foto.jpg">
     </div>
@@ -285,13 +297,14 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <strong>Ingeniería en Diseño Industrial</strong>
           <span>Universitat Jaume I</span>
         </div>
       </div>
@@ -299,16 +312,15 @@ h1{
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <strong>Ingeniería en Diseño Industrial</strong>
           <span>Universitat Politècnica de València</span>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Programa Erasmus</strong>
-          <span>Londres</span>
+          <h3>Erasmus</h3>
+          <strong>Londres</strong>
         </div>
       </div>
 
@@ -335,9 +347,9 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact">
-      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
-      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
-      <a href="https://www.linkedin.com" target="_blank">LinkedIn<span>Perfil profesional</span></a>
+      <a href="tel:+34600000000">+34 600 000 000</a>
+      <a href="mailto:luis@example.com">luis@example.com</a>
+      <a href="#">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -348,15 +360,12 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
-const line=document.getElementById("timelineLine");
-const timeline=document.querySelector(".timeline");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
 
-window.addEventListener("scroll",()=>{
-  if(!timeline||!line) return;
-  const rect=timeline.getBoundingClientRect();
-  const visible=Math.min(window.innerHeight-rect.top,rect.height);
-  line.style.height=Math.max(0,visible)+"px";
-});
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
 </script>
 
 </body>
