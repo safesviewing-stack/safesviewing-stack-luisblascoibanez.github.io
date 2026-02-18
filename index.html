@@ -206,7 +206,7 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
-  transition:height .6s cubic-bezier(.4,0,.2,1);
+  transition:height .25s ease-out; /* MÁS RÁPIDA */
 }
 
 .timeline-item{
@@ -223,7 +223,6 @@ h1{
   transform:none;
 }
 
-/* 🔹 PUNTO CENTRADO EN CADA BLOQUE */
 .timeline-item::before{
   content:"";
   position:absolute;
@@ -409,15 +408,14 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
-/* TIMELINE LINE PROGRESS */
+/* TIMELINE LINE PROGRESS (MÁS DIRECTA) */
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
 
 window.addEventListener("scroll",()=>{
   const rect=timeline.getBoundingClientRect();
-  const raw=Math.min(window.innerHeight-rect.top,rect.height);
-  const eased=raw*0.85;
-  line.style.height=Math.max(0,eased)+"px";
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
 });
 </script>
 
