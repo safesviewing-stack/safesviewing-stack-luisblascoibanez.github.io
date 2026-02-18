@@ -8,17 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= RESET ================= */
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
-/* ================= BODY ================= */
+/* ========= RESET ========= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
+  overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
-/* ================= NAV ================= */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -34,6 +41,7 @@ nav{
   backdrop-filter:blur(12px);
   z-index:100;
 }
+
 nav span{
   font-size:11px;
   letter-spacing:.3em;
@@ -42,48 +50,60 @@ nav span{
   cursor:pointer;
 }
 
-/* ================= SECTIONS ================= */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
+  display:flex;
+  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
 }
+
 .section-block{
   position:sticky;
   top:260px;
   max-width:1100px;
 }
 
-/* ================= TITLES ================= */
+/* ========= TITULOS ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* ================= HERO ================= */
-.hero h1{
+/* ========= HERO ========= */
+.section.hero{
+  align-items:center;
+}
+
+.section.hero h1{
   font-size:clamp(80px,7vw,140px);
   margin-left:-4px;
 }
+
 .hero-sub{
   margin-top:24px;
+  padding-left:4px;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
 
-/* ================= ABOUT ================= */
+/* ========= ABOUT ========= */
 .about{
   display:flex;
+  align-items:flex-start;
   margin-top:12px;
 }
+
 .about p{
   font-size:15px;
   color:#aaa;
-  line-height:1.6;
   max-width:700px;
+  line-height:1.6;
 }
+
 .about img{
   width:300px;
   height:400px;
@@ -92,29 +112,47 @@ h1{
   opacity:.9;
 }
 
-/* ================= PORTFOLIO ================= */
+/* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
+  position:relative;
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
   padding-right:120px;
-  position:relative;
 }
+
 .portfolio-wrapper::after{
   content:"";
   position:absolute;
-  right:0;top:0;
-  width:120px;height:100%;
-  background:linear-gradient(to right,transparent,#0a0a0a);
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(
+    to right,
+    rgba(10,10,10,0),
+    rgba(10,10,10,1)
+  );
 }
+
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
   padding-bottom:20px;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
 }
-.portfolio-carousel::-webkit-scrollbar{height:6px}
-.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
+
+.portfolio-carousel::-webkit-scrollbar{
+  height:6px;
+}
+
+.portfolio-carousel::-webkit-scrollbar-thumb{
+  background:#444;
+  border-radius:6px;
+}
 
 .project-card{
   min-width:460px;
@@ -124,22 +162,34 @@ h1{
   transform:translateY(12px);
   transition:.8s ease;
 }
-.project-card.is-visible{opacity:1;transform:none}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
 
 .project-image{
   height:260px;
   margin-bottom:20px;
   overflow:hidden;
 }
+
 .project-image img{
   width:100%;
   height:100%;
   object-fit:cover;
   transition:.4s ease;
 }
-.project-card:hover img{transform:scale(1.03)}
 
-.project-inner h2{font-size:28px;font-weight:400}
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
 .project-inner span{
   font-size:12px;
   letter-spacing:.18em;
@@ -147,12 +197,13 @@ h1{
   text-transform:uppercase;
 }
 
-/* ================= CV ================= */
+/* ========= CV ========= */
 .timeline{
+  position:relative;
   margin-top:60px;
   padding-left:60px;
-  position:relative;
 }
+
 .timeline-line{
   position:absolute;
   left:20px;
@@ -162,72 +213,57 @@ h1{
   background:linear-gradient(#fff,#777);
   transition:height .25s ease-out;
 }
+
 .timeline-item{
+  position:relative;
   margin-bottom:80px;
   max-width:520px;
   opacity:0;
   transform:translateY(20px);
   transition:.8s ease;
-  position:relative;
 }
-.timeline-item.is-visible{opacity:1;transform:none}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
 .timeline-item::before{
   content:"";
   position:absolute;
   left:-44px;
   top:50%;
   transform:translateY(-50%);
-  width:10px;height:10px;
+  width:10px;
+  height:10px;
   border-radius:50%;
   background:#fff;
 }
+
 .timeline-card{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
   padding:28px;
 }
+
 .timeline-card h3{
   font-size:18px;
   letter-spacing:.12em;
   text-transform:uppercase;
   margin-bottom:16px;
 }
-.timeline-card strong{font-size:16px}
-.timeline-card span{font-size:13px;color:#888}
 
-/* ================= CONTACT ================= */
-.contact-grid{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
+.timeline-card strong{
+  display:block;
+  font-size:16px;
 }
-.contact-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
-  opacity:0;
-  transform:translateY(16px);
-  transition:.6s ease;
-}
-.contact-card.is-visible{opacity:1;transform:none}
-.copy-btn{
-  margin-top:8px;
-  font-size:12px;
-  color:#aaa;
-  cursor:pointer;
-}
-.copy-btn.copied{color:#fff}
 
-/* ================= FOOTER ================= */
-footer{
-  padding:60px 10vw 40px 22vw;
-  font-size:11px;
-  letter-spacing:.2em;
-  color:#666;
+.timeline-card span{
+  font-size:13px;
+  color:#888;
 }
+
 </style>
 </head>
 
@@ -238,7 +274,6 @@ footer{
   <span>Sobre mí</span>
   <span>Portfolio</span>
   <span>CV</span>
-  <span>Contacto</span>
 </nav>
 
 <section class="section hero">
@@ -252,8 +287,11 @@ footer{
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>Ingeniero en diseño industrial de 24 años, con base en Valencia…</p>
-      <img src="foto.jpg">
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
+        con formación técnica y sensibilidad por el proceso completo de diseño.
+      </p>
+      <img src="foto.jpg" alt="">
     </div>
   </div>
 </section>
@@ -261,10 +299,26 @@ footer{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
+
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>NODE</h2></div></a>
-        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>Sixay · Cómoda</h2></div></a>
+
+        <a href="#" class="project-card">
+          <div class="project-image"><img src="brazo1.jpg"></div>
+          <div class="project-inner">
+            <h2>NODE</h2>
+            <span>Proyecto final de grado</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-image"><img src="reloj1.jpg"></div>
+          <div class="project-inner">
+            <h2>Sixay · Cómoda</h2>
+            <span>Diseño de mobiliario</span>
+          </div>
+        </a>
+
       </div>
     </div>
   </div>
@@ -273,52 +327,58 @@ footer{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+
     <div class="timeline">
-      <div class="timeline-line" id="line"></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI</strong></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UPV</strong></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Erasmus</h3><strong>Londres</strong></div></div>
-    </div>
-  </div>
-</section>
+      <div class="timeline-line" id="timelineLine"></div>
 
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <strong>Email</strong>
-        <div>luis@example.com</div>
-        <div class="copy-btn" data-copy="luis@example.com">Copiar email</div>
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Universitat Jaume I</strong>
+        </div>
       </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Universitat Politècnica de València</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Erasmus</h3>
+          <strong>Londres</strong>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
-
-<footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
 
 <script>
+/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting));
+/* OBSERVER */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
-document.querySelectorAll(".project-card,.timeline-item,.contact-card").forEach(el=>obs.observe(el));
 
-const line=document.getElementById("line");
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+
+/* TIMELINE LINE */
+const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+
 window.addEventListener("scroll",()=>{
-  const t=document.querySelector(".timeline").getBoundingClientRect();
-  line.style.height=Math.max(0,Math.min(window.innerHeight-t.top,t.height))+"px";
-});
-
-document.querySelectorAll(".copy-btn").forEach(b=>{
-  b.onclick=()=>{
-    navigator.clipboard.writeText(b.dataset.copy);
-    b.textContent="Copiado";
-    setTimeout(()=>b.textContent="Copiar email",1500);
-  };
+  const rect=timeline.getBoundingClientRect();
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
 });
 </script>
 
