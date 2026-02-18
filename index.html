@@ -10,12 +10,18 @@
 <style>
 
 /* ========= RESET ========= */
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
 
 /* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
+  overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
@@ -48,6 +54,8 @@ nav span{
 .section{
   min-height:100vh;
   scroll-snap-align:start;
+  display:flex;
+  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
 }
 
@@ -58,7 +66,11 @@ nav span{
 }
 
 /* ========= HERO ========= */
-.hero h1{
+.section.hero{
+  align-items:center;
+}
+
+.section.hero h1{
   font-size:clamp(80px,7vw,140px);
   line-height:1.05;
   margin-left:-4px;
@@ -73,32 +85,49 @@ nav span{
 }
 
 /* ========= TEXT ========= */
-p{
+.section-block p{
+  margin-top:8px;
+  padding-left:8px;
   font-size:15px;
-  line-height:1.6;
   color:#aaa;
+  max-width:700px;
+  line-height:1.6;
+  text-align:justify;
 }
 
 /* ========= ABOUT ========= */
 .about{
   display:flex;
-  gap:40px;
+  align-items:flex-start;
   margin-top:12px;
 }
 
 .about img{
   width:300px;
   height:400px;
+  margin-left:40px;
   object-fit:cover;
   opacity:.9;
 }
 
-/* ========= PORTFOLIO (INTOCABLE) ========= */
+/* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
+  position:relative;
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
   padding-right:120px;
+}
+
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
@@ -106,6 +135,7 @@ p{
   gap:48px;
   overflow-x:auto;
   padding-bottom:20px;
+  scroll-behavior:smooth;
   scrollbar-width:thin;
   scrollbar-color:#444 transparent;
 }
@@ -115,12 +145,46 @@ p{
 
 .project-card{
   min-width:460px;
+  text-decoration:none;
+  color:inherit;
   opacity:0;
   transform:translateY(12px);
-  transition:.8s ease;
+  transition:opacity .8s ease, transform .8s ease;
 }
 
-.project-card.is-visible{opacity:1;transform:none}
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s ease;
+}
+
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
 
 /* ========= CV TIMELINE ========= */
 .timeline{
@@ -129,14 +193,14 @@ p{
   padding-left:60px;
 }
 
-.timeline::before{
-  content:"";
+.timeline-line{
   position:absolute;
   left:20px;
   top:0;
-  bottom:0;
-  width:1px;
-  background:rgba(255,255,255,.12);
+  width:2px;
+  height:0;
+  background:linear-gradient(#fff,#777);
+  transition:height .2s linear;
 }
 
 .timeline-item{
@@ -172,28 +236,20 @@ p{
 }
 
 .timeline-card h3{
-  font-size:15px;
+  font-size:14px;
   letter-spacing:.15em;
   text-transform:uppercase;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
 .timeline-card strong{
   display:block;
   font-size:16px;
-  margin-bottom:4px;
 }
 
 .timeline-card span{
   font-size:13px;
   color:#888;
-}
-
-/* ========= FOOTER ========= */
-.footer{
-  font-size:11px;
-  letter-spacing:.18em;
-  color:#cfcfcf;
 }
 
 </style>
@@ -220,8 +276,15 @@ p{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        con formación técnica y sensibilidad por el proceso completo de diseño.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de análisis hasta la materialización.
       </p>
       <img src="foto.jpg">
     </div>
@@ -231,12 +294,42 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
+
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-        <div class="project-card">NODE</div>
-        <div class="project-card">Sixay · Cómoda</div>
-        <div class="project-card">Exploración material</div>
-        <div class="project-card">Proyecto conceptual</div>
+
+        <a href="node.html" class="project-card">
+          <div class="project-image"><img src="brazo1.jpg"></div>
+          <div class="project-inner">
+            <h2>NODE</h2>
+            <span>Proyecto final de grado</span>
+          </div>
+        </a>
+
+        <a href="sixay.html" class="project-card">
+          <div class="project-image"><img src="reloj1.jpg"></div>
+          <div class="project-inner">
+            <h2>Sixay · Cómoda</h2>
+            <span>Diseño de mobiliario</span>
+          </div>
+        </a>
+
+        <a href="exploracion.html" class="project-card">
+          <div class="project-image"><img src="secador2.jpg"></div>
+          <div class="project-inner">
+            <h2>Exploración material</h2>
+            <span>Proyecto experimental</span>
+          </div>
+        </a>
+
+        <a href="conceptual.html" class="project-card">
+          <div class="project-image"></div>
+          <div class="project-inner">
+            <h2>Proyecto conceptual</h2>
+            <span>Diseño de producto</span>
+          </div>
+        </a>
+
       </div>
     </div>
   </div>
@@ -247,6 +340,7 @@ p{
     <h1>CV</h1>
 
     <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
 
       <div class="timeline-item">
         <div class="timeline-card">
@@ -292,17 +386,29 @@ p{
 </section>
 
 <script>
+/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
 
-const observer=new IntersectionObserver(e=>{
-  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting));
+/* OBSERVER */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
+
+/* TIMELINE LINE PROGRESS */
+const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+
+window.addEventListener("scroll",()=>{
+  const rect=timeline.getBoundingClientRect();
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
+});
 </script>
 
 </body>
