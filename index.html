@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ===== RESET ===== */
 *{
   margin:0;
   padding:0;
@@ -15,6 +16,7 @@
   font-family:"Inter",sans-serif;
 }
 
+/* ===== BODY ===== */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -22,7 +24,7 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:0;
@@ -47,7 +49,7 @@ nav span{
   cursor:pointer;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -62,35 +64,32 @@ nav span{
   max-width:1100px;
 }
 
-/* TITLES */
+/* ===== TITLES ===== */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .section.hero{
   align-items:center;
 }
 
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
-  margin-left:-4px;
 }
 
 .hero-sub{
   margin-top:24px;
-  padding-left:4px;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
 
-/* TEXT */
+/* ===== TEXT ===== */
 .section-block p{
-  margin-top:8px;
-  padding-left:8px;
+  margin-top:12px;
   font-size:15px;
   color:#aaa;
   max-width:565px;
@@ -98,12 +97,11 @@ h1{
   text-align:justify;
 }
 
-/* ABOUT */
+/* ===== ABOUT ===== */
 .about{
   display:flex;
-  align-items:flex-start;
   gap:48px;
-  margin-top:12px;
+  margin-top:24px;
 }
 
 .about img{
@@ -111,14 +109,12 @@ h1{
   height:480px;
   object-fit:cover;
   opacity:.9;
-  margin-top:12px;
 }
 
 /* ===== PORTFOLIO ===== */
 .portfolio-wrapper{
   position:relative;
   margin-top:56px;
-  margin-left:8px;
   overflow:hidden;
   padding-right:120px;
 }
@@ -152,7 +148,9 @@ h1{
   background:#aaa;
   border-radius:10px;
 }
-.portfolio-carousel::-webkit-scrollbar-thumb:hover{background:#fff}
+.portfolio-carousel::-webkit-scrollbar-thumb:hover{
+  background:#fff;
+}
 
 .project-card{
   min-width:540px;
@@ -160,7 +158,7 @@ h1{
   color:inherit;
   opacity:0;
   transform:translateY(12px);
-  transition:opacity .8s ease, transform .8s ease;
+  transition:.8s ease;
 }
 
 .project-card.is-visible{
@@ -170,7 +168,7 @@ h1{
 
 .project-image{
   height:310px;
-  margin-bottom:24px;
+  margin-bottom:20px;
   overflow:hidden;
 }
 
@@ -178,10 +176,7 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .4s ease;
 }
-
-.project-card:hover img{transform:scale(1.03)}
 
 .project-inner h2{
   font-size:28px;
@@ -246,38 +241,42 @@ h1{
 
 .timeline-card h3{
   font-size:18px;
-  font-weight:500;
   letter-spacing:.12em;
   text-transform:uppercase;
   margin-bottom:16px;
 }
 
-.timeline-card strong{display:block;font-size:16px}
-.timeline-card span{font-size:13px;color:#888}
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
 
-/* ===== CONTACTO ===== */
+.timeline-card span{
+  font-size:13px;
+  color:#888;
+}
+
+/* ===== CONTACT ===== */
 .contact{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
-  padding-left:8px;
 }
 
 .contact a{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
   padding:28px;
   border-radius:20px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  color:#f5f5f5;
+  color:#fff;
   text-decoration:none;
   transition:.35s ease;
 }
 
 .contact a span{
+  display:block;
+  margin-top:8px;
   font-size:12px;
   letter-spacing:.18em;
   text-transform:uppercase;
@@ -286,7 +285,6 @@ h1{
 
 .contact a:hover{
   transform:translateY(-4px);
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 </style>
 </head>
@@ -301,6 +299,7 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -308,49 +307,88 @@ h1{
   </div>
 </section>
 
+<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico, flexible y
-        adaptable a distintos contextos. Formación en UJI, UPV y Erasmus en Londres, con base técnica
-        en electricidad. Disfruto de todo el proceso de diseño desde la fase de estudio hasta la
-        materialización final.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de estudio hasta la materialización final.
       </p>
-      <img src="foto.jpg">
+      <img src="foto.jpg" alt="">
     </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel" id="portfolioCarousel">
 
-        <a class="project-card"><div class="project-image"><img src="1.jpg"></div><div class="project-inner"><h2>NODE</h2><span>Proyecto final</span></div></a>
-        <a class="project-card"><div class="project-image"><img src="2.jpg"></div><div class="project-inner"><h2>Sixay</h2><span>Mobiliario</span></div></a>
-        <a class="project-card"><div class="project-image"><img src="3.jpg"></div><div class="project-inner"><h2>Exploración</h2><span>Experimental</span></div></a>
+        <a class="project-card">
+          <div class="project-image"><img src="1.jpg"></div>
+          <div class="project-inner"><h2>NODE</h2><span>Proyecto final de grado</span></div>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="2.jpg"></div>
+          <div class="project-inner"><h2>Sixay</h2><span>Diseño de mobiliario</span></div>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="3.jpg"></div>
+          <div class="project-inner"><h2>Exploración</h2><span>Proyecto experimental</span></div>
+        </a>
 
       </div>
     </div>
   </div>
 </section>
 
+<!-- CV -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI · UPV · Londres</strong></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>Español · Inglés · Húngaro</strong></div></div>
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>UJI · UPV · Erasmus Londres</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Idiomas</h3>
+          <strong>Español · Inglés · Húngaro</strong>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Software</h3>
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
+          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+        </div>
+      </div>
 
     </div>
   </div>
 </section>
 
+<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
@@ -388,22 +426,21 @@ window.addEventListener("scroll",()=>{
   line.style.height=Math.max(0,h)+"px";
 });
 
-/* ===== SCROLL HORIZONTAL SUAVE + CLAMP ===== */
-const carousel = document.getElementById("portfolioCarousel");
-let current = 0;
-let target = 0;
-const ease = 0.08;
+/* SCROLL HORIZONTAL SUAVE + CLAMP */
+const carousel=document.getElementById("portfolioCarousel");
+let current=0, target=0;
+const ease=0.08;
 
-carousel.addEventListener("wheel", e=>{
+carousel.addEventListener("wheel",e=>{
   e.preventDefault();
-  const max = carousel.scrollWidth - carousel.clientWidth;
-  target += e.deltaY * 1.2;
-  target = Math.max(0, Math.min(target, max));
+  const max=carousel.scrollWidth-carousel.clientWidth;
+  target+=e.deltaY*1.2;
+  target=Math.max(0,Math.min(target,max));
 },{passive:false});
 
 function animate(){
-  current += (target - current) * ease;
-  carousel.scrollLeft = current;
+  current+=(target-current)*ease;
+  carousel.scrollLeft=current;
   requestAnimationFrame(animate);
 }
 animate();
