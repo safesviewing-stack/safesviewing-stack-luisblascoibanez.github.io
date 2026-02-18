@@ -122,12 +122,29 @@ h1{
   padding-right:120px;
 }
 
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
+}
+
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
   padding-bottom:20px;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
 }
+
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
 
 .project-card{
   min-width:460px;
@@ -135,7 +152,7 @@ h1{
   color:inherit;
   opacity:0;
   transform:translateY(12px);
-  transition:.8s ease;
+  transition:opacity .8s ease, transform .8s ease;
 }
 
 .project-card.is-visible{
@@ -153,9 +170,26 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
+  transition:transform .4s ease;
 }
 
-/* ===== CV (AJUSTADO) ===== */
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
+/* CV */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -175,7 +209,7 @@ h1{
 .timeline-item{
   position:relative;
   margin-bottom:80px;
-  max-width:460px; /* 🔧 REDUCIDO */
+  max-width:460px;
   opacity:0;
   transform:translateY(20px);
   transition:.8s ease;
@@ -223,7 +257,7 @@ h1{
   color:#888;
 }
 
-/* CONTACT */
+/* CONTACT FRAMER */
 .contact{
   margin-top:48px;
   display:grid;
@@ -250,6 +284,11 @@ h1{
   letter-spacing:.18em;
   text-transform:uppercase;
   color:#888;
+}
+
+.contact a:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 </style>
 </head>
@@ -293,6 +332,38 @@ h1{
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+
+        <a href="node.html" class="project-card">
+          <div class="project-image"><img src="brazo1.jpg" alt=""></div>
+          <div class="project-inner"><h2>NODE</h2><span>Proyecto final de grado</span></div>
+        </a>
+
+        <a href="sixay.html" class="project-card">
+          <div class="project-image"><img src="reloj1.jpg" alt=""></div>
+          <div class="project-inner"><h2>Sixay · Cómoda</h2><span>Diseño de mobiliario</span></div>
+        </a>
+
+        <a href="exploracion.html" class="project-card">
+          <div class="project-image"><img src="secador2.jpg" alt=""></div>
+          <div class="project-inner"><h2>Exploración material</h2><span>Proyecto experimental</span></div>
+        </a>
+
+        <a href="conceptual.html" class="project-card">
+          <div class="project-image"><img src="conceptual.jpg" alt=""></div>
+          <div class="project-inner"><h2>Proyecto conceptual</h2><span>Diseño de producto</span></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CV -->
 <section class="section">
   <div class="section-block">
@@ -310,14 +381,34 @@ h1{
   </div>
 </section>
 
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<span>Perfil profesional</span></a>
+    </div>
+  </div>
+</section>
+
 <script>
+/* NAV */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
+});
+
+/* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".timeline-item")
+document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
+/* TIMELINE LINE */
 const line=document.getElementById("timelineLine");
 const timeline=document.querySelector(".timeline");
 
@@ -325,11 +416,6 @@ window.addEventListener("scroll",()=>{
   const r=timeline.getBoundingClientRect();
   const h=Math.min(window.innerHeight-r.top,r.height);
   line.style.height=Math.max(0,h)+"px";
-});
-
-document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
 });
 </script>
 
