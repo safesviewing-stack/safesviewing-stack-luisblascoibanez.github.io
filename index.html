@@ -174,7 +174,7 @@ h1{
 }
 
 .project-image{
-  height:310px; /* 🔧 REDUCIDA */
+  height:310px;
   margin-bottom:24px;
   overflow:hidden;
 }
@@ -340,7 +340,7 @@ h1{
   <div class="section-block">
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
+      <div class="portfolio-carousel" id="portfolioCarousel">
 
         <a href="node.html" class="project-card">
           <div class="project-image"><img src="brazo1.jpg"></div>
@@ -416,6 +416,14 @@ window.addEventListener("scroll",()=>{
   const h=Math.min(window.innerHeight-r.top,r.height);
   line.style.height=Math.max(0,h)+"px";
 });
+
+/* ===== SCROLL HORIZONTAL CON RUEDA ===== */
+const carousel=document.getElementById("portfolioCarousel");
+
+carousel.addEventListener("wheel",e=>{
+  e.preventDefault();
+  carousel.scrollLeft += e.deltaY * 1.2;
+},{passive:false});
 </script>
 
 </body>
