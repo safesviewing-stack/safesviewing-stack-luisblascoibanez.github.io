@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 /* ========= RESET ========= */
 *{
   margin:0;
@@ -162,6 +163,12 @@ h1{
   transform:none;
 }
 
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  background:#222;
+}
+
 /* ========= CV ========= */
 .timeline{
   position:relative;
@@ -239,6 +246,7 @@ h1{
   letter-spacing:.18em;
   text-transform:uppercase;
 }
+
 </style>
 </head>
 
@@ -252,6 +260,7 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -259,6 +268,7 @@ h1{
   </div>
 </section>
 
+<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
@@ -279,7 +289,71 @@ h1{
   </div>
 </section>
 
-<!-- El resto de secciones (Portfolio, CV, Contacto) permanecen exactamente igual que antes -->
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <a class="project-card"><div class="project-image"></div></a>
+        <a class="project-card"><div class="project-image"></div></a>
+        <a class="project-card"><div class="project-image"></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+
+      <div class="timeline-item"><div class="timeline-card">UJI</div></div>
+      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
+      <div class="timeline-item"><div class="timeline-card">Erasmus Londres</div></div>
+      <div class="timeline-item"><div class="timeline-card">Idiomas / Software</div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <p>Si te interesa mi perfil o quieres hablar sobre un proyecto, escríbeme.</p>
+      <a href="mailto:luis@example.com">luis@example.com<br><span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<br><span>Perfil profesional</span></a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+
+const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+
+window.addEventListener("scroll",()=>{
+  if(!timeline||!line) return;
+  const rect=timeline.getBoundingClientRect();
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
+});
+</script>
 
 </body>
 </html>
