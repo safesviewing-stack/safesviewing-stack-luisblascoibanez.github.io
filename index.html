@@ -146,10 +146,16 @@ h1{
   scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{height:6px}
-.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
+.portfolio-carousel::-webkit-scrollbar{
+  height:6px;
+}
+.portfolio-carousel::-webkit-scrollbar-thumb{
+  background:#444;
+  border-radius:6px;
+}
 
 .project-card{
+  position:relative;
   min-width:460px;
   text-decoration:none;
   color:inherit;
@@ -163,7 +169,9 @@ h1{
   transform:none;
 }
 
+/* === IMAGEN === */
 .project-image{
+  position:relative;
   height:260px;
   margin-bottom:20px;
   overflow:hidden;
@@ -173,11 +181,36 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .4s ease;
+  transition:transform .6s ease;
 }
 
+/* === OVERLAY === */
+.project-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(2px);
+  opacity:0;
+  display:flex;
+  align-items:flex-end;
+  padding:24px;
+  transition:opacity .4s ease;
+}
+
+.project-overlay span{
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#eee;
+}
+
+/* === HOVER === */
 .project-card:hover img{
-  transform:scale(1.03);
+  transform:scale(1.04);
+}
+
+.project-card:hover .project-overlay{
+  opacity:1;
 }
 
 .project-inner h2{
@@ -186,13 +219,12 @@ h1{
 }
 
 .project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
+  display:none; /* ahora solo en overlay */
 }
 
-/* ========= CV TIMELINE ========= */
+/* ========= CV (INTOCABLE) ========= */
+/* ——— todo exactamente igual que antes ——— */
+
 .timeline{
   position:relative;
   margin-top:60px;
@@ -206,7 +238,7 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
-  transition:height .25s ease-out; /* MÁS RÁPIDA */
+  transition:height .25s ease-out;
 }
 
 .timeline-item{
@@ -288,11 +320,7 @@ h1{
         enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
         a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
         ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
-        desde la fase de análisis hasta la materialización.
+        ambas dimensiones del diseño.
       </p>
       <img src="foto.jpg" alt="">
     </div>
@@ -307,34 +335,49 @@ h1{
       <div class="portfolio-carousel">
 
         <a href="node.html" class="project-card">
-          <div class="project-image"><img src="brazo1.jpg" alt=""></div>
+          <div class="project-image">
+            <img src="brazo1.jpg" alt="">
+            <div class="project-overlay">
+              <span>Proyecto final de grado</span>
+            </div>
+          </div>
           <div class="project-inner">
             <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
           </div>
         </a>
 
         <a href="sixay.html" class="project-card">
-          <div class="project-image"><img src="reloj1.jpg" alt=""></div>
+          <div class="project-image">
+            <img src="reloj1.jpg" alt="">
+            <div class="project-overlay">
+              <span>Diseño de mobiliario</span>
+            </div>
+          </div>
           <div class="project-inner">
             <h2>Sixay · Cómoda</h2>
-            <span>Diseño de mobiliario</span>
           </div>
         </a>
 
         <a href="exploracion.html" class="project-card">
-          <div class="project-image"><img src="secador2.jpg" alt=""></div>
+          <div class="project-image">
+            <img src="secador2.jpg" alt="">
+            <div class="project-overlay">
+              <span>Proyecto experimental</span>
+            </div>
+          </div>
           <div class="project-inner">
             <h2>Exploración material</h2>
-            <span>Proyecto experimental</span>
           </div>
         </a>
 
         <a href="conceptual.html" class="project-card">
-          <div class="project-image"></div>
+          <div class="project-image">
+            <div class="project-overlay">
+              <span>Diseño de producto</span>
+            </div>
+          </div>
           <div class="project-inner">
             <h2>Proyecto conceptual</h2>
-            <span>Diseño de producto</span>
           </div>
         </a>
 
@@ -350,44 +393,11 @@ h1{
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Jaume I</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Politècnica de València</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Programa Erasmus</strong>
-          <span>Londres</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Idiomas</h3>
-          <strong>Español · Inglés · Húngaro</strong>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Software</h3>
-          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
-          <span>Fusion 360 · Sinutrain · 3ds Max</span>
-        </div>
-      </div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Jaume I</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>UPV</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Programa Erasmus</strong><span>Londres</span></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>Español · Inglés · Húngaro</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Software</h3><strong>Rhino · AutoCAD · Inventor · SolidWorks</strong><span>Fusion 360 · Sinutrain · 3ds Max</span></div></div>
 
     </div>
   </div>
@@ -408,7 +418,7 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
-/* TIMELINE LINE PROGRESS (MÁS DIRECTA) */
+/* TIMELINE LINE */
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
 
