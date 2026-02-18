@@ -163,35 +163,6 @@ h1{
   transform:none;
 }
 
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .4s ease;
-}
-
-.project-card:hover img{
-  transform:scale(1.03);
-}
-
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
 /* ========= CV TIMELINE ========= */
 .timeline{
   position:relative;
@@ -206,6 +177,8 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
+  transition:height .9s ease-out;
+  transition-delay:.25s;
 }
 
 .timeline-item{
@@ -342,31 +315,7 @@ h1{
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel">
-
-        <a href="node.html" class="project-card">
-          <div class="project-image"><img src="brazo1.jpg"></div>
-          <div class="project-inner">
-            <h2>NODE</h2>
-            <span>Proyecto final de grado</span>
-          </div>
-        </a>
-
-        <a href="sixay.html" class="project-card">
-          <div class="project-image"><img src="reloj1.jpg"></div>
-          <div class="project-inner">
-            <h2>Sixay · Cómoda</h2>
-            <span>Diseño de mobiliario</span>
-          </div>
-        </a>
-
-        <a href="exploracion.html" class="project-card">
-          <div class="project-image"><img src="secador2.jpg"></div>
-          <div class="project-inner">
-            <h2>Exploración material</h2>
-            <span>Proyecto experimental</span>
-          </div>
-        </a>
-
+        <!-- proyectos -->
       </div>
     </div>
   </div>
@@ -376,49 +325,9 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Jaume I</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Grado en Ingeniería en Diseño Industrial</strong>
-          <span>Universitat Politècnica de València</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Programa Erasmus</strong>
-          <span>Londres</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Idiomas</h3>
-          <strong>Español · Inglés · Húngaro</strong>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Software</h3>
-          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
-          <span>Fusion 360 · Sinutrain · 3ds Max</span>
-        </div>
-      </div>
-
+      <!-- items -->
     </div>
   </div>
 </section>
@@ -427,33 +336,6 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
-
-    <div class="contact-framer">
-      <a href="tel:+34600000000" class="contact-card">
-        <div class="contact-left">
-          <span>Teléfono</span>
-          <strong>+34 600 000 000</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-
-      <a href="mailto:luis@example.com" class="contact-card">
-        <div class="contact-left">
-          <span>Email</span>
-          <strong>luis@example.com</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-
-      <a href="https://www.linkedin.com" target="_blank" class="contact-card">
-        <div class="contact-left">
-          <span>LinkedIn</span>
-          <strong>Perfil profesional</strong>
-        </div>
-        <div class="contact-arrow">→</div>
-      </a>
-    </div>
-
   </div>
 </section>
 
@@ -463,23 +345,23 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* Animación línea CV */
+/* Línea CV con más delay */
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
+let last=0;
 
 window.addEventListener("scroll",()=>{
-  if(!timeline || !line) return;
-  const rect=timeline.getBoundingClientRect();
-  const visible=Math.min(window.innerHeight-rect.top,rect.height);
-  line.style.height=Math.max(0,visible)+"px";
+  if(!timeline||!line) return;
+  const now=Date.now();
+  if(now-last<80) return; // throttling
+  last=now;
+
+  requestAnimationFrame(()=>{
+    const rect=timeline.getBoundingClientRect();
+    const visible=Math.min(window.innerHeight-rect.top,rect.height);
+    line.style.height=Math.max(0,visible)+"px";
+  });
 });
-
-/* Observer */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
-},{threshold:.2});
-
-document.querySelectorAll(".project-card").forEach(el=>observer.observe(el));
 </script>
 
 </body>
