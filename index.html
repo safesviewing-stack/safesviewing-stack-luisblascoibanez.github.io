@@ -192,11 +192,20 @@ h1{
   text-transform:uppercase;
 }
 
-/* ========= CV ========= */
+/* ========= CV TIMELINE ========= */
 .timeline{
   position:relative;
   margin-top:60px;
   padding-left:60px;
+}
+
+.timeline-line{
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
+  background:linear-gradient(#fff,#777);
 }
 
 .timeline-item{
@@ -367,7 +376,9 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+
     <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
 
       <div class="timeline-item">
         <div class="timeline-card">
@@ -452,12 +463,23 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
+/* Animación línea CV */
+const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+
+window.addEventListener("scroll",()=>{
+  if(!timeline || !line) return;
+  const rect=timeline.getBoundingClientRect();
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
+});
+
+/* Observer */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".project-card")
-  .forEach(el=>observer.observe(el));
+document.querySelectorAll(".project-card").forEach(el=>observer.observe(el));
 </script>
 
 </body>
