@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 /* ========= RESET ========= */
 *{
   margin:0;
@@ -65,7 +64,7 @@ nav span{
   max-width:1100px;
 }
 
-/* ========= TITULOS DE SECCIÓN ========= */
+/* ========= TITULOS ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
@@ -192,7 +191,7 @@ h1{
   text-transform:uppercase;
 }
 
-/* ========= CV TIMELINE ========= */
+/* ========= CV ========= */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -291,7 +290,6 @@ h1{
 .contact a:hover{
   opacity:.7;
 }
-
 </style>
 </head>
 
@@ -305,40 +303,75 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- TODAS LAS SECCIONES EXISTENTES PERMANECEN IGUAL -->
+<!-- HERO -->
+<section class="section hero">
+  <div class="section-block">
+    <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
+    <div class="hero-sub">Portfolio | Diseño industrial</div>
+  </div>
+</section>
 
+<!-- SOBRE MI -->
+<section class="section">
+  <div class="section-block">
+    <h1>Sobre mí</h1>
+    <div class="about">
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
+        técnico y creativo, con formación en UJI, UPV y Erasmus en Londres. Formación
+        profesional en electricidad y enfoque completo del proceso de diseño.
+      </p>
+      <img src="foto.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>NODE</h2><span>TFG</span></div></a>
+        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>Sixay</h2><span>Mobiliario</span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UPV</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Erasmus</h3><strong>Londres</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>ES · EN · HU</strong></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
-
     <div class="contact">
-      <p>
-        Si te interesa mi perfil o quieres hablar sobre un proyecto,
-        puedes escribirme directamente.
-      </p>
-
-      <a href="mailto:luis@example.com">
-        luis@example.com<br>
-        <span>Email</span>
-      </a>
-
-      <a href="https://www.linkedin.com" target="_blank">
-        LinkedIn<br>
-        <span>Perfil profesional</span>
-      </a>
+      <p>Si te interesa mi perfil o quieres hablar sobre un proyecto, escríbeme.</p>
+      <a href="mailto:luis@example.com">luis@example.com<br><span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<br><span>Perfil profesional</span></a>
     </div>
-
   </div>
 </section>
 
 <script>
-/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
@@ -346,12 +379,11 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
-/* TIMELINE LINE */
 const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
 
 window.addEventListener("scroll",()=>{
-  if(!timeline || !line) return;
+  if(!timeline||!line) return;
   const rect=timeline.getBoundingClientRect();
   const visible=Math.min(window.innerHeight-rect.top,rect.height);
   line.style.height=Math.max(0,visible)+"px";
