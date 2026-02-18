@@ -9,7 +9,7 @@
 
 <style>
 
-/* ===== RESET ===== */
+/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -17,7 +17,7 @@
   font-family:"Inter",sans-serif;
 }
 
-/* ===== BODY ===== */
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -25,7 +25,7 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* ===== NAV ===== */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -36,7 +36,7 @@ nav{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:48px;
+  gap:50px;
   background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
   z-index:100;
@@ -50,46 +50,55 @@ nav span{
   cursor:pointer;
 }
 
-/* ===== SECTIONS ===== */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   display:flex;
+  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
+}
+
+/* 🔑 ELIMINA MARGEN FINAL */
+.section:last-of-type{
+  padding-bottom:0;
 }
 
 .section-block{
   position:sticky;
-  top:240px;
+  top:260px;
   max-width:1100px;
 }
 
-/* ===== TITLES ===== */
+/* ========= TITULOS ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* ===== HERO ===== */
+/* ========= HERO ========= */
 .section.hero{
   align-items:center;
 }
 
 .section.hero h1{
   font-size:clamp(80px,7vw,140px);
+  margin-left:-4px;
 }
 
 .hero-sub{
   margin-top:24px;
+  padding-left:4px;
   font-size:14px;
   letter-spacing:.25em;
   color:#777;
 }
 
-/* ===== TEXT ===== */
+/* ========= TEXT ========= */
 .section-block p{
-  margin-top:12px;
+  margin-top:8px;
+  padding-left:8px;
   font-size:15px;
   color:#aaa;
   max-width:700px;
@@ -97,25 +106,39 @@ h1{
   text-align:justify;
 }
 
-/* ===== ABOUT ===== */
+/* ========= ABOUT ========= */
 .about{
   display:flex;
-  gap:40px;
-  margin-top:20px;
+  align-items:flex-start;
+  margin-top:12px;
 }
 
 .about img{
   width:300px;
   height:400px;
+  margin-left:40px;
   object-fit:cover;
   opacity:.9;
 }
 
-/* ===== PORTFOLIO ===== */
+/* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
+  position:relative;
   margin-top:32px;
+  margin-left:8px;
   overflow:hidden;
   padding-right:120px;
+}
+
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
@@ -123,91 +146,42 @@ h1{
   gap:48px;
   overflow-x:auto;
   padding-bottom:20px;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
 }
+
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
 
 .project-card{
   min-width:460px;
   text-decoration:none;
   color:inherit;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .8s ease, transform .8s ease;
 }
 
-.project-image{
-  height:260px;
-  overflow:hidden;
-  margin-bottom:20px;
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
 }
 
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.project-inner h2{
-  font-size:28px;
-  font-weight:400;
-}
-
-.project-inner span{
-  font-size:12px;
-  letter-spacing:.18em;
-  color:#777;
-  text-transform:uppercase;
-}
-
-/* ===== CV ===== */
+/* ========= CV ========= */
 .timeline{
+  position:relative;
   margin-top:60px;
   padding-left:60px;
-  position:relative;
 }
 
-.timeline-line{
-  position:absolute;
-  left:20px;
-  top:0;
-  width:1px;
-  height:100%;
-  background:#555;
-}
-
-.timeline-item{
-  margin-bottom:80px;
-  position:relative;
-}
-
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:-44px;
-  top:50%;
-  transform:translateY(-50%);
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-}
-
-.timeline-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
-}
-
-.timeline-card h3{
-  font-size:18px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:12px;
-}
-
-/* ===== CONTACT (FRAMER) ===== */
+/* ========= CONTACTO — FRAMER FINO ========= */
 .contact-framer{
   margin-top:60px;
   display:flex;
   flex-direction:column;
   gap:18px;
+  padding-left:8px;
 }
 
 .contact-card{
@@ -220,7 +194,7 @@ h1{
   border:0.75px solid rgba(255,255,255,.07);
   text-decoration:none;
   color:#f5f5f5;
-  transition:.3s ease;
+  transition:.35s ease;
 }
 
 .contact-card:hover{
@@ -236,22 +210,20 @@ h1{
 }
 
 .contact-left strong{
-  display:block;
   margin-top:6px;
   font-size:19px;
   font-weight:400;
 }
 
-/* ===== FOOTER ===== */
-footer{
-  height:140px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:12px;
+.contact-arrow{
+  font-size:17px;
   color:#666;
-  letter-spacing:.2em;
-  text-transform:uppercase;
+  transition:.35s ease;
+}
+
+.contact-card:hover .contact-arrow{
+  transform:translateX(4px);
+  color:#aaa;
 }
 
 </style>
@@ -275,17 +247,12 @@ footer{
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        flexible y técnico-creativo. Formación en UJI, UPV y Erasmus en Londres, con base
-        profesional en electricidad y enfoque completo del proceso de diseño.
-      </p>
-      <img src="foto.jpg" alt="">
+      <p>Ingeniero en diseño industrial de 24 años, con base en Valencia...</p>
     </div>
   </div>
 </section>
@@ -294,21 +261,6 @@ footer{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-
-        <a href="node.html" class="project-card">
-          <div class="project-image"><img src="brazo1.jpg"></div>
-          <div class="project-inner"><h2>NODE</h2><span>TFG</span></div>
-        </a>
-
-        <a href="sixay.html" class="project-card">
-          <div class="project-image"><img src="reloj1.jpg"></div>
-          <div class="project-inner"><h2>Sixay</h2><span>Mobiliario</span></div>
-        </a>
-
-      </div>
-    </div>
   </div>
 </section>
 
@@ -316,76 +268,24 @@ footer{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-    <div class="timeline">
-      <div class="timeline-line"></div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          Grado en Diseño Industrial · UJI / UPV · Erasmus Londres
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Idiomas</h3>
-          Español · Inglés · Húngaro
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Software</h3>
-          Rhino · AutoCAD · Inventor · SolidWorks · Fusion · Sinutrain · 3ds Max
-        </div>
-      </div>
-
-    </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
-
     <div class="contact-framer">
-
       <a href="tel:+34600000000" class="contact-card">
         <div class="contact-left">
           <span>Teléfono</span>
           <strong>+34 600 000 000</strong>
         </div>
+        <div class="contact-arrow">→</div>
       </a>
-
-      <a href="mailto:luis@example.com" class="contact-card">
-        <div class="contact-left">
-          <span>Email</span>
-          <strong>luis@example.com</strong>
-        </div>
-      </a>
-
-      <a href="https://www.linkedin.com" target="_blank" class="contact-card">
-        <div class="contact-left">
-          <span>LinkedIn</span>
-          <strong>Perfil profesional</strong>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
-
-<footer>
-  © 2026 · Luis Blasco — Industrial Design
-</footer>
-
-<script>
-document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
-});
-</script>
 
 </body>
 </html>
