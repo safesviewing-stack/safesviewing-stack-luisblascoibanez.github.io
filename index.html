@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -17,7 +15,6 @@
   font-family:"Inter",sans-serif;
 }
 
-/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -25,7 +22,6 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -50,7 +46,6 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -65,14 +60,12 @@ nav span{
   max-width:1100px;
 }
 
-/* ========= TITULOS ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* ========= HERO ========= */
 .section.hero{
   align-items:center;
 }
@@ -90,7 +83,6 @@ h1{
   color:#777;
 }
 
-/* ========= TEXT ========= */
 .section-block p{
   margin-top:8px;
   padding-left:8px;
@@ -101,7 +93,6 @@ h1{
   text-align:justify;
 }
 
-/* ========= ABOUT ========= */
 .about{
   display:flex;
   align-items:flex-start;
@@ -116,7 +107,7 @@ h1{
   opacity:.9;
 }
 
-/* ========= PORTFOLIO ========= */
+/* ===== PORTFOLIO ===== */
 .portfolio-wrapper{
   position:relative;
   margin-top:32px;
@@ -192,7 +183,7 @@ h1{
   text-transform:uppercase;
 }
 
-/* ========= CV ========= */
+/* ===== CV ===== */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -242,7 +233,7 @@ h1{
   padding:28px;
 }
 
-/* ========= CONTACTO — FRAMER STYLE ========= */
+/* ===== CONTACTO FRAMER ===== */
 .contact{
   margin-top:48px;
   display:grid;
@@ -252,7 +243,6 @@ h1{
 }
 
 .contact a{
-  position:relative;
   display:flex;
   flex-direction:column;
   gap:12px;
@@ -262,10 +252,7 @@ h1{
   border:1px solid rgba(255,255,255,.08);
   color:#f5f5f5;
   text-decoration:none;
-  transition:
-    transform .35s ease,
-    background .35s ease,
-    box-shadow .35s ease;
+  transition:.35s ease;
 }
 
 .contact a span{
@@ -280,7 +267,6 @@ h1{
   background:rgba(255,255,255,.06);
   box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
-
 </style>
 </head>
 
@@ -316,7 +302,7 @@ h1{
         una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
         desde la fase de análisis hasta la materialización.
       </p>
-      <img src="foto.jpg" alt="">
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -324,14 +310,38 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-    <!-- portfolio intacto -->
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+
+        <a href="node.html" class="project-card">
+          <div class="project-image"><img src="brazo1.jpg"></div>
+          <div class="project-inner"><h2>NODE</h2><span>Proyecto final de grado</span></div>
+        </a>
+
+        <a href="sixay.html" class="project-card">
+          <div class="project-image"><img src="reloj1.jpg"></div>
+          <div class="project-inner"><h2>Sixay · Cómoda</h2><span>Diseño de mobiliario</span></div>
+        </a>
+
+        <a href="exploracion.html" class="project-card">
+          <div class="project-image"><img src="secador2.jpg"></div>
+          <div class="project-inner"><h2>Exploración material</h2><span>Proyecto experimental</span></div>
+        </a>
+
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-    <!-- cv intacto -->
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+      <div class="timeline-item"><div class="timeline-card">UJI</div></div>
+      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
+      <div class="timeline-item"><div class="timeline-card">Erasmus Londres</div></div>
+    </div>
   </div>
 </section>
 
@@ -339,18 +349,9 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact">
-      <a href="tel:+34600000000">
-        +34 600 000 000
-        <span>Teléfono</span>
-      </a>
-      <a href="mailto:luis@example.com">
-        luis@example.com
-        <span>Email</span>
-      </a>
-      <a href="https://www.linkedin.com" target="_blank">
-        LinkedIn
-        <span>Perfil profesional</span>
-      </a>
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<span>Perfil profesional</span></a>
     </div>
   </div>
 </section>
@@ -360,6 +361,13 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
   b.onclick=()=>document.querySelectorAll(".section")[i]
     .scrollIntoView({behavior:"smooth"});
 });
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
 </script>
 
 </body>
