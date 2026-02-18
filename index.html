@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ========= RESET ========= */
 *{
   margin:0;
   padding:0;
@@ -15,6 +17,7 @@
   font-family:"Inter",sans-serif;
 }
 
+/* ========= BODY ========= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -22,7 +25,7 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* NAV */
+/* ========= NAV ========= */
 nav{
   position:fixed;
   top:0;
@@ -34,7 +37,7 @@ nav{
   justify-content:center;
   align-items:center;
   gap:50px;
-  background:rgba(10,10,10,.4);
+  background:rgba(10,10,10,.45);
   backdrop-filter:blur(12px);
   z-index:100;
 }
@@ -47,7 +50,7 @@ nav span{
   cursor:pointer;
 }
 
-/* SECTIONS */
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -62,14 +65,14 @@ nav span{
   max-width:1100px;
 }
 
-/* TITLES */
+/* ========= TITLES ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* HERO */
+/* ========= HERO ========= */
 .section.hero{
   align-items:center;
 }
@@ -85,7 +88,7 @@ h1{
   color:#777;
 }
 
-/* TEXT */
+/* ========= TEXT ========= */
 .section-block p{
   margin-top:12px;
   font-size:15px;
@@ -95,7 +98,7 @@ h1{
   text-align:justify;
 }
 
-/* ABOUT */
+/* ========= ABOUT ========= */
 .about{
   display:flex;
   gap:48px;
@@ -109,12 +112,23 @@ h1{
   opacity:.9;
 }
 
-/* ===== PORTFOLIO ===== */
+/* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
   position:relative;
   margin-top:56px;
   overflow:hidden;
   padding-right:120px;
+}
+
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:120px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
@@ -126,7 +140,46 @@ h1{
   scrollbar-color:#aaa transparent;
 }
 
-/* ===== CV ===== */
+.portfolio-carousel::-webkit-scrollbar{height:10px}
+.portfolio-carousel::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.08);
+  border-radius:10px;
+}
+.portfolio-carousel::-webkit-scrollbar-thumb{
+  background:#aaa;
+  border-radius:10px;
+}
+.portfolio-carousel::-webkit-scrollbar-thumb:hover{
+  background:#fff;
+}
+
+.project-card{
+  min-width:540px;
+  text-decoration:none;
+  color:inherit;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.project-image{
+  height:310px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ========= CV ========= */
 .timeline{
   position:relative;
   margin-top:60px;
@@ -192,13 +245,37 @@ h1{
   color:#888;
 }
 
-/* CONTACT */
+/* ========= CONTACT ========= */
 .contact{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
 }
+
+.contact a{
+  padding:28px;
+  border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;
+  text-decoration:none;
+  transition:.35s ease;
+}
+
+.contact a span{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#888;
+}
+
+.contact a:hover{
+  transform:translateY(-4px);
+}
+
 </style>
 </head>
 
@@ -212,6 +289,7 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -219,13 +297,62 @@ h1{
   </div>
 </section>
 
+<!-- SOBRE MI -->
+<section class="section">
+  <div class="section-block">
+    <h1>Sobre mí</h1>
+    <div class="about">
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de estudio hasta la materialización final.
+      </p>
+      <img src="foto.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel" id="portfolioCarousel">
+
+        <a class="project-card">
+          <div class="project-image"><img src="1.jpg"></div>
+          <strong>NODE</strong>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="2.jpg"></div>
+          <strong>Sixay</strong>
+        </a>
+
+        <a class="project-card">
+          <div class="project-image"><img src="3.jpg"></div>
+          <strong>Exploración material</strong>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
 
-      <!-- FORMACION -->
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Formación</h3>
@@ -248,16 +375,14 @@ h1{
         </div>
       </div>
 
-      <!-- EXPERIENCIA -->
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Experiencia</h3>
           <strong>Sin experiencia profesional</strong>
-          <span>Disponibilidad para prácticas / primer empleo</span>
+          <span>Perfil junior · Primer empleo / prácticas</span>
         </div>
       </div>
 
-      <!-- IDIOMAS -->
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Idiomas</h3>
@@ -265,7 +390,6 @@ h1{
         </div>
       </div>
 
-      <!-- SOFTWARE -->
       <div class="timeline-item">
         <div class="timeline-card">
           <h3>Software</h3>
@@ -278,13 +402,31 @@ h1{
   </div>
 </section>
 
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="#">LinkedIn<span>Perfil profesional</span></a>
+    </div>
+  </div>
+</section>
+
 <script>
+/* NAV */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
+});
+
 /* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".timeline-item")
+document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
 /* TIMELINE LINE */
@@ -297,6 +439,25 @@ window.addEventListener("scroll",()=>{
   const h=Math.min(window.innerHeight-r.top,r.height);
   line.style.height=Math.max(0,h)+"px";
 });
+
+/* SCROLL HORIZONTAL SUAVE + CLAMP */
+const carousel=document.getElementById("portfolioCarousel");
+let current=0, target=0;
+const ease=0.08;
+
+carousel.addEventListener("wheel",e=>{
+  e.preventDefault();
+  const max=carousel.scrollWidth-carousel.clientWidth;
+  target+=e.deltaY*1.2;
+  target=Math.max(0,Math.min(target,max));
+},{passive:false});
+
+function animate(){
+  current+=(target-current)*ease;
+  carousel.scrollLeft=current;
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
