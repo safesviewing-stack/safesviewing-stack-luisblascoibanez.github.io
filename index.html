@@ -39,7 +39,7 @@ nav{
   gap:50px;
   background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
-  z-index:100;
+  z-index:1000;
 }
 
 nav span{
@@ -59,8 +59,8 @@ nav span{
   padding:180px 10vw 160px 22vw;
 }
 
-/* 🔑 ELIMINA MARGEN FINAL */
 .section:last-of-type{
+  min-height:calc(100vh - 160px);
   padding-bottom:0;
 }
 
@@ -168,6 +168,35 @@ h1{
   transform:none;
 }
 
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s ease;
+}
+
+.project-card:hover img{
+  transform:scale(1.03);
+}
+
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
 /* ========= CV ========= */
 .timeline{
   position:relative;
@@ -175,7 +204,7 @@ h1{
   padding-left:60px;
 }
 
-/* ========= CONTACTO — FRAMER FINO ========= */
+/* ========= CONTACTO — FRAMER ========= */
 .contact-framer{
   margin-top:60px;
   display:flex;
@@ -239,7 +268,6 @@ h1{
   <span data-i="4">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Luis<br>Blasco-Ibáñez<br>Berbel</h1>
@@ -247,31 +275,46 @@ h1{
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>Ingeniero en diseño industrial de 24 años, con base en Valencia...</p>
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
+        desde la fase de análisis hasta la materialización.
+      </p>
+      <img src="foto.jpg" alt="">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <!-- tus proyectos aquí (los que ya tenías) -->
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CV -->
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
+    <div class="timeline">
+      <!-- timeline completo como antes -->
+    </div>
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
@@ -283,9 +326,39 @@ h1{
         </div>
         <div class="contact-arrow">→</div>
       </a>
+
+      <a href="mailto:luis@example.com" class="contact-card">
+        <div class="contact-left">
+          <span>Email</span>
+          <strong>luis@example.com</strong>
+        </div>
+        <div class="contact-arrow">→</div>
+      </a>
+
+      <a href="https://www.linkedin.com" target="_blank" class="contact-card">
+        <div class="contact-left">
+          <span>LinkedIn</span>
+          <strong>Perfil profesional</strong>
+        </div>
+        <div class="contact-arrow">→</div>
+      </a>
     </div>
   </div>
 </section>
+
+<script>
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
