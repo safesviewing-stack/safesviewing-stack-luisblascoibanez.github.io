@@ -122,16 +122,6 @@ h1{
   padding-right:120px;
 }
 
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
-}
-
 .portfolio-carousel{
   display:flex;
   gap:48px;
@@ -139,54 +129,29 @@ h1{
   padding-bottom:20px;
 }
 
-.project-card{
-  min-width:460px;
-  text-decoration:none;
-  color:inherit;
-  opacity:0;
-  transform:translateY(12px);
-  transition:.8s ease;
-}
-
-.project-card.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* CV */
+/* ===== CV (VERSIÓN BUENA) ===== */
 .timeline{
   position:relative;
-  margin-top:60px;
-  padding-left:60px;
+  margin-top:64px;
+  padding-left:64px;
 }
 
 .timeline-line{
   position:absolute;
-  left:20px;
+  left:22px;
   top:0;
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
+  transition:height .35s ease-out;
 }
 
 .timeline-item{
   position:relative;
-  margin-bottom:80px;
+  margin-bottom:96px;
   max-width:520px;
   opacity:0;
-  transform:translateY(20px);
+  transform:translateY(24px);
   transition:.8s ease;
 }
 
@@ -198,7 +163,7 @@ h1{
 .timeline-item::before{
   content:"";
   position:absolute;
-  left:-44px;
+  left:-42px;
   top:50%;
   transform:translateY(-50%);
   width:10px;
@@ -210,20 +175,22 @@ h1{
 .timeline-card{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
+  border-radius:22px;
+  padding:32px;
 }
 
 .timeline-card h3{
   font-size:18px;
-  letter-spacing:.12em;
+  font-weight:500;
+  letter-spacing:.14em;
   text-transform:uppercase;
-  margin-bottom:16px;
+  margin-bottom:18px;
 }
 
 .timeline-card strong{
   display:block;
   font-size:16px;
+  margin-bottom:6px;
 }
 
 .timeline-card span{
@@ -231,7 +198,7 @@ h1{
   color:#888;
 }
 
-/* CONTACT */
+/* CONTACT FRAMER */
 .contact{
   margin-top:48px;
   display:grid;
@@ -242,11 +209,23 @@ h1{
 
 .contact a{
   padding:28px;
-  border-radius:20px;
+  border-radius:22px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   color:#f5f5f5;
   text-decoration:none;
+  transition:.35s ease;
+}
+
+.contact a span{
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#888;
+}
+
+.contact a:hover{
+  transform:translateY(-4px);
 }
 </style>
 </head>
@@ -273,9 +252,11 @@ h1{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        técnico y creativo, formado en UJI, UPV y Erasmus en Londres, con formación
-        profesional en electricidad.
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño.
       </p>
       <img src="foto.jpg">
     </div>
@@ -286,10 +267,7 @@ h1{
   <div class="section-block">
     <h1>Portfolio</h1>
     <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <a class="project-card"><div class="project-image"></div></a>
-        <a class="project-card"><div class="project-image"></div></a>
-      </div>
+      <div class="portfolio-carousel"></div>
     </div>
   </div>
 </section>
@@ -347,9 +325,9 @@ h1{
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact">
-      <a href="tel:+34600000000">+34 600 000 000</a>
-      <a href="mailto:luis@example.com">luis@example.com</a>
-      <a href="#">LinkedIn</a>
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="#" target="_blank">LinkedIn<span>Perfil profesional</span></a>
     </div>
   </div>
 </section>
@@ -362,10 +340,20 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
 
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
-},{threshold:.2});
+},{threshold:.25});
 
-document.querySelectorAll(".project-card,.timeline-item")
+document.querySelectorAll(".timeline-item")
   .forEach(el=>observer.observe(el));
+
+const timeline=document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+
+window.addEventListener("scroll",()=>{
+  if(!timeline) return;
+  const rect=timeline.getBoundingClientRect();
+  const visible=Math.min(window.innerHeight-rect.top,rect.height);
+  line.style.height=Math.max(0,visible)+"px";
+});
 </script>
 
 </body>
