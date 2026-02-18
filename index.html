@@ -107,109 +107,6 @@ h1{
   opacity:.9;
 }
 
-/* PORTFOLIO */
-.portfolio-wrapper{
-  position:relative;
-  margin-top:32px;
-  margin-left:8px;
-  overflow:hidden;
-  padding-right:120px;
-}
-
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
-}
-
-.portfolio-carousel{
-  display:flex;
-  gap:48px;
-  overflow-x:auto;
-  padding-bottom:20px;
-}
-
-.project-card{
-  min-width:460px;
-  text-decoration:none;
-  color:inherit;
-  opacity:0;
-  transform:translateY(12px);
-  transition:.8s ease;
-}
-
-.project-card.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.project-image{
-  height:260px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* CV */
-.timeline{
-  position:relative;
-  margin-top:60px;
-  padding-left:60px;
-}
-
-.timeline-line{
-  position:absolute;
-  left:20px;
-  top:0;
-  width:1px;
-  height:0;
-  background:linear-gradient(#fff,#777);
-  transition:height .3s ease-out;
-}
-
-.timeline-item{
-  position:relative;
-  margin-bottom:80px;
-  max-width:520px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.8s ease;
-}
-
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:-44px;
-  top:50%;
-  transform:translateY(-50%);
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-}
-
-.timeline-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
-}
-
 /* CONTACT FRAMER */
 .contact{
   margin-top:48px;
@@ -282,7 +179,29 @@ h1{
   </div>
 </section>
 
-<!-- Portfolio, CV y Contacto permanecen exactamente igual -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="tel:+34600000000">+34 600 000 000<span>Teléfono</span></a>
+      <a href="mailto:luis@example.com">luis@example.com<span>Email</span></a>
+      <a href="https://www.linkedin.com" target="_blank">LinkedIn<span>Perfil profesional</span></a>
+    </div>
+  </div>
+</section>
+
+<script>
+/* NAVEGACIÓN FUNCIONAL */
+const sections = document.querySelectorAll(".section");
+const navItems = document.querySelectorAll("nav span");
+
+navItems.forEach(item=>{
+  item.addEventListener("click",()=>{
+    const index = parseInt(item.dataset.i,10);
+    sections[index].scrollIntoView({ behavior:"smooth" });
+  });
+});
+</script>
 
 </body>
 </html>
