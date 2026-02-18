@@ -8,24 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
-/* ========= RESET ========= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
-
-/* ========= BODY ========= */
+/* ================= BODY ================= */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
-/* ========= NAV ========= */
+/* ================= NAV ================= */
 nav{
   position:fixed;
   top:0;
@@ -41,7 +34,6 @@ nav{
   backdrop-filter:blur(12px);
   z-index:100;
 }
-
 nav span{
   font-size:11px;
   letter-spacing:.3em;
@@ -50,36 +42,30 @@ nav span{
   cursor:pointer;
 }
 
-/* ========= SECTIONS ========= */
+/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
-  display:flex;
-  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
 }
-
 .section-block{
   position:sticky;
   top:260px;
   max-width:1100px;
 }
 
-/* ========= TITULOS ========= */
+/* ================= TITLES ================= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
   line-height:1.05;
 }
 
-/* ========= HERO ========= */
-.section.hero{align-items:center;}
-
-.section.hero h1{
+/* ================= HERO ================= */
+.hero h1{
   font-size:clamp(80px,7vw,140px);
   margin-left:-4px;
 }
-
 .hero-sub{
   margin-top:24px;
   font-size:14px;
@@ -87,97 +73,172 @@ h1{
   color:#777;
 }
 
-/* ========= CONTACTO ========= */
-.section.contact-section{
-  min-height:auto;
-  padding-bottom:120px;
+/* ================= ABOUT ================= */
+.about{
+  display:flex;
+  margin-top:12px;
+}
+.about p{
+  font-size:15px;
+  color:#aaa;
+  line-height:1.6;
+  max-width:700px;
+}
+.about img{
+  width:300px;
+  height:400px;
+  margin-left:40px;
+  object-fit:cover;
+  opacity:.9;
 }
 
-.section.contact-section .section-block{
+/* ================= PORTFOLIO ================= */
+.portfolio-wrapper{
+  margin-top:32px;
+  margin-left:8px;
+  overflow:hidden;
+  padding-right:120px;
   position:relative;
-  top:auto;
+}
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  right:0;top:0;
+  width:120px;height:100%;
+  background:linear-gradient(to right,transparent,#0a0a0a);
+}
+.portfolio-carousel{
+  display:flex;
+  gap:48px;
+  overflow-x:auto;
+  padding-bottom:20px;
+}
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
+
+.project-card{
+  min-width:460px;
+  text-decoration:none;
+  color:inherit;
+  opacity:0;
+  transform:translateY(12px);
+  transition:.8s ease;
+}
+.project-card.is-visible{opacity:1;transform:none}
+
+.project-image{
+  height:260px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s ease;
+}
+.project-card:hover img{transform:scale(1.03)}
+
+.project-inner h2{font-size:28px;font-weight:400}
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
 }
 
+/* ================= CV ================= */
+.timeline{
+  margin-top:60px;
+  padding-left:60px;
+  position:relative;
+}
+.timeline-line{
+  position:absolute;
+  left:20px;
+  top:0;
+  width:1px;
+  height:0;
+  background:linear-gradient(#fff,#777);
+  transition:height .25s ease-out;
+}
+.timeline-item{
+  margin-bottom:80px;
+  max-width:520px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+  position:relative;
+}
+.timeline-item.is-visible{opacity:1;transform:none}
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-44px;
+  top:50%;
+  transform:translateY(-50%);
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#fff;
+}
+.timeline-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+}
+.timeline-card h3{
+  font-size:18px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.timeline-card strong{font-size:16px}
+.timeline-card span{font-size:13px;color:#888}
+
+/* ================= CONTACT ================= */
 .contact-grid{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
 }
-
 .contact-card{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
   padding:28px;
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
   opacity:0;
   transform:translateY(16px);
   transition:.6s ease;
 }
-
-.contact-card.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.contact-icon{
-  width:20px;
-  height:20px;
-  stroke:#fff;
-  stroke-width:1.4;
-  fill:none;
-  flex-shrink:0;
-  margin-top:4px;
-}
-
-.contact-content strong{
-  display:block;
-  font-size:15px;
-  margin-bottom:4px;
-}
-
-.contact-content a,
-.contact-content span{
-  font-size:14px;
-  color:#888;
-  text-decoration:none;
-}
-
-.contact-content a:hover{color:#fff;}
-
+.contact-card.is-visible{opacity:1;transform:none}
 .copy-btn{
   margin-top:8px;
   font-size:12px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
   color:#aaa;
   cursor:pointer;
 }
+.copy-btn.copied{color:#fff}
 
-.copy-btn.copied{color:#fff;}
-
-/* ========= FOOTER ========= */
+/* ================= FOOTER ================= */
 footer{
   padding:60px 10vw 40px 22vw;
   font-size:11px;
   letter-spacing:.2em;
   color:#666;
 }
-
 </style>
 </head>
 
 <body>
 
 <nav>
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Sobre mí</span>
-  <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
+  <span>Inicio</span>
+  <span>Sobre mí</span>
+  <span>Portfolio</span>
+  <span>CV</span>
+  <span>Contacto</span>
 </nav>
 
 <section class="section hero">
@@ -187,86 +248,76 @@ footer{
   </div>
 </section>
 
-<!-- ===== CONTACTO ===== -->
-<section class="section contact-section">
+<section class="section">
   <div class="section-block">
-    <h1>Contacto</h1>
-
-    <div class="contact-grid">
-
-      <div class="contact-card">
-        <svg class="contact-icon" viewBox="0 0 24 24">
-          <rect x="2" y="5" width="20" height="14" rx="2"/>
-          <path d="M2 7l10 6 10-6"/>
-        </svg>
-        <div class="contact-content">
-          <strong>Email</strong>
-          <a href="mailto:luis@example.com">luis@example.com</a>
-          <div class="copy-btn" data-copy="luis@example.com">Copiar email</div>
-        </div>
-      </div>
-
-      <div class="contact-card">
-        <svg class="contact-icon" viewBox="0 0 24 24">
-          <path d="M16 8a6 6 0 01-12 0 6 6 0 0112 0z"/>
-          <path d="M2 22c1.5-4 6-6 10-6s8.5 2 10 6"/>
-        </svg>
-        <div class="contact-content">
-          <strong>LinkedIn</strong>
-          <a href="https://www.linkedin.com" target="_blank">linkedin.com</a>
-        </div>
-      </div>
-
-      <div class="contact-card">
-        <svg class="contact-icon" viewBox="0 0 24 24">
-          <path d="M12 21s7-7 7-11a7 7 0 10-14 0c0 4 7 11 7 11z"/>
-          <circle cx="12" cy="10" r="2.5"/>
-        </svg>
-        <div class="contact-content">
-          <strong>Ubicación</strong>
-          <span>Valencia, España</span>
-        </div>
-      </div>
-
+    <h1>Sobre mí</h1>
+    <div class="about">
+      <p>Ingeniero en diseño industrial de 24 años, con base en Valencia…</p>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
 
-<footer>
-  © 2026 · Luis Blasco-Ibáñez Berbel
-</footer>
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>NODE</h2></div></a>
+        <a class="project-card"><div class="project-image"></div><div class="project-inner"><h2>Sixay · Cómoda</h2></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-block">
+    <h1>CV</h1>
+    <div class="timeline">
+      <div class="timeline-line" id="line"></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UJI</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>UPV</strong></div></div>
+      <div class="timeline-item"><div class="timeline-card"><h3>Erasmus</h3><strong>Londres</strong></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <strong>Email</strong>
+        <div>luis@example.com</div>
+        <div class="copy-btn" data-copy="luis@example.com">Copiar email</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 · Luis Blasco-Ibáñez Berbel</footer>
 
 <script>
-/* NAV */
 document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>document.querySelectorAll(".section")[i]
-    .scrollIntoView({behavior:"smooth"});
+  b.onclick=()=>document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
 });
 
-/* CONTACT ANIMATION */
-const cards=document.querySelectorAll(".contact-card");
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      cards.forEach((c,i)=>{
-        setTimeout(()=>c.classList.add("is-visible"),i*120);
-      });
-    }
-  });
-},{threshold:.3});
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting));
+},{threshold:.2});
+document.querySelectorAll(".project-card,.timeline-item,.contact-card").forEach(el=>obs.observe(el));
 
-cards.forEach(c=>observer.observe(c));
+const line=document.getElementById("line");
+window.addEventListener("scroll",()=>{
+  const t=document.querySelector(".timeline").getBoundingClientRect();
+  line.style.height=Math.max(0,Math.min(window.innerHeight-t.top,t.height))+"px";
+});
 
-/* COPY EMAIL */
-document.querySelectorAll(".copy-btn").forEach(btn=>{
-  btn.onclick=()=>{
-    navigator.clipboard.writeText(btn.dataset.copy);
-    btn.textContent="Copiado";
-    btn.classList.add("copied");
-    setTimeout(()=>{
-      btn.textContent="Copiar email";
-      btn.classList.remove("copied");
-    },1600);
+document.querySelectorAll(".copy-btn").forEach(b=>{
+  b.onclick=()=>{
+    navigator.clipboard.writeText(b.dataset.copy);
+    b.textContent="Copiado";
+    setTimeout(()=>b.textContent="Copiar email",1500);
   };
 });
 </script>
