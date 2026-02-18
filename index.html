@@ -10,12 +10,7 @@
 <style>
 
 /* ========= RESET ========= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
 /* ========= BODY ========= */
 body{
@@ -54,8 +49,6 @@ nav span{
 .section{
   min-height:100vh;
   scroll-snap-align:start;
-  display:flex;
-  justify-content:flex-start;
   padding:180px 10vw 160px 22vw;
 }
 
@@ -65,7 +58,7 @@ nav span{
   max-width:1100px;
 }
 
-/* ========= TITULOS DE SECCIÓN ========= */
+/* ========= TITLES ========= */
 h1{
   font-size:clamp(70px,6vw,120px);
   font-weight:500;
@@ -73,11 +66,7 @@ h1{
 }
 
 /* ========= HERO ========= */
-.section.hero{
-  align-items:center;
-}
-
-.section.hero h1{
+.hero h1{
   font-size:clamp(80px,7vw,140px);
   margin-left:-4px;
 }
@@ -90,90 +79,44 @@ h1{
   color:#777;
 }
 
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:8px;
-  padding-left:8px;
-  font-size:15px;
-  color:#aaa;
-  max-width:700px;
-  line-height:1.6;
-  text-align:justify;
-}
-
 /* ========= ABOUT ========= */
-.about{
-  display:flex;
-  align-items:flex-start;
-  margin-top:12px;
-}
-
-.about img{
-  width:300px;
-  height:400px;
-  margin-left:40px;
-  object-fit:cover;
-  opacity:.9;
-}
+.about{display:flex;margin-top:12px}
+.about p{max-width:700px;color:#aaa;line-height:1.6}
+.about img{width:300px;height:400px;margin-left:40px;object-fit:cover}
 
 /* ========= PORTFOLIO ========= */
 .portfolio-wrapper{
-  position:relative;
   margin-top:32px;
   margin-left:8px;
   overflow:hidden;
-  padding-right:120px;
-}
-
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:120px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
 }
 
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:20px;
+  cursor:grab;
   scroll-behavior:smooth;
-  scrollbar-width:thin;
-  scrollbar-color:#444 transparent;
 }
 
-.portfolio-carousel::-webkit-scrollbar{
-  height:6px;
-}
-.portfolio-carousel::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:6px;
-}
+.portfolio-carousel.grabbing{cursor:grabbing}
 
 .project-card{
-  position:relative;
   min-width:460px;
-  text-decoration:none;
-  color:inherit;
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity .8s ease, transform .8s ease;
+  position:relative;
+  transition:.4s ease;
+  opacity:.4;
+  transform:scale(.96);
 }
 
-.project-card.is-visible{
+.project-card.active{
   opacity:1;
-  transform:none;
+  transform:scale(1);
 }
 
-/* === IMAGEN === */
 .project-image{
   position:relative;
   height:260px;
-  margin-bottom:20px;
   overflow:hidden;
 }
 
@@ -181,116 +124,72 @@ h1{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .6s ease;
+  transition:.6s ease;
 }
 
-/* === OVERLAY === */
 .project-overlay{
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.45);
-  backdrop-filter:blur(2px);
-  opacity:0;
   display:flex;
   align-items:flex-end;
   padding:24px;
-  transition:opacity .4s ease;
+  opacity:0;
+  transition:.4s ease;
 }
 
-.project-overlay span{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:#eee;
-}
-
-/* === HOVER === */
-.project-card:hover img{
-  transform:scale(1.04);
-}
-
-.project-card:hover .project-overlay{
-  opacity:1;
-}
+.project-card.active .project-overlay{opacity:1}
 
 .project-inner h2{
+  margin-top:20px;
   font-size:28px;
   font-weight:400;
 }
 
-.project-inner span{
-  display:none; /* ahora solo en overlay */
-}
-
-/* ========= CV (INTOCABLE) ========= */
-/* ——— todo exactamente igual que antes ——— */
-
-.timeline{
-  position:relative;
-  margin-top:60px;
-  padding-left:60px;
-}
-
+/* ========= CV ========= */
+.timeline{margin-top:60px;padding-left:60px;position:relative}
 .timeline-line{
-  position:absolute;
-  left:20px;
-  top:0;
-  width:1px;
-  height:0;
+  position:absolute;left:20px;top:0;width:1px;height:0;
   background:linear-gradient(#fff,#777);
   transition:height .25s ease-out;
 }
-
 .timeline-item{
-  position:relative;
   margin-bottom:80px;
-  max-width:520px;
   opacity:0;
   transform:translateY(20px);
   transition:.8s ease;
 }
-
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
-}
-
+.timeline-item.is-visible{opacity:1;transform:none}
 .timeline-item::before{
   content:"";
   position:absolute;
   left:-44px;
   top:50%;
   transform:translateY(-50%);
-  width:10px;
-  height:10px;
-  border-radius:50%;
+  width:10px;height:10px;border-radius:50%;
   background:#fff;
 }
-
 .timeline-card{
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
   padding:28px;
 }
 
-.timeline-card h3{
-  font-size:18px;
-  font-weight:500;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:16px;
+/* ========= CONTACT ========= */
+.contact{
+  margin-top:40px;
 }
 
-.timeline-card strong{
+.contact a{
   display:block;
-  font-size:16px;
+  font-size:18px;
+  color:#ddd;
+  margin-bottom:16px;
+  text-decoration:none;
+  transition:.3s ease;
 }
 
-.timeline-card span{
-  font-size:13px;
-  color:#888;
-}
+.contact a:hover{color:#fff}
 
 </style>
 </head>
@@ -302,6 +201,7 @@ h1{
   <span data-i="1">Sobre mí</span>
   <span data-i="2">Portfolio</span>
   <span data-i="3">CV</span>
+  <span data-i="4">Contacto</span>
 </nav>
 
 <section class="section hero">
@@ -315,14 +215,8 @@ h1{
   <div class="section-block">
     <h1>Sobre mí</h1>
     <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño.
-      </p>
-      <img src="foto.jpg" alt="">
+      <p>Ingeniero en diseño industrial con perfil ecléctico y base técnica.</p>
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -330,56 +224,24 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>Portfolio</h1>
-
     <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
+      <div class="portfolio-carousel" id="carousel">
 
-        <a href="node.html" class="project-card">
+        <div class="project-card">
           <div class="project-image">
-            <img src="brazo1.jpg" alt="">
-            <div class="project-overlay">
-              <span>Proyecto final de grado</span>
-            </div>
+            <img src="brazo1.jpg">
+            <div class="project-overlay"><span>Proyecto final de grado</span></div>
           </div>
-          <div class="project-inner">
-            <h2>NODE</h2>
-          </div>
-        </a>
+          <div class="project-inner"><h2>NODE</h2></div>
+        </div>
 
-        <a href="sixay.html" class="project-card">
+        <div class="project-card">
           <div class="project-image">
-            <img src="reloj1.jpg" alt="">
-            <div class="project-overlay">
-              <span>Diseño de mobiliario</span>
-            </div>
+            <img src="reloj1.jpg">
+            <div class="project-overlay"><span>Mobiliario</span></div>
           </div>
-          <div class="project-inner">
-            <h2>Sixay · Cómoda</h2>
-          </div>
-        </a>
-
-        <a href="exploracion.html" class="project-card">
-          <div class="project-image">
-            <img src="secador2.jpg" alt="">
-            <div class="project-overlay">
-              <span>Proyecto experimental</span>
-            </div>
-          </div>
-          <div class="project-inner">
-            <h2>Exploración material</h2>
-          </div>
-        </a>
-
-        <a href="conceptual.html" class="project-card">
-          <div class="project-image">
-            <div class="project-overlay">
-              <span>Diseño de producto</span>
-            </div>
-          </div>
-          <div class="project-inner">
-            <h2>Proyecto conceptual</h2>
-          </div>
-        </a>
+          <div class="project-inner"><h2>Sixay · Cómoda</h2></div>
+        </div>
 
       </div>
     </div>
@@ -389,16 +251,21 @@ h1{
 <section class="section">
   <div class="section-block">
     <h1>CV</h1>
-
     <div class="timeline">
       <div class="timeline-line" id="timelineLine"></div>
+      <div class="timeline-item"><div class="timeline-card">UJI</div></div>
+      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
+      <div class="timeline-item"><div class="timeline-card">Erasmus · Londres</div></div>
+    </div>
+  </div>
+</section>
 
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>Universitat Jaume I</span></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Grado en Ingeniería en Diseño Industrial</strong><span>UPV</span></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Formación</h3><strong>Programa Erasmus</strong><span>Londres</span></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Idiomas</h3><strong>Español · Inglés · Húngaro</strong></div></div>
-      <div class="timeline-item"><div class="timeline-card"><h3>Software</h3><strong>Rhino · AutoCAD · Inventor · SolidWorks</strong><span>Fusion 360 · Sinutrain · 3ds Max</span></div></div>
-
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:luis@email.com">luis@email.com</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -410,22 +277,43 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
     .scrollIntoView({behavior:"smooth"});
 });
 
-/* OBSERVER */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
-},{threshold:.2});
+/* DRAG SCROLL */
+const carousel=document.getElementById("carousel");
+let isDown=false,startX,scrollLeft;
 
-document.querySelectorAll(".project-card,.timeline-item")
-  .forEach(el=>observer.observe(el));
+carousel.addEventListener("mousedown",e=>{
+  isDown=true;
+  carousel.classList.add("grabbing");
+  startX=e.pageX-carousel.offsetLeft;
+  scrollLeft=carousel.scrollLeft;
+});
+carousel.addEventListener("mouseleave",()=>isDown=false);
+carousel.addEventListener("mouseup",()=>isDown=false);
+carousel.addEventListener("mousemove",e=>{
+  if(!isDown)return;
+  e.preventDefault();
+  const x=e.pageX-carousel.offsetLeft;
+  carousel.scrollLeft=scrollLeft-(x-startX)*1.2;
+});
+
+/* ACTIVE CARD */
+function updateActive(){
+  const cards=[...document.querySelectorAll(".project-card")];
+  const center=window.innerWidth/2;
+  cards.forEach(card=>{
+    const r=card.getBoundingClientRect();
+    card.classList.toggle("active",Math.abs(r.left+r.width/2-center)<200);
+  });
+}
+carousel.addEventListener("scroll",updateActive);
+updateActive();
 
 /* TIMELINE LINE */
-const timeline=document.querySelector(".timeline");
 const line=document.getElementById("timelineLine");
-
+const timeline=document.querySelector(".timeline");
 window.addEventListener("scroll",()=>{
-  const rect=timeline.getBoundingClientRect();
-  const visible=Math.min(window.innerHeight-rect.top,rect.height);
-  line.style.height=Math.max(0,visible)+"px";
+  const r=timeline.getBoundingClientRect();
+  line.style.height=Math.max(0,Math.min(window.innerHeight-r.top,r.height))+"px";
 });
 </script>
 
