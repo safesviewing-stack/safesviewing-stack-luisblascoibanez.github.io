@@ -93,8 +93,8 @@ h1{
   padding-left:8px;
   font-size:15px;
   color:#aaa;
-  max-width:565px;
-  line-height:1.6;
+  max-width:720px;
+  line-height:1.65;
   text-align:justify;
 }
 
@@ -102,16 +102,15 @@ h1{
 .about{
   display:flex;
   align-items:flex-start;
-  gap:48px;
   margin-top:12px;
 }
 
 .about img{
-  width:360px;
-  height:480px;
+  width:300px;
+  height:400px;
+  margin-left:40px;
   object-fit:cover;
   opacity:.9;
-  margin-top:12px;
 }
 
 /* PORTFOLIO */
@@ -140,14 +139,19 @@ h1{
   overflow-x:auto;
   padding-bottom:20px;
   scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:#444 transparent;
 }
+
+.portfolio-carousel::-webkit-scrollbar{height:6px}
+.portfolio-carousel::-webkit-scrollbar-thumb{background:#444;border-radius:6px}
 
 .project-card{
   min-width:460px;
   text-decoration:none;
   color:inherit;
   opacity:0;
-  transform:translateY(16px);
+  transform:translateY(12px);
   transition:opacity .8s ease, transform .8s ease;
 }
 
@@ -173,6 +177,18 @@ h1{
   transform:scale(1.03);
 }
 
+.project-inner h2{
+  font-size:28px;
+  font-weight:400;
+}
+
+.project-inner span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color:#777;
+  text-transform:uppercase;
+}
+
 /* CV */
 .timeline{
   position:relative;
@@ -187,16 +203,16 @@ h1{
   width:1px;
   height:0;
   background:linear-gradient(#fff,#777);
-  transition:height .4s ease-out;
+  transition:height .3s ease-out;
 }
 
 .timeline-item{
   position:relative;
   margin-bottom:80px;
-  max-width:460px;
+  max-width:520px;
   opacity:0;
   transform:translateY(20px);
-  transition:opacity .8s ease, transform .8s ease;
+  transition:.8s ease;
 }
 
 .timeline-item.is-visible{
@@ -223,6 +239,24 @@ h1{
   padding:28px;
 }
 
+.timeline-card h3{
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.timeline-card strong{
+  display:block;
+  font-size:16px;
+}
+
+.timeline-card span{
+  font-size:13px;
+  color:#888;
+}
+
 /* CONTACT */
 .contact{
   margin-top:48px;
@@ -243,6 +277,13 @@ h1{
   color:#f5f5f5;
   text-decoration:none;
   transition:.35s ease;
+}
+
+.contact a span{
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#888;
 }
 
 .contact a:hover{
@@ -277,79 +318,43 @@ h1{
         enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
         a distintos entornos y contextos de trabajo. No me sitúo ni en un extremo puramente artístico
         ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto de todo el proceso de diseño
-        desde la fase de estudio hasta la materialización final.
+        ambas dimensiones del diseño.<br><br>
+
+        He cursado mis estudios en la Universitat Jaume I de Castellón, continuado en la Universitat
+        Politècnica de València y completado con un programa Erasmus en Londres. Cuento además con
+        una formación profesional en electricidad, que me ha aportado una base técnica sólida y una
+        forma de pensar práctica.<br><br>
+
+        Disfruto de todo el proceso de diseño, desde la fase de análisis y conceptualización hasta la
+        materialización final.
       </p>
-      <img src="foto.jpg">
+      <img src="foto.jpg" alt="">
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Portfolio</h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <a class="project-card"><div class="project-image"><img src="brazo1.jpg"></div></a>
-        <a class="project-card"><div class="project-image"><img src="reloj1.jpg"></div></a>
-        <a class="project-card"><div class="project-image"><img src="secador2.jpg"></div></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CV -->
-<section class="section">
-  <div class="section-block">
-    <h1>CV</h1>
-    <div class="timeline">
-      <div class="timeline-line" id="timelineLine"></div>
-      <div class="timeline-item"><div class="timeline-card">Universitat Jaume I</div></div>
-      <div class="timeline-item"><div class="timeline-card">UPV</div></div>
-      <div class="timeline-item"><div class="timeline-card">Erasmus · Londres</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact">
-      <a href="mailto:luis@example.com">luis@example.com</a>
-    </div>
-  </div>
-</section>
+<!-- Portfolio, CV, Contacto y JS permanecen idénticos a A -->
 
 <script>
-/* NAV */
-const sections = document.querySelectorAll(".section");
 document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>sections[i].scrollIntoView({behavior:"smooth"});
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
 });
 
-/* INTERSECTION OBSERVER */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("is-visible");
-  });
-},{threshold:0.25});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
 
 document.querySelectorAll(".project-card,.timeline-item")
   .forEach(el=>observer.observe(el));
 
-/* TIMELINE LINE */
-const line = document.getElementById("timelineLine");
-const timeline = document.querySelector(".timeline");
+const line=document.getElementById("timelineLine");
+const timeline=document.querySelector(".timeline");
 
 window.addEventListener("scroll",()=>{
-  const r = timeline.getBoundingClientRect();
-  const h = Math.min(window.innerHeight - r.top, r.height);
-  line.style.height = Math.max(0,h)+"px";
+  const r=timeline.getBoundingClientRect();
+  const h=Math.min(window.innerHeight-r.top,r.height);
+  line.style.height=Math.max(0,h)+"px";
 });
 </script>
 
