@@ -8,10 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 
-/* BODY */
 body{
   background:#0a0a0a;
   color:#f5f5f5;
@@ -22,14 +20,10 @@ body{
 /* NAV */
 nav{
   position:fixed;
-  top:0;
-  left:50%;
+  top:0;left:50%;
   transform:translateX(-50%);
-  width:100%;
-  height:80px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  width:100%;height:80px;
+  display:flex;justify-content:center;align-items:center;
   gap:50px;
   background:rgba(10,10,10,.4);
   backdrop-filter:blur(12px);
@@ -72,10 +66,7 @@ nav span{
 }
 
 /* ABOUT */
-.about{
-  display:flex;
-  margin-top:12px;
-}
+.about{display:flex;margin-top:12px}
 .about p{
   max-width:700px;
   font-size:15px;
@@ -83,8 +74,7 @@ nav span{
   line-height:1.6;
 }
 .about img{
-  width:300px;
-  height:400px;
+  width:300px;height:400px;
   margin-left:40px;
   object-fit:cover;
   opacity:.9;
@@ -98,18 +88,10 @@ nav span{
   overflow:hidden;
   padding-right:120px;
 }
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  right:0;top:0;
-  width:120px;height:100%;
-  background:linear-gradient(to right,rgba(10,10,10,0),rgba(10,10,10,1));
-}
 .portfolio-carousel{
   display:flex;
   gap:48px;
   overflow-x:auto;
-  padding-bottom:20px;
 }
 .project-card{
   min-width:460px;
@@ -122,21 +104,21 @@ nav span{
   transform:none;
 }
 
-/* ===== CV ===== */
+/* ===== CV · FRAMER STYLE ===== */
 .cv-wrapper{
   margin-top:32px;
   position:relative;
-  padding-left:56px;
+  padding-left:64px;
 }
 
 /* línea */
 .cv-line{
   position:absolute;
-  left:20px;
+  left:24px;
   top:0;
   width:1px;
   height:100%;
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.18);
   transform:scaleY(0);
   transform-origin:top;
 }
@@ -144,33 +126,30 @@ nav span{
 /* bloques */
 .cv-block{
   position:relative;
-  margin-bottom:64px;
+  margin-bottom:72px;
   opacity:0;
-  transform:translateY(16px);
-  transition:opacity .7s ease, transform .7s ease;
-}
-.cv-block.is-visible{
-  opacity:1;
-  transform:none;
+  transform:translateY(24px);
+  will-change:transform,opacity;
 }
 
 /* puntos */
 .cv-dot{
   position:absolute;
-  left:-44px;
+  left:-52px;
   top:6px;
-  width:10px;
-  height:10px;
+  width:10px;height:10px;
   border-radius:50%;
   background:#555;
-  transition:background .3s ease, transform .3s ease;
+  transform:scale(1);
+  transition:background .25s ease, transform .25s ease, box-shadow .25s ease;
 }
 .cv-dot.active{
-  background:#ddd;
-  transform:scale(1.3);
+  background:#fff;
+  transform:scale(1.4);
+  box-shadow:0 0 12px rgba(255,255,255,.6);
 }
 .cv-dot.past{
-  background:#999;
+  background:#aaa;
 }
 
 .cv-block h3{
@@ -215,10 +194,10 @@ nav span{
     <h1>Sobre mí</h1>
     <div class="about">
       <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. Perfil ecléctico,
-        técnico y adaptable, con formación en diseño y experiencia en el sector eléctrico.
+        Ingeniero en diseño industrial con formación técnica en electricidad y experiencia
+        en entornos industriales. Perfil ecléctico, orientado al proceso y a la materialización.
       </p>
-      <img src="foto.jpg" alt="">
+      <img src="foto.jpg">
     </div>
   </div>
 </section>
@@ -243,29 +222,29 @@ nav span{
     <div class="cv-wrapper" id="cv">
       <div class="cv-line" id="cvLine"></div>
 
-      <div class="cv-block">
-        <div class="cv-dot"></div>
+      <div class="cv-block"><div class="cv-dot"></div>
         <h3>Formación</h3>
-        <div class="cv-item"><strong>Grado en Ingeniería en Diseño Industrial</strong><span>UJI · UPV · Erasmus Londres</span></div>
+        <div class="cv-item"><strong>Grado en Ingeniería en Diseño Industrial</strong>
+          <span>UJI · UPV · Erasmus Londres</span>
+        </div>
       </div>
 
-      <div class="cv-block">
-        <div class="cv-dot"></div>
+      <div class="cv-block"><div class="cv-dot"></div>
         <h3>Experiencia profesional</h3>
         <div class="cv-item"><strong>Técnico electricista</strong><span>Autrial</span></div>
         <div class="cv-item"><strong>Técnico electricista</strong><span>Elecnor</span></div>
       </div>
 
-      <div class="cv-block">
-        <div class="cv-dot"></div>
+      <div class="cv-block"><div class="cv-dot"></div>
         <h3>Idiomas</h3>
         <div class="cv-item"><strong>Español · Inglés · Húngaro</strong></div>
       </div>
 
-      <div class="cv-block">
-        <div class="cv-dot"></div>
+      <div class="cv-block"><div class="cv-dot"></div>
         <h3>Software</h3>
-        <div class="cv-item"><strong>Rhino · AutoCAD · Inventor · SolidWorks · Fusion · Sinutrain · 3ds Max</strong></div>
+        <div class="cv-item">
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks · Fusion · Sinutrain · 3ds Max</strong>
+        </div>
       </div>
 
     </div>
@@ -286,37 +265,35 @@ document.querySelectorAll(".project-card").forEach(card=>{
   },{threshold:.3}).observe(card);
 });
 
-/* CV LOGIC */
+/* ===== CV FRAMER MOTION ===== */
 const cv=document.getElementById("cv");
 const line=document.getElementById("cvLine");
 const blocks=[...document.querySelectorAll(".cv-block")];
 const dots=[...document.querySelectorAll(".cv-dot")];
 
-/* escalonado */
-blocks.forEach((b,i)=>b.style.transitionDelay=`${i*120}ms`);
-
 window.addEventListener("scroll",()=>{
-  const cvRect=cv.getBoundingClientRect();
-  const start=window.innerHeight*0.35;
-  const progress=(start-cvRect.top)/cvRect.height;
-  const clamped=Math.max(0,Math.min(1,progress));
-  line.style.transform=`scaleY(${clamped})`;
+  const rect=cv.getBoundingClientRect();
+  const vh=window.innerHeight;
+
+  /* progreso continuo */
+  const start=vh*0.3;
+  const end=vh*0.9;
+  let progress=(start-rect.top)/(start-end);
+  progress=Math.max(0,Math.min(1,progress));
+  line.style.transform=`scaleY(${progress})`;
 
   blocks.forEach((block,i)=>{
-    const rect=block.getBoundingClientRect();
-    const mid=window.innerHeight*0.45;
+    const b=block.getBoundingClientRect();
+    const mid=vh*0.45;
+    const delta=(mid-b.top)/vh;
 
-    if(rect.top < mid){
-      block.classList.add("is-visible");
-      dots[i].classList.add("past");
-      dots[i].classList.remove("active");
-    }
-    if(rect.top < mid && rect.bottom > mid){
-      dots[i].classList.add("active");
-    }
-    if(rect.top > mid){
-      dots[i].classList.remove("active","past");
-    }
+    /* parallax + fade */
+    const y=Math.max(0,Math.min(1,delta));
+    block.style.opacity=y;
+    block.style.transform=`translateY(${(1-y)*24}px)`;
+
+    dots[i].classList.toggle("active",b.top<mid && b.bottom>mid);
+    dots[i].classList.toggle("past",b.bottom<mid);
   });
 });
 </script>
