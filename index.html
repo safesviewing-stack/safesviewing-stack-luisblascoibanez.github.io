@@ -1,578 +1,600 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borregos S.L. | Premium Experience</title>
-    <!-- Fuentes elegantes: Playfair Display para títulos, Plus Jakarta Sans para textos -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* --- VARIABLES DE TEMA (MODO CLARO ELEGANTE) --- */
-        :root {
-            --bg-color: #faf9f6; /* Off-white perlado */
-            --main-color: #aa8c49; /* Oro envejecido */
-            --accent-color: #3e4a59; /* Azul pizarra oscuro */
-            --yellow: #f1ebd9; /* Beige suave */
-            --dark: #1a1a1a;
-            --card-bg: #ffffff;
-            --text-dark: #2c2c2c;
-            --text-light: #ffffff;
-            --border-radius: 20px;
-            --shadow-subtle: 0 10px 30px rgba(0,0,0,0.04);
-            --shadow-hover: 0 20px 40px rgba(0,0,0,0.08);
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luis Blasco — Industrial Design</title>
 
-        /* --- VARIABLES DE TEMA (MODO OSCURO PREMIUM) --- */
-        body.dark-mode {
-            --bg-color: #0d0d0d;
-            --main-color: #d4af37; /* Oro brillante */
-            --accent-color: #8fa3b0; 
-            --yellow: #1f1d18;
-            --dark: #fcfcfc;
-            --card-bg: #141414;
-            --text-dark: #f0f0f0;
-            --text-light: #121212;
-            --shadow-subtle: 0 10px 30px rgba(0,0,0,0.3);
-            --shadow-hover: 0 20px 40px rgba(0,0,0,0.5);
-        }
+<!-- Tipografías de alta gama: Playfair para lujo/editorial, Plus Jakarta para técnica/legibilidad -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        * {
-            box-sizing: border-box; margin: 0; padding: 0;
-            /* Se retira el cursor de oveja para mayor elegancia */
-        }
+<style>
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--dark);
-            overflow-x: hidden; scroll-behavior: smooth; 
-            transition: var(--transition-smooth);
-            line-height: 1.6;
-        }
+/* ========= VARIABLES Y RESET ========= */
+:root {
+  --bg-dark: #070707;
+  --text-main: #fcfcfc;
+  --text-muted: #8a8a8a;
+  --accent: #d4af37; /* Oro pálido muy sutil, casi champagne */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --smooth-bezier: cubic-bezier(0.19, 1, 0.22, 1);
+}
 
-        h1, h2, h3, .serif-font {
-            font-family: 'Playfair Display', serif;
-        }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-        /* --- EFECTOS REVEAL --- */
-        .reveal { opacity: 0; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
-        .reveal.active { opacity: 1; }
-        .reveal-up { transform: translateY(40px); }
-        .reveal-up.active { transform: translateY(0); }
-        .reveal-scale { transform: scale(0.95); }
-        .reveal-scale.active { transform: scale(1); }
+/* ========= BODY ========= */
+body{
+  background-color: var(--bg-dark);
+  /* Un gradiente de ruido/luz súper elegante de fondo */
+  background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  background-repeat: no-repeat;
+  color: var(--text-main);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 300;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-        /* --- ANIMACIONES ELEGANTES --- */
-        @keyframes float-hero { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+/* ========= NAV (Elegante y difuminado) ========= */
+nav{
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  height:90px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:clamp(30px, 4vw, 60px);
+  background:rgba(7,7,7,0.6);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index:100;
+  border-bottom: 1px solid var(--glass-border);
+}
 
-        /* --- CONTROLES SUPERIORES (GLASSMORPHISM) --- */
-        .top-controls { position: fixed; top: 1.5rem; right: 2rem; display: flex; align-items: center; gap: 1rem; z-index: 1002; }
-        .magnetic-btn { display: inline-block; transition: transform 0.2s ease-out; }
-        
-        .btn-control {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            color: var(--dark); border: 1px solid rgba(128, 128, 128, 0.2); 
-            width: 50px; height: 50px; border-radius: 50%;
-            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-subtle); transition: var(--transition-smooth);
-            cursor: pointer;
-        }
-        .btn-control:hover { background: var(--main-color); color: white; border-color: var(--main-color); transform: translateY(-3px); }
-        
-        body.dark-mode .btn-control { background: rgba(0, 0, 0, 0.3); color: white; }
+nav span{
+  font-size:10px;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color: var(--text-muted);
+  cursor:pointer;
+  transition: all 0.4s var(--smooth-bezier);
+  position: relative;
+  padding-bottom: 4px;
+}
 
-        .hamburger { padding: 0; flex-direction: column; gap: 5px; }
-        .hamburger span { display: block; width: 20px; height: 2px; background: var(--dark); transition: all 0.3s ease; }
-        body.dark-mode .hamburger span { background: white; }
-        .hamburger:hover span { background: white; }
-        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: white;}
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: white;}
+nav span::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0%; height: 1px;
+  background-color: var(--text-main);
+  transition: width 0.4s var(--smooth-bezier);
+}
 
-        .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(5px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
-        .glass-overlay.active { opacity: 1; pointer-events: auto; }
+nav span:hover{
+  color: var(--text-main);
+}
+nav span:hover::after {
+  width: 100%;
+}
 
-        /* MENU LATERAL ELEGANTE */
-        .side-panel { position: fixed; top: 0; right: -100%; width: min(400px, 100vw); height: 100vh; background: var(--card-bg); border-left: 1px solid rgba(128,128,128,0.1); padding: 8rem 3rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 40px rgba(0,0,0,0.1); }
-        .side-panel.open { right: 0; }
-        .side-panel a { color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 2rem; text-decoration: none; transition: var(--transition-smooth); display: block; position: relative; width: fit-content; }
-        .side-panel a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--main-color); transition: width 0.4s ease; }
-        .side-panel a:hover { color: var(--main-color); transform: translateX(10px); }
-        .side-panel a:hover::after { width: 100%; }
+/* ========= SECTIONS ========= */
+.section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  justify-content:flex-start;
+  padding: 160px 8vw 120px clamp(20px, 15vw, 300px);
+}
 
-        /* --- CLASES REUTILIZABLES (Antiguo "Brutal-border") --- */
-        .elegant-card { 
-            background: var(--card-bg); border-radius: var(--border-radius); 
-            box-shadow: var(--shadow-subtle); border: 1px solid rgba(128, 128, 128, 0.1); 
-            transition: var(--transition-smooth); position: relative; overflow: hidden;
-        }
-        .elegant-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--main-color); }
+.section-block{
+  position:sticky;
+  top:220px;
+  max-width:1200px;
+  width: 100%;
+}
 
-        section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; }
-        
-        .section-title { 
-            font-size: 3rem; margin-bottom: 3rem; color: var(--main-color);
-            display: flex; align-items: center; gap: 1rem;
-        }
-        .section-title::after { content: ''; flex-grow: 1; height: 1px; background: rgba(128,128,128,0.2); }
+/* ========= TITLES (Estilo Editorial) ========= */
+h1{
+  font-family: 'Playfair Display', serif;
+  font-size:clamp(60px, 7vw, 130px);
+  font-weight:400;
+  line-height:0.95;
+  margin-left:-4px;
+  letter-spacing: -0.02em;
+}
+h1 i {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--text-muted);
+  font-weight: 400;
+}
 
-        /* INICIO */
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at top, var(--yellow) 0%, var(--bg-color) 70%); position: relative; overflow: hidden; }
-        body.dark-mode header { background: radial-gradient(circle at top, #1a1a14 0%, var(--bg-color) 70%); }
-        h1 { font-size: clamp(4rem, 10vw, 8rem); font-weight: 700; color: var(--text-dark); animation: float-hero 6s ease-in-out infinite; z-index: 2; position: relative; letter-spacing: -0.02em; }
-        h1 span { font-style: italic; color: var(--main-color); font-weight: 400;}
-        .subtitle { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; opacity: 0.7; margin-top: 1rem; text-transform: uppercase; letter-spacing: 8px; z-index: 2; position: relative; }
-        
-        .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 140px; height: 140px; background: transparent; color: var(--text-dark); border-radius: 50%; border: 1px dashed var(--main-color); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; animation: spin-slow 15s linear infinite; z-index: 1; padding: 1rem;}
+/* ========= HERO ========= */
+.section.hero{
+  align-items:center;
+}
+.hero-sub{
+  margin-top:40px;
+  font-size:12px;
+  font-weight: 500;
+  letter-spacing:0.35em;
+  color:var(--text-muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.hero-sub::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--text-muted);
+}
 
-        /* SOBRE NOSOTROS */
-        .about-text { font-size: 1.15rem; font-weight: 300; line-height: 1.8; text-align: justify; color: var(--text-dark); padding: 4rem; }
-        .about-text::first-letter { font-family: 'Playfair Display', serif; font-size: 4rem; float: left; margin-right: 15px; line-height: 1; color: var(--main-color); }
+/* ========= TEXT ========= */
+.section-block p{
+  margin-top:30px;
+  font-size:16px;
+  color:var(--text-muted);
+  max-width:550px;
+  line-height:1.8;
+  text-align:justify;
+}
 
-        /* REBAÑO */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; perspective: 1000px; }
-        .card-rebano { padding: 1.5rem; text-align: center; cursor: pointer; transform-style: preserve-3d; will-change: transform; }
-        .card-rebano h3 { margin-top: 1.5rem; font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
-        .card-rebano img { width: 100%; height: 350px; object-fit: cover; object-position: center 18%; border-radius: calc(var(--border-radius) - 10px); margin-bottom: 0.5rem; filter: grayscale(100%) contrast(1.1); transition: var(--transition-smooth); transform: translateZ(20px); }
-        .card-rebano:hover img { filter: grayscale(0%); transform: translateZ(40px) scale(1.03); }
+/* ========= ABOUT ========= */
+.about{
+  display:flex;
+  flex-wrap: wrap;
+  gap:clamp(30px, 6vw, 80px);
+  margin-top:20px;
+  align-items: flex-start;
+}
 
-        /* MODAL ELEGANTE */
-        .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
-        .modal-content { max-width: 700px; margin: 0 auto; background: var(--card-bg); color: var(--text-dark); padding: 4rem; border-radius: var(--border-radius); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; border: 1px solid rgba(255,255,255,0.1); }
-        .close-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: transparent; color: var(--text-dark); border: none; font-size: 1rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
-        .close-btn:hover { color: var(--main-color); }
-        #perfilNombre { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
-        #perfilSub { font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--main-color); font-size: 1rem; margin-bottom: 2rem; display: block; }
-        #perfilTexto { font-weight: 300; font-size: 1.1rem; line-height: 1.8; opacity: 0.8; }
+.about img{
+  width: clamp(280px, 30vw, 400px);
+  height: 550px;
+  object-fit:cover;
+  border-radius: 4px; /* Un redondeo súper sutil muy de diseño industrial */
+  filter: grayscale(80%) contrast(1.1);
+  transition: filter 1s var(--smooth-bezier);
+}
 
-        /* SERVICIOS / INVENTARIO */
-        .service-card { padding: 3rem; margin-bottom: 2rem; border-left: 4px solid var(--main-color); }
-        .service-card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
-        .service-card p { font-weight: 300; opacity: 0.8; font-size: 1.1rem; }
+.about img:hover {
+  filter: grayscale(0%) contrast(1.05);
+}
 
-        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .item-inventario { padding: 1.5rem; text-align: center; }
-        .item-inventario img { width: 100%; height: 220px; object-fit: cover; border-radius: calc(var(--border-radius) - 8px); transition: var(--transition-smooth); margin-bottom: 1.5rem; }
-        .item-inventario:hover img { transform: scale(1.05); }
-        .item-inventario p { font-weight: 600; font-size: 1.1rem; }
-        .item-inventario span { font-size: 0.85rem; color: var(--main-color); text-transform: uppercase; letter-spacing: 1px; }
+/* ========= PORTFOLIO ========= */
+.portfolio-wrapper{
+  position:relative;
+  margin-top:70px;
+  overflow:hidden;
+  padding-right:120px;
+  padding-left: 5px; /* Compensa sombras */
+}
 
-        /* BLOG CAROUSEL */
-        .carousel-wrapper { position: relative; padding: 2rem 0; overflow: hidden; }
-        .carousel { display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 2rem; }
-        .carousel::-webkit-scrollbar { display: none; }
-        .carousel-item { min-width: 70%; height: 400px; background-size: cover; background-position: center; border-radius: var(--border-radius); flex-shrink: 0; transition: var(--transition-smooth); box-shadow: var(--shadow-subtle); position: relative; }
-        .carousel-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); border-radius: var(--border-radius); opacity: 0; transition: opacity 0.3s; }
-        .carousel-item:hover { transform: scale(1.02); }
-        .carousel-item:hover::after { opacity: 1; }
-        .carousel-item.video { background: var(--dark); color: var(--bg-color); font-family: 'Playfair Display', serif; font-size: 2rem; display: flex; align-items: center; justify-content: center; font-style: italic; }
+/* Difuminado derecho para ocultar el scroll sutilmente */
+.portfolio-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:150px;
+  height:100%;
+  pointer-events:none;
+  background:linear-gradient(to right,rgba(7,7,7,0),rgba(7,7,7,1));
+}
 
-        .carousel-btn { position: absolute; top: 45%; transform: translateY(-50%); background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; box-shadow: var(--shadow-subtle); color: #111; transition: var(--transition-smooth); }
-        .carousel-btn.left { left: -1rem; }
-        .carousel-btn.right { right: -1rem; }
-        .carousel-btn:hover { background: var(--main-color); color: white; transform: translateY(-50%) scale(1.1); }
+.portfolio-carousel{
+  display:flex;
+  gap:50px;
+  overflow-x:auto;
+  padding-bottom:40px;
+  scrollbar-width: none; /* Oculta scrollbar por elegancia (Firefox) */
+}
+.portfolio-carousel::-webkit-scrollbar { display: none; } /* Safari y Chrome */
 
-        /* DONACIONES */
-        .donaciones-container { padding: 5rem 3rem; text-align: center; background: radial-gradient(circle at center, var(--yellow), transparent); }
-        .donaciones-container h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem; }
-        .donaciones-cajas { display: flex; justify-content: center; gap: 1.5rem; margin: 3rem 0; flex-wrap: wrap; }
-        
-        .btn-donar { background: var(--bg-color); color: var(--text-dark); font-size: 1.5rem; font-family: 'Playfair Display', serif; padding: 1rem 3rem; border-radius: 50px; border: 1px solid rgba(128,128,128,0.2); text-decoration: none; box-shadow: var(--shadow-subtle); transition: var(--transition-smooth); display: inline-block; }
-        .btn-donar:hover { background: var(--main-color); color: white; transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        
-        .progreso-wrapper { width: 100%; height: 8px; background: rgba(128,128,128,0.2); border-radius: 10px; margin-top: 3rem; position: relative; overflow: hidden; }
-        .progreso-barra { height: 100%; width: 0%; background: var(--main-color); transition: width 1s cubic-bezier(0.25, 1, 0.5, 1); position: relative; border-radius: 10px; }
-        .progreso-texto { margin-top: 1rem; font-weight: 300; font-size: 1rem; letter-spacing: 1px; }
-        .progreso-texto span { font-weight: 700; color: var(--main-color); }
+.project-card{
+  min-width: 420px;
+  text-decoration:none;
+  color:inherit;
+  opacity:0;
+  transform:translateY(30px);
+  transition: 1s var(--smooth-bezier);
+  cursor: pointer;
+  display: block;
+}
 
-        /* EASTER EGGS ELEGANTES */
-        #quesoBtn { background: transparent; color: var(--main-color); border: 1px solid var(--main-color); border-radius: 50px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; padding: 0.8rem 2rem; cursor: pointer; transition: var(--transition-smooth); margin-top: 2rem; }
-        #quesoBtn:hover { background: var(--main-color); color: white; }
-        
-        .drop-fx { position: fixed; font-size: 2rem; z-index: 9999; animation: fallElegant 4s cubic-bezier(0.25, 1, 0.5, 1) forwards; pointer-events: none; opacity: 0.8; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));}
-        @keyframes fallElegant { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
 
-        .beee { position: fixed; transform: translate(-50%, -50%); font-family: 'Playfair Display', serif; font-style: italic; font-size: 3rem; pointer-events: none; z-index: 999999; animation: beeeFade 1.5s ease-out forwards; mix-blend-mode: exclusion; }
-        @keyframes beeeFade { 0% { opacity: 0; transform: translate(-50%, -30px) scale(0.9); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 100% { opacity: 0; transform: translate(-50%, -80px) scale(1); filter: blur(4px); } }
+.project-image{
+  height: 500px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border-radius: 4px;
+}
 
-        /* FOOTER & BOTÓN CAOS */
-        .chaos-btn-wrapper { text-align: center; padding: 4rem 2rem; }
-        .btn-chaos { background: transparent; color: var(--text-dark); font-size: 0.8rem; letter-spacing: 4px; font-weight: 400; padding: 1rem 3rem; border: 1px solid rgba(128,128,128,0.2); border-radius: 50px; text-transform: uppercase; transition: var(--transition-smooth); cursor: pointer; opacity: 0.5;}
-        .btn-chaos:hover { opacity: 1; color: #ff3333; border-color: #ff3333; letter-spacing: 6px; }
-        
-        body.fade-out-mode { overflow: hidden; }
-        body.fade-out-mode > *:not(#cinematic-msg) { transition: opacity 3s ease, filter 3s ease; opacity: 0 !important; filter: blur(10px) grayscale(100%); pointer-events: none; }
-        
-        footer { padding: 6rem 2rem 8rem; text-align: center; border-top: 1px solid rgba(128,128,128,0.1); }
-        .email-huge { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); color: var(--text-dark); text-decoration: none; position: relative; display: inline-block; transition: var(--transition-smooth); }
-        .email-huge::after { content:''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px; background: var(--main-color); transition: width 0.4s ease; }
-        .email-huge:hover { color: var(--main-color); }
-        .email-huge:hover::after { width: 100%; }
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scale(1);
+  filter: grayscale(100%);
+  transition: transform 1.2s var(--smooth-bezier), filter 0.8s ease;
+}
 
-        /* Ajuste de imágenes individuales */
-        .david-card img { object-position: center 50%; }
-        .jos-card img { object-position: center 20%; }
-        .leandro-card img { object-position: center 0%; }
-        .luis-card img { object-position: center 0%; }
-        .pablo-card img { object-position: center 0%; }
-        
-        .elegant-text-accent { color: var(--main-color); font-style: italic; }
-    </style>
+.project-card:hover .project-image img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
+
+.project-card strong{
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  display: block;
+  transition: color 0.4s ease;
+}
+
+.project-card:hover strong {
+  color: var(--accent);
+}
+
+/* ========= CV / TIMELINE ========= */
+.timeline{
+  position:relative;
+  margin-top:80px;
+  padding-left:80px;
+}
+
+.timeline-line{
+  position:absolute;
+  left:22px;
+  top:10px;
+  width:1px;
+  height:0;
+  /* Degradado elegante de la línea de tiempo */
+  background:linear-gradient(to bottom, #fff, rgba(255,255,255,0.1));
+}
+
+.timeline-item{
+  position:relative;
+  margin-bottom:70px;
+  max-width:550px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s var(--smooth-bezier);
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+/* Punto de la línea de tiempo: Estilo anillo minimalista */
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:-63px; /* Centrado con la línea */
+  top:20px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--bg-dark);
+  border: 1px solid var(--text-muted);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.timeline-item:hover::before {
+  background: var(--text-main);
+  border-color: var(--text-main);
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  transform: scale(1.2);
+}
+
+.timeline-card{
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding:35px 40px;
+  transition: transform 0.6s var(--smooth-bezier), border-color 0.6s;
+}
+
+.timeline-card:hover {
+  transform: translateX(10px);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.timeline-card h3{
+  font-family: 'Playfair Display', serif;
+  font-size:16px;
+  font-style: italic;
+  letter-spacing:0.1em;
+  color: var(--text-muted);
+  margin-bottom:20px;
+}
+
+.timeline-card strong{
+  display:block;
+  font-weight: 500;
+  font-size:18px;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.timeline-card span{
+  font-size:14px;
+  color:var(--text-muted);
+  line-height: 1.6;
+  display: block;
+}
+
+/* ========= CONTACTO ========= */
+.contact{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+
+.contact a{
+  padding:40px;
+  border-radius:12px;
+  background: var(--glass-bg);
+  border:1px solid var(--glass-border);
+  color:var(--text-main);
+  text-decoration:none;
+  transition:all 0.6s var(--smooth-bezier);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact a span{
+  display:block;
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
+
+/* Brillo sutil al hacer hover en el contacto */
+.contact a::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.contact a:hover{
+  transform:translateY(-8px);
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+}
+
+.contact a:hover::after {
+  left: 200%;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
+<nav>
+  <span data-i="0">Inicio</span>
+  <span data-i="1">Sobre mí</span>
+  <span data-i="2">Portfolio</span>
+  <span data-i="3">Currículum</span>
+  <span data-i="4">Contacto</span>
+</nav>
 
-    <!-- CONTROLES -->
-    <div class="top-controls">
-        <div class="magnetic-btn"><button class="btn-control" id="themeBtn" onclick="toggleTheme()" title="Modo Día/Noche">☽</button></div>
-        <div class="magnetic-btn">
-            <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+<!-- HERO -->
+<section class="section hero">
+  <div class="section-block">
+    <!-- Cursivas intercaladas en el título para ese toque editorial Premium -->
+    <h1>Luis<br><i>Blasco-Ibáñez</i><br>Berbel</h1>
+    <div class="hero-sub">Industrial Design Portfolio</div>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section class="section">
+  <div class="section-block">
+    <h1>Sobre <i>mí</i></h1>
+    <div class="about">
+      <p>
+        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
+        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
+        a distintos entornos y contextos de trabajo.<br><br>
+        No me sitúo ni en un extremo puramente artístico
+        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
+        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
+        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
+        en Londres. <br><br>
+        Cuento además con una formación profesional en electricidad, que me ha aportado
+        una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
+        desde el periodo del desarrollo hasta la materialización terminal.
+      </p>
+      <img src="foto.jpg" alt="Retrato de Luis Blasco">
     </div>
+  </div>
+</section>
 
-    <!-- MENÚ LATERAL -->
-    <nav class="side-panel" id="sideMenu">
-        <a href="#inicio" onclick="toggleMenu()">La Firma</a>
-        <a href="#nosotros" onclick="toggleMenu()">Manifiesto</a>
-        <a href="#rebano" onclick="toggleMenu()">Miembros</a>
-        <a href="#servicios" onclick="toggleMenu()">Servicios Exclusivos</a>
-        <a href="#inventario" onclick="toggleMenu()">Archivo de Bienes</a>
-        <a href="#blog" onclick="toggleMenu()">Exhibición</a>
-        <a href="#donaciones" onclick="toggleMenu()">Mecenazgo</a>
-    </nav>
+<!-- PORTFOLIO -->
+<section class="section">
+  <div class="section-block">
+    <h1><i>P</i>ortfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel" id="portfolioCarousel">
 
-    <!-- INICIO -->
-    <header id="inicio">
-        <div class="spinning-badge">Maison Borrego <br> Est. 2023</div>
-        <h1 class="reveal reveal-up">Borregos <span>S.L.</span></h1>
-        <button class="reveal reveal-up elegant-card" id="quesoBtn" title="Degustación visual">K de queso</button>
-        <div class="subtitle reveal reveal-up">El refinamiento de la inutilidad</div>
-    </header>
+        <a href="#" class="project-card">
+          <div class="project-image"><img src="1.jpg" alt="Proyecto NODE"></div>
+          <strong>NODE</strong>
+        </a>
 
-    <!-- SOBRE NOSOTROS -->
-    <section id="nosotros">
-        <h2 class="section-title reveal reveal-left">Manifiesto</h2>
-        <div class="about-text elegant-card reveal reveal-up">
-          Somos un grupo de individuos objetivamente inútiles que decidió unirse en el contexto más valenciano posible: las Fallas. Entre pólvora, ruido y decisiones mal pensadas, se consolidó esta agrupación de gilipollas funcionales, unidos más por la costumbre que por cualquier talento destacable. Como todo grupo de hombres, contamos con una amplia variedad de edades y personalidades. En teoría, cada uno “se encarga de algo”. En la práctica, nadie hace nada de forma clara, salvo dos o tres que lo intentan con una mezcla de buena voluntad y fracaso moderado. El resto acompaña, opina sin base y contribuye al desorden general. Nuestro objetivo común es tan sencillo como ambicioso: obtener el carnet del 33% y acceder con dignidad administrativa a zona Gemelos. No por necesidad, sino por <span class="elegant-text-accent">coherencia vital</span>. A lo largo del tiempo hemos compartido numerosas locuras y experiencias, algunas memorables y otras imposibles de contar sin acabar con un historial judicial similar al de cierta prostituta televisiva condenada a la reclusión perpetua. No somos un modelo a seguir, pero sí un fenómeno persistente. Y aunque nuestra utilidad sea discutible, nuestra capacidad para mantenernos unidos en el caos merece, al menos, una mención. El borreguismo no es ningún tipo de institución, ser borrego simplemente es una filosofía y una manera de pensar diferente.
-        </div>
-    </section>
+        <a href="#" class="project-card">
+          <div class="project-image"><img src="2.jpg" alt="Proyecto Sixay"></div>
+          <strong>Sixay</strong>
+        </a>
 
-    <!-- REBAÑO -->
-    <section id="rebano">
-        <h2 class="section-title reveal reveal-left">La Mesa Directiva</h2>
-        <div class="grid-3">
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card" onclick="abrirPerfil('Samuel A. Duart', 'Director General de Contemplación', 'El borrego es un gordo de gimnasio, una aberración de la biología moderna: va a entrenar, suda, gruñe… y sigue gordo. Pero ojo, impone. No por velocidad ni agilidad, sino por pura presencia gravitacional. Parece un monstruo sacado de un bestiario medieval. Es adicto a las mujeres, pero desde una superioridad casi filosófica: observa, aprecia, idealiza… y no toca. Un deseo contemplativo. Un erotismo conceptual. Evade impuestos con la tranquilidad del que ha leído lo justo como para saber que el sistema es una farsa. Es vago, sí, pero vago culto. De los que no hacen nada mientras piensan cosas. Un borrego ilustrado que no sirve para mucho… pero tampoco pretende servir.')">
-                <img src="Samu.jpg" alt="Samu">
-                <h3>Samuel A. Duart</h3>
-            </div>
-            
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card david-card" onclick="abrirPerfil('David Monfort', 'Consultor Estratégico de Caos', 'La alegría de la fiesta por insistencia, no porque sea divertido, sino porque siempre está ahí, resistiendo. Nunca hace nada, jamás, pero curiosamente siempre está cansado. Lo único que hace es sacarse el carnet de camión y trabajar de informático usando ChatGPT. Tiene gallinas y las menciona con orgullo. Trabaja de repartidor de Amazon y lo defiende como si fuera una vocación heroica. Su moto se oye a tres kilómetros y la ha decorado con pegatinas de rayos porque cree que así corre más. La aerodinámica es mental. Su Dacia Sandero tiene unas garras en el faro para imponer respeto. Vive convencido de que el ruido es personalidad.')">
-                <img src="David.jpg" alt="David">
-                <h3>David Monfort</h3>
-            </div>
-            
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card" onclick="abrirPerfil('Ignacio Piqueras', 'Finanzas y Gestión de Presencias', 'Este borrego ya es otra liga. Aquí sí se hacen cosas. Estudia ADE y además invierte: gráficas, números, rentabilidad a largo plazo. Se le ve poco la cara, ya sea por los apuntes financieros o porque su brillo daña la vista humana. Su ausencia no es dejadez, es gestión de la escasez: aparece poco porque vale mucho. Tiene carisma sin esfuerzo, no presume, no grita, simplemente está y suma. Top 3 de borregos de provecho. Eficiente y peligrosamente competente. Admirable.')">
-                <img src="Ignacio.jpg" alt="Ignacio">
-                <h3>Ignacio Piqueras</h3>
-            </div>
-            
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card" onclick="abrirPerfil('Frank Cordoba', 'Agente Infiltrado & Calistenia', 'Sospechoso por diseño. Serio en apariencia, misterioso sin proponérselo. Perfectamente capaz de desaparecer a China a vivir experiencias intensas sin dar detalles. Tiene cara de psicópata funcional calculando cosas, pero resulta que estudia ingeniería, así que son matemáticas procesándose en segundo plano. Calistenia en solitario: torso hipertrofiado, piernas omitidas. Actualmente juega en segunda división italiana. Un borrego en estado cuántico: absurdo, inquietante y carismático.')">
-                <img src="Frank.jpg" alt="Frank">
-                <h3>Frank Cordoba</h3>
-            </div>
+        <a href="#" class="project-card">
+          <div class="project-image"><img src="3.jpg" alt="Exploración Material"></div>
+          <strong>Exploración material</strong>
+        </a>
 
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card jos-card" onclick="abrirPerfil('Jose Gil Dimas', 'Asesor de Logística (Dueño de la Borregueta)', 'El pesao oficial, el que no calla jamás, juzga la vida en variables lógicas. Su charla de ascensor incluye entropía social y traumas vitales. Es el MacGyver del grupo, su coche es el bolsillo de Doraemon: cables, bridas, herramientas incomprensibles. Odia a la gente profundamente pero busca no tener conflictos. Polifacético hasta el absurdo y propietario del medio de transporte oficial: la mítica Borregueta. Inexplicablemente útil y con un aura muy, muy densa.')">
-                <img src="Jos.jpg" alt="Jos">
-                <h3>Jose Gil Dimas</h3>
-            </div>
-
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card" onclick="abrirPerfil('Miguel Madrid', 'Líder Operativo & Embajador Amoroso', 'El eje invisible que mantiene todo unido. Cabeza desproporcionada, mirada penetrante (intensificada ante estímulos femeninos). Atrapado en el recuerdo histórico de Venus ('ay carallo'). Trabaja en Leroy Merlin y tiene su propia skin en Gang Beasts. No sabe leer; deletreó la contraseña del router y dijo 'k de queso'. Desde ese momento, es nuestro lema. Líder natural, estrella absoluta y portador de un analfabetismo funcional impecable.')">
-                <img src="Miguel.jpg" alt="Miguel">
-                <h3>Miguel Madrid</h3>
-            </div>
-
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card luis-card" onclick="abrirPerfil('Luis Blasco-Ibáñez', 'RR.PP. y Positivismo Tóxico', 'El borrego del 'sí' perpetuo. Entrega a las 12 PM un TFG y dice que sí a un plan desastroso con energía inexplicable. Sospechosamente feliz, es el graciosillo que amas y odias, y el creador del lenguaje moderno ('bombito', 'plataneas'). Limítrofe entre irresponsabilidad y magia social. Queda un año para su Erasmus londinense, augurando un desastre diplomático. Agotador, rápido y totalmente imprescindible.')">
-                <img src="Luis.jpg" alt="Luis">
-                <h3>Luis Blasco-Ibáñez</h3>
-            </div>
-
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card pablo-card" onclick="abrirPerfil('Pablo Gozalbo', 'Fundador Honorífico & Fallero Mayor', 'Tranquilo, de perfil bajo, indirectamente creador de este grupo a través de un portal dimensional en su falla. Fallero y valencianista: paciencia selectiva y sobreestimada resistencia al alcohol. Discreto pero con una chispa de maldad interna. Ahora posee correa (rosa, funcional) impuesta por su novia. Mantiene su esencia calmada, noble y fundamental, siendo el origen silencioso de toda esta debacle.')">
-                <img src="Pablo.jpg" alt="Pablo">
-                <h3>Pablo Gozalbo</h3>
-            </div>
-
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card leandro-card" onclick="abrirPerfil('Leandro Fontana', 'Hospedador & Anarquista Doméstico', 'Apareció como DLC. Vive solo en la sagrada 'Borregocueva', cuya cerradura se abre con un cuchillo. Nos usa para limpiar su caos, que vuelve a resurgir en 24h. Decoración posmoderna de fluidos y plásticos. Juega a GTA impasible frente a terremotos reales. Seguimos la doctrina de que será el próximo Danirep. Confortable en la suciedad, perdido vitalmente pero convencidísimo de sus difusos planes de futuro.')">
-                <img src="Leandro.jpg" alt="Leandro">
-                <h3>Leandro Fontana</h3>
-            </div>
-
-            <div class="card-rebano elegant-card reveal reveal-scale 3d-card" onclick="abrirPerfil('Adrian', 'Vigilante Silencioso (NPC Oficial)', 'El NPC absoluto. Viste de oscuro, camina raro, intentando imponer pero destilando vulnerabilidad. Destaca por no destacar. Tiene miedo de hacer maldades y eso lo hace paradójicamente una buena persona dentro del rebaño. Le tira a todas, sin excepción, fallando meticulosamente en cada intento. Creador de tensión nula y confort máximo. Silencioso, irrelevante y necesario estructuralmente.')">
-                <img src="Adrian.jpg" alt="Adrian">
-                <h3>Adrian</h3>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL PERFIL ELEGANTE -->
-    <div id="modalPerfil" class="modal-perfil">
-        <div class="modal-content">
-            <button class="close-btn" onclick="cerrarPerfil()">Cerrar</button>
-            <h2 id="perfilNombre">Nombre</h2>
-            <span id="perfilSub">Sub</span>
-            <p id="perfilTexto">Texto</p>
-        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- QUÉ HACEMOS -->
-    <section id="servicios">
-        <h2 class="section-title reveal reveal-left">Catálogo de Inutilidades</h2>
-        <div class="service-card elegant-card reveal reveal-up">
-            <h3>Escolta de Engaño Táctico</h3>
-            <p>Aparición conjunta en locales nocturnos para hacer bulto estratégico mientras un miembro intenta socializar. Margen de éxito tasado en un negativo treinta y tres por ciento.</p>
-        </div>
-        <div class="service-card elegant-card reveal reveal-up">
-            <h3>Ausencia Presencial</h3>
-            <p>Asistimos a su evento de alto nivel para consumir exclusivamente su catering mientras observamos nuestras pantallas móviles sin interacción verbal alguna.</p>
-        </div>
-        <div class="service-card elegant-card reveal reveal-up">
-            <h3>Paseos Conceptuales (Borregueta Tour)</h3>
-            <p>Quema de combustibles fósiles sin destino en nuestro vehículo institucional, adornado sobriamente con material de látex frontal, a través del sistema viario urbano.</p>
-        </div>
-        <div class="service-card elegant-card reveal reveal-up" style="border-left-color: var(--yellow); background: rgba(170, 140, 73, 0.05);">
-            <h3 class="serif-font">Comité de Asesoramiento Amatorio</h3>
-            <p>Intervención no solicitada para la elección del perfil acompañante de un miembro en horas lúdicas, garantizando por consenso la peor decisión posible.</p>
-        </div>
-        <div class="service-card elegant-card reveal reveal-up">
-            <h3>Retiros Digestivos (Borregocueva)</h3>
-            <p>Encuentro en nuestro sanctasanctórum con el propósito litúrgico de ingerir masas cilíndricas de origen turco bañadas en lácteos agrios, envueltos en mutismo.</p>
-        </div>
-        <div class="service-card elegant-card reveal reveal-up">
-            <h3>Recolección Urbana Conceptual</h3>
-            <p>Intervención artística consistente en la expropiación pacífica de mobiliario urbano (señales, hitos cónicos) integrándolos en nuestra colección privada.</p>
-        </div>
-    </section>
+<!-- CV -->
+<section class="section">
+  <div class="section-block">
+    <h1><i>C</i>urrículum</h1>
 
-    <!-- INVENTARIO -->
-    <section id="inventario">
-        <h2 class="section-title reveal reveal-left">Bienes Inmuebles</h2>
-        <div class="grid-inventario reveal reveal-up">
-            <div class="item-inventario elegant-card">
-                <img src="https://picsum.photos/seed/inv1/300" alt="La Borregueta">
-                <p>La Borregueta</p>
-                <span>Adq. Oct 2023</span>
-            </div>
-            <div class="item-inventario elegant-card">
-                <img src="https://picsum.photos/seed/inv2/300" alt="Carro">
-                <p>Vehículo Logístico Menor</p>
-                <span>Adq. Ene 2024</span>
-            </div>
-            <div class="item-inventario elegant-card">
-                <img src="https://picsum.photos/seed/inv3/300" alt="Trofeo">
-                <p>Trofeo Conceptual (20cm)</p>
-                <span>Adq. Feb 2024</span>
-            </div>
-        </div>
-    </section>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
 
-    <!-- BLOG -->
-    <section id="blog">
-        <h2 class="section-title reveal reveal-left">Exhibición</h2>
-        <div class="carousel-wrapper elegant-card reveal reveal-up">
-            <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
-            <div class="carousel" id="blogCarousel">
-                <div class="carousel-item" style="background-image:url('https://picsum.photos/seed/eleblog1/800/500')"></div>
-                <div class="carousel-item" style="background-image:url('https://picsum.photos/seed/eleblog2/800/500')"></div>
-                <div class="carousel-item" style="background-image:url('https://picsum.photos/seed/eleblog3/800/500')"></div>
-                <div class="carousel-item" style="background-image:url('https://picsum.photos/seed/eleblog4/800/500')"></div>
-                <div class="carousel-item video">Cinematografía Privada</div>
-            </div>
-            <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Formación</h3>
+          <strong>Universitat Jaume I</strong>
+          <span>Ingeniería en Diseño Industrial</span>
         </div>
-    </section>
+      </div>
 
-    <!-- DONACIONES -->
-    <section id="donaciones">
-        <h2 class="section-title reveal reveal-left" style="justify-content:center; text-align:center;">Mecenazgo</h2>
-        <div class="donaciones-container elegant-card reveal reveal-scale">
-            <h3>Contribución a la Inversión en Carencias</h3>
-            <div class="donaciones-cajas">
-                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(1)">1€</a></div>
-                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(2)">2€</a></div>
-                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(5)">5€</a></div>
-            </div>
-            <div class="progreso-wrapper">
-                <div class="progreso-barra" id="barraProgreso"></div>
-            </div>
-            <div class="progreso-texto">
-                Fondo Fiduciario Táctico: <span><span id="dineroRecaudado">0</span>€</span> / 300€
-            </div>
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <strong>Universitat Politècnica de València</strong>
+          <span>Ingeniería en Diseño Industrial</span>
         </div>
-    </section>
+      </div>
 
-    <!-- BOTÓN CAOS (Ahora refinado y cinematográfico) -->
-    <div class="chaos-btn-wrapper">
-        <button class="btn-chaos" onclick="iniciarDestruccion(this)">Iniciar Clausura Institucional</button>
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <strong>Programa Erasmus+</strong>
+          <span>Londres, Reino Unido</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Experiencia</h3>
+          <strong>Perfil en desarrollo</strong>
+          <span>Primer empleo / Posición Junior</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Idiomas</h3>
+          <strong>Español · Inglés · Húngaro</strong>
+          <span>Competencia profesional e internacional</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <h3>Herramientas y Software</h3>
+          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
+          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+        </div>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer id="contacto">
-        <h2 class="serif-font reveal reveal-up" style="font-size: 2rem; margin-bottom: 1rem; color: var(--main-color);">Contacto Formal</h2>
-        <div class="magnetic-btn reveal reveal-up">
-            <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
-        </div>
-    </footer>
-
-    <!-- MENSAJE DE CLIT/FADE -->
-    <div id="cinematic-msg" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background: #000; color:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:999999; opacity:0; pointer-events:none; transition: opacity 2s ease;">
-        <h1 style="font-family:'Playfair Display', serif; font-size:4rem; color:#d4af37; text-align:center; font-style:italic; font-weight:300;">Silencio absoluto.</h1>
-        <p style="margin-top:2rem; font-family:'Plus Jakarta Sans', sans-serif; font-size:1rem; letter-spacing:4px; opacity:0.6; text-transform:uppercase;">El sistema ha concluido su ciclo.</p>
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Con<i>tacto</i></h1>
+    <div class="contact">
+      <a href="tel:+34600000000">
+        +34 600 000 000
+        <span>Llamada directa</span>
+      </a>
+      <a href="mailto:luis@example.com">
+        luis@example.com
+        <span>Correo electrónico</span>
+      </a>
+      <a href="#" target="_blank">
+        LinkedIn
+        <span>Conexión profesional</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    <!-- JAVASCRIPT: MAGIA ELEGANTE -->
-    <script>
-        // 1. SCROLL REVEAL (MÁS SUAVE)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<script>
+/* SCROLL DE NAVEGACIÓN DESDE EL MENÚ SUPERIOR */
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+  };
+});
 
-        // 2. MAGNETIC BUTTONS & 3D CARDS SUAVES
-        document.querySelectorAll('.magnetic-btn').forEach(btn => {
-            btn.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                this.children[0].style.transform = `translate(${(e.clientX - rect.left - rect.width/2) * 0.15}px, ${(e.clientY - rect.top - rect.height/2) * 0.15}px)`;
-            });
-            btn.addEventListener('mouseleave', function() { this.children[0].style.transform = `translate(0px, 0px)`; });
-        });
-        document.querySelectorAll('.3d-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                // Movimientos súper sutiles para efecto premium
-                card.style.transform = `perspective(1000px) rotateX(${((e.clientY - rect.top - rect.height/2)/rect.height/2)*-3}deg) rotateY(${((e.clientX - rect.left - rect.width/2)/rect.width/2)*3}deg) scale3d(1.01, 1.01, 1.01)`;
-            });
-            card.addEventListener('mouseleave', () => card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`);
-        });
+/* INTERSECTION OBSERVER PARA LAS ANIMACIONES REVEAL (Aparición fluida) */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.target.classList.toggle("is-visible", e.isIntersecting));
+},{ threshold: 0.15 });
 
-        // 3. MENU / MODO OSCURO PREMIUM
-        function toggleMenu() {
-            document.getElementById('sideMenu').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('active');
-            document.getElementById('hamburgerBtn').classList.toggle('active');
-        }
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '☀' : '☽';
-        }
+document.querySelectorAll(".project-card, .timeline-item").forEach(el => observer.observe(el));
 
-        // 4. SONIDO ELEGANTEMENTE INÚTIL (SIN RESTRICCIONES)
-        const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
+/* ANIMACIÓN DE LA LÍNEA DEL TIMELINE (Se pinta conforme bajas) */
+const line = document.getElementById("timelineLine");
+const timeline = document.querySelector(".timeline");
 
-        // 5. DONACIONES
-        let dineroActual = 0;
-        function sumarDonacion(qty) {
-            dineroActual += qty;
-            document.getElementById('barraProgreso').style.width = Math.min((dineroActual / 300) * 100, 100) + '%';
-            document.getElementById('dineroRecaudado').innerText = dineroActual;
-            
-            const billet = document.createElement('div');
-            billet.textContent = '✧';
-            billet.style.color = 'var(--main-color)';
-            billet.className = 'drop-fx';
-            billet.style.left = Math.random() * 90 + 'vw';
-            document.body.appendChild(billet);
-            setTimeout(() => billet.remove(), 4000);
-        }
-        sumarDonacion(0); 
+window.addEventListener("scroll", () => {
+  if(!timeline) return;
+  const r = timeline.getBoundingClientRect();
+  // Math para calcular qué parte del contenedor está en pantalla
+  const h = Math.min(window.innerHeight - r.top - 100, r.height);
+  line.style.height = Math.max(0, h) + "px";
+});
 
-        // 6. PERFIL INSTANTÁNEO SUAVE
-        function abrirPerfil(nombre, sub, texto) {
-            document.getElementById('perfilNombre').innerText = nombre; 
-            document.getElementById('perfilSub').innerText = sub; 
-            document.getElementById('perfilTexto').innerText = texto; 
-            document.getElementById('modalPerfil').style.display = 'block';
-            document.getElementById('modalPerfil').style.opacity = '0';
-            setTimeout(() => document.getElementById('modalPerfil').style.opacity = '1', 10);
-        }
-        function cerrarPerfil() { 
-            document.getElementById('modalPerfil').style.opacity = '0';
-            setTimeout(() => document.getElementById('modalPerfil').style.display = 'none', 300);
-        }
+/* SCROLL HORIZONTAL SUPER SUAVE ("Buttery scroll") EN EL CARRUSEL */
+const carousel = document.getElementById("portfolioCarousel");
+let current = 0, target = 0;
+const ease = 0.05; // Ajuste aquí para que frene más elegantemente
 
-        // EASTER EGG QUESO (Afinado)
-        document.getElementById('quesoBtn').addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            const btn = e.currentTarget;
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const q = document.createElement('div');
-                    q.textContent = '🧀';
-                    q.className = 'drop-fx';
-                    q.style.left = Math.random() * 100 + 'vw';
-                    q.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
-                    document.body.appendChild(q);
-                    setTimeout(() => q.remove(), 4000);
-                }, i * 150);
-            }
-        });
-        
-        // 7. DESTRUCCIÓN CINEMATOGRÁFICA
-        function iniciarDestruccion(btn) {
-            if(btn.classList.contains('exploded')) return; 
-            btn.classList.add('exploded');
-            
-            // Suave transición a un estado contemplativo
-            window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            
-            setTimeout(() => {
-                document.body.classList.add('fade-out-mode');
-                
-                setTimeout(() => {
-                    const msg = document.getElementById('cinematic-msg');
-                    msg.style.opacity = '1';
-                    msg.style.pointerEvents = 'auto';
-                }, 2000);
-                
-            }, 800);
-        }
+carousel.addEventListener("wheel", e => {
+  // Evitar scroll vertical cuando el ratón está en el carrusel (Opcional, pero se siente Premium)
+  // e.preventDefault(); 
+  const max = carousel.scrollWidth - carousel.clientWidth;
+  target += e.deltaY * 1.5;
+  target = Math.max(0, Math.min(target, max));
+}, { passive: false });
 
-        // CAROUSEL
-        function scrollCarousel(direction) {
-          const carousel = document.getElementById('blogCarousel');
-          const scrollAmount = carousel.offsetWidth * 0.7;
-          carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-        }
+function animate(){
+  current += (target - current) * ease;
+  carousel.scrollLeft = current;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 
-        // CLICK GLOBAL BEEEE (Mantenemos la coña pero estéticamente bella)
-        window.addEventListener('pointerdown', function (e) {
-            
-            if(e.target.closest('#modalPerfil') || e.target.closest('.donaciones-cajas') || e.target.closest('#quesoBtn') || e.target.closest('.btn-control')) return;
-
-            const sound = sheepAudio.cloneNode();
-            sound.volume = 0.5; // Un poco más elegante el volumen
-            sound.play().catch(() => {});
-
-            const beee = document.createElement('div');
-            beee.className = 'beee';
-            beee.textContent = 'Beeee...';
-
-            beee.style.left = e.clientX + 'px';
-            beee.style.top  = e.clientY + 'px';
-
-            const colors = ['#aa8c49', '#3e4a59', '#737373']; // Colores elegantes
-            beee.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-            document.body.appendChild(beee);
-
-            setTimeout(function () {
-                beee.remove();
-            }, 1500);
-
-        });
-    </script>
 </body>
 </html>
