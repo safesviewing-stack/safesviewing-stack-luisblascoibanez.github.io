@@ -46,30 +46,31 @@
             z-index: -1;
         }
 
-        /* --- CURSOR MÁS PEQUEÑO --- */
+        /* --- CURSOR CONFIG --- */
         #cursor {
-            width: 16px; /* Reducido de 30px a 16px */
-            height: 16px;
+            width: 14px; 
+            height: 14px;
             border: 1px solid var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease-out;
+            transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
             box-shadow: 0 0 10px var(--accent-glow);
             transform: translate(-50%, -50%);
         }
 
-        /* --- HEADER RECTANGULAR FULL WIDTH --- */
+        /* --- HEADER IPHONE GLASS STYLE --- */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px);
-            padding: 20px 10%;
-            border-bottom: 1px solid var(--border);
+            background: rgba(5, 5, 5, 0.45); /* Más transparente */
+            backdrop-filter: blur(35px); /* Mucho más desenfoque estilo iOS */
+            -webkit-backdrop-filter: blur(35px);
+            padding: 18px 10%;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.12); /* Borde ultra fino */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -84,8 +85,8 @@
         .nav-logo {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: 1.1rem;
-            letter-spacing: -1px;
+            font-size: 1rem;
+            letter-spacing: 2px;
             color: var(--text);
         }
 
@@ -97,7 +98,7 @@
         .nav-links a {
             text-decoration: none;
             color: var(--text-dim);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -108,7 +109,7 @@
 
         section { padding: 140px 10% 80px; }
 
-        /* --- INICIO (HERO) IZQUIERDA --- */
+        /* --- INICIO (HERO) RE-ALINEADO --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -122,9 +123,10 @@
             font-family: 'Syne', sans-serif;
             font-size: clamp(3rem, 12vw, 7.5rem);
             line-height: 0.85;
-            margin-bottom: 30px;
-            letter-spacing: -5px;
+            margin-bottom: 40px; /* Desplazado ligeramente hacia PORTFOLIO */
+            letter-spacing: -6px;
             text-transform: uppercase;
+            padding-left: 2px; /* Alineación óptica exacta */
         }
 
         .hero .subtitle {
@@ -132,14 +134,10 @@
             letter-spacing: 4px;
             color: var(--accent);
             font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .hero .highlight {
-            color: var(--text);
-            display: block;
-        }
-
-        /* --- PORTFOLIO 6 PROYECTOS --- */
+        /* --- PORTFOLIO --- */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -162,7 +160,7 @@
         }
 
         .project-card:hover { border-color: var(--accent); transform: translateY(-10px); }
-        .project-card:hover .project-image img { transform: scale(1.05); filter: grayscale(0%); opacity: 1; }
+        .project-card:hover .project-image img { filter: grayscale(0%); opacity: 1; }
         
         .project-info { padding: 25px; }
         .project-info h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; }
@@ -180,7 +178,6 @@
             border: 1px solid var(--border);
             padding: 30px;
             border-radius: 24px;
-            transition: 0.4s;
         }
 
         .skill-card i { font-size: 1.8rem; color: var(--accent); margin-bottom: 15px; display: block; }
@@ -212,33 +209,11 @@
             border-radius: 100px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 0.9rem;
             transition: 0.3s;
         }
 
-        .btn-cv:hover { transform: scale(1.05); box-shadow: 0 10px 40px var(--accent-glow); }
-
-        .contact-box {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 80px 10%;
-            border-radius: 40px;
-            border: 1px solid var(--border);
-        }
-
-        input, textarea {
-            width: 100%; background: transparent;
-            border: none; border-bottom: 1px solid var(--border); 
-            padding: 20px 0; border-radius: 0; color: white; margin-bottom: 30px; outline: none;
-            font-size: 1rem;
-        }
-
-        input:focus { border-color: var(--accent); }
-
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-
         @media (max-width: 768px) {
             .portfolio-grid, .skills-grid { grid-template-columns: 1fr; }
-            .bento-2 { grid-column: span 1; }
             .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
             header { padding: 15px 5%; }
             .nav-links { display: none; }
@@ -250,7 +225,8 @@
     <div id="cursor"></div>
 
     <header id="navbar">
-        <div class="nav-logo">LB-I BERBEL</div>
+        <!-- LOGO ACTUALIZADO -->
+        <div class="nav-logo">L|BIB</div>
         <nav class="nav-links">
             <a href="#work">Proyectos</a>
             <a href="#skills">Skills</a>
@@ -259,7 +235,6 @@
         </nav>
     </header>
 
-    <!-- INICIO: TÍTULO EN 3 LÍNEAS -->
     <section class="hero" id="home">
         <div data-aos="fade-up" data-aos-duration="1200">
             <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
@@ -267,33 +242,32 @@
         </div>
     </section>
 
-    <!-- PROYECTOS INDUSTRIALES -->
     <section id="work">
         <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Proyectos Seleccionados.</h2>
         <div class="portfolio-grid">
             <div class="project-card" data-aos="fade-up">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Silla Ergonómica K1</h3><p>Modelado 3D / Prototipado</p></div>
+                <div class="project-info"><h3>Mobiliario Urbano S1</h3><p>Concept / CAD</p></div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Iluminación Minimalista</h3><p>Concepto / Renderizado</p></div>
+                <div class="project-info"><h3>Estructura Lámpara L-X</h3><p>Renderizado / Keyshot</p></div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Wearable Device</h3><p>Diseño de Producto</p></div>
+                <div class="project-info"><h3>Industrial Gear Design</h3><p>DFA Analysis</p></div>
             </div>
             <div class="project-card" data-aos="fade-up">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Audio Experience</h3><p>Ingeniería de Diseño</p></div>
+                <div class="project-info"><h3>Prototipo Hifi</h3><p>Ingeniería de Producto</p></div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Mobiliario Urbano</h3><p>Sostenibilidad</p></div>
+                <div class="project-info"><h3>Sostenibilidad Madera</h3><p>Manufactura</p></div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="project-image"><img src="https://images.unsplash.com/photo-1542120463-75ad255c7067?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Packaging Circular</h3><p>Ecodiseño</p></div>
+                <div class="project-info"><h3>Componentes Ergo</h3><p>Sketch / 3D</p></div>
             </div>
         </div>
     </section>
@@ -303,50 +277,50 @@
         <div class="skills-grid">
             <div class="skill-card bento-2" data-aos="fade-up">
                 <i class="fa-solid fa-cube"></i>
-                <h3>Modelado CAD Pro</h3>
-                <p>Dominio experto en Rhino 7, SolidWorks y Fusion 360 para producción industrial.</p>
+                <h3>Modelado avanzado</h3>
+                <p>Uso profesional de Rhino 7 y SolidWorks para superficies complejas.</p>
             </div>
             <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fa-solid fa-layer-group"></i>
-                <h3>Keyshot / V-Ray</h3>
-                <p>Visualización fotorrealista de alto nivel.</p>
+                <h3>Visualización</h3>
+                <p>Renders en Keyshot 11.</p>
             </div>
             <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fa-solid fa-microchip"></i>
-                <h3>DFM / DFA</h3>
-                <p>Diseño para manufactura y ensamblaje.</p>
+                <h3>Tecnología</h3>
+                <p>DFM / DFA / IoT.</p>
             </div>
         </div>
     </section>
 
     <section id="cv">
-        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Experiencia.</h2>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2023 — HOY</div><div class="cv-content"><h3>Senior Product Designer</h3><span>Industrial Studio S.A.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2023</div><div class="cv-content"><h3>Junior Industrial Designer</h3><span>R+D Innovation Center.</span></div></div>
-        <a href="#" class="btn-cv" data-aos="zoom-in">DOWNLOAD CURRICULUM <i class="fa-solid fa-arrow-down"></i></a>
+        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Trayectoria.</h2>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — HOY</div><div class="cv-content"><h3>Industrial Design Intern</h3><span>Estudio de Diseño B.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3>Grado Diseño Industrial</h3><span>Universidad Técnica.</span></div></div>
+        <a href="#" class="btn-cv" data-aos="zoom-in">DOWNLOAD CV <i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
-    <section id="contact">
-        <div class="contact-box" data-aos="zoom-out">
-            <h2 style="font-family: 'Syne'; font-size: 3rem; text-transform: uppercase; margin-bottom: 50px;">Trabajemos juntos.</h2>
-            <form style="max-width: 600px; margin: 0 auto;">
-                <input type="text" placeholder="TU NOMBRE">
-                <input type="email" placeholder="TU CORREO ELECTRÓNICO">
-                <textarea rows="4" placeholder="HÁBLAME DE TU PROYECTO"></textarea>
-                <button type="submit" style="width: 100%; padding: 22px; border: none; background: var(--accent); color: white; font-weight: 800; border-radius: 12px; margin-top: 20px;">ENVIAR MENSAJE</button>
+    <section id="contact" style="margin-bottom: 100px;">
+        <div style="background: rgba(255, 255, 255, 0.03); padding: 80px 10%; border-radius: 40px; border: 1px solid var(--border);" data-aos="zoom-out">
+            <h2 style="font-family: 'Syne'; font-size: 3rem; text-transform: uppercase; margin-bottom: 50px;">Hablemos.</h2>
+            <form style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column;">
+                <input style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;" type="text" placeholder="TU NOMBRE">
+                <input style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;" type="email" placeholder="TU CORREO">
+                <textarea style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;" rows="4" placeholder="¿EN QUÉ ESTÁS TRABAJANDO?"></textarea>
+                <button type="submit" style="width: fit-content; padding: 15px 60px; border: none; background: var(--accent); color: white; font-weight: 800; border-radius: 100px; margin-top: 20px; align-self: flex-start;">ENVIAR</button>
             </form>
         </div>
     </section>
 
     <footer style="padding: 60px 10%; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 2px;">
-        LUIS BLASCO-IBÁÑEZ BERBEL © 2024 / INDUSTRIAL DESIGNER
+        LUIS BLASCO-IBÁÑEZ BERBEL © 2024
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // LOGIC: SMART HEADER
+        // LOGIC: HEADER HIDDEN/SHOW
         let lastScrollTop = 0;
         let isNavigating = false;
         const navbar = document.getElementById("navbar");
@@ -374,10 +348,11 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button, .project-card, .skill-card').forEach(el => {
+        // CURSOR REDUCIDO SOBRE BOTONES
+        document.querySelectorAll('a, button, .project-card, .skill-card, input, textarea').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(3.5)';
-                cursor.style.backgroundColor = 'rgba(139, 92, 246, 0.15)';
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.8)'; /* REDUCIDO SEGÚN SOLICITUD */
+                cursor.style.backgroundColor = 'rgba(139, 92, 246, 0.2)';
             });
             el.addEventListener('mouseleave', () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(1)';
