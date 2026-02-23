@@ -57,7 +57,6 @@
             transition: transform 0.1s ease;
         }
 
-        /* --- HEADER RECTANGULAR FULL-WIDTH --- */
         header {
             position: fixed;
             top: 0;
@@ -65,7 +64,7 @@
             width: 100%;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
-            padding: 20px 10%; /* Alineado con las secciones */
+            padding: 20px 10%;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -104,7 +103,6 @@
 
         .nav-links a:hover { color: var(--accent); }
 
-        /* --- RESTO DEL CÓDIGO (Sin tocar) --- */
         section { padding: 140px 10% 80px; }
 
         .hero {
@@ -129,6 +127,67 @@
             text-shadow: 0 0 50px var(--accent-glow);
         }
 
+        /* --- NUEVA SECCIÓN PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .project-info p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- RESTO --- */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -212,13 +271,19 @@
 
         input:focus { border-color: var(--accent); }
 
+        @media (max-width: 1024px) {
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: 1fr; }
             .bento-2 { grid-column: span 1; }
             .hero h1 { font-size: 3.5rem; }
             .cv-item { flex-direction: column; gap: 10px; }
             header { padding: 15px 5%; }
-            .nav-links { display: none; } /* En móviles puedes añadir un menú burguer luego */
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -240,7 +305,38 @@
         <div data-aos="fade-up" data-aos-duration="1200">
             <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">Full Stack Engineer & UI Artist</p>
             <h1>CREATING THE<br><span class="highlight">DIGITAL FUTURE</span></h1>
-            <p style="color: var(--text-dim); max-width: 600px; margin: 20px auto;">Soluciones visuales y técnicas para marcas que buscan destacar en la web moderna. Minimalismo táctico enfocado en resultados.</p>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 20px auto;">Soluciones visuales y técnicas para marcas que buscan destacar en la web moderna.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN PORTFOLIO (TRABAJO) -->
+    <section id="work">
+        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">CASOS DE ESTUDIO.</h2>
+        <div class="portfolio-grid">
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>E-Commerce Core</h3><p>Next.js / UI Design</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>Cyber Portal</h3><p>React / Branding</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>Nova App</h3><p>Fullstack / API</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>Architect Vision</h3><p>Three.js / WebGL</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>Zen Interface</h3><p>UX Research</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1522542550221-31fd19279a28?auto=format&fit=crop&q=80&w=800" alt="Work"></div>
+                <div class="project-info"><h3>Data Stream</h3><p>Dashboard / Stats</p></div>
+            </div>
         </div>
     </section>
 
@@ -255,7 +351,7 @@
             <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <h3>UI/UX Design</h3>
-                <p>Interfaces intuitivas centradas en la conversión y estética Framer.</p>
+                <p>Interfaces intuitivas centradas en la conversión.</p>
             </div>
             <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fa-solid fa-server"></i>
@@ -265,12 +361,12 @@
             <div class="skill-card" data-aos="fade-up">
                 <i class="fa-solid fa-mobile-screen"></i>
                 <h3>Mobile first</h3>
-                <p>Adaptabilidad total en cualquier dispositivo.</p>
+                <p>Adaptabilidad total en dispositivos.</p>
             </div>
             <div class="skill-card bento-2" data-aos="fade-up" data-aos-delay="150">
                 <i class="fa-solid fa-bolt"></i>
                 <h3>Optimización</h3>
-                <p>SEO y performance nivel experto (100 Core Web Vitals).</p>
+                <p>Performance nivel experto.</p>
             </div>
             <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fa-brands fa-figma"></i>
@@ -282,34 +378,27 @@
 
     <section id="cv">
         <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">HISTORIAL.</h2>
-        
         <div class="cv-item" data-aos="fade-up">
             <div class="cv-year">2022 — PRES.</div>
             <div class="cv-content">
                 <h3>Lead Developer en Agencia XYZ</h3>
                 <span>Supervisión de arquitectura web y equipo creativo.</span>
-                <p style="margin-top: 10px; color: var(--text-dim);">Lideré el rediseño de más de 20 plataformas enterprise aumentando la conversión en un 40%.</p>
             </div>
         </div>
-
         <div class="cv-item" data-aos="fade-up">
             <div class="cv-year">2020 — 2022</div>
             <div class="cv-content">
                 <h3>Product Designer en TechLab</h3>
-                <span>Especialista en sistemas de diseño complejos.</span>
+                <span>Especialista en sistemas de diseño.</span>
             </div>
         </div>
-
-        <a href="cv.pdf" class="btn-cv" data-aos="zoom-in">
-            DESCARGAR CURRICULUM <i class="fa-solid fa-arrow-down"></i>
-        </a>
+        <a href="cv.pdf" class="btn-cv" data-aos="zoom-in">DESCARGAR CURRICULUM <i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
     <section id="contact">
         <div class="contact-box" data-aos="zoom-out">
             <h2 style="font-family: 'Syne'; font-size: 4rem; line-height: 1;">LET'S START A<br>PROJECT.</h2>
-            <br>
-            <form style="max-width: 500px; margin: 0 auto; text-align: left;">
+            <form style="max-width: 500px; margin: 40px auto; text-align: left;">
                 <input type="text" placeholder="NOMBRE COMPLETO">
                 <input type="email" placeholder="EMAIL DE CONTACTO">
                 <textarea rows="4" placeholder="¿CÓMO PUEDO AYUDARTE?"></textarea>
@@ -326,31 +415,25 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // LOGIC: HEADER SMART
         let lastScrollTop = 0;
         const navbar = document.getElementById("navbar");
-
         window.addEventListener("scroll", function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
             if (scrollTop > lastScrollTop && scrollTop > 50) {
-                // Scroll Abajo -> Ocultar por completo
                 navbar.classList.add("nav-hidden");
             } else {
-                // Scroll Arriba -> Mostrar
                 navbar.classList.remove("nav-hidden");
             }
             lastScrollTop = scrollTop;
         });
 
-        // CURSOR ANIMADO
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button').forEach(el => {
+        document.querySelectorAll('a, button, .project-card').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
             el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
         });
