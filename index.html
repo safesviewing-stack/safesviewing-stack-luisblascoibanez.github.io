@@ -3,195 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco | Ingeniero de Diseño Industrial</title>
-    <!-- Fuentes y Librerías -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Luis Blasco | Industrial Design Engineer</title>
+    <!-- SF Pro es la fuente de Apple, usamos Inter como alternativa web premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
         :root {
-            --primary: #2d3436;
-            --accent: #0984e3;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --bg: #f5f6fa;
-            --text: #2d3436;
+            --apple-bg: #f5f5f7;
+            --apple-text: #1d1d1f;
+            --apple-gray: #86868b;
+            --glass: rgba(255, 255, 255, 0.72);
+            --accent: #0071e3;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            line-height: 1.5;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #f5f6fa 0%, #dcdde1 100%);
-            min-height: 100vh;
         }
 
-        /* --- Fondo Animado --- */
-        .bg-circles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .circle {
-            position: absolute;
-            background: var(--accent);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.1;
-            animation: float 20s infinite alternate;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 100px); }
-        }
-
-        /* --- Navegación --- */
+        /* --- NAVEGACIÓN ESTILO APPLE --- */
         nav {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1000px;
+            top: 0;
+            width: 100%;
+            height: 44px;
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            padding: 15px 30px;
-            border-radius: 50px;
+            backdrop-filter: saturate(180%) blur(20px);
+            z-index: 9999;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
         }
 
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { 
-            text-decoration: none; 
-            color: var(--text); 
-            font-size: 0.9rem; 
-            font-weight: 600;
-            transition: 0.3s;
+        nav .links {
+            display: flex;
+            gap: 40px;
         }
-        .nav-links a:hover { color: var(--accent); }
 
-        /* --- Secciones Generales --- */
-        section {
-            padding: 120px 10% 80px;
-            min-height: 100vh;
+        nav a {
+            text-decoration: none;
+            color: var(--apple-text);
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover { opacity: 1; }
+
+        /* --- HERO SECTION --- */
+        #inicio {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
         }
 
-        /* --- Inicio (Hero) --- */
-        #inicio { text-align: center; }
-        .hero-content h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto 30px; }
-        .btn-main {
-            padding: 15px 40px;
-            background: var(--primary);
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.4s;
-            display: inline-block;
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* --- Sobre Mí --- */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--apple-gray);
+            font-weight: 500;
+            max-width: 600px;
         }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .stat-item { padding: 20px; background: var(--glass); border-radius: 15px; text-align: center; }
 
-        /* --- Portfolio --- */
-        .portfolio-grid {
+        /* --- GRID BENTO (Sobre Mí & CV) --- */
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 20px;
         }
-        .portfolio-item {
-            position: relative;
-            height: 350px;
-            border-radius: 20px;
+
+        .bento-item {
+            background: #fff;
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             overflow: hidden;
+            position: relative;
+        }
+
+        .bento-item:hover {
+            transform: scale(1.02);
+        }
+
+        .item-1 { grid-column: 1 / 3; }
+        .item-2 { grid-column: 3 / 5; background: #000; color: #fff; }
+        .item-3 { grid-column: 1 / 2; }
+        .item-4 { grid-column: 2 / 5; background: linear-gradient(135deg, #e3e3e7 0%, #f5f5f7 100%); }
+
+        /* --- PORTFOLIO (Visual Massive) --- */
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            width: 100%;
+            height: 80vh;
+            border-radius: 30px;
+            background-color: #e8e8ed;
+            margin-bottom: 40px;
+            overflow: hidden;
+            position: relative;
             cursor: pointer;
         }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .portfolio-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white; transform: translateY(100%); transition: 0.4s;
-        }
-        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
-        .portfolio-item:hover img { transform: scale(1.1); }
 
-        /* --- CV / Skills --- */
-        .skills-container { display: flex; wrap: wrap; gap: 10px; margin-top: 20px; }
-        .skill-tag { 
-            padding: 8px 20px; 
-            background: white; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
-            font-weight: 600;
-            border: 1px solid #eee;
-        }
-
-        /* --- Contacto --- */
-        .contact-form { max-width: 600px; margin: 0 auto; width: 100%; }
-        .input-group { margin-bottom: 20px; }
-        input, textarea {
+        .project-card img {
             width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            background: rgba(255,255,255,0.8);
-            outline: none;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        /* --- Responsivo --- */
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- CONTACTO --- */
+        .contact-card {
+            background: #fff;
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .btn-apple {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-apple:hover { background: #0077ed; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 20px;
+            font-size: 12px;
+            color: var(--apple-gray);
+            border-top: 1px solid #d2d2d7;
+            text-align: center;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
+            .bento-grid {
+                display: flex;
+                flex-direction: column;
+            }
+            .bento-item { height: 300px; }
+            nav .links { gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-circles">
-        <div class="circle" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
-        <div class="circle" style="width: 300px; height: 300px; bottom: -50px; right: -50px; background: #a29bfe;"></div>
-    </div>
-
     <nav>
-        <div class="logo">LUIS BLASCO</div>
-        <div class="nav-links">
+        <div class="links">
             <a href="#inicio">Inicio</a>
-            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#sobre-mi">Sobre mí</a>
             <a href="#portfolio">Portfolio</a>
             <a href="#cv">CV</a>
             <a href="#contacto">Contacto</a>
@@ -199,137 +217,103 @@
     </nav>
 
     <section id="inicio">
-        <div class="hero-content">
-            <p class="reveal">Hola, mi nombre es Luis</p>
-            <h1 class="reveal">Ingeniero de <br><span style="color: var(--accent);">Diseño Industrial</span></h1>
-            <p class="reveal">Especializado en crear soluciones estéticas, funcionales y sostenibles. De Valencia para el mundo.</p>
-            <a href="#portfolio" class="btn-main reveal">Ver Proyectos</a>
-        </div>
+        <h1 class="hero-title">Luis Blasco.</h1>
+        <p class="hero-subtitle">Ingeniero de Diseño Industrial. <br> Combinando precisión y estética en Valencia.</p>
     </section>
 
-    <section id="sobre-mi">
-        <div class="about-grid">
-            <div class="glass-card reveal">
-                <h2>Sobre Mí</h2>
-                <br>
-                <p>Tengo 24 años y soy un apasionado de la unión entre la ingeniería técnica y la sensibilidad artística. Formado en las mejores instituciones de la Comunidad Valenciana.</p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <strong>UPV</strong>
-                        <p>Grado / Master</p>
-                    </div>
-                    <div class="stat-item">
-                        <strong>UJI</strong>
-                        <p>Castellón</p>
-                    </div>
+    <section id="sobre-mi" class="section-container">
+        <div class="bento-grid">
+            <div class="bento-item item-1 reveal">
+                <span style="color:var(--apple-gray); font-weight:600; margin-bottom:10px;">Perfil</span>
+                <h2>24 años. Creatividad impulsada por la técnica.</h2>
+                <p style="color:var(--apple-gray); margin-top:10px;">De Valencia, formado para materializar ideas imposibles.</p>
+            </div>
+            <div class="bento-item item-2 reveal">
+                <h2>Educación Elite</h2>
+                <div style="margin-top:20px;">
+                    <p>• UPV - València</p>
+                    <p style="color:var(--apple-gray); font-size:14px; margin-bottom:10px;">Grado en Ing. Diseño Industrial</p>
+                    <p>• UJI - Castelló</p>
+                    <p style="color:var(--apple-gray); font-size:14px;">Especialización y Desarrollo</p>
                 </div>
             </div>
-            <div class="reveal">
-                <h3>Mi Filosofía</h3>
-                <p>El diseño no es solo cómo se ve, sino cómo funciona. Mi enfoque se centra en el usuario y en la optimización de procesos industriales mediante herramientas de vanguardia.</p>
+            <div class="bento-item item-3 reveal" style="background-color: #f2f2f7;">
+                <h3 style="font-size:40px;">U+V</h3>
+                <p>ADN Ingeniero</p>
             </div>
-        </div>
-    </section>
-
-    <section id="portfolio">
-        <h2 class="reveal">Portfolio Seleccionado</h2>
-        <div class="portfolio-grid">
-            <!-- Proyecto 1 -->
-            <div class="portfolio-item glass-card reveal">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Proyecto">
-                <div class="portfolio-overlay">
-                    <h4>Diseño Mobiliario</h4>
-                    <p>Modelado 3D y Ergonomía</p>
-                </div>
-            </div>
-            <!-- Proyecto 2 -->
-            <div class="portfolio-item glass-card reveal">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" alt="Proyecto">
-                <div class="portfolio-overlay">
-                    <h4>Producto Tech</h4>
-                    <p>Integración de componentes</p>
-                </div>
-            </div>
-            <!-- Proyecto 3 -->
-            <div class="portfolio-item glass-card reveal">
-                <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800" alt="Proyecto">
-                <div class="portfolio-overlay">
-                    <h4>Sostenibilidad</h4>
-                    <p>Eco-diseño industrial</p>
-                </div>
+            <div class="bento-item item-4 reveal">
+                <h2>Filosofía</h2>
+                <p style="font-size:24px; color:var(--apple-gray);">"Menos es mejor, siempre que funcione perfecto."</p>
             </div>
         </div>
     </section>
 
-    <section id="cv">
-        <div class="glass-card reveal">
-            <h2>Currículum & Habilidades</h2>
-            <br>
-            <div class="about-grid">
+    <section id="portfolio" class="section-container">
+        <div class="portfolio-header">
+            <h2 style="font-size: 48px; font-weight: 700;">Portfolio.</h2>
+            <p style="color:var(--apple-gray);">Una mirada a mis proyectos destacados.</p>
+        </div>
+
+        <div class="project-card reveal">
+            <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1600" alt="Estructuras">
+            <div class="project-info">
+                <p style="font-weight:600; letter-spacing:1px; margin-bottom:10px;">01. MOBILIARIO</p>
+                <h3 style="font-size:32px;">Diseño Ergonómico v2</h3>
+            </div>
+        </div>
+
+        <div class="project-card reveal">
+            <img src="https://images.unsplash.com/photo-1558191053-8edcb01e1da3?auto=format&fit=crop&q=80&w=1600" alt="Tech">
+            <div class="project-info">
+                <p style="font-weight:600; letter-spacing:1px; margin-bottom:10px;">02. HARDWARE</p>
+                <h3 style="font-size:32px;">Sistemas de Iluminación Inteligente</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="cv" class="section-container">
+        <div class="bento-item reveal" style="height: auto; width: 100%; border: 1px solid #d2d2d7;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;">
                 <div>
-                    <h4>Educación</h4>
-                    <p><strong>Universitat Politècnica de València (UPV)</strong></p>
-                    <p>Ingeniería de Diseño Industrial y Desarrollo de Producto.</p>
-                    <br>
-                    <p><strong>Universitat Jaume I (UJI)</strong></p>
-                    <p>Formación complementaria en diseño y materiales.</p>
+                    <h2 style="font-size:32px;">Habilidades técnicas.</h2>
+                    <p style="color:var(--apple-gray); margin: 20px 0;">SolidWorks, Rhino 3D, Keyshot, Renderizado Fotorrealista, <br>Impresión 3D, Prototipado rápido.</p>
                 </div>
-                <div>
-                    <h4>Software & Skills</h4>
-                    <div class="skills-container">
-                        <span class="skill-tag">SolidWorks</span>
-                        <span class="skill-tag">Rhino 3D</span>
-                        <span class="skill-tag">Keyshot</span>
-                        <span class="skill-tag">Adobe Creative Suite</span>
-                        <span class="skill-tag">Impresión 3D</span>
-                        <span class="skill-tag">CAD/CAM</span>
-                    </div>
-                    <br>
-                    <a href="#" class="btn-main" style="padding: 10px 20px; font-size: 0.8rem;">Descargar CV (PDF)</a>
-                </div>
+                <a href="#" class="btn-apple">Descargar Curriculum Vitae</a>
             </div>
         </div>
     </section>
 
-    <section id="contacto">
-        <div class="contact-form glass-card reveal">
-            <h2 style="text-align: center; margin-bottom: 30px;">Hablemos</h2>
-            <form>
-                <div class="input-group">
-                    <input type="text" placeholder="Nombre completo">
-                </div>
-                <div class="input-group">
-                    <input type="email" placeholder="Correo electrónico">
-                </div>
-                <div class="input-group">
-                    <textarea rows="5" placeholder="Cuéntame sobre tu proyecto..."></textarea>
-                </div>
-                <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer;">Enviar Mensaje</button>
-            </form>
+    <section id="contacto" class="section-container">
+        <div class="contact-card reveal">
+            <h2 style="font-size:56px; letter-spacing:-0.03em;">¿Hablamos de diseño?</h2>
+            <p style="color:var(--apple-gray); font-size:20px; margin-top:20px;">Disponible para nuevos retos y proyectos innovadores.</p>
+            <a href="mailto:hola@luisblasco.com" class="btn-apple">Contactar con Luis</a>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; opacity: 0.6; font-size: 0.8rem;">
-        &copy; 2024 Luis Blasco Ibáñez Berbel | Ingeniero de Diseño Industrial
+    <footer>
+        <p>Copyright © 2024 Luis Blasco Ibáñez Berbel. Todos los derechos reservados.</p>
+        <p style="margin-top:10px;">Diseño Industrial · València · UPV · UJI</p>
     </footer>
 
     <script>
-        // Animaciones de revelado al hacer scroll
+        // Apple style Scroll Reveal
         ScrollReveal().reveal('.reveal', {
-            delay: 200,
-            distance: '50px',
-            duration: 1000,
-            easing: 'cubic-bezier(0.5, 0, 0, 1)',
-            interval: 100,
-            origin: 'bottom'
+            delay: 100,
+            distance: '60px',
+            duration: 1200,
+            easing: 'cubic-bezier(0.2, 1, 0.3, 1)', // Curva de suavizado característica de Apple
+            origin: 'bottom',
+            interval: 150
         });
 
-        // Efecto parallax suave para los círculos de fondo
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            document.querySelectorAll('.circle').forEach(circle => {
-                circle.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+        // Easing scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
