@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMBRE | Creative Portfolio</title>
+    <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,20 +46,21 @@
             z-index: -1;
         }
 
-        /* --- CURSOR CAMBIADO (Efecto Aro Glow) --- */
+        /* --- CURSOR MÁS PEQUEÑO --- */
         #cursor {
-            width: 30px;
-            height: 30px;
-            border: 1.5px solid var(--accent);
+            width: 16px; /* Reducido de 30px a 16px */
+            height: 16px;
+            border: 1px solid var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
             transition: transform 0.15s ease-out;
-            box-shadow: 0 0 15px var(--accent-glow);
-            transform: translate(-50%, -50%); /* Centrado exacto */
+            box-shadow: 0 0 10px var(--accent-glow);
+            transform: translate(-50%, -50%);
         }
 
+        /* --- HEADER RECTANGULAR FULL WIDTH --- */
         header {
             position: fixed;
             top: 0;
@@ -83,10 +84,9 @@
         .nav-logo {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: 1.2rem;
-            background: linear-gradient(90deg, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.1rem;
+            letter-spacing: -1px;
+            color: var(--text);
         }
 
         .nav-links {
@@ -97,10 +97,10 @@
         .nav-links a {
             text-decoration: none;
             color: var(--text-dim);
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
@@ -108,35 +108,38 @@
 
         section { padding: 140px 10% 80px; }
 
-        /* --- INICIO ALINEADO A LA IZQUIERDA --- */
+        /* --- INICIO (HERO) IZQUIERDA --- */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start; /* Cambio a la izquierda */
-            text-align: left; /* Cambio a la izquierda */
+            align-items: flex-start;
+            text-align: left;
         }
 
         .hero h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 10vw, 7rem);
-            line-height: 0.9;
-            margin-bottom: 25px;
-            letter-spacing: -4px;
+            font-size: clamp(3rem, 12vw, 7.5rem);
+            line-height: 0.85;
+            margin-bottom: 30px;
+            letter-spacing: -5px;
+            text-transform: uppercase;
         }
 
-        .hero p {
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 20px 0; /* Reset margen lateral */
+        .hero .subtitle {
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: var(--accent);
+            font-weight: 700;
         }
 
         .hero .highlight {
-            color: var(--accent);
-            text-shadow: 0 0 50px var(--accent-glow);
+            color: var(--text);
+            display: block;
         }
 
+        /* --- PORTFOLIO 6 PROYECTOS --- */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -147,24 +150,25 @@
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
             transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .project-image { width: 100%; height: 300px; overflow: hidden; }
+        .project-image { width: 100%; height: 350px; overflow: hidden; background: #111; }
         .project-image img {
             width: 100%; height: 100%; object-fit: cover;
-            transition: 0.6s; filter: grayscale(100%); opacity: 0.6;
+            transition: 0.8s; filter: grayscale(100%); opacity: 0.5;
         }
 
         .project-card:hover { border-color: var(--accent); transform: translateY(-10px); }
-        .project-card:hover .project-image img { transform: scale(1.1); filter: grayscale(0%); opacity: 1; }
+        .project-card:hover .project-image img { transform: scale(1.05); filter: grayscale(0%); opacity: 1; }
+        
         .project-info { padding: 25px; }
-        .project-info h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; margin-bottom: 5px; }
-        .project-info p { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .project-info h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; }
+        .project-info p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; }
 
+        /* --- SKILLS BENTO --- */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -179,66 +183,63 @@
             transition: 0.4s;
         }
 
-        .skill-card:hover {
-            border-color: var(--accent);
-            background: rgba(139, 92, 246, 0.05);
-            transform: translateY(-5px);
-        }
-
-        .skill-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: block; }
+        .skill-card i { font-size: 1.8rem; color: var(--accent); margin-bottom: 15px; display: block; }
         .bento-2 { grid-column: span 2; }
 
+        /* --- CV LINE --- */
         .cv-item {
             display: flex;
             gap: 40px;
-            padding: 30px 0;
+            padding: 40px 0;
             border-bottom: 1px solid var(--border);
         }
 
         .cv-year {
             font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
-            min-width: 120px;
+            font-size: 1.1rem;
+            min-width: 140px;
             color: var(--accent);
         }
-
-        .cv-content h3 { font-size: 1.5rem; margin-bottom: 5px; }
-        .cv-content span { color: var(--text-dim); font-size: 0.9rem; }
 
         .btn-cv {
             margin-top: 40px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: white;
             color: black;
-            padding: 18px 35px;
+            padding: 20px 40px;
             border-radius: 100px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
-        .btn-cv:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(255,255,255,0.2); }
+        .btn-cv:hover { transform: scale(1.05); box-shadow: 0 10px 40px var(--accent-glow); }
 
         .contact-box {
-            background: linear-gradient(135deg, #111, #050505);
-            padding: 80px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 80px 10%;
             border-radius: 40px;
             border: 1px solid var(--border);
-            text-align: center;
         }
 
         input, textarea {
-            width: 100%; background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border); padding: 15px;
-            border-radius: 12px; color: white; margin-bottom: 15px; outline: none;
+            width: 100%; background: transparent;
+            border: none; border-bottom: 1px solid var(--border); 
+            padding: 20px 0; border-radius: 0; color: white; margin-bottom: 30px; outline: none;
+            font-size: 1rem;
         }
+
+        input:focus { border-color: var(--accent); }
+
+        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
 
         @media (max-width: 768px) {
             .portfolio-grid, .skills-grid { grid-template-columns: 1fr; }
             .bento-2 { grid-column: span 1; }
-            .hero h1 { font-size: 3.5rem; }
+            .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
             header { padding: 15px 5%; }
             .nav-links { display: none; }
         }
@@ -249,69 +250,103 @@
     <div id="cursor"></div>
 
     <header id="navbar">
-        <div class="nav-logo">DESIGN STUDIO</div>
+        <div class="nav-logo">LB-I BERBEL</div>
         <nav class="nav-links">
             <a href="#work">Proyectos</a>
-            <a href="#skills">Habilidades</a>
+            <a href="#skills">Skills</a>
             <a href="#cv">Trayectoria</a>
             <a href="#contact">Contacto</a>
         </nav>
     </header>
 
+    <!-- INICIO: TÍTULO EN 3 LÍNEAS -->
     <section class="hero" id="home">
         <div data-aos="fade-up" data-aos-duration="1200">
-            <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">Full Stack Engineer & UI Artist</p>
-            <h1>CREATING THE<br><span class="highlight">DIGITAL FUTURE</span></h1>
-            <p>Soluciones visuales y técnicas para marcas que buscan destacar.</p>
+            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
+            <p class="subtitle">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
         </div>
     </section>
 
+    <!-- PROYECTOS INDUSTRIALES -->
     <section id="work">
-        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">CASOS DE ESTUDIO.</h2>
+        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Proyectos Seleccionados.</h2>
         <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up"><div class="project-image"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>E-Commerce Core</h3><p>Next.js / UI</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><div class="project-image"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Cyber Portal</h3><p>React / Branding</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><div class="project-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Nova App</h3><p>Fullstack</p></div></div>
-            <div class="project-card" data-aos="fade-up"><div class="project-image"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Architect Vision</h3><p>WebGL</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><div class="project-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Zen Interface</h3><p>UX Design</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><div class="project-image"><img src="https://images.unsplash.com/photo-1522542550221-31fd19279a28?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Data Stream</h3><p>Stats Dashboard</p></div></div>
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Silla Ergonómica K1</h3><p>Modelado 3D / Prototipado</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Iluminación Minimalista</h3><p>Concepto / Renderizado</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Wearable Device</h3><p>Diseño de Producto</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Audio Experience</h3><p>Ingeniería de Diseño</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Mobiliario Urbano</h3><p>Sostenibilidad</p></div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image"><img src="https://images.unsplash.com/photo-1542120463-75ad255c7067?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="project-info"><h3>Packaging Circular</h3><p>Ecodiseño</p></div>
+            </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">POWER GRID.</h2>
+        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Estructura Técnica.</h2>
         <div class="skills-grid">
-            <div class="skill-card bento-2" data-aos="fade-up"><i class="fa-solid fa-code"></i><h3>Frontend Development</h3><p>React / Next / Vue.</p></div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>UI Design</h3></div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><i class="fa-solid fa-server"></i><h3>Backend</h3></div>
-            <div class="skill-card" data-aos="fade-up"><i class="fa-solid fa-bolt"></i><h3>Performance</h3></div>
-            <div class="skill-card bento-2" data-aos="fade-up" data-aos-delay="100"><i class="fa-brands fa-figma"></i><h3>Figma Architect</h3></div>
+            <div class="skill-card bento-2" data-aos="fade-up">
+                <i class="fa-solid fa-cube"></i>
+                <h3>Modelado CAD Pro</h3>
+                <p>Dominio experto en Rhino 7, SolidWorks y Fusion 360 para producción industrial.</p>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-layer-group"></i>
+                <h3>Keyshot / V-Ray</h3>
+                <p>Visualización fotorrealista de alto nivel.</p>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>DFM / DFA</h3>
+                <p>Diseño para manufactura y ensamblaje.</p>
+            </div>
         </div>
     </section>
 
     <section id="cv">
-        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">HISTORIAL.</h2>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — PRES.</div><div class="cv-content"><h3>Lead Developer</h3><span>Digital Solutions Studio.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2022</div><div class="cv-content"><h3>Senior Product Designer</h3><span>Fintech Labs.</span></div></div>
-        <a href="cv.pdf" class="btn-cv" data-aos="zoom-in">DESCARGAR CV <i class="fa-solid fa-arrow-down"></i></a>
+        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Experiencia.</h2>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2023 — HOY</div><div class="cv-content"><h3>Senior Product Designer</h3><span>Industrial Studio S.A.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2023</div><div class="cv-content"><h3>Junior Industrial Designer</h3><span>R+D Innovation Center.</span></div></div>
+        <a href="#" class="btn-cv" data-aos="zoom-in">DOWNLOAD CURRICULUM <i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
     <section id="contact">
         <div class="contact-box" data-aos="zoom-out">
-            <h2 style="font-family: 'Syne'; font-size: 4rem; line-height: 1;">LET'S START.</h2>
-            <form style="max-width: 500px; margin: 40px auto; text-align: left;">
-                <input type="text" placeholder="NOMBRE">
-                <input type="email" placeholder="EMAIL">
-                <textarea rows="4" placeholder="MENSAJE"></textarea>
-                <button type="submit" style="width: 100%; padding: 18px; border: none; background: var(--accent); color: white; font-weight: 700; border-radius: 12px;">ENVIAR</button>
+            <h2 style="font-family: 'Syne'; font-size: 3rem; text-transform: uppercase; margin-bottom: 50px;">Trabajemos juntos.</h2>
+            <form style="max-width: 600px; margin: 0 auto;">
+                <input type="text" placeholder="TU NOMBRE">
+                <input type="email" placeholder="TU CORREO ELECTRÓNICO">
+                <textarea rows="4" placeholder="HÁBLAME DE TU PROYECTO"></textarea>
+                <button type="submit" style="width: 100%; padding: 22px; border: none; background: var(--accent); color: white; font-weight: 800; border-radius: 12px; margin-top: 20px;">ENVIAR MENSAJE</button>
             </form>
         </div>
     </section>
+
+    <footer style="padding: 60px 10%; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 2px;">
+        LUIS BLASCO-IBÁÑEZ BERBEL © 2024 / INDUSTRIAL DESIGNER
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
+        // LOGIC: SMART HEADER
         let lastScrollTop = 0;
         let isNavigating = false;
         const navbar = document.getElementById("navbar");
@@ -327,11 +362,12 @@
         window.addEventListener("scroll", function() {
             if (isNavigating) return;
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) navbar.classList.add("nav-hidden");
+            if (scrollTop > lastScrollTop && scrollTop > 80) navbar.classList.add("nav-hidden");
             else navbar.classList.remove("nav-hidden");
             lastScrollTop = scrollTop;
         });
 
+        // CURSOR ANIMATION
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
@@ -340,12 +376,12 @@
 
         document.querySelectorAll('a, button, .project-card, .skill-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                cursor.style.background = 'rgba(139, 92, 246, 0.1)';
+                cursor.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                cursor.style.backgroundColor = 'rgba(139, 92, 246, 0.15)';
             });
             el.addEventListener('mouseleave', () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.background = 'transparent';
+                cursor.style.backgroundColor = 'transparent';
             });
         });
     </script>
