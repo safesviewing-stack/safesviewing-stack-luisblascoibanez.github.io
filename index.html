@@ -5,421 +5,361 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luis Blasco — Industrial Design</title>
 
-<!-- Tipografías de alto impacto: Space Grotesk para display técnico, Inter para legibilidad -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+<!-- Fuentes: Outfit (ultrafina geométrica para impacto) e Inter (para legibilidad técnica) -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
 /* ========= VARIABLES Y RESET ========= */
 :root {
-  --bg: #09090b;
-  --text: #ffffff;
-  --text-muted: #888888;
-  --accent: #ccff00; /* Verde Ácido / Amarillo Neón - Alto impacto */
-  --border: #333333;
+  --bg: #030303; /* Negro abismal, casi puro */
+  --text-main: #f0f0f0;
+  --text-muted: #666666;
+  --line-color: rgba(255, 255, 255, 0.1);
+  --accent: #ffffff;
+  --smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ========= BODY (Grid de Ingeniería) ========= */
-body{
+body {
   background-color: var(--bg);
-  /* Patrón de cuadrícula tipo plano técnico */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
-  color: var(--text);
+  color: var(--text-main);
   font-family: "Inter", sans-serif;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
+  font-weight: 300;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========= NAV (Bloque Crudo) ========= */
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:80px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:clamp(10px, 3vw, 40px);
-  background:rgba(9, 9, 11, 0.85);
-  backdrop-filter:blur(8px);
-  z-index:100;
-  border-bottom: 2px solid var(--border);
+::selection {
+  background: var(--text-main);
+  color: var(--bg);
 }
 
-nav span{
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.15em;
+/* ========= LÍNEAS GUÍA (Grid fino de fondo) ========= */
+.guide-lines {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; max-width: 1600px; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.guide-line {
+  width: 1px; height: 100%;
+  background: rgba(255,255,255,0.02);
+}
+
+/* ========= NAV ========= */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 80px;
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 0 4vw; gap: 40px;
+  background: rgba(3, 3, 3, 0.7);
+  backdrop-filter: blur(15px);
+  z-index: 100;
+  border-bottom: 1px solid var(--line-color);
+}
+
+nav span {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 10px 20px;
-  transition: all 0.2s ease-out;
-  border: 2px solid transparent;
+  position: relative;
+  transition: color 0.4s var(--smooth);
 }
 
-nav span:hover{
-  color: var(--bg);
+nav span::before {
+  content: '';
+  position: absolute;
+  top: -30px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 0px;
   background: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 0 var(--text);
+  transition: height 0.4s var(--smooth);
 }
 
-/* ========= SECTIONS ========= */
-.section{
-  min-height:100vh;
-  scroll-snap-align:start;
-  display:flex;
-  justify-content:flex-start;
-  padding: 160px 8vw 120px clamp(20px, 15vw, 300px);
+nav span:hover {
+  color: var(--text-main);
+}
+nav span:hover::before {
+  height: 20px;
 }
 
-.section-block{
-  position:sticky;
-  top:220px;
-  max-width:1200px;
-  width: 100%;
+/* ========= CONTENEDOR PRINCIPAL ========= */
+main {
+  position: relative;
+  z-index: 10;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-/* ========= TITLES (Gigantes y Geométricos) ========= */
-h1{
-  font-family: 'Space Grotesk', sans-serif;
-  font-size:clamp(60px, 9vw, 150px);
-  font-weight:900;
-  line-height:0.9;
+section {
+  padding: 15vh 4vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--line-color);
+}
+
+/* ========= TIPOGRAFÍA DE IMPACTO FINO ========= */
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200; /* Ultra fina */
+  font-size: clamp(60px, 12vw, 200px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin-left: -5px;
   text-transform: uppercase;
-  margin-left:-6px;
-  letter-spacing: -0.03em;
 }
 
-/* Efecto texto hueco con borde */
-.outline {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--text);
-  transition: all 0.4s ease;
+h2.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  font-size: clamp(40px, 6vw, 100px);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 80px;
 }
-h1:hover .outline {
-  color: var(--accent);
-  -webkit-text-stroke: 2px var(--accent);
+
+/* Efecto Itálico sutil en tipografía fina */
+.thin-italic {
+  font-weight: 100;
+  font-style: italic;
+  color: var(--text-muted);
 }
 
 /* ========= HERO ========= */
-.section.hero{
-  align-items:center;
-}
-.hero-sub{
-  margin-top:40px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size:16px;
-  font-weight: 900;
-  letter-spacing:0.2em;
-  color:var(--bg);
-  background: var(--accent);
-  padding: 10px 20px;
-  display: inline-block;
-  text-transform: uppercase;
-  border: 2px solid var(--text);
-  box-shadow: 6px 6px 0 var(--text);
-}
-
-/* ========= TEXT ========= */
-.section-block p{
-  margin-top:30px;
-  font-size:16px;
-  color:#cccccc;
-  max-width:550px;
-  line-height:1.7;
-  text-align:justify;
-  background: #000;
-  padding: 30px;
-  border-left: 4px solid var(--accent);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-top: 1px solid var(--border);
-}
-
-/* ========= ABOUT ========= */
-.about{
-  display:flex;
-  flex-wrap: wrap;
-  gap:clamp(30px, 6vw, 80px);
-  margin-top:30px;
+.hero {
   align-items: flex-start;
+  padding-top: 20vh;
 }
-
-.about img{
-  width: clamp(280px, 30vw, 400px);
-  height: 550px;
-  object-fit:cover;
-  filter: grayscale(100%) contrast(1.2);
-  border: 4px solid var(--text);
-  /* Sombra dura industrial */
-  box-shadow: 15px 15px 0 var(--accent);
-  transition: all 0.3s ease;
+.hero-tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
-
-.about img:hover {
-  transform: translate(-5px, -5px);
-  box-shadow: 20px 20px 0 var(--accent);
-  filter: grayscale(0%) contrast(1.1);
-}
-
-/* ========= PORTFOLIO ========= */
-.portfolio-wrapper{
-  position:relative;
-  margin-top:70px;
-  overflow:hidden;
-  padding-right:120px;
-  padding-left: 5px; 
-}
-
-/* Corte brusco lateral para el carrusel */
-.portfolio-wrapper::after{
-  content:"";
-  position:absolute;
-  top:0;
-  right:0;
-  width:100px;
-  height:100%;
-  pointer-events:none;
-  background:linear-gradient(to right,rgba(9,9,11,0),rgba(9,9,11,1) 80%);
-}
-
-.portfolio-carousel{
-  display:flex;
-  gap:60px;
-  overflow-x:auto;
-  padding-bottom:50px;
-  scrollbar-width: none;
-}
-.portfolio-carousel::-webkit-scrollbar { display: none; } 
-
-.project-card{
-  min-width: 480px;
-  text-decoration:none;
-  color:inherit;
-  opacity:0;
-  /* Animación más agresiva de entrada */
-  transform:translateX(-40px) skewX(-2deg);
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  cursor: pointer;
+.hero-tag::before {
+  content: '';
   display: block;
+  width: 60px; height: 1px;
+  background: var(--text-muted);
 }
 
-.project-card.is-visible{
-  opacity:1;
-  transform:none;
+/* ========= SOBRE MÍ ========= */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: end;
 }
-
-.project-image{
-  height: 380px;
-  margin-bottom: 24px;
+.about-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #a0a0a0;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+.about-image {
+  width: 100%;
+  height: 70vh;
   overflow: hidden;
-  border: 3px solid var(--border);
-  transition: all 0.3s ease;
+}
+.about-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: 1s var(--smooth);
+}
+.about-image:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* ========= PORTFOLIO (NUEVO DISEÑO ASIMÉTRICO) ========= */
+.portfolio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15vh; /* Mucho aire entre proyectos */
+}
+
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 8vw;
+  width: 100%;
+}
+
+/* Alternar diseño de izquierda a derecha */
+.project-row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.project-img-wrapper {
+  flex: 1.5;
+  height: 75vh;
+  overflow: hidden;
   position: relative;
 }
 
-.project-image::before {
-  content: 'EXPLORAR';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--accent);
-  color: var(--bg);
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  padding: 10px 20px;
-  font-size: 20px;
-  z-index: 10;
-  opacity: 0;
-  transition: 0.3s ease;
-}
-
-.project-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.project-img-wrapper img {
+  width: 100%; height: 100%;
+  object-fit: cover;
   filter: grayscale(100%);
-  transition: all 0.5s ease;
-}
-
-.project-card:hover .project-image {
-  border-color: var(--accent);
-  box-shadow: 10px 10px 0 rgba(204, 255, 0, 0.2);
-}
-
-.project-card:hover .project-image img {
-  filter: grayscale(0%);
   transform: scale(1.05);
-  opacity: 0.5;
+  transition: transform 1.5s var(--smooth), filter 0.8s ease;
 }
 
-.project-card:hover .project-image::before {
-  opacity: 1;
+.project-row:hover .project-img-wrapper img {
+  transform: scale(1);
+  filter: grayscale(0%);
 }
 
-.project-card strong{
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  font-size: 32px;
-  letter-spacing: -0.02em;
-  display: block;
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-info span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.project-info h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: clamp(30px, 4vw, 60px);
   text-transform: uppercase;
-  transition: color 0.3s ease;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
 }
 
-.project-card:hover strong {
-  color: var(--accent);
+/* ========= CV (Líneas finas) ========= */
+.cv-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6vw;
+  border-top: 1px solid var(--line-color);
 }
 
-/* ========= CV / TIMELINE ========= */
-.timeline{
-  position:relative;
-  margin-top:80px;
-  padding-left:80px;
+.cv-col {
+  padding-top: 40px;
 }
-
-.timeline-line{
-  position:absolute;
-  left: 28px;
-  top:0;
-  width: 4px;
-  background: var(--accent);
-}
-
-.timeline-item{
-  position:relative;
-  margin-bottom:70px;
-  max-width:550px;
-  opacity:0;
-  transform:translateX(-30px);
-  transition:0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-/* Punto de timeline tipo tuerca geométrica cuadrada */
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left: -58px;
-  top: 35px;
-  width: 16px;
-  height: 16px;
-  background: var(--bg);
-  border: 4px solid var(--accent);
-  transform: rotate(45deg);
-  z-index: 2;
-  transition: 0.3s;
-}
-
-.timeline-item:hover::before {
-  background: var(--accent);
-  transform: rotate(0deg) scale(1.2);
-}
-
-.timeline-card{
-  background: #000;
-  border: 2px solid var(--border);
-  border-left: 6px solid var(--accent);
-  padding:30px 40px;
-  transition: all 0.3s ease;
-}
-
-.timeline-card:hover {
-  transform: translateX(10px);
-  border-color: #555;
-  box-shadow: 8px 8px 0 rgba(255,255,255,0.05);
-}
-
-.timeline-card h3{
-  font-family: 'Space Grotesk', sans-serif;
-  font-size:14px;
-  font-weight: 700;
-  letter-spacing:0.15em;
+.cv-col h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom:20px;
+  margin-bottom: 40px;
 }
 
-.timeline-card strong{
-  display:block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size:20px;
-  color: var(--text);
-  margin-bottom: 8px;
+.cv-item {
+  margin-bottom: 60px;
+  position: relative;
 }
 
-.timeline-card span{
-  font-size:15px;
-  color:var(--text-muted);
-  display: block;
-}
-
-/* ========= CONTACTO ========= */
-.contact{
-  margin-top:70px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
-}
-
-.contact a{
-  padding:40px;
-  background: #000;
-  border: 2px solid var(--border);
-  color:var(--text);
-  text-decoration:none;
-  text-align: center;
-  transition:all 0.3s ease;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
+.cv-item h4 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
   font-size: 24px;
+  margin-bottom: 5px;
 }
 
-.contact a span{
-  display:block;
-  margin-top:15px;
-  font-family: 'Inter', sans-serif;
-  font-size:12px;
-  font-weight: 700;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-  transition: color 0.3s;
+.cv-item p {
+  color: var(--text-muted);
+  font-size: 14px;
 }
 
-/* Efecto Invertido al hover muy llamativo */
-.contact a:hover{
-  transform:translateY(-5px) scale(1.02);
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
-  box-shadow: 10px 10px 0 var(--text);
+/* ========= CONTACTO (Gigante y de filo a filo) ========= */
+.contact {
+  text-align: center;
+  padding: 10vh 0;
 }
 
-.contact a:hover span {
-  color: var(--bg);
-  opacity: 0.8;
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact-links a {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  font-size: clamp(40px, 8vw, 150px);
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-muted);
+  border-top: 1px solid var(--line-color);
+  padding: 4vh 0;
+  transition: all 0.6s var(--smooth);
+  text-align: center;
+}
+
+.contact-links a:last-child {
+  border-bottom: 1px solid var(--line-color);
+}
+
+.contact-links a:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.02);
+  letter-spacing: 0.02em;
+}
+
+/* ========= ANIMACIONES REVEAL (Ultra suaves) ========= */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s var(--smooth), transform 1.2s var(--smooth);
+  will-change: transform, opacity;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Para crear un efecto de revelación de máscara en las fotos */
+.reveal-mask {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  transition: clip-path 1.4s var(--smooth);
+}
+.reveal-mask.is-visible {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@media (max-width: 900px) {
+  .about-content, .cv-container, .project-row {
+    grid-template-columns: 1fr;
+    flex-direction: column !important; /* Forza apilamiento en móvil */
+    gap: 40px;
+  }
+  .project-img-wrapper { height: 50vh; width: 100%; }
 }
 
 </style>
@@ -427,198 +367,179 @@ h1:hover .outline {
 
 <body>
 
+<!-- Líneas finas de arquitectura de fondo -->
+<div class="guide-lines">
+  <div class="guide-line"></div>
+  <div class="guide-line"></div>
+  <div class="guide-line"></div>
+  <div class="guide-line"></div>
+  <div class="guide-line"></div>
+</div>
+
 <nav>
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Sobre mí</span>
-  <span data-i="2">Portfolio</span>
-  <span data-i="3">Historial</span>
-  <span data-i="4">Contacto</span>
+  <span data-i="0">01. Inicio</span>
+  <span data-i="1">02. Biografía</span>
+  <span data-i="2">03. Archivo</span>
+  <span data-i="3">04. Info</span>
+  <span data-i="4">05. Red</span>
 </nav>
 
-<!-- HERO -->
-<section class="section hero">
-  <div class="section-block">
-    <h1>
-      LUIS<br>
-      <span class="outline">BLASCO</span><br>
-      IBÁÑEZ
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="sec-0">
+    <h1 class="reveal">
+      Luis <br>
+      Blasco-<br>
+      Ibáñez
     </h1>
-    <div class="hero-sub">Industrial Design & Engineering</div>
-  </div>
-</section>
-
-<!-- SOBRE MI -->
-<section class="section">
-  <div class="section-block">
-    <h1>Sobre <span class="outline">mí</span></h1>
-    <div class="about">
-      <p>
-        Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
-        enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse
-        a distintos entornos y contextos de trabajo.<br><br>
-        No me sitúo ni en un extremo puramente artístico
-        ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
-        ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
-        continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres.<br><br>
-        Cuento además con una formación profesional en electricidad, que me ha aportado
-        una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
-        desde el periodo del desarrollo hasta la materialización terminal.
-      </p>
-      <img src="foto.jpg" alt="Retrato Luis Blasco">
+    <div class="hero-tag reveal" style="transition-delay: 0.2s;">
+      Industrial Design <span class="thin-italic">Est. Valencia</span>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PORTFOLIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Port<span class="outline">folio</span></h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel" id="portfolioCarousel">
-
-        <a href="#" class="project-card">
-          <div class="project-image"><img src="1.jpg" alt="Proyecto NODE"></div>
-          <strong>01. NODE</strong>
-        </a>
-
-        <a href="#" class="project-card">
-          <div class="project-image"><img src="2.jpg" alt="Proyecto Sixay"></div>
-          <strong>02. Sixay</strong>
-        </a>
-
-        <a href="#" class="project-card">
-          <div class="project-image"><img src="3.jpg" alt="Exploración Material"></div>
-          <strong>03. Materiales</strong>
-        </a>
-
+  <!-- SOBRE MÍ -->
+  <section id="sec-1">
+    <h2 class="section-title reveal">Visión <span class="thin-italic">Industrial</span></h2>
+    <div class="about-content">
+      <div class="about-text reveal">
+        <p>
+          Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona enfocada en un campo fijo, sino alguien con un perfil ecléctico, flexible y capaz de adaptarse a distintos entornos.
+        </p>
+        <p>
+          No me sitúo ni en un extremo puramente artístico ni estrictamente técnico, sino en el punto de intersección exacto. Cursé mis estudios en la Universitat Jaume I de Castellón, la UPV en Valencia y finalicé un programa en Londres.
+        </p>
+        <p>
+          Disfruto la pureza del proceso de diseño. Desde los primeros esquemas del desarrollo mental, hasta la ejecución física y la materialización final de los objetos.
+        </p>
+      </div>
+      <!-- Aplicamos la máscara a la imagen para un efecto fino de aparición -->
+      <div class="about-image reveal-mask">
+        <img src="foto.jpg" alt="Luis Blasco Portrait">
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CV -->
-<section class="section">
-  <div class="section-block">
-    <h1>C<span class="outline">V</span></h1>
-
-    <div class="timeline">
-      <!-- El script rellena el alto de esta línea con el color neón -->
-      <div class="timeline-line" id="timelineLine"></div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Formación</h3>
-          <strong>Universitat Jaume I</strong>
-          <span>Ingeniería en Diseño Industrial</span>
+  <!-- PORTFOLIO NUEVO (GRILLA ASIMÉTRICA GIGANTE) -->
+  <section id="sec-2" style="border-bottom: none;">
+    <h2 class="section-title reveal">Archivo de <span class="thin-italic">Proyectos</span></h2>
+    
+    <div class="portfolio-grid">
+      <!-- Proyecto 1 (Imagen Izquierda) -->
+      <div class="project-row">
+        <div class="project-img-wrapper reveal-mask">
+          <img src="1.jpg" alt="Proyecto NODE">
+        </div>
+        <div class="project-info reveal">
+          <span>01 // MOBILIARIO MODULAR</span>
+          <h3>Node</h3>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <strong>Universitat Politècnica de València</strong>
-          <span>Ingeniería en Diseño Industrial</span>
+      <!-- Proyecto 2 (Imagen Derecha por nth-child(even)) -->
+      <div class="project-row">
+        <div class="project-img-wrapper reveal-mask">
+          <img src="2.jpg" alt="Proyecto Sixay">
+        </div>
+        <div class="project-info reveal">
+          <span>02 // ESTÉTICA Y ERGONOMÍA</span>
+          <h3>Sixay</h3>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <strong>Programa Erasmus+</strong>
-          <span>Londres, Reino Unido</span>
+      <!-- Proyecto 3 (Imagen Izquierda) -->
+      <div class="project-row">
+        <div class="project-img-wrapper reveal-mask">
+          <img src="3.jpg" alt="Exploración">
+        </div>
+        <div class="project-info reveal">
+          <span>03 // ESTUDIO FÍSICO</span>
+          <h3>Exploración<br><span class="thin-italic">Material</span></h3>
         </div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Status Actual</h3>
-          <strong>Perfil Técnico Junior</strong>
-          <span>Búsqueda de primer empleo / prácticas</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Idiomas</h3>
-          <strong>Español · Inglés · Húngaro</strong>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <h3>Toolkit</h3>
-          <strong>Rhino · AutoCAD · SolidWorks</strong>
-          <span>Inventor · Fusion 360 · Sinutrain · 3ds Max</span>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1><span class="outline">Contacta</span></h1>
-    <div class="contact">
-      <a href="tel:+34600000000">
-        +34 600 000 000
-        <span>Llamar ahora</span>
-      </a>
-      <a href="mailto:luis@example.com">
-        luis@example.com
-        <span>Enviar correo</span>
-      </a>
-      <a href="#" target="_blank">
-        LinkedIn
-        <span>Conectar</span>
-      </a>
+  <!-- CV -->
+  <section id="sec-3">
+    <h2 class="section-title reveal">Historial <span class="thin-italic">Técnico</span></h2>
+
+    <!-- Las columnas finas estructuran el CV sin usar tarjetas -->
+    <div class="cv-container">
+      <div class="cv-col reveal">
+        <h3>Educación Académica</h3>
+        <div class="cv-item">
+          <h4>Universitat Jaume I</h4>
+          <p>Ingeniería en Diseño Industrial</p>
+        </div>
+        <div class="cv-item">
+          <h4>Universitat Politècnica de València</h4>
+          <p>Ingeniería en Diseño Industrial</p>
+        </div>
+        <div class="cv-item">
+          <h4>Programa Erasmus+</h4>
+          <p>Londres, Reino Unido</p>
+        </div>
+      </div>
+
+      <div class="cv-col reveal" style="transition-delay: 0.1s;">
+        <h3>Datos Profesionales</h3>
+        <div class="cv-item">
+          <h4>Status</h4>
+          <p>Perfil Junior en desarrollo / Sin experiencia profesional previa.</p>
+        </div>
+        <div class="cv-item">
+          <h4>Idiomas Operativos</h4>
+          <p>Español, Inglés, Húngaro.</p>
+        </div>
+        <div class="cv-item">
+          <h4>Software / Maquinaria</h4>
+          <p>Rhino · AutoCAD · Inventor · SolidWorks · Fusion 360 · Sinutrain · 3ds Max</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- CONTACTO DE FILO A FILO -->
+  <section class="contact" id="sec-4" style="border-bottom:none;">
+    <h2 class="section-title reveal" style="text-align: left;">Conectar</h2>
+    <div class="contact-links reveal">
+      <a href="mailto:luis@example.com">Email.</a>
+      <a href="tel:+34600000000">Teléfono.</a>
+      <a href="#">Linkedin.</a>
+    </div>
+  </section>
+
+</main>
 
 <script>
-/* SCROLL DE NAVEGACIÓN DESDE EL MENÚ SUPERIOR */
-document.querySelectorAll("nav span").forEach((b,i)=>{
-  b.onclick=()=>{
-    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
-  };
+/* NAVEGACIÓN SUPERIOR (SCROLL) */
+document.querySelectorAll("nav span").forEach((btn, i) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("section")[i].scrollIntoView({ behavior: "smooth" });
+  });
 });
 
-/* INTERSECTION OBSERVER PARA LAS ANIMACIONES REVEAL (Golpes fuertes, no suaves) */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => e.target.classList.toggle("is-visible", e.isIntersecting));
-},{ threshold: 0.1 });
+/* INTERSECTION OBSERVER PARA LAS ANIMACIONES SUAVES Y FINAS */
+const observerOptions = {
+  threshold: 0.15, 
+  rootMargin: "0px 0px -50px 0px"
+};
 
-document.querySelectorAll(".project-card, .timeline-item").forEach(el => observer.observe(el));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    // Cuando el elemento entra en pantalla, añadimos la clase que activa la animación CSS
+    if(entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      // Descomenta la línea de abajo si quieres que se animen solo una vez
+      // observer.unobserve(entry.target); 
+    }
+  });
+}, observerOptions);
 
-/* ANIMACIÓN DE LA LÍNEA DEL TIMELINE (Se pinta conforme bajas) */
-const line = document.getElementById("timelineLine");
-const timeline = document.querySelector(".timeline");
-
-window.addEventListener("scroll", () => {
-  if(!timeline) return;
-  const r = timeline.getBoundingClientRect();
-  const h = Math.min(window.innerHeight - r.top - 50, r.height);
-  line.style.height = Math.max(0, h) + "px";
+document.querySelectorAll(".reveal, .reveal-mask").forEach(el => {
+  observer.observe(el);
 });
-
-/* SCROLL HORIZONTAL DINÁMICO EN EL CARRUSEL */
-const carousel = document.getElementById("portfolioCarousel");
-let current = 0, target = 0;
-const ease = 0.08; 
-
-carousel.addEventListener("wheel", e => {
-  const max = carousel.scrollWidth - carousel.clientWidth;
-  target += e.deltaY * 1.5;
-  target = Math.max(0, Math.min(target, max));
-}, { passive: false });
-
-function animate(){
-  current += (target - current) * ease;
-  carousel.scrollLeft = current;
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
