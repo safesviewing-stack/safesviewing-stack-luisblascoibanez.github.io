@@ -3,329 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco | Design Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Luis Blasco | Industrial Design Engineer</title>
+    
+    <!-- Fuentes Premium y Librerías de Animación -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+
     <style>
         :root {
-            /* Tema Oscuro (Por defecto) */
-            --bg: #0a0a0a;
+            --bg: #050505;
             --text: #ffffff;
-            --accent: #5e5e5e;
-            --card: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --glass: blur(20px);
+            --accent: #e5e5e5;
+            --gray-subtle: #888;
+            --spacing: 12vw;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         [data-theme="light"] {
-            --bg: #ffffff;
-            --text: #000000;
-            --accent: #888888;
-            --card: rgba(0, 0, 0, 0.02);
-            --border: rgba(0, 0, 0, 0.08);
+            --bg: #fdfdfd;
+            --text: #050505;
+            --accent: #222;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.6s cubic-bezier(0.23, 1, 0.32, 1), color 0.6s;
+            cursor: none; /* Para el cursor personalizado */
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            line-height: 1.4;
         }
 
-        /* --- BOTÓN DARK MODE --- */
-        .theme-toggle {
+        /* --- EFECTO DE GRANO (CINE) --- */
+        .noise {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.05;
+            background: url('https://media.giphy.com/media/oEI9uWUjW3pAicSCZ2/giphy.gif');
+        }
+
+        /* --- CURSOR PERSONALIZADO --- */
+        #cursor {
+            position: fixed;
+            width: 8px; height: 8px;
+            background: var(--text);
+            border-radius: 50%;
+            pointer-events: none;
             z-index: 10000;
-            cursor: pointer;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            backdrop-filter: var(--glass);
-            color: var(--text);
-            font-weight: 700;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            transition: transform 0.1s;
         }
 
-        /* --- HEADER / NAVEGACIÓN --- */
+        /* --- HEADER ULTRA GRANDE --- */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 100px;
+            padding: 40px var(--spacing);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 5%;
-            z-index: 999;
-            background: linear-gradient(to bottom, var(--bg), transparent);
+            align-items: baseline;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
         }
 
-        nav a {
+        .logo { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: -2px; }
+
+        .nav-links a {
             text-decoration: none;
             color: var(--text);
-            margin-left: 30px;
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: 1px;
-            opacity: 0.6;
+            margin-left: 50px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { opacity: 1; transform: translateY(-2px); }
+
+        /* --- SECCIONES CON MUCHO AIRE --- */
+        section {
+            padding: 200px var(--spacing);
+            min-height: 100vh;
         }
 
-        nav a:hover { opacity: 1; }
-
-        /* --- HERO SECTION (GIGANTE) --- */
+        /* --- HERO: IMPACTO TOTAL --- */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 5%;
+        }
+
+        .hero span.line {
+            display: block;
+            overflow: hidden;
+            height: auto;
         }
 
         .hero h1 {
-            font-size: 15vw;
-            line-height: 0.85;
-            font-weight: 900;
-            letter-spacing: -0.05em;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13vw;
+            line-height: 0.9;
             text-transform: uppercase;
-            margin-left: -0.5vw;
+            font-weight: 900;
+            letter-spacing: -0.06em;
         }
 
-        .hero h1 span {
-            display: block;
+        .hero h1 .stroke {
             color: transparent;
             -webkit-text-stroke: 1px var(--text);
+            opacity: 0.3;
         }
 
-        .hero-footer {
-            margin-top: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        /* --- SOBRE MI (AWWWARDS STYLE) --- */
-        .about {
-            padding: 150px 5%;
+        /* --- GRID DE SOBRE MI --- */
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 100px;
             align-items: center;
         }
 
-        .about-image {
+        .photo-container {
             width: 100%;
-            aspect-ratio: 4/5;
-            background: #1a1a1a; /* Placeholder para tu foto */
-            border-radius: 4px;
-            overflow: hidden;
+            height: 600px;
+            background: #111;
             position: relative;
+            overflow: hidden;
+            border-radius: 2px;
         }
-
-        .about-image img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%);
+        .photo-container div {
+            width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1600') center/cover;
+            filter: grayscale(1) brightness(0.7);
+            transition: 1s ease-out;
         }
+        .photo-container:hover div { transform: scale(1.1) grayscale(0); }
 
-        .about-content h2 { font-size: 4rem; margin-bottom: 30px; letter-spacing: -2px; }
-        .about-content p { font-size: 1.2rem; line-height: 1.8; opacity: 0.8; }
+        .about-text h2 { font-size: 3.5rem; font-weight: 600; margin-bottom: 40px; }
+        .about-text p { font-size: 1.2rem; color: var(--gray-subtle); max-width: 500px; }
 
-        /* --- PORTFOLIO (6 PROYECTOS) --- */
-        .portfolio { padding: 100px 5%; }
+        /* --- PORTFOLIO (6 PROYECTOS ALINEADOS) --- */
+        .portfolio-title { margin-bottom: 100px; text-align: center; font-size: 0.8rem; letter-spacing: 5px; opacity: 0.5; }
+        
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            gap: 80px 40px;
         }
 
-        .project-item {
+        .project-card {
             position: relative;
-            margin-bottom: 60px;
+            margin-top: calc(var(--index) * 50px);
         }
 
-        .project-img {
-            width: 100%;
-            aspect-ratio: 16/10;
-            background: var(--card);
-            border-radius: 8px;
+        .project-img-wrapper {
             overflow: hidden;
-            cursor: pointer;
+            height: 550px;
+            margin-bottom: 25px;
+            background: #111;
         }
 
-        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s transform; }
-        .project-item:hover img { transform: scale(1.05); }
+        .project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .project-card:hover .project-img-wrapper img { transform: scale(1.05); }
 
-        .project-info {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
+        .project-card h4 { font-family: 'Outfit'; font-size: 1.8rem; }
+        .project-card p { opacity: 0.4; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
 
-        /* --- CV TIMELINE --- */
-        .cv-section { padding: 150px 5%; background: var(--card); }
-        .timeline { max-width: 900px; margin-top: 60px; }
-        .timeline-item {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
+        /* --- CV EDUCATIVO MODERNO --- */
+        .education-list { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; }
+        .edu-item {
+            padding: 50px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 200px 1fr 200px;
+            align-items: baseline;
+            transition: 0.3s;
         }
-        .time-year { font-weight: 700; color: var(--accent); }
+        .edu-item:hover { background: rgba(255,255,255,0.02); padding-left: 20px; }
 
-        /* --- FOOTER --- */
-        footer { padding: 100px 5%; text-align: center; border-top: 1px solid var(--border); }
-        .contact-big { font-size: 8vw; font-weight: 900; text-decoration: none; color: var(--text); }
-        .contact-big:hover { opacity: 0.5; }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .about, .portfolio-grid, .timeline-item { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 20vw; }
+        /* --- BOTÓN DARK MODE FLOATING --- */
+        .theme-btn {
+            position: fixed; bottom: 40px; left: 40px;
+            padding: 15px 30px;
+            background: var(--text);
+            color: var(--bg);
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 10px;
+            letter-spacing: 2px;
+            border: none;
+            z-index: 1000;
         }
+
+        /* --- CONTACTO FINAL --- */
+        .footer-cta { text-align: center; padding-bottom: 150px; }
+        .giant-email { 
+            font-family: 'Outfit'; font-size: 8vw; 
+            text-decoration: none; color: var(--text);
+            transition: 0.4s ease;
+            display: inline-block;
+        }
+        .giant-email:hover { -webkit-text-stroke: 1px var(--text); color: transparent; }
+
     </style>
 </head>
 <body>
 
-    <button class="theme-toggle" onclick="toggleTheme()">Dark/Light</button>
+    <div class="noise"></div>
+    <div id="cursor"></div>
+    <button class="theme-btn" onclick="toggleTheme()">DARK/LIGHT MODE</button>
 
     <header>
-        <div style="font-weight: 900; letter-spacing: 2px;">LB</div>
-        <nav>
-            <a href="#sobre-mi">SOBRE MI</a>
-            <a href="#portfolio">PROYECTOS</a>
-            <a href="#cv">EXPERIENCIA</a>
-            <a href="#contacto">CONTACTO</a>
+        <div class="logo">LUIS.BLASCO</div>
+        <nav class="nav-links">
+            <a href="#inicio">Index</a>
+            <a href="#sobre-mi">About</a>
+            <a href="#portfolio">Work</a>
+            <a href="#cv">History</a>
+            <a href="#contacto">Talk</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <p class="reveal">LUIS BLASCO IBÁÑEZ BERBEL</p>
-        <h1>ENGINEER<span>DESIGNER</span></h1>
-        <div class="hero-footer reveal">
-            <p>VALENCIA, ES. <br> BASADO EN LA UPV.</p>
-            <p>24 AÑOS / ELEGANCIA INDUSTRIAL</p>
+    <section id="inicio" class="hero">
+        <span class="line"><h1 class="reveal-up">LUIS BLASCO</h1></span>
+        <span class="line"><h1 class="reveal-up stroke">INDUSTRIAL</h1></span>
+        <span class="line"><h1 class="reveal-up">ENGINEER.</h1></span>
+        <div class="hero-footer reveal" style="display:flex; justify-content: space-between; margin-top: 100px;">
+            <p style="opacity:0.4;">BASADO EN VALENCIA <br>ESPAÑA</p>
+            <p style="opacity:0.4; text-align: right;">UPV + LONDON MIDDLESEX <br>INGENIERO DE DISEÑO & PRODUCTO</p>
         </div>
     </section>
 
-    <section id="sobre-mi" class="about">
-        <div class="about-image reveal">
-            <!-- AQUÍ CAMBIARÁS TU FOTO POSTERIORMENTE -->
-            <div style="width: 100%; height: 100%; background: #222; display:flex; align-items:center; justify-content:center; color:#555;">[ ESPACIO PARA TU FOTO ]</div>
+    <section id="sobre-mi" class="about-grid">
+        <div class="photo-container reveal">
+            <!-- Espacio para tu futura foto -->
+            <div></div>
         </div>
-        <div class="about-content reveal">
-            <h2>Ingeniería con <br>alma creativa.</h2>
-            <p>Como diseñador industrial de 24 años formado en Valencia, mi enfoque se sitúa en la intersección entre la funcionalidad eléctrica y la estética vanguardista. Creo en productos que no solo cumplen una función técnica impecable, sino que también cuentan una historia a través de sus materiales y proporciones.</p>
-            <br>
-            <p>Especialista en transformar conceptos complejos en realidades tangibles y elegantes.</p>
+        <div class="about-text">
+            <h2 class="reveal">24 años, ingeniería táctica y diseño holístico.</h2>
+            <p class="reveal">Soy un híbrido entre la rigurosidad técnica de un instalador eléctrico y la visión estética de un diseñador de producto.</p>
+            <p class="reveal" style="margin-top:30px;">Mi trabajo consiste en racionalizar la complejidad para crear objetos que se sientan naturales y necesarios.</p>
         </div>
     </section>
 
     <section id="portfolio" class="portfolio">
+        <p class="portfolio-title">TRABAJO SELECCIONADO 2021/2024</p>
         <div class="portfolio-grid">
             <!-- 6 PROYECTOS -->
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>AXON-01</h4><p>Mobiliario Industrial</p></div>
+            <div class="project-card reveal" style="--index: 0;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600"></div>
+                <h4>CÁPSULA CORE</h4>
+                <p>Ecodiseño Industrial</p>
             </div>
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>KINETIC SOUND</h4><p>Audio / Tech</p></div>
+            <div class="project-card reveal" style="--index: 1;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1600"></div>
+                <h4>MODULAR 202</h4>
+                <p>Electrónica / UX</p>
             </div>
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>LUMINA</h4><p>Sistema Lumínico</p></div>
+            <div class="project-card reveal" style="--index: 0.5;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?q=80&w=1600"></div>
+                <h4>ÓPTICA LÍTICA</h4>
+                <p>Análisis de Materiales</p>
             </div>
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1544244015-0cd4b3ffc6b0?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>OVOID UNIT</h4><p>Prototipado CAD</p></div>
+            <div class="project-card reveal" style="--index: 1.5;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1600"></div>
+                <h4>FLUJO V0</h4>
+                <p>Luminaria Técnica</p>
             </div>
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1581235720704-06d3acfc13b7?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>ESTRUCTURA C</h4><p>Ecodiseño</p></div>
+            <div class="project-card reveal" style="--index: 0.2;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1555616635-640b71bdb185?q=80&w=1600"></div>
+                <h4>KINETIC STRUCTURE</h4>
+                <p>Mobility Design</p>
             </div>
-            <div class="project-item reveal">
-                <div class="project-img"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1000"></div>
-                <div class="project-info"><h4>MINIMAL WATCH</h4><p>Precision Design</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cv" class="cv-section">
-        <h2 style="font-size: 3rem;" class="reveal">Educación & Trayectoria</h2>
-        <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="time-year">2016 - 2018</div>
-                <div>
-                    <h4>Grado Medio y Superior en Electricidad</h4>
-                    <p style="opacity: 0.6;">Bases técnicas, circuitos y potencia industrial.</p>
-                </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="time-year">2019 - 2021</div>
-                <div>
-                    <h4>Grado en Ing. de Diseño Industrial (UJI)</h4>
-                    <p style="opacity: 0.6;">Castellón. Fundamentos de diseño e ingeniería de producto (Mitad de carrera).</p>
-                </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="time-year">2022 - 2023</div>
-                <div>
-                    <h4>Grado en Ing. de Diseño Industrial (UPV)</h4>
-                    <p style="opacity: 0.6;">Valencia. Consolidación de proyectos técnicos y materiales avanzados.</p>
-                </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="time-year">2023 - 2024</div>
-                <div>
-                    <h4>Erasmus - Middlesex University London</h4>
-                    <p style="opacity: 0.6;">Reino Unido. Diseño internacional, innovación y prototipado global.</p>
-                </div>
+            <div class="project-card reveal" style="--index: 1.2;">
+                <div class="project-img-wrapper"><img src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=1600"></div>
+                <h4>DORSET CHAIR</h4>
+                <p>Concepto Ergónomo</p>
             </div>
         </div>
     </section>
 
-    <footer id="contacto">
-        <p class="reveal">¿TIENES UNA IDEA?</p>
-        <a href="mailto:hola@luisbalsco.com" class="contact-big reveal">TRABAJEMOS.</a>
-        <div style="margin-top: 50px; opacity: 0.4;">
-            <p>© 2024 LUIS BLASCO IBÁÑEZ BERBEL</p>
+    <section id="cv">
+        <h2 style="font-size: 3.5rem;" class="reveal">TRAYECTORIA</h2>
+        <div class="education-list">
+            <div class="edu-item reveal">
+                <span class="year">2016 — 2018</span>
+                <span class="info">Grado Medio y Superior Electricidad</span>
+                <span class="loc">Instalación & Base</span>
+            </div>
+            <div class="edu-item reveal">
+                <span class="year">2019 — 2021</span>
+                <span class="info">Ing. Diseño Industrial (UJI Castellón)</span>
+                <span class="loc">Fundamentos (50%)</span>
+            </div>
+            <div class="edu-item reveal">
+                <span class="year">2021 — 2023</span>
+                <span class="info">Grado Diseño Industrial (UPV València)</span>
+                <span class="loc">Bachelor degree</span>
+            </div>
+            <div class="edu-item reveal" style="color:var(--text); background:rgba(255,255,255,0.05);">
+                <span class="year">2023 — 2024</span>
+                <span class="info">Middlesex University London (UK)</span>
+                <span class="loc">Erasmus Programme</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="footer-cta">
+        <p class="reveal">ESTOY DISPONIBLE</p>
+        <a href="mailto:hola@luisblasco.com" class="giant-email reveal">HELLO.</a>
+        <div style="margin-top:100px; display:flex; justify-content:center; gap:30px; opacity:0.3; font-size:10px; letter-spacing:2px;">
+            <span>LINKEDIN</span>
+            <span>BEHANCE</span>
+            <span>INSTAGRAM</span>
         </div>
     </footer>
 
     <script>
-        // TOGGLE DARK MODE
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-        }
-
-        // ANIMACIONES NIVEL PREMIO
-        ScrollReveal().reveal('.reveal', {
-            distance: '80px',
-            duration: 1400,
-            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            origin: 'bottom',
-            interval: 100
+        // CURSOR ANIMADO
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
 
-        // Parallax suave en el texto span
-        window.addEventListener('scroll', () => {
-            const span = document.querySelector('h1 span');
-            let value = window.scrollY;
-            span.style.transform = `translateX(${value * 0.1}px)`;
+        // EFECTO TEMA DARK/LIGHT
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        }
+
+        // ANIMACIONES GSAP AL HACER SCROLL
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Revelado de textos en Hero
+        gsap.from(".reveal-up", {
+            y: 100,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "power4.out",
+            delay: 0.5
+        });
+
+        // Revelado suave por secciones
+        ScrollReveal().reveal('.reveal', {
+            distance: '100px',
+            duration: 1800,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            origin: 'bottom',
+            interval: 100,
+            viewFactor: 0.2
+        });
+
+        // Animación de Parallax suave para las imágenes de portfolio
+        gsap.querySelectorAll(".project-img-wrapper img").forEach(img => {
+            gsap.to(img, {
+                yPercent: 15,
+                scrollTrigger: {
+                    trigger: img,
+                    scrub: true
+                }
+            });
         });
     </script>
 </body>
