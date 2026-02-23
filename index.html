@@ -46,4 +46,371 @@
 
         .section-label {
             font-size: 10px;
-            letter-spaci
+            letter-spacing: 5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing);
+        }
+
+        .hero h1 {
+            font-size: 7.5vw;
+            line-height: 0.85;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .hero span { 
+            display: block;
+            color: var(--accent);
+            font-weight: 200;
+            font-size: 7vw;
+        }
+
+        /* --- SOBRE MI --- */
+        .about {
+            padding: 100px var(--spacing);
+            display: flex;
+            gap: 100px;
+        }
+
+        .about-image {
+            flex: 1;
+            height: 650px;
+            background: #111 url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1600') center/cover;
+            filter: grayscale(1) contrast(1.1);
+            border-radius: 2px;
+        }
+
+        .about-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-text h2 { font-size: 4rem; margin-bottom: 30px; font-weight: 700; line-height: 1; }
+        .about-text p { font-size: 1.25rem; font-weight: 300; color: #888; line-height: 1.7; }
+
+        /* --- SKILLS --- */
+        .skills {
+            padding: 100px var(--spacing);
+            background: #080808;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .skill-cat h3 { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 1px solid var(--gray); padding-bottom: 15px; }
+        .skill-cat ul { list-style: none; }
+        .skill-cat li { 
+            font-size: 1rem; color: #666; margin-bottom: 12px; 
+            display: flex; align-items: center;
+        }
+        .skill-cat li::before { content: ""; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-right: 15px; }
+
+        /* --- PORTFOLIO --- */
+        .portfolio { padding: 150px var(--spacing); }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 40px;
+        }
+
+        .project-card {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .project-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.6;
+            transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover img { transform: scale(1.08); opacity: 0.9; }
+
+        .project-overlay { position: absolute; bottom: 40px; left: 40px; }
+        .project-overlay h3 { font-size: 2.2rem; text-transform: uppercase; font-weight: 700; }
+        .project-overlay span { color: var(--accent); font-size: 11px; letter-spacing: 3px; font-weight: 600; }
+
+        /* --- CV (Línea bajada) --- */
+        .cv-container {
+            padding: 150px var(--spacing);
+            position: relative;
+        }
+
+        .timeline {
+            position: absolute;
+            left: calc(var(--spacing) + 15px);
+            top: 250px; /* Bajada la línea del CV respecto al inicio */
+            bottom: 150px;
+            width: 1px;
+            background: var(--gray);
+        }
+
+        .timeline-progress {
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 0;
+            background: var(--accent);
+        }
+
+        .cv-item {
+            margin-bottom: 120px;
+            padding-left: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cv-item:first-of-type { margin-top: 100px; }
+
+        .cv-item h4 { font-size: 2rem; margin-bottom: 8px; font-weight: 400; }
+        .cv-item span { color: var(--accent); font-weight: 700; display: block; margin-bottom: 10px; }
+        .cv-item p { color: #666; max-width: 500px; font-weight: 300; }
+
+        /* --- CONTACTO --- */
+        .contact {
+            padding: 150px var(--spacing);
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-box {
+            background: #0a0a0a;
+            padding: 80px;
+            border: 1px solid var(--gray);
+            width: 100%;
+            max-width: 900px;
+            border-radius: 4px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .input-group { position: relative; }
+        input, textarea {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid #333; padding: 20px 0;
+            color: white; font-family: 'Outfit'; font-size: 14px; outline: none;
+            transition: 0.4s;
+        }
+        input:focus, textarea:focus { border-color: var(--accent); }
+
+        .submit-btn {
+            grid-column: span 2;
+            padding: 25px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+        .submit-btn:hover { background: #fff; transform: translateY(-5px); }
+
+        @media (max-width: 1100px) {
+            .about, .skills-grid, .portfolio-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; flex-direction: column; }
+            .about-image { height: 450px; }
+            .hero h1 { font-size: 14vw; }
+            .hero span { font-size: 13vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#about">Studio</a>
+            <a href="#portfolio">Work</a>
+            <a href="#cv">Timeline</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Luis Blasco-Ibáñez Berbel:</h1>
+            <span>Engineered. Functional. Aesthetic.</span>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-image"></div>
+        <div class="about-text">
+            <span class="section-label">01. Studio Portrait</span>
+            <h2>Ingeniería impulsada <br> por la estética.</h2>
+            <p>Diseñador industrial de 24 años especializado en la convergencia de la precisión técnica y la elegancia formal. Mi experiencia combina la base mecánica industrial con la sensibilidad artística contemporánea de Valencia y Londres.</p>
+        </div>
+    </section>
+
+    <section class="skills">
+        <span class="section-label">02. Core Competencies</span>
+        <div class="skills-grid">
+            <div class="skill-cat">
+                <h3>Technical Design</h3>
+                <ul>
+                    <li>SolidWorks & CAD</li>
+                    <li>Advanced Surface (Rhino)</li>
+                    <li>Eco-Design Analysis</li>
+                    <li>Technical Drawing</li>
+                </ul>
+            </div>
+            <div class="skill-cat">
+                <h3>Visualization</h3>
+                <ul>
+                    <li>Keyshot Rendering</li>
+                    <li>Industrial Lighting</li>
+                    <li>Curation of Materials</li>
+                    <li>Adobe Master Suite</li>
+                </ul>
+            </div>
+            <div class="skill-cat">
+                <h3>Industrial</h3>
+                <ul>
+                    <li>Electromechanical Prototyping</li>
+                    <li>Mass Production Optimization</li>
+                    <li>English (Fluent/International)</li>
+                    <li>Project Leadership</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <span class="section-label">03. Project Case Studies</span>
+        <div class="portfolio-grid">
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1558191053-c03fb2757e3d?q=80&w=1200">
+                <div class="project-overlay"><span>Industrial</span><h3>Axon Watch</h3></div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=1200">
+                <div class="project-overlay"><span>Lighting</span><h3>Solar Lumen</h3></div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1581235720704-06d3acfc13b7?q=80&w=1200">
+                <div class="project-overlay"><span>Mech</span><h3>Fluid System</h3></div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1544244015-0cd4b3ffc6b0?q=80&w=1200">
+                <div class="project-overlay"><span>Architecture</span><h3>Space Unit</h3></div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200">
+                <div class="project-overlay"><span>HIFI Audio</span><h3>Solid Sound</h3></div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=1200">
+                <div class="project-overlay"><span>Ergo</span><h3>Task Seat</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cv" class="cv-container">
+        <span class="section-label">04. Resume History</span>
+        <div class="timeline"><div class="timeline-progress"></div></div>
+
+        <div class="cv-item">
+            <span>2016 — 2018</span>
+            <h4>Especialista Electricidad</h4>
+            <p>Donde la técnica se hizo táctil. Control de potencia e instalaciones industriales complejas.</p>
+        </div>
+        <div class="cv-item">
+            <span>2019 — 2021</span>
+            <h4>UJI Castellón</h4>
+            <p>Evolución académica: El paso de la potencia a la forma funcional en el producto industrial.</p>
+        </div>
+        <div class="cv-item">
+            <span>2021 — 2023</span>
+            <h4>UPV València</h4>
+            <p>Fase de consolidación. Ingeniería de producto en su máxima expresión técnica y materiales.</p>
+        </div>
+        <div class="cv-item">
+            <span>2023 — 2024</span>
+            <h4>Middlesex University London</h4>
+            <p>Erasmus+. Expansión hacia un mercado de diseño internacional, innovador y multicultural.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-box">
+            <span class="section-label">05. Business Inquiries</span>
+            <h2>Habla conmigo</h2>
+            <form class="contact-grid">
+                <div class="input-group"><input type="text" placeholder="NOMBRE COMPLETO"></div>
+                <div class="input-group"><input type="email" placeholder="CORREO"></div>
+                <div class="input-group" style="grid-column: span 2;"><textarea placeholder="DESCRIBE TU VISIÓN..."></textarea></div>
+                <button type="submit" class="submit-btn">COMENZAR DIÁLOGO</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding: 100px var(--spacing) 50px; text-align: center; opacity: 0.3; font-size: 11px; letter-spacing: 5px;">
+        © 2024 LUIS BLASCO-IBÁÑEZ BERBEL
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Barra de progreso del CV
+        gsap.to(".timeline-progress", {
+            height: "100%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".cv-container",
+                start: "top center+=100", // Empieza más tarde que el título
+                end: "bottom center+=100",
+                scrub: true
+            }
+        });
+
+        // Revelado de ítems del CV
+        gsap.utils.toArray(".cv-item").forEach(item => {
+            gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%"
+                }
+            });
+        });
+
+        // Revelado del Portfolio
+        gsap.utils.toArray(".reveal").forEach(card => {
+            gsap.from(card, {
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%"
+                }
+            });
+        });
+    </script>
+</body>
+</html>
