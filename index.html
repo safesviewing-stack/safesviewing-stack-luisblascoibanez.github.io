@@ -5,20 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luis Blasco — Industrial Design</title>
 
-<!-- Tipografías de alta gama: Playfair para lujo/editorial, Plus Jakarta para técnica/legibilidad -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Tipografías de alto impacto: Space Grotesk para display técnico, Inter para legibilidad -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
 
 /* ========= VARIABLES Y RESET ========= */
 :root {
-  --bg-dark: #070707;
-  --text-main: #fcfcfc;
-  --text-muted: #8a8a8a;
-  --accent: #d4af37; /* Oro pálido muy sutil, casi champagne */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --smooth-bezier: cubic-bezier(0.19, 1, 0.22, 1);
+  --bg: #09090b;
+  --text: #ffffff;
+  --text-muted: #888888;
+  --accent: #ccff00; /* Verde Ácido / Amarillo Neón - Alto impacto */
+  --border: #333333;
 }
 
 *{
@@ -27,65 +25,58 @@
   box-sizing:border-box;
 }
 
-/* ========= BODY ========= */
+/* ========= BODY (Grid de Ingeniería) ========= */
 body{
-  background-color: var(--bg-dark);
-  /* Un gradiente de ruido/luz súper elegante de fondo */
-  background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 50%);
-  background-repeat: no-repeat;
-  color: var(--text-main);
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 300;
+  background-color: var(--bg);
+  /* Patrón de cuadrícula tipo plano técnico */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========= NAV (Elegante y difuminado) ========= */
+/* ========= NAV (Bloque Crudo) ========= */
 nav{
   position:fixed;
   top:0;
-  left:50%;
-  transform:translateX(-50%);
+  left:0;
   width:100%;
-  height:90px;
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:clamp(30px, 4vw, 60px);
-  background:rgba(7,7,7,0.6);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  gap:clamp(10px, 3vw, 40px);
+  background:rgba(9, 9, 11, 0.85);
+  backdrop-filter:blur(8px);
   z-index:100;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 2px solid var(--border);
 }
 
 nav span{
-  font-size:10px;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  cursor:pointer;
-  transition: all 0.4s var(--smooth-bezier);
-  position: relative;
-  padding-bottom: 4px;
-}
-
-nav span::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0%; height: 1px;
-  background-color: var(--text-main);
-  transition: width 0.4s var(--smooth-bezier);
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.2s ease-out;
+  border: 2px solid transparent;
 }
 
 nav span:hover{
-  color: var(--text-main);
-}
-nav span:hover::after {
-  width: 100%;
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--text);
 }
 
 /* ========= SECTIONS ========= */
@@ -104,20 +95,26 @@ nav span:hover::after {
   width: 100%;
 }
 
-/* ========= TITLES (Estilo Editorial) ========= */
+/* ========= TITLES (Gigantes y Geométricos) ========= */
 h1{
-  font-family: 'Playfair Display', serif;
-  font-size:clamp(60px, 7vw, 130px);
-  font-weight:400;
-  line-height:0.95;
-  margin-left:-4px;
-  letter-spacing: -0.02em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size:clamp(60px, 9vw, 150px);
+  font-weight:900;
+  line-height:0.9;
+  text-transform: uppercase;
+  margin-left:-6px;
+  letter-spacing: -0.03em;
 }
-h1 i {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  color: var(--text-muted);
-  font-weight: 400;
+
+/* Efecto texto hueco con borde */
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+  transition: all 0.4s ease;
+}
+h1:hover .outline {
+  color: var(--accent);
+  -webkit-text-stroke: 2px var(--accent);
 }
 
 /* ========= HERO ========= */
@@ -126,29 +123,33 @@ h1 i {
 }
 .hero-sub{
   margin-top:40px;
-  font-size:12px;
-  font-weight: 500;
-  letter-spacing:0.35em;
-  color:var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size:16px;
+  font-weight: 900;
+  letter-spacing:0.2em;
+  color:var(--bg);
+  background: var(--accent);
+  padding: 10px 20px;
+  display: inline-block;
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.hero-sub::before {
-  content: '';
-  width: 40px; height: 1px;
-  background: var(--text-muted);
+  border: 2px solid var(--text);
+  box-shadow: 6px 6px 0 var(--text);
 }
 
 /* ========= TEXT ========= */
 .section-block p{
   margin-top:30px;
   font-size:16px;
-  color:var(--text-muted);
+  color:#cccccc;
   max-width:550px;
-  line-height:1.8;
+  line-height:1.7;
   text-align:justify;
+  background: #000;
+  padding: 30px;
+  border-left: 4px solid var(--accent);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
 /* ========= ABOUT ========= */
@@ -156,7 +157,7 @@ h1 i {
   display:flex;
   flex-wrap: wrap;
   gap:clamp(30px, 6vw, 80px);
-  margin-top:20px;
+  margin-top:30px;
   align-items: flex-start;
 }
 
@@ -164,13 +165,17 @@ h1 i {
   width: clamp(280px, 30vw, 400px);
   height: 550px;
   object-fit:cover;
-  border-radius: 4px; /* Un redondeo súper sutil muy de diseño industrial */
-  filter: grayscale(80%) contrast(1.1);
-  transition: filter 1s var(--smooth-bezier);
+  filter: grayscale(100%) contrast(1.2);
+  border: 4px solid var(--text);
+  /* Sombra dura industrial */
+  box-shadow: 15px 15px 0 var(--accent);
+  transition: all 0.3s ease;
 }
 
 .about img:hover {
-  filter: grayscale(0%) contrast(1.05);
+  transform: translate(-5px, -5px);
+  box-shadow: 20px 20px 0 var(--accent);
+  filter: grayscale(0%) contrast(1.1);
 }
 
 /* ========= PORTFOLIO ========= */
@@ -179,37 +184,38 @@ h1 i {
   margin-top:70px;
   overflow:hidden;
   padding-right:120px;
-  padding-left: 5px; /* Compensa sombras */
+  padding-left: 5px; 
 }
 
-/* Difuminado derecho para ocultar el scroll sutilmente */
+/* Corte brusco lateral para el carrusel */
 .portfolio-wrapper::after{
   content:"";
   position:absolute;
   top:0;
   right:0;
-  width:150px;
+  width:100px;
   height:100%;
   pointer-events:none;
-  background:linear-gradient(to right,rgba(7,7,7,0),rgba(7,7,7,1));
+  background:linear-gradient(to right,rgba(9,9,11,0),rgba(9,9,11,1) 80%);
 }
 
 .portfolio-carousel{
   display:flex;
-  gap:50px;
+  gap:60px;
   overflow-x:auto;
-  padding-bottom:40px;
-  scrollbar-width: none; /* Oculta scrollbar por elegancia (Firefox) */
+  padding-bottom:50px;
+  scrollbar-width: none;
 }
-.portfolio-carousel::-webkit-scrollbar { display: none; } /* Safari y Chrome */
+.portfolio-carousel::-webkit-scrollbar { display: none; } 
 
 .project-card{
-  min-width: 420px;
+  min-width: 480px;
   text-decoration:none;
   color:inherit;
   opacity:0;
-  transform:translateY(30px);
-  transition: 1s var(--smooth-bezier);
+  /* Animación más agresiva de entrada */
+  transform:translateX(-40px) skewX(-2deg);
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   cursor: pointer;
   display: block;
 }
@@ -220,33 +226,61 @@ h1 i {
 }
 
 .project-image{
-  height: 500px;
+  height: 380px;
   margin-bottom: 24px;
   overflow: hidden;
-  border-radius: 4px;
+  border: 3px solid var(--border);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.project-image::before {
+  content: 'EXPLORAR';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  padding: 10px 20px;
+  font-size: 20px;
+  z-index: 10;
+  opacity: 0;
+  transition: 0.3s ease;
 }
 
 .project-image img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transform: scale(1);
   filter: grayscale(100%);
-  transition: transform 1.2s var(--smooth-bezier), filter 0.8s ease;
+  transition: all 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  border-color: var(--accent);
+  box-shadow: 10px 10px 0 rgba(204, 255, 0, 0.2);
 }
 
 .project-card:hover .project-image img {
-  transform: scale(1.04);
   filter: grayscale(0%);
+  transform: scale(1.05);
+  opacity: 0.5;
+}
+
+.project-card:hover .project-image::before {
+  opacity: 1;
 }
 
 .project-card strong{
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  font-size: 24px;
-  letter-spacing: 0.05em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  letter-spacing: -0.02em;
   display: block;
-  transition: color 0.4s ease;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
 .project-card:hover strong {
@@ -262,12 +296,10 @@ h1 i {
 
 .timeline-line{
   position:absolute;
-  left:22px;
-  top:10px;
-  width:1px;
-  height:0;
-  /* Degradado elegante de la línea de tiempo */
-  background:linear-gradient(to bottom, #fff, rgba(255,255,255,0.1));
+  left: 28px;
+  top:0;
+  width: 4px;
+  background: var(--accent);
 }
 
 .timeline-item{
@@ -275,8 +307,8 @@ h1 i {
   margin-bottom:70px;
   max-width:550px;
   opacity:0;
-  transform:translateY(30px);
-  transition:1s var(--smooth-bezier);
+  transform:translateX(-30px);
+  transition:0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .timeline-item.is-visible{
@@ -284,63 +316,62 @@ h1 i {
   transform:none;
 }
 
-/* Punto de la línea de tiempo: Estilo anillo minimalista */
+/* Punto de timeline tipo tuerca geométrica cuadrada */
 .timeline-item::before{
   content:"";
   position:absolute;
-  left:-63px; /* Centrado con la línea */
-  top:20px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--bg-dark);
-  border: 1px solid var(--text-muted);
-  transition: all 0.5s ease;
+  left: -58px;
+  top: 35px;
+  width: 16px;
+  height: 16px;
+  background: var(--bg);
+  border: 4px solid var(--accent);
+  transform: rotate(45deg);
   z-index: 2;
+  transition: 0.3s;
 }
 
 .timeline-item:hover::before {
-  background: var(--text-main);
-  border-color: var(--text-main);
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
-  transform: scale(1.2);
+  background: var(--accent);
+  transform: rotate(0deg) scale(1.2);
 }
 
 .timeline-card{
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding:35px 40px;
-  transition: transform 0.6s var(--smooth-bezier), border-color 0.6s;
+  background: #000;
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  padding:30px 40px;
+  transition: all 0.3s ease;
 }
 
 .timeline-card:hover {
   transform: translateX(10px);
-  border-color: rgba(255,255,255,0.2);
+  border-color: #555;
+  box-shadow: 8px 8px 0 rgba(255,255,255,0.05);
 }
 
 .timeline-card h3{
-  font-family: 'Playfair Display', serif;
-  font-size:16px;
-  font-style: italic;
-  letter-spacing:0.1em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size:14px;
+  font-weight: 700;
+  letter-spacing:0.15em;
+  text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom:20px;
 }
 
 .timeline-card strong{
   display:block;
-  font-weight: 500;
-  font-size:18px;
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size:20px;
+  color: var(--text);
+  margin-bottom: 8px;
 }
 
 .timeline-card span{
-  font-size:14px;
+  font-size:15px;
   color:var(--text-muted);
-  line-height: 1.6;
   display: block;
 }
 
@@ -354,47 +385,41 @@ h1 i {
 
 .contact a{
   padding:40px;
-  border-radius:12px;
-  background: var(--glass-bg);
-  border:1px solid var(--glass-border);
-  color:var(--text-main);
+  background: #000;
+  border: 2px solid var(--border);
+  color:var(--text);
   text-decoration:none;
-  transition:all 0.6s var(--smooth-bezier);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  transition:all 0.3s ease;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
 }
 
 .contact a span{
   display:block;
-  margin-top:12px;
-  font-size:10px;
+  margin-top:15px;
+  font-family: 'Inter', sans-serif;
+  font-size:12px;
+  font-weight: 700;
   letter-spacing:0.25em;
   text-transform:uppercase;
   color:var(--text-muted);
+  transition: color 0.3s;
 }
 
-/* Brillo sutil al hacer hover en el contacto */
-.contact a::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 50%; height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.6s ease;
-}
-
+/* Efecto Invertido al hover muy llamativo */
 .contact a:hover{
-  transform:translateY(-8px);
-  border-color: rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.06);
+  transform:translateY(-5px) scale(1.02);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  box-shadow: 10px 10px 0 var(--text);
 }
 
-.contact a:hover::after {
-  left: 200%;
+.contact a:hover span {
+  color: var(--bg);
+  opacity: 0.8;
 }
 
 </style>
@@ -406,23 +431,26 @@ h1 i {
   <span data-i="0">Inicio</span>
   <span data-i="1">Sobre mí</span>
   <span data-i="2">Portfolio</span>
-  <span data-i="3">Currículum</span>
+  <span data-i="3">Historial</span>
   <span data-i="4">Contacto</span>
 </nav>
 
 <!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <!-- Cursivas intercaladas en el título para ese toque editorial Premium -->
-    <h1>Luis<br><i>Blasco-Ibáñez</i><br>Berbel</h1>
-    <div class="hero-sub">Industrial Design Portfolio</div>
+    <h1>
+      LUIS<br>
+      <span class="outline">BLASCO</span><br>
+      IBÁÑEZ
+    </h1>
+    <div class="hero-sub">Industrial Design & Engineering</div>
   </div>
 </section>
 
 <!-- SOBRE MI -->
 <section class="section">
   <div class="section-block">
-    <h1>Sobre <i>mí</i></h1>
+    <h1>Sobre <span class="outline">mí</span></h1>
     <div class="about">
       <p>
         Ingeniero en diseño industrial de 24 años, con base en Valencia. No me considero una persona
@@ -432,12 +460,12 @@ h1 i {
         ni estrictamente técnico, sino en un punto intermedio que me permite comprender y conectar
         ambas dimensiones del diseño. He cursado mis estudios en la Universitat Jaume I de Castellón,
         continuado en la Universitat Politècnica de València y completado con un programa Erasmus
-        en Londres. <br><br>
+        en Londres.<br><br>
         Cuento además con una formación profesional en electricidad, que me ha aportado
         una base técnica sólida y una forma de pensar práctica. Disfruto del proceso de diseño
         desde el periodo del desarrollo hasta la materialización terminal.
       </p>
-      <img src="foto.jpg" alt="Retrato de Luis Blasco">
+      <img src="foto.jpg" alt="Retrato Luis Blasco">
     </div>
   </div>
 </section>
@@ -445,23 +473,23 @@ h1 i {
 <!-- PORTFOLIO -->
 <section class="section">
   <div class="section-block">
-    <h1><i>P</i>ortfolio</h1>
+    <h1>Port<span class="outline">folio</span></h1>
     <div class="portfolio-wrapper">
       <div class="portfolio-carousel" id="portfolioCarousel">
 
         <a href="#" class="project-card">
           <div class="project-image"><img src="1.jpg" alt="Proyecto NODE"></div>
-          <strong>NODE</strong>
+          <strong>01. NODE</strong>
         </a>
 
         <a href="#" class="project-card">
           <div class="project-image"><img src="2.jpg" alt="Proyecto Sixay"></div>
-          <strong>Sixay</strong>
+          <strong>02. Sixay</strong>
         </a>
 
         <a href="#" class="project-card">
           <div class="project-image"><img src="3.jpg" alt="Exploración Material"></div>
-          <strong>Exploración material</strong>
+          <strong>03. Materiales</strong>
         </a>
 
       </div>
@@ -472,9 +500,10 @@ h1 i {
 <!-- CV -->
 <section class="section">
   <div class="section-block">
-    <h1><i>C</i>urrículum</h1>
+    <h1>C<span class="outline">V</span></h1>
 
     <div class="timeline">
+      <!-- El script rellena el alto de esta línea con el color neón -->
       <div class="timeline-line" id="timelineLine"></div>
 
       <div class="timeline-item">
@@ -501,9 +530,9 @@ h1 i {
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <h3>Experiencia</h3>
-          <strong>Perfil en desarrollo</strong>
-          <span>Primer empleo / Posición Junior</span>
+          <h3>Status Actual</h3>
+          <strong>Perfil Técnico Junior</strong>
+          <span>Búsqueda de primer empleo / prácticas</span>
         </div>
       </div>
 
@@ -511,15 +540,14 @@ h1 i {
         <div class="timeline-card">
           <h3>Idiomas</h3>
           <strong>Español · Inglés · Húngaro</strong>
-          <span>Competencia profesional e internacional</span>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <h3>Herramientas y Software</h3>
-          <strong>Rhino · AutoCAD · Inventor · SolidWorks</strong>
-          <span>Fusion 360 · Sinutrain · 3ds Max</span>
+          <h3>Toolkit</h3>
+          <strong>Rhino · AutoCAD · SolidWorks</strong>
+          <span>Inventor · Fusion 360 · Sinutrain · 3ds Max</span>
         </div>
       </div>
 
@@ -530,19 +558,19 @@ h1 i {
 <!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
-    <h1>Con<i>tacto</i></h1>
+    <h1><span class="outline">Contacta</span></h1>
     <div class="contact">
       <a href="tel:+34600000000">
         +34 600 000 000
-        <span>Llamada directa</span>
+        <span>Llamar ahora</span>
       </a>
       <a href="mailto:luis@example.com">
         luis@example.com
-        <span>Correo electrónico</span>
+        <span>Enviar correo</span>
       </a>
       <a href="#" target="_blank">
         LinkedIn
-        <span>Conexión profesional</span>
+        <span>Conectar</span>
       </a>
     </div>
   </div>
@@ -556,10 +584,10 @@ document.querySelectorAll("nav span").forEach((b,i)=>{
   };
 });
 
-/* INTERSECTION OBSERVER PARA LAS ANIMACIONES REVEAL (Aparición fluida) */
+/* INTERSECTION OBSERVER PARA LAS ANIMACIONES REVEAL (Golpes fuertes, no suaves) */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.target.classList.toggle("is-visible", e.isIntersecting));
-},{ threshold: 0.15 });
+},{ threshold: 0.1 });
 
 document.querySelectorAll(".project-card, .timeline-item").forEach(el => observer.observe(el));
 
@@ -570,19 +598,16 @@ const timeline = document.querySelector(".timeline");
 window.addEventListener("scroll", () => {
   if(!timeline) return;
   const r = timeline.getBoundingClientRect();
-  // Math para calcular qué parte del contenedor está en pantalla
-  const h = Math.min(window.innerHeight - r.top - 100, r.height);
+  const h = Math.min(window.innerHeight - r.top - 50, r.height);
   line.style.height = Math.max(0, h) + "px";
 });
 
-/* SCROLL HORIZONTAL SUPER SUAVE ("Buttery scroll") EN EL CARRUSEL */
+/* SCROLL HORIZONTAL DINÁMICO EN EL CARRUSEL */
 const carousel = document.getElementById("portfolioCarousel");
 let current = 0, target = 0;
-const ease = 0.05; // Ajuste aquí para que frene más elegantemente
+const ease = 0.08; 
 
 carousel.addEventListener("wheel", e => {
-  // Evitar scroll vertical cuando el ratón está en el carrusel (Opcional, pero se siente Premium)
-  // e.preventDefault(); 
   const max = carousel.scrollWidth - carousel.clientWidth;
   target += e.deltaY * 1.5;
   target = Math.max(0, Math.min(target, max));
