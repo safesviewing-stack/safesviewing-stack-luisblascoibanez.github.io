@@ -1,320 +1,331 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco | Industrial Design Engineer</title>
-    <!-- SF Pro es la fuente de Apple, usamos Inter como alternativa web premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Luis Blasco | Design Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
         :root {
-            --apple-bg: #f5f5f7;
-            --apple-text: #1d1d1f;
-            --apple-gray: #86868b;
-            --glass: rgba(255, 255, 255, 0.72);
-            --accent: #0071e3;
+            /* Tema Oscuro (Por defecto) */
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --accent: #5e5e5e;
+            --card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: blur(20px);
+        }
+
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --text: #000000;
+            --accent: #888888;
+            --card: rgba(0, 0, 0, 0.02);
+            --border: rgba(0, 0, 0, 0.08);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.6s cubic-bezier(0.23, 1, 0.32, 1), color 0.6s;
         }
 
         body {
-            background-color: var(--apple-bg);
-            color: var(--apple-text);
-            line-height: 1.5;
+            background-color: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
         }
 
-        /* --- NAVEGACIÓN ESTILO APPLE --- */
-        nav {
+        /* --- BOTÓN DARK MODE --- */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 10000;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            backdrop-filter: var(--glass);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- HEADER / NAVEGACIÓN --- */
+        header {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 44px;
-            background: var(--glass);
-            backdrop-filter: saturate(180%) blur(20px);
-            z-index: 9999;
+            height: 100px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-        }
-
-        nav .links {
-            display: flex;
-            gap: 40px;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 999;
+            background: linear-gradient(to bottom, var(--bg), transparent);
         }
 
         nav a {
             text-decoration: none;
-            color: var(--apple-text);
-            font-size: 12px;
+            color: var(--text);
+            margin-left: 30px;
             font-weight: 400;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            font-size: 13px;
+            letter-spacing: 1px;
+            opacity: 0.6;
         }
 
         nav a:hover { opacity: 1; }
 
-        /* --- HERO SECTION --- */
-        #inicio {
+        /* --- HERO SECTION (GIGANTE) --- */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            padding: 0 5%;
         }
 
-        .hero-title {
-            font-size: clamp(40px, 8vw, 80px);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-            background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero h1 {
+            font-size: 15vw;
+            line-height: 0.85;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            margin-left: -0.5vw;
         }
 
-        .hero-subtitle {
-            font-size: clamp(18px, 3vw, 24px);
-            color: var(--apple-gray);
-            font-weight: 500;
-            max-width: 600px;
+        .hero h1 span {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text);
         }
 
-        /* --- GRID BENTO (Sobre Mí & CV) --- */
-        .section-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 300px);
-            gap: 20px;
-        }
-
-        .bento-item {
-            background: #fff;
-            border-radius: 30px;
-            padding: 40px;
+        .hero-footer {
+            margin-top: 50px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        /* --- SOBRE MI (AWWWARDS STYLE) --- */
+        .about {
+            padding: 150px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: #1a1a1a; /* Placeholder para tu foto */
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
         }
 
-        .bento-item:hover {
-            transform: scale(1.02);
+        .about-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%);
         }
 
-        .item-1 { grid-column: 1 / 3; }
-        .item-2 { grid-column: 3 / 5; background: #000; color: #fff; }
-        .item-3 { grid-column: 1 / 2; }
-        .item-4 { grid-column: 2 / 5; background: linear-gradient(135deg, #e3e3e7 0%, #f5f5f7 100%); }
+        .about-content h2 { font-size: 4rem; margin-bottom: 30px; letter-spacing: -2px; }
+        .about-content p { font-size: 1.2rem; line-height: 1.8; opacity: 0.8; }
 
-        /* --- PORTFOLIO (Visual Massive) --- */
-        .portfolio-header {
-            text-align: center;
+        /* --- PORTFOLIO (6 PROYECTOS) --- */
+        .portfolio { padding: 100px 5%; }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .project-item {
+            position: relative;
             margin-bottom: 60px;
         }
 
-        .project-card {
+        .project-img {
             width: 100%;
-            height: 80vh;
-            border-radius: 30px;
-            background-color: #e8e8ed;
-            margin-bottom: 40px;
+            aspect-ratio: 16/10;
+            background: var(--card);
+            border-radius: 8px;
             overflow: hidden;
-            position: relative;
             cursor: pointer;
         }
 
-        .project-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s transform; }
+        .project-item:hover img { transform: scale(1.05); }
 
         .project-info {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        /* --- CONTACTO --- */
-        .contact-card {
-            background: #fff;
-            border-radius: 30px;
-            padding: 80px 40px;
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .btn-apple {
-            background: var(--accent);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
             margin-top: 20px;
-            transition: background 0.3s;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .btn-apple:hover { background: #0077ed; }
+        /* --- CV TIMELINE --- */
+        .cv-section { padding: 150px 5%; background: var(--card); }
+        .timeline { max-width: 900px; margin-top: 60px; }
+        .timeline-item {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+        .time-year { font-weight: 700; color: var(--accent); }
 
         /* --- FOOTER --- */
-        footer {
-            padding: 60px 20px;
-            font-size: 12px;
-            color: var(--apple-gray);
-            border-top: 1px solid #d2d2d7;
-            text-align: center;
-        }
+        footer { padding: 100px 5%; text-align: center; border-top: 1px solid var(--border); }
+        .contact-big { font-size: 8vw; font-weight: 900; text-decoration: none; color: var(--text); }
+        .contact-big:hover { opacity: 0.5; }
 
-        /* Responsive */
+        /* Mobile */
         @media (max-width: 768px) {
-            .bento-grid {
-                display: flex;
-                flex-direction: column;
-            }
-            .bento-item { height: 300px; }
-            nav .links { gap: 15px; }
+            .about, .portfolio-grid, .timeline-item { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 20vw; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="links">
-            <a href="#inicio">Inicio</a>
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#cv">CV</a>
-            <a href="#contacto">Contacto</a>
-        </div>
-    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Dark/Light</button>
 
-    <section id="inicio">
-        <h1 class="hero-title">Luis Blasco.</h1>
-        <p class="hero-subtitle">Ingeniero de Diseño Industrial. <br> Combinando precisión y estética en Valencia.</p>
-    </section>
+    <header>
+        <div style="font-weight: 900; letter-spacing: 2px;">LB</div>
+        <nav>
+            <a href="#sobre-mi">SOBRE MI</a>
+            <a href="#portfolio">PROYECTOS</a>
+            <a href="#cv">EXPERIENCIA</a>
+            <a href="#contacto">CONTACTO</a>
+        </nav>
+    </header>
 
-    <section id="sobre-mi" class="section-container">
-        <div class="bento-grid">
-            <div class="bento-item item-1 reveal">
-                <span style="color:var(--apple-gray); font-weight:600; margin-bottom:10px;">Perfil</span>
-                <h2>24 años. Creatividad impulsada por la técnica.</h2>
-                <p style="color:var(--apple-gray); margin-top:10px;">De Valencia, formado para materializar ideas imposibles.</p>
-            </div>
-            <div class="bento-item item-2 reveal">
-                <h2>Educación Elite</h2>
-                <div style="margin-top:20px;">
-                    <p>• UPV - València</p>
-                    <p style="color:var(--apple-gray); font-size:14px; margin-bottom:10px;">Grado en Ing. Diseño Industrial</p>
-                    <p>• UJI - Castelló</p>
-                    <p style="color:var(--apple-gray); font-size:14px;">Especialización y Desarrollo</p>
-                </div>
-            </div>
-            <div class="bento-item item-3 reveal" style="background-color: #f2f2f7;">
-                <h3 style="font-size:40px;">U+V</h3>
-                <p>ADN Ingeniero</p>
-            </div>
-            <div class="bento-item item-4 reveal">
-                <h2>Filosofía</h2>
-                <p style="font-size:24px; color:var(--apple-gray);">"Menos es mejor, siempre que funcione perfecto."</p>
-            </div>
+    <section class="hero">
+        <p class="reveal">LUIS BLASCO IBÁÑEZ BERBEL</p>
+        <h1>ENGINEER<span>DESIGNER</span></h1>
+        <div class="hero-footer reveal">
+            <p>VALENCIA, ES. <br> BASADO EN LA UPV.</p>
+            <p>24 AÑOS / ELEGANCIA INDUSTRIAL</p>
         </div>
     </section>
 
-    <section id="portfolio" class="section-container">
-        <div class="portfolio-header">
-            <h2 style="font-size: 48px; font-weight: 700;">Portfolio.</h2>
-            <p style="color:var(--apple-gray);">Una mirada a mis proyectos destacados.</p>
+    <section id="sobre-mi" class="about">
+        <div class="about-image reveal">
+            <!-- AQUÍ CAMBIARÁS TU FOTO POSTERIORMENTE -->
+            <div style="width: 100%; height: 100%; background: #222; display:flex; align-items:center; justify-content:center; color:#555;">[ ESPACIO PARA TU FOTO ]</div>
         </div>
+        <div class="about-content reveal">
+            <h2>Ingeniería con <br>alma creativa.</h2>
+            <p>Como diseñador industrial de 24 años formado en Valencia, mi enfoque se sitúa en la intersección entre la funcionalidad eléctrica y la estética vanguardista. Creo en productos que no solo cumplen una función técnica impecable, sino que también cuentan una historia a través de sus materiales y proporciones.</p>
+            <br>
+            <p>Especialista en transformar conceptos complejos en realidades tangibles y elegantes.</p>
+        </div>
+    </section>
 
-        <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1600" alt="Estructuras">
-            <div class="project-info">
-                <p style="font-weight:600; letter-spacing:1px; margin-bottom:10px;">01. MOBILIARIO</p>
-                <h3 style="font-size:32px;">Diseño Ergonómico v2</h3>
+    <section id="portfolio" class="portfolio">
+        <div class="portfolio-grid">
+            <!-- 6 PROYECTOS -->
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>AXON-01</h4><p>Mobiliario Industrial</p></div>
             </div>
-        </div>
-
-        <div class="project-card reveal">
-            <img src="https://images.unsplash.com/photo-1558191053-8edcb01e1da3?auto=format&fit=crop&q=80&w=1600" alt="Tech">
-            <div class="project-info">
-                <p style="font-weight:600; letter-spacing:1px; margin-bottom:10px;">02. HARDWARE</p>
-                <h3 style="font-size:32px;">Sistemas de Iluminación Inteligente</h3>
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>KINETIC SOUND</h4><p>Audio / Tech</p></div>
+            </div>
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>LUMINA</h4><p>Sistema Lumínico</p></div>
+            </div>
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1544244015-0cd4b3ffc6b0?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>OVOID UNIT</h4><p>Prototipado CAD</p></div>
+            </div>
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1581235720704-06d3acfc13b7?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>ESTRUCTURA C</h4><p>Ecodiseño</p></div>
+            </div>
+            <div class="project-item reveal">
+                <div class="project-img"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1000"></div>
+                <div class="project-info"><h4>MINIMAL WATCH</h4><p>Precision Design</p></div>
             </div>
         </div>
     </section>
 
-    <section id="cv" class="section-container">
-        <div class="bento-item reveal" style="height: auto; width: 100%; border: 1px solid #d2d2d7;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;">
+    <section id="cv" class="cv-section">
+        <h2 style="font-size: 3rem;" class="reveal">Educación & Trayectoria</h2>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="time-year">2016 - 2018</div>
                 <div>
-                    <h2 style="font-size:32px;">Habilidades técnicas.</h2>
-                    <p style="color:var(--apple-gray); margin: 20px 0;">SolidWorks, Rhino 3D, Keyshot, Renderizado Fotorrealista, <br>Impresión 3D, Prototipado rápido.</p>
+                    <h4>Grado Medio y Superior en Electricidad</h4>
+                    <p style="opacity: 0.6;">Bases técnicas, circuitos y potencia industrial.</p>
                 </div>
-                <a href="#" class="btn-apple">Descargar Curriculum Vitae</a>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="time-year">2019 - 2021</div>
+                <div>
+                    <h4>Grado en Ing. de Diseño Industrial (UJI)</h4>
+                    <p style="opacity: 0.6;">Castellón. Fundamentos de diseño e ingeniería de producto (Mitad de carrera).</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="time-year">2022 - 2023</div>
+                <div>
+                    <h4>Grado en Ing. de Diseño Industrial (UPV)</h4>
+                    <p style="opacity: 0.6;">Valencia. Consolidación de proyectos técnicos y materiales avanzados.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="time-year">2023 - 2024</div>
+                <div>
+                    <h4>Erasmus - Middlesex University London</h4>
+                    <p style="opacity: 0.6;">Reino Unido. Diseño internacional, innovación y prototipado global.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="section-container">
-        <div class="contact-card reveal">
-            <h2 style="font-size:56px; letter-spacing:-0.03em;">¿Hablamos de diseño?</h2>
-            <p style="color:var(--apple-gray); font-size:20px; margin-top:20px;">Disponible para nuevos retos y proyectos innovadores.</p>
-            <a href="mailto:hola@luisblasco.com" class="btn-apple">Contactar con Luis</a>
+    <footer id="contacto">
+        <p class="reveal">¿TIENES UNA IDEA?</p>
+        <a href="mailto:hola@luisbalsco.com" class="contact-big reveal">TRABAJEMOS.</a>
+        <div style="margin-top: 50px; opacity: 0.4;">
+            <p>© 2024 LUIS BLASCO IBÁÑEZ BERBEL</p>
         </div>
-    </section>
-
-    <footer>
-        <p>Copyright © 2024 Luis Blasco Ibáñez Berbel. Todos los derechos reservados.</p>
-        <p style="margin-top:10px;">Diseño Industrial · València · UPV · UJI</p>
     </footer>
 
     <script>
-        // Apple style Scroll Reveal
+        // TOGGLE DARK MODE
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+        }
+
+        // ANIMACIONES NIVEL PREMIO
         ScrollReveal().reveal('.reveal', {
-            delay: 100,
-            distance: '60px',
-            duration: 1200,
-            easing: 'cubic-bezier(0.2, 1, 0.3, 1)', // Curva de suavizado característica de Apple
+            distance: '80px',
+            duration: 1400,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
             origin: 'bottom',
-            interval: 150
+            interval: 100
         });
 
-        // Easing scroll suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Parallax suave en el texto span
+        window.addEventListener('scroll', () => {
+            const span = document.querySelector('h1 span');
+            let value = window.scrollY;
+            span.style.transform = `translateX(${value * 0.1}px)`;
         });
     </script>
 </body>
