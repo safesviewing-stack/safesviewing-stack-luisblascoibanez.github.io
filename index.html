@@ -25,7 +25,7 @@
             padding: 0;
             box-sizing: border-box;
             cursor: none; 
-            scroll-behavior: smooth; /* Para el scroll suave entre secciones */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -46,16 +46,18 @@
             z-index: -1;
         }
 
+        /* --- CURSOR CAMBIADO (Efecto Aro Glow) --- */
         #cursor {
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
+            width: 30px;
+            height: 30px;
+            border: 1.5px solid var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
+            transition: transform 0.15s ease-out;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translate(-50%, -50%); /* Centrado exacto */
         }
 
         header {
@@ -106,13 +108,14 @@
 
         section { padding: 140px 10% 80px; }
 
+        /* --- INICIO ALINEADO A LA IZQUIERDA --- */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start; /* Cambio a la izquierda */
+            text-align: left; /* Cambio a la izquierda */
         }
 
         .hero h1 {
@@ -121,6 +124,12 @@
             line-height: 0.9;
             margin-bottom: 25px;
             letter-spacing: -4px;
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 20px 0; /* Reset margen lateral */
         }
 
         .hero .highlight {
@@ -144,32 +153,14 @@
             transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .project-image {
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-
+        .project-image { width: 100%; height: 300px; overflow: hidden; }
         .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.6s;
-            filter: grayscale(100%);
-            opacity: 0.6;
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.6s; filter: grayscale(100%); opacity: 0.6;
         }
 
-        .project-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-
+        .project-card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .project-card:hover .project-image img { transform: scale(1.1); filter: grayscale(0%); opacity: 1; }
         .project-info { padding: 25px; }
         .project-info h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; margin-bottom: 5px; }
         .project-info p { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -194,13 +185,7 @@
             transform: translateY(-5px);
         }
 
-        .skill-card i {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            display: block;
-        }
-
+        .skill-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: block; }
         .bento-2 { grid-column: span 2; }
 
         .cv-item {
@@ -245,29 +230,15 @@
         }
 
         input, textarea {
-            width: 100%;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 12px;
-            color: white;
-            margin-bottom: 15px;
-            outline: none;
-        }
-
-        input:focus { border-color: var(--accent); }
-
-        @media (max-width: 1024px) {
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            width: 100%; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border); padding: 15px;
+            border-radius: 12px; color: white; margin-bottom: 15px; outline: none;
         }
 
         @media (max-width: 768px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr; }
+            .portfolio-grid, .skills-grid { grid-template-columns: 1fr; }
             .bento-2 { grid-column: span 1; }
             .hero h1 { font-size: 3.5rem; }
-            .cv-item { flex-direction: column; gap: 10px; }
             header { padding: 15px 5%; }
             .nav-links { display: none; }
         }
@@ -291,146 +262,91 @@
         <div data-aos="fade-up" data-aos-duration="1200">
             <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">Full Stack Engineer & UI Artist</p>
             <h1>CREATING THE<br><span class="highlight">DIGITAL FUTURE</span></h1>
-            <p style="color: var(--text-dim); max-width: 600px; margin: 20px auto;">Soluciones visuales y técnicas para marcas que buscan destacar.</p>
+            <p>Soluciones visuales y técnicas para marcas que buscan destacar.</p>
         </div>
     </section>
 
     <section id="work">
         <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">CASOS DE ESTUDIO.</h2>
         <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800" alt="W1"></div>
-                <div class="project-info"><h3>E-Commerce Core</h3><p>Next.js / UI Design</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800" alt="W2"></div>
-                <div class="project-info"><h3>Cyber Portal</h3><p>React / Branding</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="W3"></div>
-                <div class="project-info"><h3>Nova App</h3><p>Fullstack / API</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="W4"></div>
-                <div class="project-info"><h3>Architect Vision</h3><p>Three.js / WebGL</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800" alt="W5"></div>
-                <div class="project-info"><h3>Zen Interface</h3><p>UX Research</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1522542550221-31fd19279a28?auto=format&fit=crop&q=80&w=800" alt="W6"></div>
-                <div class="project-info"><h3>Data Stream</h3><p>Dashboard / Stats</p></div>
-            </div>
+            <div class="project-card" data-aos="fade-up"><div class="project-image"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>E-Commerce Core</h3><p>Next.js / UI</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><div class="project-image"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Cyber Portal</h3><p>React / Branding</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><div class="project-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Nova App</h3><p>Fullstack</p></div></div>
+            <div class="project-card" data-aos="fade-up"><div class="project-image"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Architect Vision</h3><p>WebGL</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><div class="project-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Zen Interface</h3><p>UX Design</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><div class="project-image"><img src="https://images.unsplash.com/photo-1522542550221-31fd19279a28?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Data Stream</h3><p>Stats Dashboard</p></div></div>
         </div>
     </section>
 
     <section id="skills">
         <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">POWER GRID.</h2>
         <div class="skills-grid">
-            <div class="skill-card bento-2" data-aos="fade-up">
-                <i class="fa-solid fa-code"></i>
-                <h3>Frontend Development</h3>
-                <p>Especialista en interfaces de alto rendimiento con React.</p>
-            </div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <h3>UI/UX Design</h3>
-                <p>Enfoque moderno.</p>
-            </div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fa-solid fa-server"></i>
-                <h3>Backend</h3>
-                <p>Node & Python.</p>
-            </div>
-            <div class="skill-card" data-aos="fade-up">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>Performance</h3>
-                <p>Core Web Vitals.</p>
-            </div>
-            <div class="skill-card bento-2" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-brands fa-figma"></i>
-                <h3>Product Design</h3>
-                <p>Ecosistemas de diseño complejos.</p>
-            </div>
+            <div class="skill-card bento-2" data-aos="fade-up"><i class="fa-solid fa-code"></i><h3>Frontend Development</h3><p>React / Next / Vue.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>UI Design</h3></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><i class="fa-solid fa-server"></i><h3>Backend</h3></div>
+            <div class="skill-card" data-aos="fade-up"><i class="fa-solid fa-bolt"></i><h3>Performance</h3></div>
+            <div class="skill-card bento-2" data-aos="fade-up" data-aos-delay="100"><i class="fa-brands fa-figma"></i><h3>Figma Architect</h3></div>
         </div>
     </section>
 
     <section id="cv">
         <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">HISTORIAL.</h2>
-        <div class="cv-item" data-aos="fade-up">
-            <div class="cv-year">2022 — PRES.</div>
-            <div class="cv-content">
-                <h3>Lead Developer en Agencia XYZ</h3>
-                <span>Arquitectura avanzada y diseño visual.</span>
-            </div>
-        </div>
-        <div class="cv-item" data-aos="fade-up">
-            <div class="cv-year">2020 — 2022</div>
-            <div class="cv-content">
-                <h3>Product Designer en TechLab</h3>
-            </div>
-        </div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — PRES.</div><div class="cv-content"><h3>Lead Developer</h3><span>Digital Solutions Studio.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2022</div><div class="cv-content"><h3>Senior Product Designer</h3><span>Fintech Labs.</span></div></div>
         <a href="cv.pdf" class="btn-cv" data-aos="zoom-in">DESCARGAR CV <i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
     <section id="contact">
         <div class="contact-box" data-aos="zoom-out">
-            <h2 style="font-family: 'Syne'; font-size: 4rem; line-height: 1;">LET'S START A<br>PROJECT.</h2>
+            <h2 style="font-family: 'Syne'; font-size: 4rem; line-height: 1;">LET'S START.</h2>
             <form style="max-width: 500px; margin: 40px auto; text-align: left;">
-                <input type="text" placeholder="NOMBRE COMPLETO">
+                <input type="text" placeholder="NOMBRE">
                 <input type="email" placeholder="EMAIL">
                 <textarea rows="4" placeholder="MENSAJE"></textarea>
-                <button type="submit" style="width: 100%; padding: 18px; border: none; background: var(--accent); color: white; font-weight: 700; cursor: pointer; border-radius: 12px;">ENVIAR</button>
+                <button type="submit" style="width: 100%; padding: 18px; border: none; background: var(--accent); color: white; font-weight: 700; border-radius: 12px;">ENVIAR</button>
             </form>
         </div>
     </section>
-
-    <footer style="padding: 50px 10%; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border);">
-        <p>&copy; 2024 / DISEÑADO POR TI — STUDIO</p>
-    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // HEADER LOGIC
         let lastScrollTop = 0;
         let isNavigating = false;
         const navbar = document.getElementById("navbar");
 
-        // Al hacer clic en un enlace, evitamos que desaparezca
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 isNavigating = true;
                 navbar.classList.remove("nav-hidden");
-                // Volvemos a activar la lógica tras terminar el desplazamiento
                 setTimeout(() => { isNavigating = false; }, 800); 
             });
         });
 
         window.addEventListener("scroll", function() {
-            if (isNavigating) return; // Si estamos navegando por clic, no hacer nada
-            
+            if (isNavigating) return;
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                navbar.classList.add("nav-hidden");
-            } else {
-                navbar.classList.remove("nav-hidden");
-            }
+            if (scrollTop > lastScrollTop && scrollTop > 100) navbar.classList.add("nav-hidden");
+            else navbar.classList.remove("nav-hidden");
             lastScrollTop = scrollTop;
         });
 
-        // CURSOR
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
-            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        document.querySelectorAll('a, button, .project-card, .skill-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+                cursor.style.background = 'rgba(139, 92, 246, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = 'transparent';
+            });
         });
     </script>
 </body>
