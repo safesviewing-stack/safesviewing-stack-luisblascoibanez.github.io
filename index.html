@@ -1,20 +1,306 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="style.css">
-    <title>Contacto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre | Digital Studio</title>
+    
+    <!-- Fonts: Syne para títulos, Inter para cuerpo -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Librería de animaciones estilo Framer -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #cfff04; /* Verde neón "Framer style" */
+            --card-bg: #161616;
+            --text-main: #ffffff;
+            --text-secondary: #888888;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair; /* Detalle de estudio de diseño */
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVEGACIÓN FLOTANTE (Framer Look) --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 10px 30px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 12vw, 8rem);
+            line-height: 0.8;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: -4px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            padding: 120px 10% 60px;
+        }
+
+        .section-tag {
+            background: var(--card-bg);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 50px;
+            letter-spacing: -2px;
+        }
+
+        /* --- SKILLS (Ticker Animado) --- */
+        .marquee {
+            overflow: hidden;
+            background: var(--accent);
+            color: black;
+            padding: 20px 0;
+            white-space: nowrap;
+            font-family: var(--font-display);
+            font-weight: 800;
+            text-transform: uppercase;
+            transform: rotate(-1deg);
+            margin: 50px 0;
+        }
+
+        .marquee div {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- PORTFOLIO (Grid de Bento Box) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.5s;
+        }
+
+        .work-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .work-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: 0.5s;
+        }
+
+        .work-card:hover img {
+            opacity: 1;
+        }
+
+        .card-large { grid-column: span 8; }
+        .card-small { grid-column: span 4; }
+
+        .work-info {
+            padding: 25px;
+        }
+
+        /* --- CONTACTO / CV --- */
+        .footer-cta {
+            background: var(--card-bg);
+            padding: 100px 5%;
+            text-align: center;
+            border-radius: 50px 50px 0 0;
+            margin-top: 100px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--accent);
+            color: black;
+            padding: 20px 50px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            transition: 0.3s;
+            margin-top: 30px;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(207, 255, 4, 0.4);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .card-large, .card-small { grid-column: span 12; }
+            .hero h1 { font-size: 4rem; }
+        }
+    </style>
 </head>
 <body>
-    <nav>...</nav> <!-- Copia el mismo menú -->
-    <div class="container">
-        <h1>Hablemos.</h1>
-        <p class="lead">¿Tienes una idea? Vamos a construirla juntos.</p>
-        <form style="display: flex; flex-direction: column; gap: 20px; max-width: 500px;">
-            <input type="text" placeholder="Tu Nombre" style="padding: 15px; border-radius: 12px; border: 1px solid var(--gray-border);">
-            <input type="email" placeholder="Tu Email" style="padding: 15px; border-radius: 12px; border: 1px solid var(--gray-border);">
-            <textarea placeholder="Mensaje" rows="5" style="padding: 15px; border-radius: 12px; border: 1px solid var(--gray-border);"></textarea>
-            <button type="submit" class="btn">Enviar Mensaje →</button>
-        </form>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre-mi">Perfil</a>
+        <a href="#portfolio">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <h1 data-aos="zoom-out-up" data-aos-duration="1500">DIGITAL<br>DESIGNER</h1>
+        <p data-aos="fade-up" data-aos-delay="400">Transformando conceptos complejos en productos visualmente impecables.</p>
+    </section>
+
+    <div class="marquee">
+        <div>
+            UI/UX DESIGN • WEB DEVELOPMENT • BRANDING • MOTION DESIGN • REACT • FRAMER • UI/UX DESIGN • WEB DEVELOPMENT • BRANDING • MOTION DESIGN • REACT • FRAMER •
+        </div>
     </div>
+
+    <section id="sobre-mi">
+        <div class="section-tag">Perfil</div>
+        <div style="max-width: 800px;">
+            <h2 data-aos="fade-right">Creo interfaces que la gente ama usar. Basado en Madrid, trabajando para el mundo.</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Mi enfoque mezcla la rigurosidad técnica con la libertad creativa. Ayudo a estudios y marcas a destacar en entornos digitales competitivos.</p>
+            <br>
+            <a href="cv.pdf" style="color: var(--accent); text-decoration: none; font-weight: bold;">[ Descargar Curriculum Vitae ]</a>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="section-tag">Portfolio</div>
+        <div class="portfolio-grid">
+            <!-- Proyecto 1 (Grande) -->
+            <div class="work-card card-large" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=1000" alt="App">
+                <div class="work-info">
+                    <h3>01 / Nexo Mobile App</h3>
+                    <p>Fintech Solution Design</p>
+                </div>
+            </div>
+            <!-- Proyecto 2 (Pequeño) -->
+            <div class="work-card card-small" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&q=80&w=1000" alt="Visual">
+                <div class="work-info">
+                    <h3>02 / Astral Visuals</h3>
+                    <p>Brand Identity</p>
+                </div>
+            </div>
+             <!-- Proyecto 3 (Pequeño) -->
+             <div class="work-card card-small" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1000" alt="Tech">
+                <div class="work-info">
+                    <h3>03 / Quantum Web</h3>
+                    <p>Web3 Ecosystem</p>
+                </div>
+            </div>
+            <!-- Proyecto 4 (Grande) -->
+            <div class="work-card card-large" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000" alt="Dev">
+                <div class="work-info">
+                    <h3>04 / Code Studio</h3>
+                    <p>Full-stack development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="footer-cta">
+        <div class="section-tag">Contacto</div>
+        <h2>¿TIENES UN PROYECTO?<br>HAGÁMOSLO REALIDAD</h2>
+        <a href="mailto:hola@tustudio.com" class="btn-main">HOLA@TUSTUDIO.COM</a>
+        
+        <div style="margin-top: 60px; color: var(--text-secondary);">
+            <p>Twitter — Instagram — LinkedIn — Behance</p>
+            <br>
+            <p>© 2024 / Diseñado con intención.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts para animaciones -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+    </script>
 </body>
 </html>
