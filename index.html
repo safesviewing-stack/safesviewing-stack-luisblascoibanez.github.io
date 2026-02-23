@@ -3,67 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre | Digital Studio</title>
+    <title>NOMBRE | Creative Portfolio</title>
     
-    <!-- Fonts: Syne para títulos, Inter para cuerpo -->
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    <!-- Librería de animaciones estilo Framer -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #0a0a0a;
-            --accent: #cfff04; /* Verde neón "Framer style" */
-            --card-bg: #161616;
-            --text-main: #ffffff;
-            --text-secondary: #888888;
-            --font-display: 'Syne', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --bg: #050505;
+            --accent: #8b5cf6; /* Violeta Moderno */
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-dim: #a1a1aa;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: crosshair; /* Detalle de estudio de diseño */
+            cursor: none; /* Cursor personalizado premium */
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text-main);
-            font-family: var(--font-body);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- NAVEGACIÓN FLOTANTE (Framer Look) --- */
-        nav {
+        /* --- BACKGROUND GRAIN EFFECT --- */
+        body::before {
+            content: "";
             position: fixed;
-            top: 20px;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e1b4b, transparent),
+                        radial-gradient(circle at 0% 100%, #111, transparent);
+            z-index: -1;
+        }
+
+        /* --- CURSOR CUSTOM --- */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        /* --- HEADER DINÁMICO --- */
+        header {
+            position: fixed;
+            top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.7);
-            backdrop-filter: blur(15px);
-            padding: 10px 30px;
+            width: 90%;
+            max-width: 600px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 12px 30px;
             border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border);
             display: flex;
-            gap: 20px;
-            z-index: 1000;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        nav a {
-            color: var(--text-secondary);
+        header.nav-hidden {
+            transform: translate(-50%, -150%);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
             text-decoration: none;
+            color: var(--text-dim);
             font-size: 0.85rem;
             font-weight: 500;
             transition: 0.3s;
         }
 
-        nav a:hover {
-            color: var(--accent);
-        }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* --- HERO --- */
+        /* --- SECCIONES --- */
+        section { padding: 140px 10% 80px; }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -71,235 +116,260 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 10%;
         }
 
         .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 12vw, 8rem);
-            line-height: 0.8;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 0.9;
+            margin-bottom: 25px;
             letter-spacing: -4px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-        }
-
-        /* --- SECCIONES --- */
-        section {
-            padding: 120px 10% 60px;
-        }
-
-        .section-tag {
-            background: var(--card-bg);
+        .hero .highlight {
             color: var(--accent);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
+            text-shadow: 0 0 50px var(--accent-glow);
         }
 
-        h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 4rem);
-            margin-bottom: 50px;
-            letter-spacing: -2px;
-        }
-
-        /* --- SKILLS (Ticker Animado) --- */
-        .marquee {
-            overflow: hidden;
-            background: var(--accent);
-            color: black;
-            padding: 20px 0;
-            white-space: nowrap;
-            font-family: var(--font-display);
-            font-weight: 800;
-            text-transform: uppercase;
-            transform: rotate(-1deg);
-            margin: 50px 0;
-        }
-
-        .marquee div {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* --- PORTFOLIO (Grid de Bento Box) --- */
-        .portfolio-grid {
+        /* --- SKILLS GRID (BENTO BOX) --- */
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
 
-        .work-card {
+        .skill-card {
             background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
             border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.5s;
+            transition: 0.4s;
         }
 
-        .work-card:hover {
+        .skill-card:hover {
             border-color: var(--accent);
-            transform: translateY(-10px);
+            background: rgba(139, 92, 246, 0.05);
+            transform: translateY(-5px);
         }
 
-        .work-card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: 0.5s;
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .work-card:hover img {
-            opacity: 1;
+        .bento-2 { grid-column: span 2; }
+
+        /* --- CV SECTION --- */
+        .cv-item {
+            display: flex;
+            gap: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .card-large { grid-column: span 8; }
-        .card-small { grid-column: span 4; }
-
-        .work-info {
-            padding: 25px;
+        .cv-year {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            min-width: 120px;
+            color: var(--accent);
         }
 
-        /* --- CONTACTO / CV --- */
-        .footer-cta {
-            background: var(--card-bg);
-            padding: 100px 5%;
-            text-align: center;
-            border-radius: 50px 50px 0 0;
-            margin-top: 100px;
-        }
+        .cv-content h3 { font-size: 1.5rem; margin-bottom: 5px; }
+        .cv-content span { color: var(--text-dim); font-size: 0.9rem; }
 
-        .btn-main {
-            display: inline-block;
-            background: var(--accent);
+        /* --- BOTÓN CV --- */
+        .btn-cv {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
             color: black;
-            padding: 20px 50px;
+            padding: 18px 35px;
             border-radius: 100px;
             text-decoration: none;
-            font-weight: 800;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-weight: 700;
             transition: 0.3s;
-            margin-top: 30px;
         }
 
-        .btn-main:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(207, 255, 4, 0.4);
+        .btn-cv:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(255,255,255,0.2); }
+
+        /* --- CONTACTO --- */
+        .contact-box {
+            background: linear-gradient(135deg, #111, #050505);
+            padding: 80px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            text-align: center;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .card-large, .card-small { grid-column: span 12; }
-            .hero h1 { font-size: 4rem; }
+        input, textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--accent); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .skills-grid { grid-template-columns: 1fr; }
+            .bento-2 { grid-column: span 1; }
+            .hero h1 { font-size: 3.5rem; }
+            .cv-item { flex-direction: column; gap: 10px; }
+            header { padding: 10px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#sobre-mi">Perfil</a>
-        <a href="#portfolio">Proyectos</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
+    <div id="cursor"></div>
 
-    <section id="inicio" class="hero">
-        <h1 data-aos="zoom-out-up" data-aos-duration="1500">DIGITAL<br>DESIGNER</h1>
-        <p data-aos="fade-up" data-aos-delay="400">Transformando conceptos complejos en productos visualmente impecables.</p>
-    </section>
+    <header id="navbar">
+        <div class="nav-logo">DESIGN STUDIO</div>
+        <nav class="nav-links">
+            <a href="#work">Proyectos</a>
+            <a href="#skills">Habilidades</a>
+            <a href="#cv">Trayectoria</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+    </header>
 
-    <div class="marquee">
-        <div>
-            UI/UX DESIGN • WEB DEVELOPMENT • BRANDING • MOTION DESIGN • REACT • FRAMER • UI/UX DESIGN • WEB DEVELOPMENT • BRANDING • MOTION DESIGN • REACT • FRAMER •
-        </div>
-    </div>
-
-    <section id="sobre-mi">
-        <div class="section-tag">Perfil</div>
-        <div style="max-width: 800px;">
-            <h2 data-aos="fade-right">Creo interfaces que la gente ama usar. Basado en Madrid, trabajando para el mundo.</h2>
-            <p style="color: var(--text-secondary); font-size: 1.2rem;">Mi enfoque mezcla la rigurosidad técnica con la libertad creativa. Ayudo a estudios y marcas a destacar en entornos digitales competitivos.</p>
-            <br>
-            <a href="cv.pdf" style="color: var(--accent); text-decoration: none; font-weight: bold;">[ Descargar Curriculum Vitae ]</a>
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1200">
+            <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">Full Stack Engineer & UI Artist</p>
+            <h1>CREATING THE<br><span class="highlight">DIGITAL FUTURE</span></h1>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 20px auto;">Soluciones visuales y técnicas para marcas que buscan destacar en la web moderna. Minimalismo táctico enfocado en resultados.</p>
         </div>
     </section>
 
-    <section id="portfolio">
-        <div class="section-tag">Portfolio</div>
-        <div class="portfolio-grid">
-            <!-- Proyecto 1 (Grande) -->
-            <div class="work-card card-large" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=1000" alt="App">
-                <div class="work-info">
-                    <h3>01 / Nexo Mobile App</h3>
-                    <p>Fintech Solution Design</p>
-                </div>
+    <section id="skills">
+        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">POWER GRID.</h2>
+        <div class="skills-grid">
+            <div class="skill-card bento-2" data-aos="fade-up">
+                <i class="fa-solid fa-code"></i>
+                <h3>Frontend Development</h3>
+                <p>Especialista en interfaces de alto rendimiento con React, Vue y animaciones nativas.</p>
             </div>
-            <!-- Proyecto 2 (Pequeño) -->
-            <div class="work-card card-small" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&q=80&w=1000" alt="Visual">
-                <div class="work-info">
-                    <h3>02 / Astral Visuals</h3>
-                    <p>Brand Identity</p>
-                </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>UI/UX Design</h3>
+                <p>Interfaces intuitivas centradas en la conversión y estética Framer.</p>
             </div>
-             <!-- Proyecto 3 (Pequeño) -->
-             <div class="work-card card-small" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1000" alt="Tech">
-                <div class="work-info">
-                    <h3>03 / Quantum Web</h3>
-                    <p>Web3 Ecosystem</p>
-                </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-server"></i>
+                <h3>Backend</h3>
+                <p>Estructuras sólidas en Node y Python.</p>
             </div>
-            <!-- Proyecto 4 (Grande) -->
-            <div class="work-card card-large" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000" alt="Dev">
-                <div class="work-info">
-                    <h3>04 / Code Studio</h3>
-                    <p>Full-stack development</p>
-                </div>
+            <div class="skill-card" data-aos="fade-up">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h3>Mobile first</h3>
+                <p>Adaptabilidad total en cualquier dispositivo.</p>
+            </div>
+            <div class="skill-card bento-2" data-aos="fade-up" data-aos-delay="150">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Optimización</h3>
+                <p>SEO y performance nivel experto (100 Core Web Vitals).</p>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-brands fa-figma"></i>
+                <h3>Prototipado</h3>
+                <p>Diseño rápido en Figma.</p>
             </div>
         </div>
     </section>
 
-    <footer id="contacto" class="footer-cta">
-        <div class="section-tag">Contacto</div>
-        <h2>¿TIENES UN PROYECTO?<br>HAGÁMOSLO REALIDAD</h2>
-        <a href="mailto:hola@tustudio.com" class="btn-main">HOLA@TUSTUDIO.COM</a>
+    <section id="cv">
+        <h2 style="font-family: 'Syne'; font-size: 3rem; margin-bottom: 40px;" data-aos="fade-right">HISTORIAL.</h2>
         
-        <div style="margin-top: 60px; color: var(--text-secondary);">
-            <p>Twitter — Instagram — LinkedIn — Behance</p>
-            <br>
-            <p>© 2024 / Diseñado con intención.</p>
+        <div class="cv-item" data-aos="fade-up">
+            <div class="cv-year">2022 — PRES.</div>
+            <div class="cv-content">
+                <h3>Lead Developer en Agencia XYZ</h3>
+                <span>Supervisión de arquitectura web y equipo creativo.</span>
+                <p style="margin-top: 10px; color: var(--text-dim);">Lideré el rediseño de más de 20 plataformas enterprise aumentando la conversión en un 40%.</p>
+            </div>
         </div>
+
+        <div class="cv-item" data-aos="fade-up">
+            <div class="cv-year">2020 — 2022</div>
+            <div class="cv-content">
+                <h3>Product Designer en TechLab</h3>
+                <span>Especialista en sistemas de diseño complejos.</span>
+            </div>
+        </div>
+
+        <div class="cv-item" data-aos="fade-up">
+            <div class="cv-year">2018 — 2020</div>
+            <div class="cv-content">
+                <h3>Desarrollador Full Stack Jr</h3>
+                <span>Primeras experiencias en startups de Silicon Valley.</span>
+            </div>
+        </div>
+
+        <a href="cv.pdf" class="btn-cv" data-aos="zoom-in">
+            DESCARGAR CURRICULUM <i class="fa-solid fa-arrow-down"></i>
+        </a>
+    </section>
+
+    <section id="contact">
+        <div class="contact-box" data-aos="zoom-out">
+            <h2 style="font-family: 'Syne'; font-size: 4rem; line-height: 1;">LET'S START A<br>PROJECT.</h2>
+            <br>
+            <p style="color: var(--text-dim); margin-bottom: 40px;">Disponible para trabajos freelance y colaboraciones premium.</p>
+            
+            <form style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <input type="text" placeholder="NOMBRE COMPLETO">
+                <input type="email" placeholder="EMAIL DE CONTACTO">
+                <textarea rows="4" placeholder="¿CÓMO PUEDO AYUDARTE?"></textarea>
+                <button type="submit" style="width: 100%; padding: 18px; border-radius: 12px; border: none; background: var(--accent); color: white; font-weight: 700; cursor: pointer;">ENVIAR PROPUESTA</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding: 50px 10%; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim);">
+        <p>&copy; 2024 / DISEÑADO POR TI — STUDIO</p>
     </footer>
 
-    <!-- Scripts para animaciones -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            offset: 100,
-            once: true
+        AOS.init({ duration: 1000, once: true });
+
+        // LOGIC: HEADER QUE DESAPARECE Y APARECE
+        let lastScrollTop = 0;
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll Abajo -> Ocultar
+                navbar.classList.add("nav-hidden");
+            } else {
+                // Scroll Arriba -> Mostrar
+                navbar.classList.remove("nav-hidden");
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // CURSOR ANIMADO
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // EFECTO SCALE EN BOTONES PARA EL CURSOR
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
         });
     </script>
 </body>
