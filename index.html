@@ -85,7 +85,6 @@
 
         .header-toggles { display: flex; gap: 15px; align-items: center; }
         
-        /* BOTÓN IDIOMAS - Preservamos original adaptado a flexbox con su margen */
         #lang-toggle { 
             background: transparent; border: 1px solid var(--border); color: var(--text); 
             padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
@@ -94,70 +93,29 @@
         }
         #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- THEME TOGGLE (PILL/SLIDER ESTILO REACT/TAILWIND INTEGRADO CSS PURO) --- */
+        /* --- THEME TOGGLE SLIDER --- */
         .theme-switch-wrapper {
-            all: unset; /* Retira formato base de botones nativos para control absoluto de caja */
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between;
-            width: 64px; 
-            height: 32px; 
-            padding: 3px; 
-            border-radius: 9999px;
-            cursor: none; /* Porque tienes cursor global 'custom' */
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            box-sizing: border-box;
-            background: #09090b; 
-            border: 1px solid #27272a; 
-            position: relative;
+            all: unset; display: flex; align-items: center; justify-content: space-between;
+            width: 64px; height: 32px; padding: 3px; border-radius: 9999px;
+            cursor: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
+            background: #09090b; border: 1px solid #27272a; position: relative;
         }
 
-        .light-mode .theme-switch-wrapper {
-            background: #ffffff;
-            border: 1px solid #e4e4e7;
-        }
-
+        .light-mode .theme-switch-wrapper { background: #ffffff; border: 1px solid #e4e4e7; }
         .theme-icon-container {
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 24px; 
-            height: 24px; 
-            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; 
+            width: 24px; height: 24px; border-radius: 50%;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
         }
 
         .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
 
-        /* Contenedor o Knob Izquierdo (Mueve en light) */
-        .icon-left {
-            background: #27272a; 
-            color: #ffffff;
-            transform: translateX(0);
-        }
-        .light-mode .icon-left {
-            transform: translateX(32px);
-            background: #e5e7eb; 
-            color: #374151; 
-        }
-
-        /* Contenedor Derecho (Mueve en light) */
-        .icon-right {
-            background: transparent;
-            color: #71717a; 
-            transform: translateX(0);
-        }
-        .light-mode .icon-right {
-            transform: translateX(-32px);
-            color: #000000;
-        }
-
-        /* Alternador interno de vistas y transparencias dependiente del parent body (.light-mode) */
-        .dark-visible { display: block; }
-        .light-visible { display: none; }
-        
-        .light-mode .dark-visible { display: none; }
-        .light-mode .light-visible { display: block; }
+        .icon-left { background: #27272a; color: #ffffff; transform: translateX(0); }
+        .light-mode .icon-left { transform: translateX(32px); background: #e5e7eb; color: #374151; }
+        .icon-right { background: transparent; color: #71717a; transform: translateX(0); }
+        .light-mode .icon-right { transform: translateX(-32px); color: #000000; }
+        .dark-visible { display: block; } .light-visible { display: none; }
+        .light-mode .dark-visible { display: none; } .light-mode .light-visible { display: block; }
 
         /* --- SECCIONES GENERALES --- */
         section { padding: 220px 10% 120px; }
@@ -182,64 +140,44 @@
         .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
 
-        /* --- INTERACTIVE HOVER BUTTON COMPONENT --- */
-        .interactive-hover-btn {
+        /* --- PIXEL CANVAS BOTONES CSS --- */
+        .pixel-btn {
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Encapsula el grid renderizado */
             border-radius: 100px;
             border: 1px solid var(--border);
             background: var(--bg);
             color: var(--text);
-            padding: 20px 45px;
             text-align: center;
             font-weight: 800;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             cursor: none;
             text-decoration: none;
             min-width: fit-content;
             transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            outline: none;
         }
 
-        .interactive-hover-btn:hover { border-color: var(--accent); }
+        .pixel-btn:hover, .pixel-btn:focus-visible { border-color: var(--accent); }
 
-        .ihb-text-1 {
-            display: inline-block;
-            transform: translateX(4px);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-            z-index: 10;
+        .pixel-btn-content {
+            padding: 20px 45px;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10; /* Encima del PixelCanvas (ShadowDom overlay en parent) */
             position: relative;
+            transition: transform 0.3s ease;
         }
-
-        .interactive-hover-btn:hover .ihb-text-1 { transform: translateX(48px); opacity: 0; }
-
-        .ihb-text-2 {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            color: white; 
-            z-index: 10;
-            transform: translateX(-15px);
-            opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        
+        .pixel-btn:hover .pixel-btn-content i {
+            transform: scale(1.1) rotate(-5deg); /* Ligera reacción en el botón general con ícono */
+            color: var(--accent);
         }
-
-        .interactive-hover-btn:hover .ihb-text-2 { transform: translateX(0); opacity: 1; }
-
-        .ihb-dot {
-            position: absolute; left: 20%; top: 50%;
-            transform: translateY(-50%) scale(1); height: 8px; width: 8px;
-            background: var(--accent); border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0; pointer-events: none;
-        }
-
-        .interactive-hover-btn:hover .ihb-dot {
-            left: 0%; top: 0%; width: 100%; height: 100%;
-            border-radius: 100px; 
-            transform: translateY(0) scale(1.01);
-        }
+        
+        .pixel-btn i { transition: transform 0.4s ease, color 0.4s ease; }
 
         /* MEDIA QUERIES */
         @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -266,20 +204,12 @@
                 <a href="#contact" class="lang-text" data-es="Contacto" data-en="Contact">Contacto</a>
             </nav>
             <div class="header-toggles">
-                <button id="lang-toggle" aria-label="Toggle Language">
-                    <span>ES</span>
-                </button>
-
-                <!-- BOTON ESTILO SHADCN COMPONENT INTERCAMBIO ANIMADO -->
+                <button id="lang-toggle" aria-label="Toggle Language"><span>ES</span></button>
                 <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
-                    <!-- CIRCULO CAMBIANTE (Lado izquierdo original) -->
                     <div class="theme-icon-container icon-left">
-                        <!-- El active dark (visible sin .light-mode root) es MOON -->
                         <i class="fa-solid fa-moon dark-visible"></i>
-                        <!-- El active light (visible con .light-mode root movido dcha) es SUN -->
                         <i class="fa-solid fa-sun light-visible"></i>
                     </div>
-                    <!-- CONTENEDOR AUXILIAR DE ICONOS (Lado derecho original) -->
                     <div class="theme-icon-container icon-right">
                         <i class="fa-solid fa-sun dark-visible"></i>
                         <i class="fa-solid fa-moon light-visible"></i>
@@ -300,7 +230,7 @@
         <h2 class="section-title lang-text" data-aos="fade-up" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
         <div class="about-container">
             <div class="about-text-reduced" data-aos="fade-up">
-                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos." data-en="I am 24 years old and an industrial designer from Valencia. Throughout my education, I have studied the same degree at three different universities, an experience that has allowed me to contrast methods, approaches, and ways of understanding design, strengthening my adaptability and learning capacity. I do not consider myself an exclusive lover of art or science. I define myself as an eclectic person, situated at the midpoint between both worlds. I am especially interested in the synergy between the technical and the sensitive, where functionality, process, and logic coexist with aesthetics, use, and user experience. Before focusing on design, I obtained an intermediate and an advanced degree in electricity, a technical background that directly influences my way of designing. This training has given me a deep understanding of systems, materials, and construction processes, allowing me to approach design with a realistic, precise, and viability-oriented perspective. I enjoy tackling complex problems and transforming them into clear, functional, and well-resolved solutions. For me, design is not just a matter of form, but a balance between technical thinking, aesthetic criteria, and the conscious use of resources.">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
+                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
             </div>
             <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
         </div>
@@ -332,16 +262,17 @@
         <div class="cv-item" data-aos="fade-up"><div class="cv-year lang-text" data-es="2024 — PRESENTE" data-en="2024 — PRESENT">2024 — PRESENTE</div><div class="cv-content"><h3>PRODUCT DESIGNER LEAD</h3><span>Industrial Core Studio.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3 class="lang-text" data-es="DISEÑADOR JUNIOR" data-en="JUNIOR DESIGNER">DISEÑADOR JUNIOR</h3><span>Prototyping Labs.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">BECARIO DISEÑO</h3><span>Bionic Design Solutions.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021</div><div class="cv-content"><h3 class="lang-text" data-es="ESPECIALISTA SURFACING" data-en="SURFACING SPECIALIST">ESPECIALISTA SURFACING</h3><span>Academy 3D Course.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3 class="lang-text" data-es="GRADO DISEÑO INDUSTRIAL" data-en="BACHELOR IN INDUSTRIAL DESIGN">GRADO DISEÑO INDUSTRIAL</h3><span class="lang-text" data-es="Univ. Politécnica Superior." data-en="Higher Polytechnic Univ.">Univ. Politécnica Superior.</span></div></div>
         
-        <a href="#" class="interactive-hover-btn" style="margin-top: 60px;">
-            <span class="ihb-text-1 lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
-            <div class="ihb-text-2">
+        <!-- INTEGRADO SHADCN PIXEL CANVAS BUTTON -->
+        <a href="#" class="pixel-btn" style="margin-top: 60px;">
+            <!-- Componente renderizado por Web Component en Background, customizado por variables data para tonos Morados a juego con tu portfolio -->
+            <pixel-canvas data-gap="10" data-speed="25" data-colors="#8b5cf6,#a78bfa,#c4b5fd" data-variant="default"></pixel-canvas>
+            
+            <div class="pixel-btn-content">
                 <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
                 <i class="fa-solid fa-file-arrow-down"></i>
             </div>
-            <div class="ihb-dot"></div>
         </a>
     </section>
 
@@ -353,13 +284,15 @@
                 <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
                 <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
                 
-                <button type="submit" class="interactive-hover-btn" style="margin-top:20px; width: fit-content; min-width: 250px;">
-                    <span class="ihb-text-1 lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
-                    <div class="ihb-text-2">
+                <!-- INTEGRADO SHADCN PIXEL CANVAS BUTTON CONTACTO -->
+                <button type="submit" class="pixel-btn" style="margin-top:20px; width: fit-content; min-width: 250px;">
+                    <!-- Colores morados oscurecidos compatibles en HEX data-colors="#8b5cf6,#a78bfa,#ddd6fe" -->
+                    <pixel-canvas data-gap="10" data-speed="25" data-colors="#8b5cf6,#a78bfa,#ddd6fe" data-variant="default"></pixel-canvas>
+                    
+                    <div class="pixel-btn-content">
                         <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                    <div class="ihb-dot"></div>
                 </button>
             </form>
         </div>
@@ -370,34 +303,257 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- 🟢 SCRIPT - PIXEL CANVAS COMPONENT LÓGICA TRADUCIDA VANILLA 🟢 -->
+    <script>
+        class Pixel {
+            constructor(canvas, context, x, y, color, speed, delay) {
+                this.width = canvas.width;
+                this.height = canvas.height;
+                this.ctx = context;
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.speed = this.getRandomValue(0.1, 0.9) * speed;
+                this.size = 0;
+                this.sizeStep = Math.random() * 0.4;
+                this.minSize = 0.5;
+                this.maxSizeInteger = 2;
+                this.maxSize = this.getRandomValue(this.minSize, this.maxSizeInteger);
+                this.delay = delay;
+                this.counter = 0;
+                this.counterStep = Math.random() * 4 + (this.width + this.height) * 0.01;
+                this.isIdle = false;
+                this.isReverse = false;
+                this.isShimmer = false;
+            }
+
+            getRandomValue(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            draw() {
+                const centerOffset = this.maxSizeInteger * 0.5 - this.size * 0.5;
+                this.ctx.fillStyle = this.color;
+                this.ctx.fillRect(this.x + centerOffset, this.y + centerOffset, this.size, this.size);
+            }
+
+            appear() {
+                this.isIdle = false;
+                if (this.counter <= this.delay) {
+                    this.counter += this.counterStep;
+                    return;
+                }
+                if (this.size >= this.maxSize) { this.isShimmer = true; }
+                if (this.isShimmer) { this.shimmer(); } 
+                else { this.size += this.sizeStep; }
+                this.draw();
+            }
+
+            disappear() {
+                this.isShimmer = false;
+                this.counter = 0;
+                if (this.size <= 0) {
+                    this.isIdle = true;
+                    return;
+                } else { this.size -= 0.1; }
+                this.draw();
+            }
+
+            shimmer() {
+                if (this.size >= this.maxSize) { this.isReverse = true; } 
+                else if (this.size <= this.minSize) { this.isReverse = false; }
+                
+                if (this.isReverse) { this.size -= this.speed; } 
+                else { this.size += this.speed; }
+            }
+        }
+
+        class PixelCanvasElement extends HTMLElement {
+            constructor() {
+                super();
+                this.canvas = document.createElement("canvas");
+                this.ctx = this.canvas.getContext("2d");
+                this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                
+                this.pixels = [];
+                this.animation = null;
+                this.timeInterval = 1000 / 60;
+                this.timePrevious = performance.now();
+                this._initialized = false;
+                this._resizeObserver = null;
+                this._parent = null;
+
+                const shadow = this.attachShadow({ mode: "open" });
+                const style = document.createElement("style");
+                style.textContent = `
+                  :host {
+                    display: grid; width: 100%; height: 100%;
+                    position: absolute; inset: 0; pointer-events: none;
+                    border-radius: inherit; overflow: hidden; z-index: 0;
+                  }
+                  canvas { width: 100%; height: 100%; }
+                `;
+                shadow.appendChild(style);
+                shadow.appendChild(this.canvas);
+            }
+
+            get colors() {
+                const clrs = this.getAttribute('data-colors');
+                return clrs ? clrs.split(",") : ["#f8fafc", "#f1f5f9", "#cbd5e1"];
+            }
+
+            get gap() {
+                const value = Number(this.getAttribute('data-gap')) || 5;
+                return Math.max(4, Math.min(50, value));
+            }
+
+            get speed() {
+                const value = Number(this.getAttribute('data-speed')) || 35;
+                return this.reducedMotion ? 0 : Math.max(0, Math.min(100, value)) * 0.001;
+            }
+
+            get noFocus() { return this.hasAttribute("data-no-focus"); }
+            get variant() { return this.getAttribute('data-variant') || "default"; }
+
+            connectedCallback() {
+                if (this._initialized) return;
+                this._initialized = true;
+                this._parent = this.parentElement;
+
+                requestAnimationFrame(() => {
+                    this.handleResize();
+                    const ro = new ResizeObserver((entries) => {
+                        if (!entries.length) return;
+                        requestAnimationFrame(() => this.handleResize());
+                    });
+                    ro.observe(this);
+                    this._resizeObserver = ro;
+                });
+
+                this._parent?.addEventListener("mouseenter", () => this.handleAnimation("appear"));
+                this._parent?.addEventListener("mouseleave", () => this.handleAnimation("disappear"));
+
+                if (!this.noFocus) {
+                    this._parent?.addEventListener("focus", () => this.handleAnimation("appear"), { capture: true });
+                    this._parent?.addEventListener("blur", () => this.handleAnimation("disappear"), { capture: true });
+                }
+            }
+
+            disconnectedCallback() {
+                this._initialized = false;
+                this._resizeObserver?.disconnect();
+                
+                this._parent?.removeEventListener("mouseenter", () => this.handleAnimation("appear"));
+                this._parent?.removeEventListener("mouseleave", () => this.handleAnimation("disappear"));
+
+                if (this.animation) {
+                    cancelAnimationFrame(this.animation);
+                    this.animation = null;
+                }
+                this._parent = null;
+            }
+
+            handleResize() {
+                if (!this.ctx || !this._initialized) return;
+                const rect = this.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
+
+                const width = Math.floor(rect.width);
+                const height = Math.floor(rect.height);
+                const dpr = window.devicePixelRatio || 1;
+                
+                this.canvas.width = width * dpr;
+                this.canvas.height = height * dpr;
+                this.canvas.style.width = `${width}px`;
+                this.canvas.style.height = `${height}px`;
+
+                this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+                this.ctx.scale(dpr, dpr);
+
+                this.createPixels();
+            }
+
+            getDistanceToCenter(x, y) {
+                const dx = x - this.canvas.width / 2;
+                const dy = y - this.canvas.height / 2;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            getDistanceToBottomLeft(x, y) {
+                const dx = x;
+                const dy = this.canvas.height - y;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            createPixels() {
+                if (!this.ctx) return;
+                this.pixels = [];
+                for (let x = 0; x < this.canvas.width; x += this.gap) {
+                    for (let y = 0; y < this.canvas.height; y += this.gap) {
+                        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+                        let delay = 0;
+                        if (this.variant === "icon") { delay = this.reducedMotion ? 0 : this.getDistanceToCenter(x, y); } 
+                        else { delay = this.reducedMotion ? 0 : this.getDistanceToBottomLeft(x, y); }
+                        this.pixels.push(new Pixel(this.canvas, this.ctx, x, y, color, this.speed, delay));
+                    }
+                }
+            }
+
+            handleAnimation(name) {
+                if (this.animation) cancelAnimationFrame(this.animation);
+
+                const animate = () => {
+                    this.animation = requestAnimationFrame(animate);
+                    const timeNow = performance.now();
+                    const timePassed = timeNow - this.timePrevious;
+                    if (timePassed < this.timeInterval) return;
+                    this.timePrevious = timeNow - (timePassed % this.timeInterval);
+                    
+                    if (!this.ctx) return;
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    let allIdle = true;
+                    for (const pixel of this.pixels) {
+                        pixel[name]();
+                        if (!pixel.isIdle) allIdle = false;
+                    }
+
+                    if (allIdle) {
+                        cancelAnimationFrame(this.animation);
+                        this.animation = null;
+                    }
+                };
+                animate();
+            }
+        }
+        customElements.define("pixel-canvas", PixelCanvasElement);
+    </script>
+    
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // CAMBIO DE IDIOMA Y REEMPLAZO DE TEXTOS
+        // LENGUAJES
         const btnLang = document.getElementById("lang-toggle");
         let currentLang = "es";
 
         btnLang.addEventListener("click", () => {
             currentLang = currentLang === "es" ? "en" : "es";
-            
             btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
 
             document.querySelectorAll(".lang-text").forEach(el => {
                 el.innerHTML = el.getAttribute(`data-${currentLang}`);
             });
-
             document.querySelectorAll(".lang-ph").forEach(el => {
                 el.placeholder = el.getAttribute(`data-${currentLang}`);
             });
         });
 
-        // NUEVO CONTENEDOR TEMA LÓGICA
+        // TEMAS DARK/LIGHT MODE CON LA PÍLDORA SLIDER NATIVA
         const btnToggleTheme = document.getElementById("theme-switch");
         
         btnToggleTheme.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            
-            // Corrige los text fields color igual que tenías programado
             const formInputs = document.querySelectorAll("#contact input, #contact textarea");
             if(document.body.classList.contains("light-mode")){
                 formInputs.forEach(input => input.style.color = "#1d1d1f");
@@ -406,7 +562,7 @@
             }
         });
 
-        // HEADER SCROLL
+        // SCROLL REACCIÓN
         let lastScroll = 0;
         let isAutoScrolling = false;
         let scrollTimeout;
@@ -431,7 +587,7 @@
             lastScroll = currentScroll;
         });
 
-        // CUSTOM CURSOR HOVER LOGIC INCLUSIVE AL NUEVO ELEMENTO REACCIONANTE
+        // CUSTOM CURSOR HOVER 
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
