@@ -43,7 +43,7 @@
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        /* Carga visual inicial de transiciones idiomas (evita flickering al permutar) */
+        /* Anti-flicker transicion multilenguaje */
         .lang-node { transition: opacity 0.3s; }
         .lang-animating { opacity: 0 !important; }
 
@@ -62,18 +62,17 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- ULTRA-FLUID GPU ACCELERATED CURSOR (SIN DELAY PARA PUNTO) --- */
+        /* --- INSTA-RESPONSE HARDWARE CURSOR --- */
         #cursor-dot {
             width: 8px; height: 8px; background: var(--text); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
             will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
+        /* RING uses Lerp logic separately via script */
         #cursor-ring {
             width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
-            transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                        height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                        background 0.3s ease, border-color 0.3s ease;
+            transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
             will-change: transform, width, height;
         }
         
@@ -83,7 +82,7 @@
         }
         .hovered-element #cursor-dot { opacity: 0; }
 
-        /* --- NAVBAR & TENSION ACTIONS --- */
+        /* --- NAVBAR --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%;
             display: flex; justify-content: center; z-index: 2000;
@@ -94,27 +93,20 @@
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 12px 30px; display: flex; align-items: center; gap: 40px;
-            border: 1px solid var(--border); border-radius: 100px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: var(--text-dim); font-size: 0.8rem; 
-            font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; 
-            transition: color 0.3s; 
-        }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; }
         .nav-links a:hover { color: var(--text); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
-        /* Icon Wrapper Control */
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { 
             background: transparent; border: none; color: var(--text);
             width: 25px; height: 25px; display: flex; align-items: center; 
-            justify-content: center; font-size: 1rem; transition: transform 0.3s, color 0.3s;
-            font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
+            justify-content: center; font-size: 1rem; transition: transform 0.3s, color 0.3s; font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
         }
         .icon-btn:hover { color: var(--accent); transform: scale(1.1); }
 
@@ -122,52 +114,45 @@
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
 
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        
+        .hero-text-block {
+            margin-top: 15vh; /* Se baja el peso de estos textos drásticamente en base a tu petición */
+        }
+
         .hero h1 { 
             font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
             line-height: 0.9; font-weight: 800; 
             letter-spacing: -0.04em; text-transform: uppercase;
         }
-        .hero .subtitle { margin-top: 20px; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; opacity: 0.9;}
+        .hero .subtitle { 
+            margin-top: 25px; font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
+            color: var(--accent); font-weight: 600; font-family: 'Inter'; 
+            letter-spacing: -0.5px; opacity: 0.9;
+        }
 
-        .hero .availability {
-            position: absolute; bottom: 50px; left: 5vw; 
-            display: flex; align-items: center; gap: 10px; 
-            font-size: 0.85rem; color: var(--text-dim); 
-            text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
-        }
-        .pulse-box {
-            position: relative; display: flex; justify-content: center; align-items: center;
-            width: 8px; height: 8px;
-        }
+        .hero .availability { position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;}
+        .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 8px; height: 8px; }
         .pulse-core { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
         .pulse-ring { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
         .availability span { line-height: 1; margin-top: 1px; }
 
         @keyframes ping { 75%, 100% { transform: scale(2.8); opacity: 0; } }
-
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- BENTO GRID: ABOUT --- */
+        /* --- BENTO GRID --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px;
-            padding: 50px; backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;
-        }
+        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;}
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- BENTO GRID: PORTFOLIO --- */
+        /* --- PORTFOLIO --- */
         .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
-        .p-card {
-            position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px;
-            overflow: hidden; group; transition: 0.5s ease;
-        }
+        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; transition: 0.5s ease; }
         .p-wide { grid-column: span 8; height: 500px; }
         .p-square { grid-column: span 4; height: 500px; }
-        
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7; }
@@ -184,70 +169,65 @@
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- EXPERIENCIA "FOCUS EFFECT" (Awwwards Grade FX) --- */
+        /* --- EXPERIENCE SECTION (THE COLOR INVERT FX) --- */
         .cv-wrapper { 
             border-top: 1px solid var(--border); 
-            display: flex; flex-direction: column; 
-            transition: 0.4s ease; 
-            padding-top: 10px;
+            display: flex; flex-direction: column; margin-top: 40px;
         }
 
-        /* Comportamiento al flotar "encima de toda la lista" - BLUR REVEAL */
-        .cv-wrapper:hover .cv-item { 
-            opacity: 0.35; filter: blur(3px); 
-            transform: scale(0.98); /* Apagado en los lejanos */
-        }
-        
         .cv-item { 
-            display: flex; justify-content: space-between; padding: 45px 30px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 35px 20px; 
             border-bottom: 1px solid var(--border);
-            align-items: center; cursor: none;
-            border-radius: 18px; margin: 5px 0;
-            background: transparent;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            text-decoration: none; cursor: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative; overflow: hidden;
+            background: transparent; border-radius: 12px; margin-top: -1px; /* Para empalme border infinito */
         }
 
-        /* Tarjeta seleccionada HOVER ACTIVE STATE */
-        .cv-wrapper .cv-item:hover { 
-            opacity: 1 !important; 
-            filter: blur(0px) !important;
-            transform: translateX(15px) scale(1.02); /* Adelanta bruscamente 20px  */
-            border-bottom: 1px solid transparent; 
+        /* ------------------ ACTIVE INVERSION EFFECT ---------------- */
+        .cv-item:hover { 
+            background: var(--text); /* The Card flips its physical matter/light contrast */
+            border-bottom-color: transparent;
+            border-radius: 25px;
+            padding: 55px 40px; /* Pistón Effect: Se expande fuerte hacia los bordes  */
+            transform: scale(1.005); 
+            z-index: 10;
         }
 
-        /* Barrido y línea trasera */
-        .cv-item::before {
-            content: ""; position: absolute; top: 0; left: 0; 
-            width: 0%; height: 100%; 
-            background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%);
-            z-index: 0; opacity: 0; 
+        /* Elements react directly mapping Inverse Color Matrix: */
+        .cv-role { z-index: 1;}
+        .cv-role h3 { 
+            font-family: 'Syne'; font-size: 2rem; font-weight: 700; color: var(--text);
+            transition: all 0.4s; letter-spacing: -0.5px;
+        }
+        .cv-item:hover .cv-role h3 { 
+            color: var(--bg); /* Se transforma a negro o gris hiper oscuso en base de contraste nativo */
+            letter-spacing: -1.5px; 
+            transform: translateY(-2px);
+        }
+
+        .cv-company { font-size: 1rem; color: var(--text-dim); transition: all 0.4s;}
+        .cv-item:hover .cv-company { color: var(--bg); opacity: 0.75; transform: translateY(2px);}
+        
+        /* Flex del layout derecho */
+        .cv-right { display: flex; align-items: center; gap: 30px; z-index: 1;}
+        .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 0.95rem; color: var(--accent); transition: all 0.4s; }
+        .cv-item:hover .cv-year { color: var(--bg); opacity: 0.8; }
+        
+        /* Circulo Rotativo Hardware en el Extremo Derecha */
+        .fx-outbox {
+            display: flex; justify-content: center; align-items: center;
+            width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: inherit;
-        }
-        .cv-item:hover::before { width: 100%; opacity: 1; }
-
-        .cv-role { z-index: 1; position: relative;}
-        .cv-role h3 { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; transition: color 0.4s; }
-        .cv-item:hover .cv-role h3 { color: var(--accent); text-shadow: 0px 5px 15px rgba(255,90,0,0.3);}
-        .cv-company { font-size: 1rem; color: var(--text-dim); transition: color 0.4s;}
-        
-        /* Efecto de Flecha Voladora "Slam In" en Fecha Derecha */
-        .cv-right { display: flex; align-items: center; gap: 20px; z-index: 1;}
-        .cv-year { font-family: 'Inter'; color: var(--accent); font-weight: 500; font-size: 0.9rem; transition: transform 0.4s;}
-        
-        .fx-arrow { 
-            font-size: 1.4rem; color: var(--text);
-            opacity: 0; 
-            transform: translateX(-30px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            color: var(--text);
+            transform: rotate(-45deg); /* Arrow diagonal al natural */
         }
         
-        .cv-item:hover .cv-company { color: var(--text); }
-        .cv-item:hover .cv-year { transform: translateX(-15px); }
-        .cv-item:hover .fx-arrow { 
-            opacity: 1; 
-            transform: translateX(0);
+        .cv-item:hover .fx-outbox {
+            background: var(--accent); border-color: transparent; color: white;
+            transform: rotate(0deg) scale(1.2); /* Straight arrow brutal + Inflated circle  */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         /* Btn final */
@@ -260,7 +240,6 @@
         .contact-info a { display: block; font-size: 2rem; color: var(--text-dim); text-decoration: none; margin-bottom: 10px; transition: 0.3s;}
         .contact-info a:hover { color: var(--accent); }
         
-        /* FOOTER */
         footer { padding: 40px 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 100px; }
 
         @media (max-width: 1024px) {
@@ -273,7 +252,8 @@
             header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
             .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
-            .cv-item:hover { transform: translateY(-5px) scale(1.02); } /* No adelantamos en el móvil horizontal para q quepa */
+            .cv-right {width: 100%; justify-content: space-between;}
+            .cv-item:hover { transform: scale(1.02); padding: 40px 25px; } /* Ajuste de expansion responsivo */
         }
     </style>
 </head>
@@ -293,25 +273,21 @@
                 <a href="#cv" class="inter-hover lang-node" data-en="Resume" data-es="Currículum">Currículum</a>
             </nav>
             <div class="tools-nav">
-                <!-- Theme btn -->
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
                 <div class="nav-dot" style="margin: 0 10px;"></div>
-                <!-- Lang btn -->
                 <button id="lang-toggle" class="icon-btn inter-hover" aria-label="Cambio de idioma">EN</button>
             </div>
         </header>
     </div>
 
     <section class="hero" id="home">
-        <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+        <!-- Bloque encapsulado con margin-top inmenso y perspectiva estructural inferior -->
+        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
-            <!-- El subtexto que se quitó ahora reside elegantemente justo aquí. -->
             <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
         </div>
         
-        <div class="availability" data-aos="fade-up" data-aos-delay="500">
+        <div class="availability" data-aos="fade-up" data-aos-delay="400">
             <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
             <span class="lang-node" data-en="Available for new challenges" data-es="Disponible para nuevos retos">Disponible para nuevos retos</span>
         </div>
@@ -343,10 +319,7 @@
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div>
-                        <h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3>
-                        <p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p>
-                    </div>
+                    <div><h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3><p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
@@ -355,10 +328,7 @@
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div>
-                        <h3 class="lang-node" data-en="EGO SEATING" data-es="EGO SEATING">EGO SEATING</h3>
-                        <p class="lang-node" data-en="Context / Object" data-es="Mobiliario / Contexto">Mobiliario / Contexto</p>
-                    </div>
+                    <div><h3 class="lang-node" data-en="EGO SEATING" data-es="EGO SEATING">EGO SEATING</h3><p class="lang-node" data-en="Context / Object" data-es="Mobiliario / Contexto">Mobiliario / Contexto</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
@@ -367,10 +337,7 @@
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div>
-                        <h3 class="lang-node" data-en="BEATS X" data-es="BEATS X">BEATS X</h3>
-                        <p class="lang-node" data-en="Consumer Electronics" data-es="Carcasas Hi-Fi">Carcasas Hi-Fi / Consumer Electronics</p>
-                    </div>
+                    <div><h3 class="lang-node" data-en="BEATS X" data-es="BEATS X">BEATS X</h3><p class="lang-node" data-en="Consumer Electronics" data-es="Carcasas Hi-Fi">Carcasas Hi-Fi / Consumer Electronics</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
@@ -379,10 +346,7 @@
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div>
-                        <h3 class="lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h3>
-                        <p class="lang-node" data-en="Industrialized Organics" data-es="Diseño Orgánico Industrializado">Diseño Orgánico Industrializado</p>
-                    </div>
+                    <div><h3 class="lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h3><p class="lang-node" data-en="Industrialized Organics" data-es="Diseño Orgánico Industrializado">Diseño Orgánico Industrializado</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
@@ -410,52 +374,52 @@
         </div>
     </section>
 
+    <!-- ==== CV NUEVA SECCIÓN MATRIX EXPAND/INVERT HOVER ==== -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
         <div class="cv-wrapper">
-            <!-- Items de la lista - ¡Todos son botones invisibles (focus action inter-hover)! -->
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up" aria-label="Rol 1">
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
                     <h3 class="lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
-                    <div class="cv-company lang-node" data-en="Industrial Core Studio • Shaping modern artifacts" data-es="Industrial Core Studio • Liderando diseño de producto">Industrial Core Studio • Liderando diseño de producto global</div>
+                    <div class="cv-company lang-node" data-en="Industrial Core Studio" data-es="Industrial Core Studio">Industrial Core Studio</div>
                 </div>
                 <div class="cv-right">
                     <span class="cv-year">2024 — HOY</span>
-                    <i class="fa-solid fa-arrow-right-long fx-arrow"></i>
+                    <div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </a>
 
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="50">
                 <div class="cv-role">
                     <h3 class="lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
-                    <div class="cv-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Validación y diseño logístico">Prototyping Labs C.A • Parametrización y volúmenes</div>
+                    <div class="cv-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Parametrización y volúmenes">Prototyping Labs C.A • Parametrización y volúmenes</div>
                 </div>
                 <div class="cv-right">
                     <span class="cv-year">2022 — 2024</span>
-                    <i class="fa-solid fa-arrow-right-long fx-arrow"></i>
+                    <div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </a>
 
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Hardware Developer Intern" data-es="Especialista y Proyección">Especialista Técnico Integrado</h3>
-                    <div class="cv-company lang-node" data-en="Bionic Solutions • Enclosing & hardware fitting" data-es="Bionic Solutions • Implementación electrónica dentro de plásticos">Bionic Solutions • Ingeniería interna empacada</div>
+                    <h3 class="lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
+                    <div class="cv-company lang-node" data-en="Bionic Solutions • Enclosing fitting" data-es="Bionic Solutions • Ingeniería interna empacada">Bionic Solutions • Ingeniería interna empacada</div>
                 </div>
                 <div class="cv-right">
                     <span class="cv-year">2021 — 2022</span>
-                    <i class="fa-solid fa-arrow-right-long fx-arrow"></i>
+                    <div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </a>
 
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="150">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado Oficial / Carrera">Graduado en Diseño Industrial</h3>
-                    <div class="cv-company lang-node" data-en="Three-university synthesis development scheme." data-es="Cursado intermitente integrador entre 3 politecnicos cruzados.">Curriculum de cruce validado entre tres ramas académicas de peso.</div>
+                    <h3 class="lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
+                    <div class="cv-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar.">Curriculum de cruce interdisciplinar y académico.</div>
                 </div>
                 <div class="cv-right">
                     <span class="cv-year">2016 — 2020</span>
-                    <i class="fa-solid fa-arrow-right-long fx-arrow"></i>
+                    <div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </a>
         </div>
@@ -468,13 +432,13 @@
             <div class="footer-grid">
                 <div>
                     <h2 class="mega-text lang-node" data-en="CREATING<br>FORM" data-es="CREEMOS<br>FUTURO">CREEMOS<br>FUTURO</h2>
-                    <p class="about-text lang-node" style="margin-top:20px; max-width: 400px;" data-en="Producing functionary tools translated to beauty geometry." data-es="Diseñando con sentido estético atado en hardware riguroso y honestidad visual objetual.">Diseñando con sentido de pertenencia material, ergonomía y un uso impecable.</p>
+                    <p class="about-text lang-node" style="margin-top:20px; max-width: 400px;" data-en="Producing functionary tools translated to beauty geometry." data-es="Diseñando con sentido estético atado en hardware riguroso y honestidad visual objetual.">Diseñando con sentido estético atado en hardware riguroso y honestidad visual objetual.</p>
                 </div>
                 <div class="contact-info">
                     <p class="lang-node" style="text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px;" data-en="PUNCH IN LINE /" data-es="ENLACES ACTIVOS /">ENLACES ACTIVOS /</p>
                     <a href="mailto:hola@luisblasco.com">hola@luisblasco.com</a>
                     <a href="#">Red de Trabajos →</a>
-                    <a href="#">+34 (Phone/Línea)</a>
+                    <a href="#">+34 (Línea)</a>
                 </div>
             </div>
         </div>
@@ -482,7 +446,7 @@
 
     <footer>
         <div>L|BIB DESIGN SYSTEM © 2026.</div>
-        <div class="lang-node" data-en="Valencia Based / Ww availability." data-es="RADICADO EN VALENCIA | ABORDANDO PLANETA.">RADICADO EN VALENCIA | PROYECTO GLOBAL.</div>
+        <div class="lang-node" data-en="Valencia Based / Ww availability." data-es="RADICADO EN VALENCIA | PROYECTO GLOBAL.">RADICADO EN VALENCIA | PROYECTO GLOBAL.</div>
     </footer>
 
     <!-- SCRIPTS -->
@@ -490,7 +454,7 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 50 });
 
-        // TEMA DIA Y NOCHE
+        // TEMA DIA/NOCHE
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
@@ -498,30 +462,24 @@
             btnToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // MECANISMO IDIOMA PROFESIONAL INTERNO HTML5 (SPANISH DEFAULT = "EN" Button text is shown)
+        // MECANISMO IDIOMA
         const btnLang = document.getElementById("lang-toggle");
-        let langActive = "es"; // Estado nativo de inicio
-
+        let langActive = "es";
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
-            // Apaga para difuminado de transición cruzada en JS CSS magic!
             domElements.forEach(node => node.classList.add("lang-animating"));
-            
             setTimeout(() => {
-                langActive = langActive === "es" ? "en" : "es"; // Bascula logica.
-                
+                langActive = langActive === "es" ? "en" : "es"; 
                 domElements.forEach(node => {
                     const text = node.getAttribute(`data-${langActive}`);
-                    if (text) node.innerHTML = text; // Lo transfiere intacto
+                    if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
-
-                // Set de etiqueta inversa del boton para avisar cual puede poner luego:
                 btnLang.textContent = langActive === "es" ? "EN" : "ES"; 
-            }, 300); // 300ms el ms equivalente al ease de CSS para difuminado perfecto sin sacudidas
+            }, 300);
         });
 
-        // NAVBAR TIPO ISLE
+        // ISLA DEL HEADER SCROLL COMPACTING
         const navbar = document.getElementById("navbar");
         let lastScrollTop = 0;
         window.addEventListener("scroll", () => {
@@ -531,32 +489,34 @@
             lastScrollTop = scrollTop;
         });
 
-        // GPU-ACCELERATED INSTA FLUID CURSOR 2026 TWEAKS = MAXIMA PRIORIDAD
+        // ------------------------------------------------------------- //
+        // GPU CURSOR : CERO DELAY (Native Mapping) + Lerp solo en Aro
+        // ------------------------------------------------------------- //
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
+        
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;
-        let dotX = -100, dotY = -100;
 
-        window.addEventListener("mousemove", (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        window.addEventListener("mousemove", (e) => { 
+            mouseX = e.clientX; 
+            mouseY = e.clientY; 
 
-        // LERP ULTRA REDUCIDO (0.9 para hardware tracker; 0.4 para muelle suave en blanco interior)
-        function renderCursor() {
-            // Un 95% lerp practicamente ignora frames perdidos. Fluye magnifíco pegado al mouse:
-            dotX += (mouseX - dotX) * 0.95;
-            dotY += (mouseY - dotY) * 0.95;
+            // CERO (0ms) delay físico aquí, ligado duro al procesador de hardware
+            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        });
+
+        // Ring Interpolation suavizada, persiguiendo fluidamente pero sin estresar el control central.
+        function renderRing() {
+            ringX += (mouseX - ringX) * 0.35;
+            ringY += (mouseY - ringY) * 0.35;
             
-            // Reaceleracion agresiva en vez de lag
-            ringX += (mouseX - ringX) * 0.40;
-            ringY += (mouseY - ringY) * 0.40;
-            
-            dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(renderCursor);
+            requestAnimationFrame(renderRing);
         }
-        requestAnimationFrame(renderCursor);
+        requestAnimationFrame(renderRing);
 
-        // Activaciones expandibles de Hover Global (se suma todos los tags `a`, listados `cv-item`)
+        // HOVER SYSTEM EXPANSOR PARA TODAS LAS CLASES Y TARJETAS CV
         document.querySelectorAll('.inter-hover').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
