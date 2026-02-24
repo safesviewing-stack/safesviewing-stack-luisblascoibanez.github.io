@@ -83,11 +83,83 @@
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        .header-toggles { display: flex; gap: 12px; align-items: center; }
-        #theme-toggle, #lang-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; transition: 0.3s; }
-        #theme-toggle:hover, #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .header-toggles { display: flex; gap: 15px; align-items: center; }
+        
+        /* BOTÓN IDIOMAS - Preservamos original adaptado a flexbox con su margen */
+        #lang-toggle { 
+            background: transparent; border: 1px solid var(--border); color: var(--text); 
+            padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
+            align-items: center; justify-content: center; font-size: 0.75rem; 
+            font-weight: 700; transition: 0.3s; outline: none; 
+        }
+        #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- SECCIONES --- */
+        /* --- THEME TOGGLE (PILL/SLIDER ESTILO REACT/TAILWIND INTEGRADO CSS PURO) --- */
+        .theme-switch-wrapper {
+            all: unset; /* Retira formato base de botones nativos para control absoluto de caja */
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            width: 64px; 
+            height: 32px; 
+            padding: 3px; 
+            border-radius: 9999px;
+            cursor: none; /* Porque tienes cursor global 'custom' */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-sizing: border-box;
+            background: #09090b; 
+            border: 1px solid #27272a; 
+            position: relative;
+        }
+
+        .light-mode .theme-switch-wrapper {
+            background: #ffffff;
+            border: 1px solid #e4e4e7;
+        }
+
+        .theme-icon-container {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 24px; 
+            height: 24px; 
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
+
+        /* Contenedor o Knob Izquierdo (Mueve en light) */
+        .icon-left {
+            background: #27272a; 
+            color: #ffffff;
+            transform: translateX(0);
+        }
+        .light-mode .icon-left {
+            transform: translateX(32px);
+            background: #e5e7eb; 
+            color: #374151; 
+        }
+
+        /* Contenedor Derecho (Mueve en light) */
+        .icon-right {
+            background: transparent;
+            color: #71717a; 
+            transform: translateX(0);
+        }
+        .light-mode .icon-right {
+            transform: translateX(-32px);
+            color: #000000;
+        }
+
+        /* Alternador interno de vistas y transparencias dependiente del parent body (.light-mode) */
+        .dark-visible { display: block; }
+        .light-visible { display: none; }
+        
+        .light-mode .dark-visible { display: none; }
+        .light-mode .light-visible { display: block; }
+
+        /* --- SECCIONES GENERALES --- */
         section { padding: 220px 10% 120px; }
 
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
@@ -130,9 +202,7 @@
             transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .interactive-hover-btn:hover {
-            border-color: var(--accent);
-        }
+        .interactive-hover-btn:hover { border-color: var(--accent); }
 
         .ihb-text-1 {
             display: inline-block;
@@ -142,60 +212,37 @@
             position: relative;
         }
 
-        .interactive-hover-btn:hover .ihb-text-1 {
-            transform: translateX(48px);
-            opacity: 0;
-        }
+        .interactive-hover-btn:hover .ihb-text-1 { transform: translateX(48px); opacity: 0; }
 
         .ihb-text-2 {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: white; /* Text inside purple overlay */
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            color: white; 
             z-index: 10;
             transform: translateX(-15px);
             opacity: 0;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
         }
 
-        .interactive-hover-btn:hover .ihb-text-2 {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        .interactive-hover-btn:hover .ihb-text-2 { transform: translateX(0); opacity: 1; }
 
         .ihb-dot {
-            position: absolute;
-            left: 20%;
-            top: 50%;
-            transform: translateY(-50%) scale(1);
-            height: 8px;
-            width: 8px;
-            background: var(--accent);
-            border-radius: 50%;
+            position: absolute; left: 20%; top: 50%;
+            transform: translateY(-50%) scale(1); height: 8px; width: 8px;
+            background: var(--accent); border-radius: 50%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0;
-            pointer-events: none;
+            z-index: 0; pointer-events: none;
         }
 
         .interactive-hover-btn:hover .ihb-dot {
-            left: 0%;
-            top: 0%;
-            width: 100%;
-            height: 100%;
-            border-radius: 100px; /* fills out gracefully */
+            left: 0%; top: 0%; width: 100%; height: 100%;
+            border-radius: 100px; 
             transform: translateY(0) scale(1.01);
         }
 
         /* MEDIA QUERIES */
-        @media (max-width: 1024px) { 
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr); } 
-        }
+        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { 
             .nav-links { display: none; } 
             .portfolio-grid { grid-template-columns: 1fr; } 
@@ -222,8 +269,21 @@
                 <button id="lang-toggle" aria-label="Toggle Language">
                     <span>ES</span>
                 </button>
-                <button id="theme-toggle" aria-label="Toggle Theme">
-                    <i class="fa-solid fa-moon"></i>
+
+                <!-- BOTON ESTILO SHADCN COMPONENT INTERCAMBIO ANIMADO -->
+                <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
+                    <!-- CIRCULO CAMBIANTE (Lado izquierdo original) -->
+                    <div class="theme-icon-container icon-left">
+                        <!-- El active dark (visible sin .light-mode root) es MOON -->
+                        <i class="fa-solid fa-moon dark-visible"></i>
+                        <!-- El active light (visible con .light-mode root movido dcha) es SUN -->
+                        <i class="fa-solid fa-sun light-visible"></i>
+                    </div>
+                    <!-- CONTENEDOR AUXILIAR DE ICONOS (Lado derecho original) -->
+                    <div class="theme-icon-container icon-right">
+                        <i class="fa-solid fa-sun dark-visible"></i>
+                        <i class="fa-solid fa-moon light-visible"></i>
+                    </div>
                 </button>
             </div>
         </div>
@@ -275,7 +335,6 @@
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021</div><div class="cv-content"><h3 class="lang-text" data-es="ESPECIALISTA SURFACING" data-en="SURFACING SPECIALIST">ESPECIALISTA SURFACING</h3><span>Academy 3D Course.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3 class="lang-text" data-es="GRADO DISEÑO INDUSTRIAL" data-en="BACHELOR IN INDUSTRIAL DESIGN">GRADO DISEÑO INDUSTRIAL</h3><span class="lang-text" data-es="Univ. Politécnica Superior." data-en="Higher Polytechnic Univ.">Univ. Politécnica Superior.</span></div></div>
         
-        <!-- BUTTON WITH INTERACTIVE HOVER RECREATED (Vanilla translation of interactive-hover-button component) -->
         <a href="#" class="interactive-hover-btn" style="margin-top: 60px;">
             <span class="ihb-text-1 lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
             <div class="ihb-text-2">
@@ -294,7 +353,6 @@
                 <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
                 <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
                 
-                <!-- BUTTON WITH INTERACTIVE HOVER RECREATED FOR FORMS (Compatible using inner styling fixes instead of react variants) -->
                 <button type="submit" class="interactive-hover-btn" style="margin-top:20px; width: fit-content; min-width: 250px;">
                     <span class="ihb-text-1 lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
                     <div class="ihb-text-2">
@@ -315,33 +373,31 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // CAMBIO DE IDIOMA Y REEMPLAZO DE TEXTOS EN VIVO
+        // CAMBIO DE IDIOMA Y REEMPLAZO DE TEXTOS
         const btnLang = document.getElementById("lang-toggle");
         let currentLang = "es";
 
         btnLang.addEventListener("click", () => {
             currentLang = currentLang === "es" ? "en" : "es";
             
-            // Actualiza texto visual del botón 
             btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
 
-            // Cambiar textos interiores regulares (HTML interior)
             document.querySelectorAll(".lang-text").forEach(el => {
                 el.innerHTML = el.getAttribute(`data-${currentLang}`);
             });
 
-            // Cambiar textos de variables inputs y forms (Placeholders)
             document.querySelectorAll(".lang-ph").forEach(el => {
                 el.placeholder = el.getAttribute(`data-${currentLang}`);
             });
         });
 
-        // CAMBIO DE TEMA
-        const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
+        // NUEVO CONTENEDOR TEMA LÓGICA
+        const btnToggleTheme = document.getElementById("theme-switch");
+        
+        btnToggleTheme.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            btnToggle.querySelector("i").className = document.body.classList.contains("light-mode") ? "fa-solid fa-sun" : "fa-solid fa-moon";
             
+            // Corrige los text fields color igual que tenías programado
             const formInputs = document.querySelectorAll("#contact input, #contact textarea");
             if(document.body.classList.contains("light-mode")){
                 formInputs.forEach(input => input.style.color = "#1d1d1f");
@@ -350,7 +406,7 @@
             }
         });
 
-        // HEADER: LÓGICA DE PULSADO Y SCROLL
+        // HEADER SCROLL
         let lastScroll = 0;
         let isAutoScrolling = false;
         let scrollTimeout;
@@ -375,15 +431,14 @@
             lastScroll = currentScroll;
         });
 
-        // CURSOR
+        // CUSTOM CURSOR HOVER LOGIC INCLUSIVE AL NUEVO ELEMENTO REACCIONANTE
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Los botones tipo link de los nuevos botones dinámicos y sus selectores. 
-        document.querySelectorAll('a, button, input, textarea, .project-card, .header-toggles button').forEach(el => {
+        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
             el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
         });
