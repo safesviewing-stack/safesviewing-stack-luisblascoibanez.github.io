@@ -68,7 +68,6 @@
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
             will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
-        /* RING uses Lerp logic separately via script */
         #cursor-ring {
             width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
@@ -106,28 +105,31 @@
         .icon-btn { 
             background: transparent; border: none; color: var(--text);
             width: 25px; height: 25px; display: flex; align-items: center; 
-            justify-content: center; font-size: 1rem; transition: transform 0.3s, color 0.3s; font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
+            justify-content: center; font-size: 1.1rem; transition: transform 0.3s, color 0.3s; font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
         }
         .icon-btn:hover { color: var(--accent); transform: scale(1.1); }
+        
+        .btn-pill { width: auto !important; padding: 0 15px; border-radius: 30px; border: 1px solid var(--border); height: 35px; gap: 8px;}
+        .btn-pill:hover { border-color: var(--accent); }
 
         /* --- HERO SECTIONS --- */
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
 
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        
-        .hero-text-block {
-            margin-top: 15vh; /* Se baja el peso de estos textos drásticamente en base a tu petición */
-        }
+        .hero-text-block { margin-top: 15vh; }
 
         .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
-            line-height: 0.9; font-weight: 800; 
+            font-family: 'Syne', sans-serif; 
+            font-size: clamp(3rem, 8vw, 7rem); /* SE HA REDUCIDO NOTABLEMENTE EL TAMAÑO */
+            line-height: 0.95; font-weight: 800; 
             letter-spacing: -0.04em; text-transform: uppercase;
         }
+        
         .hero .subtitle { 
-            margin-top: 25px; font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
+            margin-top: -5px; /* LO HEMOS PEGADO DEBAJO AL TÍTULO AL MÁXIMO (antes margin 25px) */
+            font-size: clamp(1rem, 2vw, 1.3rem); 
             color: var(--accent); font-weight: 600; font-family: 'Inter'; 
-            letter-spacing: -0.5px; opacity: 0.9;
+            letter-spacing: 0.5px; opacity: 0.9;
         }
 
         .hero .availability { position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;}
@@ -153,6 +155,8 @@
         .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; transition: 0.5s ease; }
         .p-wide { grid-column: span 8; height: 500px; }
         .p-square { grid-column: span 4; height: 500px; }
+        .p-half { grid-column: span 6; height: 500px; } /* FORMATO NUEVO DE BENTO PARA BALANCE */
+
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7; }
@@ -169,7 +173,7 @@
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- EXPERIENCE SECTION (THE COLOR INVERT FX) --- */
+        /* --- EXPERIENCE SECTION --- */
         .cv-wrapper { 
             border-top: 1px solid var(--border); 
             display: flex; flex-direction: column; margin-top: 40px;
@@ -177,60 +181,26 @@
 
         .cv-item { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 35px 20px; 
-            border-bottom: 1px solid var(--border);
-            text-decoration: none; cursor: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
-            background: transparent; border-radius: 12px; margin-top: -1px; /* Para empalme border infinito */
+            padding: 35px 20px; border-bottom: 1px solid var(--border);
+            text-decoration: none; cursor: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; background: transparent; border-radius: 12px; margin-top: -1px;
         }
 
-        /* ------------------ ACTIVE INVERSION EFFECT ---------------- */
-        .cv-item:hover { 
-            background: var(--text); /* The Card flips its physical matter/light contrast */
-            border-bottom-color: transparent;
-            border-radius: 25px;
-            padding: 55px 40px; /* Pistón Effect: Se expande fuerte hacia los bordes  */
-            transform: scale(1.005); 
-            z-index: 10;
-        }
-
-        /* Elements react directly mapping Inverse Color Matrix: */
+        .cv-item:hover { background: var(--text); border-bottom-color: transparent; border-radius: 25px; padding: 55px 40px; transform: scale(1.005); z-index: 10; }
         .cv-role { z-index: 1;}
-        .cv-role h3 { 
-            font-family: 'Syne'; font-size: 2rem; font-weight: 700; color: var(--text);
-            transition: all 0.4s; letter-spacing: -0.5px;
-        }
-        .cv-item:hover .cv-role h3 { 
-            color: var(--bg); /* Se transforma a negro o gris hiper oscuso en base de contraste nativo */
-            letter-spacing: -1.5px; 
-            transform: translateY(-2px);
-        }
+        .cv-role h3 { font-family: 'Syne'; font-size: 2rem; font-weight: 700; color: var(--text); transition: all 0.4s; letter-spacing: -0.5px;}
+        .cv-item:hover .cv-role h3 { color: var(--bg); letter-spacing: -1.5px; transform: translateY(-2px);}
 
         .cv-company { font-size: 1rem; color: var(--text-dim); transition: all 0.4s;}
         .cv-item:hover .cv-company { color: var(--bg); opacity: 0.75; transform: translateY(2px);}
         
-        /* Flex del layout derecho */
         .cv-right { display: flex; align-items: center; gap: 30px; z-index: 1;}
         .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 0.95rem; color: var(--accent); transition: all 0.4s; }
         .cv-item:hover .cv-year { color: var(--bg); opacity: 0.8; }
         
-        /* Circulo Rotativo Hardware en el Extremo Derecha */
-        .fx-outbox {
-            display: flex; justify-content: center; align-items: center;
-            width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            color: var(--text);
-            transform: rotate(-45deg); /* Arrow diagonal al natural */
-        }
-        
-        .cv-item:hover .fx-outbox {
-            background: var(--accent); border-color: transparent; color: white;
-            transform: rotate(0deg) scale(1.2); /* Straight arrow brutal + Inflated circle  */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+        .fx-outbox { display: flex; justify-content: center; align-items: center; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text); transform: rotate(-45deg); }
+        .cv-item:hover .fx-outbox { background: var(--accent); border-color: transparent; color: white; transform: rotate(0deg) scale(1.2); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* Btn final */
         .btn { display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, background 0.3s; margin-top: 50px; }
         .btn:hover { transform: translateY(-5px); background: var(--accent); color: white;}
 
@@ -244,16 +214,16 @@
 
         @media (max-width: 1024px) {
             .portfolio-bento { display: flex; flex-direction: column; }
-            .p-wide, .p-square { height: 400px; }
+            .p-wide, .p-square, .p-half { height: 400px; }
             .bento-about, .skills-bento, .footer-grid { grid-template-columns: 1fr; }
             .bento-card-photo { min-height: 400px;}
         }
         @media (max-width: 768px) {
-            header { padding: 10px 20px; gap: 20px; }
+            header { padding: 10px 20px; gap: 15px; }
             .nav-links, .nav-dot { display: none; }
             .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
             .cv-right {width: 100%; justify-content: space-between;}
-            .cv-item:hover { transform: scale(1.02); padding: 40px 25px; } /* Ajuste de expansion responsivo */
+            .cv-item:hover { transform: scale(1.02); padding: 40px 25px; } 
         }
     </style>
 </head>
@@ -275,13 +245,18 @@
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
                 <div class="nav-dot" style="margin: 0 10px;"></div>
-                <button id="lang-toggle" class="icon-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                
+                <!-- Botón Lenguaje REDISEÑADO CON ICONO -->
+                <button id="lang-toggle" class="icon-btn btn-pill inter-hover" aria-label="Cambio de idioma">
+                    <i class="fa-solid fa-earth-europe" style="font-size:1.1rem; color:var(--text);"></i> 
+                    <span id="lang-lbl" style="font-size: 0.75rem;">EN</span>
+                </button>
             </div>
         </header>
     </div>
 
     <section class="hero" id="home">
-        <!-- Bloque encapsulado con margin-top inmenso y perspectiva estructural inferior -->
+        <!-- Bloque concentrado. Título Menor + Texto pegado -->
         <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
             <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
@@ -314,6 +289,7 @@
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
         
+        <!-- Ahora uniendo 6 Proyectos para estética robusta de portafolio -->
         <div class="portfolio-bento">
             <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
@@ -350,6 +326,26 @@
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
+
+            <!-- + 2 PROYECTOS AÑADIDOS AL FINAL. FORMATO 50 / 50 P-HALF  -->
+            <a href="#" class="p-card p-half inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div><h3 class="lang-node" data-en="LUMEN LIGHT" data-es="LUMEN LUZ">LUMEN LUZ</h3><p class="lang-node" data-en="Luminarie Product" data-es="Objeto de Iluminación Técnica">Objeto de Iluminación Técnica</p></div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="#" class="p-card p-half inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=1200&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div><h3 class="lang-node" data-en="MODULA FRAME" data-es="TRAMA URBANA">TRAMA URBANA</h3><p class="lang-node" data-en="Transit Enclosure Structure" data-es="Mobiliario Entorno Estructurado">Mobiliario Entorno Estructurado</p></div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
         </div>
     </section>
 
@@ -374,7 +370,7 @@
         </div>
     </section>
 
-    <!-- ==== CV NUEVA SECCIÓN MATRIX EXPAND/INVERT HOVER ==== -->
+    <!-- ==== CV SECCIÓN MATRIX INVERTIDA HOVER ==== -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
@@ -462,12 +458,15 @@
             btnToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // MECANISMO IDIOMA
+        // MECANISMO IDIOMA PASTILLA TEXT/GLOBE
         const btnLang = document.getElementById("lang-toggle");
+        const langLbl = document.getElementById("lang-lbl");
         let langActive = "es";
+
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
+            
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es"; 
                 domElements.forEach(node => {
@@ -475,7 +474,8 @@
                     if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
-                btnLang.textContent = langActive === "es" ? "EN" : "ES"; 
+                // Permuta el rotulillo del icon button pastilla
+                langLbl.textContent = langActive === "es" ? "EN" : "ES"; 
             }, 300);
         });
 
@@ -489,9 +489,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // ------------------------------------------------------------- //
-        // GPU CURSOR : CERO DELAY (Native Mapping) + Lerp solo en Aro
-        // ------------------------------------------------------------- //
+        // GPU CURSOR DIRECT
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         
@@ -501,22 +499,17 @@
         window.addEventListener("mousemove", (e) => { 
             mouseX = e.clientX; 
             mouseY = e.clientY; 
-
-            // CERO (0ms) delay físico aquí, ligado duro al procesador de hardware
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
 
-        // Ring Interpolation suavizada, persiguiendo fluidamente pero sin estresar el control central.
         function renderRing() {
             ringX += (mouseX - ringX) * 0.35;
             ringY += (mouseY - ringY) * 0.35;
-            
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
         requestAnimationFrame(renderRing);
 
-        // HOVER SYSTEM EXPANSOR PARA TODAS LAS CLASES Y TARJETAS CV
         document.querySelectorAll('.inter-hover').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
