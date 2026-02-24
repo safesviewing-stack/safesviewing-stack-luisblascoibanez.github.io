@@ -62,7 +62,7 @@
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             background: var(--glass); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
-            padding: 18px 10%; display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 8% 18px 14%; display: flex; justify-content: space-between; align-items: center;
             z-index: 2000; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid var(--border);
         }
@@ -70,7 +70,7 @@
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.5px; text-transform: uppercase; }
         .header-actions { display: flex; align-items: center; gap: 40px; margin-left: auto; } 
-        .nav-links { display: flex; gap: 25px; margin-left: 80px; }
+        .nav-links { display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
@@ -105,9 +105,7 @@
         @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .nav-links, #theme-toggle { display: none; } .portfolio-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3.5rem; } }
 
-        .nav-links {
-    margin-left: 80px; /* prueba entre 60–120px */
-}
+ 
     </style>
 </head>
 <body>
