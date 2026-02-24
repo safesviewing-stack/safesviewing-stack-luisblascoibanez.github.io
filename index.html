@@ -68,6 +68,7 @@
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
             will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
+        /* RING uses Lerp logic separately via script */
         #cursor-ring {
             width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
@@ -101,35 +102,44 @@
         .nav-links a:hover { color: var(--text); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
+        /* Tensión visual en Header (Theme y Botón de Lenguaje Modificados) */
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { 
             background: transparent; border: none; color: var(--text);
             width: 25px; height: 25px; display: flex; align-items: center; 
-            justify-content: center; font-size: 1.1rem; transition: transform 0.3s, color 0.3s; font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
+            justify-content: center; font-size: 1rem; transition: transform 0.3s, color 0.3s; font-family: 'Syne'; font-weight: 800; text-transform: uppercase;
         }
         .icon-btn:hover { color: var(--accent); transform: scale(1.1); }
-        
-        .btn-pill { width: auto !important; padding: 0 15px; border-radius: 30px; border: 1px solid var(--border); height: 35px; gap: 8px;}
-        .btn-pill:hover { border-color: var(--accent); }
+
+        /* NUEVO BOTÓN IDIOMA: Altamente Sutil / Reducido e indexado como nota lateral */
+        .lang-sutil-btn {
+            background: transparent; border: none; color: var(--text-dim);
+            font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 400; 
+            letter-spacing: 0.5px; padding: 2px 4px; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
+        }
+        .lang-sutil-btn:hover {
+            color: var(--text); opacity: 1; transform: translateY(-1px);
+        }
 
         /* --- HERO SECTIONS --- */
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
 
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        .hero-text-block { margin-top: 15vh; }
+        
+        .hero-text-block {
+            margin-top: 15vh; /* Bajando textos en el layout central inferior */
+        }
 
         .hero h1 { 
-            font-family: 'Syne', sans-serif; 
-            font-size: clamp(3rem, 8vw, 7rem); /* SE HA REDUCIDO NOTABLEMENTE EL TAMAÑO */
-            line-height: 0.95; font-weight: 800; 
+            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
+            line-height: 0.9; font-weight: 800; 
             letter-spacing: -0.04em; text-transform: uppercase;
         }
-        
         .hero .subtitle { 
-            margin-top: -5px; /* LO HEMOS PEGADO DEBAJO AL TÍTULO AL MÁXIMO (antes margin 25px) */
-            font-size: clamp(1rem, 2vw, 1.3rem); 
+            margin-top: 25px; font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
             color: var(--accent); font-weight: 600; font-family: 'Inter'; 
-            letter-spacing: 0.5px; opacity: 0.9;
+            letter-spacing: -0.5px; opacity: 0.9;
         }
 
         .hero .availability { position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;}
@@ -141,7 +151,7 @@
         @keyframes ping { 75%, 100% { transform: scale(2.8); opacity: 0; } }
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- BENTO GRID --- */
+        /* --- BENTO GRID: SOBRE MI --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;}
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
@@ -150,13 +160,11 @@
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- PORTFOLIO --- */
+        /* --- BENTO GRID: PORTFOLIO (Soportando 6 cartas encajadas) --- */
         .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
         .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; transition: 0.5s ease; }
         .p-wide { grid-column: span 8; height: 500px; }
         .p-square { grid-column: span 4; height: 500px; }
-        .p-half { grid-column: span 6; height: 500px; } /* FORMATO NUEVO DE BENTO PARA BALANCE */
-
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7; }
@@ -174,23 +182,21 @@
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
         /* --- EXPERIENCE SECTION --- */
-        .cv-wrapper { 
-            border-top: 1px solid var(--border); 
-            display: flex; flex-direction: column; margin-top: 40px;
-        }
-
+        .cv-wrapper { border-top: 1px solid var(--border); display: flex; flex-direction: column; margin-top: 40px;}
         .cv-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 35px 20px; border-bottom: 1px solid var(--border);
-            text-decoration: none; cursor: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden; background: transparent; border-radius: 12px; margin-top: -1px;
+            display: flex; justify-content: space-between; align-items: center; padding: 35px 20px; 
+            border-bottom: 1px solid var(--border); text-decoration: none; cursor: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; background: transparent; border-radius: 12px; margin-top: -1px; 
         }
 
-        .cv-item:hover { background: var(--text); border-bottom-color: transparent; border-radius: 25px; padding: 55px 40px; transform: scale(1.005); z-index: 10; }
+        .cv-item:hover { 
+            background: var(--text); border-bottom-color: transparent; border-radius: 25px;
+            padding: 55px 40px; transform: scale(1.005); z-index: 10;
+        }
+
         .cv-role { z-index: 1;}
         .cv-role h3 { font-family: 'Syne'; font-size: 2rem; font-weight: 700; color: var(--text); transition: all 0.4s; letter-spacing: -0.5px;}
         .cv-item:hover .cv-role h3 { color: var(--bg); letter-spacing: -1.5px; transform: translateY(-2px);}
-
         .cv-company { font-size: 1rem; color: var(--text-dim); transition: all 0.4s;}
         .cv-item:hover .cv-company { color: var(--bg); opacity: 0.75; transform: translateY(2px);}
         
@@ -198,32 +204,35 @@
         .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 0.95rem; color: var(--accent); transition: all 0.4s; }
         .cv-item:hover .cv-year { color: var(--bg); opacity: 0.8; }
         
-        .fx-outbox { display: flex; justify-content: center; align-items: center; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text); transform: rotate(-45deg); }
-        .cv-item:hover .fx-outbox { background: var(--accent); border-color: transparent; color: white; transform: rotate(0deg) scale(1.2); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .fx-outbox {
+            display: flex; justify-content: center; align-items: center; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text); transform: rotate(-45deg); 
+        }
+        
+        .cv-item:hover .fx-outbox { background: var(--accent); border-color: transparent; color: white; transform: rotate(0deg) scale(1.2); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
 
+        /* Btn */
         .btn { display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, background 0.3s; margin-top: 50px; }
         .btn:hover { transform: translateY(-5px); background: var(--accent); color: white;}
 
-        /* --- CONTACT --- */
+        /* --- FOOTER / CONTACT --- */
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center;}
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; font-weight: 800;}
         .contact-info a { display: block; font-size: 2rem; color: var(--text-dim); text-decoration: none; margin-bottom: 10px; transition: 0.3s;}
         .contact-info a:hover { color: var(--accent); }
-        
         footer { padding: 40px 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 100px; }
 
         @media (max-width: 1024px) {
             .portfolio-bento { display: flex; flex-direction: column; }
-            .p-wide, .p-square, .p-half { height: 400px; }
+            .p-wide, .p-square { height: 400px; }
             .bento-about, .skills-bento, .footer-grid { grid-template-columns: 1fr; }
             .bento-card-photo { min-height: 400px;}
         }
         @media (max-width: 768px) {
-            header { padding: 10px 20px; gap: 15px; }
+            header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
             .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
             .cv-right {width: 100%; justify-content: space-between;}
-            .cv-item:hover { transform: scale(1.02); padding: 40px 25px; } 
+            .cv-item:hover { transform: scale(1.02); padding: 40px 25px; }
         }
     </style>
 </head>
@@ -245,18 +254,14 @@
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
                 <div class="nav-dot" style="margin: 0 10px;"></div>
-                
-                <!-- Botón Lenguaje REDISEÑADO CON ICONO -->
-                <button id="lang-toggle" class="icon-btn btn-pill inter-hover" aria-label="Cambio de idioma">
-                    <i class="fa-solid fa-earth-europe" style="font-size:1.1rem; color:var(--text);"></i> 
-                    <span id="lang-lbl" style="font-size: 0.75rem;">EN</span>
-                </button>
+                <!-- Símbolo de idioma ahora mucho más tenue e indexado inteligentemente. -->
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
             </div>
         </header>
     </div>
 
     <section class="hero" id="home">
-        <!-- Bloque concentrado. Título Menor + Texto pegado -->
+        <!-- Textos colapsados a la gravedad baja visual requerida -->
         <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
             <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
@@ -289,8 +294,9 @@
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
         
-        <!-- Ahora uniendo 6 Proyectos para estética robusta de portafolio -->
+        <!-- MATRIZ PORTFOLIO MODIFICADA: +2 PIEZAS EQUILIBRANDO AL MODELO -->
         <div class="portfolio-bento">
+            <!-- P: 1 (Wide) -->
             <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
@@ -300,6 +306,7 @@
                 </div>
             </a>
             
+            <!-- P: 2 (Square) -->
             <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
@@ -309,6 +316,7 @@
                 </div>
             </a>
             
+            <!-- P: 3 (Square) -->
             <a href="#" class="p-card p-square inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
@@ -318,6 +326,7 @@
                 </div>
             </a>
 
+            <!-- P: 4 (Wide) -->
             <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
@@ -326,26 +335,26 @@
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
-
-            <!-- + 2 PROYECTOS AÑADIDOS AL FINAL. FORMATO 50 / 50 P-HALF  -->
-            <a href="#" class="p-card p-half inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800&q=80"></div>
+            
+            <!-- NUEVO P: 5 (Wide - Complementando Sistema Empaque Médico) -->
+            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div><h3 class="lang-node" data-en="LUMEN LIGHT" data-es="LUMEN LUZ">LUMEN LUZ</h3><p class="lang-node" data-en="Luminarie Product" data-es="Objeto de Iluminación Técnica">Objeto de Iluminación Técnica</p></div>
+                    <div><h3 class="lang-node" data-en="OMNI DYNAMICS" data-es="OMNI DYNAMICS">OMNI DYNAMICS</h3><p class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card p-half inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=1200&q=80"></div>
+            <!-- NUEVO P: 6 (Square - Mobiliario Moderno/Habitat) -->
+            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <div><h3 class="lang-node" data-en="MODULA FRAME" data-es="TRAMA URBANA">TRAMA URBANA</h3><p class="lang-node" data-en="Transit Enclosure Structure" data-es="Mobiliario Entorno Estructurado">Mobiliario Entorno Estructurado</p></div>
+                    <div><h3 class="lang-node" data-en="LUNA ENVIRONMENT" data-es="LUNA AMBIENT">LUNA AMBIENT</h3><p class="lang-node" data-en="Industrial Object / Home" data-es="Objeto Industrial y Hábitat">Objeto Industrial y Hábitat</p></div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
-
         </div>
     </section>
 
@@ -355,22 +364,22 @@
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Advanced Parametric" data-es="Modelado Topológico">Modelado Topológico</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino Class-A workflow." data-es="SolidWorks & Rhinoceros avanzados. Precisión y fluidez en geometrías puras y complejas.">SolidWorks & Rhinoceros avanzados. Precisión volumétrica en integraciones clase-A.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino Class-A workflow." data-es="SolidWorks & Rhinoceros avanzados. Precisión volumétrica en integraciones clase-A.">SolidWorks & Rhinoceros avanzados. Precisión volumétrica en integraciones clase-A.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Visual Rendering" data-es="Representación C.G.I">Representación Visual</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Mastery in Keyshot material logic to present physical weight seamlessly." data-es="Keyshot y simuladores foto-reales. Exposición exacta del material (C.M.F) e impacto de usuario.">Keyshot & Realidad C.M.F. Renderización comunicando acabados y pesos visuales absolutos.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Mastery in Keyshot material logic to present physical weight seamlessly." data-es="Keyshot & Realidad C.M.F. Renderización comunicando acabados y pesos visuales absolutos.">Keyshot & Realidad C.M.F. Renderización comunicando acabados y pesos visuales absolutos.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Manufacturing logic (DFM)" data-es="Diseño (DFM) Aplicado">Viabilidad (DFM)</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Injection mold understanding, assembly tolerances & hardware behavior." data-es="Comprensión de procesos térmicos e interrelación metálico/plástica pensada para inyección de matrices.">Metodologías enfocadas a producción. Comportamientos empíricos plásticos en ensamblado.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Injection mold understanding, assembly tolerances & hardware behavior." data-es="Metodologías enfocadas a producción. Comportamientos empíricos plásticos en ensamblado.">Metodologías enfocadas a producción. Comportamientos empíricos plásticos en ensamblado.</p>
             </div>
         </div>
     </section>
 
-    <!-- ==== CV SECCIÓN MATRIX INVERTIDA HOVER ==== -->
+    <!-- MATRIX CV DE COLOR OPUESTO -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
@@ -450,7 +459,7 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 50 });
 
-        // TEMA DIA/NOCHE
+        // TEMA DÍA Y NOCHE
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
@@ -458,15 +467,14 @@
             btnToggle.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // MECANISMO IDIOMA PASTILLA TEXT/GLOBE
+        // MECANISMO DE IDIOMA I18N
         const btnLang = document.getElementById("lang-toggle");
-        const langLbl = document.getElementById("lang-lbl");
         let langActive = "es";
-
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
             
+            // Pausa el swap para la magia del cross-fade:
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es"; 
                 domElements.forEach(node => {
@@ -474,12 +482,11 @@
                     if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
-                // Permuta el rotulillo del icon button pastilla
-                langLbl.textContent = langActive === "es" ? "EN" : "ES"; 
+                btnLang.textContent = langActive === "es" ? "EN" : "ES"; 
             }, 300);
         });
 
-        // ISLA DEL HEADER SCROLL COMPACTING
+        // SCROLL NAVBAR DINAMIC YIELDING
         const navbar = document.getElementById("navbar");
         let lastScrollTop = 0;
         window.addEventListener("scroll", () => {
@@ -489,19 +496,22 @@
             lastScrollTop = scrollTop;
         });
 
-        // GPU CURSOR DIRECT
+        // ============================================ //
+        // CPU GPU CUSTOM INSTA-CURSOR                  //
+        // ============================================ //
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;
 
         window.addEventListener("mousemove", (e) => { 
             mouseX = e.clientX; 
             mouseY = e.clientY; 
+            // EL PUNTO RIGIDO A CERO LATENCIA
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
 
+        // SUAVE FLUÍDEZ EN CASCADA SOLO PARA EL CÍRCULO CONVEXO DEL ENTORNO
         function renderRing() {
             ringX += (mouseX - ringX) * 0.35;
             ringY += (mouseY - ringY) * 0.35;
@@ -510,6 +520,7 @@
         }
         requestAnimationFrame(renderRing);
 
+        // HOVER INTELIGENTE MAGNÉTICO
         document.querySelectorAll('.inter-hover').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
