@@ -58,17 +58,10 @@
 
         /* --- HEADER GLASS --- */
         header {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%;
-            padding: 20px 4% 20px 10%; 
-            background: var(--glass); 
-            backdrop-filter: blur(35px); 
-            -webkit-backdrop-filter: blur(35px);
-            display: flex; 
-            align-items: center;
-            z-index: 2000; 
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 4% 20px 10%; background: var(--glass); 
+            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
+            display: flex; align-items: center; z-index: 2000; 
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid var(--border);
         }
@@ -76,7 +69,6 @@
         header.nav-hidden { transform: translateY(-100%); }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.5px; text-transform: uppercase; }
-        
         .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
         
         .nav-links { display: flex; gap: 25px; }
@@ -140,44 +132,55 @@
         .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
 
-        /* --- PIXEL CANVAS BOTONES CSS --- */
-        .pixel-btn {
+        /* --- EXPAND ICON BUTTON CSS --- */
+        /* Totalmente reemplazado el estilo de botones viejos al nativo equivalente ExpandIconRight propuesto con estilos purpura redondo solidos */
+        
+        .btn-expand {
             position: relative;
-            overflow: hidden; /* Encapsula el grid renderizado */
-            border-radius: 100px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--text);
-            text-align: center;
-            font-weight: 800;
-            cursor: none;
-            text-decoration: none;
-            min-width: fit-content;
-            transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
-            outline: none;
-        }
-
-        .pixel-btn:hover, .pixel-btn:focus-visible { border-color: var(--accent); }
-
-        .pixel-btn-content {
-            padding: 20px 45px;
-            width: 100%; height: 100%;
-            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            z-index: 10; /* Encima del PixelCanvas (ShadowDom overlay en parent) */
-            position: relative;
-            transition: transform 0.3s ease;
+            white-space: nowrap;
+            background-color: var(--accent); 
+            color: #ffffff; /* Fuerzo blanco siempre independiente del modo general oscuro/luz por coherencia tonal con Accent Purpura */
+            padding: 20px 45px;
+            font-size: 1rem;
+            font-weight: 800;
+            border-radius: 100px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            cursor: none;
+            min-width: fit-content;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-expand:hover {
+            background-color: #7c3aed; /* Simulamos leve saturación oscura estilo primmary/90  */
+            box-shadow: 0px 4px 15px var(--accent-glow); /* Integrado de paso sutil brillo  */
         }
         
-        .pixel-btn:hover .pixel-btn-content i {
-            transform: scale(1.1) rotate(-5deg); /* Ligera reacción en el botón general con ícono */
-            color: var(--accent);
+        .btn-expand:active {
+            transform: scale(0.97); /* Resistencia natural por clic nativa adaptativa */
         }
-        
-        .pixel-btn i { transition: transform 0.4s ease, color 0.4s ease; }
+
+        .btn-expand-icon {
+            display: inline-flex;
+            align-items: center;
+            width: 0px;                  /* Contenedor plegado */
+            padding-left: 0px; 
+            opacity: 0;
+            overflow: hidden; 
+            transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-expand:hover .btn-expand-icon {
+            width: 25px;                 /* Crece abriéndose espacio limpiamente equivalent a [w-5] ~ 20px en la logica react  */
+            padding-left: 10px;          /* pl-2 margin logica natural para no comer texto  */
+            transform: translateX(0%);
+            opacity: 1;
+        }
 
         /* MEDIA QUERIES */
         @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -264,13 +267,11 @@
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">BECARIO DISEÑO</h3><span>Bionic Design Solutions.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3 class="lang-text" data-es="GRADO DISEÑO INDUSTRIAL" data-en="BACHELOR IN INDUSTRIAL DESIGN">GRADO DISEÑO INDUSTRIAL</h3><span class="lang-text" data-es="Univ. Politécnica Superior." data-en="Higher Polytechnic Univ.">Univ. Politécnica Superior.</span></div></div>
         
-        <!-- INTEGRADO SHADCN PIXEL CANVAS BUTTON -->
-        <a href="#" class="pixel-btn" style="margin-top: 60px;">
-            <!-- Componente renderizado por Web Component en Background, customizado por variables data para tonos Morados a juego con tu portfolio -->
-            <pixel-canvas data-gap="10" data-speed="25" data-colors="#8b5cf6,#a78bfa,#c4b5fd" data-variant="default"></pixel-canvas>
-            
-            <div class="pixel-btn-content">
-                <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
+        <!-- ESTILIZACION COMPONENTE  BUTTON "EXPAND RIGHT" CLONE -->
+        <a href="#" class="btn-expand group" style="margin-top: 60px;">
+            <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
+            <!-- Expansor Oculto (Hasta Hover Animado)-->
+            <div class="btn-expand-icon">
                 <i class="fa-solid fa-file-arrow-down"></i>
             </div>
         </a>
@@ -284,13 +285,11 @@
                 <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
                 <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
                 
-                <!-- INTEGRADO SHADCN PIXEL CANVAS BUTTON CONTACTO -->
-                <button type="submit" class="pixel-btn" style="margin-top:20px; width: fit-content; min-width: 250px;">
-                    <!-- Colores morados oscurecidos compatibles en HEX data-colors="#8b5cf6,#a78bfa,#ddd6fe" -->
-                    <pixel-canvas data-gap="10" data-speed="25" data-colors="#8b5cf6,#a78bfa,#ddd6fe" data-variant="default"></pixel-canvas>
-                    
-                    <div class="pixel-btn-content">
-                        <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
+                <!-- ESTILIZACION COMPONENTE CONTACT BUTTON "EXPAND RIGHT" CLONE  -->
+                <button type="submit" class="btn-expand group" style="margin-top:20px; min-width: 250px; justify-content: center;">
+                    <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
+                     <!-- Expansor Oculto (Hasta Hover Animado)-->
+                    <div class="btn-expand-icon">
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </button>
@@ -303,237 +302,12 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- 🟢 SCRIPT - PIXEL CANVAS COMPONENT LÓGICA TRADUCIDA VANILLA 🟢 -->
-    <script>
-        class Pixel {
-            constructor(canvas, context, x, y, color, speed, delay) {
-                this.width = canvas.width;
-                this.height = canvas.height;
-                this.ctx = context;
-                this.x = x;
-                this.y = y;
-                this.color = color;
-                this.speed = this.getRandomValue(0.1, 0.9) * speed;
-                this.size = 0;
-                this.sizeStep = Math.random() * 0.4;
-                this.minSize = 0.5;
-                this.maxSizeInteger = 2;
-                this.maxSize = this.getRandomValue(this.minSize, this.maxSizeInteger);
-                this.delay = delay;
-                this.counter = 0;
-                this.counterStep = Math.random() * 4 + (this.width + this.height) * 0.01;
-                this.isIdle = false;
-                this.isReverse = false;
-                this.isShimmer = false;
-            }
 
-            getRandomValue(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
-            draw() {
-                const centerOffset = this.maxSizeInteger * 0.5 - this.size * 0.5;
-                this.ctx.fillStyle = this.color;
-                this.ctx.fillRect(this.x + centerOffset, this.y + centerOffset, this.size, this.size);
-            }
-
-            appear() {
-                this.isIdle = false;
-                if (this.counter <= this.delay) {
-                    this.counter += this.counterStep;
-                    return;
-                }
-                if (this.size >= this.maxSize) { this.isShimmer = true; }
-                if (this.isShimmer) { this.shimmer(); } 
-                else { this.size += this.sizeStep; }
-                this.draw();
-            }
-
-            disappear() {
-                this.isShimmer = false;
-                this.counter = 0;
-                if (this.size <= 0) {
-                    this.isIdle = true;
-                    return;
-                } else { this.size -= 0.1; }
-                this.draw();
-            }
-
-            shimmer() {
-                if (this.size >= this.maxSize) { this.isReverse = true; } 
-                else if (this.size <= this.minSize) { this.isReverse = false; }
-                
-                if (this.isReverse) { this.size -= this.speed; } 
-                else { this.size += this.speed; }
-            }
-        }
-
-        class PixelCanvasElement extends HTMLElement {
-            constructor() {
-                super();
-                this.canvas = document.createElement("canvas");
-                this.ctx = this.canvas.getContext("2d");
-                this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                
-                this.pixels = [];
-                this.animation = null;
-                this.timeInterval = 1000 / 60;
-                this.timePrevious = performance.now();
-                this._initialized = false;
-                this._resizeObserver = null;
-                this._parent = null;
-
-                const shadow = this.attachShadow({ mode: "open" });
-                const style = document.createElement("style");
-                style.textContent = `
-                  :host {
-                    display: grid; width: 100%; height: 100%;
-                    position: absolute; inset: 0; pointer-events: none;
-                    border-radius: inherit; overflow: hidden; z-index: 0;
-                  }
-                  canvas { width: 100%; height: 100%; }
-                `;
-                shadow.appendChild(style);
-                shadow.appendChild(this.canvas);
-            }
-
-            get colors() {
-                const clrs = this.getAttribute('data-colors');
-                return clrs ? clrs.split(",") : ["#f8fafc", "#f1f5f9", "#cbd5e1"];
-            }
-
-            get gap() {
-                const value = Number(this.getAttribute('data-gap')) || 5;
-                return Math.max(4, Math.min(50, value));
-            }
-
-            get speed() {
-                const value = Number(this.getAttribute('data-speed')) || 35;
-                return this.reducedMotion ? 0 : Math.max(0, Math.min(100, value)) * 0.001;
-            }
-
-            get noFocus() { return this.hasAttribute("data-no-focus"); }
-            get variant() { return this.getAttribute('data-variant') || "default"; }
-
-            connectedCallback() {
-                if (this._initialized) return;
-                this._initialized = true;
-                this._parent = this.parentElement;
-
-                requestAnimationFrame(() => {
-                    this.handleResize();
-                    const ro = new ResizeObserver((entries) => {
-                        if (!entries.length) return;
-                        requestAnimationFrame(() => this.handleResize());
-                    });
-                    ro.observe(this);
-                    this._resizeObserver = ro;
-                });
-
-                this._parent?.addEventListener("mouseenter", () => this.handleAnimation("appear"));
-                this._parent?.addEventListener("mouseleave", () => this.handleAnimation("disappear"));
-
-                if (!this.noFocus) {
-                    this._parent?.addEventListener("focus", () => this.handleAnimation("appear"), { capture: true });
-                    this._parent?.addEventListener("blur", () => this.handleAnimation("disappear"), { capture: true });
-                }
-            }
-
-            disconnectedCallback() {
-                this._initialized = false;
-                this._resizeObserver?.disconnect();
-                
-                this._parent?.removeEventListener("mouseenter", () => this.handleAnimation("appear"));
-                this._parent?.removeEventListener("mouseleave", () => this.handleAnimation("disappear"));
-
-                if (this.animation) {
-                    cancelAnimationFrame(this.animation);
-                    this.animation = null;
-                }
-                this._parent = null;
-            }
-
-            handleResize() {
-                if (!this.ctx || !this._initialized) return;
-                const rect = this.getBoundingClientRect();
-                if (rect.width === 0 || rect.height === 0) return;
-
-                const width = Math.floor(rect.width);
-                const height = Math.floor(rect.height);
-                const dpr = window.devicePixelRatio || 1;
-                
-                this.canvas.width = width * dpr;
-                this.canvas.height = height * dpr;
-                this.canvas.style.width = `${width}px`;
-                this.canvas.style.height = `${height}px`;
-
-                this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-                this.ctx.scale(dpr, dpr);
-
-                this.createPixels();
-            }
-
-            getDistanceToCenter(x, y) {
-                const dx = x - this.canvas.width / 2;
-                const dy = y - this.canvas.height / 2;
-                return Math.sqrt(dx * dx + dy * dy);
-            }
-
-            getDistanceToBottomLeft(x, y) {
-                const dx = x;
-                const dy = this.canvas.height - y;
-                return Math.sqrt(dx * dx + dy * dy);
-            }
-
-            createPixels() {
-                if (!this.ctx) return;
-                this.pixels = [];
-                for (let x = 0; x < this.canvas.width; x += this.gap) {
-                    for (let y = 0; y < this.canvas.height; y += this.gap) {
-                        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-                        let delay = 0;
-                        if (this.variant === "icon") { delay = this.reducedMotion ? 0 : this.getDistanceToCenter(x, y); } 
-                        else { delay = this.reducedMotion ? 0 : this.getDistanceToBottomLeft(x, y); }
-                        this.pixels.push(new Pixel(this.canvas, this.ctx, x, y, color, this.speed, delay));
-                    }
-                }
-            }
-
-            handleAnimation(name) {
-                if (this.animation) cancelAnimationFrame(this.animation);
-
-                const animate = () => {
-                    this.animation = requestAnimationFrame(animate);
-                    const timeNow = performance.now();
-                    const timePassed = timeNow - this.timePrevious;
-                    if (timePassed < this.timeInterval) return;
-                    this.timePrevious = timeNow - (timePassed % this.timeInterval);
-                    
-                    if (!this.ctx) return;
-                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-                    let allIdle = true;
-                    for (const pixel of this.pixels) {
-                        pixel[name]();
-                        if (!pixel.isIdle) allIdle = false;
-                    }
-
-                    if (allIdle) {
-                        cancelAnimationFrame(this.animation);
-                        this.animation = null;
-                    }
-                };
-                animate();
-            }
-        }
-        customElements.define("pixel-canvas", PixelCanvasElement);
-    </script>
-    
+    <!-- EL MINIMO DE JAVA (Totalmente puro por encima sin trazas innecesarias de JS extras renderizadores para esta build actual )-->
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // LENGUAJES
+        // LENGUAJES LÓGICA RÁPIDA 
         const btnLang = document.getElementById("lang-toggle");
         let currentLang = "es";
 
@@ -549,9 +323,8 @@
             });
         });
 
-        // TEMAS DARK/LIGHT MODE CON LA PÍLDORA SLIDER NATIVA
+        // TEMAS DARK/LIGHT MODE LÓGICA DE FORMS
         const btnToggleTheme = document.getElementById("theme-switch");
-        
         btnToggleTheme.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             const formInputs = document.querySelectorAll("#contact input, #contact textarea");
@@ -562,7 +335,7 @@
             }
         });
 
-        // SCROLL REACCIÓN
+        // HEADER SCROLL
         let lastScroll = 0;
         let isAutoScrolling = false;
         let scrollTimeout;
@@ -587,7 +360,7 @@
             lastScroll = currentScroll;
         });
 
-        // CUSTOM CURSOR HOVER 
+        // CUSTOM CURSOR HOVER BINDED FOR ANY CLICABLE INSTANCES NOW
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
