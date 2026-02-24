@@ -87,7 +87,8 @@
         .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7.5rem); line-height: 0.85; margin-bottom: 40px; letter-spacing: -6px; text-transform: uppercase; }
         .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
 
-        h2.section-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 80px; text-transform: uppercase; }
+        /* ESPACIO REDUCIDO ENTRE TÍTULO Y CONTENIDO */
+        h2.section-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
 
         .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
         .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); }
@@ -216,7 +217,6 @@
             link.addEventListener("click", () => {
                 isAutoScrolling = true;
                 navbar.classList.remove("nav-hidden");
-                // Cuando termina de bajar por el clic, desbloqueamos la lógica de ocultar
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => { isAutoScrolling = false; }, 1000);
             });
@@ -224,13 +224,10 @@
 
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
-            
-            // Si el usuario scrollea manualmente después del clic, recuperamos control
             if (!isAutoScrolling) {
                 if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
                 else navbar.classList.remove("nav-hidden");
             }
-            
             lastScroll = currentScroll;
         });
 
