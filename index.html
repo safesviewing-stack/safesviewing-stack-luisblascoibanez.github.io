@@ -48,8 +48,6 @@
             z-index: -1;
         }
 
-    
-
         /* --- CURSOR --- */
         #cursor {
             width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 50%;
@@ -58,18 +56,29 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- HEADER GLASS (DYNAMIC BEHAVIOR) --- */
+        /* --- HEADER GLASS (CORREGIDO) --- */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: var(--glass); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 2000; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            /* Corrección: Se añade padding equivalente al de las secciones (10%) y 20px arriba/abajo */
+            padding: 20px 10%; 
+            background: var(--glass); 
+            backdrop-filter: blur(35px); 
+            -webkit-backdrop-filter: blur(35px);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            z-index: 2000; 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid var(--border);
         }
+        
         header.nav-hidden { transform: translateY(-100%); }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.5px; text-transform: uppercase; }
-        .header-actions { display: flex; align-items: center; gap: 40px; margin-left: auto; } 
+        .header-actions { display: flex; align-items: center; gap: 40px; } 
         .nav-links { display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
@@ -84,14 +93,13 @@
         .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7.5rem); line-height: 0.85; margin-bottom: 40px; letter-spacing: -6px; text-transform: uppercase; }
         .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
 
-        /* ESPACIO REDUCIDO ENTRE TÍTULO Y CONTENIDO */
         h2.section-title { font-family: 'Syne', sans-serif; font-size: 4rem; margin-bottom: 40px; text-transform: uppercase; }
 
         .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
         .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); }
         .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
 
-        /* --- PORTFOLIO (3x2 GRID) --- */
+        /* --- PORTFOLIO --- */
         .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; transition: 0.4s; overflow: hidden; }
         .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
@@ -102,16 +110,22 @@
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
         .btn-cv { margin-top: 60px; display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.4s; }
 
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .nav-links, #theme-toggle { display: none; } .portfolio-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3.5rem; } }
-
- 
+        /* MEDIA QUERIES (Correcciones añadidas) */
+        @media (max-width: 1024px) { 
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); } 
+        }
+        @media (max-width: 768px) { 
+            /* En móvil, solo ocultamos los textos (los nav-links) para que el botón Theme Toggle no desaparezca, resolviendo que no se vea vacío el header */
+            .nav-links { display: none; } 
+            .portfolio-grid { grid-template-columns: 1fr; } 
+            .hero h1 { font-size: 3.5rem; }
+            .about-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div>
-    
 
     <header id="navbar">
         <div class="nav-logo">L|BIB</div>
@@ -123,7 +137,7 @@
                 <a href="#cv">Curriculum</a>
                 <a href="#contact">Contacto</a>
             </nav>
-            <button id="theme-toggle">
+            <button id="theme-toggle" aria-label="Toggle Theme">
                 <i class="fa-solid fa-moon"></i>
             </button>
         </div>
@@ -142,7 +156,7 @@
             <div class="about-text-reduced" data-aos="fade-up">
                 <p>Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
             </div>
-            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in">
+            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
         </div>
     </section>
 
@@ -202,6 +216,14 @@
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.querySelector("i").className = document.body.classList.contains("light-mode") ? "fa-solid fa-sun" : "fa-solid fa-moon";
+            
+            // Corrige también el color del formulario
+            const formInputs = document.querySelectorAll("#contact input, #contact textarea");
+            if(document.body.classList.contains("light-mode")){
+                formInputs.forEach(input => input.style.color = "#1d1d1f");
+            } else {
+                formInputs.forEach(input => input.style.color = "white");
+            }
         });
 
         // HEADER: LÓGICA DE PULSADO Y SCROLL
@@ -221,7 +243,7 @@
         });
 
         window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
+            const currentScroll = window.scrollY || document.documentElement.scrollTop;
             if (!isAutoScrolling) {
                 if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
                 else navbar.classList.remove("nav-hidden");
