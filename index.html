@@ -3,474 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco-Ibáñez Berbel | Portfolio</title>
-    <!-- Tailwind CSS (Framework) -->
+    <title>Luis Blasco | Diseño Industrial</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root[data-theme="dark"] {
-            --bg-color: #050505;
-            --text-color: #FAFAFA;
-            --secondary-text: #888888;
-            --glass-bg: rgba(5, 5, 5, 0.7);
-            --border-color: #222222;
-            --card-bg: rgba(255,255,255, 0.03);
-            --gradient-accent: rgba(80, 80, 255, 0.2);
+            --bg-color: #000000;
+            --text-color: #FFFFFF;
+            --secondary-text: #777777;
+            --border-color: #1A1A1A;
+            --nav-bg: rgba(0, 0, 0, 0.7);
         }
         :root[data-theme="light"] {
-            --bg-color: #F8F9FA;
-            --text-color: #111111;
-            --secondary-text: #555555;
-            --glass-bg: rgba(248, 249, 250, 0.7);
-            --border-color: #DDDDDD;
-            --card-bg: rgba(0,0,0, 0.03);
-            --gradient-accent: rgba(80, 80, 255, 0.1);
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-text: #888888;
+            --border-color: #EEEEEE;
+            --nav-bg: rgba(255, 255, 255, 0.7);
         }
 
-        /* Base Setup */
+        /* Base & Resets */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s ease;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Glass Navbar */
+        ::selection {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Nav Glass */
         .glass-nav {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(12px);
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
         }
 
-        /* Custom Framer/Apple Animations */
-        .framer-ease {
-            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Abstract Gradient Blob Background */
-        .bg-blob {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--gradient-accent) 0%, transparent 60%);
-            top: -20%;
-            left: -10%;
-            animation: moveBlob 25s infinite alternate linear;
-            pointer-events: none;
-            z-index: -1;
-            filter: blur(80px);
-        }
-        @keyframes moveBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30%, 30%) scale(1.2); }
-        }
-
-        /* Scroll Reveal Utility */
+        /* Custom Reveal Animation (Más sutil) */
         .reveal {
             opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
-        /* Text Gradients */
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(90deg, var(--text-color), var(--secondary-text));
-        }
-
-        /* Cards Hover (Skills & Portfolio) */
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(128, 128, 128, 0.3);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
-        }
-
-        /* Portfolio Items */
-        .project-img-wrapper {
+        /* Portfolio Image Hover (Suave) */
+        .img-wrapper {
             overflow: hidden;
-            border-radius: 8px;
+            background: var(--border-color);
         }
-        .project-img {
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .img-wrapper img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
-        .portfolio-item:hover .project-img {
-            transform: scale(1.07);
+        .portfolio-item:hover .img-wrapper img {
+            transform: scale(1.03);
         }
-        .project-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .portfolio-item:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        /* Interactive Input Fields */
-        .input-line {
+
+        /* Minimal Input Fields */
+        .input-clean {
             background: transparent;
             border: none;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            transition: border-color 0.3s;
+            transition: border-color 0.4s ease;
         }
-        .input-line:focus {
+        .input-clean:focus {
             outline: none;
             border-bottom: 1px solid var(--text-color);
         }
 
-        /* Floating action Buttons */
-        .framer-button {
-            background: var(--text-color);
+        /* Minimal Outline Button */
+        .btn-minimal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-minimal:hover {
+            border-color: var(--text-color);
+            background-color: var(--text-color);
             color: var(--bg-color);
-            border: 1px solid var(--text-color);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: color 0.4s;
-        }
-        .framer-button::before {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color);
-            z-index: -1;
-            transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .framer-button:hover {
-            color: var(--text-color);
-        }
-        .framer-button:hover::before {
-            top: 0;
-            border: 1px solid var(--text-color);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased font-light selection:bg-black selection:text-white">
 
-    <!-- Ambient Background -->
-    <div class="bg-blob"></div>
-
-    <!-- Navegación -->
-    <nav class="glass-nav fixed w-full z-50 top-0 left-0 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-xl font-bold tracking-tight">Luis.B<span class="text-blue-500">.</span></a>
+    <!-- Nav Minimalista -->
+    <nav class="glass-nav fixed w-full z-50 top-0 left-0 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-medium tracking-tighter">Luis<span class="text-gray-400">Blasco</span>.</a>
             
-            <div class="hidden md:flex gap-8 items-center text-sm font-medium" style="color: var(--secondary-text)">
-                <a href="#about" class="hover:text-current transition-colors t-sobre">Sobre mí</a>
-                <a href="#skills" class="hover:text-current transition-colors t-hab">Habilidades</a>
-                <a href="#portfolio" class="hover:text-current transition-colors t-port">Portfolio</a>
-                <a href="#cv" class="hover:text-current transition-colors t-cv">CV</a>
+            <div class="hidden md:flex gap-10 text-xs font-medium uppercase tracking-widest" style="color: var(--secondary-text)">
+                <a href="#about" class="hover:text-[color:var(--text-color)] transition-colors t-sobre">Info</a>
+                <a href="#skills" class="hover:text-[color:var(--text-color)] transition-colors t-hab">Skills</a>
+                <a href="#portfolio" class="hover:text-[color:var(--text-color)] transition-colors t-port">Trabajos</a>
+                <a href="#cv" class="hover:text-[color:var(--text-color)] transition-colors t-cv">Bio</a>
             </div>
 
-            <div class="flex items-center gap-4 text-sm font-medium">
-                <!-- Toggle Language -->
-                <button id="lang-toggle" class="hover:opacity-60 transition-opacity">EN</button>
-                <div style="width: 1px; height: 16px; background: var(--border-color)"></div>
-                <!-- Toggle Dark/Light Mode -->
-                <button id="theme-toggle" class="hover:opacity-60 transition-opacity flex items-center justify-center p-2 rounded-full" aria-label="Cambiar tema">
-                    <!-- Icono Sol -->
-                    <svg id="icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <!-- Icono Luna -->
-                    <svg id="icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <button id="lang-toggle" class="hover:opacity-50 transition-opacity uppercase text-xs tracking-wider">EN</button>
+                <div class="w-px h-4" style="background-color: var(--border-color)"></div>
+                <button id="theme-toggle" class="hover:opacity-50 transition-opacity">
+                    <!-- Icon Light (Sol) -->
+                    <svg id="icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Icon Dark (Luna) -->
+                    <svg id="icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- MAIN WRAPPER -->
     <main class="w-full">
         
-        <!-- 1. Hero Section -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
-            <div class="max-w-4xl w-full text-center">
-                <p class="mb-4 text-sm tracking-widest uppercase font-medium t-prof" style="color: var(--secondary-text); letter-spacing: 0.2em;">
-                    Diseñador Industrial
+        <!-- 1. Hero: Puramente tipográfico, mucho aire arriba y abajo -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center px-6 pt-32 pb-24 lg:pt-48">
+            <div class="max-w-7xl mx-auto w-full">
+                <p class="text-sm md:text-base font-normal tracking-widest uppercase mb-10 t-prof" style="color: var(--secondary-text)">
+                    Ingeniería + Diseño Industrial
                 </p>
-                <!-- Nombre con tipografía gigante, minimalista -->
-                <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-none">
-                    Luis <br /> <span class="text-gradient">Blasco-Ibáñez</span> <br /> Berbel
+                <h1 class="text-[12vw] sm:text-7xl md:text-8xl lg:text-9xl font-semibold tracking-tighter leading-[0.9] mb-12 lg:mb-20">
+                    Luis <br />
+                    Blasco-Ibáñez.
                 </h1>
-                <p class="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto t-manifesto" style="color: var(--secondary-text)">
-                    Sinergia entre la <strong class="font-medium" style="color:var(--text-color)">ingeniería</strong> y el <strong class="font-medium" style="color:var(--text-color)">diseño creativo</strong> para generar soluciones reales.
-                </p>
-                <div class="flex justify-center gap-4">
-                    <a href="#portfolio" class="framer-button px-8 py-4 rounded-full font-medium text-sm flex items-center gap-2 t-btn-hero framer-ease">
-                        Ver portfolio 
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                
+                <div class="flex flex-col md:flex-row gap-8 justify-between items-start md:items-end w-full max-w-4xl">
+                    <p class="text-xl md:text-2xl font-light leading-snug max-w-lg t-manifesto" style="color: var(--secondary-text)">
+                        No veo límites entre <strong class="font-normal" style="color:var(--text-color)">la técnica y el arte.</strong> Diseño centrado en resolver, experimentar y materializar de forma honesta.
+                    </p>
+                    <a href="#portfolio" class="btn-minimal px-8 py-4 text-xs font-semibold tracking-widest uppercase t-btn-hero">
+                        Ver Trabajos
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 2. Sobre Mí -->
-        <section id="about" class="py-32 px-6">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
-                <div class="w-full md:w-1/2 reveal">
-                    <h2 class="text-sm tracking-widest uppercase font-medium mb-6 t-sobre-titulo" style="color: var(--secondary-text);">Sobre Mí</h2>
-                    <h3 class="text-3xl md:text-5xl font-medium tracking-tight mb-8 leading-snug">
-                        Diseño entendido como un punto de encuentro entre <span class="italic text-gray-500">lo técnico y lo creativo.</span>
-                    </h3>
+        <!-- Separador ultra limpio -->
+        <div class="w-full h-px" style="background-color: var(--border-color)"></div>
+
+        <!-- 2. Info (About): Dos columnas asimétricas, texto grande y respirado -->
+        <section id="about" class="py-32 md:py-56 px-6">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32">
+                <div class="md:w-1/4 reveal">
+                    <span class="text-xs font-semibold tracking-widest uppercase t-sobre-titulo" style="color: var(--secondary-text)">Acerca de mí</span>
                 </div>
-                <div class="w-full md:w-1/2 reveal delay-100 text-lg font-light leading-relaxed space-y-6" style="color: var(--secondary-text)">
-                    <p class="t-p1">
-                        Soy Luis Blasco-Ibáñez Berbel, diseñador industrial de 24 años. Me apasiona la impresión 3D y disfrutar resolviendo problemas estructurales, mecánicos o estéticos.
-                    </p>
-                    <p class="t-p2">
-                        No me considero únicamente técnico ni puramente artístico: me interesa la intersección entre ambos mundos, donde la ingeniería, el diseño y la experimentación se cruzan para crear soluciones reales y bien pensadas.
-                    </p>
-                    <p class="t-p3">
-                        Disfruto explorando procesos de fabricación, analizando nuevos materiales y operando nuevas tecnologías de manufactura aditiva, siempre con una mentalidad abierta, inquieta y curiosa.
-                    </p>
+                <div class="md:w-3/4 reveal delay-100">
+                    <h2 class="text-3xl md:text-5xl font-normal leading-tight tracking-tight mb-16 t-p1">
+                        Soy un diseñador industrial de 24 años fascinado por entender <span class="italic text-gray-500">cómo se hacen las cosas.</span> 
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-base md:text-lg font-light leading-relaxed" style="color: var(--secondary-text)">
+                        <p class="t-p2">
+                            La intersección entre ingeniería, estética y fabricación digital es el terreno donde trabajo. Exploro la manufactura aditiva, los procesos iterativos y los prototipos bien resueltos funcionalmente.
+                        </p>
+                        <p class="t-p3">
+                            Me interesa analizar nuevos materiales y exprimir herramientas paramétricas para generar piezas que cumplan rigurosos criterios técnicos sin descuidar el impacto visual del producto final.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Habilidades -->
-        <section id="skills" class="py-32 px-6 bg-opacity-5">
+        <div class="w-full h-px max-w-7xl mx-auto" style="background-color: var(--border-color)"></div>
+
+        <!-- 3. Habilidades (Skills): Adiós tarjetas, hola layout desnudo -->
+        <section id="skills" class="py-32 md:py-56 px-6">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-sm tracking-widest uppercase font-medium mb-12 reveal text-center t-hab" style="color: var(--secondary-text);">Stack & Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="mb-20 md:mb-32 reveal">
+                    <span class="text-xs font-semibold tracking-widest uppercase t-hab" style="color: var(--secondary-text)">Mis Herramientas</span>
+                </div>
+
+                <!-- Grid Limpio -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     
-                    <!-- Tarjeta 1 -->
-                    <div class="feature-card p-8 rounded-2xl reveal delay-100 flex flex-col justify-between aspect-square">
-                        <svg class="w-10 h-10 mb-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">Autodesk</h3>
-                            <p class="text-sm t-desc-1" style="color: var(--secondary-text);">CAD avanzado, diseño paramétrico, optimización geométrica y modelado 3D preciso para industria.</p>
-                        </div>
+                    <div class="reveal">
+                        <span class="block mb-6 text-2xl font-light">01</span>
+                        <h3 class="text-xl font-medium tracking-tight mb-4 border-b pb-4" style="border-color: var(--border-color)">CAD / 3D Modelado</h3>
+                        <p class="text-sm font-light leading-relaxed t-desc-1" style="color: var(--secondary-text)">
+                            Dominio avanzado de ecosistema Autodesk. Diseño paramétrico, validación geométrica de precisión y conceptualización industrial rigurosa.
+                        </p>
                     </div>
 
-                    <!-- Tarjeta 2 -->
-                    <div class="feature-card p-8 rounded-2xl reveal delay-200 flex flex-col justify-between aspect-square">
-                        <svg class="w-10 h-10 mb-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 t-imp3d">Impresión 3D</h3>
-                            <p class="text-sm t-desc-2" style="color: var(--secondary-text);">Slicing de piezas, g-codes, prototipado rápido e integración tecnológica (FDM, SLA, materiales funcionales).</p>
-                        </div>
+                    <div class="reveal delay-100">
+                        <span class="block mb-6 text-2xl font-light">02</span>
+                        <h3 class="text-xl font-medium tracking-tight mb-4 border-b pb-4 t-imp3d" style="border-color: var(--border-color)">Impresión 3D</h3>
+                        <p class="text-sm font-light leading-relaxed t-desc-2" style="color: var(--secondary-text)">
+                            Traducción física de la pantalla. Creación y manipulación de g-codes, prototipado FDM/SLA iterativo con comprensión material funcional.
+                        </p>
                     </div>
 
-                    <!-- Tarjeta 3 -->
-                    <div class="feature-card p-8 rounded-2xl reveal delay-300 flex flex-col justify-between aspect-square">
-                        <svg class="w-10 h-10 mb-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 t-prog">Programación</h3>
-                            <p class="text-sm t-desc-3" style="color: var(--secondary-text);">Bases tecnológicas, desarrollo de lógica e integración digital. Enfoque multidisciplinar a nivel web.</p>
-                        </div>
+                    <div class="reveal delay-200">
+                        <span class="block mb-6 text-2xl font-light">03</span>
+                        <h3 class="text-xl font-medium tracking-tight mb-4 border-b pb-4 t-prog" style="border-color: var(--border-color)">Lógica / Código</h3>
+                        <p class="text-sm font-light leading-relaxed t-desc-3" style="color: var(--secondary-text)">
+                            Más allá del objeto físico: bases en programación web para resolver de forma interdisciplinar las capas de interacción digital de los productos.
+                        </p>
                     </div>
 
-                    <!-- Tarjeta 4 -->
-                    <div class="feature-card p-8 rounded-2xl reveal delay-400 flex flex-col justify-between aspect-square">
-                        <svg class="w-10 h-10 mb-8 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 t-dg">Diseño Gráfico</h3>
-                            <p class="text-sm t-desc-4" style="color: var(--secondary-text);">Presentación de productos visuales y diseño orientado a experiencia (Adobe Suite).</p>
-                        </div>
+                    <div class="reveal delay-300">
+                        <span class="block mb-6 text-2xl font-light">04</span>
+                        <h3 class="text-xl font-medium tracking-tight mb-4 border-b pb-4 t-dg" style="border-color: var(--border-color)">Diseño Gráfico</h3>
+                        <p class="text-sm font-light leading-relaxed t-desc-4" style="color: var(--secondary-text)">
+                            Suite Adobe aplicada al diseño gráfico y UX visual. Creación de renders para un empaquetado final racional, comunicativo y estético.
+                        </p>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- 4. Portfolio -->
-        <section id="portfolio" class="py-32 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-16 reveal flex justify-between items-end">
-                    <h2 class="text-5xl font-bold tracking-tight">Proyectos <br> <span style="color: var(--secondary-text); font-weight:300;">Destacados.</span></h2>
+        <!-- 4. Portfolio (Proyectos) Imágenes inmensas, sin adornos -->
+        <section id="portfolio" class="pt-24 pb-32 md:pb-56 px-4 md:px-6">
+            <div class="max-w-[100rem] mx-auto">
+                <div class="mb-24 flex items-end justify-between reveal px-2 md:px-6">
+                    <h2 class="text-5xl md:text-8xl font-medium tracking-tighter t-port-tit">Selección <br/> de Proyectos.</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                     
-                    <!-- Proyecto 1 -->
-                    <div class="portfolio-item group cursor-pointer reveal delay-100">
-                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Prototype 01" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
-                            <!-- Overlay Hover -->
-                            <div class="project-overlay absolute inset-0 flex items-end p-8">
-                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
-                            </div>
+                    <!-- P1 -->
+                    <div class="portfolio-item group cursor-pointer reveal">
+                        <div class="img-wrapper w-full aspect-[4/3] md:aspect-video mb-6">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200" alt="Prototype 01" class="object-cover w-full h-full mix-blend-luminosity hover:mix-blend-normal opacity-80 group-hover:opacity-100">
                         </div>
-                        <div>
-                            <span class="text-xs uppercase font-bold tracking-widest text-blue-500 mb-2 block t-ind-des">Diseño Industrial</span>
-                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Biomechanical Prototype M1</h3>
+                        <div class="flex justify-between items-start mt-4 px-2">
+                            <div>
+                                <h3 class="text-2xl font-medium tracking-tight mb-1">Biomechanical Module M1</h3>
+                                <p class="text-sm t-ind-des" style="color: var(--secondary-text)">Diseño Industrial</p>
+                            </div>
+                            <span class="text-xs tracking-widest uppercase btn-minimal px-4 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity t-pbtn">Ver Proyecto</span>
                         </div>
                     </div>
 
-                    <!-- Proyecto 2 -->
-                    <div class="portfolio-item group cursor-pointer reveal delay-200">
-                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
-                            <img src="https://images.unsplash.com/photo-1616142171579-37f2252ccce3?auto=format&fit=crop&q=80&w=800" alt="3D Printing" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
-                            <div class="project-overlay absolute inset-0 flex items-end p-8">
-                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
-                            </div>
+                    <!-- P2 -->
+                    <div class="portfolio-item group cursor-pointer reveal md:mt-32"> <!-- Desplazado visualmente para estilo asimétrico Framer/Apple -->
+                        <div class="img-wrapper w-full aspect-[4/3] md:aspect-video mb-6">
+                            <img src="https://images.unsplash.com/photo-1616142171579-37f2252ccce3?auto=format&fit=crop&q=80&w=1200" alt="3D Printing" class="object-cover w-full h-full mix-blend-luminosity hover:mix-blend-normal opacity-80 group-hover:opacity-100">
                         </div>
-                        <div>
-                            <span class="text-xs uppercase font-bold tracking-widest text-emerald-500 mb-2 block">Fabricación / Impresión 3D</span>
-                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Additive Mfg Optimization</h3>
+                        <div class="flex justify-between items-start mt-4 px-2">
+                            <div>
+                                <h3 class="text-2xl font-medium tracking-tight mb-1">Additive Setup Optimization</h3>
+                                <p class="text-sm" style="color: var(--secondary-text)">Fabricación Aditiva / 3D</p>
+                            </div>
+                            <span class="text-xs tracking-widest uppercase btn-minimal px-4 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity t-pbtn">Ver Proyecto</span>
                         </div>
                     </div>
 
-                    <!-- Proyecto 3 -->
-                    <div class="portfolio-item group cursor-pointer reveal delay-100">
-                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
-                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=800" alt="Robotics" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
-                            <div class="project-overlay absolute inset-0 flex items-end p-8">
-                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
-                            </div>
+                    <!-- P3 -->
+                    <div class="portfolio-item group cursor-pointer reveal mt-12 md:mt-[-8rem]"> <!-- Empujado hacia arriba -->
+                        <div class="img-wrapper w-full aspect-[4/3] md:aspect-video mb-6">
+                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=1200" alt="Mechanical Engineering" class="object-cover w-full h-full mix-blend-luminosity hover:mix-blend-normal opacity-80 group-hover:opacity-100">
                         </div>
-                        <div>
-                            <span class="text-xs uppercase font-bold tracking-widest text-indigo-500 mb-2 block t-mech">Ingeniería Mecánica</span>
-                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Autodesk Concept Assembly</h3>
+                        <div class="flex justify-between items-start mt-4 px-2">
+                            <div>
+                                <h3 class="text-2xl font-medium tracking-tight mb-1">Autodesk Engine Core</h3>
+                                <p class="text-sm t-mech" style="color: var(--secondary-text)">Ingeniería Mecánica / Ensamblajes</p>
+                            </div>
+                            <span class="text-xs tracking-widest uppercase btn-minimal px-4 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity t-pbtn">Ver Proyecto</span>
                         </div>
                     </div>
 
-                    <!-- Proyecto 4 -->
-                    <div class="portfolio-item group cursor-pointer reveal delay-200">
-                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
-                            <img src="https://images.unsplash.com/photo-1618698263162-8e1217e9ce90?auto=format&fit=crop&q=80&w=800" alt="Web interface minimal" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
-                            <div class="project-overlay absolute inset-0 flex items-end p-8">
-                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
-                            </div>
+                    <!-- P4 -->
+                    <div class="portfolio-item group cursor-pointer reveal mt-12 md:mt-24">
+                        <div class="img-wrapper w-full aspect-[4/3] md:aspect-video mb-6">
+                            <img src="https://images.unsplash.com/photo-1618698263162-8e1217e9ce90?auto=format&fit=crop&q=80&w=1200" alt="UI / Visual Design" class="object-cover w-full h-full mix-blend-luminosity hover:mix-blend-normal opacity-80 group-hover:opacity-100">
                         </div>
-                        <div>
-                            <span class="text-xs uppercase font-bold tracking-widest text-pink-500 mb-2 block">Diseño / Desarrollo Web</span>
-                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Product Interface Dash</h3>
+                        <div class="flex justify-between items-start mt-4 px-2">
+                            <div>
+                                <h3 class="text-2xl font-medium tracking-tight mb-1">Interface Conceptual Flow</h3>
+                                <p class="text-sm" style="color: var(--secondary-text)">Diseño Web y Gráfico</p>
+                            </div>
+                            <span class="text-xs tracking-widest uppercase btn-minimal px-4 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity t-pbtn">Ver Proyecto</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-32 md:mt-48 flex justify-center reveal">
+                    <a href="#" class="btn-minimal px-10 py-5 text-xs font-semibold tracking-widest uppercase t-ver-todos">
+                        Archivo de trabajos completos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-px max-w-7xl mx-auto" style="background-color: var(--border-color)"></div>
+
+        <!-- 5. Currículum / Biografía: Tipografía pura -->
+        <section id="cv" class="py-32 md:py-56 px-6">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32">
+                <div class="md:w-1/4 reveal">
+                    <span class="text-xs font-semibold tracking-widest uppercase t-cv-tit" style="color: var(--secondary-text)">Educación y Formación</span>
                 </div>
                 
-                <div class="mt-12 flex justify-center">
-                    <button class="framer-button px-6 py-3 rounded-full text-sm font-semibold tracking-wider transition-transform t-ver-todos">VER TODOS LOS PROYECTOS</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Timeline CV -->
-        <section id="cv" class="py-32 px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-16 reveal t-tra">Trayectoria.</h2>
-                
-                <div class="relative border-l border-[color:var(--border-color)] ml-3 md:ml-6 space-y-12 pb-6">
-                    
-                    <!-- Elemento 5 -->
-                    <div class="relative pl-10 reveal delay-100">
-                        <div class="absolute w-4 h-4 rounded-full bg-[color:var(--text-color)] -left-[9px] top-2 shadow-[0_0_10px_var(--text-color)]"></div>
-                        <span class="text-xs tracking-widest uppercase text-blue-500 font-bold mb-2 block">Reciente</span>
-                        <h3 class="text-xl md:text-2xl font-bold">Ingeniería en Diseño Industrial</h3>
-                        <h4 class="text-md mt-1 font-medium t-cv-univ1" style="color: var(--secondary-text)">Universitat Politècnica de València (UPV)</h4>
-                    </div>
-
-                    <!-- Elemento 4 -->
-                    <div class="relative pl-10 reveal delay-200">
-                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--text-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
-                        <h3 class="text-xl md:text-2xl font-bold t-era2">Programa Erasmus (Reino Unido)</h3>
-                        <h4 class="text-md mt-1 font-medium" style="color: var(--secondary-text)">Middlesex University (London)</h4>
-                        <p class="text-sm mt-3" style="color: var(--secondary-text)">Enriquecimiento en metodologías de diseño y manufactura avanzada en el entorno londinense.</p>
-                    </div>
-
-                    <!-- Elemento 3 -->
-                    <div class="relative pl-10 reveal delay-300">
-                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--text-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
-                        <h3 class="text-xl md:text-2xl font-bold t-era1">Programa SICUE (Castellón)</h3>
-                        <h4 class="text-md mt-1 font-medium" style="color: var(--secondary-text)">Universitat Jaume I (UJI)</h4>
-                    </div>
-
-                    <!-- Elemento 2 -->
-                    <div class="relative pl-10 reveal delay-400">
-                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--border-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
-                        <h3 class="text-xl md:text-2xl font-bold" style="color: var(--secondary-text)">Grado Superior en Electricidad</h3>
-                    </div>
-
-                    <!-- Elemento 1 -->
-                    <div class="relative pl-10 reveal delay-500">
-                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--border-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
-                        <h3 class="text-xl md:text-2xl font-bold" style="color: var(--secondary-text)">Grado Medio en Electricidad</h3>
-                        <p class="text-sm mt-3 opacity-60">Base puramente técnica e instalaciones físicas formales.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Contacto -->
-        <section id="contact" class="py-32 px-6 min-h-[70vh] flex flex-col justify-center">
-            <div class="max-w-4xl mx-auto w-full reveal bg-gradient-to-tr from-[rgba(100,100,255,0.03)] to-transparent rounded-3xl p-10 md:p-20 border border-[color:var(--border-color)] feature-card relative overflow-hidden">
-                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight t-contacto-h">Listo para crear.</h2>
-                        <p class="text-lg mb-8 font-light t-contacto-p" style="color: var(--secondary-text)">Abierto a colaboraciones creativas, nuevos retos de ingeniería y oportunidades que fusionen ambas visiones.</p>
+                <div class="md:w-3/4">
+                    <div class="border-l border-[color:var(--border-color)] ml-1 pl-10 md:pl-16 space-y-20 relative">
                         
-                        <div class="flex gap-4">
-                            <!-- Links visuales de contacto -->
-                            <a href="mailto:hola@luisblasco.com" class="hover:text-blue-500 transition-colors">Email</a>
-                            <a href="#" class="hover:text-blue-500 transition-colors">LinkedIn</a>
-                            <a href="#" class="hover:text-blue-500 transition-colors">Behance</a>
+                        <!-- Elemento -->
+                        <div class="reveal relative">
+                            <!-- Dot minimalista -->
+                            <div class="absolute -left-[45px] md:-left-[69px] w-[10px] h-[10px] rounded-full bg-[color:var(--text-color)] top-2"></div>
+                            
+                            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-2">
+                                <h3 class="text-2xl md:text-3xl font-medium tracking-tight mb-1 lg:mb-0">Ingeniería en Diseño Industrial</h3>
+                                <span class="text-sm font-light uppercase tracking-widest text-gray-400 t-rec">Actualmente</span>
+                            </div>
+                            <h4 class="text-lg font-light t-cv-univ1" style="color: var(--secondary-text)">Universitat Politècnica de València (UPV)</h4>
                         </div>
+
+                        <!-- Elemento -->
+                        <div class="reveal relative">
+                            <div class="absolute -left-[45px] md:-left-[69px] w-[10px] h-[10px] rounded-full bg-[color:var(--bg-color)] border border-[color:var(--border-color)] top-2"></div>
+                            
+                            <h3 class="text-2xl md:text-3xl font-medium tracking-tight mb-2 t-era2">Programa Erasmus</h3>
+                            <h4 class="text-lg font-light mb-4" style="color: var(--secondary-text)">Middlesex University — Londres (UK)</h4>
+                            <p class="text-sm font-light max-w-2xl leading-relaxed t-era2-d" style="color: var(--secondary-text)">
+                                Intercambio académico y técnico internacional, con un foco intensivo en investigación tecnológica, prototipos interactivos y entorno de ingeniería metodológico.
+                            </p>
+                        </div>
+
+                        <!-- Elemento -->
+                        <div class="reveal relative">
+                            <div class="absolute -left-[45px] md:-left-[69px] w-[10px] h-[10px] rounded-full bg-[color:var(--bg-color)] border border-[color:var(--border-color)] top-2"></div>
+                            <h3 class="text-2xl md:text-3xl font-medium tracking-tight mb-2 t-era1">Programa SICUE</h3>
+                            <h4 class="text-lg font-light" style="color: var(--secondary-text)">Universitat Jaume I (UJI) — Castellón</h4>
+                        </div>
+
+                        <!-- Elementos base fusionados visualmente -->
+                        <div class="reveal relative">
+                            <div class="absolute -left-[45px] md:-left-[69px] w-[10px] h-[10px] rounded-full bg-[color:var(--bg-color)] border border-[color:var(--border-color)] top-2"></div>
+                            <h3 class="text-2xl md:text-3xl font-medium tracking-tight mb-2" style="color: var(--secondary-text)">Grado Superior de Electricidad</h3>
+                            <h4 class="text-lg font-light" style="color: var(--secondary-text)">Anterior a Universidad</h4>
+                        </div>
+                        
+                        <div class="reveal relative">
+                            <div class="absolute -left-[45px] md:-left-[69px] w-[10px] h-[10px] rounded-full bg-[color:var(--bg-color)] border border-[color:var(--border-color)] top-2"></div>
+                            <h3 class="text-2xl md:text-3xl font-medium tracking-tight mb-2 opacity-50">Grado Medio de Electricidad</h3>
+                        </div>
+
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Contacto: Desnudo total -->
+        <section id="contact" class="pt-32 pb-56 md:pt-56 px-6 bg-[color:var(--bg-color)] border-t" style="border-color: var(--border-color);">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32 items-center md:items-start justify-center">
+                
+                <div class="w-full md:w-1/2 reveal md:pr-12">
+                    <h2 class="text-5xl md:text-8xl font-medium tracking-tighter mb-10 leading-[0.9] t-contacto-h">Contacta.</h2>
+                    <p class="text-xl md:text-2xl font-light leading-relaxed mb-12 t-contacto-p" style="color: var(--secondary-text)">
+                        Tanto si buscas colaboración, desarrollar un proyecto o incorporar una pieza de talento híbrido técnico/creativo, conversemos.
+                    </p>
                     
-                    <form class="space-y-8">
-                        <div>
-                            <input type="text" placeholder="Nombre completo / Empresa" class="input-line w-full pb-3 pt-2 text-sm">
+                    <div class="flex gap-10 text-sm font-semibold tracking-widest uppercase">
+                        <a href="mailto:email@ejemplo.com" class="border-b border-transparent hover:border-current pb-1 transition-colors">Mail</a>
+                        <a href="#" class="border-b border-transparent hover:border-current pb-1 transition-colors">LinkedIn</a>
+                        <a href="#" class="border-b border-transparent hover:border-current pb-1 transition-colors">Behance</a>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 reveal md:pl-12 w-full mt-10 md:mt-0">
+                    <form class="space-y-12">
+                        <div class="w-full">
+                            <input type="text" placeholder="Tu nombre o empresa" class="input-clean w-full pb-4 text-xl md:text-2xl placeholder:font-light" style="--tw-placeholder-opacity: 0.3;">
                         </div>
-                        <div>
-                            <input type="email" placeholder="Dirección de e-mail" class="input-line w-full pb-3 pt-2 text-sm">
+                        <div class="w-full">
+                            <input type="email" placeholder="Dirección email" class="input-clean w-full pb-4 text-xl md:text-2xl placeholder:font-light" style="--tw-placeholder-opacity: 0.3;">
                         </div>
-                        <div>
-                            <textarea placeholder="Cuéntame sobre tu proyecto" rows="3" class="input-line w-full pb-3 pt-2 text-sm resize-none"></textarea>
+                        <div class="w-full">
+                            <textarea placeholder="Cuéntame tu idea..." rows="3" class="input-clean w-full pb-4 text-xl md:text-2xl resize-none placeholder:font-light" style="--tw-placeholder-opacity: 0.3;"></textarea>
                         </div>
-                        <button type="submit" class="framer-button px-8 py-3 w-full rounded-md font-medium text-sm transition-all t-hablemos">
-                            Hablemos hoy
-                        </button>
+                        <div class="pt-4">
+                            <button type="submit" class="btn-minimal px-10 py-5 w-full md:w-auto text-sm font-semibold tracking-widest uppercase t-hablemos">
+                                Enviar mensaje
+                            </button>
+                        </div>
                     </form>
                 </div>
+
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="py-8 text-center text-sm font-light border-t border-[color:var(--border-color)] t-foot" style="color: var(--secondary-text)">
-        © 2024 Luis Blasco-Ibáñez Berbel. Todos los derechos reservados.<br> <span class="opacity-50">Diseñado con un enfoque racional e ingenieril.</span>
+    <!-- Footer Super Limpio -->
+    <footer class="py-12 px-6 text-xs text-center md:text-left flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto uppercase tracking-widest font-semibold" style="color: var(--secondary-text)">
+        <span>© <span id="year">2024</span> LBB. All rights reserved.</span>
+        <span class="mt-4 md:mt-0 font-light opacity-60">Diseñado desde cero</span>
     </footer>
 
-    <!-- LOGICA / SCRIPTS JAVASCRIPT VANILLA -->
+    <!-- LOGICA / SCRIPTS JAVASCRIPT -->
     <script>
-        // 1. Scroll Animations - Intersection Observer para las clases "reveal"
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // 1. SCROLL REVEAL SUAVE 
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 50; // offset
+                var elementVisible = 50;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        // Lanzar una vez por si ya está en pantalla
         reveal();
 
-
-        // 2. Light / Dark Theme Toggle 
+        // 2. TEMA MODO CLARO / OSCURO SIN RELIEVE, TODO A COLOR
         const themeBtn = document.getElementById("theme-toggle");
         const lightIcon = document.getElementById("icon-light");
         const darkIcon = document.getElementById("icon-dark");
@@ -488,62 +444,50 @@
             }
         });
 
-
-        // 3. Mini Sistema Básico Multilingüe (Español / Ingles Toggle mockup funcional)
+        // 3. BOTÓN LENGUAJE INTERNO (Ajustado para el DOM simple)
         const langToggle = document.getElementById("lang-toggle");
         let isEnglish = false;
         
-        // Diccionario estático ultraligero
-        const dictionary = {
-            "en": {
-                "t-sobre": "About", "t-hab": "Skills", "t-port": "Work", "t-cv": "Resume",
-                "t-prof": "Industrial Designer",
-                "t-manifesto": "Synergy between <strong class='font-medium text-[color:var(--text-color)]'>engineering</strong> and <strong class='font-medium text-[color:var(--text-color)]'>creative design</strong> to forge real solutions.",
-                "t-btn-hero": "View Portfolio <svg class='w-4 h-4 ml-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 14l-7 7m0 0l-7-7m7 7V3'></path></svg>",
-                "t-sobre-titulo": "About me",
-                "t-p1": "I am Luis Blasco-Ibáñez Berbel, a 24-year-old industrial designer. I am passionate about 3D printing and enjoy solving structural, mechanical, or aesthetic challenges.",
-                "t-p2": "I don’t see myself as purely technical or strictly artistic: I am interested in the intersection where engineering, design, and experimentation cross paths to create thoughtful real-world solutions.",
-                "t-p3": "I love exploring manufacturing processes, researching new materials, and operating new additive manufacturing technologies, always maintaining an open and curious mindset.",
-                "t-desc-1": "Advanced CAD, parametric design, geometry optimization, and accurate 3D modeling for the industry.",
-                "t-imp3d": "3D Printing",
-                "t-desc-2": "Part slicing, g-codes, rapid prototyping, and technology integration (FDM, SLA, functional materials).",
-                "t-prog": "Development",
-                "t-desc-3": "Core technical foundation, logic building, and digital web integration from a multidisciplinary standpoint.",
-                "t-dg": "Graphic Design",
-                "t-desc-4": "Visual product presentations and user-centered aesthetics (Adobe Creative Suite).",
-                "t-pbtn": "View Project",
-                "t-ind-des": "Industrial Design",
-                "t-mech": "Mechanical Engineering",
-                "t-ver-todos": "VIEW ALL PROJECTS",
-                "t-tra": "Journey.",
-                "t-cv-univ1": "Technical University of Valencia (UPV)",
-                "t-era2": "Erasmus Exchange (UK)",
-                "t-era1": "SICUE Program",
-                "t-contacto-h": "Ready to build.",
-                "t-contacto-p": "Open for creative collaborations, fresh engineering challenges, and opportunities bridging both fields.",
-                "t-hablemos": "Let's talk today",
-                "t-foot": "© 2024 Luis Blasco-Ibáñez Berbel. All rights reserved.<br> <span class='opacity-50'>Designed with a rational and engineering mindset.</span>"
-            },
-            "es": {} 
-            // Las versiones en ES ya están integradas hard-coded en el DOM de base. 
-            // Esto solo es para ejemplificar si se pide retorno. Una web real cargarla vía i18n / fetch.
+        const dictEn = {
+            "t-sobre": "Info", "t-hab": "Skills", "t-port": "Work", "t-cv": "Bio",
+            "t-prof": "Engineering + Industrial Design",
+            "t-manifesto": "I see no boundaries between <strong class='font-normal' style='color:var(--text-color)'>technique and art.</strong> Design focused on solving, experimenting, and bringing things to life honestly.",
+            "t-btn-hero": "View Projects",
+            "t-sobre-titulo": "About me",
+            "t-p1": "I am a 24-year-old industrial designer deeply fascinated by understanding <span class='italic text-gray-500'>how things are made.</span>",
+            "t-p2": "The intersection of engineering, aesthetics, and digital manufacturing is my field of play. I explore additive manufacturing, iterative processes, and functionally rigorous prototyping.",
+            "t-p3": "I love analyzing new materials and squeezing parametric tools to produce parts that meet strict technical criteria without ever compromising the visual identity of the final product.",
+            "t-desc-1": "Advanced mastery of Autodesk. Parametric setup, geometric validation, and conceptual rigour.",
+            "t-imp3d": "3D Printing",
+            "t-desc-2": "Screen-to-physical translation. G-code manipulation, iterative SLA/FDM prototyping with material insight.",
+            "t-prog": "Logic & Code",
+            "t-desc-3": "Going beyond the physical: core coding principles applied for holistic digital layers in hardware/software design.",
+            "t-dg": "Graphic Design",
+            "t-desc-4": "Adobe Suite focused on UX and layout aesthetics to grant final physical objects proper rationale & visualization.",
+            "t-port-tit": "Selected <br/> Work.",
+            "t-pbtn": "View",
+            "t-ind-des": "Industrial Design",
+            "t-mech": "Mechanical Assembly",
+            "t-ver-todos": "View Complete Archive",
+            "t-cv-tit": "Education & Background",
+            "t-rec": "Current",
+            "t-cv-univ1": "Technical University of Valencia (UPV)",
+            "t-era2": "Erasmus Exchange",
+            "t-era2-d": "International tech-centric environment focused heavily on physical tech interaction and structural manufacturing design methodology.",
+            "t-era1": "SICUE Domestic Exchange",
+            "t-contacto-h": "Get in touch.",
+            "t-contacto-p": "Whether for a joint collaboration, to materialize a new technical-creative vision or just an engaging coffee talk.",
+            "t-hablemos": "Send Inquiry"
         };
 
-        // Respaldo de ES original cacheado (minimal approach para archivo simple)
-        const elementClassesToSwap = [
-            "t-sobre", "t-hab", "t-port", "t-cv", "t-prof", "t-manifesto", "t-btn-hero", "t-sobre-titulo", "t-p1", "t-p2", "t-p3", 
-            "t-desc-1", "t-imp3d", "t-desc-2", "t-prog", "t-desc-3", "t-dg", "t-desc-4", "t-ind-des", "t-mech", "t-ver-todos",
-            "t-tra", "t-cv-univ1", "t-era2", "t-era1", "t-contacto-h", "t-contacto-p", "t-hablemos", "t-foot"
-        ];
-        
-        let originalTexts = {};
-        
-        // Setup initial ES cache
-        elementClassesToSwap.forEach(cls => {
+        const cssSelectors = Object.keys(dictEn);
+        let dictEsCache = {};
+
+        // Auto Cache de Español
+        cssSelectors.forEach(cls => {
             const els = document.querySelectorAll("." + cls);
-            els.forEach((el, index) => {
-                if(!originalTexts[cls]) originalTexts[cls] = [];
-                originalTexts[cls].push(el.innerHTML);
+            els.forEach(el => {
+                if(!dictEsCache[cls]) dictEsCache[cls] = el.innerHTML;
             });
         });
 
@@ -551,23 +495,13 @@
             isEnglish = !isEnglish;
             langToggle.innerText = isEnglish ? "ES" : "EN";
 
-            elementClassesToSwap.forEach(cls => {
+            cssSelectors.forEach(cls => {
                 const els = document.querySelectorAll("." + cls);
-                els.forEach((el, index) => {
-                    // Update Portfolio button multiples properly or others
-                    if(isEnglish) {
-                        el.innerHTML = dictionary["en"][cls];
-                    } else {
-                        el.innerHTML = originalTexts[cls][index] || originalTexts[cls][0]; // rollback
-                    }
+                els.forEach(el => {
+                    el.innerHTML = isEnglish ? dictEn[cls] : dictEsCache[cls];
                 });
             });
-
-            // Para portfolio loop multiple
-            const pfBtns = document.querySelectorAll(".t-pbtn");
-            pfBtns.forEach(el => el.innerHTML = isEnglish ? "View Details" : "Ver Detalle");
         });
     </script>
-
 </body>
 </html>
