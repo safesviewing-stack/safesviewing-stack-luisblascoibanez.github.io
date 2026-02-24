@@ -109,7 +109,88 @@
         /* --- CURRICULUM --- */
         .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
-        .btn-cv { margin-top: 60px; display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.4s; }
+
+        /* --- INTERACTIVE HOVER BUTTON COMPONENT --- */
+        .interactive-hover-btn {
+            position: relative;
+            overflow: hidden;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            padding: 20px 45px;
+            text-align: center;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            text-decoration: none;
+            min-width: fit-content;
+            transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .interactive-hover-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .ihb-text-1 {
+            display: inline-block;
+            transform: translateX(4px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            z-index: 10;
+            position: relative;
+        }
+
+        .interactive-hover-btn:hover .ihb-text-1 {
+            transform: translateX(48px);
+            opacity: 0;
+        }
+
+        .ihb-text-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white; /* Text inside purple overlay */
+            z-index: 10;
+            transform: translateX(-15px);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+
+        .interactive-hover-btn:hover .ihb-text-2 {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .ihb-dot {
+            position: absolute;
+            left: 20%;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            height: 8px;
+            width: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .interactive-hover-btn:hover .ihb-dot {
+            left: 0%;
+            top: 0%;
+            width: 100%;
+            height: 100%;
+            border-radius: 100px; /* fills out gracefully */
+            transform: translateY(0) scale(1.01);
+        }
 
         /* MEDIA QUERIES */
         @media (max-width: 1024px) { 
@@ -193,7 +274,16 @@
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">BECARIO DISEÑO</h3><span>Bionic Design Solutions.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021</div><div class="cv-content"><h3 class="lang-text" data-es="ESPECIALISTA SURFACING" data-en="SURFACING SPECIALIST">ESPECIALISTA SURFACING</h3><span>Academy 3D Course.</span></div></div>
         <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3 class="lang-text" data-es="GRADO DISEÑO INDUSTRIAL" data-en="BACHELOR IN INDUSTRIAL DESIGN">GRADO DISEÑO INDUSTRIAL</h3><span class="lang-text" data-es="Univ. Politécnica Superior." data-en="Higher Polytechnic Univ.">Univ. Politécnica Superior.</span></div></div>
-        <a href="#" class="btn-cv"><span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span> <i class="fa-solid fa-file-arrow-down"></i></a>
+        
+        <!-- BUTTON WITH INTERACTIVE HOVER RECREATED (Vanilla translation of interactive-hover-button component) -->
+        <a href="#" class="interactive-hover-btn" style="margin-top: 60px;">
+            <span class="ihb-text-1 lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
+            <div class="ihb-text-2">
+                <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">DESCARGAR CV PDF</span>
+                <i class="fa-solid fa-file-arrow-down"></i>
+            </div>
+            <div class="ihb-dot"></div>
+        </a>
     </section>
 
     <section id="contact" style="padding-bottom: 250px;">
@@ -203,7 +293,16 @@
                 <input type="text" class="lang-ph" data-es="TU NOMBRE" data-en="YOUR NAME" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
                 <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
                 <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
-                <button type="submit" class="lang-text" data-es="ENVIAR" data-en="SEND" style="cursor:none; width:fit-content; background:var(--accent); color:white; border:none; padding:20px 60px; border-radius:100px; font-weight:800; margin-top:20px;">ENVIAR</button>
+                
+                <!-- BUTTON WITH INTERACTIVE HOVER RECREATED FOR FORMS (Compatible using inner styling fixes instead of react variants) -->
+                <button type="submit" class="interactive-hover-btn" style="margin-top:20px; width: fit-content; min-width: 250px;">
+                    <span class="ihb-text-1 lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
+                    <div class="ihb-text-2">
+                        <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <div class="ihb-dot"></div>
+                </button>
             </form>
         </div>
     </section>
@@ -283,6 +382,7 @@
             cursor.style.top = e.clientY + 'px';
         });
 
+        // Los botones tipo link de los nuevos botones dinámicos y sus selectores. 
         document.querySelectorAll('a, button, input, textarea, .project-card, .header-toggles button').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
             el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
