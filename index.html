@@ -309,13 +309,8 @@ header::before {
     opacity: 0.85;
 }
 
-   /* === SKILLS GRID === */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
-}
+
+
 
 .skill-card {
     background: var(--card-bg);
@@ -345,6 +340,20 @@ header::before {
     font-size: 0.9rem;
     color: var(--text-dim);
     line-height: 1.6;
+}
+
+        /* === SKILLS (VERTICAL) === */
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra las cajas */
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.skill-card {
+    width: 100%;
+    max-width: 900px; /* controla lo largas */
 }
     </style>
 </head>
