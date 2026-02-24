@@ -261,88 +261,17 @@ header::before {
     margin-top: 8px;
 }
 
+/* === MAGNETIC SKILLS GRID === */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
 
-
-      /* === SKILLS CAROUSEL === */
-.skills-carousel {
-    overflow: hidden;
-    width: 100%;
+.skill-item {
     position: relative;
-}
-
-.skills-track {
-    display: flex;
-    gap: 25px;
-    width: max-content;
-    animation: skills-scroll 30s linear infinite;
-}
-
-.skills-carousel:hover .skills-track {
-    animation-play-state: paused;
-}
-
-@keyframes skills-scroll {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-
-        .skill-card {
-    min-width: 280px;
-    height: 160px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.skill-card:hover {
-    transform: translateY(-10px) scale(1.05);
-}
-
-        /* === SKILLS CAROUSEL === */
-.skills-carousel {
-    overflow: hidden;
-    width: 100%;
-    margin-top: 40px;
-}
-
-.skills-track {
-    display: flex;
-    gap: 20px;
-    width: max-content;
-    animation: skills-scroll 35s linear infinite;
-}
-
-.skills-carousel:hover .skills-track {
-    animation-play-state: paused;
-}
-
-@keyframes skills-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-        /* === SKILL BOX STYLE === */
-.skill-box {
-    min-width: 220px;
-    height: 120px;
+    height: 140px;
 
     display: flex;
     flex-direction: column;
@@ -351,40 +280,31 @@ header::before {
     gap: 10px;
 
     background: rgba(20,20,20,0.55);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
+    border-radius: 22px;
 
-    transition: 
-        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
-.skill-box img {
-    width: 36px;
-    height: 36px;
-    filter: grayscale(100%) brightness(1.2);
-    transition: filter 0.3s ease, transform 0.3s ease;
+.skill-item img {
+    width: 38px;
+    height: 38px;
+    filter: grayscale(100%) brightness(1.1);
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.skill-box span {
+.skill-item span {
     font-size: 0.7rem;
     letter-spacing: 2px;
     font-weight: 700;
     opacity: 0.85;
 }
 
-        .skill-box:hover {
-    transform: translateY(-8px) scale(1.05);
-    border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.skill-box:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.1);
-}
+   
     </style>
 </head>
 <body>
@@ -454,34 +374,17 @@ header::before {
    <section id="skills">
     <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
 
-    <div class="skills-carousel">
-        <div class="skills-track">
-
-            <!-- STACK -->
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/autodesk/autodesk-original.svg"><span>AUTOCAD</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidworks/solidworks-original.svg"><span>SOLIDWORKS</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rhino/rhino-original.svg"><span>RHINO</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"><span>GITHUB</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg"><span>PHOTOSHOP</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg"><span>ILLUSTRATOR</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg"><span>INDESIGN</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg"><span>ANIMATE</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"><span>3DS MAX</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"><span>FUSION 360</span></div>
-
-            <!-- DUPLICADO PARA LOOP -->
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/autodesk/autodesk-original.svg"><span>AUTOCAD</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidworks/solidworks-original.svg"><span>SOLIDWORKS</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rhino/rhino-original.svg"><span>RHINO</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"><span>GITHUB</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg"><span>PHOTOSHOP</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg"><span>ILLUSTRATOR</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg"><span>INDESIGN</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg"><span>ANIMATE</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"><span>3DS MAX</span></div>
-            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"><span>FUSION 360</span></div>
-
-        </div>
+    <div class="skills-grid">
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/autodesk/autodesk-original.svg"><span>AUTOCAD</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidworks/solidworks-original.svg"><span>SOLIDWORKS</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rhino/rhino-original.svg"><span>RHINO</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"><span>GITHUB</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg"><span>PHOTOSHOP</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg"><span>ILLUSTRATOR</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg"><span>INDESIGN</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg"><span>ANIMATE</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"><span>FUSION 360</span></div>
+        <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"><span>3DS MAX</span></div>
     </div>
 </section>
 
@@ -641,6 +544,27 @@ header::before {
             el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
             el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
         });
+
+
+
+        <script>
+document.querySelectorAll('.skill-item').forEach(item => {
+    item.addEventListener('mousemove', e => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const moveX = x * 0.05;
+        const moveY = y * 0.05;
+
+        item.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translate(0, 0)';
+    });
+});
+</script>
     </script>
 </body>
 </html>
