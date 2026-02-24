@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --bg: #050505;
+            --accent: #8b5cf6; 
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-dim: #a1a1aa;
+            --glass: rgba(5, 5, 5, 0.45);
+        }
+
+        .light-mode {
+            --bg: #f5f5f7;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.1);
+            --text: #1d1d1f;
+            --text-dim: #424245;
+            --glass: rgba(255, 255, 255, 0.6);
+            --accent-glow: rgba(139, 92, 246, 0.15); /* Slightly subtle for white background */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background 0.5s ease;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
+            z-index: -1;
+        }
+
+        /* --- CURSOR --- */
+        #cursor {
+            width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- HEADER GLASS --- */
+       header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    padding: 20px 4% 20px 10%;
+
+    background: rgba(5, 5, 5, 0.30); /* ← más transparente */
+    backdrop-filter: blur(35px) saturate(140%);
+    -webkit-backdrop-filter: blur(35px) saturate(140%);
+
+    display: flex;
+    align-items: center;
+
+    z-index: 2000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.3s ease,
+                backdrop-filter 0.3s ease;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0)
+    );
+    pointer-events: none;
+}
+
+        
+        header.nav-hidden { transform: translateY(-100%); }
+
+        .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;   /* más grande */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+        .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
+        
+        /* SPOTLIGHT NAV LINK EFFECTS  */
+        .nav-links { 
+            display: flex; gap: 25px; position: relative; 
+            padding-bottom: 5px; /* Added internal space protecting light cast visually  */
+        }
+
+        .nav-links a { 
+            color: #ffffff;
+            position: relative; z-index: 2; /* Sobre luz blur */
+            text-decoration: none; font-size: 0.7rem; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; 
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.spotlight-active { color: var(--text); font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .light-mode .nav-links a.spotlight-active { text-shadow: none; color: var(--accent); }
+
+        /* EL DESTELLO CORREDOR (Nav Indicator Box Shadow Translate) */
+        .nav-indicator {
+            position: absolute;
+            top: -21px;  /* Sincronizado para ir justo contra el "Techo de Header" pegado visual */
+            left: 0;
+            height: 2px;
+            background: #fff; /* White base con difuminado purpura imita Spotlight origin Tailwind style */
+            box-shadow: 0 1px 12px 1px var(--accent);
+            border-radius: 4px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            opacity: 0; /* Opaco x def. Aparece via Script si matcheas ID*/
+            pointer-events: none;
+            z-index: 1;
+        }
+
+       
+
+        .header-toggles { display: flex; gap: 15px; align-items: center; }
+        
+        #lang-toggle { 
+            background: transparent; border: 1px solid var(--border); color: var(--text); 
+            padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
+            align-items: center; justify-content: center; font-size: 0.75rem; 
+            font-weight: 700; transition: 0.3s; outline: none; 
+        }
+        #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* --- THEME TOGGLE SLIDER --- */
+        .theme-switch-wrapper {
+            all: unset; display: flex; align-items: center; justify-content: space-between;
+            width: 64px; height: 32px; padding: 3px; border-radius: 9999px;
+            cursor: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
+            background: #09090b; border: 1px solid #27272a; position: relative;
+        }
+
+        .light-mode .theme-switch-wrapper { background: #ffffff; border: 1px solid #e4e4e7; }
+        .theme-icon-container {
+            display: flex; justify-content: center; align-items: center; 
+            width: 24px; height: 24px; border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
+
+        .icon-left { background: #27272a; color: #ffffff; transform: translateX(0); }
+        .light-mode .icon-left { transform: translateX(32px); background: #e5e7eb; color: #374151; }
+        .icon-right { background: transparent; color: #71717a; transform: translateX(0); }
+        .light-mode .icon-right { transform: translateX(-32px); color: #000000; }
+        .dark-visible { display: block; } .light-visible { display: none; }
+        .light-mode .dark-visible { display: none; } .light-mode .light-visible { display: block; }
+
+        /* --- SECCIONES GENERALES --- */
+        section { padding: 220px 10% 120px; }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
+        .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    line-height: 1.1;        /* más separación entre líneas */
+    margin-bottom: 40px;
+    letter-spacing: -6px;
+    text-transform: uppercase;
+    margin-left: -8px;
+}
+        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+
+        h2.section-title { font-family: 'Inter', sans-serif; font-size: 4rem; margin-bottom: 40px; text-transform: uppercase; }
+
+        .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
+        .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); text-align: justify; text-justify: inter-word; }
+        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
+
+        /* --- PORTFOLIO --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; transition: 0.4s; overflow: hidden; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .project-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; }
+
+        /* --- CURRICULUM --- */
+        .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
+        .cv-year {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    min-width: 160px;
+}
+
+        /* --- EXPAND ICON BUTTON CSS --- */
+        
+        .btn-expand {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            background-color: var(--accent); 
+            color: #ffffff; 
+            padding: 20px 45px;
+            font-size: 1rem;
+            font-weight: 800;
+            border-radius: 100px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            cursor: none;
+            min-width: fit-content;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-expand:hover {
+            background-color: #7c3aed; 
+            box-shadow: 0px 4px 15px var(--accent-glow); 
+        }
+        
+        .btn-expand:active { transform: scale(0.97); }
+
+        .btn-expand-icon {
+            display: inline-flex; align-items: center;
+            width: 0px; padding-left: 0px; opacity: 0;
+            overflow: hidden; transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-expand:hover .btn-expand-icon {
+            width: 25px; padding-left: 10px;          
+            transform: translateX(0%); opacity: 1;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .portfolio-grid { grid-template-columns: 1fr; } 
+            .hero h1 { font-size: 3.5rem; }
+            .about-container { grid-template-columns: 1fr; }
+        }
+
+
+        .nav-links a.spotlight-active {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+        .nav-links {
+    display: flex;
+    align-items: center;
+}
+
+        .nav-links a {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+        .nav-links {
+    margin-top: 8px;
+}
+
+/* === MAGNETIC SKILLS GRID === */
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.skill-card {
+    width: 100%;
+    max-width: 900px;   /* controla lo largas que son */
+    text-align: left; 
+}
+
+.skill-item {
+    position: relative;
+    height: 140px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: rgba(20,20,20,0.55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.skill-item img {
+    width: 38px;
+    height: 38px;
+    filter: grayscale(100%) brightness(1.1);
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.skill-item span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    opacity: 0.85;
+}
+
+
+
+
+.skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 35px;
+
+    transition: 
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+}
+
+.skill-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;          /* más grande */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    color: var(--text);          /* bien protagonista */
+}
+.skill-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    opacity: 0.6;   /* más opacos */
+}
+        /* === SKILLS (VERTICAL) === */
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.skill-card {
+    width: 100%;
+    max-width: 900px; /* controla lo largas */
+}
+
+    .project-card p {
+    font-size: 0.65rem;      /* más pequeño */
+    letter-spacing: 1.8px;   /* look técnico/editorial */
+    opacity: 0.55;           /* más opaco */
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+        /* === FADE INFERIOR CAMUFLADO === */
+body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120px;          /* más discreto */
+    pointer-events: none;
+    z-index: 999;
+
+    background: linear-gradient(
+        to top,
+        var(--bg) 0%,
+        rgba(0, 0, 0, 0.0) 100%
+    );
+}
+
+.light-mode body::after {
+    background: linear-gradient(
+        to top,
+        var(--bg) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+        #work .section-title {
+    margin-bottom: 45px; /* antes ~25px */
+}
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <header id="navbar">
+        <div class="nav-logo">L · BIB</div>
+        <div class="header-actions">
+            
+            <nav class="nav-links" id="nav-container">
+                <!-- HAZ DIRECCIONAL/LINEA RESPONSABLE DEL HIGHLIGHT INDICATOR -->
+               
+                
+                <a href="#about" class="lang-text" data-es="Sobre mí" data-en="About me">Sobre mí</a>
+                <a href="#work" class="lang-text" data-es="Portfolio" data-en="Portfolio">Portfolio</a>
+                <a href="#skills" class="lang-text" data-es="Habilidades" data-en="Skills">Habilidades</a>
+                <a href="#cv" class="lang-text" data-es="Curriculum" data-en="Resume">Curriculum</a>
+                <a href="#contact" class="lang-text" data-es="Contacto" data-en="Contact">Contacto</a>
+            </nav>
+            
+            <div class="header-toggles">
+                <button id="lang-toggle" aria-label="Toggle Language"><span>ES</span></button>
+                <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
+                    <div class="theme-icon-container icon-left">
+                        <i class="fa-solid fa-moon dark-visible"></i>
+                        <i class="fa-solid fa-sun light-visible"></i>
+                    </div>
+                    <div class="theme-icon-container icon-right">
+                        <i class="fa-solid fa-sun dark-visible"></i>
+                        <i class="fa-solid fa-moon light-visible"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1200">
+            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
+            <p class="subtitle lang-text" data-aos="fade-right" data-aos-delay="400" data-es="PORTFOLIO | DISEÑADOR INDUSTRIAL" data-en="PORTFOLIO | INDUSTRIAL DESIGNER">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
+        <div class="about-container">
+            <div class="about-text-reduced" data-aos="fade-up">
+                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
+            </div>
+            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Portfolio" data-en="Portfolio">Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ALPHA</h3><p class="lang-text" data-es="ESTRUCTURA TÉCNICA" data-en="TECHNICAL STRUCTURE">ESTRUCTURA TÉCNICA</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>EGO</h3><p class="lang-text" data-es="MUEBLE SINGULAR" data-en="UNIQUE FURNITURE">MUEBLE SINGULAR</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ION</h3><p class="lang-text" data-es="TECNOLOGÍA" data-en="TECHNOLOGY">TECNOLOGÍA</p></div></div>
+            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>BEATS</h3><p class="lang-text" data-es="SONIDO HI-FI" data-en="HI-FI SOUND">SONIDO HI-FI</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CITY</h3><p class="lang-text" data-es="ENTORNO URBANO" data-en="URBAN ENVIRONMENT">ENTORNO URBANO</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CORE</h3><p class="lang-text" data-es="FORMAS ORGÁNICAS" data-en="ORGANIC SHAPES">FORMAS ORGÁNICAS</p></div></div>
+        </div>
+    </section>
+
+   <section id="skills">
+    <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
+
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h3>CAD AVANZADO</h3>
+            <p>SolidWorks · Fusion 360 · Inventor · Rhino · AutoCAD</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>RENDER Y VISUALIZACIÓN</h3>
+            <p>3ds Max · SolidWorks Visualize</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>DISEÑO GRÁFICO</h3>
+            <p>Photoshop · Illustrator · InDesign · Animate</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>PROTOTIPADO</h3>
+            <p>Maquetas · Impresión 3D</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>DISEÑO WEB</h3>
+            <p>GitHub</p>
+        </div>
+    </div>
+</section>
+
+    <section id="cv">
+    <h2 class="section-title lang-text" data-aos="fade-up" data-es="Curriculum" data-en="Resume">
+        Curriculum
+    </h2>
+
+    <div class="cv-item" data-aos="fade-up">
+        <div class="cv-year lang-text" data-es="2024 — PRESENTE" data-en="2024 — PRESENT">
+            2024 — PRESENTE
+        </div>
+        <div class="cv-content">
+            <h3>PRODUCT DESIGNER LEAD</h3>
+            <span>Industrial Core Studio.</span>
+        </div>
+    </div>
+
+    <div class="cv-item" data-aos="fade-up">
+        <div class="cv-year">2023</div>
+        <div class="cv-content">
+            <h3 class="lang-text" 
+                data-es="PRÁCTICAS DISEÑO INDUSTRIAL" 
+                data-en="INDUSTRIAL DESIGN INTERN">
+                PRÁCTICAS DISEÑO INDUSTRIAL
+            </h3>
+            <span class="lang-text" 
+                  data-es="Estudio de diseño / Empresa" 
+                  data-en="Design studio / Company">
+                Estudio de diseño / Empresa
+            </span>
+        </div>
+    </div>
+
+    <div class="cv-item" data-aos="fade-up">
+        <div class="cv-year">2022 — 2024</div>
+        <div class="cv-content">
+            <h3 class="lang-text" data-es="DISEÑADOR JUNIOR" data-en="JUNIOR DESIGNER">
+                DISEÑADOR JUNIOR
+            </h3>
+            <span>Prototyping Labs.</span>
+        </div>
+    </div>
+
+    <div class="cv-item" data-aos="fade-up">
+        <div class="cv-year">2021 — 2022</div>
+        <div class="cv-content">
+            <h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">
+                BECARIO DISEÑO
+            </h3>
+            <span>Bionic Design Solutions.</span>
+        </div>
+    </div>
+
+    <div class="cv-item" data-aos="fade-up">
+        <div class="cv-year">2016 — 2020</div>
+        <div class="cv-content">
+            <h3 class="lang-text" 
+                data-es="GRADO DISEÑO INDUSTRIAL" 
+                data-en="BACHELOR IN INDUSTRIAL DESIGN">
+                GRADO DISEÑO INDUSTRIAL
+            </h3>
+            <span class="lang-text" 
+                  data-es="Univ. Politécnica Superior." 
+                  data-en="Higher Polytechnic Univ.">
+                Univ. Politécnica Superior.
+            </span>
+        </div>
+    </div>
+
+    <a href="#" class="btn-expand group" style="margin-top: 60px;">
+        <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">
+            DESCARGAR CV PDF
+        </span>
+        <div class="btn-expand-icon">
+            <i class="fa-solid fa-file-arrow-down"></i>
+        </div>
+    </a>
+</section>
+
+    <section id="contact" style="padding-bottom: 250px;">
+        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Contacto" data-en="Contact">Contacto</h2>
+        <div style="background:var(--card-bg); padding:80px; border-radius:40px; border:1px solid var(--border);">
+            <form style="display:flex; flex-direction:column; gap:20px;">
+                <input type="text" class="lang-ph" data-es="TU NOMBRE" data-en="YOUR NAME" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
+                <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
+                <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
+                
+                <button type="submit" class="btn-expand group" style="margin-top:20px; min-width: 250px; justify-content: center;">
+                    <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
+                    <div class="btn-expand-icon">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding:30px 10%; text-align:center; opacity:0.35; font-size: 0.7rem; letter-spacing: 1px;">
+        <p class="lang-text" data-es="© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial" data-en="© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Designer">© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // SPOTLIGHT LÓGICA CON CALCULO DIMENSION Y MARCAJE  DE SECCIÓN (Active State + Blur Effect Mapeado interactivo )
+        
+        const navContainer = document.getElementById("nav-container");
+        const sectionsArray = document.querySelectorAll("section[id]");
+        const sectionNavLinks = document.querySelectorAll(".nav-links a");
+        
+        function updateSpotlight() {
+            let activeId = "";
+            let currentScroll = window.scrollY;
+            
+            // Evaluamos la posición general de todas las áreas visuales restando viewport tolerante superior/mitad  (-50% viewHeight triggers)
+            sectionsArray.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const vTollerance = window.innerHeight * 0.45; // Empieza a cambiar cuando cruzamos la frontera natural por la mtiad d
+                
+                if (currentScroll >= (sectionTop - vTollerance) && currentScroll < (sectionTop + sectionHeight - vTollerance)) {
+                    activeId = section.getAttribute("id");
+                }
+            });
+
+            // Condición absoluta Forzosa en End Point Footer = "contact" id check 
+            if ((window.innerHeight + currentScroll) >= document.body.offsetHeight - 50) {
+                activeId = "contact";
+            }
+            
+            if (activeId) {
+                const activeLinkTarget = document.querySelector(`.nav-links a[href="#${activeId}"]`);
+                if(activeLinkTarget) {
+                    const lBox = activeLinkTarget.getBoundingClientRect();
+                    const nBox = navContainer.getBoundingClientRect();
+                    
+                    const leftShift = lBox.left - nBox.left; 
+
+                   
+
+                    sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
+                    activeLinkTarget.classList.add('spotlight-active');
+                }
+            } else { 
+                 // Opaca Si se encuentra al top y Hero Mode en lugar Neutral // 
+                spotlight.style.opacity = '0';
+                sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
+            }
+        }
+        window.addEventListener('scroll', updateSpotlight, { passive: true });
+        window.addEventListener('resize', updateSpotlight);
+        
+        // Ejecución preventiva por cache visual Start  Load
+        document.addEventListener("DOMContentLoaded", updateSpotlight);
+
+        // LENGUAJES LÓGICA RÁPIDA 
+        const btnLang = document.getElementById("lang-toggle");
+        let currentLang = "es";
+        btnLang.addEventListener("click", () => {
+            currentLang = currentLang === "es" ? "en" : "es";
+            btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
+            document.querySelectorAll(".lang-text").forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+            document.querySelectorAll(".lang-ph").forEach(el => {
+                el.placeholder = el.getAttribute(`data-${currentLang}`);
+            });
+            setTimeout(updateSpotlight, 100); // Trigger para reacordar width post cambios palabra longitudes "curriculum a Resume etc" !
+        });
+
+        // TEMAS DARK/LIGHT MODE LÓGICA DE FORMS
+        const btnToggleTheme = document.getElementById("theme-switch");
+        btnToggleTheme.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+            const formInputs = document.querySelectorAll("#contact input, #contact textarea");
+            if(document.body.classList.contains("light-mode")){
+                formInputs.forEach(input => input.style.color = "#1d1d1f");
+            } else {
+                formInputs.forEach(input => input.style.color = "white");
+            }
+        });
+
+        // HEADER SCROLL AUTO Y HIDDEN CONTROL DEFAULT 
+        let lastScroll = 0;
+        let isAutoScrolling = false;
+        let scrollTimeout;
+        const navbar = document.getElementById("navbar");
+        
+        sectionNavLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                isAutoScrolling = true;
+                navbar.classList.remove("nav-hidden");
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => { isAutoScrolling = false; updateSpotlight(); }, 1000); // Lanza Actualizacion
+            });
+        });
+
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.scrollY || document.documentElement.scrollTop;
+            if (!isAutoScrolling) {
+                if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
+                else navbar.classList.remove("nav-hidden");
+            }
+            lastScroll = currentScroll;
+        });
+
+        // CUSTOM CURSOR HOVER EVENT LOOP CATCH OVER EVERYTHING INTERACTIVO NUEVO   
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
+            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
+        });
+
+
+
+        
+    </script>
+</body>
+</html>
