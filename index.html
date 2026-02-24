@@ -315,6 +315,76 @@ header::before {
 .skill-card:hover {
     transform: translateY(-10px) scale(1.05);
 }
+
+        /* === SKILLS CAROUSEL === */
+.skills-carousel {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.skills-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: skills-scroll 35s linear infinite;
+}
+
+.skills-carousel:hover .skills-track {
+    animation-play-state: paused;
+}
+
+@keyframes skills-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+        /* === SKILL BOX STYLE === */
+.skill-box {
+    min-width: 220px;
+    height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: rgba(20,20,20,0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+
+    transition: 
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.skill-box img {
+    width: 36px;
+    height: 36px;
+    filter: grayscale(100%) brightness(1.2);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.skill-box span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    opacity: 0.85;
+}
+
+        .skill-box:hover {
+    transform: translateY(-8px) scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.skill-box:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body>
@@ -386,20 +456,31 @@ header::before {
 
     <div class="skills-carousel">
         <div class="skills-track">
-            <div class="project-card skill-card">CAD AVANZADO</div>
-            <div class="project-card skill-card">RENDERING</div>
-            <div class="project-card skill-card">INGENIERÍA</div>
-            <div class="project-card skill-card">PROTOTIPADO</div>
-            <div class="project-card skill-card">DFM / DFA</div>
-            <div class="project-card skill-card">MATERIALS</div>
 
-            <!-- duplicado para loop infinito -->
-            <div class="project-card skill-card">CAD AVANZADO</div>
-            <div class="project-card skill-card">RENDERING</div>
-            <div class="project-card skill-card">INGENIERÍA</div>
-            <div class="project-card skill-card">PROTOTIPADO</div>
-            <div class="project-card skill-card">DFM / DFA</div>
-            <div class="project-card skill-card">MATERIALS</div>
+            <!-- STACK -->
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/autodesk/autodesk-original.svg"><span>AUTOCAD</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidworks/solidworks-original.svg"><span>SOLIDWORKS</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rhino/rhino-original.svg"><span>RHINO</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"><span>GITHUB</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg"><span>PHOTOSHOP</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg"><span>ILLUSTRATOR</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg"><span>INDESIGN</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg"><span>ANIMATE</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"><span>3DS MAX</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"><span>FUSION 360</span></div>
+
+            <!-- DUPLICADO PARA LOOP -->
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/autodesk/autodesk-original.svg"><span>AUTOCAD</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidworks/solidworks-original.svg"><span>SOLIDWORKS</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rhino/rhino-original.svg"><span>RHINO</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"><span>GITHUB</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg"><span>PHOTOSHOP</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg"><span>ILLUSTRATOR</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg"><span>INDESIGN</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg"><span>ANIMATE</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"><span>3DS MAX</span></div>
+            <div class="skill-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"><span>FUSION 360</span></div>
+
         </div>
     </div>
 </section>
