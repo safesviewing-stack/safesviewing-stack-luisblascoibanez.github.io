@@ -60,7 +60,7 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- HEADER IPHONE GLASS --- */
+        /* --- HEADER IPHONE GLASS (SIN LÍNEA) --- */
         header {
             position: fixed;
             top: 0;
@@ -70,7 +70,7 @@
             backdrop-filter: blur(35px); 
             -webkit-backdrop-filter: blur(35px);
             padding: 18px 10%;
-            border-bottom: 0.5px solid rgba(255, 255, 255, 0.12); 
+            border-bottom: none; /* Línea eliminada */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -78,9 +78,7 @@
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        header.nav-hidden {
-            transform: translateY(-100%);
-        }
+        header.nav-hidden { transform: translateY(-100%); }
 
         .nav-logo {
             font-family: 'Syne', sans-serif;
@@ -90,10 +88,7 @@
             color: var(--text);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
+        .nav-links { display: flex; gap: 25px; }
 
         .nav-links a {
             text-decoration: none;
@@ -135,21 +130,44 @@
             font-weight: 700;
         }
 
-        /* --- SOBRE MÍ --- */
-        .about-text {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+        /* --- TÍTULOS DE SECCIÓN UNIFORMES --- */
+        h2.section-title {
             font-family: 'Syne', sans-serif;
-            max-width: 900px;
-            line-height: 1.2;
-            margin-top: 40px;
+            font-size: 2.5rem; 
+            margin-bottom: 60px; 
+            text-transform: uppercase;
+            color: var(--text);
         }
+
+        /* --- SOBRE MÍ CON FOTO ALINEADA --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .about-text-reduced {
+            font-size: 1.1rem; /* Tamaño reducido solicitado */
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+
+        .about-photo {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .about-photo:hover { filter: grayscale(0%); border-color: var(--accent); }
 
         /* --- PORTFOLIO --- */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            margin-top: 40px;
         }
 
         .project-card {
@@ -161,17 +179,11 @@
         }
 
         .project-image { width: 100%; height: 350px; overflow: hidden; background: #111; }
-        .project-image img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: 0.8s; filter: grayscale(100%); opacity: 0.5;
-        }
-
+        .project-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; filter: grayscale(100%); opacity: 0.5; }
         .project-card:hover { border-color: var(--accent); transform: translateY(-10px); }
         .project-card:hover .project-image img { filter: grayscale(0%); opacity: 1; }
-        
         .project-info { padding: 25px; }
         .project-info h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; }
-        .project-info p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; }
 
         /* --- SKILLS BENTO --- */
         .skills-grid {
@@ -191,37 +203,37 @@
         .bento-2 { grid-column: span 2; }
 
         /* --- CURRICULUM --- */
-        .cv-item {
+        .cv-item { display: flex; gap: 40px; padding: 40px 0; border-bottom: 1px solid var(--border); }
+        .cv-year { font-family: 'Syne', sans-serif; font-size: 1.1rem; min-width: 140px; color: var(--accent); }
+        .btn-cv { margin-top: 40px; display: inline-flex; align-items: center; gap: 12px; background: white; color: black; padding: 20px 40px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.3s; }
+
+        /* --- CONTACTO (ALINEACIÓN DE SCROLL) --- */
+        #contact {
+            min-height: 100vh;
             display: flex;
-            gap: 40px;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .cv-year {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            min-width: 140px;
-            color: var(--accent);
-        }
-
-        .btn-cv {
-            margin-top: 40px;
-            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: white;
-            color: black;
-            padding: 20px 40px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 800;
+            justify-content: center;
         }
 
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 80px 10%; 
+            border-radius: 40px; 
+            border: 1px solid var(--border);
+            width: 100%;
+        }
+
+        input, textarea {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); 
+            padding: 20px 0; color: white; margin-bottom: 30px; outline: none; font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-grid, .about-container { grid-template-columns: 1fr; }
+            .about-photo { order: -1; max-width: 400px; }
+        }
 
         @media (max-width: 768px) {
-            .portfolio-grid, .skills-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
             header { padding: 15px 5%; }
             .nav-links { display: none; }
@@ -243,6 +255,7 @@
         </nav>
     </header>
 
+    <!-- HERO -->
     <section class="hero" id="home">
         <div data-aos="fade-up" data-aos-duration="1200">
             <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
@@ -250,104 +263,85 @@
         </div>
     </section>
 
-    <!-- SECCIÓN SOBRE MÍ -->
+    <!-- SOBRE MÍ ACTUALIZADO -->
     <section id="about">
-        <h2 style="font-family: 'Syne'; font-size: 1rem; text-transform: uppercase; color: var(--accent); letter-spacing: 3px;" data-aos="fade-up">Sobre mí.</h2>
-        <div class="about-text" data-aos="fade-up" data-aos-delay="200">
-            Soy un diseñador industrial apasionado por la fusión entre **funcionalidad técnica** y **estética minimalista**. Creo en objetos que no solo ocupan espacio, sino que resuelven problemas a través del ingenio y el respeto por los materiales.
+        <h2 class="section-title" data-aos="fade-right">Sobre mí.</h2>
+        <div class="about-container">
+            <div class="about-text-reduced" data-aos="fade-up">
+                <p>Soy un diseñador industrial apasionado por la fusión entre funcionalidad técnica y estética minimalista. Mi enfoque de diseño se basa en la simplificación de procesos, la elección consciente de materiales y la creación de objetos que generen una conexión emocional duradera con el usuario.</p>
+                <br>
+                <p>Desde el bocetaje inicial hasta el prototipado final, cuido cada detalle para asegurar que el producto no solo resuelva una necesidad real, sino que sea viable desde el punto de vista manufacturero (DFM/DFA).</p>
+            </div>
+            <!-- IMAGEN ALINEADA A LA DERECHA (Poner ruta en src) -->
+            <img src="https://via.placeholder.com/350x450/111/fff?text=TU+FOTO" class="about-photo" alt="Luis Blasco-Ibáñez Berbel" data-aos="fade-left">
         </div>
     </section>
 
-    <!-- SECCIÓN PORTFOLIO -->
+    <!-- PORTFOLIO -->
     <section id="work">
-        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Portfolio.</h2>
+        <h2 class="section-title" data-aos="fade-right">Portfolio.</h2>
         <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Mobiliario Urbano S1</h3><p>Concept / CAD</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Estructura Lámpara L-X</h3><p>Visualización</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Componentes Mecánicos</h3><p>DFA Analysis</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Hifi Interface</h3><p>Prototipado</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Eco Wood Desk</h3><p>Manufactura</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="project-image"><img src="https://images.unsplash.com/photo-1542120463-75ad255c7067?auto=format&fit=crop&q=80&w=800"></div>
-                <div class="project-info"><h3>Packaging Tech</h3><p>3D / Desarrollo</p></div>
-            </div>
+            <div class="project-card" data-aos="fade-up"><div class="project-image"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Mobiliario Urbano S1</h3><p>Concept / CAD</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><div class="project-image"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Estructura Lámpara L-X</h3><p>Visualización</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><div class="project-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800"></div><div class="project-info"><h3>Componentes Mecánicos</h3><p>Ingeniería</p></div></div>
         </div>
     </section>
 
-    <!-- SECCIÓN HABILIDADES -->
+    <!-- HABILIDADES -->
     <section id="skills">
-        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Habilidades.</h2>
+        <h2 class="section-title" data-aos="fade-right">Habilidades.</h2>
         <div class="skills-grid">
-            <div class="skill-card bento-2" data-aos="fade-up">
-                <i class="fa-solid fa-cube"></i>
-                <h3>Modelado avanzado</h3>
-                <p>Uso experto de Rhino 7 y SolidWorks para superficies complejas.</p>
-            </div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-solid fa-layer-group"></i>
-                <h3>Visualización</h3>
-                <p>Renderizado Keyshot.</p>
-            </div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fa-solid fa-microchip"></i>
-                <h3>Producción</h3>
-                <p>DFM / DFA.</p>
-            </div>
+            <div class="skill-card bento-2" data-aos="fade-up"><i class="fa-solid fa-cube"></i><h3>Modelado CAD</h3><p>SolidWorks, Rhino 7, Fusion 360.</p></div>
+            <div class="skill-card" data-aos="fade-up"><i class="fa-solid fa-layer-group"></i><h3>Render</h3><p>Keyshot, V-Ray.</p></div>
+            <div class="skill-card" data-aos="fade-up"><i class="fa-solid fa-microchip"></i><h3>Ingeniería</h3><p>Manufactura e IoT.</p></div>
         </div>
     </section>
 
-    <!-- SECCIÓN CURRICULUM -->
+    <!-- CURRICULUM -->
     <section id="cv">
-        <h2 style="font-family: 'Syne'; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase;" data-aos="fade-right">Curriculum.</h2>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — HOY</div><div class="cv-content"><h3>Diseño de Producto Intern</h3><span>Studio Name BCN.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3>Grado Ingeniería en Diseño</h3><span>UPV València.</span></div></div>
+        <h2 class="section-title" data-aos="fade-right">Curriculum.</h2>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — HOY</div><div class="cv-content"><h3>Industrial Design Junior</h3><span>Product Development Studio B.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3>Ingeniería de Diseño Industrial</h3><span>Universidad Técnica de Valencia.</span></div></div>
         <a href="#" class="btn-cv" data-aos="zoom-in">DOWNLOAD CV <i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
-    <section id="contact" style="margin-bottom: 100px;">
-        <div style="background: rgba(255, 255, 255, 0.03); padding: 80px 10%; border-radius: 40px; border: 1px solid var(--border);" data-aos="zoom-out">
+    <!-- CONTACTO (CON BOX CENTRADO) -->
+    <section id="contact">
+        <div class="contact-box" data-aos="zoom-out">
             <h2 style="font-family: 'Syne'; font-size: 3rem; text-transform: uppercase; margin-bottom: 50px;">Hablemos.</h2>
             <form style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column;">
-                <input type="text" placeholder="NOMBRE" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;">
-                <input type="email" placeholder="EMAIL" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;">
-                <textarea rows="4" placeholder="MENSAJE" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: white; margin-bottom: 30px; outline: none;"></textarea>
+                <input type="text" placeholder="NOMBRE">
+                <input type="email" placeholder="CORREO ELECTRÓNICO">
+                <textarea rows="4" placeholder="MENSAJE"></textarea>
                 <button type="submit" style="width: fit-content; padding: 15px 60px; border: none; background: var(--accent); color: white; font-weight: 800; border-radius: 100px; margin-top: 20px;">ENVIAR</button>
             </form>
         </div>
     </section>
 
-    <footer style="padding: 60px 10%; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 2px;">
-        LUIS BLASCO-IBÁÑEZ BERBEL © 2024
+    <footer style="padding: 60px 10%; border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <div style="font-size: 0.9rem; letter-spacing: 2px; color: var(--text);">LUIS BLASCO-IBÁÑEZ BERBEL</div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-dim); font-size: 0.8rem;">
+            <!-- CONTACT INFO SOLICITADO -->
+            <a href="mailto:luisblascoibanezberbel@gmail.com" style="color: var(--text-dim); text-decoration: none;">luisblascoibanezberbel@gmail.com</a>
+            <a href="tel:+34630511806" style="color: var(--text-dim); text-decoration: none;">+34 630 511 806</a>
+        </div>
+        <div style="margin-top: 20px; font-size: 0.7rem; color: var(--text-dim);">© 2024 / DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
+        // LOGIC: HEADER SMART
         let lastScrollTop = 0;
         let isNavigating = false;
         const navbar = document.getElementById("navbar");
 
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
                 isNavigating = true;
                 navbar.classList.remove("nav-hidden");
-                setTimeout(() => { isNavigating = false; }, 800); 
+                setTimeout(() => { isNavigating = false; }, 1000); 
             });
         });
 
@@ -359,6 +353,7 @@
             lastScrollTop = scrollTop;
         });
 
+        // CURSOR ANIMATION
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
