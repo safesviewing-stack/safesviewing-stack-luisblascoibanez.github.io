@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luis Blasco-Ibáñez | Industrial Design</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -13,10 +13,10 @@
         /* --- CORE VARIABLES --- */
         :root {
             --bg: #030303;
-            --accent: #FF5A00; 
+            --accent: #FF5A00; /* Naranja técnico industrial, muy premium */
             --accent-glow: rgba(255, 90, 0, 0.15);
             --card-bg: rgba(25, 25, 27, 0.4);
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.05);
             --text: #f3f3f3;
             --text-dim: #8b8b8d;
             --glass: rgba(10, 10, 12, 0.5);
@@ -24,40 +24,29 @@
         }
 
         .light-mode {
-            --bg: #f4f4f5;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --border: rgba(0, 0, 0, 0.08);
+            --bg: #f2f2f4;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --border: rgba(0, 0, 0, 0.06);
             --text: #111112;
             --text-dim: #5c5c5f;
             --glass: rgba(255, 255, 255, 0.6);
             --accent-glow: rgba(255, 90, 0, 0.05);
         }
 
+        /* --- BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg); color: var(--text);
-            font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; line-height: 1.5;
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        /* --- SYSTEM PRELOADER --- */
-        #preloader {
-            position: fixed; inset: 0; background: var(--bg); z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-        .preloader-hidden { transform: translateY(-100%); }
-        .preloader-text {
-            font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;
-            letter-spacing: 2px; display: flex; flex-direction: column; gap: 20px; align-items: center;
-        }
-        .progress-bar { width: 200px; height: 1px; background: var(--border); position: relative; }
-        .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 1s ease; }
-
-        /* Background Noise */
+        /* Film Grain Noise overlay - Trendy in 2026 */
         body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998;
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 9998;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             opacity: 0.04; mix-blend-mode: overlay;
         }
@@ -70,21 +59,9 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* HUD ELEMENTS (Cruces Técnicas) */
-        .hud-cross {
-            position: absolute; width: 12px; height: 12px; pointer-events: none; opacity: 0.5;
-        }
-        .hud-cross::before, .hud-cross::after {
-            content: ""; position: absolute; background: var(--text-dim);
-        }
-        .hud-cross::before { top: 5px; left: 0; width: 12px; height: 1px; }
-        .hud-cross::after { top: 0; left: 5px; width: 1px; height: 12px; }
-        .hc-tl { top: 40px; left: 40px; } .hc-tr { top: 40px; right: 40px; }
-        .hc-bl { bottom: 40px; left: 40px; } .hc-br { bottom: 40px; right: 40px; }
-
-        /* --- CURSOR --- */
+        /* --- MODERN CUSTOM CURSOR --- */
         #cursor-dot {
-            width: 6px; height: 6px; background: var(--text); border-radius: 50%;
+            width: 8px; height: 8px; background: var(--text); border-radius: 50%;
             position: fixed; pointer-events: none; z-index: 9999;
             transform: translate(-50%, -50%); transition: background 0.2s, transform 0.2s;
         }
@@ -94,387 +71,420 @@
             transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border 0.3s;
             transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .hovered-element #cursor-ring { width: 70px; height: 70px; background: var(--text); mix-blend-mode: difference; border-color: transparent; }
+        
+        .hovered-element #cursor-ring {
+            width: 80px; height: 80px; background: var(--text); mix-blend-mode: difference;
+            border-color: transparent;
+        }
         .hovered-element #cursor-dot { opacity: 0; }
 
         /* --- FLOATING PILL NAVBAR --- */
         .navbar-wrapper {
-            position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
+            position: fixed; top: 30px; left: 0; width: 100%;
+            display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .navbar-hidden { transform: translateY(-120px); }
 
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 10px 25px; display: flex; align-items: center; gap: 40px;
-            border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 12px 30px; display: flex; align-items: center; gap: 40px;
+            border: 1px solid var(--border); border-radius: 100px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .nav-logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.9rem; letter-spacing: -0.5px; }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { 
-            text-decoration: none; color: var(--text-dim); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; 
+            text-decoration: none; color: var(--text-dim); font-size: 0.8rem; 
+            font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; 
+            transition: color 0.3s; 
         }
         .nav-links a:hover { color: var(--text); }
-        .nav-dot { width: 3px; height: 3px; background: var(--border); border-radius: 50%; }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
-        #theme-toggle { background: transparent; border: none; color: var(--text); width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s; }
-        #theme-toggle:hover { transform: rotate(90deg); }
+        #theme-toggle { 
+            background: transparent; border: none; color: var(--text);
+            width: 25px; height: 25px; display: flex; align-items: center; 
+            justify-content: center; font-size: 1.1rem; transition: transform 0.3s;
+        }
+        #theme-toggle:hover { transform: rotate(45deg); }
 
         /* --- SECTIONS --- */
-        section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; position: relative; }
+        section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
 
-        /* --- HERO --- */
-        .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; }
+        .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
         .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 11vw, 10rem); 
-            line-height: 0.9; margin-bottom: 20px; font-weight: 800; letter-spacing: -0.05em; text-transform: uppercase;
+            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
+            line-height: 0.9; margin-bottom: 20px; font-weight: 800; 
+            letter-spacing: -0.04em; text-transform: uppercase;
         }
-        .hero .subtitle { font-family: 'Space Mono', monospace; font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
-        .availability {
-            position: absolute; bottom: 80px; left: 5vw; display: flex; align-items: center; gap: 10px; font-family: 'Space Mono'; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;
+        .hero .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--accent); font-weight: 600; font-family: 'Syne'; letter-spacing: 1px;}
+        .hero .availability {
+            position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
         }
-        .pulse { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: ping 2s infinite; }
-        @keyframes ping { 75%, 100% { transform: scale(2.5); opacity: 0; } }
+        .pulse { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        
+        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
 
-        /* --- MARQUEE SCROLL (CINTA INFINITA) --- */
-        .marquee {
-            width: 100vw; background: var(--accent); padding: 12px 0; overflow: hidden; white-space: nowrap; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: center; color: var(--bg); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1);
+        h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
+
+        /* --- BENTO GRID: ABOUT --- */
+        .bento-about {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
         }
-        .marquee-track { display: inline-block; white-space: nowrap; animation: scroll-marquee 25s linear infinite; }
-        .marquee:hover .marquee-track { animation-play-state: paused; }
-        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin-bottom: 60px; letter-spacing: -1.5px;}
-
-        /* --- BENTO ABOUT --- */
-        .bento-about { display: grid; grid-template-columns: 2fr 1.2fr; gap: 20px; }
-        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 60px; backdrop-filter: var(--blur); position: relative;}
-        .bento-card-photo { overflow: hidden; min-height: 450px; position: relative; border-radius: 20px; border: 1px solid var(--border); }
-        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .bento-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px;
+            padding: 50px; backdrop-filter: var(--blur);
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .bento-card-photo {
+            padding: 0; overflow: hidden; height: 100%; min-height: 450px;
+            position: relative; border-radius: 30px; border: 1px solid var(--border);
+        }
+        .bento-card-photo img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%);
+            transition: filter 0.5s, transform 0.5s;
+        }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- 3D PORTFOLIO BENTO --- */
-        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; perspective: 1200px; } /* Perspective for 3D tilt */
+        /* --- BENTO GRID: PORTFOLIO --- */
+        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
         .p-card {
-            position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
-            transition: transform 0.1s; will-change: transform; transform-style: preserve-3d;
+            position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px;
+            overflow: hidden; group; transition: 0.5s ease;
         }
         .p-wide { grid-column: span 8; height: 500px; }
         .p-square { grid-column: span 4; height: 500px; }
         
-        .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; pointer-events: none; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease-out; transform: scale(1.02); }
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7; }
+        .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
+        .p-img-container img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1.01);
+        }
+        .p-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
+            z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7;
+        }
 
         .p-info {
-            position: absolute; bottom: 35px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; transform: translateZ(30px); /* 3D pop effect */
+            position: absolute; bottom: 30px; left: 30px; right: 30px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end;
         }
-        .p-info h3 { font-family: 'Syne'; font-size: 2.2rem; margin-bottom: 5px; color: white; letter-spacing: -1px;}
-        .p-info p { font-family: 'Space Mono'; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; }
+        .p-info h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 5px; color: white;}
+        .p-info p { font-size: 0.85rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
 
         .view-circle {
-            width: 50px; height: 50px; border-radius: 50%; background: var(--text); color: var(--bg); display: flex; justify-content: center; align-items: center; font-size: 1.2rem; opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .p-card:hover { z-index: 10; border-color: rgba(255,255,255,0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
-        .p-card:hover .p-img-container img { transform: scale(1.1); filter: contrast(1.1); }
-        .p-card:hover .p-overlay { opacity: 0.9; }
-        .p-card:hover .view-circle { opacity: 1; transform: scale(1); }
+        .p-card:hover { border-color: rgba(255,255,255,0.2); }
+        .p-card:hover .p-img-container img { transform: scale(1.08); }
+        .p-card:hover .p-overlay { opacity: 1; }
+        .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- CV MINIMAL --- */
-        .cv-item { display: flex; justify-content: space-between; padding: 35px 0; border-bottom: 1px solid var(--border); align-items: center; transition: 0.3s; }
-        .cv-item:hover { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent); padding-left: 15px;}
-        .cv-role h3 { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; margin-bottom: 4px;}
-        .cv-company { font-family: 'Inter'; font-size: 1rem; color: var(--text-dim); }
-        .cv-year { font-family: 'Space Mono'; color: var(--accent); font-size: 0.8rem; }
+        /* --- SKILLS --- */
+        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
+        .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
+
+        /* --- CURRICULUM MINIMALISTA --- */
+        .cv-wrapper { border-top: 1px solid var(--border); }
+        .cv-item { 
+            display: flex; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid var(--border);
+            align-items: center; transition: 0.3s;
+        }
+        .cv-item:hover { padding-left: 20px; padding-right: 20px; background: rgba(255,255,255,0.01); }
+        .cv-role h3 { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; }
+        .cv-company { font-size: 1rem; color: var(--text-dim); }
+        .cv-year { font-family: 'Inter'; color: var(--accent); font-weight: 500; font-size: 0.9rem;}
         
         .btn {
-            display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 50px; border: 1px solid transparent; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, background 0.3s; margin-top: 50px;
         }
-        .btn:hover { background: transparent; color: var(--text); border-color: var(--text); }
+        .btn:hover { transform: translateY(-5px); background: var(--accent); color: white;}
 
         /* --- CONTACT --- */
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.9; font-weight: 800;}
-        .contact-link { display: block; font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-dim); text-decoration: none; margin-bottom: 15px; transition: color 0.3s, padding 0.3s; border-bottom: 1px solid transparent; width: fit-content; font-family: 'Syne', sans-serif;}
-        .contact-link:hover { color: var(--accent); padding-left: 20px;}
-
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center;}
+        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; font-weight: 800;}
+        .contact-info a { display: block; font-size: 2rem; color: var(--text-dim); text-decoration: none; margin-bottom: 10px; transition: 0.3s;}
+        .contact-info a:hover { color: var(--accent); }
+        
+        /* FOOTER */
         footer {
-            padding: 40px 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; margin-top: 100px; font-family: 'Space Mono'; letter-spacing: 1px;
+            padding: 40px 5vw; display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 100px;
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
             .portfolio-bento { display: flex; flex-direction: column; }
             .p-wide, .p-square { height: 400px; }
-            .bento-about { grid-template-columns: 1fr; }
-            .bento-card-photo { min-height: 350px;}
+            .bento-about, .skills-bento, .footer-grid { grid-template-columns: 1fr; }
+            .bento-card-photo { min-height: 400px;}
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
-            .nav-links, .nav-dot, .hud-cross { display: none; }
-            .cv-item { flex-direction: column; align-items: flex-start; gap: 15px;}
+            .nav-links, .nav-dot { display: none; }
+            .cv-item { flex-direction: column; align-items: flex-start; gap: 10px;}
+            .cv-item:hover { padding-left: 0; padding-right: 0;}
         }
     </style>
 </head>
 <body>
 
-    <!-- SYSTEM PRELOADER -->
-    <div id="preloader">
-        <div class="preloader-text">
-            <span>> SYS.INIT_L|BIB</span>
-            <span>ASSEMBLING GEOMETRY</span>
-            <div class="progress-bar"><div class="progress-fill" id="p-bar"></div></div>
-        </div>
-    </div>
-
-    <!-- CUSTOM CURSOR -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- DYNAMIC NAVBAR -->
+    <!-- Navegación Islote Dinámico -->
     <div class="navbar-wrapper" id="navbar">
         <header>
-            <div class="nav-logo inter-hover">L|BIB_</div>
+            <div class="nav-logo inter-hover">L|BIB</div>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="#about" class="inter-hover">Pérfil</a>
-                <a href="#work" class="inter-hover">Archivo</a>
-                <a href="#cv" class="inter-hover">Sistema</a>
+                <a href="#about" class="inter-hover">Sobre mí</a>
+                <a href="#work" class="inter-hover">Portfolio</a>
+                <a href="#skills" class="inter-hover">Studio</a>
+                <a href="#cv" class="inter-hover">Currículum</a>
             </nav>
-            <button id="theme-toggle" class="inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+            <button id="theme-toggle" class="inter-hover" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
         </header>
     </div>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="home">
-        <!-- HUD Elements -->
-        <div class="hud-cross hc-tl"></div> <div class="hud-cross hc-tr"></div>
-        <div class="hud-cross hc-bl"></div> <div class="hud-cross hc-br"></div>
-
-        <p class="subtitle" data-aos="fade-right">OBJETOS / TÉCNICA / MÉTODO</p>
-        <div data-aos="fade-up" data-aos-delay="200">
+        <p class="subtitle" data-aos="fade-down" data-aos-duration="1000">DIS. INDUSTRIAL</p>
+        <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
         </div>
-        <div class="availability" data-aos="fade-in" data-aos-delay="600">
-            <div class="pulse"></div> DESIGN ENGINEER PORTFOLIO 2026
+        <div class="availability" data-aos="fade-up" data-aos-delay="500">
+            <div class="pulse"></div> Disponible para nuevos retos
         </div>
     </section>
 
-    <!-- MARQUEE INFINITE SCROLL -->
-    <div class="marquee" data-aos="fade-in">
-        <div class="marquee-track">
-            RHINOCEROS 3D • SOLIDWORKS • DFMA (MANUFACTURING) • PLASTIC INJECTION MOLDING • CLASS-A SURFACING • KEYSHOT REALISM • PROTOTYPING • CNC MILLING • MATERIAL SCIENCE • RHINOCEROS 3D • SOLIDWORKS • DFMA (MANUFACTURING) • PLASTIC INJECTION MOLDING • CLASS-A SURFACING • KEYSHOT REALISM • PROTOTYPING • CNC MILLING • MATERIAL SCIENCE •
-        </div>
-    </div>
-
-    <!-- ABOUT SECTION -->
     <section id="about">
-        <h2 class="section-title" data-aos="fade-up">ADN Estructural /</h2>
+        <h2 class="section-title" data-aos="fade-right">Perfil /</h2>
         <div class="bento-about">
             <div class="bento-card" data-aos="fade-up">
                 <p class="about-text">
-                    Operando en el epicentro de Valencia. Poseo formación académica transdiciplinar pasando por múltiples ecosistemas universitarios que forjaron mi mentalidad pragmática. 
+                    Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>.
                     <br><br>
-                    <strong>La funcionalidad dicta la volumetría.</strong> Antes de la estética pura, concibo piezas desde el cálculo. Mis fundamentos provienen de sistemas eléctricos y de matricería, garantizando que el diseño trasciende del render al polímero moldeado real. <br><br> Diseño optimizando tolerancias, respetando ensamblajes mecánicos e induciendo deseo a través de acabados puros.
+                    No opero puramente desde el arte ni puramente desde la ingeniería. Habito ese eje central; persiguiendo el balance entre <strong>la belleza material, el empirismo productivo y la coherencia sistémica</strong>. Mi paso por estudios previos de técnica y electricidad fundamentó mi ADN en una comprensión rigurosa del porqué detrás de la forma, diseñando con mentalidad orientada a la <em>fabricación y optimización real.</em>
                 </p>
             </div>
-            <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Workspace">
+            <div class="bento-card-photo" data-aos="fade-up" data-aos-delay="150">
+                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Retrato o Entorno">
             </div>
         </div>
     </section>
 
-    <!-- PORTFOLIO ARCHIVE (WITH 3D TILT JS) -->
     <section id="work">
-        <h2 class="section-title" data-aos="fade-up">Prototipos Recientes /</h2>
+        <h2 class="section-title" data-aos="fade-right">Archivo de Diseño /</h2>
+        
         <div class="portfolio-bento">
-            
-            <a href="#" class="p-card p-wide inter-hover tilt-card" data-aos="fade-up">
+            <!-- Project 1 (WIDE) -->
+            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div>
-                        <p>// 001. METÁLICA ESTRUCTURAL</p>
-                        <h3>CHASIS ALPHA</h3>
+                        <h3>PROYECTO ALPHA</h3>
+                        <p>Diseño Estructural Técnico</p>
                     </div>
-                    <div class="view-circle"><i class="fa-solid fa-plus"></i></div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card p-square inter-hover tilt-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div>
-                        <p>// 002. ACÚSTICA APLICADA</p>
-                        <h3>MÓDULO HI-FI</h3>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-plus"></i></div>
-                </div>
-            </a>
-
-            <a href="#" class="p-card p-square inter-hover tilt-card" data-aos="fade-up">
+            <!-- Project 2 (SQUARE) -->
+            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div>
-                        <p>// 003. CONTEXTO DE USO</p>
-                        <h3>SILLA EGO</h3>
+                        <h3>EGO SEATING</h3>
+                        <p>Mobiliario / Contexto</p>
                     </div>
-                    <div class="view-circle"><i class="fa-solid fa-plus"></i></div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card p-wide inter-hover tilt-card" data-aos="fade-up" data-aos-delay="100">
+            <!-- Project 3 (SQUARE) -->
+            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div>
+                        <h3>BEATS X</h3>
+                        <p>Carcasas Hi-Fi / Consumer Electronics</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Project 4 (WIDE) -->
+            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div>
-                        <p>// 004. INYECCIÓN ORGÁNICA</p>
-                        <h3>SISTEMA ION</h3>
+                        <h3>ION CORE</h3>
+                        <p>Diseño Orgánico Industrializado</p>
                     </div>
-                    <div class="view-circle"><i class="fa-solid fa-plus"></i></div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
         </div>
     </section>
 
-    <!-- CV SYSTEM -->
+    <section id="skills">
+        <h2 class="section-title" data-aos="fade-right">Infraestructura & Técnicas /</h2>
+        <div class="skills-bento">
+            <div class="bento-card" data-aos="fade-up">
+                <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Modelado Topológico</h3>
+                <p class="about-text" style="font-size:0.95rem;">SolidWorks & Rhinoceros avanzados. Precisión volumétrica orientada a moldeo plástico e integración compleja de componentes clase-A Surfaces.</p>
+            </div>
+            <div class="bento-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Representación Visual</h3>
+                <p class="about-text" style="font-size:0.95rem;">Keyshot & Realidad Física CGI. Renderización matérica avanzada comunicando acabados, gramajes, pesos visuales e impacto comercial.</p>
+            </div>
+            <div class="bento-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Viabilidad Productiva (DFM)</h3>
+                <p class="about-text" style="font-size:0.95rem;">Metodologías de "Design for Manufacturing". Costeo optimizado de matricería. Interrelación experta de elementos metálicos/plásticos.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="cv">
-        <h2 class="section-title" data-aos="fade-up">Registros del Sistema /</h2>
-        <div style="border-top: 1px solid var(--border);">
+        <div class="cv-wrapper">
+            <h2 class="section-title" style="margin-top: 50px;" data-aos="fade-up">Histórico Laboral /</h2>
+            
             <div class="cv-item" data-aos="fade-up">
                 <div class="cv-role">
                     <h3>Product Designer Lead</h3>
-                    <div class="cv-company">Industrial Core Studio</div>
+                    <div class="cv-company">Industrial Core Studio • Liderando diseño de producto global</div>
                 </div>
-                <div class="cv-year">[ 2024 — ACTUAL ]</div>
+                <div class="cv-year">2024 — ACTUALIDAD</div>
             </div>
 
             <div class="cv-item" data-aos="fade-up" data-aos-delay="50">
                 <div class="cv-role">
-                    <h3>Diseñador Paramétrico Jr.</h3>
-                    <div class="cv-company">Prototyping Labs C.A</div>
+                    <h3>Diseñador Jr. Equipamiento</h3>
+                    <div class="cv-company">Prototyping Labs C.A • Parametrización</div>
                 </div>
-                <div class="cv-year">[ 2022 — 2024 ]</div>
+                <div class="cv-year">2022 — 2024</div>
             </div>
 
             <div class="cv-item" data-aos="fade-up" data-aos-delay="100">
                 <div class="cv-role">
-                    <h3>Ingeniería Inversa (Beca)</h3>
-                    <div class="cv-company">Bionic Solutions</div>
+                    <h3>Pasante CAD + Electricidad</h3>
+                    <div class="cv-company">Bionic Solutions & Partners</div>
                 </div>
-                <div class="cv-year">[ 2021 — 2022 ]</div>
+                <div class="cv-year">2021 — 2022</div>
             </div>
 
-            <a href="#" class="btn inter-hover" data-aos="fade-up"><i class="fa-solid fa-download"></i> Extraer Datasheet .PDF</a>
+            <div class="cv-item" data-aos="fade-up" data-aos-delay="150">
+                <div class="cv-role">
+                    <h3>Graduado Diseño Industrial</h3>
+                    <div class="cv-company">Desarrollado en tres universidades polítecnicas cruzadas</div>
+                </div>
+                <div class="cv-year">2016 — 2020</div>
+            </div>
+
+            <a href="#" class="btn inter-hover" data-aos="fade-up"><i class="fa-solid fa-arrow-down-to-line"></i> Bajar Dossier & CV</a>
         </div>
     </section>
 
-    <!-- CONTACT TERMINAL -->
-    <section id="contact" style="margin-bottom: 50px;">
-        <div class="bento-card" style="padding: 10vw 5vw;" data-aos="zoom-in">
-            <h2 class="mega-text">INICIAR SECUENCIA.</h2>
-            <div style="margin-top: 50px;">
-                <p style="font-family: 'Space Mono'; font-size: 0.8rem; color: var(--accent); margin-bottom: 20px;">/// INPUT DETECTADO</p>
-                <a href="mailto:hola@luisblasco.com" class="contact-link inter-hover">hola@luisblasco.com</a>
-                <a href="#" class="contact-link inter-hover">linkedin.com/in/luis-blasco</a>
-                <a href="#" class="contact-link inter-hover">+34 600 000 000</a>
+    <section id="contact">
+        <div class="bento-card" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="footer-grid">
+                <div>
+                    <h2 class="mega-text">CREEMOS<br>FUTURO</h2>
+                    <p class="about-text" style="margin-top:20px; max-width: 400px;">Diseñando con sentido, funcionalidad asertiva y honestidad objetual.</p>
+                </div>
+                <div class="contact-info">
+                    <p style="text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px;">Vía directa</p>
+                    <a href="mailto:hola@luisblasco.com" class="inter-hover">hola@luisblasco.com</a>
+                    <a href="#" class="inter-hover">LinkedIn / Redes</a>
+                    <a href="#" class="inter-hover">+34 600 000 000</a>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div>[ DOC_VERSION: 3.1.2026 ]</div>
-        <div>VLC_ESP _ ROOT_SYSTEM TERMINATED</div>
+        <div>L|BIB DESIGN © 2026. ALL RIGHTS RESERVED.</div>
+        <div>BASADO EN VALENCIA, ESP.</div>
     </footer>
 
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        /* 1. SYSTEM PRELOADER LOGIC */
-        window.addEventListener("load", () => {
-            const bar = document.getElementById("p-bar");
-            const preloader = document.getElementById("preloader");
-            
-            setTimeout(() => { bar.style.width = "100%"; }, 200);
-            
-            setTimeout(() => { 
-                preloader.classList.add("preloader-hidden");
-                // Initiar animaciones scroll SOLO después de que acabe la carga
-                AOS.init({ duration: 800, once: true, offset: 50 });
-            }, 1200);
-        });
+        AOS.init({ duration: 800, once: true, offset: 50 });
 
-        /* 2. THEME TOGGLE (Dark/Light mode switch) */
+        // INTERACCIONES TEMA LUZ / OSCURO
         const btnToggle = document.getElementById("theme-toggle");
+        const body = document.documentElement; // Utilizamos el elemento raíz HTML para más limpieza en darkmodes actuales.
+        
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            btnToggle.querySelector("i").className = document.body.classList.contains("light-mode") ? "fa-solid fa-sun" : "fa-solid fa-moon";
+            const isLight = document.body.classList.contains("light-mode");
+            btnToggle.querySelector("i").className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
         });
 
-        /* 3. SCROLL NAVBAR DYNAMICS */
+        // NAVBAR TIPO PILL QUE DESAPARECE INTELIGENTEMENTE CON SCROLL
         const navbar = document.getElementById("navbar");
         let lastScrollTop = 0;
+
         window.addEventListener("scroll", () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) navbar.classList.add("navbar-hidden");
-            else navbar.classList.remove("navbar-hidden");
+            if (scrollTop > lastScrollTop && scrollTop > 150) {
+                // Scroll down
+                navbar.classList.add("navbar-hidden");
+            } else {
+                // Scroll up
+                navbar.classList.remove("navbar-hidden");
+            }
             lastScrollTop = scrollTop;
         });
 
-        /* 4. SMOOTH MAGNETIC CURSOR */
+        // MAGNETIC CURSOR & SMOOTH FOLLOW TIPO 2026
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
-        let ringX = mouseX, ringY = mouseY;
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
         
         window.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            dot.style.left = `${mouseX}px`; dot.style.top = `${mouseY}px`;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // The dot directly follows
+            dot.style.left = `${mouseX}px`;
+            dot.style.top = `${mouseY}px`;
         });
 
-        function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15; // Smooth delay tracking
+        // The ring has interpolation (Lerp) so it smoothly chases the pointer
+        function renderLoop() {
+            ringX += (mouseX - ringX) * 0.15; // Velocidad de persecución del anillo
             ringY += (mouseY - ringY) * 0.15;
-            ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`;
-            requestAnimationFrame(renderCursor);
+            
+            ring.style.left = `${ringX}px`;
+            ring.style.top = `${ringY}px`;
+            
+            requestAnimationFrame(renderLoop);
         }
-        requestAnimationFrame(renderCursor);
+        requestAnimationFrame(renderLoop);
 
-        // Hover events for expansion
+        // Estado expandido magnético en los links (Se ve y siente como cursor real macOs/iPadOs)
         document.querySelectorAll('.inter-hover, a, button, .p-card').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
-        });
-
-        /* 5. TILT 3D PARALLAX EFFECT FOR PORTFOLIO CARDS */
-        const tiltCards = document.querySelectorAll('.tilt-card');
-        
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // x position within the element
-                const y = e.clientY - rect.top;  // y position within the element
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                // Calculates amount to tilt (multiplier controls intensity)
-                const rotateX = ((y - centerY) / centerY) * -5; // Max degrees of rotation
-                const rotateY = ((x - centerX) / centerX) * 5;
-                
-                card.style.transform = `perspective(1000px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            // Reset back to normal smoothly on mouseout
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
-            });
         });
     </script>
 </body>
