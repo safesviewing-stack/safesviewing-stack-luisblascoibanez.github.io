@@ -263,10 +263,15 @@ header::before {
 
 /* === MAGNETIC SKILLS GRID === */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 30px;
     margin-top: 60px;
+}
+
+.skill-card {
+    width: 100%;
+    max-width: 900px;   /* controla lo largas que son */
 }
 
 .skill-item {
