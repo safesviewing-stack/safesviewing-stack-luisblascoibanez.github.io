@@ -263,15 +263,57 @@ header::before {
 
 
 
-        /* === FRAMER STYLE – BASE 3D === */
-#skills .project-card {
+      /* === SKILLS CAROUSEL === */
+.skills-carousel {
+    overflow: hidden;
+    width: 100%;
     position: relative;
-    transform-style: preserve-3d;
-    will-change: transform;
-    transition:
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.5s ease,
-        border-color 0.4s ease;
+}
+
+.skills-track {
+    display: flex;
+    gap: 25px;
+    width: max-content;
+    animation: skills-scroll 30s linear infinite;
+}
+
+.skills-carousel:hover .skills-track {
+    animation-play-state: paused;
+}
+
+@keyframes skills-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+
+        .skill-card {
+    min-width: 280px;
+    height: 160px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-card:hover {
+    transform: translateY(-10px) scale(1.05);
 }
     </style>
 </head>
@@ -339,14 +381,28 @@ header::before {
         </div>
     </section>
 
-    <section id="skills">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Habilidades" data-en="Skills">Habilidades</h2>
-        <div class="portfolio-grid">
-            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-cube" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3 class="lang-text" data-es="CAD AVANZADO" data-en="ADVANCED CAD">CAD AVANZADO</h3><p>SolidWorks / Rhino / Surfaces.</p></div>
-            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3 class="lang-text" data-es="REPRESENTACIÓN" data-en="RENDERING">REPRESENTACIÓN</h3><p class="lang-text" data-es="Keyshot / Realismo Pro." data-en="Keyshot / Pro Realism.">Keyshot / Realismo Pro.</p></div>
-            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-microchip" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3 class="lang-text" data-es="INGENIERÍA" data-en="ENGINEERING">INGENIERÍA</h3><p class="lang-text" data-es="DFM / DFA / Moldes." data-en="DFM / DFA / Molds.">DFM / DFA / Moldes.</p></div>
+   <section id="skills">
+    <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
+
+    <div class="skills-carousel">
+        <div class="skills-track">
+            <div class="project-card skill-card">CAD AVANZADO</div>
+            <div class="project-card skill-card">RENDERING</div>
+            <div class="project-card skill-card">INGENIERÍA</div>
+            <div class="project-card skill-card">PROTOTIPADO</div>
+            <div class="project-card skill-card">DFM / DFA</div>
+            <div class="project-card skill-card">MATERIALS</div>
+
+            <!-- duplicado para loop infinito -->
+            <div class="project-card skill-card">CAD AVANZADO</div>
+            <div class="project-card skill-card">RENDERING</div>
+            <div class="project-card skill-card">INGENIERÍA</div>
+            <div class="project-card skill-card">PROTOTIPADO</div>
+            <div class="project-card skill-card">DFM / DFA</div>
+            <div class="project-card skill-card">MATERIALS</div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="cv">
         <h2 class="section-title lang-text" data-aos="fade-up" data-es="Curriculum" data-en="Resume">Curriculum</h2>
