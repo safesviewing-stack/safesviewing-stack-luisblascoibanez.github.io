@@ -103,22 +103,7 @@
             z-index: 1;
         }
 
-        .light-mode .nav-indicator { background: var(--accent); }
-
-        /* Lente volumétrica vertical del haz de Spotlight via after*/
-        .nav-indicator::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140%;
-            height: 60px; /* Profundidad iluminacion volumétrica */
-            background: linear-gradient(to bottom, var(--accent-glow) 0%, transparent 100%);
-            filter: blur(6px); /* Tailwind "blur-lg/md equivalent mix"*/
-            pointer-events: none;
-        }
-
+       
 
         .header-toggles { display: flex; gap: 15px; align-items: center; }
         
@@ -226,6 +211,12 @@
             .hero h1 { font-size: 3.5rem; }
             .about-container { grid-template-columns: 1fr; }
         }
+
+
+        .nav-links a.spotlight-active {
+    color: var(--accent);
+    font-weight: 700;
+}
     </style>
 </head>
 <body>
@@ -238,7 +229,7 @@
             
             <nav class="nav-links" id="nav-container">
                 <!-- HAZ DIRECCIONAL/LINEA RESPONSABLE DEL HIGHLIGHT INDICATOR -->
-                <div id="nav-spotlight" class="nav-indicator"></div>
+               
                 
                 <a href="#about" class="lang-text" data-es="Sobre mí" data-en="About me">Sobre mí</a>
                 <a href="#work" class="lang-text" data-es="Portfolio" data-en="Portfolio">Portfolio</a>
@@ -345,7 +336,7 @@
         AOS.init({ duration: 1000, once: true });
 
         // SPOTLIGHT LÓGICA CON CALCULO DIMENSION Y MARCAJE  DE SECCIÓN (Active State + Blur Effect Mapeado interactivo )
-        const spotlight = document.getElementById("nav-spotlight");
+        
         const navContainer = document.getElementById("nav-container");
         const sectionsArray = document.querySelectorAll("section[id]");
         const sectionNavLinks = document.querySelectorAll(".nav-links a");
@@ -378,10 +369,7 @@
                     
                     const leftShift = lBox.left - nBox.left; 
 
-                    // Alineación nativa React Translation Translate y Escala lineal por Elemento Horizontal detectado 
-                    spotlight.style.opacity = '1';
-                    spotlight.style.transform = `translateX(${leftShift}px)`;
-                    spotlight.style.width = `${lBox.width}px`;
+                   
 
                     sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
                     activeLinkTarget.classList.add('spotlight-active');
