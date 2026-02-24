@@ -56,19 +56,17 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- HEADER GLASS (CORREGIDO) --- */
+        /* --- HEADER GLASS --- */
         header {
             position: fixed; 
             top: 0; 
             left: 0; 
             width: 100%;
-            /* Corrección: Se añade padding equivalente al de las secciones (10%) y 20px arriba/abajo */
             padding: 20px 10%; 
             background: var(--glass); 
             backdrop-filter: blur(35px); 
             -webkit-backdrop-filter: blur(35px);
             display: flex; 
-            justify-content: space-between; 
             align-items: center;
             z-index: 2000; 
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -78,7 +76,10 @@
         header.nav-hidden { transform: translateY(-100%); }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.5px; text-transform: uppercase; }
-        .header-actions { display: flex; align-items: center; gap: 40px; } 
+        
+        /* Botones del header movidos directamente a la derecha */
+        .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
+        
         .nav-links { display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
@@ -110,12 +111,11 @@
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
         .btn-cv { margin-top: 60px; display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.4s; }
 
-        /* MEDIA QUERIES (Correcciones añadidas) */
+        /* MEDIA QUERIES */
         @media (max-width: 1024px) { 
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); } 
         }
         @media (max-width: 768px) { 
-            /* En móvil, solo ocultamos los textos (los nav-links) para que el botón Theme Toggle no desaparezca, resolviendo que no se vea vacío el header */
             .nav-links { display: none; } 
             .portfolio-grid { grid-template-columns: 1fr; } 
             .hero h1 { font-size: 3.5rem; }
