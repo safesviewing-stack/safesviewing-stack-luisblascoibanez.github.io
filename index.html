@@ -66,9 +66,9 @@
 
     padding: 20px 4% 20px 10%;
 
-    background: rgba(5, 5, 5, 0.25); /* ← más transparente */
-    backdrop-filter: blur(45px) saturate(160%);
-    -webkit-backdrop-filter: blur(45px) saturate(160%);
+    background: rgba(5, 5, 5, 0.35); /* ← más transparente */
+    backdrop-filter: blur(28px) saturate(130%);
+    -webkit-backdrop-filter: blur(28px) saturate(130%);
 
     display: flex;
     align-items: center;
@@ -106,6 +106,7 @@ header::before {
         }
 
         .nav-links a { 
+            color: #ffffff;
             position: relative; z-index: 2; /* Sobre luz blur */
             text-decoration: none; color: var(--text-dim); font-size: 0.7rem; 
             font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; 
