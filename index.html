@@ -61,7 +61,7 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- HEADER GLASS (HIDES ON SCROLL) --- */
+        /* --- HEADER GLASS (DYNAMIC BEHAVIOR) --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             background: var(--glass); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
@@ -72,7 +72,7 @@
         header.nav-hidden { transform: translateY(-100%); }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 2px; }
-        .header-actions { display: flex; align-items: center; gap: 40px; margin-left: auto; } /* DESPLAZADO A LA DERECHA */
+        .header-actions { display: flex; align-items: center; gap: 40px; margin-left: auto; } 
         .nav-links { display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
@@ -91,7 +91,7 @@
 
         .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
         .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); }
-        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); transition: 0.5s; }
+        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
 
         /* --- PORTFOLIO (3x2 GRID) --- */
         .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
@@ -99,18 +99,12 @@
         .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
         .project-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; }
 
-        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 35px; border-radius: 22px; transition: 0.4s; }
-        .skill-card i { font-size: 1.8rem; color: var(--accent); margin-bottom: 20px; display: block; }
-
+        /* --- CURRICULUM --- */
         .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
         .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
         .btn-cv { margin-top: 60px; display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.4s; }
 
-        .contact-box { background: var(--card-bg); padding: 80px 10%; border-radius: 40px; border: 1px solid var(--border); }
-        input, textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: var(--text); margin-bottom: 30px; outline: none; transition: 0.3s; }
-
-        @media (max-width: 1024px) { .portfolio-grid, .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .nav-links, #theme-toggle { display: none; } .portfolio-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3.5rem; } }
     </style>
 </head>
@@ -123,7 +117,7 @@
     <header id="navbar">
         <div class="nav-logo">L|BIB</div>
         <div class="header-actions">
-            <nav class="nav-links">
+            <nav class="nav-links" id="nav-container">
                 <a href="#about">Sobre mí</a>
                 <a href="#work">Portfolio</a>
                 <a href="#skills">Habilidades</a>
@@ -147,7 +141,7 @@
         <h2 class="section-title" data-aos="fade-up">Sobre mí.</h2>
         <div class="about-container">
             <div class="about-text-reduced" data-aos="fade-up">
-                <p>Diseñador industrial enfocado en la convergencia entre ingeniería de precisión y diseño estético funcional. Mi trabajo se define por la simplificación de lo complejo.</p>
+                <p>Diseñador industrial especializado en transformar procesos industriales complejos en experiencias de producto intuitivas y minimalistas.</p>
             </div>
             <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in">
         </div>
@@ -156,92 +150,87 @@
     <section id="work">
         <h2 class="section-title" data-aos="fade-up">Portfolio.</h2>
         <div class="portfolio-grid">
-            <!-- FILA 1 -->
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>PROYECTO ALPHA</h3><p>DESARROLLO DE PRODUCTO</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>MOBILIARIO EGO</h3><p>MODELADO RHINO</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>DISPOSITIVO TECH</h3><p>INGENIERÍA TÉCNICA</p></div>
-            </div>
-            <!-- FILA 2 -->
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>AUDIO CORE</h3><p>RENDERIZADO KEYSHOT</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>STATION GRID</h3><p>SOLUCIONES URBANAS</p></div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img">
-                <div style="padding:30px;"><h3>ELEMENTUM X</h3><p>SUPERFICIES AVANZADAS</p></div>
-            </div>
+            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ALPHA</h3><p>ESTRUCTURA TÉCNICA</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>EGO</h3><p>MUEBLE SINGULAR</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ION</h3><p>TECNOLOGÍA</p></div></div>
+            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>BEATS</h3><p>SONIDO HI-FI</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CITY</h3><p>ENTORNO URBANO</p></div></div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CORE</h3><p>FORMAS ORGÁNICAS</p></div></div>
         </div>
     </section>
 
     <section id="skills">
         <h2 class="section-title" data-aos="fade-up">Habilidades.</h2>
-        <div class="skills-grid">
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="50"><i class="fa-solid fa-cube"></i><h3>CAD AVANZADO</h3><p>SolidWorks / Rhino.</p></div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>VISUALIZACIÓN</h3><p>Keyshot / VRay.</p></div>
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="150"><i class="fa-solid fa-microchip"></i><h3>FABRICACIÓN</h3><p>DFM / DFA / Inyección.</p></div>
+        <div class="portfolio-grid">
+            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-cube" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3>CAD AVANZADO</h3><p>SolidWorks / Rhino / Surfaces.</p></div>
+            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3>REPRESENTACIÓN</h3><p>Keyshot / Realismo Pro.</p></div>
+            <div class="project-card" style="padding:35px;"><i class="fa-solid fa-microchip" style="color:var(--accent); font-size:2rem; margin-bottom:20px; display:block;"></i><h3>INGENIERÍA</h3><p>DFM / DFA / Moldes.</p></div>
         </div>
     </section>
 
     <section id="cv">
         <h2 class="section-title" data-aos="fade-up">Curriculum.</h2>
-        <!-- 3 NUEVOS + LOS ORIGINALES -->
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — PRESENTE</div><div class="cv-content"><h3>PRODUCT DESIGNER LEAD</h3><span>Industrial Core Studio, Madrid.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3>DISEÑADOR DE PRODUCTO JUNIOR</h3><span>Prototyping Labs SL.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3>INTERN DISEÑO INDUSTRIAL</h3><span>Bionic Design Solutions.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2021</div><div class="cv-content"><h3>CURSO ESPECIALIZADO CAD</h3><span>Master in Surfaces Class-A.</span></div></div>
-        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3>GRADO DISEÑO INDUSTRIAL</h3><span>Politécnica Superior.</span></div></div>
-        <a href="#" class="btn-cv" data-aos="zoom-in">DESCARGAR CV PDF <i class="fa-solid fa-file-arrow-down"></i></a>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — PRESENTE</div><div class="cv-content"><h3>PRODUCT DESIGNER LEAD</h3><span>Industrial Core Studio.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2024</div><div class="cv-content"><h3>DISEÑADOR JUNIOR</h3><span>Prototyping Labs.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3>BECARIO DISEÑO</h3><span>Bionic Design Solutions.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021</div><div class="cv-content"><h3>ESPECIALISTA SURFACING</h3><span>Academy 3D Course.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2016 — 2020</div><div class="cv-content"><h3>GRADO DISEÑO INDUSTRIAL</h3><span>Univ. Politécnica Superior.</span></div></div>
+        <a href="#" class="btn-cv">DESCARGAR CV PDF <i class="fa-solid fa-file-arrow-down"></i></a>
     </section>
 
-    <section id="contact">
-        <div class="contact-box" data-aos="fade-up">
-            <h2 style="font-family:'Syne'; font-size: 2.5rem; text-transform:uppercase; margin-bottom:40px;">Contacto.</h2>
-            <form>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <input type="text" placeholder="NOMBRE COMPLETO">
-                    <input type="email" placeholder="EMAIL">
-                </div>
-                <textarea rows="4" placeholder="¿CÓMO PUEDO AYUDARTE?"></textarea>
-                <button type="submit" style="cursor:none; width:fit-content; padding:20px 60px; border:none; background:var(--accent); color:white; font-weight:800; border-radius:100px; text-transform:uppercase;">ENVIAR MENSAJE</button>
+    <section id="contact" style="padding-bottom: 250px;">
+        <h2 class="section-title" data-aos="fade-up">Contacto.</h2>
+        <div style="background:var(--card-bg); padding:80px; border-radius:40px; border:1px solid var(--border);">
+            <form style="display:flex; flex-direction:column; gap:20px;">
+                <input type="text" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
+                <input type="email" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
+                <textarea placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
+                <button type="submit" style="cursor:none; width:fit-content; background:var(--accent); color:white; border:none; padding:20px 60px; border-radius:100px; font-weight:800; margin-top:20px;">ENVIAR</button>
             </form>
         </div>
     </section>
 
-    <footer style="padding:100px 10%; text-align:center;">
-        <div style="font-family:'Syne'; font-weight:800; font-size:1.2rem; margin-bottom: 20px;">LUIS BLASCO-IBÁÑEZ BERBEL</div>
-        <div style="color:var(--text-dim); font-size:0.9rem;">© 2024 / PRODUCT DESIGNER</div>
+    <footer style="padding:60px 10%; text-align:center; opacity:0.6;">
+        <p>© 2024 / LUIS BLASCO-IBÁÑEZ BERBEL / INDUSTRIAL DESIGNER</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // TEMA: CLARO/OSCURO
+        // CAMBIO DE TEMA
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.querySelector("i").className = document.body.classList.contains("light-mode") ? "fa-solid fa-sun" : "fa-solid fa-moon";
         });
 
-        // HIDE HEADER ON SCROLL
+        // HEADER: LÓGICA DE PULSADO Y SCROLL
         let lastScroll = 0;
+        let isAutoScrolling = false;
+        let scrollTimeout;
         const navbar = document.getElementById("navbar");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                isAutoScrolling = true;
+                navbar.classList.remove("nav-hidden");
+                // Cuando termina de bajar por el clic, desbloqueamos la lógica de ocultar
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => { isAutoScrolling = false; }, 1000);
+            });
+        });
+
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
-            else navbar.classList.remove("nav-hidden");
+            
+            // Si el usuario scrollea manualmente después del clic, recuperamos control
+            if (!isAutoScrolling) {
+                if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
+                else navbar.classList.remove("nav-hidden");
+            }
+            
             lastScroll = currentScroll;
         });
 
