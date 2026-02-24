@@ -62,7 +62,6 @@
             top: 0; 
             left: 0; 
             width: 100%;
-            /* AQUÍ ESTÁ EL AJUSTE: Arriba 20px, Derecha 4%, Abajo 20px, Izquierda fija al 10% */
             padding: 20px 4% 20px 10%; 
             background: var(--glass); 
             backdrop-filter: blur(35px); 
@@ -84,8 +83,9 @@
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        #theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: 0.3s; }
-        #theme-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .header-toggles { display: flex; gap: 12px; align-items: center; }
+        #theme-toggle, #lang-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; transition: 0.3s; }
+        #theme-toggle:hover, #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
         /* --- SECCIONES --- */
         section { padding: 220px 10% 120px; }
@@ -137,9 +137,14 @@
                 <a href="#cv">Curriculum</a>
                 <a href="#contact">Contacto</a>
             </nav>
-            <button id="theme-toggle" aria-label="Toggle Theme">
-                <i class="fa-solid fa-moon"></i>
-            </button>
+            <div class="header-toggles">
+                <button id="lang-toggle" aria-label="Toggle Language">
+                    <span>ES</span>
+                </button>
+                <button id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -210,6 +215,15 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
+
+        // CAMBIO DE IDIOMA VISUAL (lógica de botón)
+        const btnLang = document.getElementById("lang-toggle");
+        btnLang.addEventListener("click", () => {
+            const langSpan = btnLang.querySelector("span");
+            langSpan.textContent = langSpan.textContent === "ES" ? "EN" : "ES";
+            
+            // Aquí puedes llamar a una función que reemplace todos los textos si es necesario más adelante.
+        });
 
         // CAMBIO DE TEMA
         const btnToggle = document.getElementById("theme-toggle");
