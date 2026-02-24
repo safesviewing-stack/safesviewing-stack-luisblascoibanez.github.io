@@ -1,738 +1,573 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Luis Blasco-Ibáñez Berbel | Portfolio</title>
+    <!-- Tailwind CSS (Framework) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES --- */
-        :root {
-            --bg: #050505;
-            --accent: #8b5cf6; 
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --card-bg: rgba(20, 20, 20, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --text-dim: #a1a1aa;
-            --glass: rgba(5, 5, 5, 0.45);
+        :root[data-theme="dark"] {
+            --bg-color: #050505;
+            --text-color: #FAFAFA;
+            --secondary-text: #888888;
+            --glass-bg: rgba(5, 5, 5, 0.7);
+            --border-color: #222222;
+            --card-bg: rgba(255,255,255, 0.03);
+            --gradient-accent: rgba(80, 80, 255, 0.2);
+        }
+        :root[data-theme="light"] {
+            --bg-color: #F8F9FA;
+            --text-color: #111111;
+            --secondary-text: #555555;
+            --glass-bg: rgba(248, 249, 250, 0.7);
+            --border-color: #DDDDDD;
+            --card-bg: rgba(0,0,0, 0.03);
+            --gradient-accent: rgba(80, 80, 255, 0.1);
         }
 
-        .light-mode {
-            --bg: #f5f5f7;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.1);
-            --text: #1d1d1f;
-            --text-dim: #424245;
-            --glass: rgba(255, 255, 255, 0.6);
-            --accent-glow: rgba(139, 92, 246, 0.15); /* Slightly subtle for white background */
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
-
+        /* Base Setup */
         body {
-            background-color: var(--bg);
-            color: var(--text);
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
-            line-height: 1.6;
-            transition: background 0.5s ease;
+            scroll-behavior: smooth;
         }
 
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
-            z-index: -1;
+        /* Glass Navbar */
+        .glass-nav {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* --- CURSOR --- */
-        #cursor {
-            width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999;
-            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: translate(-50%, -50%);
+        /* Custom Framer/Apple Animations */
+        .framer-ease {
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- HEADER GLASS --- */
-       header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    padding: 20px 4% 20px 10%;
-
-    background: rgba(5, 5, 5, 0.30); /* ← más transparente */
-    backdrop-filter: blur(35px) saturate(140%);
-    -webkit-backdrop-filter: blur(35px) saturate(140%);
-
-    display: flex;
-    align-items: center;
-
-    z-index: 2000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.3s ease,
-                backdrop-filter 0.3s ease;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0)
-    );
-    pointer-events: none;
-}
-
-        
-        header.nav-hidden { transform: translateY(-100%); }
-
-        .nav-logo {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.35rem;   /* más grande */
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-        .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
-        
-        /* SPOTLIGHT NAV LINK EFFECTS  */
-        .nav-links { 
-            display: flex; gap: 25px; position: relative; 
-            padding-bottom: 5px; /* Added internal space protecting light cast visually  */
-        }
-
-        .nav-links a { 
-            color: #ffffff;
-            position: relative; z-index: 2; /* Sobre luz blur */
-            text-decoration: none; font-size: 0.7rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; 
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a.spotlight-active { color: var(--text); font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .light-mode .nav-links a.spotlight-active { text-shadow: none; color: var(--accent); }
-
-        /* EL DESTELLO CORREDOR (Nav Indicator Box Shadow Translate) */
-        .nav-indicator {
+        /* Abstract Gradient Blob Background */
+        .bg-blob {
             position: absolute;
-            top: -21px;  /* Sincronizado para ir justo contra el "Techo de Header" pegado visual */
-            left: 0;
-            height: 2px;
-            background: #fff; /* White base con difuminado purpura imita Spotlight origin Tailwind style */
-            box-shadow: 0 1px 12px 1px var(--accent);
-            border-radius: 4px;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            opacity: 0; /* Opaco x def. Aparece via Script si matcheas ID*/
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--gradient-accent) 0%, transparent 60%);
+            top: -20%;
+            left: -10%;
+            animation: moveBlob 25s infinite alternate linear;
             pointer-events: none;
-            z-index: 1;
+            z-index: -1;
+            filter: blur(80px);
+        }
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30%, 30%) scale(1.2); }
         }
 
-       
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
 
-        .header-toggles { display: flex; gap: 15px; align-items: center; }
+        /* Text Gradients */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, var(--text-color), var(--secondary-text));
+        }
+
+        /* Cards Hover (Skills & Portfolio) */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(128, 128, 128, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        /* Portfolio Items */
+        .project-img-wrapper {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .project-img {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .portfolio-item:hover .project-img {
+            transform: scale(1.07);
+        }
+        .project-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .portfolio-item:hover .project-overlay {
+            opacity: 1;
+        }
         
-        #lang-toggle { 
-            background: transparent; border: 1px solid var(--border); color: var(--text); 
-            padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
-            align-items: center; justify-content: center; font-size: 0.75rem; 
-            font-weight: 700; transition: 0.3s; outline: none; 
-        }
-        #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
-        /* --- THEME TOGGLE SLIDER --- */
-        .theme-switch-wrapper {
-            all: unset; display: flex; align-items: center; justify-content: space-between;
-            width: 64px; height: 32px; padding: 3px; border-radius: 9999px;
-            cursor: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
-            background: #09090b; border: 1px solid #27272a; position: relative;
-        }
-
-        .light-mode .theme-switch-wrapper { background: #ffffff; border: 1px solid #e4e4e7; }
-        .theme-icon-container {
-            display: flex; justify-content: center; align-items: center; 
-            width: 24px; height: 24px; border-radius: 50%;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
-        }
-
-        .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
-
-        .icon-left { background: #27272a; color: #ffffff; transform: translateX(0); }
-        .light-mode .icon-left { transform: translateX(32px); background: #e5e7eb; color: #374151; }
-        .icon-right { background: transparent; color: #71717a; transform: translateX(0); }
-        .light-mode .icon-right { transform: translateX(-32px); color: #000000; }
-        .dark-visible { display: block; } .light-visible { display: none; }
-        .light-mode .dark-visible { display: none; } .light-mode .light-visible { display: block; }
-
-        /* --- SECCIONES GENERALES --- */
-        section { padding: 220px 10% 120px; }
-
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
-        .hero h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(3rem, 12vw, 7.5rem);
-    line-height: 1.1;        /* más separación entre líneas */
-    margin-bottom: 40px;
-    letter-spacing: -6px;
-    text-transform: uppercase;
-    margin-left: -8px;
-}
-        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-
-        h2.section-title { font-family: 'Inter', sans-serif; font-size: 4rem; margin-bottom: 40px; text-transform: uppercase; }
-
-        .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
-        .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); text-align: justify; text-justify: inter-word; }
-        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
-
-        /* --- PORTFOLIO --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; transition: 0.4s; overflow: hidden; }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .project-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; }
-
-        /* --- CURRICULUM --- */
-        .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
-        .cv-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    min-width: 160px;
-}
-
-        /* --- EXPAND ICON BUTTON CSS --- */
-        
-        .btn-expand {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            background-color: var(--accent); 
-            color: #ffffff; 
-            padding: 20px 45px;
-            font-size: 1rem;
-            font-weight: 800;
-            border-radius: 100px;
+        /* Interactive Input Fields */
+        .input-line {
+            background: transparent;
             border: none;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+        .input-line:focus {
             outline: none;
-            text-decoration: none;
-            cursor: none;
-            min-width: fit-content;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+            border-bottom: 1px solid var(--text-color);
         }
 
-        .btn-expand:hover {
-            background-color: #7c3aed; 
-            box-shadow: 0px 4px 15px var(--accent-glow); 
+        /* Floating action Buttons */
+        .framer-button {
+            background: var(--text-color);
+            color: var(--bg-color);
+            border: 1px solid var(--text-color);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s;
         }
-        
-        .btn-expand:active { transform: scale(0.97); }
-
-        .btn-expand-icon {
-            display: inline-flex; align-items: center;
-            width: 0px; padding-left: 0px; opacity: 0;
-            overflow: hidden; transform: translateX(100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .framer-button::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: -1;
+            transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
-        .btn-expand:hover .btn-expand-icon {
-            width: 25px; padding-left: 10px;          
-            transform: translateX(0%); opacity: 1;
+        .framer-button:hover {
+            color: var(--text-color);
         }
-
-        /* MEDIA QUERIES */
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { 
-            .nav-links { display: none; } 
-            .portfolio-grid { grid-template-columns: 1fr; } 
-            .hero h1 { font-size: 3.5rem; }
-            .about-container { grid-template-columns: 1fr; }
+        .framer-button:hover::before {
+            top: 0;
+            border: 1px solid var(--text-color);
         }
-
-
-        .nav-links a.spotlight-active {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-        .nav-links {
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links a {
-    line-height: 1;
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links {
-    margin-top: 8px;
-}
-
-/* === MAGNETIC SKILLS GRID === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px;   /* controla lo largas que son */
-    text-align: left; 
-}
-
-.skill-item {
-    position: relative;
-    height: 140px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    background: rgba(20,20,20,0.55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 22px;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-}
-
-.skill-item img {
-    width: 38px;
-    height: 38px;
-    filter: grayscale(100%) brightness(1.1);
-    transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.skill-item span {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    opacity: 0.85;
-}
-
-
-
-
-.skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 35px;
-
-    transition: 
-        transform 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-}
-
-.skill-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;          /* más grande */
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    color: var(--text);          /* bien protagonista */
-}
-.skill-card p {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    opacity: 0.6;   /* más opacos */
-}
-        /* === SKILLS (VERTICAL) === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px; /* controla lo largas */
-}
-
-    .project-card p {
-    font-size: 0.65rem;      /* más pequeño */
-    letter-spacing: 1.8px;   /* look técnico/editorial */
-    opacity: 0.55;           /* más opaco */
-    text-transform: uppercase;
-    margin-top: 6px;
-}
-
-        /* === FADE INFERIOR CAMUFLADO === */
-body::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 120px;          /* más discreto */
-    pointer-events: none;
-    z-index: 999;
-
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(0, 0, 0, 0.0) 100%
-    );
-}
-
-.light-mode body::after {
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-}
-
-        #work .section-title {
-    margin-bottom: 45px; /* antes ~25px */
-}
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <div id="cursor"></div>
+    <!-- Ambient Background -->
+    <div class="bg-blob"></div>
 
-    <header id="navbar">
-        <div class="nav-logo">L · BIB</div>
-        <div class="header-actions">
+    <!-- Navegación -->
+    <nav class="glass-nav fixed w-full z-50 top-0 left-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold tracking-tight">Luis.B<span class="text-blue-500">.</span></a>
             
-            <nav class="nav-links" id="nav-container">
-                <!-- HAZ DIRECCIONAL/LINEA RESPONSABLE DEL HIGHLIGHT INDICATOR -->
-               
-                
-                <a href="#about" class="lang-text" data-es="Sobre mí" data-en="About me">Sobre mí</a>
-                <a href="#work" class="lang-text" data-es="Portfolio" data-en="Portfolio">Portfolio</a>
-                <a href="#skills" class="lang-text" data-es="Habilidades" data-en="Skills">Habilidades</a>
-                <a href="#cv" class="lang-text" data-es="Curriculum" data-en="Resume">Curriculum</a>
-                <a href="#contact" class="lang-text" data-es="Contacto" data-en="Contact">Contacto</a>
-            </nav>
-            
-            <div class="header-toggles">
-                <button id="lang-toggle" aria-label="Toggle Language"><span>ES</span></button>
-                <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
-                    <div class="theme-icon-container icon-left">
-                        <i class="fa-solid fa-moon dark-visible"></i>
-                        <i class="fa-solid fa-sun light-visible"></i>
-                    </div>
-                    <div class="theme-icon-container icon-right">
-                        <i class="fa-solid fa-sun dark-visible"></i>
-                        <i class="fa-solid fa-moon light-visible"></i>
-                    </div>
+            <div class="hidden md:flex gap-8 items-center text-sm font-medium" style="color: var(--secondary-text)">
+                <a href="#about" class="hover:text-current transition-colors t-sobre">Sobre mí</a>
+                <a href="#skills" class="hover:text-current transition-colors t-hab">Habilidades</a>
+                <a href="#portfolio" class="hover:text-current transition-colors t-port">Portfolio</a>
+                <a href="#cv" class="hover:text-current transition-colors t-cv">CV</a>
+            </div>
+
+            <div class="flex items-center gap-4 text-sm font-medium">
+                <!-- Toggle Language -->
+                <button id="lang-toggle" class="hover:opacity-60 transition-opacity">EN</button>
+                <div style="width: 1px; height: 16px; background: var(--border-color)"></div>
+                <!-- Toggle Dark/Light Mode -->
+                <button id="theme-toggle" class="hover:opacity-60 transition-opacity flex items-center justify-center p-2 rounded-full" aria-label="Cambiar tema">
+                    <!-- Icono Sol -->
+                    <svg id="icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Icono Luna -->
+                    <svg id="icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero">
-        <div data-aos="fade-up" data-aos-duration="1200">
-            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
-            <p class="subtitle lang-text" data-aos="fade-right" data-aos-delay="400" data-es="PORTFOLIO | DISEÑADOR INDUSTRIAL" data-en="PORTFOLIO | INDUSTRIAL DESIGNER">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
-        </div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
-        <div class="about-container">
-            <div class="about-text-reduced" data-aos="fade-up">
-                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
+    <!-- MAIN WRAPPER -->
+    <main class="w-full">
+        
+        <!-- 1. Hero Section -->
+        <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+            <div class="max-w-4xl w-full text-center">
+                <p class="mb-4 text-sm tracking-widest uppercase font-medium t-prof" style="color: var(--secondary-text); letter-spacing: 0.2em;">
+                    Diseñador Industrial
+                </p>
+                <!-- Nombre con tipografía gigante, minimalista -->
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-none">
+                    Luis <br /> <span class="text-gradient">Blasco-Ibáñez</span> <br /> Berbel
+                </h1>
+                <p class="text-lg md:text-2xl font-light mb-12 max-w-2xl mx-auto t-manifesto" style="color: var(--secondary-text)">
+                    Sinergia entre la <strong class="font-medium" style="color:var(--text-color)">ingeniería</strong> y el <strong class="font-medium" style="color:var(--text-color)">diseño creativo</strong> para generar soluciones reales.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#portfolio" class="framer-button px-8 py-4 rounded-full font-medium text-sm flex items-center gap-2 t-btn-hero framer-ease">
+                        Ver portfolio 
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                    </a>
+                </div>
             </div>
-            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
-        </div>
-    </section>
+        </section>
 
-    <section id="work">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Portfolio" data-en="Portfolio">Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ALPHA</h3><p class="lang-text" data-es="ESTRUCTURA TÉCNICA" data-en="TECHNICAL STRUCTURE">ESTRUCTURA TÉCNICA</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>EGO</h3><p class="lang-text" data-es="MUEBLE SINGULAR" data-en="UNIQUE FURNITURE">MUEBLE SINGULAR</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ION</h3><p class="lang-text" data-es="TECNOLOGÍA" data-en="TECHNOLOGY">TECNOLOGÍA</p></div></div>
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>BEATS</h3><p class="lang-text" data-es="SONIDO HI-FI" data-en="HI-FI SOUND">SONIDO HI-FI</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CITY</h3><p class="lang-text" data-es="ENTORNO URBANO" data-en="URBAN ENVIRONMENT">ENTORNO URBANO</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CORE</h3><p class="lang-text" data-es="FORMAS ORGÁNICAS" data-en="ORGANIC SHAPES">FORMAS ORGÁNICAS</p></div></div>
-        </div>
-    </section>
+        <!-- 2. Sobre Mí -->
+        <section id="about" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+                <div class="w-full md:w-1/2 reveal">
+                    <h2 class="text-sm tracking-widest uppercase font-medium mb-6 t-sobre-titulo" style="color: var(--secondary-text);">Sobre Mí</h2>
+                    <h3 class="text-3xl md:text-5xl font-medium tracking-tight mb-8 leading-snug">
+                        Diseño entendido como un punto de encuentro entre <span class="italic text-gray-500">lo técnico y lo creativo.</span>
+                    </h3>
+                </div>
+                <div class="w-full md:w-1/2 reveal delay-100 text-lg font-light leading-relaxed space-y-6" style="color: var(--secondary-text)">
+                    <p class="t-p1">
+                        Soy Luis Blasco-Ibáñez Berbel, diseñador industrial de 24 años. Me apasiona la impresión 3D y disfrutar resolviendo problemas estructurales, mecánicos o estéticos.
+                    </p>
+                    <p class="t-p2">
+                        No me considero únicamente técnico ni puramente artístico: me interesa la intersección entre ambos mundos, donde la ingeniería, el diseño y la experimentación se cruzan para crear soluciones reales y bien pensadas.
+                    </p>
+                    <p class="t-p3">
+                        Disfruto explorando procesos de fabricación, analizando nuevos materiales y operando nuevas tecnologías de manufactura aditiva, siempre con una mentalidad abierta, inquieta y curiosa.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-   <section id="skills">
-    <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
-
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h3>CAD AVANZADO</h3>
-            <p>SolidWorks · Fusion 360 · Inventor · Rhino · AutoCAD</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>RENDER Y VISUALIZACIÓN</h3>
-            <p>3ds Max · SolidWorks Visualize</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>DISEÑO GRÁFICO</h3>
-            <p>Photoshop · Illustrator · InDesign · Animate</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>PROTOTIPADO</h3>
-            <p>Maquetas · Impresión 3D</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>DISEÑO WEB</h3>
-            <p>GitHub</p>
-        </div>
-    </div>
-</section>
-
-    <section id="cv">
-    <h2 class="section-title lang-text" data-aos="fade-up" data-es="Curriculum" data-en="Resume">
-        Curriculum
-    </h2>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year lang-text" data-es="2024 — PRESENTE" data-en="2024 — PRESENT">
-            2024 — PRESENTE
-        </div>
-        <div class="cv-content">
-            <h3>PRODUCT DESIGNER LEAD</h3>
-            <span>Industrial Core Studio.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2023</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="PRÁCTICAS DISEÑO INDUSTRIAL" 
-                data-en="INDUSTRIAL DESIGN INTERN">
-                PRÁCTICAS DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Estudio de diseño / Empresa" 
-                  data-en="Design studio / Company">
-                Estudio de diseño / Empresa
-            </span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2022 — 2024</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="DISEÑADOR JUNIOR" data-en="JUNIOR DESIGNER">
-                DISEÑADOR JUNIOR
-            </h3>
-            <span>Prototyping Labs.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2021 — 2022</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">
-                BECARIO DISEÑO
-            </h3>
-            <span>Bionic Design Solutions.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2016 — 2020</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="GRADO DISEÑO INDUSTRIAL" 
-                data-en="BACHELOR IN INDUSTRIAL DESIGN">
-                GRADO DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Univ. Politécnica Superior." 
-                  data-en="Higher Polytechnic Univ.">
-                Univ. Politécnica Superior.
-            </span>
-        </div>
-    </div>
-
-    <a href="#" class="btn-expand group" style="margin-top: 60px;">
-        <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">
-            DESCARGAR CV PDF
-        </span>
-        <div class="btn-expand-icon">
-            <i class="fa-solid fa-file-arrow-down"></i>
-        </div>
-    </a>
-</section>
-
-    <section id="contact" style="padding-bottom: 250px;">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Contacto" data-en="Contact">Contacto</h2>
-        <div style="background:var(--card-bg); padding:80px; border-radius:40px; border:1px solid var(--border);">
-            <form style="display:flex; flex-direction:column; gap:20px;">
-                <input type="text" class="lang-ph" data-es="TU NOMBRE" data-en="YOUR NAME" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
-                
-                <button type="submit" class="btn-expand group" style="margin-top:20px; min-width: 250px; justify-content: center;">
-                    <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
-                    <div class="btn-expand-icon">
-                        <i class="fa-solid fa-arrow-right"></i>
+        <!-- 3. Habilidades -->
+        <section id="skills" class="py-32 px-6 bg-opacity-5">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-sm tracking-widest uppercase font-medium mb-12 reveal text-center t-hab" style="color: var(--secondary-text);">Stack & Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Tarjeta 1 -->
+                    <div class="feature-card p-8 rounded-2xl reveal delay-100 flex flex-col justify-between aspect-square">
+                        <svg class="w-10 h-10 mb-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Autodesk</h3>
+                            <p class="text-sm t-desc-1" style="color: var(--secondary-text);">CAD avanzado, diseño paramétrico, optimización geométrica y modelado 3D preciso para industria.</p>
+                        </div>
                     </div>
-                </button>
-            </form>
-        </div>
-    </section>
 
-    <footer style="padding:30px 10%; text-align:center; opacity:0.35; font-size: 0.7rem; letter-spacing: 1px;">
-        <p class="lang-text" data-es="© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial" data-en="© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Designer">© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial</p>
+                    <!-- Tarjeta 2 -->
+                    <div class="feature-card p-8 rounded-2xl reveal delay-200 flex flex-col justify-between aspect-square">
+                        <svg class="w-10 h-10 mb-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 t-imp3d">Impresión 3D</h3>
+                            <p class="text-sm t-desc-2" style="color: var(--secondary-text);">Slicing de piezas, g-codes, prototipado rápido e integración tecnológica (FDM, SLA, materiales funcionales).</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3 -->
+                    <div class="feature-card p-8 rounded-2xl reveal delay-300 flex flex-col justify-between aspect-square">
+                        <svg class="w-10 h-10 mb-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 t-prog">Programación</h3>
+                            <p class="text-sm t-desc-3" style="color: var(--secondary-text);">Bases tecnológicas, desarrollo de lógica e integración digital. Enfoque multidisciplinar a nivel web.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4 -->
+                    <div class="feature-card p-8 rounded-2xl reveal delay-400 flex flex-col justify-between aspect-square">
+                        <svg class="w-10 h-10 mb-8 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 t-dg">Diseño Gráfico</h3>
+                            <p class="text-sm t-desc-4" style="color: var(--secondary-text);">Presentación de productos visuales y diseño orientado a experiencia (Adobe Suite).</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Portfolio -->
+        <section id="portfolio" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 reveal flex justify-between items-end">
+                    <h2 class="text-5xl font-bold tracking-tight">Proyectos <br> <span style="color: var(--secondary-text); font-weight:300;">Destacados.</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Proyecto 1 -->
+                    <div class="portfolio-item group cursor-pointer reveal delay-100">
+                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Prototype 01" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
+                            <!-- Overlay Hover -->
+                            <div class="project-overlay absolute inset-0 flex items-end p-8">
+                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-blue-500 mb-2 block t-ind-des">Diseño Industrial</span>
+                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Biomechanical Prototype M1</h3>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 2 -->
+                    <div class="portfolio-item group cursor-pointer reveal delay-200">
+                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
+                            <img src="https://images.unsplash.com/photo-1616142171579-37f2252ccce3?auto=format&fit=crop&q=80&w=800" alt="3D Printing" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
+                            <div class="project-overlay absolute inset-0 flex items-end p-8">
+                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-emerald-500 mb-2 block">Fabricación / Impresión 3D</span>
+                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Additive Mfg Optimization</h3>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 3 -->
+                    <div class="portfolio-item group cursor-pointer reveal delay-100">
+                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
+                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=800" alt="Robotics" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
+                            <div class="project-overlay absolute inset-0 flex items-end p-8">
+                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-indigo-500 mb-2 block t-mech">Ingeniería Mecánica</span>
+                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Autodesk Concept Assembly</h3>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 4 -->
+                    <div class="portfolio-item group cursor-pointer reveal delay-200">
+                        <div class="project-img-wrapper relative h-[450px] w-full bg-neutral-900 mb-6">
+                            <img src="https://images.unsplash.com/photo-1618698263162-8e1217e9ce90?auto=format&fit=crop&q=80&w=800" alt="Web interface minimal" class="project-img object-cover w-full h-full opacity-80 mix-blend-lighten">
+                            <div class="project-overlay absolute inset-0 flex items-end p-8">
+                                <span class="bg-white text-black px-4 py-1 text-xs rounded-full font-bold uppercase t-pbtn">Ver Detalle</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-pink-500 mb-2 block">Diseño / Desarrollo Web</span>
+                            <h3 class="text-2xl font-semibold group-hover:pl-2 transition-all duration-300">Product Interface Dash</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex justify-center">
+                    <button class="framer-button px-6 py-3 rounded-full text-sm font-semibold tracking-wider transition-transform t-ver-todos">VER TODOS LOS PROYECTOS</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Timeline CV -->
+        <section id="cv" class="py-32 px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-16 reveal t-tra">Trayectoria.</h2>
+                
+                <div class="relative border-l border-[color:var(--border-color)] ml-3 md:ml-6 space-y-12 pb-6">
+                    
+                    <!-- Elemento 5 -->
+                    <div class="relative pl-10 reveal delay-100">
+                        <div class="absolute w-4 h-4 rounded-full bg-[color:var(--text-color)] -left-[9px] top-2 shadow-[0_0_10px_var(--text-color)]"></div>
+                        <span class="text-xs tracking-widest uppercase text-blue-500 font-bold mb-2 block">Reciente</span>
+                        <h3 class="text-xl md:text-2xl font-bold">Ingeniería en Diseño Industrial</h3>
+                        <h4 class="text-md mt-1 font-medium t-cv-univ1" style="color: var(--secondary-text)">Universitat Politècnica de València (UPV)</h4>
+                    </div>
+
+                    <!-- Elemento 4 -->
+                    <div class="relative pl-10 reveal delay-200">
+                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--text-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
+                        <h3 class="text-xl md:text-2xl font-bold t-era2">Programa Erasmus (Reino Unido)</h3>
+                        <h4 class="text-md mt-1 font-medium" style="color: var(--secondary-text)">Middlesex University (London)</h4>
+                        <p class="text-sm mt-3" style="color: var(--secondary-text)">Enriquecimiento en metodologías de diseño y manufactura avanzada en el entorno londinense.</p>
+                    </div>
+
+                    <!-- Elemento 3 -->
+                    <div class="relative pl-10 reveal delay-300">
+                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--text-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
+                        <h3 class="text-xl md:text-2xl font-bold t-era1">Programa SICUE (Castellón)</h3>
+                        <h4 class="text-md mt-1 font-medium" style="color: var(--secondary-text)">Universitat Jaume I (UJI)</h4>
+                    </div>
+
+                    <!-- Elemento 2 -->
+                    <div class="relative pl-10 reveal delay-400">
+                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--border-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
+                        <h3 class="text-xl md:text-2xl font-bold" style="color: var(--secondary-text)">Grado Superior en Electricidad</h3>
+                    </div>
+
+                    <!-- Elemento 1 -->
+                    <div class="relative pl-10 reveal delay-500">
+                        <div class="absolute w-3 h-3 rounded-full border border-[color:var(--border-color)] bg-[color:var(--bg-color)] -left-[6px] top-2"></div>
+                        <h3 class="text-xl md:text-2xl font-bold" style="color: var(--secondary-text)">Grado Medio en Electricidad</h3>
+                        <p class="text-sm mt-3 opacity-60">Base puramente técnica e instalaciones físicas formales.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Contacto -->
+        <section id="contact" class="py-32 px-6 min-h-[70vh] flex flex-col justify-center">
+            <div class="max-w-4xl mx-auto w-full reveal bg-gradient-to-tr from-[rgba(100,100,255,0.03)] to-transparent rounded-3xl p-10 md:p-20 border border-[color:var(--border-color)] feature-card relative overflow-hidden">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight t-contacto-h">Listo para crear.</h2>
+                        <p class="text-lg mb-8 font-light t-contacto-p" style="color: var(--secondary-text)">Abierto a colaboraciones creativas, nuevos retos de ingeniería y oportunidades que fusionen ambas visiones.</p>
+                        
+                        <div class="flex gap-4">
+                            <!-- Links visuales de contacto -->
+                            <a href="mailto:hola@luisblasco.com" class="hover:text-blue-500 transition-colors">Email</a>
+                            <a href="#" class="hover:text-blue-500 transition-colors">LinkedIn</a>
+                            <a href="#" class="hover:text-blue-500 transition-colors">Behance</a>
+                        </div>
+                    </div>
+                    
+                    <form class="space-y-8">
+                        <div>
+                            <input type="text" placeholder="Nombre completo / Empresa" class="input-line w-full pb-3 pt-2 text-sm">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Dirección de e-mail" class="input-line w-full pb-3 pt-2 text-sm">
+                        </div>
+                        <div>
+                            <textarea placeholder="Cuéntame sobre tu proyecto" rows="3" class="input-line w-full pb-3 pt-2 text-sm resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="framer-button px-8 py-3 w-full rounded-md font-medium text-sm transition-all t-hablemos">
+                            Hablemos hoy
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-sm font-light border-t border-[color:var(--border-color)] t-foot" style="color: var(--secondary-text)">
+        © 2024 Luis Blasco-Ibáñez Berbel. Todos los derechos reservados.<br> <span class="opacity-50">Diseñado con un enfoque racional e ingenieril.</span>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <!-- LOGICA / SCRIPTS JAVASCRIPT VANILLA -->
     <script>
-        AOS.init({ duration: 1000, once: true });
-
-        // SPOTLIGHT LÓGICA CON CALCULO DIMENSION Y MARCAJE  DE SECCIÓN (Active State + Blur Effect Mapeado interactivo )
-        
-        const navContainer = document.getElementById("nav-container");
-        const sectionsArray = document.querySelectorAll("section[id]");
-        const sectionNavLinks = document.querySelectorAll(".nav-links a");
-        
-        function updateSpotlight() {
-            let activeId = "";
-            let currentScroll = window.scrollY;
-            
-            // Evaluamos la posición general de todas las áreas visuales restando viewport tolerante superior/mitad  (-50% viewHeight triggers)
-            sectionsArray.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const vTollerance = window.innerHeight * 0.45; // Empieza a cambiar cuando cruzamos la frontera natural por la mtiad d
-                
-                if (currentScroll >= (sectionTop - vTollerance) && currentScroll < (sectionTop + sectionHeight - vTollerance)) {
-                    activeId = section.getAttribute("id");
+        // 1. Scroll Animations - Intersection Observer para las clases "reveal"
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 50; // offset
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
                 }
-            });
-
-            // Condición absoluta Forzosa en End Point Footer = "contact" id check 
-            if ((window.innerHeight + currentScroll) >= document.body.offsetHeight - 50) {
-                activeId = "contact";
-            }
-            
-            if (activeId) {
-                const activeLinkTarget = document.querySelector(`.nav-links a[href="#${activeId}"]`);
-                if(activeLinkTarget) {
-                    const lBox = activeLinkTarget.getBoundingClientRect();
-                    const nBox = navContainer.getBoundingClientRect();
-                    
-                    const leftShift = lBox.left - nBox.left; 
-
-                   
-
-                    sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
-                    activeLinkTarget.classList.add('spotlight-active');
-                }
-            } else { 
-                 // Opaca Si se encuentra al top y Hero Mode en lugar Neutral // 
-                spotlight.style.opacity = '0';
-                sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
             }
         }
-        window.addEventListener('scroll', updateSpotlight, { passive: true });
-        window.addEventListener('resize', updateSpotlight);
-        
-        // Ejecución preventiva por cache visual Start  Load
-        document.addEventListener("DOMContentLoaded", updateSpotlight);
+        window.addEventListener("scroll", reveal);
+        // Lanzar una vez por si ya está en pantalla
+        reveal();
 
-        // LENGUAJES LÓGICA RÁPIDA 
-        const btnLang = document.getElementById("lang-toggle");
-        let currentLang = "es";
-        btnLang.addEventListener("click", () => {
-            currentLang = currentLang === "es" ? "en" : "es";
-            btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
-            document.querySelectorAll(".lang-text").forEach(el => {
-                el.innerHTML = el.getAttribute(`data-${currentLang}`);
-            });
-            document.querySelectorAll(".lang-ph").forEach(el => {
-                el.placeholder = el.getAttribute(`data-${currentLang}`);
-            });
-            setTimeout(updateSpotlight, 100); // Trigger para reacordar width post cambios palabra longitudes "curriculum a Resume etc" !
-        });
 
-        // TEMAS DARK/LIGHT MODE LÓGICA DE FORMS
-        const btnToggleTheme = document.getElementById("theme-switch");
-        btnToggleTheme.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            const formInputs = document.querySelectorAll("#contact input, #contact textarea");
-            if(document.body.classList.contains("light-mode")){
-                formInputs.forEach(input => input.style.color = "#1d1d1f");
+        // 2. Light / Dark Theme Toggle 
+        const themeBtn = document.getElementById("theme-toggle");
+        const lightIcon = document.getElementById("icon-light");
+        const darkIcon = document.getElementById("icon-dark");
+        const htmlDoc = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            if(htmlDoc.getAttribute('data-theme') === 'dark') {
+                htmlDoc.setAttribute('data-theme', 'light');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
             } else {
-                formInputs.forEach(input => input.style.color = "white");
+                htmlDoc.setAttribute('data-theme', 'dark');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
             }
         });
 
-        // HEADER SCROLL AUTO Y HIDDEN CONTROL DEFAULT 
-        let lastScroll = 0;
-        let isAutoScrolling = false;
-        let scrollTimeout;
-        const navbar = document.getElementById("navbar");
+
+        // 3. Mini Sistema Básico Multilingüe (Español / Ingles Toggle mockup funcional)
+        const langToggle = document.getElementById("lang-toggle");
+        let isEnglish = false;
         
-        sectionNavLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                isAutoScrolling = true;
-                navbar.classList.remove("nav-hidden");
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => { isAutoScrolling = false; updateSpotlight(); }, 1000); // Lanza Actualizacion
+        // Diccionario estático ultraligero
+        const dictionary = {
+            "en": {
+                "t-sobre": "About", "t-hab": "Skills", "t-port": "Work", "t-cv": "Resume",
+                "t-prof": "Industrial Designer",
+                "t-manifesto": "Synergy between <strong class='font-medium text-[color:var(--text-color)]'>engineering</strong> and <strong class='font-medium text-[color:var(--text-color)]'>creative design</strong> to forge real solutions.",
+                "t-btn-hero": "View Portfolio <svg class='w-4 h-4 ml-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 14l-7 7m0 0l-7-7m7 7V3'></path></svg>",
+                "t-sobre-titulo": "About me",
+                "t-p1": "I am Luis Blasco-Ibáñez Berbel, a 24-year-old industrial designer. I am passionate about 3D printing and enjoy solving structural, mechanical, or aesthetic challenges.",
+                "t-p2": "I don’t see myself as purely technical or strictly artistic: I am interested in the intersection where engineering, design, and experimentation cross paths to create thoughtful real-world solutions.",
+                "t-p3": "I love exploring manufacturing processes, researching new materials, and operating new additive manufacturing technologies, always maintaining an open and curious mindset.",
+                "t-desc-1": "Advanced CAD, parametric design, geometry optimization, and accurate 3D modeling for the industry.",
+                "t-imp3d": "3D Printing",
+                "t-desc-2": "Part slicing, g-codes, rapid prototyping, and technology integration (FDM, SLA, functional materials).",
+                "t-prog": "Development",
+                "t-desc-3": "Core technical foundation, logic building, and digital web integration from a multidisciplinary standpoint.",
+                "t-dg": "Graphic Design",
+                "t-desc-4": "Visual product presentations and user-centered aesthetics (Adobe Creative Suite).",
+                "t-pbtn": "View Project",
+                "t-ind-des": "Industrial Design",
+                "t-mech": "Mechanical Engineering",
+                "t-ver-todos": "VIEW ALL PROJECTS",
+                "t-tra": "Journey.",
+                "t-cv-univ1": "Technical University of Valencia (UPV)",
+                "t-era2": "Erasmus Exchange (UK)",
+                "t-era1": "SICUE Program",
+                "t-contacto-h": "Ready to build.",
+                "t-contacto-p": "Open for creative collaborations, fresh engineering challenges, and opportunities bridging both fields.",
+                "t-hablemos": "Let's talk today",
+                "t-foot": "© 2024 Luis Blasco-Ibáñez Berbel. All rights reserved.<br> <span class='opacity-50'>Designed with a rational and engineering mindset.</span>"
+            },
+            "es": {} 
+            // Las versiones en ES ya están integradas hard-coded en el DOM de base. 
+            // Esto solo es para ejemplificar si se pide retorno. Una web real cargarla vía i18n / fetch.
+        };
+
+        // Respaldo de ES original cacheado (minimal approach para archivo simple)
+        const elementClassesToSwap = [
+            "t-sobre", "t-hab", "t-port", "t-cv", "t-prof", "t-manifesto", "t-btn-hero", "t-sobre-titulo", "t-p1", "t-p2", "t-p3", 
+            "t-desc-1", "t-imp3d", "t-desc-2", "t-prog", "t-desc-3", "t-dg", "t-desc-4", "t-ind-des", "t-mech", "t-ver-todos",
+            "t-tra", "t-cv-univ1", "t-era2", "t-era1", "t-contacto-h", "t-contacto-p", "t-hablemos", "t-foot"
+        ];
+        
+        let originalTexts = {};
+        
+        // Setup initial ES cache
+        elementClassesToSwap.forEach(cls => {
+            const els = document.querySelectorAll("." + cls);
+            els.forEach((el, index) => {
+                if(!originalTexts[cls]) originalTexts[cls] = [];
+                originalTexts[cls].push(el.innerHTML);
             });
         });
 
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.scrollY || document.documentElement.scrollTop;
-            if (!isAutoScrolling) {
-                if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
-                else navbar.classList.remove("nav-hidden");
-            }
-            lastScroll = currentScroll;
+        langToggle.addEventListener("click", () => {
+            isEnglish = !isEnglish;
+            langToggle.innerText = isEnglish ? "ES" : "EN";
+
+            elementClassesToSwap.forEach(cls => {
+                const els = document.querySelectorAll("." + cls);
+                els.forEach((el, index) => {
+                    // Update Portfolio button multiples properly or others
+                    if(isEnglish) {
+                        el.innerHTML = dictionary["en"][cls];
+                    } else {
+                        el.innerHTML = originalTexts[cls][index] || originalTexts[cls][0]; // rollback
+                    }
+                });
+            });
+
+            // Para portfolio loop multiple
+            const pfBtns = document.querySelectorAll(".t-pbtn");
+            pfBtns.forEach(el => el.innerHTML = isEnglish ? "View Details" : "Ver Detalle");
         });
-
-        // CUSTOM CURSOR HOVER EVENT LOOP CATCH OVER EVERYTHING INTERACTIVO NUEVO   
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
-            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
-        });
-
-
-
-        
     </script>
+
 </body>
 </html>
