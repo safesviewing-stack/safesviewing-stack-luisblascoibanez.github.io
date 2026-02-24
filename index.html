@@ -13,7 +13,7 @@
         /* --- CORE VARIABLES --- */
         :root {
             --bg: #030303;
-            --accent: #FF5A00; /* Naranja técnico industrial, muy premium */
+            --accent: #FF5A00; 
             --accent-glow: rgba(255, 90, 0, 0.15);
             --card-bg: rgba(25, 25, 27, 0.4);
             --border: rgba(255, 255, 255, 0.05);
@@ -43,7 +43,6 @@
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        /* Film Grain Noise overlay - Trendy in 2026 */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9998;
@@ -59,17 +58,21 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- MODERN CUSTOM CURSOR --- */
+        /* --- GPU-ACCELERATED CUSTOM CURSOR --- */
         #cursor-dot {
             width: 8px; height: 8px; background: var(--text); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999;
-            transform: translate(-50%, -50%); transition: background 0.2s, transform 0.2s;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            transform: translate(-100px, -100px) translate(-50%, -50%); 
+            will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
         #cursor-ring {
             width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9998;
-            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border 0.3s;
-            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
+            transform: translate(-100px, -100px) translate(-50%, -50%); 
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                        height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                        background 0.3s ease, border-color 0.3s ease;
+            will-change: transform, width, height;
         }
         
         .hovered-element #cursor-ring {
@@ -120,12 +123,38 @@
             letter-spacing: -0.04em; text-transform: uppercase;
         }
         .hero .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--accent); font-weight: 600; font-family: 'Syne'; letter-spacing: 1px;}
+
+        /* EXACT VERTICAL ALIGNMENT (AVAILABILITY DOT + TEXT) */
         .hero .availability {
-            position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
+            position: absolute; bottom: 50px; left: 5vw; 
+            display: flex; align-items: center; gap: 10px; 
+            font-size: 0.85rem; color: var(--text-dim); 
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
         }
-        .pulse { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
         
-        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+        .pulse-box {
+            position: relative;
+            display: flex; justify-content: center; align-items: center;
+            width: 8px; height: 8px;
+        }
+
+        .pulse-core {
+            position: absolute; width: 8px; height: 8px;
+            background: #22c55e; border-radius: 50%;
+        }
+
+        .pulse-ring {
+            position: absolute; width: 8px; height: 8px;
+            background: #22c55e; border-radius: 50%;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .availability span {
+            line-height: 1; /* Eliminates baseline bounding-box overflow */
+            margin-top: 1px; /* Optical balance against capital letters */
+        }
+
+        @keyframes ping { 75%, 100% { transform: scale(2.8); opacity: 0; } }
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
@@ -189,7 +218,7 @@
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- CURRICULUM MINIMALISTA --- */
+        /* --- CURRICULUM --- */
         .cv-wrapper { border-top: 1px solid var(--border); }
         .cv-item { 
             display: flex; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid var(--border);
@@ -262,7 +291,12 @@
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
         </div>
         <div class="availability" data-aos="fade-up" data-aos-delay="500">
-            <div class="pulse"></div> Disponible para nuevos retos
+            <!-- Pulsador con punto estático anclado  -->
+            <div class="pulse-box">
+                <div class="pulse-ring"></div>
+                <div class="pulse-core"></div>
+            </div>
+            <span>Disponible para nuevos retos</span>
         </div>
     </section>
 
@@ -286,7 +320,7 @@
         <h2 class="section-title" data-aos="fade-right">Archivo de Diseño /</h2>
         
         <div class="portfolio-bento">
-            <!-- Project 1 (WIDE) -->
+            <!-- Project 1 -->
             <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
@@ -299,7 +333,7 @@
                 </div>
             </a>
 
-            <!-- Project 2 (SQUARE) -->
+            <!-- Project 2 -->
             <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
@@ -312,7 +346,7 @@
                 </div>
             </a>
 
-            <!-- Project 3 (SQUARE) -->
+            <!-- Project 3 -->
             <a href="#" class="p-card p-square inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
@@ -325,7 +359,7 @@
                 </div>
             </a>
 
-            <!-- Project 4 (WIDE) -->
+            <!-- Project 4 -->
             <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
@@ -430,7 +464,6 @@
 
         // INTERACCIONES TEMA LUZ / OSCURO
         const btnToggle = document.getElementById("theme-toggle");
-        const body = document.documentElement; // Utilizamos el elemento raíz HTML para más limpieza en darkmodes actuales.
         
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
@@ -454,34 +487,39 @@
             lastScrollTop = scrollTop;
         });
 
-        // MAGNETIC CURSOR & SMOOTH FOLLOW TIPO 2026
+        // --- GPU-ACCELERATED ULTRA FLUID CURSOR LOGIC ---
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mouseX = 0, mouseY = 0;
-        let ringX = 0, ringY = 0;
         
+        // Coordenadas Iniciales (Empiezan fuera de pantalla para que no molesten antes de entrar)
+        let mouseX = -100, mouseY = -100;
+        let ringX = -100, ringY = -100;
+        let dotX = -100, dotY = -100;
+
         window.addEventListener("mousemove", (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            // The dot directly follows
-            dot.style.left = `${mouseX}px`;
-            dot.style.top = `${mouseY}px`;
         });
 
-        // The ring has interpolation (Lerp) so it smoothly chases the pointer
-        function renderLoop() {
-            ringX += (mouseX - ringX) * 0.15; // Velocidad de persecución del anillo
+        // Loop Lerp + Animación CSS Transform para eliminar caídas de frames del Mouse puro (stutters)
+        function renderCursor() {
+            // Un poco de delay para el puntito enmascara los parones de sensor y los unifica a los 120Hz/60Hz puros de la pantalla (lerp del 50%).
+            dotX += (mouseX - dotX) * 0.5;
+            dotY += (mouseY - dotY) * 0.5;
+            
+            // Retardo cinematográfico del círculo blanco
+            ringX += (mouseX - ringX) * 0.15;
             ringY += (mouseY - ringY) * 0.15;
             
-            ring.style.left = `${ringX}px`;
-            ring.style.top = `${ringY}px`;
+            // Renderizado por aceleración 3D en la gráfica del navegador 
+            dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             
-            requestAnimationFrame(renderLoop);
+            requestAnimationFrame(renderCursor);
         }
-        requestAnimationFrame(renderLoop);
+        requestAnimationFrame(renderCursor);
 
-        // Estado expandido magnético en los links (Se ve y siente como cursor real macOs/iPadOs)
+        // Hover Effect Magnético
         document.querySelectorAll('.inter-hover, a, button, .p-card').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
