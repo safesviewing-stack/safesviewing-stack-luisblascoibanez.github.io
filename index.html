@@ -1,738 +1,491 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
+    <title>Luis Blasco-Ibáñez | Industrial Design</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES --- */
+        /* --- CORE VARIABLES --- */
         :root {
-            --bg: #050505;
-            --accent: #8b5cf6; 
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --card-bg: rgba(20, 20, 20, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --text-dim: #a1a1aa;
-            --glass: rgba(5, 5, 5, 0.45);
+            --bg: #030303;
+            --accent: #FF5A00; /* Naranja técnico industrial, muy premium */
+            --accent-glow: rgba(255, 90, 0, 0.15);
+            --card-bg: rgba(25, 25, 27, 0.4);
+            --border: rgba(255, 255, 255, 0.05);
+            --text: #f3f3f3;
+            --text-dim: #8b8b8d;
+            --glass: rgba(10, 10, 12, 0.5);
+            --blur: blur(20px);
         }
 
         .light-mode {
-            --bg: #f5f5f7;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.1);
-            --text: #1d1d1f;
-            --text-dim: #424245;
+            --bg: #f2f2f4;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --border: rgba(0, 0, 0, 0.06);
+            --text: #111112;
+            --text-dim: #5c5c5f;
             --glass: rgba(255, 255, 255, 0.6);
-            --accent-glow: rgba(139, 92, 246, 0.15); /* Slightly subtle for white background */
+            --accent-glow: rgba(255, 90, 0, 0.05);
         }
 
+        /* --- BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg); color: var(--text);
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-            transition: background 0.5s ease;
+            overflow-x: hidden; line-height: 1.5;
+            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
+        }
+
+        /* Film Grain Noise overlay - Trendy in 2026 */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 9998;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04; mix-blend-mode: overlay;
         }
 
         body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
-            z-index: -1;
+            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh;
+            background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%);
+            z-index: -1; transform: translateX(-50%);
         }
 
-        /* --- CURSOR --- */
-        #cursor {
-            width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 50%;
+        ::selection { background: var(--accent); color: #fff; }
+
+        /* --- MODERN CUSTOM CURSOR --- */
+        #cursor-dot {
+            width: 8px; height: 8px; background: var(--text); border-radius: 50%;
             position: fixed; pointer-events: none; z-index: 9999;
-            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); transition: background 0.2s, transform 0.2s;
+        }
+        #cursor-ring {
+            width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border 0.3s;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .hovered-element #cursor-ring {
+            width: 80px; height: 80px; background: var(--text); mix-blend-mode: difference;
+            border-color: transparent;
+        }
+        .hovered-element #cursor-dot { opacity: 0; }
+
+        /* --- FLOATING PILL NAVBAR --- */
+        .navbar-wrapper {
+            position: fixed; top: 30px; left: 0; width: 100%;
+            display: flex; justify-content: center; z-index: 2000;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .navbar-hidden { transform: translateY(-120px); }
+
+        header {
+            background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            padding: 12px 30px; display: flex; align-items: center; gap: 40px;
+            border: 1px solid var(--border); border-radius: 100px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        /* --- HEADER GLASS --- */
-       header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    padding: 20px 4% 20px 10%;
-
-    background: rgba(5, 5, 5, 0.30); /* ← más transparente */
-    backdrop-filter: blur(35px) saturate(140%);
-    -webkit-backdrop-filter: blur(35px) saturate(140%);
-
-    display: flex;
-    align-items: center;
-
-    z-index: 2000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.3s ease,
-                backdrop-filter 0.3s ease;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0)
-    );
-    pointer-events: none;
-}
-
-        
-        header.nav-hidden { transform: translateY(-100%); }
-
-        .nav-logo {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.35rem;   /* más grande */
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-        .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
-        
-        /* SPOTLIGHT NAV LINK EFFECTS  */
-        .nav-links { 
-            display: flex; gap: 25px; position: relative; 
-            padding-bottom: 5px; /* Added internal space protecting light cast visually  */
-        }
-
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { 
-            color: #ffffff;
-            position: relative; z-index: 2; /* Sobre luz blur */
-            text-decoration: none; font-size: 0.7rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; 
+            text-decoration: none; color: var(--text-dim); font-size: 0.8rem; 
+            font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; 
+            transition: color 0.3s; 
         }
+        .nav-links a:hover { color: var(--text); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a.spotlight-active { color: var(--text); font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .light-mode .nav-links a.spotlight-active { text-shadow: none; color: var(--accent); }
-
-        /* EL DESTELLO CORREDOR (Nav Indicator Box Shadow Translate) */
-        .nav-indicator {
-            position: absolute;
-            top: -21px;  /* Sincronizado para ir justo contra el "Techo de Header" pegado visual */
-            left: 0;
-            height: 2px;
-            background: #fff; /* White base con difuminado purpura imita Spotlight origin Tailwind style */
-            box-shadow: 0 1px 12px 1px var(--accent);
-            border-radius: 4px;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            opacity: 0; /* Opaco x def. Aparece via Script si matcheas ID*/
-            pointer-events: none;
-            z-index: 1;
+        #theme-toggle { 
+            background: transparent; border: none; color: var(--text);
+            width: 25px; height: 25px; display: flex; align-items: center; 
+            justify-content: center; font-size: 1.1rem; transition: transform 0.3s;
         }
+        #theme-toggle:hover { transform: rotate(45deg); }
 
-       
+        /* --- SECTIONS --- */
+        section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
 
-        .header-toggles { display: flex; gap: 15px; align-items: center; }
+        .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        .hero h1 { 
+            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
+            line-height: 0.9; margin-bottom: 20px; font-weight: 800; 
+            letter-spacing: -0.04em; text-transform: uppercase;
+        }
+        .hero .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--accent); font-weight: 600; font-family: 'Syne'; letter-spacing: 1px;}
+        .hero .availability {
+            position: absolute; bottom: 50px; left: 5vw; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
+        }
+        .pulse { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
         
-        #lang-toggle { 
-            background: transparent; border: 1px solid var(--border); color: var(--text); 
-            padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
-            align-items: center; justify-content: center; font-size: 0.75rem; 
-            font-weight: 700; transition: 0.3s; outline: none; 
+        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+
+        h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
+
+        /* --- BENTO GRID: ABOUT --- */
+        .bento-about {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
         }
-        #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
-        /* --- THEME TOGGLE SLIDER --- */
-        .theme-switch-wrapper {
-            all: unset; display: flex; align-items: center; justify-content: space-between;
-            width: 64px; height: 32px; padding: 3px; border-radius: 9999px;
-            cursor: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
-            background: #09090b; border: 1px solid #27272a; position: relative;
+        .bento-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px;
+            padding: 50px; backdrop-filter: var(--blur);
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-
-        .light-mode .theme-switch-wrapper { background: #ffffff; border: 1px solid #e4e4e7; }
-        .theme-icon-container {
-            display: flex; justify-content: center; align-items: center; 
-            width: 24px; height: 24px; border-radius: 50%;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
+        .bento-card-photo {
+            padding: 0; overflow: hidden; height: 100%; min-height: 450px;
+            position: relative; border-radius: 30px; border: 1px solid var(--border);
         }
+        .bento-card-photo img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%);
+            transition: filter 0.5s, transform 0.5s;
+        }
+        .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
-        .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
+        .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
+        .about-text strong { color: var(--text); font-weight: 500;}
 
-        .icon-left { background: #27272a; color: #ffffff; transform: translateX(0); }
-        .light-mode .icon-left { transform: translateX(32px); background: #e5e7eb; color: #374151; }
-        .icon-right { background: transparent; color: #71717a; transform: translateX(0); }
-        .light-mode .icon-right { transform: translateX(-32px); color: #000000; }
-        .dark-visible { display: block; } .light-visible { display: none; }
-        .light-mode .dark-visible { display: none; } .light-mode .light-visible { display: block; }
-
-        /* --- SECCIONES GENERALES --- */
-        section { padding: 220px 10% 120px; }
-
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
-        .hero h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(3rem, 12vw, 7.5rem);
-    line-height: 1.1;        /* más separación entre líneas */
-    margin-bottom: 40px;
-    letter-spacing: -6px;
-    text-transform: uppercase;
-    margin-left: -8px;
-}
-        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-
-        h2.section-title { font-family: 'Inter', sans-serif; font-size: 4rem; margin-bottom: 40px; text-transform: uppercase; }
-
-        .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
-        .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); text-align: justify; text-justify: inter-word; }
-        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
-
-        /* --- PORTFOLIO --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; transition: 0.4s; overflow: hidden; }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .project-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; }
-
-        /* --- CURRICULUM --- */
-        .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
-        .cv-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    min-width: 160px;
-}
-
-        /* --- EXPAND ICON BUTTON CSS --- */
+        /* --- BENTO GRID: PORTFOLIO --- */
+        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
+        .p-card {
+            position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px;
+            overflow: hidden; group; transition: 0.5s ease;
+        }
+        .p-wide { grid-column: span 8; height: 500px; }
+        .p-square { grid-column: span 4; height: 500px; }
         
-        .btn-expand {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            background-color: var(--accent); 
-            color: #ffffff; 
-            padding: 20px 45px;
-            font-size: 1rem;
-            font-weight: 800;
-            border-radius: 100px;
-            border: none;
-            outline: none;
-            text-decoration: none;
-            cursor: none;
-            min-width: fit-content;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
+        .p-img-container img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1.01);
+        }
+        .p-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
+            z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7;
         }
 
-        .btn-expand:hover {
-            background-color: #7c3aed; 
-            box-shadow: 0px 4px 15px var(--accent-glow); 
+        .p-info {
+            position: absolute; bottom: 30px; left: 30px; right: 30px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end;
         }
+        .p-info h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 5px; color: white;}
+        .p-info p { font-size: 0.85rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+
+        .view-circle {
+            width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .p-card:hover { border-color: rgba(255,255,255,0.2); }
+        .p-card:hover .p-img-container img { transform: scale(1.08); }
+        .p-card:hover .p-overlay { opacity: 1; }
+        .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
+
+        /* --- SKILLS --- */
+        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
+        .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
+
+        /* --- CURRICULUM MINIMALISTA --- */
+        .cv-wrapper { border-top: 1px solid var(--border); }
+        .cv-item { 
+            display: flex; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid var(--border);
+            align-items: center; transition: 0.3s;
+        }
+        .cv-item:hover { padding-left: 20px; padding-right: 20px; background: rgba(255,255,255,0.01); }
+        .cv-role h3 { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; }
+        .cv-company { font-size: 1rem; color: var(--text-dim); }
+        .cv-year { font-family: 'Inter'; color: var(--accent); font-weight: 500; font-size: 0.9rem;}
         
-        .btn-expand:active { transform: scale(0.97); }
+        .btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, background 0.3s; margin-top: 50px;
+        }
+        .btn:hover { transform: translateY(-5px); background: var(--accent); color: white;}
 
-        .btn-expand-icon {
-            display: inline-flex; align-items: center;
-            width: 0px; padding-left: 0px; opacity: 0;
-            overflow: hidden; transform: translateX(100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* --- CONTACT --- */
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center;}
+        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; font-weight: 800;}
+        .contact-info a { display: block; font-size: 2rem; color: var(--text-dim); text-decoration: none; margin-bottom: 10px; transition: 0.3s;}
+        .contact-info a:hover { color: var(--accent); }
+        
+        /* FOOTER */
+        footer {
+            padding: 40px 5vw; display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-top: 100px;
         }
 
-        .btn-expand:hover .btn-expand-icon {
-            width: 25px; padding-left: 10px;          
-            transform: translateX(0%); opacity: 1;
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .portfolio-bento { display: flex; flex-direction: column; }
+            .p-wide, .p-square { height: 400px; }
+            .bento-about, .skills-bento, .footer-grid { grid-template-columns: 1fr; }
+            .bento-card-photo { min-height: 400px;}
         }
-
-        /* MEDIA QUERIES */
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { 
-            .nav-links { display: none; } 
-            .portfolio-grid { grid-template-columns: 1fr; } 
-            .hero h1 { font-size: 3.5rem; }
-            .about-container { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            header { padding: 10px 20px; gap: 20px; }
+            .nav-links, .nav-dot { display: none; }
+            .cv-item { flex-direction: column; align-items: flex-start; gap: 10px;}
+            .cv-item:hover { padding-left: 0; padding-right: 0;}
         }
-
-
-        .nav-links a.spotlight-active {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-        .nav-links {
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links a {
-    line-height: 1;
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links {
-    margin-top: 8px;
-}
-
-/* === MAGNETIC SKILLS GRID === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px;   /* controla lo largas que son */
-    text-align: left; 
-}
-
-.skill-item {
-    position: relative;
-    height: 140px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    background: rgba(20,20,20,0.55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 22px;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-}
-
-.skill-item img {
-    width: 38px;
-    height: 38px;
-    filter: grayscale(100%) brightness(1.1);
-    transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.skill-item span {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    opacity: 0.85;
-}
-
-
-
-
-.skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 35px;
-
-    transition: 
-        transform 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-}
-
-.skill-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;          /* más grande */
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    color: var(--text);          /* bien protagonista */
-}
-.skill-card p {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    opacity: 0.6;   /* más opacos */
-}
-        /* === SKILLS (VERTICAL) === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px; /* controla lo largas */
-}
-
-    .project-card p {
-    font-size: 0.65rem;      /* más pequeño */
-    letter-spacing: 1.8px;   /* look técnico/editorial */
-    opacity: 0.55;           /* más opaco */
-    text-transform: uppercase;
-    margin-top: 6px;
-}
-
-        /* === FADE INFERIOR CAMUFLADO === */
-body::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 120px;          /* más discreto */
-    pointer-events: none;
-    z-index: 999;
-
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(0, 0, 0, 0.0) 100%
-    );
-}
-
-.light-mode body::after {
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-}
-
-        #work .section-title {
-    margin-bottom: 45px; /* antes ~25px */
-}
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
-    <header id="navbar">
-        <div class="nav-logo">L · BIB</div>
-        <div class="header-actions">
-            
-            <nav class="nav-links" id="nav-container">
-                <!-- HAZ DIRECCIONAL/LINEA RESPONSABLE DEL HIGHLIGHT INDICATOR -->
-               
-                
-                <a href="#about" class="lang-text" data-es="Sobre mí" data-en="About me">Sobre mí</a>
-                <a href="#work" class="lang-text" data-es="Portfolio" data-en="Portfolio">Portfolio</a>
-                <a href="#skills" class="lang-text" data-es="Habilidades" data-en="Skills">Habilidades</a>
-                <a href="#cv" class="lang-text" data-es="Curriculum" data-en="Resume">Curriculum</a>
-                <a href="#contact" class="lang-text" data-es="Contacto" data-en="Contact">Contacto</a>
+    <!-- Navegación Islote Dinámico -->
+    <div class="navbar-wrapper" id="navbar">
+        <header>
+            <div class="nav-logo inter-hover">L|BIB</div>
+            <div class="nav-dot"></div>
+            <nav class="nav-links">
+                <a href="#about" class="inter-hover">Sobre mí</a>
+                <a href="#work" class="inter-hover">Portfolio</a>
+                <a href="#skills" class="inter-hover">Studio</a>
+                <a href="#cv" class="inter-hover">Currículum</a>
             </nav>
-            
-            <div class="header-toggles">
-                <button id="lang-toggle" aria-label="Toggle Language"><span>ES</span></button>
-                <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
-                    <div class="theme-icon-container icon-left">
-                        <i class="fa-solid fa-moon dark-visible"></i>
-                        <i class="fa-solid fa-sun light-visible"></i>
-                    </div>
-                    <div class="theme-icon-container icon-right">
-                        <i class="fa-solid fa-sun dark-visible"></i>
-                        <i class="fa-solid fa-moon light-visible"></i>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </header>
+            <button id="theme-toggle" class="inter-hover" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+    </div>
 
-    <section class="hero">
-        <div data-aos="fade-up" data-aos-duration="1200">
-            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
-            <p class="subtitle lang-text" data-aos="fade-right" data-aos-delay="400" data-es="PORTFOLIO | DISEÑADOR INDUSTRIAL" data-en="PORTFOLIO | INDUSTRIAL DESIGNER">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
+    <section class="hero" id="home">
+        <p class="subtitle" data-aos="fade-down" data-aos-duration="1000">DIS. INDUSTRIAL</p>
+        <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+            <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
+        </div>
+        <div class="availability" data-aos="fade-up" data-aos-delay="500">
+            <div class="pulse"></div> Disponible para nuevos retos
         </div>
     </section>
 
     <section id="about">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
-        <div class="about-container">
-            <div class="about-text-reduced" data-aos="fade-up">
-                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
+        <h2 class="section-title" data-aos="fade-right">Perfil /</h2>
+        <div class="bento-about">
+            <div class="bento-card" data-aos="fade-up">
+                <p class="about-text">
+                    Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>.
+                    <br><br>
+                    No opero puramente desde el arte ni puramente desde la ingeniería. Habito ese eje central; persiguiendo el balance entre <strong>la belleza material, el empirismo productivo y la coherencia sistémica</strong>. Mi paso por estudios previos de técnica y electricidad fundamentó mi ADN en una comprensión rigurosa del porqué detrás de la forma, diseñando con mentalidad orientada a la <em>fabricación y optimización real.</em>
+                </p>
             </div>
-            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
+            <div class="bento-card-photo" data-aos="fade-up" data-aos-delay="150">
+                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Retrato o Entorno">
+            </div>
         </div>
     </section>
 
     <section id="work">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Portfolio" data-en="Portfolio">Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ALPHA</h3><p class="lang-text" data-es="ESTRUCTURA TÉCNICA" data-en="TECHNICAL STRUCTURE">ESTRUCTURA TÉCNICA</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>EGO</h3><p class="lang-text" data-es="MUEBLE SINGULAR" data-en="UNIQUE FURNITURE">MUEBLE SINGULAR</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ION</h3><p class="lang-text" data-es="TECNOLOGÍA" data-en="TECHNOLOGY">TECNOLOGÍA</p></div></div>
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>BEATS</h3><p class="lang-text" data-es="SONIDO HI-FI" data-en="HI-FI SOUND">SONIDO HI-FI</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CITY</h3><p class="lang-text" data-es="ENTORNO URBANO" data-en="URBAN ENVIRONMENT">ENTORNO URBANO</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CORE</h3><p class="lang-text" data-es="FORMAS ORGÁNICAS" data-en="ORGANIC SHAPES">FORMAS ORGÁNICAS</p></div></div>
+        <h2 class="section-title" data-aos="fade-right">Archivo de Diseño /</h2>
+        
+        <div class="portfolio-bento">
+            <!-- Project 1 (WIDE) -->
+            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div>
+                        <h3>PROYECTO ALPHA</h3>
+                        <p>Diseño Estructural Técnico</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Project 2 (SQUARE) -->
+            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div>
+                        <h3>EGO SEATING</h3>
+                        <p>Mobiliario / Contexto</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Project 3 (SQUARE) -->
+            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div>
+                        <h3>BEATS X</h3>
+                        <p>Carcasas Hi-Fi / Consumer Electronics</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Project 4 (WIDE) -->
+            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info">
+                    <div>
+                        <h3>ION CORE</h3>
+                        <p>Diseño Orgánico Industrializado</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
         </div>
     </section>
 
-   <section id="skills">
-    <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
-
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h3>CAD AVANZADO</h3>
-            <p>SolidWorks · Fusion 360 · Inventor · Rhino · AutoCAD</p>
+    <section id="skills">
+        <h2 class="section-title" data-aos="fade-right">Infraestructura & Técnicas /</h2>
+        <div class="skills-bento">
+            <div class="bento-card" data-aos="fade-up">
+                <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Modelado Topológico</h3>
+                <p class="about-text" style="font-size:0.95rem;">SolidWorks & Rhinoceros avanzados. Precisión volumétrica orientada a moldeo plástico e integración compleja de componentes clase-A Surfaces.</p>
+            </div>
+            <div class="bento-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Representación Visual</h3>
+                <p class="about-text" style="font-size:0.95rem;">Keyshot & Realidad Física CGI. Renderización matérica avanzada comunicando acabados, gramajes, pesos visuales e impacto comercial.</p>
+            </div>
+            <div class="bento-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;">Viabilidad Productiva (DFM)</h3>
+                <p class="about-text" style="font-size:0.95rem;">Metodologías de "Design for Manufacturing". Costeo optimizado de matricería. Interrelación experta de elementos metálicos/plásticos.</p>
+            </div>
         </div>
-
-        <div class="skill-card">
-            <h3>RENDER Y VISUALIZACIÓN</h3>
-            <p>3ds Max · SolidWorks Visualize</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>DISEÑO GRÁFICO</h3>
-            <p>Photoshop · Illustrator · InDesign · Animate</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>PROTOTIPADO</h3>
-            <p>Maquetas · Impresión 3D</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>DISEÑO WEB</h3>
-            <p>GitHub</p>
-        </div>
-    </div>
-</section>
+    </section>
 
     <section id="cv">
-    <h2 class="section-title lang-text" data-aos="fade-up" data-es="Curriculum" data-en="Resume">
-        Curriculum
-    </h2>
+        <div class="cv-wrapper">
+            <h2 class="section-title" style="margin-top: 50px;" data-aos="fade-up">Histórico Laboral /</h2>
+            
+            <div class="cv-item" data-aos="fade-up">
+                <div class="cv-role">
+                    <h3>Product Designer Lead</h3>
+                    <div class="cv-company">Industrial Core Studio • Liderando diseño de producto global</div>
+                </div>
+                <div class="cv-year">2024 — ACTUALIDAD</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year lang-text" data-es="2024 — PRESENTE" data-en="2024 — PRESENT">
-            2024 — PRESENTE
-        </div>
-        <div class="cv-content">
-            <h3>PRODUCT DESIGNER LEAD</h3>
-            <span>Industrial Core Studio.</span>
-        </div>
-    </div>
+            <div class="cv-item" data-aos="fade-up" data-aos-delay="50">
+                <div class="cv-role">
+                    <h3>Diseñador Jr. Equipamiento</h3>
+                    <div class="cv-company">Prototyping Labs C.A • Parametrización</div>
+                </div>
+                <div class="cv-year">2022 — 2024</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2023</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="PRÁCTICAS DISEÑO INDUSTRIAL" 
-                data-en="INDUSTRIAL DESIGN INTERN">
-                PRÁCTICAS DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Estudio de diseño / Empresa" 
-                  data-en="Design studio / Company">
-                Estudio de diseño / Empresa
-            </span>
-        </div>
-    </div>
+            <div class="cv-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="cv-role">
+                    <h3>Pasante CAD + Electricidad</h3>
+                    <div class="cv-company">Bionic Solutions & Partners</div>
+                </div>
+                <div class="cv-year">2021 — 2022</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2022 — 2024</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="DISEÑADOR JUNIOR" data-en="JUNIOR DESIGNER">
-                DISEÑADOR JUNIOR
-            </h3>
-            <span>Prototyping Labs.</span>
-        </div>
-    </div>
+            <div class="cv-item" data-aos="fade-up" data-aos-delay="150">
+                <div class="cv-role">
+                    <h3>Graduado Diseño Industrial</h3>
+                    <div class="cv-company">Desarrollado en tres universidades polítecnicas cruzadas</div>
+                </div>
+                <div class="cv-year">2016 — 2020</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2021 — 2022</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">
-                BECARIO DISEÑO
-            </h3>
-            <span>Bionic Design Solutions.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2016 — 2020</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="GRADO DISEÑO INDUSTRIAL" 
-                data-en="BACHELOR IN INDUSTRIAL DESIGN">
-                GRADO DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Univ. Politécnica Superior." 
-                  data-en="Higher Polytechnic Univ.">
-                Univ. Politécnica Superior.
-            </span>
-        </div>
-    </div>
-
-    <a href="#" class="btn-expand group" style="margin-top: 60px;">
-        <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">
-            DESCARGAR CV PDF
-        </span>
-        <div class="btn-expand-icon">
-            <i class="fa-solid fa-file-arrow-down"></i>
-        </div>
-    </a>
-</section>
-
-    <section id="contact" style="padding-bottom: 250px;">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Contacto" data-en="Contact">Contacto</h2>
-        <div style="background:var(--card-bg); padding:80px; border-radius:40px; border:1px solid var(--border);">
-            <form style="display:flex; flex-direction:column; gap:20px;">
-                <input type="text" class="lang-ph" data-es="TU NOMBRE" data-en="YOUR NAME" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
-                
-                <button type="submit" class="btn-expand group" style="margin-top:20px; min-width: 250px; justify-content: center;">
-                    <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
-                    <div class="btn-expand-icon">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </button>
-            </form>
+            <a href="#" class="btn inter-hover" data-aos="fade-up"><i class="fa-solid fa-arrow-down-to-line"></i> Bajar Dossier & CV</a>
         </div>
     </section>
 
-    <footer style="padding:30px 10%; text-align:center; opacity:0.35; font-size: 0.7rem; letter-spacing: 1px;">
-        <p class="lang-text" data-es="© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial" data-en="© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Designer">© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial</p>
+    <section id="contact">
+        <div class="bento-card" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="footer-grid">
+                <div>
+                    <h2 class="mega-text">CREEMOS<br>FUTURO</h2>
+                    <p class="about-text" style="margin-top:20px; max-width: 400px;">Diseñando con sentido, funcionalidad asertiva y honestidad objetual.</p>
+                </div>
+                <div class="contact-info">
+                    <p style="text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px;">Vía directa</p>
+                    <a href="mailto:hola@luisblasco.com" class="inter-hover">hola@luisblasco.com</a>
+                    <a href="#" class="inter-hover">LinkedIn / Redes</a>
+                    <a href="#" class="inter-hover">+34 600 000 000</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>L|BIB DESIGN © 2026. ALL RIGHTS RESERVED.</div>
+        <div>BASADO EN VALENCIA, ESP.</div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 800, once: true, offset: 50 });
 
-        // SPOTLIGHT LÓGICA CON CALCULO DIMENSION Y MARCAJE  DE SECCIÓN (Active State + Blur Effect Mapeado interactivo )
+        // INTERACCIONES TEMA LUZ / OSCURO
+        const btnToggle = document.getElementById("theme-toggle");
+        const body = document.documentElement; // Utilizamos el elemento raíz HTML para más limpieza en darkmodes actuales.
         
-        const navContainer = document.getElementById("nav-container");
-        const sectionsArray = document.querySelectorAll("section[id]");
-        const sectionNavLinks = document.querySelectorAll(".nav-links a");
-        
-        function updateSpotlight() {
-            let activeId = "";
-            let currentScroll = window.scrollY;
-            
-            // Evaluamos la posición general de todas las áreas visuales restando viewport tolerante superior/mitad  (-50% viewHeight triggers)
-            sectionsArray.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const vTollerance = window.innerHeight * 0.45; // Empieza a cambiar cuando cruzamos la frontera natural por la mtiad d
-                
-                if (currentScroll >= (sectionTop - vTollerance) && currentScroll < (sectionTop + sectionHeight - vTollerance)) {
-                    activeId = section.getAttribute("id");
-                }
-            });
-
-            // Condición absoluta Forzosa en End Point Footer = "contact" id check 
-            if ((window.innerHeight + currentScroll) >= document.body.offsetHeight - 50) {
-                activeId = "contact";
-            }
-            
-            if (activeId) {
-                const activeLinkTarget = document.querySelector(`.nav-links a[href="#${activeId}"]`);
-                if(activeLinkTarget) {
-                    const lBox = activeLinkTarget.getBoundingClientRect();
-                    const nBox = navContainer.getBoundingClientRect();
-                    
-                    const leftShift = lBox.left - nBox.left; 
-
-                   
-
-                    sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
-                    activeLinkTarget.classList.add('spotlight-active');
-                }
-            } else { 
-                 // Opaca Si se encuentra al top y Hero Mode en lugar Neutral // 
-                spotlight.style.opacity = '0';
-                sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
-            }
-        }
-        window.addEventListener('scroll', updateSpotlight, { passive: true });
-        window.addEventListener('resize', updateSpotlight);
-        
-        // Ejecución preventiva por cache visual Start  Load
-        document.addEventListener("DOMContentLoaded", updateSpotlight);
-
-        // LENGUAJES LÓGICA RÁPIDA 
-        const btnLang = document.getElementById("lang-toggle");
-        let currentLang = "es";
-        btnLang.addEventListener("click", () => {
-            currentLang = currentLang === "es" ? "en" : "es";
-            btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
-            document.querySelectorAll(".lang-text").forEach(el => {
-                el.innerHTML = el.getAttribute(`data-${currentLang}`);
-            });
-            document.querySelectorAll(".lang-ph").forEach(el => {
-                el.placeholder = el.getAttribute(`data-${currentLang}`);
-            });
-            setTimeout(updateSpotlight, 100); // Trigger para reacordar width post cambios palabra longitudes "curriculum a Resume etc" !
-        });
-
-        // TEMAS DARK/LIGHT MODE LÓGICA DE FORMS
-        const btnToggleTheme = document.getElementById("theme-switch");
-        btnToggleTheme.addEventListener("click", () => {
+        btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            const formInputs = document.querySelectorAll("#contact input, #contact textarea");
-            if(document.body.classList.contains("light-mode")){
-                formInputs.forEach(input => input.style.color = "#1d1d1f");
-            } else {
-                formInputs.forEach(input => input.style.color = "white");
-            }
+            const isLight = document.body.classList.contains("light-mode");
+            btnToggle.querySelector("i").className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
         });
 
-        // HEADER SCROLL AUTO Y HIDDEN CONTROL DEFAULT 
-        let lastScroll = 0;
-        let isAutoScrolling = false;
-        let scrollTimeout;
+        // NAVBAR TIPO PILL QUE DESAPARECE INTELIGENTEMENTE CON SCROLL
         const navbar = document.getElementById("navbar");
-        
-        sectionNavLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                isAutoScrolling = true;
-                navbar.classList.remove("nav-hidden");
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => { isAutoScrolling = false; updateSpotlight(); }, 1000); // Lanza Actualizacion
-            });
-        });
+        let lastScrollTop = 0;
 
         window.addEventListener("scroll", () => {
-            const currentScroll = window.scrollY || document.documentElement.scrollTop;
-            if (!isAutoScrolling) {
-                if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
-                else navbar.classList.remove("nav-hidden");
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 150) {
+                // Scroll down
+                navbar.classList.add("navbar-hidden");
+            } else {
+                // Scroll up
+                navbar.classList.remove("navbar-hidden");
             }
-            lastScroll = currentScroll;
+            lastScrollTop = scrollTop;
         });
 
-        // CUSTOM CURSOR HOVER EVENT LOOP CATCH OVER EVERYTHING INTERACTIVO NUEVO   
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
-            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
-        });
-
-
-
+        // MAGNETIC CURSOR & SMOOTH FOLLOW TIPO 2026
+        const dot = document.getElementById("cursor-dot");
+        const ring = document.getElementById("cursor-ring");
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
         
+        window.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // The dot directly follows
+            dot.style.left = `${mouseX}px`;
+            dot.style.top = `${mouseY}px`;
+        });
+
+        // The ring has interpolation (Lerp) so it smoothly chases the pointer
+        function renderLoop() {
+            ringX += (mouseX - ringX) * 0.15; // Velocidad de persecución del anillo
+            ringY += (mouseY - ringY) * 0.15;
+            
+            ring.style.left = `${ringX}px`;
+            ring.style.top = `${ringY}px`;
+            
+            requestAnimationFrame(renderLoop);
+        }
+        requestAnimationFrame(renderLoop);
+
+        // Estado expandido magnético en los links (Se ve y siente como cursor real macOs/iPadOs)
+        document.querySelectorAll('.inter-hover, a, button, .p-card').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
+        });
     </script>
 </body>
 </html>
