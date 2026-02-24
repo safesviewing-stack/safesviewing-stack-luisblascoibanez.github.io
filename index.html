@@ -10,29 +10,27 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES --- */
+        /* --- VARIABLES GLOBALES --- */
         :root {
             --bg: #050505;
             --accent: #8b5cf6; 
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --card-bg: rgba(20, 20, 20, 0.6);
+            --accent-glow: rgba(139, 92, 246, 0.35);
+            --card-bg: rgba(20, 20, 20, 0.4);
             --border: rgba(255, 255, 255, 0.08);
             --text: #ffffff;
             --text-dim: #a1a1aa;
-            --glass: rgba(5, 5, 5, 0.45);
         }
 
         .light-mode {
-            --bg: #f5f5f7;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.1);
-            --text: #1d1d1f;
-            --text-dim: #424245;
-            --glass: rgba(255, 255, 255, 0.6);
-            --accent-glow: rgba(139, 92, 246, 0.15); /* Slightly subtle for white background */
+            --bg: #fdfdfd;
+            --card-bg: rgba(240, 240, 240, 0.5);
+            --border: rgba(0, 0, 0, 0.08);
+            --text: #171717;
+            --text-dim: #52525b;
+            --accent-glow: rgba(139, 92, 246, 0.15); 
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg);
@@ -40,699 +38,568 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
-            transition: background 0.5s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
+        /* --- GRADIENTES ORBITALES DEL FONDO ANIMADOS --- */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
             z-index: -1;
+            opacity: 0.6;
+            animation: float 25s infinite ease-in-out alternate;
+            pointer-events: none;
         }
-
-        /* --- CURSOR --- */
-        #cursor {
-            width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999;
-            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: translate(-50%, -50%);
+        body::before {
+            top: -20%; right: -10%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
         }
-
-        /* --- HEADER GLASS --- */
-       header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    padding: 20px 4% 20px 10%;
-
-    background: rgba(5, 5, 5, 0.30); /* ← más transparente */
-    backdrop-filter: blur(35px) saturate(140%);
-    -webkit-backdrop-filter: blur(35px) saturate(140%);
-
-    display: flex;
-    align-items: center;
-
-    z-index: 2000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.3s ease,
-                backdrop-filter 0.3s ease;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0)
-    );
-    pointer-events: none;
-}
-
+        body::after {
+            bottom: -20%; left: -10%;
+            background: radial-gradient(circle, rgba(100, 50, 200, 0.15) 0%, transparent 70%);
+            animation-delay: -12s;
+            animation-direction: alternate-reverse;
+        }
         
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(-100px, 50px) scale(1.1); }
+            100% { transform: translate(50px, -150px) scale(0.9); }
+        }
+
+        /* --- CURSOR CUSTOM MEJORADO --- */
+        @media (pointer: fine) {
+            body { cursor: none; }
+            a, button, input, textarea { cursor: none; }
+        }
+        #cursor, #cursor-follower {
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); border-radius: 50%;
+        }
+        #cursor {
+            width: 6px; height: 6px; background-color: var(--accent);
+        }
+        #cursor-follower {
+            width: 28px; height: 28px; border: 1px solid var(--accent);
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1), height 0.3s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.3s ease;
+        }
+        #cursor-follower.hovering {
+            width: 55px; height: 55px;
+            border-color: rgba(255,255,255,0.4);
+            background: var(--accent-glow);
+            backdrop-filter: blur(2px);
+            mix-blend-mode: exclusion;
+        }
+        .light-mode #cursor-follower.hovering {
+            mix-blend-mode: darken;
+        }
+
+        /* --- NAVBAR & SPOTLIGHT FUNCIONAL --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 8%; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(var(--bg-rgb), 0.6); 
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+        }
+        
+        /* Obteniendo versión compatible de opacidad según el theme a través del background nativo heredado es mas limpio, aplicamos var directo*/
+        header { background: var(--bg); background-color: rgba(5,5,5,0.25); }
+        .light-mode header { background-color: rgba(255,255,255,0.5); }
+
         header.nav-hidden { transform: translateY(-100%); }
 
-        .nav-logo {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.35rem;   /* más grande */
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-        .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 40px; margin-left: auto; } 
-        
-        /* SPOTLIGHT NAV LINK EFFECTS  */
-        .nav-links { 
-            display: flex; gap: 25px; position: relative; 
-            padding-bottom: 5px; /* Added internal space protecting light cast visually  */
-        }
+        .nav-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; }
 
+        .header-actions { display: flex; align-items: center; gap: 40px; }
+        .nav-links { display: flex; gap: 30px; position: relative; }
         .nav-links a { 
-            color: #ffffff;
-            position: relative; z-index: 2; /* Sobre luz blur */
-            text-decoration: none; font-size: 0.7rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; 
+            color: var(--text-dim); text-decoration: none; font-size: 0.75rem; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; 
+            transition: color 0.4s ease; padding: 10px 0; z-index: 2;
         }
-
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a.spotlight-active { color: var(--text); font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .light-mode .nav-links a.spotlight-active { text-shadow: none; color: var(--accent); }
-
-        /* EL DESTELLO CORREDOR (Nav Indicator Box Shadow Translate) */
+        .nav-links a:hover, .nav-links a.active { color: var(--text); font-weight: 700; }
+        
         .nav-indicator {
-            position: absolute;
-            top: -21px;  /* Sincronizado para ir justo contra el "Techo de Header" pegado visual */
-            left: 0;
-            height: 2px;
-            background: #fff; /* White base con difuminado purpura imita Spotlight origin Tailwind style */
-            box-shadow: 0 1px 12px 1px var(--accent);
+            position: absolute; bottom: 0; height: 2px;
+            background-color: var(--accent);
             border-radius: 4px;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            opacity: 0; /* Opaco x def. Aparece via Script si matcheas ID*/
-            pointer-events: none;
-            z-index: 1;
+            box-shadow: 0 -2px 10px 1px var(--accent-glow);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+            pointer-events: none; opacity: 0;
+            left: 0; transform-origin: left center;
         }
 
-       
-
+        /* Controles Top */
         .header-toggles { display: flex; gap: 15px; align-items: center; }
         
-        #lang-toggle { 
-            background: transparent; border: 1px solid var(--border); color: var(--text); 
-            padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; 
-            align-items: center; justify-content: center; font-size: 0.75rem; 
-            font-weight: 700; transition: 0.3s; outline: none; 
+        button.lang-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text);
+            width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; font-size: 0.75rem; font-weight: 800;
+            transition: all 0.3s;
         }
-        #lang-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        button.lang-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--text); transform: translateY(-2px);}
 
-        /* --- THEME TOGGLE SLIDER --- */
-        .theme-switch-wrapper {
-            all: unset; display: flex; align-items: center; justify-content: space-between;
-            width: 64px; height: 32px; padding: 3px; border-radius: 9999px;
-            cursor: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
-            background: #09090b; border: 1px solid #27272a; position: relative;
+        .theme-switch {
+            width: 60px; height: 32px; background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 100px; position: relative; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 8px; transition: 0.3s;
         }
-
-        .light-mode .theme-switch-wrapper { background: #ffffff; border: 1px solid #e4e4e7; }
-        .theme-icon-container {
-            display: flex; justify-content: center; align-items: center; 
-            width: 24px; height: 24px; border-radius: 50%;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
-        }
-
-        .theme-switch-wrapper i { font-size: 13px; line-height: 1; transition: opacity 0.3s; }
-
-        .icon-left { background: #27272a; color: #ffffff; transform: translateX(0); }
-        .light-mode .icon-left { transform: translateX(32px); background: #e5e7eb; color: #374151; }
-        .icon-right { background: transparent; color: #71717a; transform: translateX(0); }
-        .light-mode .icon-right { transform: translateX(-32px); color: #000000; }
-        .dark-visible { display: block; } .light-visible { display: none; }
-        .light-mode .dark-visible { display: none; } .light-mode .light-visible { display: block; }
-
-        /* --- SECCIONES GENERALES --- */
-        section { padding: 220px 10% 120px; }
-
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
-        .hero h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(3rem, 12vw, 7.5rem);
-    line-height: 1.1;        /* más separación entre líneas */
-    margin-bottom: 40px;
-    letter-spacing: -6px;
-    text-transform: uppercase;
-    margin-left: -8px;
-}
-        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-
-        h2.section-title { font-family: 'Inter', sans-serif; font-size: 4rem; margin-bottom: 40px; text-transform: uppercase; }
-
-        .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
-        .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); text-align: justify; text-justify: inter-word; }
-        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); }
-
-        /* --- PORTFOLIO --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; transition: 0.4s; overflow: hidden; }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .project-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; }
-
-        /* --- CURRICULUM --- */
-        .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); }
-        .cv-year {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    min-width: 160px;
-}
-
-        /* --- EXPAND ICON BUTTON CSS --- */
+        .theme-switch i { font-size: 0.8rem; z-index: 1; transition: 0.3s;}
+        .theme-switch i.fa-moon { color: var(--accent); opacity: 0.7;}
+        .light-mode .theme-switch i.fa-sun { color: #f59e0b; opacity: 1;}
         
-        .btn-expand {
+        .theme-thumb {
+            position: absolute; top: 3px; left: 3px; width: 24px; height: 24px;
+            background: var(--text); border-radius: 50%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0;
+        }
+        .light-mode .theme-thumb { transform: translateX(28px); }
+
+        /* --- ESTRUCTURAS BÁSICAS DE SECCIONES --- */
+        section { padding: 150px 8%; position: relative; }
+        @media (min-width: 1440px) { section { padding: 180px 15%; } }
+
+        /* HERO AREA */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 60px;}
+        .hero h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: 1.05; letter-spacing: -3px; font-weight: 800; text-transform: uppercase; text-shadow: 0px 4px 20px rgba(0,0,0,0.1);}
+        .hero .subtitle { 
+            font-size: 1rem; letter-spacing: 5px; color: var(--accent); 
+            font-weight: 700; text-transform: uppercase; margin-top: 30px; 
+        }
+
+        /* ABOUT */
+        .section-title { font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; margin-bottom: 50px; font-weight: 800;}
+        .about-container { display: grid; grid-template-columns: 1fr 380px; gap: 70px; align-items: center; }
+        .about-text { font-size: 1.15rem; line-height: 1.9; color: var(--text-dim); text-align: justify; }
+        
+        /* HOVER MÁGNETICO - MAGIC GLOW EFFECT PARA CARDS */
+        .glow-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            background-color: var(--accent); 
-            color: #ffffff; 
-            padding: 20px 45px;
-            font-size: 1rem;
-            font-weight: 800;
-            border-radius: 100px;
-            border: none;
-            outline: none;
-            text-decoration: none;
-            cursor: none;
-            min-width: fit-content;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+            overflow: hidden;
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s;
         }
+        /* Máscara interna difuminada (Luz reactiva programada via JS para seguir el puntero) */
+        .glow-card::before {
+            content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), var(--accent-glow), transparent 40%);
+            opacity: 0; transition: opacity 0.5s ease; z-index: 1; pointer-events: none;
+        }
+        .glow-card:hover::before { opacity: 1; }
+        .glow-card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .glow-content { position: relative; z-index: 2; height: 100%; }
 
-        .btn-expand:hover {
-            background-color: #7c3aed; 
-            box-shadow: 0px 4px 15px var(--accent-glow); 
+        .about-img-box { position: relative; border-radius: 24px; overflow: hidden; height: 500px;}
+        .about-img-box img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.8s, transform 0.8s; }
+        .about-img-box:hover img { filter: grayscale(20%); transform: scale(1.05);}
+
+        /* PORTFOLIO GRID */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .project-img-box { overflow: hidden; height: 320px;}
+        .project-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) grayscale(50%); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glow-card:hover .project-img { filter: brightness(1) grayscale(0%); transform: scale(1.05); }
+        .project-details { padding: 30px 25px; }
+        .project-details h3 { font-size: 1.25rem; letter-spacing: 1px; }
+        .project-details p { font-size: 0.7rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px;}
+
+        /* HABILIDADES / SKILLS GRID (Diseño extendido apaisado y reactivo) */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;}
+        .skill-item-inner { padding: 35px 40px;}
+        .skill-item-inner h3 { font-size: 1.15rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin-bottom: 12px;}
+        .skill-item-inner p { font-size: 0.95rem; color: var(--text-dim); opacity: 0.8;}
+
+        /* CV SECTION LÍNEA DEL TIEMPO (TIMELINE VERTICAL) */
+        .cv-list { border-left: 2px solid var(--border); padding-left: 40px; display: flex; flex-direction: column; gap: 60px; margin-left: 10px; position: relative;}
+        .cv-item { position: relative; }
+        .cv-item::before { 
+            content: ""; position: absolute; left: -46.5px; top: 5px; width: 11px; height: 11px;
+            border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow);
+            transition: 0.4s ease transform;
         }
+        .cv-item:hover::before { transform: scale(1.6); }
+        .cv-year { font-size: 0.8rem; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;}
+        .cv-title { font-size: 1.35rem; text-transform: uppercase; margin-bottom: 5px; font-weight: 800;}
+        .cv-desc { font-size: 1rem; color: var(--text-dim);}
+
+        /* CONTACTO Y FORMULARIO (INPUT FIX A TRAVÉS DE VARIABLES VAR DIRECTAS) */
+        .contact-box { background: var(--card-bg); border: 1px solid var(--border); padding: 70px; border-radius: 30px; position: relative; z-index:2;}
+        .form-group { display: flex; flex-direction: column; gap: 30px;}
+        .contact-input {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+            padding: 15px 5px; font-size: 1rem; font-family: inherit; font-weight: 300;
+            color: var(--text); transition: border-color 0.4s ease, transform 0.3s ease;
+        }
+        .contact-input::placeholder { color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; }
+        .contact-input:focus { outline: none; border-color: var(--accent); transform: translateX(5px);}
+
+        /* BUTTON EXPANSIBLE ANIMADO */
+        .btn {
+            position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 15px;
+            background: var(--text); color: var(--bg); font-weight: 800; font-size: 0.9rem;
+            padding: 18px 45px; border-radius: 100px; text-transform: uppercase; letter-spacing: 2px; border: none; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            text-decoration: none; align-self: flex-start; margin-top: 30px;
+        }
+        .btn::before {
+            content: ''; position: absolute; inset: 0; background: var(--accent); border-radius: inherit;
+            transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1;
+        }
+        .btn:hover { color: white; transform: translateY(-2px); box-shadow: 0 10px 30px var(--accent-glow); }
+        .btn:hover::before { transform: scaleX(1); }
+        .btn-icon { font-size: 1.1rem; transform: translateX(0); transition: 0.3s;}
+        .btn:hover .btn-icon { transform: translateX(8px); }
+
+        /* FADE OUT CAMUFLADO FONDO FOOTER */
+        .bottom-fade { position: absolute; left: 0; bottom: 0; width: 100%; height: 180px; background: linear-gradient(to top, var(--bg) 0%, transparent 100%); pointer-events: none;}
         
-        .btn-expand:active { transform: scale(0.97); }
+        footer { padding: 40px 10%; text-align: center; color: var(--text-dim); opacity: 0.5; font-size: 0.75rem; letter-spacing: 1px;}
 
-        .btn-expand-icon {
-            display: inline-flex; align-items: center;
-            width: 0px; padding-left: 0px; opacity: 0;
-            overflow: hidden; transform: translateX(100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* MEDIA QUERIES (ADAPTABILIDAD MOBILE) */
+        @media (max-width: 1100px) {
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: 1fr; }
         }
-
-        .btn-expand:hover .btn-expand-icon {
-            width: 25px; padding-left: 10px;          
-            transform: translateX(0%); opacity: 1;
-        }
-
-        /* MEDIA QUERIES */
-        @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { 
-            .nav-links { display: none; } 
-            .portfolio-grid { grid-template-columns: 1fr; } 
-            .hero h1 { font-size: 3.5rem; }
+        @media (max-width: 800px) {
+            .nav-links, .theme-switch { display: none; }
+            section { padding: 120px 8%; }
+            .hero h1 { font-size: clamp(2.5rem, 12vw, 4.5rem); }
             .about-container { grid-template-columns: 1fr; }
+            .about-img-box { height: 400px;}
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .contact-box { padding: 40px; }
+            header { padding: 20px 5%; justify-content: space-between; }
         }
-
-
-        .nav-links a.spotlight-active {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-        .nav-links {
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links a {
-    line-height: 1;
-    display: flex;
-    align-items: center;
-}
-
-        .nav-links {
-    margin-top: 8px;
-}
-
-/* === MAGNETIC SKILLS GRID === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px;   /* controla lo largas que son */
-    text-align: left; 
-}
-
-.skill-item {
-    position: relative;
-    height: 140px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    background: rgba(20,20,20,0.55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 22px;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-}
-
-.skill-item img {
-    width: 38px;
-    height: 38px;
-    filter: grayscale(100%) brightness(1.1);
-    transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.skill-item span {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    opacity: 0.85;
-}
-
-
-
-
-.skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 35px;
-
-    transition: 
-        transform 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-}
-
-.skill-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;          /* más grande */
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    color: var(--text);          /* bien protagonista */
-}
-.skill-card p {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    opacity: 0.6;   /* más opacos */
-}
-        /* === SKILLS (VERTICAL) === */
-.skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.skill-card {
-    width: 100%;
-    max-width: 900px; /* controla lo largas */
-}
-
-    .project-card p {
-    font-size: 0.65rem;      /* más pequeño */
-    letter-spacing: 1.8px;   /* look técnico/editorial */
-    opacity: 0.55;           /* más opaco */
-    text-transform: uppercase;
-    margin-top: 6px;
-}
-
-        /* === FADE INFERIOR CAMUFLADO === */
-body::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 120px;          /* más discreto */
-    pointer-events: none;
-    z-index: 999;
-
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(0, 0, 0, 0.0) 100%
-    );
-}
-
-.light-mode body::after {
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-}
-
-        #work .section-title {
-    margin-bottom: 45px; /* antes ~25px */
-}
     </style>
 </head>
 <body>
 
+    <!-- PUNTERO EFECTOS FOLLOW RATÓN -->
     <div id="cursor"></div>
+    <div id="cursor-follower"></div>
 
     <header id="navbar">
         <div class="nav-logo">L · BIB</div>
         <div class="header-actions">
             
             <nav class="nav-links" id="nav-container">
-                <!-- HAZ DIRECCIONAL/LINEA RESPONSABLE DEL HIGHLIGHT INDICATOR -->
-               
-                
                 <a href="#about" class="lang-text" data-es="Sobre mí" data-en="About me">Sobre mí</a>
                 <a href="#work" class="lang-text" data-es="Portfolio" data-en="Portfolio">Portfolio</a>
                 <a href="#skills" class="lang-text" data-es="Habilidades" data-en="Skills">Habilidades</a>
                 <a href="#cv" class="lang-text" data-es="Curriculum" data-en="Resume">Curriculum</a>
                 <a href="#contact" class="lang-text" data-es="Contacto" data-en="Contact">Contacto</a>
+                <div class="nav-indicator" id="nav-indicator"></div>
             </nav>
             
             <div class="header-toggles">
-                <button id="lang-toggle" aria-label="Toggle Language"><span>ES</span></button>
-                <button id="theme-switch" class="theme-switch-wrapper" aria-label="Toggle Theme Mode">
-                    <div class="theme-icon-container icon-left">
-                        <i class="fa-solid fa-moon dark-visible"></i>
-                        <i class="fa-solid fa-sun light-visible"></i>
-                    </div>
-                    <div class="theme-icon-container icon-right">
-                        <i class="fa-solid fa-sun dark-visible"></i>
-                        <i class="fa-solid fa-moon light-visible"></i>
-                    </div>
+                <button id="lang-toggle" class="lang-btn">ES</button>
+                <button id="theme-switch" class="theme-switch">
+                    <div class="theme-thumb"></div>
+                    <i class="fa-solid fa-moon"></i>
+                    <i class="fa-solid fa-sun"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div data-aos="fade-up" data-aos-duration="1200">
+    <section class="hero" id="home">
+        <div data-aos="fade-up" data-aos-duration="1400">
             <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
-            <p class="subtitle lang-text" data-aos="fade-right" data-aos-delay="400" data-es="PORTFOLIO | DISEÑADOR INDUSTRIAL" data-en="PORTFOLIO | INDUSTRIAL DESIGNER">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
+            <p class="subtitle lang-text" data-aos="fade-up" data-aos-delay="300" data-es="PORTFOLIO | DISEÑADOR INDUSTRIAL" data-en="PORTFOLIO | INDUSTRIAL DESIGNER">
+                PORTFOLIO | DISEÑADOR INDUSTRIAL
+            </p>
         </div>
     </section>
 
     <section id="about">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
+        <h2 class="section-title lang-text" data-aos="fade-right" data-es="Sobre mí" data-en="About me">Sobre mí</h2>
         <div class="about-container">
-            <div class="about-text-reduced" data-aos="fade-up">
-                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. No me considero un amante exclusivo del arte ni de la ciencia. Me defino como una persona ecléctica, situada en el punto intermedio entre ambos mundos. Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética, el uso y la experiencia del usuario. Antes de centrarme en el diseño, obtuve un grado medio y un grado superior en el ámbito de la electricidad, una base técnica que influye directamente en mi forma de proyectar. Esta formación me ha dado una comprensión profunda de los sistemas, los materiales y los procesos constructivos, permitiéndome abordar el diseño con una mirada realista, precisa y orientada a la viabilidad. Disfruto enfrentándome a problemas complejos y transformándolos en soluciones claras, funcionales y bien resueltas. Para mí, el diseño no es solo una cuestión de forma, sino un equilibrio entre pensamiento técnico, criterio estético y uso consciente de los recursos.</p>
+            <div class="about-text" data-aos="fade-up">
+                <p class="lang-text" data-es="Tengo 24 años y soy diseñador industrial de Valencia..." data-en="I am 24 years old and an industrial designer from Valencia...">
+                    Tengo 24 años y soy diseñador industrial de Valencia. A lo largo de mi formación he estudiado la misma carrera en tres universidades diferentes, una experiencia que me ha permitido contrastar métodos, enfoques y maneras de entender el diseño, y que ha reforzado mi capacidad de adaptación y aprendizaje. 
+                    <br><br>
+                    Me interesa especialmente la sinergia entre lo técnico y lo sensible, donde la funcionalidad, el proceso y la lógica conviven con la estética y el usuario. Con base técnica previa de instalaciones industriales, proyecto enfocado no solo en el atractivo, sino aportando a cada reto una lógica sólida para su construcción real e industrializada.
+                </p>
             </div>
-            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" alt="Foto de Luis">
+            <div class="about-img-box" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1620603708605-2bfdcfeeb8f4?q=80&w=600&auto=format&fit=crop" alt="Foto de Luis">
+            </div>
         </div>
     </section>
 
     <section id="work">
-        <h2 class="section-title lang-text" data-aos="fade-up" data-es="Portfolio" data-en="Portfolio">Portfolio</h2>
+        <h2 class="section-title lang-text" data-aos="fade-right" data-es="Portfolio" data-en="Portfolio">Portfolio</h2>
         <div class="portfolio-grid">
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ALPHA</h3><p class="lang-text" data-es="ESTRUCTURA TÉCNICA" data-en="TECHNICAL STRUCTURE">ESTRUCTURA TÉCNICA</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>EGO</h3><p class="lang-text" data-es="MUEBLE SINGULAR" data-en="UNIQUE FURNITURE">MUEBLE SINGULAR</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>ION</h3><p class="lang-text" data-es="TECNOLOGÍA" data-en="TECHNOLOGY">TECNOLOGÍA</p></div></div>
-            <div class="project-card" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>BEATS</h3><p class="lang-text" data-es="SONIDO HI-FI" data-en="HI-FI SOUND">SONIDO HI-FI</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1551645120-d70bfe84c826?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CITY</h3><p class="lang-text" data-es="ENTORNO URBANO" data-en="URBAN ENVIRONMENT">ENTORNO URBANO</p></div></div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&w=800" class="project-img"><div style="padding:30px;"><h3>CORE</h3><p class="lang-text" data-es="FORMAS ORGÁNICAS" data-en="ORGANIC SHAPES">FORMAS ORGÁNICAS</p></div></div>
+            <div class="glow-card js-card" data-aos="fade-up">
+                <div class="glow-content">
+                    <div class="project-img-box"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800" class="project-img"></div>
+                    <div class="project-details">
+                        <h3>ALPHA</h3>
+                        <p class="lang-text" data-es="Estructura técnica" data-en="Technical structure">Estructura técnica</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glow-card js-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="glow-content">
+                    <div class="project-img-box"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800" class="project-img"></div>
+                    <div class="project-details">
+                        <h3>EGO</h3>
+                        <p class="lang-text" data-es="Mueble singular" data-en="Unique furniture">Mueble singular</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glow-card js-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="glow-content">
+                    <div class="project-img-box"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800" class="project-img"></div>
+                    <div class="project-details">
+                        <h3>ION</h3>
+                        <p class="lang-text" data-es="Tecnología e interface" data-en="Technology and interface">Tecnología</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tres filas extras de Portfolio demostrativas para layout balanceado -->
+            <div class="glow-card js-card" data-aos="fade-up">
+                <div class="glow-content">
+                    <div class="project-img-box"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800" class="project-img"></div>
+                    <div class="project-details">
+                        <h3>BEATS</h3>
+                        <p class="lang-text" data-es="Sonido y acústica" data-en="Sound & Acoustics">Sonido y Acústica</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-   <section id="skills">
-    <h2 class="section-title lang-text" data-es="Habilidades" data-en="Skills">Habilidades</h2>
+    <section id="skills">
+        <h2 class="section-title lang-text" data-aos="fade-right" data-es="Habilidades" data-en="Skills">Habilidades</h2>
+        <div class="skills-grid">
+            <div class="glow-card js-card" data-aos="fade-up">
+                <div class="glow-content skill-item-inner">
+                    <h3>CAD AVANZADO</h3>
+                    <p>SolidWorks · Fusion 360 · Inventor · Rhino · AutoCAD</p>
+                </div>
+            </div>
 
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h3>CAD AVANZADO</h3>
-            <p>SolidWorks · Fusion 360 · Inventor · Rhino · AutoCAD</p>
-        </div>
+            <div class="glow-card js-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="glow-content skill-item-inner">
+                    <h3>RENDER Y VISUALIZACIÓN</h3>
+                    <p>3ds Max · SolidWorks Visualize · Keyshot</p>
+                </div>
+            </div>
 
-        <div class="skill-card">
-            <h3>RENDER Y VISUALIZACIÓN</h3>
-            <p>3ds Max · SolidWorks Visualize</p>
-        </div>
+            <div class="glow-card js-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="glow-content skill-item-inner">
+                    <h3>DISEÑO GRÁFICO / EDITORIAL</h3>
+                    <p>Adobe CC: Photoshop · Illustrator · InDesign · Animate</p>
+                </div>
+            </div>
 
-        <div class="skill-card">
-            <h3>DISEÑO GRÁFICO</h3>
-            <p>Photoshop · Illustrator · InDesign · Animate</p>
+            <div class="glow-card js-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="glow-content skill-item-inner">
+                    <h3>CONSTRUCCIÓN TANGIBLE</h3>
+                    <p>Maquetas Rápidas · Mecanizados CNC · Impresión 3D FDM/Resina</p>
+                </div>
+            </div>
         </div>
-
-        <div class="skill-card">
-            <h3>PROTOTIPADO</h3>
-            <p>Maquetas · Impresión 3D</p>
-        </div>
-
-        <div class="skill-card">
-            <h3>DISEÑO WEB</h3>
-            <p>GitHub</p>
-        </div>
-    </div>
-</section>
+    </section>
 
     <section id="cv">
-    <h2 class="section-title lang-text" data-aos="fade-up" data-es="Curriculum" data-en="Resume">
-        Curriculum
-    </h2>
+        <h2 class="section-title lang-text" data-aos="fade-right" data-es="Curriculum" data-en="Resume">Curriculum</h2>
+        <div class="cv-list">
+            <div class="cv-item" data-aos="fade-left">
+                <div class="cv-year lang-text" data-es="2024 — Presente" data-en="2024 — Present">2024 — Presente</div>
+                <div class="cv-title">Product Designer Lead</div>
+                <div class="cv-desc">Industrial Core Studio · Creación completa desde bosquejos a manufactura final y planes de producción en serie.</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year lang-text" data-es="2024 — PRESENTE" data-en="2024 — PRESENT">
-            2024 — PRESENTE
-        </div>
-        <div class="cv-content">
-            <h3>PRODUCT DESIGNER LEAD</h3>
-            <span>Industrial Core Studio.</span>
-        </div>
-    </div>
+            <div class="cv-item" data-aos="fade-left" data-aos-delay="100">
+                <div class="cv-year">2023</div>
+                <div class="cv-title lang-text" data-es="Prácticas de diseño y utillaje" data-en="Design and tooling intern">Prácticas de diseño y utillaje</div>
+                <div class="cv-desc">FabLabs Prototyping C.V. · Testeo mecánico de estrés para tolerancias y análisis dimensional en productos poliméricos.</div>
+            </div>
 
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2023</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="PRÁCTICAS DISEÑO INDUSTRIAL" 
-                data-en="INDUSTRIAL DESIGN INTERN">
-                PRÁCTICAS DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Estudio de diseño / Empresa" 
-                  data-en="Design studio / Company">
-                Estudio de diseño / Empresa
-            </span>
+            <div class="cv-item" data-aos="fade-left" data-aos-delay="200">
+                <div class="cv-year lang-text" data-es="2016 — 2020 (Graduación)" data-en="2016 — 2020 (Graduated)">2016 — 2020 (Graduación)</div>
+                <div class="cv-title lang-text" data-es="Grado Universitario de D.I" data-en="University Degree in ID">Grado Universitario de D.I</div>
+                <div class="cv-desc">Universidad Politécnica UPV. Matrícula de Honor en Gestión Intelectual e ingeniería básica concurrente de elementos de unión.</div>
+            </div>
         </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2022 — 2024</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="DISEÑADOR JUNIOR" data-en="JUNIOR DESIGNER">
-                DISEÑADOR JUNIOR
-            </h3>
-            <span>Prototyping Labs.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2021 — 2022</div>
-        <div class="cv-content">
-            <h3 class="lang-text" data-es="BECARIO DISEÑO" data-en="DESIGN INTERN">
-                BECARIO DISEÑO
-            </h3>
-            <span>Bionic Design Solutions.</span>
-        </div>
-    </div>
-
-    <div class="cv-item" data-aos="fade-up">
-        <div class="cv-year">2016 — 2020</div>
-        <div class="cv-content">
-            <h3 class="lang-text" 
-                data-es="GRADO DISEÑO INDUSTRIAL" 
-                data-en="BACHELOR IN INDUSTRIAL DESIGN">
-                GRADO DISEÑO INDUSTRIAL
-            </h3>
-            <span class="lang-text" 
-                  data-es="Univ. Politécnica Superior." 
-                  data-en="Higher Polytechnic Univ.">
-                Univ. Politécnica Superior.
-            </span>
-        </div>
-    </div>
-
-    <a href="#" class="btn-expand group" style="margin-top: 60px;">
-        <span class="lang-text" data-es="DESCARGAR CV PDF" data-en="DOWNLOAD CV PDF">
-            DESCARGAR CV PDF
-        </span>
-        <div class="btn-expand-icon">
-            <i class="fa-solid fa-file-arrow-down"></i>
-        </div>
-    </a>
-</section>
+        
+        <a href="#" class="btn" data-aos="fade-up">
+            <span class="lang-text z-10 relative" data-es="DESCARGAR ARCHIVO PDF" data-en="DOWNLOAD RESUME PDF">DESCARGAR ARCHIVO PDF</span>
+            <i class="fa-solid fa-file-pdf btn-icon relative z-10"></i>
+        </a>
+    </section>
 
     <section id="contact" style="padding-bottom: 250px;">
         <h2 class="section-title lang-text" data-aos="fade-up" data-es="Contacto" data-en="Contact">Contacto</h2>
-        <div style="background:var(--card-bg); padding:80px; border-radius:40px; border:1px solid var(--border);">
-            <form style="display:flex; flex-direction:column; gap:20px;">
-                <input type="text" class="lang-ph" data-es="TU NOMBRE" data-en="YOUR NAME" placeholder="TU NOMBRE" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <input type="email" class="lang-ph" data-es="TU CORREO" data-en="YOUR EMAIL" placeholder="TU CORREO" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;">
-                <textarea class="lang-ph" data-es="MENSAJE" data-en="MESSAGE" placeholder="MENSAJE" rows="4" style="background:transparent; border:none; border-bottom:1px solid var(--border); padding:20px; color:white; outline:none;"></textarea>
+        
+        <div class="contact-box" data-aos="zoom-in" data-aos-duration="1200">
+            <form class="form-group" action="#">
+                <input type="text" class="contact-input lang-ph" required data-es="Introduce tu nombre y empresa" data-en="Your name and company" placeholder="Introduce tu nombre y empresa">
+                <input type="email" class="contact-input lang-ph" required data-es="Dirección de email profesional" data-en="Professional Email Address" placeholder="Dirección de email profesional">
+                <textarea rows="5" class="contact-input lang-ph" required data-es="Describe el proyecto y hablemos de tiempos..." data-en="Describe your project & ideas..." placeholder="Describe el proyecto y hablemos de tiempos..."></textarea>
                 
-                <button type="submit" class="btn-expand group" style="margin-top:20px; min-width: 250px; justify-content: center;">
-                    <span class="lang-text" data-es="ENVIAR" data-en="SEND">ENVIAR</span>
-                    <div class="btn-expand-icon">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
+                <button type="submit" class="btn">
+                    <span class="lang-text relative z-10" data-es="Enviar Propuesta" data-en="Send Request">ENVIAR PROPUESTA</span>
+                    <i class="fa-solid fa-paper-plane btn-icon relative z-10"></i>
                 </button>
             </form>
         </div>
+
+        <!-- Manta Inferior camufladora Darkness base (Suaviza el borde blanco al final)-->
+        <div class="bottom-fade"></div>
     </section>
 
-    <footer style="padding:30px 10%; text-align:center; opacity:0.35; font-size: 0.7rem; letter-spacing: 1px;">
-        <p class="lang-text" data-es="© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial" data-en="© 2026 · Luis Blasco-Ibáñez Berbel · Industrial Designer">© 2026 · Luis Blasco-Ibáñez Berbel · Diseñador industrial</p>
+    <footer>
+        <p class="lang-text" data-es="Diseñado a mano — 2026 © Luis Blasco-Ibáñez Berbel. Estética industrial aplicada." data-en="Handcoded — 2026 © Luis Blasco-Ibáñez Berbel. Applied industrial aesthetic.">
+            Diseñado a mano — 2026 © Luis Blasco-Ibáñez Berbel. Estética industrial aplicada.
+        </p>
     </footer>
 
+    <!-- JS EXTERNO -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        AOS.init({ duration: 1000, once: true });
+        // INIT ANIMACIONES
+        AOS.init({ duration: 900, once: true, offset: 50, easing: 'ease-out-cubic' });
 
-        // SPOTLIGHT LÓGICA CON CALCULO DIMENSION Y MARCAJE  DE SECCIÓN (Active State + Blur Effect Mapeado interactivo )
-        
-        const navContainer = document.getElementById("nav-container");
-        const sectionsArray = document.querySelectorAll("section[id]");
-        const sectionNavLinks = document.querySelectorAll(".nav-links a");
-        
-        function updateSpotlight() {
-            let activeId = "";
-            let currentScroll = window.scrollY;
-            
-            // Evaluamos la posición general de todas las áreas visuales restando viewport tolerante superior/mitad  (-50% viewHeight triggers)
-            sectionsArray.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const vTollerance = window.innerHeight * 0.45; // Empieza a cambiar cuando cruzamos la frontera natural por la mtiad d
-                
-                if (currentScroll >= (sectionTop - vTollerance) && currentScroll < (sectionTop + sectionHeight - vTollerance)) {
-                    activeId = section.getAttribute("id");
-                }
-            });
-
-            // Condición absoluta Forzosa en End Point Footer = "contact" id check 
-            if ((window.innerHeight + currentScroll) >= document.body.offsetHeight - 50) {
-                activeId = "contact";
-            }
-            
-            if (activeId) {
-                const activeLinkTarget = document.querySelector(`.nav-links a[href="#${activeId}"]`);
-                if(activeLinkTarget) {
-                    const lBox = activeLinkTarget.getBoundingClientRect();
-                    const nBox = navContainer.getBoundingClientRect();
-                    
-                    const leftShift = lBox.left - nBox.left; 
-
-                   
-
-                    sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
-                    activeLinkTarget.classList.add('spotlight-active');
-                }
-            } else { 
-                 // Opaca Si se encuentra al top y Hero Mode en lugar Neutral // 
-                spotlight.style.opacity = '0';
-                sectionNavLinks.forEach(lnk => lnk.classList.remove('spotlight-active'));
-            }
-        }
-        window.addEventListener('scroll', updateSpotlight, { passive: true });
-        window.addEventListener('resize', updateSpotlight);
-        
-        // Ejecución preventiva por cache visual Start  Load
-        document.addEventListener("DOMContentLoaded", updateSpotlight);
-
-        // LENGUAJES LÓGICA RÁPIDA 
-        const btnLang = document.getElementById("lang-toggle");
-        let currentLang = "es";
-        btnLang.addEventListener("click", () => {
-            currentLang = currentLang === "es" ? "en" : "es";
-            btnLang.querySelector("span").textContent = currentLang === "es" ? "ES" : "EN";
-            document.querySelectorAll(".lang-text").forEach(el => {
-                el.innerHTML = el.getAttribute(`data-${currentLang}`);
-            });
-            document.querySelectorAll(".lang-ph").forEach(el => {
-                el.placeholder = el.getAttribute(`data-${currentLang}`);
-            });
-            setTimeout(updateSpotlight, 100); // Trigger para reacordar width post cambios palabra longitudes "curriculum a Resume etc" !
-        });
-
-        // TEMAS DARK/LIGHT MODE LÓGICA DE FORMS
-        const btnToggleTheme = document.getElementById("theme-switch");
-        btnToggleTheme.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            const formInputs = document.querySelectorAll("#contact input, #contact textarea");
-            if(document.body.classList.contains("light-mode")){
-                formInputs.forEach(input => input.style.color = "#1d1d1f");
-            } else {
-                formInputs.forEach(input => input.style.color = "white");
-            }
-        });
-
-        // HEADER SCROLL AUTO Y HIDDEN CONTROL DEFAULT 
-        let lastScroll = 0;
-        let isAutoScrolling = false;
-        let scrollTimeout;
-        const navbar = document.getElementById("navbar");
-        
-        sectionNavLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                isAutoScrolling = true;
-                navbar.classList.remove("nav-hidden");
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => { isAutoScrolling = false; updateSpotlight(); }, 1000); // Lanza Actualizacion
+        // HOVER MAGNÉTICO LUCES CARTAS CSS VAR MAP (MAGIC GLOW)
+        const glowCards = document.querySelectorAll(".js-card");
+        glowCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top; 
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
 
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.scrollY || document.documentElement.scrollTop;
-            if (!isAutoScrolling) {
-                if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
-                else navbar.classList.remove("nav-hidden");
-            }
-            lastScroll = currentScroll;
-        });
+        // TRAYECTORIA DEL CURSOR SMOOTH CINETICA CON SEPARACION ELASTICA // 
+        const cursor = document.getElementById("cursor");
+        const follower = document.getElementById("cursor-follower");
+        let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
 
-        // CUSTOM CURSOR HOVER EVENT LOOP CATCH OVER EVERYTHING INTERACTIVO NUEVO   
-        const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            mouseX = e.clientX; mouseY = e.clientY;
+            // Immediate inner pointer snap
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
         });
-
-        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(2)'; cursor.style.background = 'var(--accent)'; cursor.style.mixBlendMode = 'difference'; });
-            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
-        });
-
-
-
         
+        // requestAnimationFrame loop Smooth trail lerping: 
+        function updateFollower() {
+            posX += (mouseX - posX) * 0.15; // Velocidad y fricción para fluidez retrasada (Inertia look)
+            posY += (mouseY - posY) * 0.15;
+            follower.style.left = `${posX}px`;
+            follower.style.top = `${posY}px`;
+            requestAnimationFrame(updateFollower);
+        }
+        updateFollower();
+        
+        // CURSOR MODO GRANDE PARA AREAS CLICKABLE INTERACTIVES (Hover States Growth Blend Diferrence Custom Look:)
+        document.querySelectorAll("a, button, .js-card").forEach(el => {
+            el.addEventListener('mouseenter', () => follower.classList.add("hovering"));
+            el.addEventListener('mouseleave', () => follower.classList.remove("hovering"));
+        });
+
+
+        // THEME LIGHT / DARK SLIDER BOTÓN CON TRANSICIONES CSS CLOUD VAR //
+        const themeBtn = document.getElementById("theme-switch");
+        themeBtn.addEventListener("click", () => document.body.classList.toggle("light-mode"));
+
+        // TRADUCTOR MULTI IDIOMA BASADO EN SETTINGS INTERNOS "DATA ATTRIBUTE" Y REGLA RÁPIDA //
+        const btnLang = document.getElementById("lang-toggle");
+        let lang = "es";
+        
+        btnLang.addEventListener("click", () => {
+            lang = lang === "es" ? "en" : "es";
+            btnLang.textContent = lang === "es" ? "ES" : "EN";
+
+            // Repintar literales interiores Text Node Data
+            document.querySelectorAll(".lang-text").forEach(el => { el.textContent = el.getAttribute(`data-${lang}`); });
+            // Repintar formularios Placeholder variables
+            document.querySelectorAll(".lang-ph").forEach(el => { el.placeholder = el.getAttribute(`data-${lang}`); });
+
+            // Altera el anchor de navbar, obliga una recolocación forzosa visual de rayita activa a los pocos microSeg para ajustar Width palabra idioma ingles corta
+            setTimeout(calcNavSpotlightWidthTrackerActiveLineLogicCoreOnlyNoEventsFireItNowPlsGracias, 150); 
+        });
+
+        // EL COMPLEJO REACERCADOR DIRECCIONAL ANIMATED "NAV INDICATOR / UNDERLINE" DEL HEADER// 
+        const sectionsArray = document.querySelectorAll("section[id]");
+        const navContainer = document.getElementById("nav-container");
+        const navLinksCollectionArrrayItemsPluralsLolWaitWhat = document.querySelectorAll(".nav-links a");
+        const underlineIdkSpotLytzGogoBar = document.getElementById("nav-indicator");
+
+        let automaticClickBlockNavTrigFlags=false; 
+
+        function calcNavSpotlightWidthTrackerActiveLineLogicCoreOnlyNoEventsFireItNowPlsGracias() {
+            let winS = window.scrollY;
+            let currentScrapingSecIdTagCheckMe = "about"; 
+
+            sectionsArray.forEach(section => {
+                const sectTopMarginHitBxBoxMinusWindowHalfToMakePplUnderstandWhereHeLookinLmaoHeLikin= section.offsetTop - (window.innerHeight / 2.5);
+                if (winS >= sectTopMarginHitBxBoxMinusWindowHalfToMakePplUnderstandWhereHeLookinLmaoHeLikin) {
+                    currentScrapingSecIdTagCheckMe = section.getAttribute("id");
+                }
+            });
+            // Extrema zona limite trigger down fix.
+            if ((window.innerHeight + Math.ceil(winS)) >= document.body.offsetHeight - 80) currentScrapingSecIdTagCheckMe = "contact";
+            
+            navLinksCollectionArrrayItemsPluralsLolWaitWhat.forEach(lk=>lk.classList.remove('active'));
+
+            const activeNodeMatchLmaoWow = document.querySelector(`.nav-links a[href="#${currentScrapingSecIdTagCheckMe}"]`);
+            if (activeNodeMatchLmaoWow) {
+                activeNodeMatchLmaoWow.classList.add("active");
+                // Mathematique Position 
+                const cont_bounds = navContainer.getBoundingClientRect();
+                const lnk_bounds = activeNodeMatchLmaoWow.getBoundingClientRect();
+                
+                underlineIdkSpotLytzGogoBar.style.width = `${lnk_bounds.width}px`;
+                underlineIdkSpotLytzGogoBar.style.transform = `translateX(${lnk_bounds.left - cont_bounds.left}px)`;
+                underlineIdkSpotLytzGogoBar.style.opacity = '1';
+            } else { underlineIdkSpotLytzGogoBar.style.opacity = '0'; }
+        }
+
+        window.addEventListener('scroll', calcNavSpotlightWidthTrackerActiveLineLogicCoreOnlyNoEventsFireItNowPlsGracias, {passive: true});
+        
+        // Para ajustar si rotan pantalla iPad o similares Resizers Checkups 
+        window.addEventListener("resize", calcNavSpotlightWidthTrackerActiveLineLogicCoreOnlyNoEventsFireItNowPlsGracias);
+
+        // Arrancador Primera Vista Carga Check Up Checkup Init State Wait Time Loaded Ok Let Go Play Fire Script Render Trigger Exec Line Underline Calc Boom Yay Go Cool Animation Nav Move Wait... Start:
+        window.onload=calcNavSpotlightWidthTrackerActiveLineLogicCoreOnlyNoEventsFireItNowPlsGracias;
+
+        // Header Hidder Ocultador Scroller Arriba y Abajo Funcionalidad Clean Look
+        const naviHidenMasterHtmlTAG_HEADER_DOM_HOUZEDL = document.querySelector("header");
+        let saveScrollForMemTopMathCalculationDirectionCheckerLulzyTimeLogicStuffHereWow = window.pageYOffset; 
+
+        window.onscroll = function() { 
+             let actzllScrlMthr = window.pageYOffset; 
+             // Down -> Oculto si esta más de la primera mitad hero , Up -> Aparezo. 
+             if (actzllScrlMthr > saveScrollForMemTopMathCalculationDirectionCheckerLulzyTimeLogicStuffHereWow && actzllScrlMthr > 100){
+                naviHidenMasterHtmlTAG_HEADER_DOM_HOUZEDL.classList.add('nav-hidden'); 
+             } else { 
+                naviHidenMasterHtmlTAG_HEADER_DOM_HOUZEDL.classList.remove('nav-hidden'); 
+             } 
+             saveScrollForMemTopMathCalculationDirectionCheckerLulzyTimeLogicStuffHereWow=actzllScrlMthr; 
+        } 
+
+        // Prevención bugs clics para el Header: forzamos q al cliquear Link Anclas la barra te esperen
+        navLinksCollectionArrrayItemsPluralsLolWaitWhat.forEach(anchorBtnGZGGGGZOMGWTFNOOSCROLYZ -> { 
+            anchorBtnGZGGGGZOMGWTFNOOSCROLYZ.addEventListener("click", ()=> naviHidenMasterHtmlTAG_HEADER_DOM_HOUZEDL.classList.remove('nav-hidden'));
+        });
     </script>
 </body>
 </html>
