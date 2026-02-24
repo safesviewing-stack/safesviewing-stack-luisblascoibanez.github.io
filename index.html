@@ -4,271 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
-    
+
+    <!-- FUENTES -->
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- TAILWIND CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- REACT, BUNDLES & MOTION VIA CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        /* --- VARIABLES DE COLOR (DYNAMIC) --- */
-        :root {
-            --bg: #050505;
-            --accent: #8b5cf6; 
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --card-bg: rgba(20, 20, 20, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #ffffff;
-            --text-dim: #a1a1aa;
-            --glass: rgba(5, 5, 5, 0.45);
+        * { cursor: none; }
+        body { background-color: #050505; color: white; overflow-x: hidden; }
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.15), transparent);
+            z-index: -1; pointer-events: none;
         }
-
-        /* --- CLASE LIGHT MODE --- */
-        .light-mode {
-            --bg: #f5f5f7;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.1);
-            --text: #1d1d1f;
-            --text-dim: #424245;
-            --glass: rgba(255, 255, 255, 0.6);
-        }
-
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            cursor: none; scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-            transition: background 0.5s ease;
-        }
-
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
-            z-index: -1;
-        }
-
-        /* --- CURSOR --- */
         #cursor {
-            width: 14px; height: 14px; border: 1px solid var(--accent);
+            width: 14px; height: 14px; border: 1px solid #8b5cf6;
             border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
-            transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease-out; transform: translate(-50%, -50%);
         }
-
-        /* --- HEADER IPHONE GLASS (MEJORADO) --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: var(--glass); 
-            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
-            padding: 18px 10%; display: flex; justify-content: space-between; align-items: center;
-            z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        header.nav-hidden { transform: translateY(-100%); }
-
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 2px; }
-        
-        .header-actions { display: flex; align-items: center; gap: 30px; }
-
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        /* MODO CLARO BUTTON */
-        #theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-
-        section { padding: 120px 10% 60px; }
-
-        /* --- HERO IZQUIERDA --- */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7.5rem); line-height: 0.85; margin-bottom: 40px; letter-spacing: -6px; text-transform: uppercase; }
-        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-
-        /* --- TÍTULOS --- */
-        h2.section-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase; }
-
-        /* --- SOBRE MÍ --- */
-        .about-container { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: flex-start; }
-        .about-text-reduced { font-size: 1rem; line-height: 1.8; color: var(--text-dim); }
-        .about-photo { width: 100%; border-radius: 20px; border: 1px solid var(--border); filter: grayscale(100%); }
-
-        /* --- SKILLS GRID (EXTENDIDO) --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 25px; border-radius: 18px; transition: 0.4s; }
-        .skill-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block; }
-        .skill-card h3 { font-size: 1.1rem; margin-bottom: 10px; text-transform: uppercase; }
-        .skill-card p { font-size: 0.85rem; color: var(--text-dim); }
-
-        /* --- CURRICULUM --- */
-        .cv-item { display: flex; gap: 40px; padding: 30px 0; border-bottom: 1px solid var(--border); }
-        .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 140px; color: var(--accent); }
-        .btn-cv { margin-top: 40px; display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); padding: 18px 35px; border-radius: 100px; text-decoration: none; font-weight: 800; }
-
-        /* --- CONTACTO (REDUCIDO) --- */
-        .contact-box { background: var(--card-bg); padding: 50px 10%; border-radius: 35px; border: 1px solid var(--border); width: 100%; }
-        input, textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 15px 0; color: var(--text); margin-bottom: 20px; outline: none; }
-
-        @media (max-width: 1024px) {
-            .skills-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-container { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
-            .nav-links, #theme-toggle { display: none; }
-        }
+        section { scroll-margin-top: 100px; }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div>
+    <div class="bg-glow"></div>
+    <div id="root"></div>
 
-    <header id="navbar">
-        <div class="nav-logo">L|BIB</div>
-        <div class="header-actions">
-            <nav class="nav-links">
-                <a href="#about">Sobre mí</a>
-                <a href="#work">Portfolio</a>
-                <a href="#skills">Habilidades</a>
-                <a href="#cv">Curriculum</a>
-                <a href="#contact">Contacto</a>
-            </nav>
-            <!-- BOTÓN MODO OSCURO / CLARO -->
-            <button id="theme-toggle" title="Cambiar modo visual">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </div>
-    </header>
+    <!-- SCRIPT BABEL (JSX) -->
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+        const { motion, AnimatePresence } = FramerMotion;
 
-    <section class="hero">
-        <div data-aos="fade-up">
-            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
-            <p class="subtitle">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
-        </div>
-    </section>
+        // --- MINI UTILIDAD PARA CLASES (sustituye a 'cn') ---
+        function cn(...classes) {
+            return classes.filter(Boolean).join(' ');
+        }
 
-    <section id="about">
-        <h2 class="section-title">Sobre mí.</h2>
-        <div class="about-container">
-            <div class="about-text-reduced">
-                <p>Soy un diseñador industrial especializado en convertir ideas técnicas complejos en soluciones simples, elegantes y funcionales. Mi filosofía integra el dominio de las herramientas CAD más avanzadas con una visión humana del producto.</p>
-                <br>
-                <p>Cuento con experiencia en todo el ciclo de vida del producto: desde el sketching conceptual hasta el desarrollo técnico para fabricación industrial, asegurando siempre el más alto estándar estético.</p>
-            </div>
-            <img src="https://via.placeholder.com/300x380/222/555?text=LUIS+FOTO" class="about-photo">
-        </div>
-    </section>
+        // --- COMPONENTE TUBELIGHT NAVBAR ---
+        const NavBar = ({ items }) => {
+            const [activeTab, setActiveTab] = useState(items[0].name);
+            const [isMobile, setIsMobile] = useState(false);
 
-    <section id="work">
-        <h2 class="section-title">Portfolio.</h2>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-            <!-- Mantenemos los proyectos originales con el diseño premium -->
-            <div class="skill-card" style="padding:0; overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" style="width:100%; height:300px; object-fit:cover; opacity: 0.6;">
-                <div style="padding:20px;"><h3>PROYECTO A1</h3><p>DISEÑO DE PRODUCTO</p></div>
-            </div>
-            <div class="skill-card" style="padding:0; overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" style="width:100%; height:300px; object-fit:cover; opacity: 0.6;">
-                <div style="padding:20px;"><h3>MOBILIARIO B2</h3><p>RHEINO 3D</p></div>
-            </div>
-            <div class="skill-card" style="padding:0; overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" style="width:100%; height:300px; object-fit:cover; opacity: 0.6;">
-                <div style="padding:20px;"><h3>DISPOSITIVO C1</h3><p>INGENIERÍA TÉCNICA</p></div>
-            </div>
-        </div>
-    </section>
+            useEffect(() => {
+                const handleResize = () => setIsMobile(window.innerWidth < 768);
+                handleResize();
+                window.addEventListener("resize", handleResize);
+                return () => window.removeEventListener("resize", handleResize);
+            }, []);
 
-    <!-- HABILIDADES (AUMENTADAS A +12 CAJAS TOTALES) -->
-    <section id="skills">
-        <h2 class="section-title">Habilidades.</h2>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="fa-solid fa-cube"></i><h3>CAD AVANZADO</h3><p>SolidWorks & Rhino.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>RENDER</h3><p>Keyshot 11 Pro.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-microchip"></i><h3>DFM/DFA</h3><p>Fabricabilidad total.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-compass-drafting"></i><h3>SURFACING</h3><p>Superficies Clase A.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-atom"></i><h3>POLÍMEROS</h3><p>Materiales industriales.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-vr-cardboard"></i><h3>IMPRESIÓN 3D</h3><p>FDM & Resina.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-pen-nib"></i><h3>SKETCHING</h3><p>Conceptualización rápida.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-gears"></i><h3>PROTOTIPADO</h3><p>Modelado funcional.</p></div>
-            <div class="skill-card"><i class="fa-solid fa-camera"></i><h3>FOTO PRODUCTO</h3><p>Composición visual.</p></div>
-        </div>
-    </section>
+            return (
+                <div className="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-[100] mb-6 sm:pt-6 h-fit pointer-events-auto">
+                    <div className="flex items-center gap-2 bg-black/40 border border-white/10 backdrop-blur-lg py-1 px-1 rounded-full shadow-2xl">
+                        {items.map((item) => {
+                            const isActive = activeTab === item.name;
+                            return (
+                                <a
+                                    key={item.name}
+                                    href={item.url}
+                                    onClick={() => setActiveTab(item.name)}
+                                    className={cn(
+                                        "relative cursor-pointer text-xs font-semibold px-4 py-2 rounded-full transition-colors",
+                                        "text-zinc-400 hover:text-white",
+                                        isActive && "text-violet-400"
+                                    )}
+                                >
+                                    <span className="hidden md:inline tracking-widest uppercase">{item.name}</span>
+                                    <span className="md:hidden flex items-center justify-center p-1">
+                                        <i data-lucide={item.iconName}></i>
+                                    </span>
+                                    
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="lamp"
+                                            className="absolute inset-0 w-full bg-violet-500/10 rounded-full -z-10"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        >
+                                            <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-violet-500 rounded-t-full shadow-[0_-5px_15px_rgba(139,92,246,0.5)]">
+                                                <div className="absolute w-12 h-6 bg-violet-500/20 rounded-full blur-md -top-2 -left-2" />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </a>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        };
 
-    <!-- CURRICULUM (+3 APARTADOS MÁS) -->
-    <section id="cv">
-        <h2 class="section-title">Curriculum.</h2>
-        <div class="cv-item"><div class="cv-year">2024 — HOY</div><div class="cv-content"><h3>DISEÑADOR INDUSTRIAL JUNIOR</h3><span>Studio Product Innovation, Madrid.</span></div></div>
-        <div class="cv-item"><div class="cv-year">2023 — 2024</div><div class="cv-content"><h3>PROYECTO COLABORATIVO R+D</h3><span>Colaboración en diseño de prótesis funcionales.</span></div></div>
-        <div class="cv-item"><div class="cv-year">2022 — 2023</div><div class="cv-content"><h3>PASANTÍA DE FABRICACIÓN</h3><span>Planta Metalmecánica - Gestión DFM.</span></div></div>
-        <div class="cv-item"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3>CURSO ESPECIALIZADO RENDERING</h3><span>Workshop intensivo Visual Studio Londres.</span></div></div>
-        <div class="cv-item"><div class="cv-year">2020 — 2021</div><div class="cv-content"><h3>FREELANCE PRODUCT DESIGN</h3><span>Consultoría para Startups emergentes.</span></div></div>
-        <a href="#" class="btn-cv">DESCARGAR PDF CV <i class="fa-solid fa-file-arrow-down"></i></a>
-    </section>
+        // --- COMPONENTE APP ---
+        const App = () => {
+            const navItems = [
+                { name: 'Inicio', url: '#home', iconName: 'home' },
+                { name: 'Sobre mí', url: '#about', iconName: 'user' },
+                { name: 'Portfolio', url: '#work', iconName: 'briefcase' },
+                { name: 'Skills', url: '#skills', iconName: 'layers' },
+                { name: 'CV', url: '#cv', iconName: 'file-text' }
+            ];
 
-    <section id="contact">
-        <div class="contact-box" data-aos="zoom-out">
-            <h2 style="font-family:'Syne'; font-size: 2rem; text-transform:uppercase; margin-bottom:30px;">Hablemos.</h2>
-            <form>
-                <input type="text" placeholder="TU NOMBRE COMPLETO">
-                <input type="email" placeholder="TU CORREO ELECTRÓNICO">
-                <textarea rows="3" placeholder="DESCRIBE TU PROYECTO O CONSULTA"></textarea>
-                <button type="submit" style="width:fit-content; padding:15px 50px; border:none; background:var(--accent); color:white; font-weight:800; border-radius:100px;">ENVIAR</button>
-            </form>
-        </div>
-    </section>
+            useEffect(() => {
+                // Inicializar iconos de Lucide
+                lucide.createIcons();
+            }, []);
 
-    <footer style="padding:60px 10%; border-top:1px solid var(--border); text-align:center;">
-        <div style="font-weight:700; font-size:0.9rem;">LUIS BLASCO-IBÁÑEZ BERBEL</div>
-        <div style="margin:20px 0; color:var(--text-dim); font-size:0.8rem;">
-            <a href="mailto:luisblascoibanezberbel@gmail.com" style="color:inherit; text-decoration:none;">luisblascoibanezberbel@gmail.com</a> | 
-            <a href="tel:+34630511806" style="color:inherit; text-decoration:none;">+34 630 511 806</a>
-        </div>
-        <div style="font-size:0.7rem; color:var(--text-dim);">© 2024 / PRODUCT & INDUSTRIAL DESIGNER</div>
-    </footer>
+            return (
+                <div className="font-inter">
+                    <NavBar items={navItems} />
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
+                    {/* HERO */}
+                    <section id="home" className="h-screen flex flex-col justify-center px-[10%]">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }} 
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <h1 className="text-[12vw] md:text-[8rem] font-syne font-extrabold leading-[0.85] tracking-tight uppercase italic text-white">
+                                LUIS<br />BLASCO-IBÁÑEZ<br />BERBEL
+                            </h1>
+                            <p className="mt-8 text-violet-400 font-bold tracking-[6px] uppercase text-sm md:text-lg">
+                                PORTFOLIO | DISEÑADOR INDUSTRIAL
+                            </p>
+                        </motion.div>
+                    </section>
 
-        // TEMA: CLARO/OSCURO
-        const btnToggle = document.getElementById("theme-toggle");
-        const body = document.body;
+                    {/* SOBRE MÍ */}
+                    <section id="about" className="py-32 px-[10%]">
+                        <h2 className="text-4xl font-syne font-bold uppercase mb-16">Sobre mí.</h2>
+                        <div className="grid md:grid-cols-2 gap-16 items-start">
+                            <div className="text-zinc-400 text-lg leading-relaxed">
+                                <p>Soy un diseñador industrial especializado en convertir ideas técnicas complejas en soluciones simples y elegantes. Mi enfoque combina CAD avanzado con una profunda sensibilidad estética para el mercado moderno.</p>
+                                <p className="mt-6">Tengo experiencia técnica en fabricación y optimización de materiales poliméricos, garantizando que el diseño sea tan funcional como visualmente impactante.</p>
+                            </div>
+                            <div className="bg-zinc-900 border border-white/10 p-2 rounded-2xl rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&w=800&q=80" className="rounded-xl grayscale hover:grayscale-0 transition-all duration-700" alt="Profile"/>
+                            </div>
+                        </div>
+                    </section>
 
-        btnToggle.addEventListener("click", () => {
-            body.classList.toggle("light-mode");
-            const icon = btnToggle.querySelector("i");
-            if (body.classList.contains("light-mode")) {
-                icon.className = "fa-solid fa-sun";
-            } else {
-                icon.className = "fa-solid fa-moon";
-            }
-        });
+                    {/* PORTFOLIO (Simplificado para el demo) */}
+                    <section id="work" className="py-32 px-[10%] bg-zinc-900/20">
+                        <h2 className="text-4xl font-syne font-bold uppercase mb-16">Portfolio.</h2>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {[1581092160562, 155859171004b, 1523275335684].map((imgId, idx) => (
+                                <div key={idx} className="group relative overflow-hidden rounded-3xl border border-white/5 bg-zinc-900">
+                                    <div className="h-72 overflow-hidden">
+                                        <img src={`https://images.unsplash.com/photo-${imgId}?auto=format&w=600`} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="font-bold uppercase tracking-tight">Proyecto Industrial 0{idx+1}</h3>
+                                        <p className="text-zinc-500 text-xs mt-2 uppercase">CAD / Rendering / DFM</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
 
-        // HEADER
-        let lastScroll = 0;
-        const navbar = document.getElementById("navbar");
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 80) navbar.classList.add("nav-hidden");
-            else navbar.classList.remove("nav-hidden");
-            lastScroll = currentScroll;
-        });
+                    {/* HABILIDADES GRID */}
+                    <section id="skills" className="py-32 px-[10%]">
+                        <h2 className="text-4xl font-syne font-bold uppercase mb-16">Habilidades.</h2>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {[
+                                {t: "Solidworks", d: "CAD Avanzado"},
+                                {t: "Rhino 3D", d: "Surfacing A"},
+                                {t: "Keyshot", d: "Hyper-render"},
+                                {t: "DFM/DFA", d: "Industrialización"},
+                                {t: "3D Print", d: "SLA / FDM"},
+                                {t: "Photoshop", d: "Post-procesado"},
+                                {t: "Concept", d: "Digital Sketch"},
+                                {t: "Prototipado", d: "Físico & UX"}
+                            ].map((skill, i) => (
+                                <div key={i} className="p-8 border border-white/5 bg-white/5 rounded-2xl hover:border-violet-500/50 transition-colors group">
+                                    <h4 className="font-bold text-white uppercase group-hover:text-violet-400 transition-colors">{skill.t}</h4>
+                                    <p className="text-zinc-500 text-sm mt-1">{skill.d}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
 
-        // CURSOR
+                    {/* FOOTER */}
+                    <footer className="py-20 border-t border-white/5 text-center text-zinc-600">
+                        <div className="text-white font-syne font-bold mb-4 tracking-tighter text-2xl">L|BIB</div>
+                        <p>© 2024 / Luis Blasco-Ibáñez Berbel</p>
+                        <p className="text-xs mt-2">Design meets Technology.</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+        // CURSOR ANIMADO (Vanilla JS)
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button, input, textarea, .skill-card').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.6)');
-            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        document.addEventListener('mouseover', e => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+            } else {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            }
         });
     </script>
 </body>
