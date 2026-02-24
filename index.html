@@ -3,195 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco-Ibáñez Berbel | Industrial Designer Portfolio</title>
+    <title>Luis Blasco-Ibáñez Berbel | Industrial Design</title>
     
-    <!-- Tipografía y Estilos Externos -->
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- SISTEMA DE DISEÑO --- */
+        /* --- VARIABLES DE COLOR (DYNAMIC) --- */
         :root {
-            --bg: #0a0a0a;
-            --accent: #a78bfa; 
-            --accent-glow: rgba(167, 139, 250, 0.15);
-            --card-bg: #161616;
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #050505;
+            --accent: #8b5cf6; 
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
             --text: #ffffff;
-            --text-dim: #94a3b8;
-            --glass: rgba(10, 10, 10, 0.8);
-            --section-margin: 200px; /* Margen aumentado entre secciones */
+            --text-dim: #a1a1aa;
+            --glass: rgba(5, 5, 5, 0.45);
         }
 
+        /* --- CLASE LIGHT MODE --- */
         .light-mode {
-            --bg: #ffffff;
-            --accent: #7c3aed;
-            --accent-glow: rgba(124, 58, 237, 0.1);
-            --card-bg: #f8fafc;
-            --border: rgba(0, 0, 0, 0.08);
-            --text: #0f172a;
-            --text-dim: #475569;
-            --glass: rgba(255, 255, 255, 0.85);
+            --bg: #f5f5f7;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.1);
+            --text: #1d1d1f;
+            --text-dim: #424245;
+            --glass: rgba(255, 255, 255, 0.6);
         }
 
-        /* --- RESET Y BASES --- */
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            cursor: none; 
+            cursor: none; scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            transition: background 0.5s ease;
         }
 
-        /* --- CURSOR PERSONALIZADO --- */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent);
+            z-index: -1;
+        }
+
+        /* --- CURSOR ANIMADO --- */
         #cursor {
-            width: 12px; height: 12px; background: var(--accent);
+            width: 14px; height: 14px; border: 1px solid var(--accent);
             border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
-            mix-blend-mode: difference; transition: transform 0.15s ease-out;
+            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
             transform: translate(-50%, -50%);
+            background: transparent;
         }
 
-        /* --- NAVEGACIÓN (iPHONE STYLE) --- */
+        /* --- HEADER CON ANIMACIÓN DE OCULTADO --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: var(--glass); backdrop-filter: saturate(180%) blur(20px);
-            padding: 25px 8%; display: flex; justify-content: space-between; align-items: center;
-            z-index: 2000; border-bottom: 1px solid var(--border);
-            transition: transform 0.4s ease;
+            background: var(--glass); 
+            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
+            padding: 18px 10%; display: flex; justify-content: space-between; align-items: center;
+            z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         header.nav-hidden { transform: translateY(-100%); }
 
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 3px; }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 2px; }
+        
+        .header-actions { display: flex; align-items: center; gap: 30px; }
 
-        .header-actions { display: flex; align-items: center; gap: 40px; }
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { 
-            text-decoration: none; color: var(--text-dim); font-size: 0.75rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s;
-        }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0; background: var(--accent); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--accent); }
 
-        #theme-toggle {
-            background: var(--card-bg); border: 1px solid var(--border);
-            color: var(--text); width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; transition: 0.3s;
-        }
+        #theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: 0.3s; }
+        #theme-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- SECCIONES ESTRUCTURA --- */
-        section { padding: var(--section-margin) 10% 0; scroll-margin-top: 100px; }
-
-        .section-header { margin-bottom: 80px; }
-        .section-title { 
-            font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); 
-            line-height: 1; text-transform: uppercase; 
-        }
+        /* --- SECCIONES (MARGEN AUMENTADO) --- */
+        section { padding: 220px 10% 120px; } /* Margen aumentado drásticamente */
 
         /* --- HERO --- */
-        .hero { 
-            height: 100vh; display: flex; flex-direction: column; 
-            justify-content: center; align-items: flex-start; padding-top: 0;
-        }
-        .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 14vw, 9rem); 
-            line-height: 0.85; letter-spacing: -6px; margin-bottom: 30px;
-        }
-        .hero .subtitle { 
-            font-size: 1.1rem; color: var(--accent); letter-spacing: 6px; 
-            text-transform: uppercase; font-weight: 600; 
-        }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; padding-bottom: 0; }
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 12vw, 7.5rem); line-height: 0.85; margin-bottom: 40px; letter-spacing: -6px; text-transform: uppercase; }
+        .hero .subtitle { font-size: 1.1rem; letter-spacing: 4px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+
+        /* --- TÍTULOS --- */
+        h2.section-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 80px; text-transform: uppercase; }
 
         /* --- SOBRE MÍ --- */
-        .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .about-text { font-size: 1.2rem; color: var(--text-dim); max-width: 600px; line-height: 1.8; }
-        .about-image { position: relative; width: 100%; max-width: 450px; justify-self: end; }
-        .about-image img { 
-            width: 100%; border-radius: 10px; filter: grayscale(1); 
-            transition: 0.5s filter; border: 1px solid var(--border);
-        }
-        .about-image:hover img { filter: grayscale(0); }
+        .about-container { display: grid; grid-template-columns: 1fr 350px; gap: 80px; align-items: center; }
+        .about-text-reduced { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); }
+        .about-photo { width: 100%; border-radius: 24px; border: 1px solid var(--border); filter: grayscale(100%); transition: 0.5s; }
+        .about-photo:hover { filter: grayscale(0%); transform: scale(1.02); }
 
-        /* --- PORTFOLIO (MASONRY-LIKE GRID) --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        .work-card { 
-            background: var(--card-bg); border-radius: 24px; overflow: hidden; 
-            border: 1px solid var(--border); transition: 0.4s;
-        }
-        .work-img { height: 450px; background: #222; overflow: hidden; }
-        .work-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; opacity: 0.8; }
-        .work-card:hover img { transform: scale(1.05); opacity: 1; }
-        .work-info { padding: 35px; }
-        .work-info h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 5px; }
-        .work-info p { color: var(--text-dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        /* --- SKILLS & PORTFOLIO --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 35px; border-radius: 22px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .skill-card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(139, 92, 246, 0.05); }
+        .skill-card i { font-size: 1.8rem; color: var(--accent); margin-bottom: 20px; display: block; }
+        .skill-card h3 { font-size: 1.2rem; margin-bottom: 12px; text-transform: uppercase; }
+        .skill-card p { font-size: 0.9rem; color: var(--text-dim); }
 
-        /* --- HABILIDADES (BENTO STYLE) --- */
-        .skills-container { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; 
-        }
-        .skill-item { 
-            background: var(--card-bg); border: 1px solid var(--border); padding: 40px; 
-            border-radius: 30px; transition: 0.4s; position: relative; overflow: hidden;
-        }
-        .skill-item:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .skill-item i { font-size: 1.8rem; color: var(--accent); margin-bottom: 25px; display: block; }
-        .skill-item h3 { font-size: 1rem; margin-bottom: 12px; letter-spacing: 1px; }
-        .skill-item p { font-size: 0.9rem; color: var(--text-dim); }
-
-        /* --- CURRICULUM (CHRONOLOGICAL) --- */
-        .cv-list { max-width: 900px; }
-        .cv-row { 
-            display: grid; grid-template-columns: 200px 1fr; 
-            padding: 50px 0; border-bottom: 1px solid var(--border); 
-        }
-        .cv-year { color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; }
-        .cv-title { font-weight: 600; font-size: 1.3rem; margin-bottom: 5px; }
-        .cv-company { color: var(--text-dim); text-transform: uppercase; font-size: 0.8rem; }
+        /* --- CURRICULUM --- */
+        .cv-item { display: flex; gap: 50px; padding: 45px 0; border-bottom: 1px solid var(--border); transition: 0.3s; }
+        .cv-item:hover { padding-left: 20px; background: rgba(255,255,255,0.02); }
+        .cv-year { font-family: 'Syne', sans-serif; font-size: 1rem; min-width: 160px; color: var(--accent); font-weight: 800; }
+        .btn-cv { margin-top: 60px; display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 800; transition: 0.4s; }
+        .btn-cv:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
 
         /* --- CONTACTO --- */
-        .contact-card { 
-            background: var(--card-bg); border: 1px solid var(--border); 
-            padding: 80px 10%; border-radius: 40px; margin-bottom: 80px;
-        }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
-        .form-group { margin-bottom: 30px; position: relative; }
-        input, textarea { 
-            width: 100%; background: transparent; border: none; 
-            border-bottom: 1.5px solid var(--border); padding: 15px 0; color: var(--text); 
-            font-family: inherit; font-size: 1rem; outline: none; transition: 0.3s;
-        }
+        .contact-box { background: var(--card-bg); padding: 80px 10%; border-radius: 40px; border: 1px solid var(--border); width: 100%; position: relative; }
+        input, textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 20px 0; color: var(--text); margin-bottom: 30px; outline: none; transition: 0.3s; font-family: 'Inter'; }
         input:focus, textarea:focus { border-bottom-color: var(--accent); }
-        button[type="submit"] {
-            background: var(--text); color: var(--bg); border: none; 
-            padding: 20px 45px; border-radius: 100px; font-weight: 800; 
-            cursor: pointer; transition: 0.3s; text-transform: uppercase;
-        }
-        button:hover { background: var(--accent); color: white; transform: scale(1.05); }
 
-        /* --- FOOTER --- */
-        footer { 
-            padding: 100px 10%; background: #000; color: white; border-top: 1px solid rgba(255,255,255,0.05); 
-            display: flex; justify-content: space-between; align-items: flex-end;
-        }
-        .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem; line-height: 0.8; }
-
-        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            :root { --section-margin: 120px; }
-            .about-layout, .portfolio-grid, .contact-grid { grid-template-columns: 1fr; }
-            .hero h1 { letter-spacing: -3px; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-container { grid-template-columns: 1fr; }
+            section { padding: 150px 10% 80px; }
         }
 
         @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
             .nav-links, #theme-toggle { display: none; }
-            .cv-row { grid-template-columns: 1fr; gap: 10px; }
-            header { padding: 15px 5%; }
+            .cv-item { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -200,153 +140,115 @@
     <div id="cursor"></div>
 
     <header id="navbar">
-        <div class="nav-logo">LUIS.BIB</div>
+        <div class="nav-logo">L|BIB</div>
         <div class="header-actions">
             <nav class="nav-links">
-                <a href="#about">Perfil</a>
-                <a href="#work">Trabajos</a>
+                <a href="#about">Sobre mí</a>
+                <a href="#work">Portfolio</a>
                 <a href="#skills">Habilidades</a>
                 <a href="#cv">Curriculum</a>
-                <a href="#contact">Hablemos</a>
+                <a href="#contact">Contacto</a>
             </nav>
-            <button id="theme-toggle">
+            <button id="theme-toggle" title="Cambiar modo visual">
                 <i class="fa-solid fa-moon"></i>
             </button>
         </div>
     </header>
 
-    <main>
-        <!-- HERO -->
-        <section class="hero">
-            <div data-aos="fade-up" data-aos-duration="1200">
-                <span class="subtitle">Diseñador Industrial & CAD Specialist</span>
-                <h1>LUIS<br>BLASCO-IBÁÑEZ</h1>
-            </div>
-        </section>
-
-        <!-- ABOUT -->
-        <section id="about">
-            <div class="section-header" data-aos="fade-right">
-                <h2 class="section-title">Enfoque Técnico y Estético.</h2>
-            </div>
-            <div class="about-layout">
-                <div class="about-text" data-aos="fade-up">
-                    <p>Fusional la manufacturabilidad técnica con la pureza estética es mi estándar. Entiendo el diseño industrial no solo como la creación de formas, sino como el equilibrio entre el material, el proceso y la emoción humana.</p>
-                    <br>
-                    <p>Experto en optimización DFM (Design for Manufacturing) y superficies Clase A para garantizar que la transición del render a la línea de producción sea impecable.</p>
-                </div>
-                <div class="about-image" data-aos="zoom-in">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=600" alt="Luis Blasco">
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO -->
-        <section id="work">
-            <div class="section-header" data-aos="fade-right">
-                <h2 class="section-title">Portfolio Seleccionado.</h2>
-            </div>
-            <div class="portfolio-grid">
-                <!-- Item 1 -->
-                <div class="work-card" data-aos="fade-up">
-                    <div class="work-img"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800"></div>
-                    <div class="work-info"><h3>Audio Shell v.1</h3><p>Design / Acoustic Engineering</p></div>
-                </div>
-                <!-- Item 2 -->
-                <div class="work-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="work-img"><img src="https://images.unsplash.com/photo-1544244015-0cd4b3966905?auto=format&w=800"></div>
-                    <div class="work-info"><h3>Hub Centric Concept</h3><p>Surfacing / Keyshot Rendering</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SKILLS -->
-        <section id="skills">
-            <div class="section-header">
-                <h2 class="section-title">Core Expertise.</h2>
-            </div>
-            <div class="skills-container">
-                <div class="skill-item" data-aos="fade-up">
-                    <i class="fa-solid fa-gem"></i>
-                    <h3>MODELADO CLASE A</h3>
-                    <p>Especialista en superficies continuas G2/G3 con Rhino y SolidWorks para acabados automotriz.</p>
-                </div>
-                <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <h3>ADDITIVE MFG</h3>
-                    <p>Domino del flujo SLA/FDM y optimización de topologías para prototipado rápido funcional.</p>
-                </div>
-                <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fa-solid fa-vr-cardboard"></i>
-                    <h3>VIZUALIZACIÓN</h3>
-                    <p>CGI de producto fotorrealista para marketing y pre-venta de alta gama.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CV -->
-        <section id="cv">
-            <div class="section-header">
-                <h2 class="section-title">Recorrido.</h2>
-            </div>
-            <div class="cv-list">
-                <div class="cv-row" data-aos="fade-up">
-                    <div class="cv-year">2024 - HOY</div>
-                    <div>
-                        <h3 class="cv-title">Lead Industrial Designer</h3>
-                        <p class="cv-company">InnoLab Projects - Madrid, ES</p>
-                    </div>
-                </div>
-                <div class="cv-row" data-aos="fade-up">
-                    <div class="cv-year">2022 - 2024</div>
-                    <div>
-                        <h3 class="cv-title">Freelance Product Developer</h3>
-                        <p class="cv-company">E-commerce Tech & Hardware Startups</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACTO -->
-        <section id="contact">
-            <div class="contact-card" data-aos="fade-up">
-                <div class="contact-grid">
-                    <div>
-                        <h2 class="section-title">Let's <br>Collab.</h2>
-                        <p style="margin-top:20px; color:var(--text-dim);">¿Tienes un proyecto en mente que necesite refinamiento industrial? Hablemos.</p>
-                    </div>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="NOMBRE COMPLETO">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="EMAIL PROFESIONAL">
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="4" placeholder="MENSAJE"></textarea>
-                        </div>
-                        <button type="submit">Enviar Solicitud</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div>
-            <div class="footer-logo">L|B<br>I|B</div>
-            <p style="margin-top:20px; font-size: 0.8rem; color: #666;">Basado en Madrid para el mundo.</p>
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1200">
+            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
+            <p class="subtitle" data-aos="fade-right" data-aos-delay="400">PORTFOLIO | DISEÑADOR INDUSTRIAL</p>
         </div>
-        <div style="text-align: right;">
-            <p style="margin-bottom: 10px;">luisblascoibanezberbel@gmail.com</p>
-            <p style="color: #444;">&copy; 2024 — DISEÑO INDUSTRIAL DE ALTO RENDIMIENTO</p>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title" data-aos="fade-up">Sobre mí.</h2>
+        <div class="about-container">
+            <div class="about-text-reduced" data-aos="fade-up" data-aos-delay="200">
+                <p>Soy un diseñador industrial especializado en convertir ideas técnicas complejas en soluciones simples, elegantes y funcionales. Mi filosofía integra el dominio de las herramientas CAD más avanzadas con una visión humana del producto.</p>
+                <br>
+                <p>Cuento con experiencia en todo el ciclo de vida del producto: desde el sketching conceptual hasta el desarrollo técnico para fabricación industrial, asegurando siempre el más alto estándar estético.</p>
+            </div>
+            <img src="https://via.placeholder.com/350x450/222/555?text=LUIS+FOTO" class="about-photo" data-aos="zoom-in" data-aos-delay="400">
         </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title" data-aos="fade-up">Portfolio.</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="skill-card" style="padding:0; overflow:hidden;" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800" style="width:100%; height:350px; object-fit:cover; opacity: 0.6;">
+                <div style="padding:30px;"><h3>PROYECTO A1</h3><p>DISEÑO DE PRODUCTO</p></div>
+            </div>
+            <div class="skill-card" style="padding:0; overflow:hidden;" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=800" style="width:100%; height:350px; object-fit:cover; opacity: 0.6;">
+                <div style="padding:30px;"><h3>MOBILIARIO B2</h3><p>RHINO 3D + KEYSHOT</p></div>
+            </div>
+            <div class="skill-card" style="padding:0; overflow:hidden;" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" style="width:100%; height:350px; object-fit:cover; opacity: 0.6;">
+                <div style="padding:30px;"><h3>DISPOSITIVO C1</h3><p>INGENIERÍA TÉCNICA</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title" data-aos="fade-up">Habilidades.</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="50"><i class="fa-solid fa-cube"></i><h3>CAD AVANZADO</h3><p>SolidWorks & Rhino.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>RENDER</h3><p>Keyshot 11 Pro.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="150"><i class="fa-solid fa-microchip"></i><h3>DFM/DFA</h3><p>Fabricabilidad total.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><i class="fa-solid fa-compass-drafting"></i><h3>SURFACING</h3><p>Superficies Clase A.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="250"><i class="fa-solid fa-atom"></i><h3>POLÍMEROS</h3><p>Materiales industriales.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-vr-cardboard"></i><h3>IMPRESIÓN 3D</h3><p>FDM & Resina.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="350"><i class="fa-solid fa-pen-nib"></i><h3>SKETCHING</h3><p>Conceptualización rápida.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-gears"></i><h3>PROTOTIPADO</h3><p>Modelado funcional.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="450"><i class="fa-solid fa-camera"></i><h3>FOTO PRODUCTO</h3><p>Composición visual.</p></div>
+        </div>
+    </section>
+
+    <section id="cv">
+        <h2 class="section-title" data-aos="fade-up">Curriculum.</h2>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2024 — HOY</div><div class="cv-content"><h3>DISEÑADOR INDUSTRIAL JUNIOR</h3><span>Studio Product Innovation, Madrid.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2023 — 2024</div><div class="cv-content"><h3>PROYECTO COLABORATIVO R+D</h3><span>Colaboración en diseño de prótesis funcionales.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2022 — 2023</div><div class="cv-content"><h3>PASANTÍA DE FABRICACIÓN</h3><span>Planta Metalmecánica - Gestión DFM.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2021 — 2022</div><div class="cv-content"><h3>CURSO ESPECIALIZADO RENDERING</h3><span>Workshop intensivo Visual Studio Londres.</span></div></div>
+        <div class="cv-item" data-aos="fade-up"><div class="cv-year">2020 — 2021</div><div class="cv-content"><h3>FREELANCE PRODUCT DESIGN</h3><span>Consultoría para Startups emergentes.</span></div></div>
+        <a href="#" class="btn-cv" data-aos="zoom-in">DESCARGAR PDF CV <i class="fa-solid fa-file-arrow-down"></i></a>
+    </section>
+
+    <section id="contact">
+        <div class="contact-box" data-aos="fade-up">
+            <h2 style="font-family:'Syne'; font-size: 2.5rem; text-transform:uppercase; margin-bottom:40px;">Hablemos.</h2>
+            <form>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <input type="text" placeholder="TU NOMBRE COMPLETO">
+                    <input type="email" placeholder="TU CORREO ELECTRÓNICO">
+                </div>
+                <textarea rows="4" placeholder="DESCRIBE TU PROYECTO O CONSULTA"></textarea>
+                <button type="submit" style="cursor:none; width:fit-content; padding:20px 60px; border:none; background:var(--accent); color:white; font-weight:800; border-radius:100px; text-transform:uppercase; letter-spacing:1px; margin-top:20px;">ENVIAR MENSAJE</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="padding:100px 10%; border-top:1px solid var(--border); text-align:center;">
+        <div style="font-family:'Syne'; font-weight:800; font-size:1.2rem; margin-bottom: 20px;">LUIS BLASCO-IBÁÑEZ BERBEL</div>
+        <div style="margin:20px 0; color:var(--text-dim); font-size:0.9rem;">
+            <a href="mailto:luisblascoibanezberbel@gmail.com" style="color:inherit; text-decoration:none; margin: 0 15px;">luisblascoibanezberbel@gmail.com</a> | 
+            <a href="tel:+34630511806" style="color:inherit; text-decoration:none; margin: 0 15px;">+34 630 511 806</a>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-dim); opacity:0.6; margin-top: 40px;">© 2024 / PRODUCT & INDUSTRIAL DESIGNER / MADE WITH PRECISION</div>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, duration: 800 });
+        // Inicializar animaciones de scroll
+        AOS.init({ 
+            duration: 1000, 
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
 
         // TEMA: CLARO/OSCURO
         const btnToggle = document.getElementById("theme-toggle");
@@ -355,30 +257,48 @@
         btnToggle.addEventListener("click", () => {
             body.classList.toggle("light-mode");
             const icon = btnToggle.querySelector("i");
-            icon.className = body.classList.contains("light-mode") ? "fa-solid fa-sun" : "fa-solid fa-moon";
+            if (body.classList.contains("light-mode")) {
+                icon.className = "fa-solid fa-sun";
+            } else {
+                icon.className = "fa-solid fa-moon";
+            }
         });
 
-        // HEADER: SCROLL COMPORTAMIENTO
+        // LÓGICA DE HEADER (MOSTRAR/OCULTAR AL HACER SCROLL)
         let lastScroll = 0;
         const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 150) navbar.classList.add("nav-hidden");
-            else navbar.classList.remove("nav-hidden");
+            if (currentScroll > lastScroll && currentScroll > 150) {
+                navbar.classList.add("nav-hidden");
+            } else {
+                navbar.classList.remove("nav-hidden");
+            }
             lastScroll = currentScroll;
         });
 
-        // CURSOR
+        // CURSOR MAGNÉTICO PERSONALIZADO
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // EFECTOS CURSOR EN ELEMENTOS INTERACTIVOS
-        document.querySelectorAll('a, button, input, textarea, .work-card, .skill-item').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(3)');
-            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        // EFECTOS DEL CURSOR AL HACER HOVER
+        const hoverables = document.querySelectorAll('a, button, input, textarea, .skill-card, .cv-item');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(4)';
+                cursor.style.background = 'var(--accent)';
+                cursor.style.mixBlendMode = 'difference';
+                cursor.style.border = 'none';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = 'transparent';
+                cursor.style.mixBlendMode = 'normal';
+                cursor.style.border = '1px solid var(--accent)';
+            });
         });
     </script>
 </body>
