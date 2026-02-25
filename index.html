@@ -14,23 +14,23 @@
         :root {
             --bg: #030303;
             --accent: #FF5A00; 
-            --accent-glow: rgba(255, 90, 0, 0.15);
+            --accent-glow: rgba(255, 90, 0, 0.25);
             --card-bg: rgba(25, 25, 27, 0.4);
-            --border: rgba(255, 255, 255, 0.05);
-            --text: #f3f3f3;
-            --text-dim: #8b8b8d;
-            --glass: rgba(10, 10, 12, 0.1); 
-            --blur: blur(35px);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-dim: #9ca3af;
+            --glass: rgba(10, 10, 12, 0.3); 
+            --blur: blur(25px);
         }
 
         .light-mode {
-            --bg: #f2f2f4;
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --border: rgba(0, 0, 0, 0.06);
-            --text: #111112;
-            --text-dim: #5c5c5f;
-            --glass: rgba(255, 255, 255, 0.2);
-            --accent-glow: rgba(255, 90, 0, 0.05);
+            --bg: #f8f8fa;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.08);
+            --text: #0a0a0b;
+            --text-dim: #6b7280;
+            --glass: rgba(255, 255, 255, 0.5);
+            --accent-glow: rgba(255, 90, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
@@ -39,36 +39,13 @@
             background-color: var(--bg); color: var(--text);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden; line-height: 1.5;
-            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
+            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; }
-        .lang-animating { opacity: 0.2 !important; filter: blur(10px); transform: scale(0.97); }
+        .lang-node { transition: all 0.4s ease; display: inline-block; }
+        .lang-animating { opacity: 0; filter: blur(10px); transform: translateY(5px); }
 
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9998;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04; mix-blend-mode: overlay;
-        }
-
-        #cursor-dot {
-            width: 8px; height: 8px; background: var(--text); border-radius: 50%;
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-            will-change: transform; transition: opacity 0.3s ease;
-        }
-        
-        #cursor-ring {
-            width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
-            transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
-            will-change: transform;
-        }
-        
-        .hovered-element #cursor-ring { width: 55px; height: 55px; background: var(--text); mix-blend-mode: difference; border-width: 0; }
-        .hovered-element #cursor-dot { opacity: 0; }
-
-        /* --- NAVBAR --- */
+        /* --- NAVEGACIÓN INTELIGENTE --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -77,129 +54,132 @@
 
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 12px 35px; display: flex; align-items: center; gap: 40px;
+            padding: 10px 30px; display: flex; align-items: center; gap: 30px;
             border: 1px solid var(--border); border-radius: 100px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--text); }
-
-        .tools-nav { display:flex; align-items: center; gap: 12px;}
-        .icon-btn, .lang-sutil-btn { 
-            background: transparent; border: none; color: var(--text);
-            width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
-            font-size: 0.85rem; transition: all 0.3s; opacity: 0.5; border-radius: 50%;
-        }
-        .lang-sutil-btn { font-family: 'Inter'; font-weight: 800; font-size: 0.75rem; cursor: none; }
-        .icon-btn:hover, .lang-sutil-btn:hover { color: var(--accent); opacity: 1; background: var(--border); }
-
-        /* --- HERO --- */
-        section { padding: 120px 5vw; max-width: 1600px; margin: 0 auto; }
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
-            line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase;
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-dim); font-size: 0.75rem; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; 
+            padding: 8px 16px; border-radius: 50px; transition: all 0.4s ease;
+            position: relative;
         }
         
-        .subtitle-bar { display: flex; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 20px; }
-        .hero .subtitle { font-size: clamp(0.9rem, 2.5vw, 1.3rem); color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
+        /* Efecto iluminación/fijo al estar en sección */
+        .nav-links a.active, .nav-links a:hover { 
+            color: var(--text); background: var(--border);
+        }
+        .nav-links a.active::after {
+            content: ""; position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 4px; background: var(--accent); border-radius: 50%;
+        }
+
+        .tools-nav { display:flex; align-items: center; gap: 10px; margin-left: 10px;}
+        .icon-btn, .lang-sutil-btn { 
+            background: transparent; border: none; color: var(--text);
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; 
+            font-size: 0.85rem; transition: 0.3s; opacity: 0.5; border-radius: 50%;
+        }
+        .icon-btn:hover, .lang-sutil-btn:hover { color: var(--accent); opacity: 1; background: var(--border); }
+        .lang-sutil-btn { font-family: 'Inter'; font-weight: 800; font-size: 0.7rem; }
+
+        /* --- HERO & SUBTITLE --- */
+        section { padding: 120px 5vw; max-width: 1600px; margin: 0 auto; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); line-height: 0.85; font-weight: 800; text-transform: uppercase; }
+        
+        .subtitle-bar { display: flex; align-items: center; margin-top: 35px; gap: 20px; }
+        /* Tono Naranja Portfolio */
+        .hero .subtitle { 
+            font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--accent); 
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+        }
 
         .status-tag {
-            display: inline-flex; align-items: center; gap: 10px;
-            font-size: 0.7rem; color: var(--text-dim); font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 0.5px;
-            background: var(--border); padding: 10px 18px; border-radius: 100px;
-            border: 1px solid var(--border);
+            display: inline-flex; align-items: center; gap: 10px; font-size: 0.65rem; color: var(--text-dim);
+            background: var(--border); padding: 8px 18px; border-radius: 100px; font-weight: 700; text-transform: uppercase;
         }
         .pulse-box { position: relative; width: 6px; height: 6px; }
         .pulse-core { position: absolute; width: 100%; height: 100%; background: #22c55e; border-radius: 50%; }
         .pulse-ring { position: absolute; width: 100%; height: 100%; background: #22c55e; border-radius: 50%; animation: ping 2s infinite; }
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
-        h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
-
-        /* --- ABOUT --- */
-        .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); }
-        .bento-card-photo { padding: 0; overflow: hidden; border-radius: 30px; border: 1px solid var(--border); height: 100%; min-height: 400px;}
-        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
-        .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
-        .about-text strong { color: var(--text); font-weight: 500;}
-
-        /* --- PORTFOLIO --- */
-        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 500px; transition: 0.5s ease; }
+        /* --- PROYECTOS (6 ÍTEMS) --- */
+        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 25px; }
+        .p-card { position: relative; border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 500px; }
         .p-wide { grid-column: span 8; } .p-square { grid-column: span 4; }
-        .p-img-container { width: 100%; height: 100%; overflow: hidden; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 60%); opacity: 0.7; transition: 0.5s; }
-        .p-info { position: absolute; bottom: 35px; left: 35px; right: 35px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .p-info h3 { font-family: 'Syne'; font-size: 2rem; color: white; margin-bottom: 5px;}
-        .p-info p { font-size: 0.8rem; text-transform: uppercase; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
-        .view-circle { width: 55px; height: 55px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; opacity: 0; transform: translateY(20px); transition: 0.4s; }
-        .p-card:hover .view-circle { opacity: 1; transform: translateY(0); }
-        .p-card:hover .p-img-container img { transform: scale(1.08); }
+        .p-img-container { width: 100%; height: 100%; transition: transform 0.8s ease; }
+        .p-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 70%); transition: 0.4s; }
+        .p-info { position: absolute; bottom: 40px; left: 40px; color: white; }
+        .p-info h3 { font-family: 'Syne'; font-size: 2.2rem; margin-bottom: 5px; font-weight: 800;}
+        .p-card:hover .p-img-container { transform: scale(1.05); }
 
         /* --- SKILLS --- */
-        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
-        .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .skill-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; }
+        .skill-icon { color: var(--accent); font-size: 1.8rem; margin-bottom: 20px; }
 
-        /* --- CV REFORMADO (ELEGANTE + EXTRA) --- */
-        .cv-wrapper { border-top: 1px solid var(--border); margin-top: 20px; }
+        /* --- CV REFORMADO --- */
         .cv-item { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 45px 20px; border-bottom: 1px solid var(--border); text-decoration: none; 
-            position: relative; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 40px 20px; border-bottom: 1px solid var(--border); text-decoration: none; 
+            transition: 0.5s ease;
         }
-        .cv-item::after { 
-            content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 2px; 
-            background: var(--accent); transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .cv-item:hover { background: rgba(255, 90, 0, 0.02); padding-left: 35px; }
-        .cv-item:hover::after { width: 100%; }
+        /* Títulos NO opacos */
+        .cv-role h3 { font-family: 'Syne'; font-size: 2.2rem; font-weight: 800; color: var(--text); transition: 0.4s; }
+        .cv-company { font-size: 1.1rem; color: var(--accent); font-weight: 500; margin-top: 5px; opacity: 0.8; transition: 0.4s; }
+        .cv-item:hover { background: rgba(255, 90, 0, 0.05); padding-left: 40px; }
+        .cv-item:hover h3 { transform: translateX(10px); color: var(--accent); }
 
-        .cv-role h3 { 
-            font-family: 'Syne'; font-size: 1.9rem; font-weight: 700; color: var(--text-dim); 
-            transition: 0.4s; letter-spacing: -0.5px;
+        /* BOTÓN DESCARGAR DINÁMICO */
+        .btn-download {
+            position: relative; display: inline-flex; align-items: center; gap: 20px;
+            background: var(--text); color: var(--bg); padding: 25px 60px;
+            border-radius: 100px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; margin-top: 50px; overflow: hidden; transition: 0.4s;
         }
-        .cv-company { font-size: 1rem; color: var(--text-dim); opacity: 0.5; transition: 0.4s; margin-top: 4px; }
+        .btn-download::before {
+            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--accent); transition: 0.4s cubic-bezier(0.6, 0, 0.4, 1); z-index: -1;
+        }
+        .btn-download:hover::before { left: 0; }
+        .btn-download:hover { color: #fff; transform: translateY(-5px) rotate(-1deg); box-shadow: 0 20px 50px var(--accent-glow); }
+        .btn-download i { font-size: 1.2rem; animation: float 2s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+        /* --- SECCIÓN CONTACTO CHULA --- */
+        .contact-wrap {
+            background: linear-gradient(180deg, var(--card-bg), transparent);
+            border-radius: 60px; padding: 100px 5vw; border: 1px solid var(--border);
+            text-align: center; overflow: hidden; position: relative;
+        }
+        .mega-title { font-family: 'Syne'; font-size: clamp(3rem, 10vw, 8rem); font-weight: 800; line-height: 0.9; margin-bottom: 60px; text-transform: uppercase; }
+        .mega-title span { -webkit-text-stroke: 1px var(--text); color: transparent; transition: 0.5s; }
+        .mega-title:hover span { color: var(--text); -webkit-text-stroke: 0; }
         
-        .cv-item:hover .cv-role h3 { color: var(--text); transform: translateX(10px); }
-        .cv-item:hover .cv-company { color: var(--accent); opacity: 1; transform: translateX(10px); }
-
-        .cv-right { display: flex; align-items: center; gap: 40px; }
-        .cv-year { font-family: 'Inter'; font-weight: 600; font-size: 0.95rem; color: var(--text-dim); }
-        .fx-outbox { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.4s; transform: rotate(-45deg); }
-        .cv-item:hover .fx-outbox { background: var(--text); color: var(--bg); border-color: transparent; transform: rotate(0deg); }
-
-        /* --- BUTTON DOSSIER ANIMADO --- */
-        .btn { 
-            display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); 
-            padding: 22px 50px; border-radius: 100px; text-decoration: none; font-weight: 700; 
-            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 60px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;}
+        .contact-btn { 
+            padding: 40px; border: 1px solid var(--border); border-radius: 40px; 
+            text-decoration: none; color: var(--text); transition: 0.4s;
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
         }
-        .btn i { transition: transform 0.3s; }
-        .btn:hover { background: var(--accent); color: white; transform: translateY(-8px); box-shadow: 0 15px 40px rgba(255, 90, 0, 0.3); }
-        .btn:hover i { transform: translateY(4px); }
+        .contact-btn:hover { background: var(--text); color: var(--bg); transform: scale(1.02); }
+        .contact-btn i { font-size: 2rem; color: var(--accent); }
+        .contact-btn:hover i { color: var(--bg); }
 
-        /* --- CONTACT GRID --- */
-        .contact-card { background: var(--card-bg); border-radius: 40px; padding: 80px 5vw; border: 1px solid var(--border); }
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 40px;}
-        .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; border-top: 1px solid var(--border); pt: 40px; padding-top: 40px; }
-        .contact-col h4 { color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;}
-        .contact-col a { display: block; font-size: 1.3rem; color: var(--text); text-decoration: none; margin-bottom: 10px; opacity: 0.7; transition: 0.3s;}
-        .contact-col a:hover { opacity: 1; transform: translateX(5px); color: var(--accent);}
-
-        footer { padding: 80px 5vw; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; letter-spacing: 2px;}
+        #cursor-dot, #cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
+        #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        #cursor-ring { width: 40px; height: 40px; border: 1.5px solid var(--accent); border-radius: 50%; transition: width 0.3s, height 0.3s; }
+        .hovered #cursor-ring { width: 60px; height: 60px; background: rgba(255, 90, 0, 0.1); border-color: transparent; }
 
         @media (max-width: 1024px) {
-            .portfolio-bento, .bento-about, .skills-bento, .contact-links-grid { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+            .portfolio-bento, .skills-grid, .contact-grid { grid-template-columns: 1fr; display: flex; flex-direction: column; }
             .p-wide, .p-square { height: 400px; }
+            header { padding: 10px; }
+            .nav-links a { font-size: 0.6rem; padding: 8px; }
         }
     </style>
 </head>
@@ -208,15 +188,15 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- NAVBAR -->
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
-            <div class="nav-logo inter-hover">L|BIB</div>
+            <div class="nav-logo inter-hover" style="font-weight: 900;">L|B.</div>
             <nav class="nav-links">
-                <a href="#about" class="inter-hover lang-node" data-en="About me" data-es="Sobre mí">Sobre mí</a>
-                <a href="#work" class="inter-hover lang-node" data-en="Work" data-es="Portfolio">Portfolio</a>
-                <a href="#skills" class="inter-hover lang-node" data-en="Skills" data-es="Estudio">Estudio</a>
-                <a href="#cv" class="inter-hover lang-node" data-en="Experience" data-es="Trayectoria">Trayectoria</a>
+                <a href="#home" class="inter-hover lang-node" data-en="Home" data-es="Inicio">Inicio</a>
+                <a href="#work" class="inter-hover lang-node" data-en="Work" data-es="Proyectos">Proyectos</a>
+                <a href="#skills" class="inter-hover lang-node" data-en="Studio" data-es="Estudio">Estudio</a>
+                <a href="#cv" class="inter-hover lang-node" data-en="Resume" data-es="CV">CV</a>
+                <a href="#contact" class="inter-hover lang-node" data-en="Contact" data-es="Contacto">Contacto</a>
             </nav>
             <div class="tools-nav">
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
@@ -227,175 +207,174 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
-        <div data-aos="fade-up" data-aos-duration="1500">
+        <div data-aos="fade-up">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
                 <div class="status-tag">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                    <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para retos</span>
+                    <span class="lang-node" data-en="Open to work" data-es="Disponible">Disponible</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Profile /" data-es="Perfil /">Perfil /</h2>
-        <div class="bento-about">
-            <div class="bento-card" data-aos="fade-up">
-                <p class="about-text lang-node" 
-                   data-en="I am an industrial designer based in Valencia. My background covers three polytechnic universities, expanding my methodological flexibility. I work at the intersection of material aesthetics and viable manufacturing logic." 
-                   data-es="Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo. Mi paso por estudios previos de técnica y electricidad fundamentó mi ADN en una comprensión rigurosa del porqué detrás de la forma.">
-                   Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo. Mi paso por estudios previos de técnica y electricidad fundamentó mi ADN en una comprensión rigurosa del porqué detrás de la forma.
-                </p>
-            </div>
-            <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=800&q=80" alt="LUIS">
-            </div>
-        </div>
-    </section>
-
-    <!-- WORK -->
+    <!-- TRABAJOS (6 PROYECTOS) -->
     <section id="work">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
+        <h2 class="section-title lang-node" data-en="Selected Projects /" data-es="Proyectos Selección /">Proyectos Selección /</h2>
         <div class="portfolio-bento">
+            <!-- 1 -->
             <div class="p-card p-wide inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3>ALPHA</h3><p>Diseño Estructural Técnico</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info"><h3>ALPHA UNIT</h3><p>Ingeniería de Producto</p></div>
             </div>
+            <!-- 2 -->
             <div class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3>EGO</h3><p>Mobiliario / Objeto</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info"><h3>EGO CHAIR</h3><p>Mobiliario Urbano</p></div>
             </div>
+            <!-- 3 (Nuevo) -->
             <div class="p-card p-square inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3>HI-FI</h3><p>Consumer Electronics</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info"><h3>ORBIT STACK</h3><p>Tecnología modular</p></div>
             </div>
+            <!-- 4 -->
             <div class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3>ION CORE</h3><p>Geometría Orgánica</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info"><h3>ION CORE</h3><p>Estructuras Class-A</p></div>
+            </div>
+            <!-- 5 (Nuevo) -->
+            <div class="p-card p-wide inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1542128962-9d50ad7bf714?auto=format&w=1200&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info"><h3>VEKTOR 01</h3><p>Mecánica Cinética</p></div>
+            </div>
+            <!-- 6 -->
+            <div class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
+                <div class="p-overlay"></div>
+                <div class="p-info"><h3>HIFI BOX</h3><p>Acústica Industrial</p></div>
             </div>
         </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- ESTUDIO / SKILLS -->
     <section id="skills">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Infrastructure /" data-es="Infraestructura /">Infraestructura /</h2>
-        <div class="skills-bento">
-            <div class="bento-card inter-hover" data-aos="fade-up">
+        <h2 class="section-title lang-node" data-en="Methodology /" data-es="Metodología /">Metodología /</h2>
+        <div class="skills-grid">
+            <div class="skill-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="Parametric modeling" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
-                <p class="about-text" style="font-size:0.9rem">Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos y tolerancias.</p>
+                <h3 style="margin-bottom: 10px; font-weight: 800;">CAD Paramétrico</h3>
+                <p class="lang-node" style="color:var(--text-dim);" data-es="Desarrollo técnico de ensambles complejos con SolidWorks asegurando la integridad mecánica." data-en="Technical development of complex assemblies with SolidWorks ensuring mechanical integrity.">Desarrollo técnico de ensambles complejos con SolidWorks asegurando la integridad mecánica.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="50">
+            <div class="skill-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="DFM logic" data-es="Matricería & D.F.M">Matricería & D.F.M</h3>
-                <p class="about-text" style="font-size:0.9rem">Pensamiento orientado a fabricación. Optimización de moldes e inyección de plásticos.</p>
+                <h3 style="margin-bottom: 10px; font-weight: 800;">Optimización DFM</h3>
+                <p class="lang-node" style="color:var(--text-dim);" data-es="Diseño pensando en fabricación y moldes. Reducción de costes y viabilidad industrial." data-en="Design for manufacturing. Cost reduction and industrial feasibility focus.">Diseño pensando en fabricación y moldes. Reducción de costes y viabilidad industrial.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="Class-A Surfaces" data-es="Geometría Class-A">Geometría Class-A</h3>
-                <p class="about-text" style="font-size:0.9rem">Dominio de continuidad de superficies y mapeado lumínico para acabados de alta gama.</p>
-            </div>
-            <div class="bento-card inter-hover" data-aos="fade-up">
-                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="Visual Rendering" data-es="Representación CGI">Representación CGI</h3>
-                <p class="about-text" style="font-size:0.9rem">Keyshot avanzado. Control C.M.F absoluto para visualización fotorrealista de materiales.</p>
-            </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="50">
-                <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="Ergonomic Fact" data-es="Ergonomía Real">Ergonomía Real</h3>
-                <p class="about-text" style="font-size:0.9rem">Estudio riguroso empírico en relación humana para lograr las iteraciones métricas justas.</p>
-            </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3 class="lang-node" style="margin-bottom:10px" data-en="Fast Prototyping" data-es="Mecanización Rápida">Mecanización Rápida</h3>
-                <p class="about-text" style="font-size:0.9rem">Validación tangible con CNC e impresión 3D para testeo de volumen y encajes mecánicos.</p>
+            <div class="skill-card inter-hover" data-aos="fade-up" data-aos-delay="200">
+                <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3 style="margin-bottom: 10px; font-weight: 800;">Visualización CGI</h3>
+                <p class="lang-node" style="color:var(--text-dim);" data-es="Representación fotorrealista para pre-validación de texturas y materiales (CMF)." data-en="Photorealistic rendering for pre-validation of textures and materials (CMF).">Representación fotorrealista para pre-validación de texturas y materiales (CMF).</p>
             </div>
         </div>
     </section>
 
     <!-- CV -->
     <section id="cv">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
+        <h2 class="section-title lang-node" data-en="Experience /" data-es="Trayectoria /">Trayectoria /</h2>
         <div class="cv-wrapper">
             <div class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Product Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
-                    <div class="cv-company">Industrial Core Studio • 2024 - Act</div>
+                    <h3 class="lang-node" data-en="Product Designer Lead" data-es="Líder de Diseño">Líder de Diseño</h3>
+                    <p class="cv-company">Industrial Core • Valencia • 2024</p>
                 </div>
-                <div class="cv-right"><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="cv-year">Hoy</div>
             </div>
             <div class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Senior Designer" data-es="Diseñador Equipamiento">Diseñador Equipamiento</h3>
-                    <div class="cv-company">Prototyping Labs • 2022 - 2024</div>
+                    <h3 class="lang-node" data-en="Technical Specialist" data-es="Especialista Técnico">Especialista Técnico</h3>
+                    <p class="cv-company">Prototyping Labs • 2022</p>
                 </div>
-                <div class="cv-right"><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="cv-year">24 Meses</div>
             </div>
             <div class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Tech Specialist" data-es="Especialista Técnico">Especialista Técnico</h3>
-                    <div class="cv-company">Bionic Solutions • 2021 - 2022</div>
+                    <h3 class="lang-node" data-en="Degree" data-es="Graduado">Diseño Industrial</h3>
+                    <p class="cv-company">Universidad Politécnica • UPV • 2016 - 2021</p>
                 </div>
-                <div class="cv-right"><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
-            </div>
-            <div class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="Degree" data-es="Diseño Industrial (Grd)">Diseño Industrial (Grd)</h3>
-                    <div class="cv-company">UPV Valencia / Milán • 2016 - 2021</div>
-                </div>
-                <div class="cv-right"><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
-            </div>
-            <!-- BARRA EXTRA -->
-            <div class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="Early Internship" data-es="Asistente Modelado">Asistente Modelado</h3>
-                    <div class="cv-company">Technical Workshop Series • 2018</div>
-                </div>
-                <div class="cv-right"><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="cv-year">Grado</div>
             </div>
         </div>
-        <a href="#" class="btn inter-hover" data-aos="zoom-in">
-            <i class="fa-solid fa-arrow-down"></i> <span class="lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span>
+        <a href="#" class="btn-download inter-hover" data-aos="zoom-in">
+            <i class="fa-solid fa-arrow-down-long"></i>
+            <span class="lang-node" data-es="Descargar CV / Portfolio (PDF)" data-en="Download CV / Portfolio (PDF)">Descargar CV / Portfolio (PDF)</span>
         </a>
     </section>
 
-    <!-- CONTACT -->
+    <!-- CONTACTO REDISEÑADO -->
     <section id="contact">
-        <div class="contact-card inter-hover" data-aos="fade-up">
-            <h2 class="mega-text lang-node" data-en="Ideas with<br>WEIGHT." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
-            <div class="contact-links-grid">
-                <div class="contact-col">
-                    <h4>Bandeja Entrada</h4>
-                    <a href="mailto:hola@luisblasco.com">hola@luisblasco.com</a>
-                </div>
-                <div class="contact-col">
-                    <h4>LinkedIn</h4>
-                    <a href="#">Blasco-Ibáñez Lab</a>
-                </div>
-                <div class="contact-col">
-                    <h4>Ubicación</h4>
-                    <a href="#">Valencia, España.</a>
-                </div>
+        <div class="contact-wrap inter-hover" data-aos="fade-up">
+            <h2 class="mega-title">LET'S <span>WORK</span> TOGETHER.</h2>
+            <div class="contact-grid">
+                <a href="mailto:hola@luisblasco.com" class="contact-btn">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Escríbeme</span>
+                    <small>hola@luisblasco.com</small>
+                </a>
+                <a href="#" class="contact-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Telegram</span>
+                    <small>@luisblasco_design</small>
+                </a>
+                <a href="#" class="contact-btn">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                    <small>conecta conmigo</small>
+                </a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="nav-logo" style="margin-bottom:10px">L|BIB</div>
-        <div>DESIGN SYSTEM © 2026. LUIS BLASCO-IBÁÑEZ.</div>
+    <footer style="padding: 60px 5vw; text-align: center; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">
+        Luis Blasco-Ibáñez — Diseño Industrial Valencia — 2026
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
+        // NAVEGACIÓN ACTIVA AUTOMÁTICA
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) current = section.getAttribute("id");
+            });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) link.classList.add("active");
+            });
+        });
+
+        // NAVBAR SYNC
+        let lastScroll = 0;
+        window.addEventListener("scroll", () => {
+            const st = pageYOffset;
+            const navbar = document.getElementById("navbar");
+            if (st > lastScroll && st > 100) navbar.classList.add("ui-hidden");
+            else navbar.classList.remove("ui-hidden");
+            lastScroll = st;
+        });
+
+        // THEME & LANG
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
@@ -403,49 +382,36 @@
         });
 
         const btnLang = document.getElementById("lang-toggle");
-        let langActive = "es";
+        let activeLang = "es";
         btnLang.addEventListener("click", () => {
-            const domElements = document.querySelectorAll(".lang-node");
-            domElements.forEach(node => node.classList.add("lang-animating"));
+            const nodes = document.querySelectorAll(".lang-node");
+            nodes.forEach(n => n.classList.add("lang-animating"));
             setTimeout(() => {
-                langActive = langActive === "es" ? "en" : "es"; 
-                domElements.forEach(node => {
-                    const text = node.getAttribute(`data-${langActive}`);
-                    if (text) node.innerHTML = text;
-                    node.classList.remove("lang-animating");
+                activeLang = activeLang === "es" ? "en" : "es";
+                nodes.forEach(n => {
+                    n.innerHTML = n.getAttribute(`data-${activeLang}`);
+                    n.classList.remove("lang-animating");
                 });
-                btnLang.textContent = langActive === "es" ? "EN" : "ES"; 
+                btnLang.textContent = activeLang.toUpperCase();
             }, 300);
-        });
-
-        // UI SYNC SCROLL
-        let lastScrollTop = 0;
-        const nav = document.getElementById("navbar");
-        window.addEventListener("scroll", () => {
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-            if (st > lastScrollTop && st > 100) nav.classList.add("ui-hidden");
-            else nav.classList.remove("ui-hidden");
-            lastScrollTop = st;
         });
 
         // CURSOR
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mx = -100, my = -100, rx = -100, ry = -100;
-        window.addEventListener("mousemove", (e) => { 
-            mx = e.clientX; my = e.clientY; 
-            dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
-        });
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        window.addEventListener("mousemove", (e) => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px, ${my}px)`; });
         function animate() {
-            rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+            rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+            ring.style.transform = `translate(${rx-16}px, ${ry-16}px)`;
             requestAnimationFrame(animate);
         }
         animate();
 
-        document.querySelectorAll('.inter-hover, a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
+        document.querySelectorAll(".inter-hover, a, button").forEach(el => {
+            el.addEventListener("mouseenter", () => document.body.classList.add("hovered"));
+            el.addEventListener("mouseleave", () => document.body.classList.remove("hovered"));
         });
     </script>
 </body>
