@@ -184,7 +184,7 @@
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
         /* =======================================================
-           NUEVO SISTEMA TIMELINE (ESTILO ACETERNITY)
+           TIMELINE LIMPIA Y LINEAL (SIN STICKY, ALINEACIÓN PERFECTA)
            ======================================================= */
         .timeline-container {
             position: relative;
@@ -193,10 +193,9 @@
             padding-bottom: 60px;
         }
 
-        /* Líneas verticales */
         .timeline-line-wrapper {
             position: absolute;
-            left: 38px; /* Offset fijo a la izquierda */
+            left: 38px; 
             top: 0;
             bottom: 0;
             width: 2px;
@@ -216,31 +215,30 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Cada bloque de contenido */
+        /* Contenedor del item: Alineación en la parte superior */
         .timeline-item {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding-top: 60px;
+            padding-top: 40px;
+            padding-bottom: 20px;
             position: relative;
         }
 
-        /* Columna Izquierda (Sticky) */
+        /* Columna Izquierda: Punto y Fecha */
         .timeline-left {
-            position: sticky;
-            top: 150px;
+            position: relative;
             align-self: flex-start;
             width: 100%;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Clave para alinear arriba */
             z-index: 40;
         }
 
-        /* El punto centrado sobre la línea */
         .timeline-dot-wrapper {
             position: absolute;
             left: 20px; 
-            top: -2px; 
+            top: 0; /* Punto de anclaje inicial idéntico */
             width: 38px;
             height: 38px;
             border-radius: 50%;
@@ -259,55 +257,48 @@
             transition: all 0.3s ease;
         }
 
-        .timeline-year-desktop {
-            display: none;
-            font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
+        .timeline-year {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15rem; /* Fecha mucho más pequeña y sutil */
+            font-weight: 600;
             color: var(--text-dim);
-            padding-left: 90px;
+            padding-left: 80px;
+            margin: 0;
+            /* La magia: Comparte exactamente la misma altura y centrado que el punto */
+            line-height: 38px; 
             transition: color 0.3s;
-            letter-spacing: -1px;
         }
 
-        /* Columna Derecha (Contenido) */
+        /* Columna Derecha: Contenido */
         .timeline-right {
             position: relative;
-            padding-left: 90px;
+            padding-left: 80px;
             padding-right: 20px;
             width: 100%;
-            margin-top: -20px;
-        }
-
-        .timeline-year-mobile {
-            display: block;
-            font-family: 'Syne', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-dim);
-            margin-bottom: 20px;
+            margin-top: 5px; /* Separacion en movil de la fecha */
         }
 
         .timeline-role {
             font-family: 'Syne', sans-serif;
-            font-size: 2.2rem;
+            font-size: 1.5rem; /* Título equilibrado, no enorme */
             font-weight: 700;
             color: var(--text);
             letter-spacing: -0.5px;
-            margin-bottom: 5px;
-            line-height: 1.1;
+            margin: 0 0 5px 0;
+            /* Se alinea perfectamente con la fecha y el punto porque comparten este eje horizontal */
+            line-height: 38px; 
         }
 
         .timeline-company {
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--accent);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 500;
         }
 
         .timeline-desc {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--text-dim);
             line-height: 1.6;
             max-width: 600px;
@@ -320,16 +311,15 @@
             box-shadow: 0 0 15px var(--accent-glow);
             border-color: var(--accent);
         }
-        .timeline-item:hover .timeline-year-desktop {
+        .timeline-item:hover .timeline-year {
             color: var(--text);
         }
 
+        /* Responsividad: Estructura en línea en Desktop */
         @media (min-width: 768px) {
-            .timeline-item { flex-direction: row; padding-top: 120px; gap: 40px;}
-            .timeline-left { width: 35%; max-width: 400px; }
-            .timeline-right { width: 65%; padding-left: 0; margin-top: 0;}
-            .timeline-year-desktop { display: block; }
-            .timeline-year-mobile { display: none; }
+            .timeline-item { flex-direction: row; padding-top: 50px; padding-bottom: 30px; gap: 0; align-items: flex-start;}
+            .timeline-left { width: 30%; max-width: 250px; margin-bottom: 0;}
+            .timeline-right { width: 70%; padding-left: 20px; margin-top: 0;}
         }
 
         /* --- ADAPTACIÓN ESTILO "FLOW BUTTON" PARA DESCARGA CV --- */
@@ -575,82 +565,70 @@
         </div>
     </section>
 
-    <!-- TIMELINE SECTION SUSTITUYENDO AL CV ACORDEÓN -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
         <div class="timeline-container" id="timeline-container">
             
-            <!-- Barra de progreso de scroll -->
             <div class="timeline-line-wrapper">
                 <div class="timeline-progress" id="timeline-progress"></div>
             </div>
 
-            <!-- ITEM 1 -->
             <div class="timeline-item inter-hover" data-aos="fade-up">
                 <div class="timeline-left">
                     <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                    <h3 class="timeline-year-desktop">2024 — HOY</h3>
+                    <h3 class="timeline-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</h3>
                 </div>
                 <div class="timeline-right">
-                    <h3 class="timeline-year-mobile">2024 — HOY</h3>
                     <h3 class="timeline-role lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
                     <p class="timeline-company lang-node" data-en="Industrial Core Studio" data-es="Industrial Core Studio">Industrial Core Studio</p>
                     <p class="timeline-desc lang-node" data-en="Leadership of design processes, parametric flow optimization, and overall technical management of physical product development." data-es="Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.">Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.</p>
                 </div>
             </div>
 
-            <!-- ITEM 2 -->
             <div class="timeline-item inter-hover" data-aos="fade-up">
                 <div class="timeline-left">
                     <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                    <h3 class="timeline-year-desktop">2022 — 2024</h3>
+                    <h3 class="timeline-year lang-node" data-en="2022 — 2024" data-es="2022 — 2024">2022 — 2024</h3>
                 </div>
                 <div class="timeline-right">
-                    <h3 class="timeline-year-mobile">2022 — 2024</h3>
                     <h3 class="timeline-role lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
                     <p class="timeline-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Parametrización y volúmenes">Prototyping Labs C.A • Parametrización y volúmenes</p>
                     <p class="timeline-desc lang-node" data-en="Deep dive into 3D modeling, rigorous assembly validation, and setting precise dimensional constraints for CNC manufacturing." data-es="Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.">Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.</p>
                 </div>
             </div>
 
-            <!-- ITEM 3 -->
             <div class="timeline-item inter-hover" data-aos="fade-up">
                 <div class="timeline-left">
                     <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                    <h3 class="timeline-year-desktop">2021 — 2022</h3>
+                    <h3 class="timeline-year lang-node" data-en="2021 — 2022" data-es="2021 — 2022">2021 — 2022</h3>
                 </div>
                 <div class="timeline-right">
-                    <h3 class="timeline-year-mobile">2021 — 2022</h3>
                     <h3 class="timeline-role lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
                     <p class="timeline-company lang-node" data-en="Bionic Solutions • Enclosing fitting" data-es="Bionic Solutions • Ingeniería interna empacada">Bionic Solutions • Ingeniería interna empacada</p>
                     <p class="timeline-desc lang-node" data-en="Design and spatial packaging of electronic circuits inside injection-molded casings, guaranteeing heat flow and structural integrity." data-es="Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.">Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.</p>
                 </div>
             </div>
 
-            <!-- ITEM 4 -->
             <div class="timeline-item inter-hover" data-aos="fade-up">
                 <div class="timeline-left">
                     <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                    <h3 class="timeline-year-desktop">2020 — 2021</h3>
+                    <h3 class="timeline-year lang-node" data-en="2020 — 2021" data-es="2020 — 2021">2020 — 2021</h3>
                 </div>
                 <div class="timeline-right">
-                    <h3 class="timeline-year-mobile">2020 — 2021</h3>
                     <h3 class="timeline-role lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
                     <p class="timeline-company lang-node" data-en="Polytechnic Inst. • Advanced Geometries" data-es="Instituto Politécnico • Geometrías Avanzadas">Instituto Politécnico • Geometrías Avanzadas</p>
                     <p class="timeline-desc lang-node" data-en="Specialization in Class-A surfacing, material resilience mapping and high-end digital simulations for production lines." data-es="Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.">Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.</p>
                 </div>
             </div>
 
-            <!-- ITEM 5 -->
             <div class="timeline-item inter-hover" data-aos="fade-up">
                 <div class="timeline-left">
                     <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                    <h3 class="timeline-year-desktop">2016 — 2020</h3>
+                    <h3 class="timeline-year lang-node" data-en="2016 — 2020" data-es="2016 — 2020">2016 — 2020</h3>
                 </div>
                 <div class="timeline-right">
-                    <h3 class="timeline-year-mobile">2016 — 2020</h3>
-                    <h3 class="timeline-role lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
+                    <h3 class="timeline-role lang-node" data-en="B.S. Ind. Design Degree" data-es="Graduado Diseño Industrial">Graduado Diseño Industrial</h3>
                     <p class="timeline-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar y académico.">Curriculum de cruce interdisciplinar y académico.</p>
                     <p class="timeline-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
                 </div>
@@ -658,7 +636,6 @@
             
         </div>
         
-        <!-- IMPLEMENTACIÓN DEL NUEVO BOTÓN FLOW ADAPTADO -->
         <div style="padding-top: 20px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
                 <i class="fa-solid fa-arrow-right flow-arr-left"></i>
@@ -746,7 +723,6 @@
             lastScrollTop = scrollTop;
         });
 
-        // ------------------ EXTREME CURSOR FLOW SCRIPT DIRECT GPU
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
@@ -771,7 +747,6 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // ------------------ TIMELINE PROGRESS LOGIC (Framer Motion Replicate)
         const updateTimeline = () => {
             const container = document.getElementById('timeline-container');
             const progress = document.getElementById('timeline-progress');
@@ -779,8 +754,6 @@
             
             const rect = container.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            
-            // Empieza a llenarse cuando la parte superior de la timeline está a mitad de la pantalla
             const viewCenter = windowHeight / 2;
             
             if (rect.top > viewCenter) {
@@ -788,7 +761,6 @@
                 progress.style.opacity = '0';
             } else {
                 let height = viewCenter - rect.top;
-                // Topeamos la altura máxima al tamaño del contenedor
                 height = Math.min(height, rect.height);
                 progress.style.height = `${height}px`;
                 progress.style.opacity = '1';
@@ -797,7 +769,7 @@
 
         window.addEventListener('scroll', updateTimeline);
         window.addEventListener('resize', updateTimeline);
-        updateTimeline(); // Init call
+        updateTimeline(); 
     </script>
 </body>
 </html>
