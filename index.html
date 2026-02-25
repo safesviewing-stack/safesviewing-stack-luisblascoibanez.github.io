@@ -143,7 +143,7 @@
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
         .hero-text-block { margin-top: 5vh; }
-        /* Título Principal Actualizado. Escalabilidad corregida y preparada para soportar nombres dobles/triple sin desbordar los laterales */
+        /* Título Principal Actualizado a tres líneas perfectas */
         .hero h1 { 
             font-family: 'Syne', sans-serif; 
             font-size: clamp(1.75rem, 6.5vw, 7.5rem); 
@@ -167,12 +167,12 @@
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- MÓDULO UNIFICADO DEL PORTFOLIO GRID (DIFUSIÓN EXTRA AL AÑADIR MARGIN) --- */
+        /* --- MÓDULO UNIFICADO DEL PORTFOLIO GRID EQUITATIVO --- */
         .portfolio-grid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
             gap: 25px; 
-            margin-top: 40px; /* <- Oxígeno ampliado sobre títulos añadida dinamicamente   */
+            margin-top: 40px; 
         }
 
         .p-card { 
@@ -218,7 +218,7 @@
 
 
         /* =======================================================
-           EL CURRÍCULUM: FORMAL, MINIMALISTA (Grid Base Clean Editor.) 
+           EL CURRÍCULUM: FORMAL Y MINIMALISTA 
            ======================================================= */
         
         .cv-list {
@@ -283,7 +283,7 @@
         .cv-row:hover .cv-year { color: var(--text); }
 
 
-        /* --- BOTÓN DESCARGA C.V INTOCABLE --- */
+        /* --- BOTÓN DESCARGA C.V --- */
         .btn { 
             position: relative;
             display: inline-flex;
@@ -334,80 +334,24 @@
         .btn:hover .flow-arr-right { right: -25%; color: #ffffff; }
 
 
-        /* =======================================================
-           REDISEÑO EXCLUSIVO 'CONTACTO' ALTO-PERFORMANCE
-           MANTENIENDO EFECTO CINTA E HIGIENE DIGITAL EDITORIAL 
-           ======================================================= */
+        /* --- RESTAURADO: CONTACT ESTUDIO VERTICAL BENTO (Como lo tenías originalmente) --- */
+        .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
+        .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
         
-        /* Contención Contact Wrapper Global Clean */
-        .contact-wrapper {
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+        .contact-col h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--accent); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.9;}
+        .contact-col a { display: block; font-size: 1.5rem; color: var(--text); text-decoration: none; margin-bottom: 8px; transition: all 0.3s; opacity: 0.7;}
+        .contact-col a:hover { opacity: 1; color: var(--accent); transform: translateX(3px);}
 
-        .contact-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 55px 15px; border-bottom: 1px solid var(--border);
-            text-decoration: none; position: relative; overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); cursor: none;
-        }
-
-        .contact-row::before {
-            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
-            background: linear-gradient(90deg, rgba(255, 90, 0, 0.08) 0%, transparent 100%);
-            z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
-        }
-
-        .contact-row::after {
-            content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
-            background: var(--accent); z-index: 2; transition: height 0.4s ease;
-        }
-
-        .contact-row:hover { padding-left: 50px; border-bottom-color: transparent;}
-        .contact-row:hover::before { width: 100%; opacity: 1; }
-        .contact-row:hover::after { height: 100%; }
-
-        .c-left {
-            display: flex; align-items: center; gap: 70px; z-index: 1;
-        }
-
-        .c-label {
-            font-family: 'Syne', sans-serif; font-size: 1rem; color: var(--accent);
-            font-weight: 700; width: 120px; letter-spacing: 2px;
-        }
-
-        .c-text {
-            font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); 
-            font-weight: 700; color: var(--text-dim); transition: all 0.4s;
-            letter-spacing: -1.5px;
-        }
-
-        /* Modulo burbuja direccional derecha identica en fluidez en C.V. Tracker  */
-        .c-icon-wrap {
-            display: flex; justify-content: center; align-items: center; 
-            width: 55px; height: 55px; border-radius: 50%; border: 1px solid var(--border); 
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-            color: var(--text-dim); transform: rotate(-45deg); z-index: 1;
-        }
-
-        /* Comportamiento Activo Reactivo Hover - Colisiones! */
-        .contact-row:hover .c-text { color: var(--text); transform: translateX(10px); }
-        .contact-row:hover .c-icon-wrap { 
-            background: var(--text); border-color: transparent; color: var(--bg); transform: rotate(0deg) scale(1.08); 
-        }
-
-        /* Limpiado Céntrico Apaisado Inferior del Grid  */
         footer { 
             padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; 
-            font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
+            border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
         }
         footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
         footer a:hover {color: var(--accent);}
 
 
-        /* Escaladores Celular General Resumidos !   */
+        /* Reposicionamiento Responsive */
         @media (max-width: 1024px) {
             .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
             .p-card { height: 420px; }
@@ -417,14 +361,9 @@
             
             .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
             .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
-            
-            /* Ruptura lateral Flex Bloque al apilar listado superior -> TextContacto abajo   */
-            .c-left { flex-direction: column; gap: 5px; align-items: flex-start; }
-            .c-label { width: auto;}
-            .c-text { letter-spacing:-1px;} 
-            
-            .contact-row { padding: 45px 5px;}
-            .contact-row:hover { padding-left: 20px;}
+
+            /* Adaptación del Bento grande recuperado */
+            .contact-links-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -433,6 +372,9 @@
             .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
             .p-info { left: 25px; right: 25px;} 
             .cv-row:hover { padding-left: 20px; } 
+
+            /* Adaptación de bento en móviles recuperada */
+            .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
     </style>
 </head>
@@ -460,7 +402,7 @@
         </header>
     </div>
 
-    <!-- TÍTULO EN LÍNEAS TIPO TRAMA INICIAL (Nuevas reglas Clam responsivas para absorver Bloque Nominal ) -->
+    <!-- TÍTULO EN TRES LÍNEAS -->
     <section class="hero" id="home">
         <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
             <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
@@ -494,7 +436,7 @@
         </div>
     </section>
 
-    <!-- PANNEL CORTES GRID EQUALIZADOS CON BLOQUEO TXT TITTLE SOBRE TITTLE Y AMPLIADO EL EJE HORIZONTAL TITLE Y LISTADO:  -->
+    <!-- PANNEL CORTES GRID EQUALIZADOS (CON MAYOR MARGEN ARRIBA DE PROYECTOS) -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
         
@@ -609,7 +551,7 @@
         </div>
     </section>
 
-    <!-- LISTADO CV PURIFICADO -->
+    <!-- LISTADO CV PURIFICADO MINIMALISTA -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
@@ -668,40 +610,32 @@
         </div>
     </section>
 
-    <!-- TABLÓN SECTORIZADO ORDEN DIRECTO (SÓLO 3 LÍNEAS VINCULANTES + BOTONES ENORMES!)  -->
-    <section id="contact" style="padding-bottom: 20px;">
-        
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Connect /" data-es="Contacto /">Contacto /</h2>
-        
-        <div class="contact-wrapper" data-aos="fade-up">
-            <!-- Row 1 -->
-            <a href="mailto:hola@luisblasco.com" class="contact-row inter-hover">
-                <div class="c-left">
-                    <span class="c-label lang-node" data-en="EMAIL HUB" data-es="CORREO / BANDEJA">CORREO / BANDEJA</span>
-                    <span class="c-text">hola@luisblasco.com</span>
-                </div>
-                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+    <!-- ESTILO BENTO RECUPERADO ORIGINAL: 'CONTACTO' -->
+    <section id="contact">
+        <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="contact-top-module">
+                <h2 class="mega-text lang-node" data-en="MATERIAL<br>REALITIES." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
+                <p class="about-text lang-node" style="max-width: 500px;" data-en="Producing strictly logical artifacts bounded to deep geometrical aesthetic truth." data-es="Formulación visual para industria humana, amparada en metodologías viables que operan sobre piezas táctiles funcionales y puristas de nuestra realidad local física de campo final testada de manera real absoluta total del marco ambiental y arquitectónico puro de contorno perimetral material humano verdadero del siglo material y real absoluto del desarrollo material objetivo.">Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales y puristas pensadas siempre en producto escalable final, aportando veracidad matérica real al prototipado local europeo actual y social.</p>
+            </div>
             
-            <!-- Row 2 -->
-            <a href="#" target="_blank" class="contact-row inter-hover">
-                <div class="c-left">
-                    <span class="c-label lang-node" data-en="NETWORK PROFILE" data-es="SOPORTE DIGITAL">SOPORTE DIGITAL</span>
-                    <span class="c-text">LinkedIn Profile Base.</span>
+            <div class="contact-links-grid">
+                <div class="contact-col">
+                    <h4 class="lang-node" data-en="EMAIL HUB" data-es="BANDEJA ENTRADA">BANDEJA ENTRADA</h4>
+                    <a href="mailto:luisbib@mail.com" class="inter-hover">hola@luisblasco.com</a>
+                    <a href="mailto:estudio@mail.com" class="inter-hover" style="font-size:1.05rem; margin-top:2px;">info@estudiocore.com</a>
                 </div>
-                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
-            </a>
-            
-            <!-- Row 3 -->
-            <a href="tel:+34000000000" class="contact-row inter-hover">
-                <div class="c-left">
-                    <span class="c-label lang-node" data-en="VOICE COM." data-es="CENTRAL MÓVIL">CENTRAL MÓVIL</span>
-                    <span class="c-text">+34 600 000 000</span>
+                <div class="contact-col">
+                    <h4 class="lang-node" data-en="PORTFOLIO LINKS" data-es="REFERENCIA DIGITAL">REFERENCIA DIGITAL</h4>
+                    <a href="#" class="inter-hover">LinkedIn CMF. <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
+                    <a href="#" class="inter-hover">Behance Labs <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
                 </div>
-                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+                <div class="contact-col">
+                    <h4 class="lang-node" data-en="OPERATION BASE" data-es="UBICACIÓN / TEL">UBICACIÓN / TEL</h4>
+                    <a href="#" class="inter-hover" style="font-size:1.1rem; line-height: 1.45; margin-bottom: 25px;">Core Diseño Central,<br>46002 Valencia, España.</a>
+                    <a href="#" class="inter-hover" style="font-family:'Syne';">+34 (TLF Línea directa)</a>
+                </div>
+            </div>
         </div>
-
     </section>
 
     <!-- Limpio cimiento de clausura footer page -->
