@@ -89,16 +89,15 @@
         }
         .hovered-element #cursor-dot { opacity: 0; }
 
-        /* --- TWEAK EXTERNO -> STATUS BAR CREADO EN EJE Y = ARRIBA/DCHA  --- */
+        /* --- ETIQUETA STATUS INLINE  --- */
         .status-tag {
-            position: fixed; top: 30px; right: 40px; 
-            display: flex; align-items: center; gap: 12px;
+            display: inline-flex; align-items: center; gap: 12px; width: max-content;
             font-size: 0.75rem; color: var(--text); font-weight: 600; 
             text-transform: uppercase; letter-spacing: 0.5px;
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 14px 25px; border-radius: 100px;
+            padding: 10px 20px; border-radius: 100px;
             border: 1px solid var(--border);
-            z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 8px; height: 8px; }
@@ -153,7 +152,7 @@
             line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase;
         }
         
-        .subtitle-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 25px; width: 100%; max-width: 90%; }
+        .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
@@ -283,11 +282,8 @@
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
-            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 10px; }
+            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
             
-            /* Posiciona la etiqueta que flota aislada si hay un viewport vertical celular estrecho  */
-            .status-tag { top: auto; bottom: 20px; right: auto; left: 5vw; border-radius: 12px;}
-
             .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
             .cv-item:hover { padding-left: 20px;}
             .cv-right {width: 100%; justify-content: space-between;}
@@ -299,12 +295,6 @@
 
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
-
-    <!-- UI LAYER 1 (La Etiqueta Puntera Libre Status, unificada con comportamiento en SCROLL GLOBAL.)  -->
-    <div class="status-tag inter-hover ui-sync">
-        <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-        <span class="lang-node" data-en="Available / Book" data-es="Disponible para retos">Disponible para nuevos retos</span>
-    </div>
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
@@ -331,7 +321,12 @@
             
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
-                <!-- Retirado de aquí "Disponibles". A nivel logistico vive a cielo superior permanente ahora.  -->
+                
+                <!-- Etiqueta unificada en la misma línea del subtítulo -->
+                <div class="status-tag inter-hover">
+                    <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
+                    <span class="lang-node" data-en="Available / Book" data-es="Disponible para retos">Disponible para nuevos retos</span>
+                </div>
             </div>
         </div>
     </section>
@@ -395,7 +390,6 @@
         </div>
     </section>
 
-    <!-- MATRIX EXPANDIDO SEIS MÓDULOS INFO. ESTUDIO INTERIOR HABILIDADES -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Skills Base /" data-es="Infraestructura /">Infraestructura /</h2>
         <div class="skills-bento">
@@ -432,7 +426,6 @@
         </div>
     </section>
 
-    <!-- MATRIX EXPERIENCA TÁCTICA ACORDEON EXTREMO: -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         <div class="cv-wrapper">
@@ -470,7 +463,6 @@
 
     <section id="contact">
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
-            <!-- Bloque superior / Split line modern grid   -->
             <div class="contact-top-module">
                 <h2 class="mega-text lang-node" data-en="MATERIAL<br>REALITIES." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
                 <p class="about-text lang-node" style="max-width: 500px;" data-en="Producing strictly logical artifacts bounded to deep geometrical aesthetic truth." data-es="Formulación visual para industria humana, amparada en metodologías viables que operan sobre piezas táctiles funcionales y puristas de nuestra realidad local física de campo final testada de manera real absoluta total del marco ambiental y arquitectónico puro de contorno perimetral material humano verdadero del siglo material y real absoluto del desarrollo material objetivo.">Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales y puristas pensadas siempre en producto escalable final, aportando veracidad matérica real al prototipado local europeo actual y social.</p>
@@ -496,7 +488,6 @@
         </div>
     </section>
 
-    <!-- EL EJE DEL FINAL DEL DOSIER : 100% CÉNTRICO Y VERTICAL ORGANIZATIVO -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
         <div>DESIGN FRAMEWORK SYSTEM © 2026.</div>
@@ -508,7 +499,6 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS CORE Y DE REDISTRIBUCIÓN Y CAMPO (Mueve etiquetas status arriba sincronizadas!)-->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 50 });
@@ -519,15 +509,12 @@
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // ------------------ SWITCH SUAVE (BLUR SNAP CROSSFADE) I18N
         const btnLang = document.getElementById("lang-toggle");
         let langActive = "es";
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
-            // Efecto Hundido Desenfocado Temporal sin que despararezca bloque material:
             domElements.forEach(node => node.classList.add("lang-animating"));
             
-            // Intervalo preciso de remplazo invisible antes de la vuelta física Bézier a pos1.
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es"; 
                 domElements.forEach(node => {
@@ -539,13 +526,11 @@
             }, 250); 
         });
 
-        // ------------------ SCROLL LISTENER MASIVO SINCRONO UI LAYER UP
         const uiLayerSyncs = document.querySelectorAll(".ui-sync");
         let lastScrollTop = 0;
         window.addEventListener("scroll", () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop && scrollTop > 150) {
-                // Guarda etiqueta superior lateral asiatico junto con modulo frontal:
                 uiLayerSyncs.forEach(layer => layer.classList.add("ui-hidden"));
             } else {
                 uiLayerSyncs.forEach(layer => layer.classList.remove("ui-hidden"));
@@ -553,7 +538,6 @@
             lastScrollTop = scrollTop;
         });
 
-        // ------------------ EXTREME CURSOR FLOW SCRIPT DIRECT GPU L-NODE LOGIC
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
