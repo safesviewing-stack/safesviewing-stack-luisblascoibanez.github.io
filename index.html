@@ -143,9 +143,14 @@
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
         .hero-text-block { margin-top: 5vh; }
+        /* Título Principal Actualizado. Escalabilidad corregida y preparada para soportar nombres dobles/triple sin desbordar los laterales */
         .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); 
-            line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase;
+            font-family: 'Syne', sans-serif; 
+            font-size: clamp(1.75rem, 6.5vw, 7.5rem); 
+            line-height: 0.95; 
+            font-weight: 800; 
+            letter-spacing: -0.04em; 
+            text-transform: uppercase;
         }
         
         .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
@@ -162,12 +167,12 @@
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- MÓDULO UNIFICADO Y SENSATO DEL PORTFOLIO GRID EQUITATIVO --- */
+        /* --- MÓDULO UNIFICADO DEL PORTFOLIO GRID (DIFUSIÓN EXTRA AL AÑADIR MARGIN) --- */
         .portfolio-grid { 
             display: grid; 
-            /* Sistema de 2 columnas donde TODO TIENE EXACTAMENTE LA MISMA MEDIDA = Nada domina frente a nada*/
             grid-template-columns: repeat(2, 1fr); 
             gap: 25px; 
+            margin-top: 40px; /* <- Oxígeno ampliado sobre títulos añadida dinamicamente   */
         }
 
         .p-card { 
@@ -176,7 +181,7 @@
             border: 1px solid var(--border); 
             border-radius: 30px; 
             overflow: hidden; 
-            height: 480px; /* Igualad absoluta y general altura bloque */
+            height: 480px; 
             transition: 0.5s ease; 
         }
         
@@ -185,18 +190,16 @@
         
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
         
-        /* Sistema P-Info: Contenedor Principal. Alinear horizontalmente Icon y Texto pero protegiendo apilado natural interno de Título e h3 */
         .p-info { 
             position: absolute; bottom: 30px; left: 35px; right: 35px; 
             z-index: 2; pointer-events: none; display: flex; 
-            justify-content: space-between; align-items: flex-end; /* Evita quiebres por el botón icon  */
+            justify-content: space-between; align-items: flex-end; 
         }
         
-        /* Agrupamiento Textos. FORZADO vertical 100% Título Subtitulo mediante Flex Col. JAMÁS pasará Subtexto derecha. */
         .p-text-col {
             display: flex;
             flex-direction: column;
-            gap: 4px; /* Oxígeno interlineado sin bailes  */
+            gap: 4px; 
         }
 
         .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
@@ -215,8 +218,7 @@
 
 
         /* =======================================================
-           EL NUEVO CURRÍCULUM: FORMALIDAD, MINIMALISMO ABSOLUTO 
-           Y ESTÉTICA EDITORIAL ESTRICTA (Sin timeline visual abstracta)
+           EL CURRÍCULUM: FORMAL, MINIMALISTA (Grid Base Clean Editor.) 
            ======================================================= */
         
         .cv-list {
@@ -226,34 +228,28 @@
             width: 100%;
         }
 
-        /* Cada fila como una caja apaisada que da espacio lateral ordenado natural clásico (Mesa Trabajo de papel C.V.)*/
         .cv-row {
             display: flex;
             flex-direction: row;
             padding: 55px 0;
             border-bottom: 1px solid var(--border);
-            gap: 60px; /* Abismo generoso inter-bloques. Orden impoluto. */
+            gap: 60px; 
             position: relative;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Lazer lateral limpio solo revelable a hover, manteniendo paz */
         .cv-row::after {
             content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
             background: var(--accent); z-index: 2; transition: height 0.3s ease;
         }
 
-        /* Micro gradiente iluminador imperceptiblemente profundo. Limpieza ante todo  */
         .cv-row::before {
             content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
             background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%);
             z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
         }
 
-        /* En la interección empujamos sin perturbar el general. */
-        .cv-row:hover {
-            padding-left: 30px;
-        }
+        .cv-row:hover { padding-left: 30px; }
         .cv-row:hover::after { height: 100%; }
         .cv-row:hover::before { width: 100%; opacity: 1; }
 
@@ -264,15 +260,11 @@
             font-weight: 700;
             width: 180px; 
             flex-shrink: 0;
-            z-index: 1; /* por delante de fondo trampa*/
+            z-index: 1;
             transition: color 0.4s ease;
         }
 
-        .cv-content {
-            display: flex;
-            flex-direction: column;
-            z-index: 1; 
-        }
+        .cv-content { display: flex; flex-direction: column; z-index: 1; }
 
         .cv-role {
             font-family: 'Syne', sans-serif;
@@ -285,20 +277,13 @@
             transition: color 0.4s ease;
         }
 
-        .cv-desc {
-            font-size: 1.05rem;
-            color: var(--text-dim);
-            line-height: 1.65;
-            max-width: 680px;
-            margin: 0;
-        }
-
-        /* Efectos sutiles focus y anclajes directos estéticos CV ROW*/
+        .cv-desc { font-size: 1.05rem; color: var(--text-dim); line-height: 1.65; max-width: 680px; margin: 0; }
+        
         .cv-row:hover .cv-role { color: var(--accent); }
         .cv-row:hover .cv-year { color: var(--text); }
 
 
-        /* --- BOTÓN DESCARGA C.V: PIÍLDORA PERFECTA FIJADA, BLANCO PURO ABSOLUTO INMUTABLE  --- */
+        /* --- BOTÓN DESCARGA C.V INTOCABLE --- */
         .btn { 
             position: relative;
             display: inline-flex;
@@ -307,7 +292,7 @@
             gap: 4px;
             overflow: hidden;
             border-radius: 100px !important; 
-            background: #ffffff; /* INTOCABLE, RESUELVE COMO LÍNEAS PEDIDO EN BLANCO APLASTANTE NORMAL.*/
+            background: #ffffff; 
             padding: 18px 40px;
             text-decoration: none;
             font-weight: 600;
@@ -321,99 +306,133 @@
             margin-top: 35px;
         }
         
-        .btn:hover { 
-            color: #ffffff; 
-            transform: translateY(-3px); 
-        }
+        .btn:hover { color: #ffffff; transform: translateY(-3px); }
         .btn:active { transform: scale(0.95); }
 
         .flow-arr-left {
-            position: absolute;
-            left: -25%;
-            z-index: 9;
-            font-size: 1rem;
-            color: #000000;
+            position: absolute; left: -25%; z-index: 9; font-size: 1rem; color: #000000;
             transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .btn:hover .flow-arr-left { left: 25px; color: #ffffff; }
 
         .flow-text {
-            position: relative;
-            z-index: 1;
-            transform: translateX(-14px);
-            transition: all 800ms ease-out;
+            position: relative; z-index: 1; transform: translateX(-14px); transition: all 800ms ease-out;
         }
         .btn:hover .flow-text { transform: translateX(12px); }
 
         .flow-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 16px;
-            height: 16px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none;
-            transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 16px; height: 16px; background: var(--accent); border-radius: 50%;
+            opacity: 0; z-index: 0; pointer-events: none; transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
         }
         .btn:hover .flow-circle { width: 350px; height: 350px; opacity: 1; }
 
         .flow-arr-right {
-            position: absolute;
-            right: 25px;
-            z-index: 9;
-            font-size: 1rem;
-            color: #000000;
+            position: absolute; right: 25px; z-index: 9; font-size: 1rem; color: #000000;
             transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .btn:hover .flow-arr-right { right: -25%; color: #ffffff; }
 
-        /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
-        .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
-        .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
-        
-        .contact-col h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--accent); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.9;}
-        .contact-col a { display: block; font-size: 1.5rem; color: var(--text); text-decoration: none; margin-bottom: 8px; transition: all 0.3s; opacity: 0.7;}
-        .contact-col a:hover { opacity: 1; color: var(--accent); transform: translateX(3px);}
 
+        /* =======================================================
+           REDISEÑO EXCLUSIVO 'CONTACTO' ALTO-PERFORMANCE
+           MANTENIENDO EFECTO CINTA E HIGIENE DIGITAL EDITORIAL 
+           ======================================================= */
+        
+        /* Contención Contact Wrapper Global Clean */
+        .contact-wrapper {
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .contact-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 55px 15px; border-bottom: 1px solid var(--border);
+            text-decoration: none; position: relative; overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); cursor: none;
+        }
+
+        .contact-row::before {
+            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
+            background: linear-gradient(90deg, rgba(255, 90, 0, 0.08) 0%, transparent 100%);
+            z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
+        }
+
+        .contact-row::after {
+            content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
+            background: var(--accent); z-index: 2; transition: height 0.4s ease;
+        }
+
+        .contact-row:hover { padding-left: 50px; border-bottom-color: transparent;}
+        .contact-row:hover::before { width: 100%; opacity: 1; }
+        .contact-row:hover::after { height: 100%; }
+
+        .c-left {
+            display: flex; align-items: center; gap: 70px; z-index: 1;
+        }
+
+        .c-label {
+            font-family: 'Syne', sans-serif; font-size: 1rem; color: var(--accent);
+            font-weight: 700; width: 120px; letter-spacing: 2px;
+        }
+
+        .c-text {
+            font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); 
+            font-weight: 700; color: var(--text-dim); transition: all 0.4s;
+            letter-spacing: -1.5px;
+        }
+
+        /* Modulo burbuja direccional derecha identica en fluidez en C.V. Tracker  */
+        .c-icon-wrap {
+            display: flex; justify-content: center; align-items: center; 
+            width: 55px; height: 55px; border-radius: 50%; border: 1px solid var(--border); 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            color: var(--text-dim); transform: rotate(-45deg); z-index: 1;
+        }
+
+        /* Comportamiento Activo Reactivo Hover - Colisiones! */
+        .contact-row:hover .c-text { color: var(--text); transform: translateX(10px); }
+        .contact-row:hover .c-icon-wrap { 
+            background: var(--text); border-color: transparent; color: var(--bg); transform: rotate(0deg) scale(1.08); 
+        }
+
+        /* Limpiado Céntrico Apaisado Inferior del Grid  */
         footer { 
             padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; 
-            border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
+            font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
         }
         footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
         footer a:hover {color: var(--accent);}
 
 
-        /* Reposes adaptables Generales y Correcciones Modulares C.V Responsive  */
+        /* Escaladores Celular General Resumidos !   */
         @media (max-width: 1024px) {
-            /* Las cards pasan a amontonarse singular en Vertical - Resolviendo 1 en la tableta y el celular para proteger las fotografias!*/
-            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
             .p-card { height: 420px; }
 
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
             .bento-card-photo { min-height: 400px;}
-            .contact-links-grid { grid-template-columns: 1fr 1fr; }
             
-            .cv-row {
-                flex-direction: column;
-                gap: 20px;
-                padding: 40px 0;
-            }
+            .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
             .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
+            
+            /* Ruptura lateral Flex Bloque al apilar listado superior -> TextContacto abajo   */
+            .c-left { flex-direction: column; gap: 5px; align-items: flex-start; }
+            .c-label { width: auto;}
+            .c-text { letter-spacing:-1px;} 
+            
+            .contact-row { padding: 45px 5px;}
+            .contact-row:hover { padding-left: 20px;}
         }
 
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
             .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
-            .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
-            .p-info { left: 25px; right: 25px;} /* Protección celular extremo textos card internos. */
-            
-            .cv-row:hover { padding-left: 20px; } /* Ajuste el salto horizontal móvil es inferior. */
+            .p-info { left: 25px; right: 25px;} 
+            .cv-row:hover { padding-left: 20px; } 
         }
     </style>
 </head>
@@ -441,9 +460,10 @@
         </header>
     </div>
 
+    <!-- TÍTULO EN LÍNEAS TIPO TRAMA INICIAL (Nuevas reglas Clam responsivas para absorver Bloque Nominal ) -->
     <section class="hero" id="home">
         <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-            <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
+            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
             
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
@@ -474,17 +494,15 @@
         </div>
     </section>
 
-
-    <!-- --- SECCION REDISEÑADA ESTADO: PORTFOLIO EQUILIBRADO 2 COL GRID APILADO DE TIPOGRAFIAS DIRECTAS --- -->
+    <!-- PANNEL CORTES GRID EQUALIZADOS CON BLOQUEO TXT TITTLE SOBRE TITTLE Y AMPLIADO EL EJE HORIZONTAL TITLE Y LISTADO:  -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
+        
         <div class="portfolio-grid">
-            
             <a href="#" class="p-card inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
-                    <!-- Blindaje Columna Para Agrupar Estrictamente en Eje (Títutulo, encima del Suxtesto Siempre) -->
                     <div class="p-text-col">
                         <h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3>
                         <p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p>
@@ -591,11 +609,10 @@
         </div>
     </section>
 
-    <!-- --- CVRRICULUM PURISTA REIMAGINADO. LISTA MINIMAL Y RECTA SIN BURBUJAS COMPLEJAS. --- -->
+    <!-- LISTADO CV PURIFICADO -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
-        <!-- Reubicada Caja Editorial Lista Suicida Sólida Vertical Categórica Estructural Sin adornos naranjas innecesarios ni Timeline Complex -->
         <div class="cv-list" data-aos="fade-up">
             
             <div class="cv-row inter-hover">
@@ -640,6 +657,7 @@
 
         </div>
         
+        <!-- Bloque descarga PDF Intacto Capsula Form -->
         <div style="padding-top: 15px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
                 <i class="fa-solid fa-arrow-right flow-arr-left"></i>
@@ -650,33 +668,43 @@
         </div>
     </section>
 
-    <section id="contact">
-        <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
-            <div class="contact-top-module">
-                <h2 class="mega-text lang-node" data-en="MATERIAL<br>REALITIES." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
-                <p class="about-text lang-node" style="max-width: 500px;" data-en="Producing strictly logical artifacts bounded to deep geometrical aesthetic truth." data-es="Formulación visual para industria humana, amparada en metodologías viables que operan sobre piezas táctiles funcionales y puristas de nuestra realidad local física de campo final testada de manera real absoluta total del marco ambiental y arquitectónico puro de contorno perimetral material humano verdadero del siglo material y real absoluto del desarrollo material objetivo.">Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales y puristas pensadas siempre en producto escalable final, aportando veracidad matérica real al prototipado local europeo actual y social.</p>
-            </div>
+    <!-- TABLÓN SECTORIZADO ORDEN DIRECTO (SÓLO 3 LÍNEAS VINCULANTES + BOTONES ENORMES!)  -->
+    <section id="contact" style="padding-bottom: 20px;">
+        
+        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Connect /" data-es="Contacto /">Contacto /</h2>
+        
+        <div class="contact-wrapper" data-aos="fade-up">
+            <!-- Row 1 -->
+            <a href="mailto:hola@luisblasco.com" class="contact-row inter-hover">
+                <div class="c-left">
+                    <span class="c-label lang-node" data-en="EMAIL HUB" data-es="CORREO / BANDEJA">CORREO / BANDEJA</span>
+                    <span class="c-text">hola@luisblasco.com</span>
+                </div>
+                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
             
-            <div class="contact-links-grid">
-                <div class="contact-col">
-                    <h4 class="lang-node" data-en="EMAIL HUB" data-es="BANDEJA ENTRADA">BANDEJA ENTRADA</h4>
-                    <a href="mailto:luisbib@mail.com" class="inter-hover">hola@luisblasco.com</a>
-                    <a href="mailto:estudio@mail.com" class="inter-hover" style="font-size:1.05rem; margin-top:2px;">info@estudiocore.com</a>
+            <!-- Row 2 -->
+            <a href="#" target="_blank" class="contact-row inter-hover">
+                <div class="c-left">
+                    <span class="c-label lang-node" data-en="NETWORK PROFILE" data-es="SOPORTE DIGITAL">SOPORTE DIGITAL</span>
+                    <span class="c-text">LinkedIn Profile Base.</span>
                 </div>
-                <div class="contact-col">
-                    <h4 class="lang-node" data-en="PORTFOLIO LINKS" data-es="REFERENCIA DIGITAL">REFERENCIA DIGITAL</h4>
-                    <a href="#" class="inter-hover">LinkedIn CMF. <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
-                    <a href="#" class="inter-hover">Behance Labs <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
+                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+            
+            <!-- Row 3 -->
+            <a href="tel:+34000000000" class="contact-row inter-hover">
+                <div class="c-left">
+                    <span class="c-label lang-node" data-en="VOICE COM." data-es="CENTRAL MÓVIL">CENTRAL MÓVIL</span>
+                    <span class="c-text">+34 600 000 000</span>
                 </div>
-                <div class="contact-col">
-                    <h4 class="lang-node" data-en="OPERATION BASE" data-es="UBICACIÓN / TEL">UBICACIÓN / TEL</h4>
-                    <a href="#" class="inter-hover" style="font-size:1.1rem; line-height: 1.45; margin-bottom: 25px;">Core Diseño Central,<br>46002 Valencia, España.</a>
-                    <a href="#" class="inter-hover" style="font-family:'Syne';">+34 (TLF Línea directa)</a>
-                </div>
-            </div>
+                <div class="c-icon-wrap"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
         </div>
+
     </section>
 
+    <!-- Limpio cimiento de clausura footer page -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
         <div>DESIGN FRAMEWORK SYSTEM © 2026.</div>
