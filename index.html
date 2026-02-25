@@ -79,19 +79,19 @@
             will-change: transform, width, height;
         }
         
-       .hovered-element #cursor-ring {
-    width: 22px;
-    height: 22px;
-    background: transparent;
-    border-color: var(--accent);
-    border-width: 2px;
-}
+        .hovered-element #cursor-ring {
+            width: 22px;
+            height: 22px;
+            background: transparent;
+            border-color: var(--accent);
+            border-width: 2px;
+        }
 
-.hovered-element #cursor-dot {
-    width: 6px;
-    height: 6px;
-    opacity: 1;
-}
+        .hovered-element #cursor-dot {
+            width: 6px;
+            height: 6px;
+            opacity: 1;
+        }
 
         /* --- ETIQUETA STATUS INLINE  --- */
         .status-tag {
@@ -342,7 +342,7 @@
         .btn:hover .flow-arr-right { right: -25%; color: #ffffff; }
 
 
-        /* --- RESTAURADO: CONTACT ESTUDIO VERTICAL BENTO (Como lo tenías originalmente) --- */
+        /* --- RESTAURADO: CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
@@ -370,7 +370,6 @@
             .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
             .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
 
-            /* Adaptación del Bento grande recuperado */
             .contact-links-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -381,26 +380,108 @@
             .p-info { left: 25px; right: 25px;} 
             .cv-row:hover { padding-left: 20px; } 
 
-            /* Adaptación de bento en móviles recuperada */
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
 
         .apellido-ajustado {
             display: inline-block;
-            font-size: 0.45em; /* Reducción notable para integrar en misma línea */
+            font-size: 0.45em; 
             letter-spacing: -0.01em;
             vertical-align: middle; 
             margin-left: 0.25em;
         }
 
         .hero-title {
-    max-width: 1200px;   /* aumenta el ancho */
-    width: 100%;
-}
+            max-width: 1200px;  
+            width: 100%;
+        }
 
-.hero-title span {
-    display: block;
-}
+        .hero-title span {
+            display: block;
+        }
+
+        /* ===============================================================
+           INYECCIÓN NUEVA CÓDIGO NATivo: SPOTLIGHT GLOW CARDS EFFECT
+           =============================================================== */
+
+        /* Clases estructurales para inyectar sobre elementos .bento-card existentes */
+        .glow-card {
+            /* Controlamos color y variables nativamente desde CSS. (22 representa Tono Naranja alineado al Site) */
+            --base: 22;
+            --spread: 20;
+            --radius: 30; /* Respetando la curva actual de tus Bento Box = 30px */
+            --border-size: 1.5px;
+            --backup-border: var(--border);
+            --size: 300; 
+            --spotlight-size: calc(var(--size) * 1px);
+            --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
+            
+            position: relative;
+            touch-action: none;
+            /* Suplanta y suma al background interno para dibujar foco brillante por el cursor interior: */
+            background-image: radial-gradient(
+                var(--spotlight-size) var(--spotlight-size) at 
+                calc(var(--x, 0) * 1px) 
+                calc(var(--y, 0) * 1px),
+                hsl(var(--hue) 100% 55% / 0.08), transparent
+            ) !important;
+            
+            border: var(--border-size) solid transparent !important;
+            background-color: var(--card-bg) !important;
+            background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+            background-position: 50% 50%;
+            background-attachment: fixed;
+            transition: all 0.4s ease-out; /* Mantiene transiciones visuales intactas */
+        }
+
+        /* Tracking exterior - Bordes Spotlight Dinámico - Geometría mediante Máscaras WebKit CSS */
+        .glow-card::before, .glow-card::after {
+            content: "";
+            position: absolute;
+            inset: calc(var(--border-size) * -1);
+            border: var(--border-size) solid transparent;
+            border-radius: calc(var(--radius) * 1px);
+            background-attachment: fixed;
+            background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            
+            mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+            mask-clip: padding-box, border-box;
+            mask-composite: intersect;
+            -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+            -webkit-mask-clip: padding-box, border-box;
+            -webkit-mask-composite: xor; 
+            
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.3s;
+        }
+
+        .glow-card::before {
+            /* Cuerda Central: Color vibrante naranaja sobre los contornos apuntados por cursor */
+            background-image: radial-gradient(
+                calc(var(--spotlight-size) * 0.8) calc(var(--spotlight-size) * 0.8) at 
+                calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+                hsl(var(--hue) 100% 55% / 1), transparent 100%
+            );
+            filter: brightness(1.5);
+            opacity: 1; /* Tracking constante visible a movimiento cursor global*/
+        }
+
+        .glow-card::after {
+            /* Difusión ambiental extra a un area menor más cálida del Foco Laser.  */
+            background-image: radial-gradient(
+                calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at 
+                calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+                rgba(255, 255, 255, 0.45), transparent 100%
+            );
+            opacity: 1; 
+        }
+
+        /* Restaura y sobrepone al layout claro Light Mode los parámetros específicos de lectura */
+        .light-mode .glow-card::before { filter: brightness(0.8); }
+
     </style>
 </head>
 <body>
@@ -465,7 +546,7 @@
         </div>
     </section>
 
-    <!-- PANNEL CORTES GRID EQUALIZADOS (CON MAYOR MARGEN ARRIBA DE PROYECTOS) -->
+    <!-- PANNEL CORTES GRID EQUALIZADOS -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
         
@@ -544,35 +625,36 @@
         </div>
     </section>
 
+    <!-- INSERCION CARDS CUBIERTAS AHORA BAJO LA ESTRUCTURA .GLOW-CARD COMPATIBLE EFECTO NATIVO LASER FOCO DE PUNTERO CSS INTERIOR -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Skills Base /" data-es="Infraestructura /">Infraestructura /</h2>
         <div class="skills-bento">
-            <div class="bento-card inter-hover" data-aos="fade-up">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Parametric Modeling" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino. Native flow geometry setup." data-es="Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías volumétricas exactas.">Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías volumétricas exactas.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="C.G.I Visualization" data-es="Representación C.G.I">Representación C.G.I</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Keyshot & Rendering flow mapping logic to simulate material weights visually." data-es="Control C.M.F absoluto utilizando visualización fotorrealista para evocar textura y gravedad de producto.">Control C.M.F absoluto utilizando visualización fotorrealista para evocar textura y gravedad de producto.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="DFM & Mfg logic" data-es="Matricería & D.F.M">Matricería & D.F.M</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready. Translating models for strict mold constraints, plastics and tolerances." data-es="Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes plásticos e inyección física pura.">Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes plásticos e inyección física pura.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Ergonomic Scale" data-es="Adaptabilidad & Ergonomía">Adaptabilidad & Ergonomía</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Human factored limits study. Guaranteeing object relation through dimensional reality testing." data-es="Integración absoluta a factor de uso humano a base empírica dimensional, estudiando métricas y ratios cómodos de iteración real de usuario con el factor físico final.">Estudio riguroso empírico en relación humana para lograr las iteraciones métricas justas. El bienestar corporal dicta volúmen final.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Mch Prototyping" data-es="Mecanización Rápida">Mecanización Rápida</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Early validation phase control: fast mockups & integration for proof-of-concept CNC checking." data-es="Tesis ágil en prototipos reales: testado primario validativo CNC y resina asegurando el paso 0 de cualquier maquinaria volumétrica construida para producción real del producto al momento de inicio iterativo iterativo a escala local iteración escala macro escala física.">Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala visual asegurada.</p>
             </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="bento-card inter-hover glow-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="A-Class Surfacing" data-es="Geometría Class-A">Geometría Class-A</h3>
                 <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Sustained surface flow continuities avoiding reflections brakes using advanced nurbs grids architecture structure manipulation system manipulation system system toolsets toolsets." data-es="Dominio de manipulación matemática sobre planos que convergen, modelando flujos perfectos evitando quiebres duros lumínicos superficiales al reflejo superficial absoluto superficial total exterior puro final del modelo purificado material modelador superficie modelismo topológico de exterior exterior final pura técnica manipulación sistema de rejillas." >Mapeado profundo sobre tangencias entre caras de modelo: suavizado matemático continuo, cero fisuras lumínicas puras.</p>
@@ -639,7 +721,7 @@
         </div>
     </section>
 
-    <!-- ESTILO BENTO RECUPERADO ORIGINAL: 'CONTACTO' -->
+    <!-- CONTACT ESTUDIO VERTICAL BENTO -->
     <section id="contact">
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
             <div class="contact-top-module">
@@ -718,15 +800,28 @@
             lastScrollTop = scrollTop;
         });
 
+        /* --- Sincronizador Base - Eventos Custom Cursor  --- */
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;
 
-        window.addEventListener("mousemove", (e) => { 
+        /* --- LÓGICA INTEGRADORA CÁLCULO SPOTLIGHT EVENT POINTER EN EL BODY GLOBAL --- */
+        const glowCards = document.querySelectorAll(".glow-card");
+        
+        window.addEventListener("pointermove", (e) => { 
+            // Control visual Cursor Laser Original (Evita reflow layout constante compartiendo datos evento):
             mouseX = e.clientX; 
             mouseY = e.clientY; 
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            
+            // Refresco instantáneo de posición Focos Dinámicos Cards Infraestructura conectadas con las matemáticas Spotlight:
+            glowCards.forEach((card) => {
+                card.style.setProperty("--x", mouseX.toFixed(2));
+                card.style.setProperty("--xp", (mouseX / window.innerWidth).toFixed(2));
+                card.style.setProperty("--y", mouseY.toFixed(2));
+                card.style.setProperty("--yp", (mouseY / window.innerHeight).toFixed(2));
+            });
         });
 
         function renderRing() {
