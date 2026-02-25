@@ -79,11 +79,19 @@
             will-change: transform, width, height;
         }
         
-        .hovered-element #cursor-ring {
-            width: 50px; height: 50px; background: var(--text); mix-blend-mode: difference;
-            border-color: transparent; border-width: 0;
-        }
-        .hovered-element #cursor-dot { opacity: 0; }
+       .hovered-element #cursor-ring {
+    width: 22px;
+    height: 22px;
+    background: transparent;
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.hovered-element #cursor-dot {
+    width: 6px;
+    height: 6px;
+    opacity: 1;
+}
 
         /* --- ETIQUETA STATUS INLINE  --- */
         .status-tag {
