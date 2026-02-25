@@ -42,8 +42,9 @@
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
-        .lang-animating { opacity: 0.25 !important; filter: blur(8px); transform: scale(0.95) translateY(2px) !important; }
+        /* Tiempos fluidos multilenguaje */
+        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; }
+        .lang-animating { opacity: 0.25 !important; filter: blur(8px); transform: scale(0.95); }
 
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -52,30 +53,30 @@
             opacity: 0.04; mix-blend-mode: overlay;
         }
 
-        /* --- CURSOR --- */
         #cursor-dot {
             width: 8px; height: 8px; background: var(--text); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
             will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
+        
         #cursor-ring {
             width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
             transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
+            will-change: transform, width, height;
         }
-        .hovered-element #cursor-ring { width: 55px; height: 55px; background: var(--text); mix-blend-mode: difference; border-color: transparent; }
+        
+        .hovered-element #cursor-ring { width: 55px; height: 55px; background: var(--text); mix-blend-mode: difference; border-width: 0; }
         .hovered-element #cursor-dot { opacity: 0; }
 
-        /* --- STATUS TAG (REUBICADO AL HERO) --- */
+        /* --- NUEVO STATUS TAG (ALINEADO EN HERO) --- */
         .status-tag {
             display: inline-flex; align-items: center; gap: 8px;
-            font-size: 0.7rem; color: var(--text); font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px;
-            background: var(--card-bg); 
+            font-size: 0.7rem; color: var(--text-dim); font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 0.5px;
             padding: 8px 16px; border-radius: 100px;
             border: 1px solid var(--border);
-            margin-left: 25px; /* "Aire" con el Portfolio text */
-            white-space: nowrap;
+            margin-left: 20px;
         }
 
         .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 6px; height: 6px; }
@@ -92,133 +93,108 @@
 
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 12px 30px; display: flex; align-items: center; gap: 40px;
+            padding: 12px 35px; display: flex; align-items: center; gap: 40px;
             border: 1px solid var(--border); border-radius: 100px;
         }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
         .nav-links a:hover { color: var(--text); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
-        .tools-nav { display:flex; align-items: center; gap: 20px;} /* Añadido aire entre botones */
-        .icon-btn { 
-            background: transparent; border: none; color: var(--text-dim); /* Opacidad reducida igual al de idioma */
-            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.3s ease;
+        /* Estilización botones superiores ajustados */
+        .tools-nav { display:flex; align-items: center; gap: 15px;}
+        .icon-btn, .lang-sutil-btn { 
+            background: transparent; border: none; color: var(--text);
+            width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; 
+            font-size: 0.9rem; transition: all 0.3s ease; opacity: 0.5; border-radius: 50%;
         }
-        .icon-btn:hover { color: var(--text); transform: scale(1.1); }
-
-        .lang-sutil-btn {
-            background: transparent; border: none; color: var(--text-dim);
-            font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 800; 
-            letter-spacing: 0.5px; transition: all 0.3s ease; opacity: 0.6; /* Opacidad igualada */
-        }
-        .lang-sutil-btn:hover { color: var(--text); opacity: 1; }
+        .lang-sutil-btn { font-family: 'Inter'; font-weight: 800; font-size: 0.7rem; }
+        .icon-btn:hover, .lang-sutil-btn:hover { color: var(--accent); opacity: 1; background: var(--border); }
 
         /* --- HERO --- */
-        section { padding: 120px 5vw; max-width: 1600px; margin: 0 auto; }
+        section { padding: 140px 5vw; max-width: 1600px; margin: 0 auto; }
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { 
-            font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 12vw, 11rem); 
-            line-height: 0.85; font-weight: 800; letter-spacing: -0.05em; text-transform: uppercase;
-        }
-        .subtitle-bar { display: flex; align-items: center; margin-top: 30px; } /* Alínea etiqueta al lado */
-        .hero .subtitle { font-size: clamp(1rem, 2vw, 1.4rem); color: var(--text-dim); font-weight: 500; font-family: 'Inter'; }
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; }
+        .subtitle-bar { display: flex; align-items: center; margin-top: 30px; }
+        .hero .subtitle { font-size: clamp(0.9rem, 2.2vw, 1.2rem); color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
 
-        /* --- PORTFOLIO & BENTO --- */
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
+
+        /* --- BENTOS --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); }
-        .about-text { font-size: 1.15rem; color: var(--text-dim); }
-        
-        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 500px; transition: 0.5s; }
-        .p-wide { grid-column: span 8; }
-        .p-square { grid-column: span 4; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
-        .p-card:hover .p-img-container img { transform: scale(1.05); }
+        .bento-card-photo { overflow: hidden; border-radius: 30px; border: 1px solid var(--border); }
+        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
+        .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
+        .about-text strong { color: var(--text); }
 
-        /* --- HISTÓRICO LABORAL (ELEGANCE) --- */
-        .cv-wrapper { border-top: 1px solid var(--border); margin-top: 40px; }
+        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+        .p-card { position: relative; border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 500px; transition: 0.5s; }
+        .p-wide { grid-column: span 8; } .p-square { grid-column: span 4; }
+        .p-img-container { width: 100%; height: 100%; overflow: hidden; }
+        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%); opacity: 0.6; }
+        .p-info { position: absolute; bottom: 30px; left: 30px; display: flex; align-items: flex-end; width: calc(100% - 60px); justify-content: space-between; }
+        .p-info h3 { font-family: 'Syne'; font-size: 2rem; color: white; }
+        .view-circle { width: 50px; height: 50px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; opacity: 0; transform: scale(0.5); transition: 0.4s; }
+        .p-card:hover .view-circle { opacity: 1; transform: scale(1); }
+
+        /* --- CV REFORMADO (ELEGANTE) --- */
+        .cv-wrapper { border-top: 1px solid var(--border); margin-top: 20px; }
         .cv-item { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 40px 20px; border-bottom: 1px solid var(--border); text-decoration: none; 
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; overflow: hidden;
+            padding: 45px 15px; border-bottom: 1px solid var(--border); text-decoration: none; 
+            position: relative; transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        .cv-item::before {
-            content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 0;
-            background: linear-gradient(0deg, rgba(255, 90, 0, 0.03) 0%, transparent 100%);
-            transition: height 0.4s ease; z-index: 0;
+        .cv-item::before { 
+            content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; 
+            background: var(--accent); transition: width 0.6s ease; z-index: 5;
         }
-
-        /* Línea inferior animada (Efecto elegante) */
-        .cv-item::after {
-            content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px;
-            background: var(--accent); transition: width 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .cv-item:hover { padding-left: 35px; background: rgba(255,255,255, 0.01); }
-        .cv-item:hover::after { width: 100%; }
-        .cv-item:hover::before { height: 100%; }
-
-        .cv-role h3 { 
-            font-family: 'Syne'; font-size: 2.2rem; font-weight: 700; color: var(--text); transition: transform 0.4s ease; 
-        }
-        .cv-item:hover .cv-role h3 { transform: translateX(10px); color: var(--accent); }
-        .cv-company { font-size: 1rem; color: var(--text-dim); transition: 0.4s; margin-top: 4px; }
-        .cv-item:hover .cv-company { transform: translateX(10px); color: var(--text); }
+        .cv-item:hover::before { width: 100%; }
+        .cv-item:hover { background: rgba(255, 255, 255, 0.02); padding-left: 30px; padding-right: 30px; }
         
-        .cv-right { display: flex; align-items: center; gap: 40px; }
-        .cv-year { font-weight: 500; color: var(--text-dim); transition: 0.4s; font-variant-numeric: tabular-nums; }
-        .cv-item:hover .cv-year { color: var(--text); transform: translateX(-10px); }
-
-        .fx-outbox {
-            width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center; transition: 0.4s;
+        .cv-role h3 { 
+            font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; color: var(--text-dim); 
+            transition: all 0.4s; letter-spacing: -0.5px;
         }
-        .cv-item:hover .fx-outbox { background: var(--accent); border-color: var(--accent); color: white; transform: rotate(45deg); }
+        .cv-company { font-size: 0.95rem; color: var(--text-dim); opacity: 0.6; transition: 0.4s; }
+        
+        .cv-item:hover .cv-role h3 { color: var(--text); transform: translateX(5px); }
+        .cv-item:hover .cv-company { opacity: 1; transform: translateX(5px); color: var(--accent); }
 
-        /* --- BOTÓN CV ANIMADO --- */
+        .cv-right { display: flex; align-items: center; gap: 40px; }
+        .cv-year { font-family: 'Inter'; font-weight: 600; font-size: 0.9rem; color: var(--text-dim); }
+        .fx-outbox { 
+            width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); 
+            display: flex; align-items: center; justify-content: center; transition: 0.4s; 
+        }
+        .cv-item:hover .fx-outbox { background: var(--text); color: var(--bg); border-color: transparent; transform: rotate(-45deg); }
+
+        /* Botón Dossier Animado */
         .btn { 
             display: inline-flex; align-items: center; gap: 15px; 
-            background: var(--text); color: var(--bg); 
-            padding: 22px 45px; border-radius: 100px; 
-            text-decoration: none; font-weight: 700; font-size: 0.9rem; 
-            text-transform: uppercase; letter-spacing: 1px; margin-top: 50px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
-            box-shadow: 0 0 0 rgba(255, 90, 0, 0);
+            background: var(--text); color: var(--bg); padding: 20px 45px; 
+            border-radius: 100px; text-decoration: none; font-weight: 700; 
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; 
+            margin-top: 50px; overflow: hidden; position: relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
         .btn i { transition: transform 0.4s; }
-        
-        .btn:hover { 
-            background: var(--accent); color: white; 
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 90, 0, 0.2);
-        }
+        .btn:hover { background: var(--accent); color: white; transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(255, 90, 0, 0.2); }
         .btn:hover i { transform: translateY(3px); }
-        
-        /* Efecto de brillo interior */
-        .btn::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: all 0.6s;
+
+        footer { padding: 80px 5vw; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;}
+
+        @media (max-width: 1024px) {
+            .portfolio-bento, .bento-about { display: flex; flex-direction: column; }
+            .p-card { height: 400px; }
         }
-        .btn:hover::before { left: 100%; }
-
-        /* --- FOOTER --- */
-        footer { padding: 80px 5vw; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); font-size: 0.8rem; }
-
         @media (max-width: 768px) {
-            .navbar-wrapper { top: 10px; }
             .nav-links { display: none; }
-            .hero h1 { line-height: 0.9; }
-            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .status-tag { margin-left: 0; }
-            .cv-role h3 { font-size: 1.5rem; }
-            .cv-item:hover { padding-left: 20px; }
+            .cv-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .subtitle-bar { flex-direction: column; align-items: flex-start; }
+            .status-tag { margin-left: 0; margin-top: 15px; }
         }
     </style>
 </head>
@@ -234,27 +210,24 @@
             <nav class="nav-links">
                 <a href="#about" class="inter-hover lang-node" data-en="About me" data-es="Sobre mí">Sobre mí</a>
                 <a href="#work" class="inter-hover lang-node" data-en="Work" data-es="Portfolio">Portfolio</a>
-                <a href="#skills" class="inter-hover lang-node" data-en="Studio" data-es="Studio">Studio</a>
-                <a href="#cv" class="inter-hover lang-node" data-en="Resume" data-es="Currículum">Currículum</a>
+                <a href="#cv" class="inter-hover lang-node" data-en="Resume" data-es="Trayectoria">Trayectoria</a>
                 <a href="#contact" class="inter-hover lang-node" data-en="Contact" data-es="Contacto">Contacto</a>
             </nav>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <!-- Punto eliminado aquí, el gap se encarga del espacio -->
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
             </div>
         </header>
     </div>
 
     <section class="hero" id="home">
-        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200">
+        <div data-aos="fade-up" data-aos-duration="1200">
             <h1>LUIS<br>BLASCO<br>IBÁÑEZ</h1>
-            
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
-                <div class="status-tag lang-node" data-en="AVAILABLE / PROJECTS" data-es="DISPONIBLE PARA NUEVOS RETOS">
+                <div class="status-tag inter-hover">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                    <span>Disponible para nuevos retos</span>
+                    <span class="lang-node" data-en="Available for work" data-es="Disponible para nuevos retos">Disponible para nuevos retos</span>
                 </div>
             </div>
         </div>
@@ -263,71 +236,71 @@
     <section id="cv">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         <div class="cv-wrapper">
-            <!-- SECCIÓN CON UNA BARRA MÁS (Total 5 ítems) -->
+            <!-- Barra 1 -->
             <a href="#" class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Product Designer Lead" data-es="Diseñador de Producto Senior">Product Designer Lead</h3>
-                    <div class="cv-company">Industrial Core Studio</div>
+                    <h3 class="lang-node" data-en="Product Design Lead" data-es="Director de Diseño de Producto">Director de Diseño de Producto</h3>
+                    <div class="cv-company">Industrial Core Studio • Valencia</div>
                 </div>
-                <div class="cv-right"><span class="cv-year">2024 — HOY</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="cv-right"><span class="cv-year">2024 — ACT.</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
             </a>
-            
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
+            <!-- Barra 2 -->
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Industrial Specialist" data-es="Especialista Industrial">Industrial Specialist</h3>
-                    <div class="cv-company">VLC Prototyping Systems</div>
+                    <h3 class="lang-node" data-en="Industrial Designer" data-es="Diseñador Industrial">Diseñador Industrial</h3>
+                    <div class="cv-company">Technical Engineering Labs</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2022 — 2024</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
             </a>
-
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
+            <!-- Barra 3 -->
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Equipment Designer" data-es="Diseñador de Equipamiento">Equipment Designer</h3>
-                    <div class="cv-company">Bionic Solutions Lab</div>
+                    <h3 class="lang-node" data-en="R&D Specialist" data-es="Especialista I+D Prototipado">Especialista I+D Prototipado</h3>
+                    <div class="cv-company">Bionic Hardware Solutions</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2021 — 2022</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
             </a>
-
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
+            <!-- Barra 4 -->
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="300">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Technical Intern" data-es="Becario Técnico Industrial">Technical Intern</h3>
-                    <div class="cv-company">Polytechnic Engineering Dept.</div>
+                    <h3 class="lang-node" data-en="Junior Consultant" data-es="Consultor Técnico Jr.">Consultor Técnico Jr.</h3>
+                    <div class="cv-company">Global Manufacturing Corp.</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2020 — 2021</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
             </a>
-
-            <!-- LA NUEVA BARRA -->
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
+            <!-- Barra 5 (NUEVA) -->
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="400">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Freelance Consultant" data-es="Consultoría Independiente">Freelance Consultant</h3>
-                    <div class="cv-company">Aeronautical Surface Concepts</div>
+                    <h3 class="lang-node" data-en="Design Intern" data-es="Asistente de Diseño Industrial">Asistente de Diseño Industrial</h3>
+                    <div class="cv-company">Polytechnic Workshop Series</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2019 — 2020</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div></div>
             </a>
         </div>
         
-        <!-- BOTÓN ANIMADO -->
         <a href="#" class="btn inter-hover" data-aos="fade-up">
-            <i class="fa-solid fa-arrow-down-to-line"></i> 
-            <span class="lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span>
+            <i class="fa-solid fa-download"></i> 
+            <span class="lang-node" data-en="Download Full CV" data-es="Descargar Dossier Completo">Descargar Dossier Completo</span>
         </a>
     </section>
 
     <footer>
-        <div class="nav-logo" style="margin-bottom: 20px;">L|BIB</div>
-        <div>LUIS BLASCO-IBÁÑEZ DESIGN FRAMEWORK © 2026.</div>
+        <div class="nav-logo" style="margin-bottom: 10px;">L|BIB</div>
+        <div>DESIGN FRAMEWORK © 2026. VALENCIA, ES.</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
 
+        // Theme Toggle
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
+        // Lang Toggle
         const btnLang = document.getElementById("lang-toggle");
         let langActive = "es";
         btnLang.addEventListener("click", () => {
@@ -341,38 +314,39 @@
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES"; 
-            }, 250); 
+            }, 300);
         });
 
-        const uiLayerSyncs = document.querySelectorAll(".ui-sync");
-        let lastScrollTop = 0;
+        // UI Sync on scroll
+        const uiSync = document.querySelectorAll(".ui-sync");
+        let lastScroll = 0;
         window.addEventListener("scroll", () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                uiLayerSyncs.forEach(layer => layer.classList.add("ui-hidden"));
+            let current = window.pageYOffset;
+            if (current > lastScroll && current > 150) {
+                uiSync.forEach(el => el.classList.add("ui-hidden"));
             } else {
-                uiLayerSyncs.forEach(layer => layer.classList.remove("ui-hidden"));
+                uiSync.forEach(el => el.classList.remove("ui-hidden"));
             }
-            lastScrollTop = scrollTop;
+            lastScroll = current;
         });
 
+        // Custom Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
 
         window.addEventListener("mousemove", (e) => { 
-            mouseX = e.clientX; 
-            mouseY = e.clientY; 
+            mouseX = e.clientX; mouseY = e.clientY; 
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
 
-        function renderRing() {
-            ringX += (mouseX - ringX) * 0.25;
-            ringY += (mouseY - ringY) * 0.25;
+        function animate() {
+            ringX += (mouseX - ringX) * 0.2;
+            ringY += (mouseY - ringY) * 0.2;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(renderRing);
+            requestAnimationFrame(animate);
         }
-        renderRing();
+        animate();
 
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
