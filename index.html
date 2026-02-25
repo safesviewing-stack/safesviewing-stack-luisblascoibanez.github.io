@@ -10,7 +10,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- CORE VARIABLES --- */
+        /* --- VARIABLES --- */
         :root {
             --bg: #030303;
             --accent: #FF5A00; 
@@ -19,7 +19,7 @@
             --border: rgba(255, 255, 255, 0.05);
             --text: #f3f3f3;
             --text-dim: #8b8b8d;
-            --glass: rgba(10, 10, 12, 0.1); 
+            --glass: rgba(10, 10, 12, 0.15); 
             --blur: blur(35px);
         }
 
@@ -29,8 +29,7 @@
             --border: rgba(0, 0, 0, 0.06);
             --text: #111112;
             --text-dim: #5c5c5f;
-            --glass: rgba(255, 255, 255, 0.2);
-            --accent-glow: rgba(255, 90, 0, 0.05);
+            --glass: rgba(255, 255, 255, 0.25);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
@@ -39,11 +38,11 @@
             background-color: var(--bg); color: var(--text);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden; line-height: 1.5;
-            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
+            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; }
-        .lang-animating { opacity: 0.2 !important; filter: blur(8px); transform: scale(0.95); }
+        .lang-node { transition: all 0.4s ease; display: inline-block; }
+        .lang-animating { opacity: 0.1 !important; filter: blur(10px); }
 
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -58,12 +57,12 @@
         .hovered-element #cursor-ring { width: 55px; height: 55px; background: var(--text); mix-blend-mode: difference; border-width: 0; }
         .hovered-element #cursor-dot { opacity: 0; }
 
-        /* --- NAVBAR FIJO CON COMPORTAMIENTO UP/DOWN --- */
+        /* --- NAVBAR FIJO DINÁMICO --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .ui-hidden { transform: translateY(-130%); }
+        .ui-hidden { transform: translateY(-150%); }
 
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
@@ -71,17 +70,17 @@
             border: 1px solid var(--border); border-radius: 100px;
         }
 
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
             text-decoration: none; color: var(--text-dim); font-size: 0.75rem; font-weight: 600; 
             text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.4s ease;
         }
 
-        /* Iluminación luz activa en scroll */
+        /* Luz Activa en el Header */
         .nav-links a.nav-active {
             color: var(--text);
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 90, 0, 0.2);
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 90, 0, 0.2);
+            opacity: 1;
         }
 
         .tools-nav { display:flex; align-items: center; gap: 12px;}
@@ -90,80 +89,79 @@
             width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
             font-size: 0.85rem; transition: all 0.3s; opacity: 0.5; border-radius: 50%;
         }
-        .lang-sutil-btn { font-family: 'Inter'; font-weight: 800; font-size: 0.75rem; }
+        .lang-sutil-btn { font-family: 'Inter'; font-weight: 800; font-size: 0.7rem; }
         .icon-btn:hover, .lang-sutil-btn:hover { color: var(--accent); opacity: 1; background: var(--border); }
 
-        /* --- HERO & SUBTITLES --- */
+        /* --- HERO --- */
         section { padding: 140px 5vw; max-width: 1600px; margin: 0 auto; }
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; }
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 11vw, 10rem); line-height: 0.9; font-weight: 800; text-transform: uppercase; }
         .subtitle-bar { display: flex; align-items: center; margin-top: 35px; gap: 20px; flex-wrap: wrap; }
-        .hero .subtitle { font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
+        .hero .subtitle { font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;}
         
         .status-tag {
-            display: inline-flex; align-items: center; gap: 10px; font-size: 0.7rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; 
-            background: var(--border); padding: 10px 18px; border-radius: 100px; border: 1px solid var(--border);
+            display: inline-flex; align-items: center; gap: 10px; background: var(--border); padding: 10px 18px; border-radius: 100px; border: 1px solid var(--border);
+            font-size: 0.7rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase;
         }
         .pulse-box { position: relative; width: 6px; height: 6px; }
         .pulse-core { position: absolute; width: 100%; height: 100%; background: #22c55e; border-radius: 50%; }
         .pulse-ring { position: absolute; width: 100%; height: 100%; background: #22c55e; border-radius: 50%; animation: ping 2s infinite; }
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
-        /* --- CONTENIDO REINTEGRADO: PROFIL, WORK, SKILLS --- */
+        /* --- BENTOS REINTEGRADOS --- */
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); }
-        .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
-        .about-text strong { color: var(--text); }
-
-        /* Portfolio */
+        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); position: relative; overflow: hidden; }
+        
+        /* Portfolio Grid */
         .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .p-card { position: relative; border-radius: 30px; border: 1px solid var(--border); height: 500px; overflow: hidden; transition: 0.5s; }
+        .p-card { position: relative; border-radius: 30px; border: 1px solid var(--border); height: 500px; overflow: hidden; transition: 0.5s; background: var(--bg); }
         .p-wide { grid-column: span 8; } .p-square { grid-column: span 4; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 60%); opacity: 0.7; }
+        .p-img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; opacity: 0.8; }
+        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 70%); transition: 0.5s; }
         .p-info { position: absolute; bottom: 35px; left: 35px; right: 35px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .p-info h3 { font-family: 'Syne'; font-size: 1.8rem; color: white; margin-bottom: 5px; }
+        .p-card:hover .p-img { transform: scale(1.05); opacity: 1; }
 
-        /* Skills (6 modulos originales) */
-        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
+        /* Skills */
+        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .skill-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 25px; }
 
-        /* --- CV REFORMADO ELEGANTE --- */
+        /* --- CV ELEGANTE --- */
         .cv-wrapper { border-top: 1px solid var(--border); }
         .cv-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 45px 20px; border-bottom: 1px solid var(--border); text-decoration: none; 
-            position: relative; transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex; justify-content: space-between; align-items: center; padding: 45px 20px; 
+            border-bottom: 1px solid var(--border); text-decoration: none; position: relative; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .cv-item::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 2px; background: var(--accent); transition: width 0.6s; }
+        .cv-item::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 2px; background: var(--accent); transition: width 0.5s; }
         .cv-item:hover { background: rgba(255, 255, 255, 0.02); padding-left: 35px; }
         .cv-item:hover::after { width: 100%; }
         
-        .cv-role h3 { font-family: 'Syne'; font-size: 1.9rem; font-weight: 700; color: var(--text-dim); transition: 0.4s; }
-        .cv-company { font-size: 1rem; color: var(--text-dim); opacity: 0.5; transition: 0.4s; }
+        .cv-role h3 { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; color: var(--text-dim); transition: 0.4s; }
         .cv-item:hover h3 { color: var(--text); transform: translateX(10px); }
+        .cv-company { font-size: 1rem; color: var(--text-dim); opacity: 0.5; margin-top: 5px; }
         .cv-item:hover .cv-company { color: var(--accent); opacity: 1; transform: translateX(10px); }
-        
-        .fx-outbox { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transform: rotate(-45deg); transition: 0.4s; }
-        .cv-item:hover .fx-outbox { background: var(--text); color: var(--bg); border-color: transparent; transform: rotate(0deg); }
 
-        .btn { display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 22px 50px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; margin-top: 50px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .fx-outbox { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.4s; transform: rotate(-45deg); }
+        .cv-item:hover .fx-outbox { background: var(--text); color: var(--bg); transform: rotate(0deg); }
+
+        /* Dossier Button */
+        .btn { 
+            display: inline-flex; align-items: center; gap: 15px; background: var(--text); color: var(--bg); padding: 22px 50px; border-radius: 100px; 
+            text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; margin-top: 60px; transition: 0.4s;
+        }
         .btn:hover { background: var(--accent); color: white; transform: translateY(-8px); box-shadow: 0 15px 40px rgba(255,90,0,0.3); }
 
         /* Contacto */
         .contact-card { background: var(--card-bg); border-radius: 40px; padding: 100px 5vw; border: 1px solid var(--border); margin-top: 50px;}
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.9; font-weight: 800; text-transform: uppercase; margin-bottom: 50px;}
+        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 0.9; text-transform: uppercase; margin-bottom: 50px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; border-top: 1px solid var(--border); padding-top: 50px; }
 
-        footer { padding: 60px 5vw; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        footer { padding: 80px 5vw; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;}
 
-        @media (max-width: 1024px) {
-            .portfolio-bento, .bento-about, .skills-bento, .contact-links-grid { grid-template-columns: 1fr; }
-            .p-wide, .p-square { height: 400px; }
-            .nav-links { display: none; }
-        }
+        @media (max-width: 1024px) { .portfolio-bento, .skills-bento, .contact-links-grid { grid-template-columns: 1fr; } .p-wide, .p-square { height: 400px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
 <body>
@@ -171,13 +169,12 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- HEADER / NAVBAR -->
     <div class="navbar-wrapper" id="navbar">
         <header>
             <div class="nav-logo inter-hover">L|BIB</div>
             <nav class="nav-links">
                 <a href="#about" class="nav-item inter-hover lang-node" data-en="Profile" data-es="Perfil">Perfil</a>
-                <a href="#work" class="nav-item inter-hover lang-node" data-en="Archive" data-es="Archivo">Archivo</a>
+                <a href="#work" class="nav-item inter-hover lang-node" data-en="Work" data-es="Portfolio">Portfolio</a>
                 <a href="#skills" class="nav-item inter-hover lang-node" data-en="Studio" data-es="Estudio">Estudio</a>
                 <a href="#cv" class="nav-item inter-hover lang-node" data-en="Path" data-es="Trayectoria">Trayectoria</a>
                 <a href="#contact" class="nav-item inter-hover lang-node" data-en="Contact" data-es="Contacto">Contacto</a>
@@ -197,160 +194,159 @@
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
                 <div class="status-tag">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                    <span class="lang-node" data-en="Available" data-es="Disponible para retos">Disponible para retos</span>
+                    <span class="lang-node" data-en="Open for projects" data-es="Disponible para retos">Disponible para retos</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SOBRE MÍ INTEGRADO -->
+    <!-- SOBRE MÍ (CONTENIDO COMPLETO) -->
     <section id="about" class="spy-section">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Identity /" data-es="Identidad /">Identidad /</h2>
+        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Identity /" data-es="Perfil /">Perfil /</h2>
         <div class="bento-about">
             <div class="bento-card" data-aos="fade-up">
                 <p class="about-text lang-node" 
-                   data-en="I am an industrial designer based in Valencia. My background spans three polytechnic universities, a journey that <strong>radically expanded my technical flexibility</strong>. I work between material aesthetics, pragmatic logic, and manufacturing coherence. Thanks to prior studies in electronics and technique, I design ensuring factory viability beyond purely digital abstraction." 
-                   data-es="Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo. Mi paso por estudios previos de técnica fundamentó mi ADN en una comprensión rigurosa de la fabricación y optimización real.">
-                   Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo. Mi paso por estudios previos de técnica fundamentó mi ADN en una comprensión rigurosa de la fabricación y optimización real.
+                   data-en="Industrial designer based in Valencia. My background spans three different polytechnic universities, a journey that <strong>radically expanded my methodological adaptability</strong>. I live at the intersection of material aesthetics and viable manufacturing logic." 
+                   data-es="Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación académica he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo, buscando siempre la coherencia sistémica.">
+                   Tengo 24 años y soy diseñador industrial radicado en Valencia. A lo largo de mi formación académica he pasado por tres universidades diferentes, experiencia que ha <strong>expandido radicalmente mi adaptabilidad metodológica</strong>. Habito el eje central entre la belleza material y el empirismo productivo, buscando siempre la coherencia sistémica.
                 </p>
             </div>
-            <div class="bento-card" style="padding: 0; overflow: hidden; height: 100%;">
-                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&w=800" style="width:100%; height:100%; object-fit:cover; filter:grayscale(1);">
+            <div class="bento-card" style="padding: 0; min-height: 350px;">
+                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&w=800" style="width:100%; height:100%; object-fit:cover; filter: grayscale(1);">
             </div>
         </div>
     </section>
 
-    <!-- ARCHIVO INTEGRADO (6 PROYECTOS) -->
+    <!-- ARCHIVO PORTFOLIO (6 PROYECTOS) -->
     <section id="work" class="spy-section">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Archive /" data-es="Archivo /">Archivo /</h2>
+        <h2 class="section-title lang-node" data-en="Archive /" data-es="Portfolio /">Portfolio /</h2>
         <div class="portfolio-bento">
             <div class="p-card p-wide inter-hover" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200" class="p-img">
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3>ALPHA PROJECT</h3><p>Diseño Estructural</p></div><div class="fx-outbox" style="transform:none; color:white;"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info"><div><h3>ALPHA PROJECT</h3><p>Ingeniería de Producto</p></div><div class="fx-outbox" style="transform:none; border-color:white; color:white;"><i class="fa-solid fa-arrow-right"></i></div></div>
             </div>
             <div class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800" class="p-img">
                 <div class="p-overlay"></div>
-                <div class="p-info"><h3>EGO SEATING</h3></div>
+                <div class="p-info"><h3>EGO CHAIR</h3></div>
             </div>
             <div class="p-card p-square inter-hover" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800" class="p-img">
                 <div class="p-overlay"></div>
-                <div class="p-info"><h3>HI-FI BEATS</h3></div>
+                <div class="p-info"><h3>HI-FI LAB</h3></div>
             </div>
             <div class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200" class="p-img">
                 <div class="p-overlay"></div>
                 <div class="p-info"><h3>ION CORE</h3></div>
             </div>
             <div class="p-card p-wide inter-hover" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&w=1200" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&w=1200" class="p-img">
                 <div class="p-overlay"></div>
                 <div class="p-info"><h3>OMNI DYNAMICS</h3></div>
             </div>
             <div class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&w=800" style="width:100%; height:100%; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&w=800" class="p-img">
                 <div class="p-overlay"></div>
                 <div class="p-info"><h3>LUNA AMBIENT</h3></div>
             </div>
         </div>
     </section>
 
-    <!-- ESTUDIO INTEGRADO (6 SKILLS TÉCNICAS) -->
+    <!-- ESTUDIO / HABILIDADES (6 MÓDULOS) -->
     <section id="skills" class="spy-section">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Framework /" data-es="Estudio /">Estudio /</h2>
+        <h2 class="section-title lang-node" data-en="Tech Base /" data-es="Infraestructura /">Infraestructura /</h2>
         <div class="skills-bento">
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
-                <h3 class="lang-node" data-en="Parametric Design" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Solidworks nativo. Gestión técnica de planos para manufactura.</p>
+                <h3 class="lang-node" data-en="Parametric Modeling" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Solidworks: Ensambles mecánicos y tolerancias críticas.</p>
+            </div>
+            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="50">
+                <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
+                <h3 class="lang-node" data-en="A-Class Surfaces" data-es="Geometría Clase-A">Geometría Clase-A</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Gestión de continuidades lumínicas y curvas NURBS.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
-                <h3 class="lang-node" data-en="Class-A Geometry" data-es="Superficie Clase-A">Superficie Clase-A</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Continuidades matemáticas (G2/G3) para reflexiones perfectas.</p>
-            </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
-                <h3 class="lang-node" data-en="Manufacturing logic" data-es="Logística DFM">Logística DFM</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Optimización real para inyección de moldes y tolerancias.</p>
+                <h3 class="lang-node" data-en="Logistics D.F.M" data-es="Estrategia D.F.M">Estrategia D.F.M</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Diseño optimizado para fabricación e inyección.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3 class="lang-node" data-en="Visual Rendering" data-es="Representación CGI">Representación CGI</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Control CMF avanzado mediante visualización Keyshot fotorrealista.</p>
+                <h3 class="lang-node" data-en="CGI Context" data-es="Visualización CGI">Visualización CGI</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Renderizado fotorrealista Keyshot y narrativa CMF.</p>
+            </div>
+            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="50">
+                <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
+                <h3 class="lang-node" data-en="Ergonomics" data-es="Antropometría">Antropometría</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Factor humano dictando la forma y métricas del objeto.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
-                <h3 class="lang-node" data-en="Ergonomic Logic" data-es="Factor Ergonómico">Factor Ergonómico</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Métricas humanas para dictar la relación con el volumen final.</p>
-            </div>
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3 class="lang-node" data-en="Prototyping" data-es="Mecanización">Mecanización</h3>
-                <p style="font-size:0.9rem; color:var(--text-dim);">Validación mediante impresión 3D e integración rápida CNC.</p>
+                <h3 class="lang-node" data-en="Fast Mockups" data-es="Mecanización">Mecanización</h3>
+                <p style="font-size:0.95rem; color:var(--text-dim);">Iteraciones tangibles mediante impresión 3D y CNC.</p>
             </div>
         </div>
     </section>
 
-    <!-- HISTORIAL INTEGRADO (5 HITOS) -->
+    <!-- TRAYECTORIA (5 BARRAS) -->
     <section id="cv" class="spy-section">
-        <h2 class="section-title lang-node" data-en="Trajectory /" data-es="Trayectoria /">Trayectoria /</h2>
+        <h2 class="section-title lang-node" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         <div class="cv-wrapper">
             <div class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role"><h3>Product Design Lead</h3><div class="cv-company">Industrial Core Studio • 2024 — HOY</div></div>
                 <div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
-            <div class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="cv-role"><h3>Jr. Designer</h3><div class="cv-company">Prototyping Labs • 2022 — 2024</div></div>
+            <div class="cv-item inter-hover" data-aos="fade-up">
+                <div class="cv-role"><h3>Specialist Designer</h3><div class="cv-company">Prototyping Labs • 2022 — 2024</div></div>
                 <div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
             <div class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role"><h3>Specialist Intern</h3><div class="cv-company">Bionic Hardware • 2021</div></div>
+                <div class="cv-role"><h3>Junior Technical</h3><div class="cv-company">Bionic Hardware • 2021 — 2022</div></div>
                 <div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
             <div class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role"><h3>Ind. Design B.A.</h3><div class="cv-company">Polytechnic crossover UPV/Milán</div></div>
+                <div class="cv-role"><h3>Ind. Design B.A.</h3><div class="cv-company">UPV Valencia / Milán • 2016 — 2021</div></div>
                 <div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
-            <!-- Barra extra reintegrada -->
             <div class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role"><h3>Asistente Modelado</h3><div class="cv-company">Technical Design Services • 2016</div></div>
+                <div class="cv-role"><h3>Model Assistant</h3><div class="cv-company">Workshop Services • 2015</div></div>
                 <div class="fx-outbox"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
         </div>
-        <a href="#" class="btn inter-hover" data-aos="zoom-in"><span class="lang-node" data-en="Get Full Dossier" data-es="Bajar Dossier Completo">Bajar Dossier Completo</span></a>
+        <a href="#" class="btn inter-hover" data-aos="zoom-in"><span class="lang-node" data-en="Full Dossier (PDF)" data-es="Dossier Completo (PDF)">Dossier Completo (PDF)</span></a>
     </section>
 
     <!-- CONTACTO -->
     <section id="contact" class="spy-section">
         <div class="contact-card inter-hover" data-aos="fade-up">
-            <h2 class="mega-text lang-node" data-en="IDEAS THAT<br>WEIGHT." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
+            <h2 class="mega-text lang-node" data-en="BUILD THE<br>MATERIAL." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
             <div class="contact-links-grid">
-                <div class="contact-col"><h4>Email</h4><a href="mailto:hola@luisblasco.com">hola@luisblasco.com</a></div>
-                <div class="contact-col"><h4>Desk</h4><a href="#">LinkedIn / Luisblasco</a></div>
-                <div class="contact-col"><h4>Loc</h4><a href="#">Valencia, España.</a></div>
+                <div class="contact-col"><h4>Canal Hub</h4><a href="mailto:hola@luisblasco.com">hola@luisblasco.com</a></div>
+                <div class="contact-col"><h4>Desk</h4><a href="#">LinkedIn / luis-bib</a></div>
+                <div class="contact-col"><h4>Operation</h4><a href="#">Valencia, España.</a></div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="nav-logo" style="margin-bottom:10px">L|BIB</div>
-        <div>DESIGN CORE SYSTEM © 2026. LUIS BLASCO-IBÁÑEZ.</div>
+        <div>DESIGN FRAMEWORK SYSTEM © 2026. LUIS BLASCO-IBÁÑEZ.</div>
     </footer>
 
+    <!-- SCRIPTS CORE -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // Toggles Dark/Light
+        // Toggles
         document.getElementById("theme-toggle").addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             document.getElementById("theme-toggle").innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // Lang Switcher
         let activeLang = "es";
         document.getElementById("lang-toggle").addEventListener("click", () => {
             const nodes = document.querySelectorAll(".lang-node");
@@ -362,29 +358,47 @@
             }, 300);
         });
 
-        // --- COMPORTAMIENTO HEADER ESCONDER/MOSTRAR ---
+        // --- LÓGICA DE HEADER (ESCONDER / MOSTRAR CON BLOQUEO EN CLIC) ---
         let lastScroll = 0;
+        let isNavigating = false; // Flag para bloquear el escondido cuando pulsamos el menú
         const nav = document.getElementById("navbar");
+
         window.addEventListener("scroll", () => {
-            let st = window.pageYOffset;
-            if (st > lastScroll && st > 100) nav.classList.add("ui-hidden"); // Al bajar
-            else nav.classList.remove("ui-hidden"); // Al subir
-            lastScroll = st;
+            if (isNavigating) return; // Si estamos navegando por clic, no hacemos nada
+
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScroll && st > 150) nav.classList.add("ui-hidden"); // Baja -> Esconde
+            else nav.classList.remove("ui-hidden"); // Sube -> Muestra
+            
+            lastScroll = st <= 0 ? 0 : st;
         });
 
-        // --- SCROLL SPY CON EFECTO LUZ ---
+        // Al hacer clic en un enlace de navegación
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                isNavigating = true; // Bloqueamos el evento de esconder
+                nav.classList.remove("ui-hidden"); // Aseguramos que sea visible
+
+                // Liberamos la navegación tras terminar el scroll (aprox 800ms por el smooth)
+                setTimeout(() => { 
+                    isNavigating = false; 
+                    lastScroll = window.pageYOffset; // Sincronizamos última posición
+                }, 1000);
+            });
+        });
+
+        // --- SCROLL SPY CON LUZ ---
         const sections = document.querySelectorAll('.spy-section');
-        const navItems = document.querySelectorAll('.nav-item');
+        const navLinks = document.querySelectorAll('.nav-item');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
-                    navItems.forEach(item => {
-                        item.classList.remove('nav-active');
-                        if (item.getAttribute('href') === `#${e.target.id}`) item.classList.add('nav-active');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('nav-active', link.getAttribute('href') === `#${e.target.id}`);
                     });
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.35 });
         sections.forEach(s => observer.observe(s));
 
         // --- CURSOR ---
