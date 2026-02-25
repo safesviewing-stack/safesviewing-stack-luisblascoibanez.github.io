@@ -384,6 +384,12 @@
             /* Adaptación de bento en móviles recuperada */
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
+
+        .apellido-ajustado {
+    display: inline-block;
+    font-size: 0.92em;        /* reducción sutil */
+    letter-spacing: -0.03em; /* compacta sin romper el carácter */
+}
     </style>
 </head>
 <body>
@@ -413,7 +419,11 @@
     <!-- TÍTULO EN TRES LÍNEAS -->
     <section class="hero" id="home">
         <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-            <h1>LUIS<br>BLASCO-IBÁÑEZ<br>BERBEL</h1>
+            <h1>
+  LUIS<br>
+  <span class="apellido-ajustado">BLASCO-IBÁÑEZ</span><br>
+  BERBEL
+</h1>
             
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
