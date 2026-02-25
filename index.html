@@ -1,3 +1,5 @@
+--- START OF FILE index - 2026-02-25T114047.652.html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -65,7 +67,6 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- CURSOR CAMBIADO A MÁS PEQUEÑO EN HOVER --- */
         #cursor-dot {
             width: 8px; height: 8px; background: var(--text); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
@@ -80,27 +81,28 @@
         }
         
         .hovered-element #cursor-ring {
-            width: 15px; height: 15px; background: var(--accent); border-color: transparent; border-width: 0;
+            width: 50px; height: 50px; background: var(--text); mix-blend-mode: difference;
+            border-color: transparent; border-width: 0;
         }
         .hovered-element #cursor-dot { opacity: 0; }
 
-        /* --- STATUS TAG ALINEADO A LA DERECHA DE SUBTITLE BAR --- */
+        /* --- MODIFICADO: STATUS TAG AHORA RELATIVO --- */
         .status-tag {
             display: flex; align-items: center; gap: 10px;
-            font-size: 0.7rem; color: var(--text); font-weight: 700; 
+            font-size: 0.65rem; color: var(--text); font-weight: 700; 
             text-transform: uppercase; letter-spacing: 1px;
-            background: var(--card-bg); backdrop-filter: var(--blur);
+            background: var(--card-bg); 
             padding: 8px 16px; border-radius: 100px;
             border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
 
         .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 6px; height: 6px; }
         .pulse-core { position: absolute; width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
         .pulse-ring { position: absolute; width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-
+        
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
-        /* --- NAVBAR --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -111,6 +113,7 @@
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 12px 35px; display: flex; align-items: center; gap: 40px;
             border: 1px solid var(--border); border-radius: 100px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
         }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
@@ -133,7 +136,7 @@
         }
         .lang-sutil-btn:hover { color: var(--text); opacity: 1; transform: translateY(-1px); }
 
-        /* --- HERO --- */
+        /* --- HERO SECTIONS --- */
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
         
@@ -143,12 +146,13 @@
             line-height: 0.9; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase;
         }
         
-        .subtitle-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 25px; width: 100%; max-width: 90%; }
+        /* MODIFICADO: SUBTITLE BAR FLEX ALIGN */
+        .subtitle-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 25px; width: 100%; max-width: 100%; gap: 20px; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- BENTO PERFIL --- */
+        /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 50px; backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;}
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
@@ -157,7 +161,7 @@
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- BENTO PORTFOLIO --- */
+        /* --- BENTO GRID: ARCHIVO DISEÑO --- */
         .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
         .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; transition: 0.5s ease; }
         .p-wide { grid-column: span 8; height: 500px; }
@@ -171,60 +175,83 @@
         .view-circle { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.08); }
+        .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- SKILLS --- */
+        /* --- INFRAESTRUCTURA --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- HISTORICO LABORAL CLEAN ANIMATION --- */
+        /* --- CV ANIMATIONS ENHANCED --- */
         .cv-wrapper { border-top: 1px solid var(--border); display: flex; flex-direction: column; margin-top: 40px; }
+        
         .cv-item { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 40px 15px; border-bottom: 1px solid var(--border); text-decoration: none;
-            transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease; 
+            padding: 45px 15px; border-bottom: 1px solid var(--border); text-decoration: none; cursor: none;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); background: transparent; 
             position: relative; overflow: hidden;
         }
+
         .cv-item::before {
-            content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 0;
-            background: var(--accent); transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
+            background: linear-gradient(90deg, var(--accent) -50%, transparent 100%);
+            z-index: 0; transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1); opacity: 0.05;
         }
-        .cv-item:hover { background: rgba(255,255,255,0.02); padding-left: 35px; }
-        .cv-item:hover::before { height: 100%; }
 
-        .cv-role { z-index: 1; transition: transform 0.4s ease; }
-        .cv-role h3 { font-family: 'Syne'; font-size: 2.1rem; font-weight: 700; color: var(--text); transition: 0.4s; letter-spacing: -0.5px; }
-        .cv-company { font-size: 1.05rem; color: var(--text-dim); transition: 0.4s; }
+        .cv-item:hover { padding-left: 60px; background: rgba(255,255,255,0.01); }
+        .cv-item:hover::before { width: 100%; }
 
-        .cv-item:hover .cv-role h3 { color: var(--accent); transform: translateX(10px); }
-        .cv-item:hover .cv-company { color: var(--text); transform: translateX(10px); }
+        .cv-role { z-index: 1; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        .cv-role h3 { 
+            font-family: 'Syne'; font-size: 2.3rem; font-weight: 700; color: var(--text); 
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); letter-spacing: -1px;
+        }
+        
+        .cv-item:hover .cv-role h3 { 
+            -webkit-text-stroke: 1px var(--accent); color: transparent; 
+            transform: translateX(15px) scale(1.02);
+        }
+
+        .cv-company { font-size: 1.05rem; color: var(--text-dim); transition: all 0.4s; }
+        .cv-item:hover .cv-company { color: var(--text); transform: translateX(15px); }
         
         .cv-right { display: flex; align-items: center; gap: 40px; z-index: 1;}
-        .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 1rem; color: var(--text-dim); transition: 0.4s;}
-        .cv-item:hover .cv-year { color: var(--text); transform: translateX(-10px);}
-        
+        .cv-year { font-family: 'Inter'; font-weight: 500; color: var(--text-dim); transition: 0.4s;}
+        .cv-item:hover .cv-year { color: var(--accent); font-weight: 800; transform: scale(1.1);}
+
         .fx-outbox {
             display: flex; justify-content: center; align-items: center; width: 55px; height: 55px; 
-            border-radius: 50%; border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
             color: var(--text); transform: rotate(-45deg); 
         }
-        .cv-item:hover .fx-outbox { background: var(--text); color: var(--bg); transform: rotate(0deg) scale(1.1); border-color: transparent; }
+        .cv-item:hover .fx-outbox { 
+            background: var(--accent); border-color: transparent; color: white; transform: rotate(0deg) scale(1.15); 
+        }
 
-        /* --- DOWNLOAD BUTTON ANIMATION --- */
+        /* --- ENHANCED BUTTON ANIMATION --- */
         .btn { 
             display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); 
-            padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; 
-            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            margin-top: 50px; position: relative; overflow: hidden;
+            padding: 20px 45px; border-radius: 100px; text-decoration: none; font-weight: 700; 
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; position: relative;
+            overflow: hidden; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: 1;
         }
-        .btn i { transition: transform 0.4s ease; }
-        .btn:hover { background: var(--accent); color: white; transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 20px rgba(255, 90, 0, 0.2); }
+
+        .btn::after {
+            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--accent); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .btn:hover { color: white; transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 30px rgba(255, 90, 0, 0.2); }
+        .btn:hover::after { left: 0; }
+        .btn i { transition: transform 0.3s ease; }
         .btn:hover i { transform: translateY(3px); }
 
-        /* --- CONTACT --- */
+        /* --- CONTACT ESTUDIO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
+        
         .contact-col h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--accent); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.9;}
         .contact-col a { display: block; font-size: 1.5rem; color: var(--text); text-decoration: none; margin-bottom: 8px; transition: all 0.3s; opacity: 0.7;}
         .contact-col a:hover { opacity: 1; color: var(--accent); transform: translateX(3px);}
@@ -233,6 +260,7 @@
             padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; 
             border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
         }
+        
         footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
         footer a:hover {color: var(--accent);}
 
@@ -242,11 +270,13 @@
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
             .contact-links-grid { grid-template-columns: 1fr 1fr; }
         }
+
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
-            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .subtitle-bar { flex-direction: column; align-items: flex-start; }
+            .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
+            .cv-item:hover { padding-left: 20px;}
             .cv-right {width: 100%; justify-content: space-between;}
         }
     </style>
@@ -281,7 +311,7 @@
             
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
-                <!-- STATUS TAG MOVIDO AQUÍ -->
+                <!-- MODIFICADO: AHORA AQUÍ A LA DERECHA Y ALINEADO -->
                 <div class="status-tag inter-hover">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
                     <span class="lang-node" data-en="Available / Book" data-es="Disponible para retos">Disponible para nuevos retos</span>
@@ -348,50 +378,58 @@
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="C.G.I Visualization" data-es="Representación C.G.I">Representación C.G.I</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Keyshot & Rendering flow mapping." data-es="Control C.MF absoluto utilizando visualización fotorrealista.">Control C.M.F absoluto utilizando visualización fotorrealista.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Keyshot & Rendering flow mapping logic." data-es="Control C.M.F absoluto utilizando visualización fotorrealista.">Control C.M.F absoluto utilizando visualización fotorrealista.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="DFM & Mfg logic" data-es="Matricería & D.F.M">Matricería & D.F.M</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready models." data-es="Pensamiento 'Diseñado para fabricación' y moldes plásticos.">Pensamiento 'Diseñado para fabricación' y moldes plásticos.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready models." data-es="Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante.">Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante.</p>
             </div>
         </div>
     </section>
 
+    <!-- MATRIX EXPERIENCA TÁCTICA: MODIFICADO CON 1 APARTADO EXTRA Y ANIMACIONES POTENCIADAS -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         <div class="cv-wrapper">
-            <!-- APARTADO EXTRA AÑADIDO -->
             <a href="#" class="cv-item inter-hover" data-aos="fade-up">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Lead Industrial Designer" data-es="Diseñador Industrial Lead">Diseñador Industrial Lead</h3>
+                    <h3 class="lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
                     <div class="cv-company lang-node" data-en="Industrial Core Studio" data-es="Industrial Core Studio">Industrial Core Studio</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2024 — HOY</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="50">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Equipment Designer" data-es="Diseñador de Equipamiento">Diseñador de Equipamiento</h3>
-                    <div class="cv-company lang-node" data-en="Prototyping Labs • Mechanics" data-es="Prototyping Labs • Parametrización">Prototyping Labs • Parametrización</div>
+                    <h3 class="lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
+                    <div class="cv-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Parametrización y volúmenes">Prototyping Labs C.A • Parametrización y volúmenes</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2022 — 2024</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
+            <!-- NUEVO APARTADO AÑADIDO -->
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Hardware Specialist" data-es="Especialista en Hardware">Especialista en Hardware</h3>
-                    <div class="cv-company lang-node" data-en="Bionic Solutions • Engineering" data-es="Bionic Solutions • Ingeniería">Bionic Solutions • Ingeniería</div>
+                    <h3 class="lang-node" data-en="Surface Modeler" data-es="Modelista de Superficies">Modelista de Superficies</h3>
+                    <div class="cv-company lang-node" data-en="G-Studio • Advanced Class-A" data-es="G-Studio • Superficies Clase-A Avanzadas">G-Studio • Superficies Clase-A Avanzadas</div>
                 </div>
                 <div class="cv-right"><span class="cv-year">2021 — 2022</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="150">
                 <div class="cv-role">
-                    <h3 class="lang-node" data-en="Junior Product Designer" data-es="Diseñador Jr. de Producto">Diseñador Jr. de Producto</h3>
-                    <div class="cv-company lang-node" data-en="Valencia Design Hub" data-es="Valencia Design Hub">Valencia Design Hub</div>
+                    <h3 class="lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
+                    <div class="cv-company lang-node" data-en="Bionic Solutions • Enclosing fitting" data-es="Bionic Solutions • Ingeniería interna empacada">Bionic Solutions • Ingeniería interna empacada</div>
                 </div>
-                <div class="cv-right"><span class="cv-year">2020 — 2021</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
+                <div class="cv-right"><span class="cv-year">2021 — 2021</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
+            </a>
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="200">
+                <div class="cv-role">
+                    <h3 class="lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
+                    <div class="cv-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar y académico.">Curriculum de cruce interdisciplinar y académico.</div>
+                </div>
+                <div class="cv-right"><span class="cv-year">2016 — 2020</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
         </div>
-        <!-- BOTÓN CON ANIMACIÓN NUEVA -->
+        <!-- BOTÓN CON ANIMACIÓN MEJORADA -->
         <a href="#" class="btn inter-hover" data-aos="fade-up"><i class="fa-solid fa-arrow-down-to-line"></i> <span class="lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span></a>
     </section>
 
@@ -399,7 +437,7 @@
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
             <div class="contact-top-module">
                 <h2 class="mega-text lang-node" data-en="MATERIAL<br>REALITIES." data-es="IDEAS CON<br>PESO.">IDEAS CON<br>PESO.</h2>
-                <p class="about-text lang-node" style="max-width: 500px;" data-en="Producing strictly logical artifacts." data-es="Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales.">Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales.</p>
+                <p class="about-text lang-node" style="max-width: 500px;" data-en="Producing strictly logical artifacts bounded to deep geometrical aesthetic truth." data-es="Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales y puristas pensadas siempre en producto escalable final.">Desarrollo estricto unificando uso humano ergonómico mediante metodologías funcionales y puristas pensadas siempre en producto escalable final.</p>
             </div>
             
             <div class="contact-links-grid">
@@ -410,10 +448,11 @@
                 <div class="contact-col">
                     <h4 class="lang-node" data-en="PORTFOLIO LINKS" data-es="REFERENCIA DIGITAL">REFERENCIA DIGITAL</h4>
                     <a href="#" class="inter-hover">LinkedIn <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
+                    <a href="#" class="inter-hover">Behance <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; transform: rotate(-45deg);"></i></a>
                 </div>
                 <div class="contact-col">
-                    <h4 class="lang-node" data-en="LOCATION" data-es="UBICACIÓN">UBICACIÓN</h4>
-                    <a href="#" class="inter-hover">Valencia, España.</a>
+                    <h4 class="lang-node" data-en="OPERATION BASE" data-es="UBICACIÓN / TEL">UBICACIÓN / TEL</h4>
+                    <a href="#" class="inter-hover" style="font-size:1.1rem; line-height: 1.45;">Valencia, España.</a>
                 </div>
             </div>
         </div>
@@ -439,6 +478,7 @@
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
+            
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es"; 
                 domElements.forEach(node => {
