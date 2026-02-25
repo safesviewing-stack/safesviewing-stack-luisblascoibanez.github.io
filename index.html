@@ -162,18 +162,48 @@
         .about-text { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- BENTO GRID: ARCHIVO DISEÑO --- */
-        .portfolio-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-flow: dense;}
-        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; transition: 0.5s ease; }
-        .p-wide { grid-column: span 8; height: 500px; }
-        .p-square { grid-column: span 4; height: 500px; }
+        /* --- MÓDULO UNIFICADO Y SENSATO DEL PORTFOLIO GRID EQUITATIVO --- */
+        .portfolio-grid { 
+            display: grid; 
+            /* Sistema de 2 columnas donde TODO TIENE EXACTAMENTE LA MISMA MEDIDA = Nada domina frente a nada*/
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+        }
+
+        .p-card { 
+            position: relative; 
+            background: var(--bg); 
+            border: 1px solid var(--border); 
+            border-radius: 30px; 
+            overflow: hidden; 
+            height: 480px; /* Igualad absoluta y general altura bloque */
+            transition: 0.5s ease; 
+        }
+        
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.7; }
-        .p-info { position: absolute; bottom: 30px; left: 30px; right: 30px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
-        .p-info h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 5px; color: white;}
-        .p-info p { font-size: 0.85rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
-        .view-circle { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
+        
+        /* Sistema P-Info: Contenedor Principal. Alinear horizontalmente Icon y Texto pero protegiendo apilado natural interno de Título e h3 */
+        .p-info { 
+            position: absolute; bottom: 30px; left: 35px; right: 35px; 
+            z-index: 2; pointer-events: none; display: flex; 
+            justify-content: space-between; align-items: flex-end; /* Evita quiebres por el botón icon  */
+        }
+        
+        /* Agrupamiento Textos. FORZADO vertical 100% Título Subtitulo mediante Flex Col. JAMÁS pasará Subtexto derecha. */
+        .p-text-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; /* Oxígeno interlineado sin bailes  */
+        }
+
+        .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
+        .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; margin: 0;}
+        
+        .view-circle { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.08); }
         .p-card:hover .p-overlay { opacity: 1; }
@@ -185,173 +215,90 @@
 
 
         /* =======================================================
-           TIMELINE REFINADA: ALINEACIÓN PERFECTA DE COLUMNAS JS REACTIVE
+           EL NUEVO CURRÍCULUM: FORMALIDAD, MINIMALISMO ABSOLUTO 
+           Y ESTÉTICA EDITORIAL ESTRICTA (Sin timeline visual abstracta)
            ======================================================= */
-        .timeline-container {
-            position: relative;
-            max-width: 1200px;
-            padding-bottom: 30px;
-        }
-
-        /* Movil / Formato base natural por defecto */
-        .timeline-line-wrapper {
-            position: absolute;
-            left: 18px; /* Trazado de ruta de móvil sobre íconos encajados */
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, transparent 0%, var(--border) 10%, var(--border) 90%, transparent 100%);
-            z-index: 1;
-        }
-
-        .timeline-progress {
-            position: absolute;
-            inset-x: 0;
-            top: 0;
+        
+        .cv-list {
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            background: linear-gradient(to bottom, transparent 0%, var(--accent) 50%, var(--accent) 100%);
-            height: 0px; 
-            border-radius: 100px;
-            opacity: 0;
-            transition: height 0.1s ease-out, opacity 0.3s ease; /* fluidez estetica scrolling */
         }
 
-        .timeline-item {
+        /* Cada fila como una caja apaisada que da espacio lateral ordenado natural clásico (Mesa Trabajo de papel C.V.)*/
+        .cv-row {
             display: flex;
-            flex-direction: column; /* Alineación pila superior inferior por defecto movil */
-            padding-bottom: 50px;
+            flex-direction: row;
+            padding: 55px 0;
+            border-bottom: 1px solid var(--border);
+            gap: 60px; /* Abismo generoso inter-bloques. Orden impoluto. */
             position: relative;
-            padding-top: 10px; /* Evita clips borde con puntos absolutos  */
-        }
-        .timeline-item:last-child {
-            padding-bottom: 0px; 
-        }
-
-        /* DOT de Posición en Z frontal e interacción Reactiva Scroll */
-        .timeline-dot-wrapper {
-            position: absolute;
-            left: 0;
-            top: 10px; /* Sincroniza inicio bloque interno general   */
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20; 
-        }
-
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--text-dim);
-            border: 1px solid var(--border);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Fecha a la Izquierda del Título Internamente */
-        .timeline-left {
-            display: flex;
-            width: 100%; 
-            position: relative;
-            z-index: 10;
-        }
-        
-        .timeline-year {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem; 
-            font-weight: 600;
-            color: var(--text-dim);
-            line-height: 38px; /* Ancho caja en paralelo exacto a bolita de posición dot_wraoper de 38 */
-            padding-left: 65px; /* Offset esquiva bolitas moviles (ancho margen interno móvil estándar) */
-            margin: 0; 
-            transition: color 0.3s;
+        /* Lazer lateral limpio solo revelable a hover, manteniendo paz */
+        .cv-row::after {
+            content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
+            background: var(--accent); z-index: 2; transition: height 0.3s ease;
         }
 
-        /* Sección Titular de Rol e Instrucción (a la derecha centralmente referenciado) */
-        .timeline-right {
-            position: relative;
-            width: 100%;
-            padding-left: 65px; /* Mantiene mismo espaciado del margin de íconos base en visual verticalizado apilado inferior!  */
-            margin-top: 5px; /* Margen separación Título a bloque descriptivo abajo */
+        /* Micro gradiente iluminador imperceptiblemente profundo. Limpieza ante todo  */
+        .cv-row::before {
+            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
+            background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%);
+            z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
         }
 
-        .timeline-role {
+        /* En la interección empujamos sin perturbar el general. */
+        .cv-row:hover {
+            padding-left: 30px;
+        }
+        .cv-row:hover::after { height: 100%; }
+        .cv-row:hover::before { width: 100%; opacity: 1; }
+
+        .cv-year {
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem; 
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            font-weight: 700;
+            width: 180px; 
+            flex-shrink: 0;
+            z-index: 1; /* por delante de fondo trampa*/
+            transition: color 0.4s ease;
+        }
+
+        .cv-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 1; 
+        }
+
+        .cv-role {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--text);
             letter-spacing: -0.5px;
-            margin: 0 0 10px 0; 
-            transition: color 0.3s;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+            transition: color 0.4s ease;
         }
 
-        .timeline-desc {
-            font-size: 1rem;
+        .cv-desc {
+            font-size: 1.05rem;
             color: var(--text-dim);
-            line-height: 1.6;
-            max-width: 650px;
-            margin: 0; 
+            line-height: 1.65;
+            max-width: 680px;
+            margin: 0;
         }
 
-        /* Scroll Re-congelante Hover Tracking Orange */
-        .timeline-item:hover .timeline-dot,
-        .timeline-item.timeline-item-active .timeline-dot {
-            background: var(--accent);
-            transform: scale(1.25);
-            box-shadow: 0 0 15px var(--accent-glow);
-            border-color: var(--accent);
-        }
-
-        .timeline-item:hover .timeline-year,
-        .timeline-item:hover .timeline-role {
-            color: #ffffff;
-        }
-
-        /*  Escalado a DESKTOP SUPERIOR COMPLETO DE ALINEACION BIDIRECCIONAL LATERAL   */
-        @media (min-width: 768px) {
-            /* Anclas base de compensación izquierda a interior del componente Timeline-Main Wrapper  */
-            .timeline-line-wrapper { left: 160px; } /* Cuelga traza media-interna hacia fondo general container grid global horizontal derecha -> (2px line axis final base origin: )  */
-            
-            .timeline-dot-wrapper {
-                left: 141px; /* 160 centro base line -(19 mitad real de los 38 height total circle = perfect alignment in x/y!):   */
-            }
-            
-            .timeline-item {
-                flex-direction: row; 
-                align-items: flex-start; 
-                justify-content: flex-start;
-                padding-bottom: 60px;
-            }
-
-            .timeline-left {
-                width: 130px; /* Da respiro físico anterior visual entre date border final e inicio colision border circle track icon  */
-                flex-shrink: 0; 
-                justify-content: flex-start;
-            }
-            
-            .timeline-year {
-                padding-left: 0; 
-                width: 100%;
-                text-align: left; /* TExt-Date se aloja naturalmente contra la línea absoluta invisible global a la pura izqda interior padding nulo  */
-            }
-            
-            .timeline-right {
-                flex: 1; /* Agarra estensión natural sin overflow y ajustado contra texto-bloque máximo limite  */
-                padding-left: 80px; /* Offset real : Sumas  (Left Axis base160 - Gap final Circle end axis(141 + 38 =179px real)). So Content start -> ( 259 margin interno right padding final axis  !   */
-                margin-top: 0; /*  Remate estricto paralelo título de eje "z_left" . */
-            }
-
-            .timeline-role {
-                margin: 0 0 8px 0;
-                line-height: 38px; /* Título igualito en centrado altitud que Year Text line and Dots height. Clean Perfection Frame Rate Design .   */
-            }
-        }
+        /* Efectos sutiles focus y anclajes directos estéticos CV ROW*/
+        .cv-row:hover .cv-role { color: var(--accent); }
+        .cv-row:hover .cv-year { color: var(--text); }
 
 
-        /* --- BOTÓN DESCARGA C.V: PIÍLDORA BLANCO BASE CONSTANTE, FLUJO FLOW --- */
+        /* --- BOTÓN DESCARGA C.V: PIÍLDORA PERFECTA FIJADA, BLANCO PURO ABSOLUTO INMUTABLE  --- */
         .btn { 
             position: relative;
             display: inline-flex;
@@ -359,9 +306,8 @@
             justify-content: center;
             gap: 4px;
             overflow: hidden;
-            /* La magia es congelar la esquina base aquí! */
             border-radius: 100px !important; 
-            background: #ffffff; /* Fijo Reposo puro sobre bg oscuro del entorno y tema dark  */
+            background: #ffffff; /* INTOCABLE, RESUELVE COMO LÍNEAS PEDIDO EN BLANCO APLASTANTE NORMAL.*/
             padding: 18px 40px;
             text-decoration: none;
             font-weight: 600;
@@ -377,9 +323,8 @@
         
         .btn:hover { 
             color: #ffffff; 
-            transform: translateY(-3px); /* Micro interación flotación paralela eje Y en Z up !  */
+            transform: translateY(-3px); 
         }
-        
         .btn:active { transform: scale(0.95); }
 
         .flow-arr-left {
@@ -426,7 +371,6 @@
         }
         .btn:hover .flow-arr-right { right: -25%; color: #ffffff; }
 
-
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
@@ -436,22 +380,30 @@
         .contact-col a { display: block; font-size: 1.5rem; color: var(--text); text-decoration: none; margin-bottom: 8px; transition: all 0.3s; opacity: 0.7;}
         .contact-col a:hover { opacity: 1; color: var(--accent); transform: translateX(3px);}
 
-        /* Creado Central Stack Footer. */
         footer { 
             padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; 
             border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
         }
-        
         footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
         footer a:hover {color: var(--accent);}
 
-        /* Responses Adaptivas Base Web   */
+
+        /* Reposes adaptables Generales y Correcciones Modulares C.V Responsive  */
         @media (max-width: 1024px) {
-            .portfolio-bento { display: flex; flex-direction: column; }
-            .p-wide, .p-square { height: 400px; }
+            /* Las cards pasan a amontonarse singular en Vertical - Resolviendo 1 en la tableta y el celular para proteger las fotografias!*/
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .p-card { height: 420px; }
+
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
             .bento-card-photo { min-height: 400px;}
             .contact-links-grid { grid-template-columns: 1fr 1fr; }
+            
+            .cv-row {
+                flex-direction: column;
+                gap: 20px;
+                padding: 40px 0;
+            }
+            .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
         }
 
         @media (max-width: 768px) {
@@ -459,6 +411,9 @@
             .nav-links, .nav-dot { display: none; }
             .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
+            .p-info { left: 25px; right: 25px;} /* Protección celular extremo textos card internos. */
+            
+            .cv-row:hover { padding-left: 20px; } /* Ajuste el salto horizontal móvil es inferior. */
         }
     </style>
 </head>
@@ -519,43 +474,83 @@
         </div>
     </section>
 
+
+    <!-- --- SECCION REDISEÑADA ESTADO: PORTFOLIO EQUILIBRADO 2 COL GRID APILADO DE TIPOGRAFIAS DIRECTAS --- -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Design Archive /" data-es="Archivo de Diseño /">Archivo de Diseño /</h2>
-        <div class="portfolio-bento">
-            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
+        <div class="portfolio-grid">
+            
+            <a href="#" class="p-card inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3><p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <!-- Blindaje Columna Para Agrupar Estrictamente en Eje (Títutulo, encima del Suxtesto Siempre) -->
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3>
+                        <p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
             
-            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="EGO SEATING" data-es="EGO SEATING">EGO SEATING</h3><p class="lang-node" data-en="Context / Object" data-es="Mobiliario / Contexto">Mobiliario / Contexto</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="EGO SEATING" data-es="EGO SEATING">EGO SEATING</h3>
+                        <p class="lang-node" data-en="Context / Object" data-es="Mobiliario / Contexto">Mobiliario / Contexto</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
             
-            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up">
+            <a href="#" class="p-card inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="BEATS X" data-es="BEATS X">BEATS X</h3><p class="lang-node" data-en="Consumer Electronics" data-es="Carcasas Hi-Fi">Carcasas Hi-Fi / Consumer Electronics</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="BEATS X" data-es="BEATS X">BEATS X</h3>
+                        <p class="lang-node" data-en="Consumer Electronics" data-es="Carcasas Hi-Fi">Carcasas Hi-Fi / Consumer Electronics</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h3><p class="lang-node" data-en="Industrialized Organics" data-es="Diseño Orgánico Industrializado">Diseño Orgánico Industrializado</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h3>
+                        <p class="lang-node" data-en="Industrialized Organics" data-es="Diseño Orgánico Industrializado">Diseño Orgánico Industrializado</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
             
-            <a href="#" class="p-card p-wide inter-hover" data-aos="fade-up">
+            <a href="#" class="p-card inter-hover" data-aos="fade-up">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&w=1200&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="OMNI DYNAMICS" data-es="OMNI DYNAMICS">OMNI DYNAMICS</h3><p class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="OMNI DYNAMICS" data-es="OMNI DYNAMICS">OMNI DYNAMICS</h3>
+                        <p class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="#" class="p-card p-square inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&w=800&q=80"></div>
                 <div class="p-overlay"></div>
-                <div class="p-info"><div><h3 class="lang-node" data-en="LUNA ENVIRONMENT" data-es="LUNA AMBIENT">LUNA AMBIENT</h3><p class="lang-node" data-en="Industrial Object / Home" data-es="Objeto Industrial y Hábitat">Objeto Industrial y Hábitat</p></div><div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div></div>
+                <div class="p-info">
+                    <div class="p-text-col">
+                        <h3 class="lang-node" data-en="LUNA ENVIRONMENT" data-es="LUNA AMBIENT">LUNA AMBIENT</h3>
+                        <p class="lang-node" data-en="Industrial Object / Home" data-es="Objeto Industrial y Hábitat">Objeto Industrial y Hábitat</p>
+                    </div>
+                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
         </div>
     </section>
@@ -596,84 +591,56 @@
         </div>
     </section>
 
-
-    <!-- --- SECCIÓN DE HISTÓRICO RESTAURADA A UNA CASCADA SIMPLE 100% CÓNCAVA E HIGIÉNICA. --- -->
+    <!-- --- CVRRICULUM PURISTA REIMAGINADO. LISTA MINIMAL Y RECTA SIN BURBUJAS COMPLEJAS. --- -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
         
-        <div class="timeline-container" id="timeline-container">
-            <div class="timeline-line-wrapper">
-                <div class="timeline-progress" id="timeline-progress"></div>
-            </div>
-
-            <!-- RENDER DEL TRAZADOR LABORAL -->
-            <div class="timeline-item inter-hover" data-aos="fade-up">
-                <div class="timeline-left">
-                    <span class="timeline-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</span>
-                </div>
-                
-                <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                
-                <div class="timeline-right">
-                    <h3 class="timeline-role lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
-                    <p class="timeline-desc lang-node" data-en="Leadership of design processes, parametric flow optimization, and overall technical management of physical product development." data-es="Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.">Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.</p>
+        <!-- Reubicada Caja Editorial Lista Suicida Sólida Vertical Categórica Estructural Sin adornos naranjas innecesarios ni Timeline Complex -->
+        <div class="cv-list" data-aos="fade-up">
+            
+            <div class="cv-row inter-hover">
+                <div class="cv-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</div>
+                <div class="cv-content">
+                    <h3 class="cv-role lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
+                    <p class="cv-desc lang-node" data-en="Leadership of design processes, parametric flow optimization, and overall technical management of physical product development." data-es="Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.">Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.</p>
                 </div>
             </div>
 
-            <div class="timeline-item inter-hover" data-aos="fade-up">
-                <div class="timeline-left">
-                    <span class="timeline-year lang-node" data-en="2022 — 2024" data-es="2022 — 2024">2022 — 2024</span>
-                </div>
-                
-                <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                
-                <div class="timeline-right">
-                    <h3 class="timeline-role lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
-                    <p class="timeline-desc lang-node" data-en="Deep dive into 3D modeling, rigorous assembly validation, and setting precise dimensional constraints for CNC manufacturing." data-es="Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.">Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.</p>
+            <div class="cv-row inter-hover">
+                <div class="cv-year lang-node" data-en="2022 — 2024" data-es="2022 — 2024">2022 — 2024</div>
+                <div class="cv-content">
+                    <h3 class="cv-role lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
+                    <p class="cv-desc lang-node" data-en="Deep dive into 3D modeling, rigorous assembly validation, and setting precise dimensional constraints for CNC manufacturing." data-es="Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.">Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.</p>
                 </div>
             </div>
 
-            <div class="timeline-item inter-hover" data-aos="fade-up">
-                <div class="timeline-left">
-                    <span class="timeline-year lang-node" data-en="2021 — 2022" data-es="2021 — 2022">2021 — 2022</span>
-                </div>
-                
-                <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                
-                <div class="timeline-right">
-                    <h3 class="timeline-role lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
-                    <p class="timeline-desc lang-node" data-en="Design and spatial packaging of electronic circuits inside injection-molded casings, guaranteeing heat flow and structural integrity." data-es="Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.">Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.</p>
+            <div class="cv-row inter-hover">
+                <div class="cv-year lang-node" data-en="2021 — 2022" data-es="2021 — 2022">2021 — 2022</div>
+                <div class="cv-content">
+                    <h3 class="cv-role lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
+                    <p class="cv-desc lang-node" data-en="Design and spatial packaging of electronic circuits inside injection-molded casings, guaranteeing heat flow and structural integrity." data-es="Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.">Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.</p>
                 </div>
             </div>
 
-            <div class="timeline-item inter-hover" data-aos="fade-up">
-                <div class="timeline-left">
-                    <span class="timeline-year lang-node" data-en="2020 — 2021" data-es="2020 — 2021">2020 — 2021</span>
-                </div>
-                
-                <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                
-                <div class="timeline-right">
-                    <h3 class="timeline-role lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
-                    <p class="timeline-desc lang-node" data-en="Specialization in Class-A surfacing, material resilience mapping and high-end digital simulations for production lines." data-es="Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.">Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.</p>
+            <div class="cv-row inter-hover">
+                <div class="cv-year lang-node" data-en="2020 — 2021" data-es="2020 — 2021">2020 — 2021</div>
+                <div class="cv-content">
+                    <h3 class="cv-role lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
+                    <p class="cv-desc lang-node" data-en="Specialization in Class-A surfacing, material resilience mapping and high-end digital simulations for production lines." data-es="Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.">Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.</p>
                 </div>
             </div>
 
-            <div class="timeline-item inter-hover" data-aos="fade-up">
-                <div class="timeline-left">
-                    <span class="timeline-year lang-node" data-en="2016 — 2020" data-es="2016 — 2020">2016 — 2020</span>
-                </div>
-                
-                <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
-                
-                <div class="timeline-right">
-                    <h3 class="timeline-role lang-node" data-en="B.S. Ind. Design Degree" data-es="Graduado Diseño Industrial">Graduado Diseño Industrial</h3>
-                    <p class="timeline-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
+            <div class="cv-row inter-hover">
+                <div class="cv-year lang-node" data-en="2016 — 2020" data-es="2016 — 2020">2016 — 2020</div>
+                <div class="cv-content">
+                    <h3 class="cv-role lang-node" data-en="B.S. Ind. Design Degree" data-es="Graduado Diseño Industrial">Graduado Diseño Industrial</h3>
+                    <p class="cv-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
                 </div>
             </div>
+
         </div>
         
-        <div style="padding-top: 25px;" data-aos="fade-up">
+        <div style="padding-top: 15px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
                 <i class="fa-solid fa-arrow-right flow-arr-left"></i>
                 <span class="flow-circle"></span>
@@ -682,7 +649,6 @@
             </a>
         </div>
     </section>
-
 
     <section id="contact">
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
@@ -785,50 +751,6 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // ------------------ TIMELINE INTELIGENTE REAL EN DIRECCIONES: "ACTIVATE TRACK" 
-        const updateTimeline = () => {
-            const container = document.getElementById('timeline-container');
-            const progress = document.getElementById('timeline-progress');
-            if (!container || !progress) return;
-            
-            const rect = container.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            // Fuerte compensación calculable por ratio view-altura real del visor: 
-            const viewCenter = windowHeight / 2; 
-            let progressHeight = 0;
-            
-            if (rect.top > viewCenter) {
-                progress.style.height = '0px';
-                progress.style.opacity = '0';
-            } else {
-                progressHeight = viewCenter - rect.top;
-                // Ancla max limit en barra sin estirar a background base fuera general layout
-                progressHeight = Math.min(progressHeight, rect.height); 
-                progress.style.height = `${progressHeight}px`;
-                progress.style.opacity = '1';
-            }
-
-            // Mapeador matemático de clase activa para "enceder los puntitos" pasandoles pintura naraja JS ! 
-            const items = document.querySelectorAll('.timeline-item');
-            items.forEach((item) => {
-                const dotWrapper = item.querySelector('.timeline-dot-wrapper');
-                if(!dotWrapper) return;
-                
-                const dotRect = dotWrapper.getBoundingClientRect();
-                const triggerDistance = (dotRect.top - rect.top) + (dotRect.height / 2);
-                
-                if (progressHeight >= triggerDistance) {
-                    item.classList.add('timeline-item-active');
-                } else {
-                    item.classList.remove('timeline-item-active');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', updateTimeline);
-        window.addEventListener('resize', updateTimeline);
-        updateTimeline(); 
     </script>
 </body>
 </html>
