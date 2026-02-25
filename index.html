@@ -42,7 +42,6 @@
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        /* Tiempos fluidos multilenguaje */
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating {
             opacity: 0.25 !important;
@@ -184,61 +183,153 @@
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- ALTA CALIDAD CURRÍCULO: EXTREME SWIPE HOVER  --- */
-        .cv-wrapper { 
-            border-top: 1px solid var(--border); display: flex; flex-direction: column; margin-top: 40px;
-        }
-        
-        .cv-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 40px 10px; border-bottom: 1px solid var(--border); text-decoration: none; cursor: none;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; 
-            position: relative; overflow: hidden;
+        /* =======================================================
+           NUEVO SISTEMA TIMELINE (ESTILO ACETERNITY)
+           ======================================================= */
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 60px;
         }
 
-        .cv-item::before {
-            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
-            background: linear-gradient(90deg, rgba(255, 90, 0, 0.08) 0%, transparent 100%);
-            z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
+        /* Líneas verticales */
+        .timeline-line-wrapper {
+            position: absolute;
+            left: 38px; /* Offset fijo a la izquierda */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent 0%, var(--border) 10%, var(--border) 90%, transparent 100%);
+            z-index: 1;
         }
 
-        .cv-item::after {
-            content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
-            background: var(--accent); z-index: 2; transition: height 0.4s ease;
+        .timeline-progress {
+            position: absolute;
+            inset-x: 0;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, transparent 0%, var(--accent) 50%, var(--accent) 100%);
+            height: 0px; 
+            border-radius: 100px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .cv-item:hover { 
-            padding-left: 50px; 
-            border-bottom-color: transparent;
+        /* Cada bloque de contenido */
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 60px;
+            position: relative;
         }
-        .cv-item:hover::before { width: 100%; opacity: 1; }
-        .cv-item:hover::after { height: 100%; }
 
-        .cv-role { z-index: 1; transition: transform 0.5s; display: flex; flex-direction: column;}
-        .cv-role h3 { 
-            font-family: 'Syne'; font-size: 2.1rem; font-weight: 700; color: var(--text); 
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); letter-spacing: -0.5px; margin-bottom: 0px; 
-            padding-left: 2px;
+        /* Columna Izquierda (Sticky) */
+        .timeline-left {
+            position: sticky;
+            top: 150px;
+            align-self: flex-start;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            z-index: 40;
         }
-        .cv-company { font-size: 1.05rem; color: var(--text-dim); transition: all 0.4s; font-family: 'Inter'; }
 
-        .cv-item:hover .cv-role h3 { 
-            -webkit-text-stroke: 1.2px var(--accent); color: transparent; 
-            transform: translateX(10px); letter-spacing: 0.5px;
+        /* El punto centrado sobre la línea */
+        .timeline-dot-wrapper {
+            position: absolute;
+            left: 20px; 
+            top: -2px; 
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .cv-item:hover .cv-company { color: var(--text); transform: translateX(10px) translateY(2px); opacity: 0.95;}
-        
-        .cv-right { display: flex; align-items: center; gap: 40px; z-index: 1;}
-        .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 1rem; color: var(--text-dim); transition: all 0.5s;}
-        .cv-item:hover .cv-year { color: var(--text); font-weight: 700; transform: translateX(-10px);}
-        
-        .fx-outbox {
-            display: flex; justify-content: center; align-items: center; width: 55px; height: 55px; 
-            border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-            color: var(--text); transform: rotate(-45deg); 
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
-        .cv-item:hover .fx-outbox { 
-            background: var(--text); border-color: transparent; color: var(--bg); transform: rotate(0deg) scale(1.08); 
+
+        .timeline-year-desktop {
+            display: none;
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            padding-left: 90px;
+            transition: color 0.3s;
+            letter-spacing: -1px;
+        }
+
+        /* Columna Derecha (Contenido) */
+        .timeline-right {
+            position: relative;
+            padding-left: 90px;
+            padding-right: 20px;
+            width: 100%;
+            margin-top: -20px;
+        }
+
+        .timeline-year-mobile {
+            display: block;
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .timeline-role {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            line-height: 1.1;
+        }
+
+        .timeline-company {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .timeline-desc {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Hover states */
+        .timeline-item:hover .timeline-dot {
+            background: var(--accent);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-glow);
+            border-color: var(--accent);
+        }
+        .timeline-item:hover .timeline-year-desktop {
+            color: var(--text);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-item { flex-direction: row; padding-top: 120px; gap: 40px;}
+            .timeline-left { width: 35%; max-width: 400px; }
+            .timeline-right { width: 65%; padding-left: 0; margin-top: 0;}
+            .timeline-year-desktop { display: block; }
+            .timeline-year-mobile { display: none; }
         }
 
         /* --- ADAPTACIÓN ESTILO "FLOW BUTTON" PARA DESCARGA CV --- */
@@ -269,11 +360,10 @@
         .btn:hover { 
             border-color: transparent;
             border-radius: 12px;
-            color: white; /* Contraste sobre el círculo activo */
+            color: white; 
         }
         .btn:active { transform: scale(0.95); }
 
-        /* Flecha Izquierda */
         .flow-arr-left {
             position: absolute;
             left: -25%;
@@ -283,7 +373,6 @@
         }
         .btn:hover .flow-arr-left { left: 25px; }
 
-        /* Texto Flotante */
         .flow-text {
             position: relative;
             z-index: 1;
@@ -292,7 +381,6 @@
         }
         .btn:hover .flow-text { transform: translateX(12px); }
 
-        /* Círculo expansivo interno */
         .flow-circle {
             position: absolute;
             top: 50%;
@@ -300,7 +388,7 @@
             transform: translate(-50%, -50%);
             width: 16px;
             height: 16px;
-            background: var(--accent); /* Adaptado a tu color nativo */
+            background: var(--accent);
             border-radius: 50%;
             opacity: 0;
             z-index: 0;
@@ -309,7 +397,6 @@
         }
         .btn:hover .flow-circle { width: 350px; height: 350px; opacity: 1; }
 
-        /* Flecha Derecha */
         .flow-arr-right {
             position: absolute;
             right: 25px;
@@ -350,10 +437,6 @@
             header { padding: 10px 20px; gap: 20px; }
             .nav-links, .nav-dot { display: none; }
             .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
-            
-            .cv-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 25px 20px;}
-            .cv-item:hover { padding-left: 20px;}
-            .cv-right {width: 100%; justify-content: space-between;}
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
     </style>
@@ -492,59 +575,98 @@
         </div>
     </section>
 
+    <!-- TIMELINE SECTION SUSTITUYENDO AL CV ACORDEÓN -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Histórico Laboral /">Histórico Laboral /</h2>
-        <div class="cv-wrapper">
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
-                    <div class="cv-company lang-node" data-en="Industrial Core Studio" data-es="Industrial Core Studio">Industrial Core Studio</div>
-                </div>
-                <div class="cv-right"><span class="cv-year">2024 — HOY</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
-            </a>
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="50">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
-                    <div class="cv-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Parametrización y volúmenes">Prototyping Labs C.A • Parametrización y volúmenes</div>
-                </div>
-                <div class="cv-right"><span class="cv-year">2022 — 2024</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
-            </a>
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
-                    <div class="cv-company lang-node" data-en="Bionic Solutions • Enclosing fitting" data-es="Bionic Solutions • Ingeniería interna empacada">Bionic Solutions • Ingeniería interna empacada</div>
-                </div>
-                <div class="cv-right"><span class="cv-year">2021 — 2022</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
-            </a>
+        
+        <div class="timeline-container" id="timeline-container">
             
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="150">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
-                    <div class="cv-company lang-node" data-en="Polytechnic Inst. • Advanced Geometries" data-es="Instituto Politécnico • Geometrías Avanzadas">Instituto Politécnico • Geometrías Avanzadas</div>
-                </div>
-                <div class="cv-right"><span class="cv-year">2020 — 2021</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
-            </a>
+            <!-- Barra de progreso de scroll -->
+            <div class="timeline-line-wrapper">
+                <div class="timeline-progress" id="timeline-progress"></div>
+            </div>
 
-            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <div class="cv-role">
-                    <h3 class="lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
-                    <div class="cv-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar y académico.">Curriculum de cruce interdisciplinar y académico.</div>
+            <!-- ITEM 1 -->
+            <div class="timeline-item inter-hover" data-aos="fade-up">
+                <div class="timeline-left">
+                    <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
+                    <h3 class="timeline-year-desktop">2024 — HOY</h3>
                 </div>
-                <div class="cv-right"><span class="cv-year">2016 — 2020</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
-            </a>
+                <div class="timeline-right">
+                    <h3 class="timeline-year-mobile">2024 — HOY</h3>
+                    <h3 class="timeline-role lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
+                    <p class="timeline-company lang-node" data-en="Industrial Core Studio" data-es="Industrial Core Studio">Industrial Core Studio</p>
+                    <p class="timeline-desc lang-node" data-en="Leadership of design processes, parametric flow optimization, and overall technical management of physical product development." data-es="Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.">Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.</p>
+                </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="timeline-item inter-hover" data-aos="fade-up">
+                <div class="timeline-left">
+                    <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
+                    <h3 class="timeline-year-desktop">2022 — 2024</h3>
+                </div>
+                <div class="timeline-right">
+                    <h3 class="timeline-year-mobile">2022 — 2024</h3>
+                    <h3 class="timeline-role lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
+                    <p class="timeline-company lang-node" data-en="Prototyping Labs • Mechanics validation" data-es="Prototyping Labs • Parametrización y volúmenes">Prototyping Labs C.A • Parametrización y volúmenes</p>
+                    <p class="timeline-desc lang-node" data-en="Deep dive into 3D modeling, rigorous assembly validation, and setting precise dimensional constraints for CNC manufacturing." data-es="Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.">Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.</p>
+                </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="timeline-item inter-hover" data-aos="fade-up">
+                <div class="timeline-left">
+                    <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
+                    <h3 class="timeline-year-desktop">2021 — 2022</h3>
+                </div>
+                <div class="timeline-right">
+                    <h3 class="timeline-year-mobile">2021 — 2022</h3>
+                    <h3 class="timeline-role lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
+                    <p class="timeline-company lang-node" data-en="Bionic Solutions • Enclosing fitting" data-es="Bionic Solutions • Ingeniería interna empacada">Bionic Solutions • Ingeniería interna empacada</p>
+                    <p class="timeline-desc lang-node" data-en="Design and spatial packaging of electronic circuits inside injection-molded casings, guaranteeing heat flow and structural integrity." data-es="Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.">Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.</p>
+                </div>
+            </div>
+
+            <!-- ITEM 4 -->
+            <div class="timeline-item inter-hover" data-aos="fade-up">
+                <div class="timeline-left">
+                    <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
+                    <h3 class="timeline-year-desktop">2020 — 2021</h3>
+                </div>
+                <div class="timeline-right">
+                    <h3 class="timeline-year-mobile">2020 — 2021</h3>
+                    <h3 class="timeline-role lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
+                    <p class="timeline-company lang-node" data-en="Polytechnic Inst. • Advanced Geometries" data-es="Instituto Politécnico • Geometrías Avanzadas">Instituto Politécnico • Geometrías Avanzadas</p>
+                    <p class="timeline-desc lang-node" data-en="Specialization in Class-A surfacing, material resilience mapping and high-end digital simulations for production lines." data-es="Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.">Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.</p>
+                </div>
+            </div>
+
+            <!-- ITEM 5 -->
+            <div class="timeline-item inter-hover" data-aos="fade-up">
+                <div class="timeline-left">
+                    <div class="timeline-dot-wrapper"><div class="timeline-dot"></div></div>
+                    <h3 class="timeline-year-desktop">2016 — 2020</h3>
+                </div>
+                <div class="timeline-right">
+                    <h3 class="timeline-year-mobile">2016 — 2020</h3>
+                    <h3 class="timeline-role lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
+                    <p class="timeline-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar y académico.">Curriculum de cruce interdisciplinar y académico.</p>
+                    <p class="timeline-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
+                </div>
+            </div>
+            
         </div>
         
         <!-- IMPLEMENTACIÓN DEL NUEVO BOTÓN FLOW ADAPTADO -->
-        <a href="#" class="btn inter-hover" data-aos="fade-up">
-            <!-- Flecha animada izquierda -->
-            <i class="fa-solid fa-arrow-right flow-arr-left"></i>
-            <!-- Círculo que se expande por detrás -->
-            <span class="flow-circle"></span>
-            <!-- Texto (con la clase lang-node nativa para traducciones integradas) -->
-            <span class="flow-text lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span>
-            <!-- Flecha animada derecha -->
-            <i class="fa-solid fa-arrow-right flow-arr-right"></i>
-        </a>
+        <div style="padding-top: 20px;" data-aos="fade-up">
+            <a href="#" class="btn inter-hover">
+                <i class="fa-solid fa-arrow-right flow-arr-left"></i>
+                <span class="flow-circle"></span>
+                <span class="flow-text lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span>
+                <i class="fa-solid fa-arrow-right flow-arr-right"></i>
+            </a>
+        </div>
     </section>
 
     <section id="contact">
@@ -624,6 +746,7 @@
             lastScrollTop = scrollTop;
         });
 
+        // ------------------ EXTREME CURSOR FLOW SCRIPT DIRECT GPU
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
@@ -647,6 +770,34 @@
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
+
+        // ------------------ TIMELINE PROGRESS LOGIC (Framer Motion Replicate)
+        const updateTimeline = () => {
+            const container = document.getElementById('timeline-container');
+            const progress = document.getElementById('timeline-progress');
+            if (!container || !progress) return;
+            
+            const rect = container.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Empieza a llenarse cuando la parte superior de la timeline está a mitad de la pantalla
+            const viewCenter = windowHeight / 2;
+            
+            if (rect.top > viewCenter) {
+                progress.style.height = '0px';
+                progress.style.opacity = '0';
+            } else {
+                let height = viewCenter - rect.top;
+                // Topeamos la altura máxima al tamaño del contenedor
+                height = Math.min(height, rect.height);
+                progress.style.height = `${height}px`;
+                progress.style.opacity = '1';
+            }
+        };
+
+        window.addEventListener('scroll', updateTimeline);
+        window.addEventListener('resize', updateTimeline);
+        updateTimeline(); // Init call
     </script>
 </body>
 </html>
