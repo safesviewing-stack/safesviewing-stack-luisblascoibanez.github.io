@@ -12,7 +12,7 @@
     <style>
         /* --- CORE VARIABLES --- */
         :root {
-            --bg: #000000; /* Fondo cambiado a negro absoluto */
+            --bg: #000000; 
             --accent: #FF5A00; 
             --accent-glow: rgba(255, 90, 0, 0.15);
             --card-bg: rgba(25, 25, 27, 0.4);
@@ -121,7 +121,6 @@
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
         .nav-logo:hover { opacity: 1; }
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        /* Texto del header menos opaco mediante transparencia fina de base (0.6) a sólido (1) en el hover */
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.3s, transform 0.3s; }
         .nav-links a:hover { opacity: 1; transform: translateY(-1px); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
@@ -242,9 +241,83 @@
             background: var(--text); border-color: transparent; color: var(--bg); transform: rotate(0deg) scale(1.08); 
         }
 
-        /* Global Download CV */
-        .btn { display: inline-flex; align-items: center; gap: 12px; background: var(--text); color: var(--bg); padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, background 0.3s; margin-top: 50px; }
-        .btn:hover { transform: translateY(-5px); background: var(--accent); color: white;}
+        /* --- ADAPTACIÓN ESTILO "FLOW BUTTON" PARA DESCARGA CV --- */
+        .btn { 
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            overflow: hidden;
+            border-radius: 100px;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+            cursor: none;
+            transition: all 600ms cubic-bezier(0.23, 1, 0.32, 1);
+            margin-top: 50px;
+        }
+        
+        .light-mode .btn { border-color: rgba(0, 0, 0, 0.2); }
+        
+        .btn:hover { 
+            border-color: transparent;
+            border-radius: 12px;
+            color: white; /* Contraste sobre el círculo activo */
+        }
+        .btn:active { transform: scale(0.95); }
+
+        /* Flecha Izquierda */
+        .flow-arr-left {
+            position: absolute;
+            left: -25%;
+            z-index: 9;
+            font-size: 1rem;
+            transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .btn:hover .flow-arr-left { left: 25px; }
+
+        /* Texto Flotante */
+        .flow-text {
+            position: relative;
+            z-index: 1;
+            transform: translateX(-14px);
+            transition: all 800ms ease-out;
+        }
+        .btn:hover .flow-text { transform: translateX(12px); }
+
+        /* Círculo expansivo interno */
+        .flow-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent); /* Adaptado a tu color nativo */
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .btn:hover .flow-circle { width: 350px; height: 350px; opacity: 1; }
+
+        /* Flecha Derecha */
+        .flow-arr-right {
+            position: absolute;
+            right: 25px;
+            z-index: 9;
+            font-size: 1rem;
+            transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .btn:hover .flow-arr-right { right: -25%; }
 
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
@@ -444,7 +517,6 @@
                 <div class="cv-right"><span class="cv-year">2021 — 2022</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
             
-            <!-- NUEVO GRADO ACADÉMICO AÑADIDO AQUI -->
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="150">
                 <div class="cv-role">
                     <h3 class="lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
@@ -461,7 +533,18 @@
                 <div class="cv-right"><span class="cv-year">2016 — 2020</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
         </div>
-        <a href="#" class="btn inter-hover" data-aos="fade-up"><i class="fa-solid fa-arrow-down-to-line"></i> <span class="lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span></a>
+        
+        <!-- IMPLEMENTACIÓN DEL NUEVO BOTÓN FLOW ADAPTADO -->
+        <a href="#" class="btn inter-hover" data-aos="fade-up">
+            <!-- Flecha animada izquierda -->
+            <i class="fa-solid fa-arrow-right flow-arr-left"></i>
+            <!-- Círculo que se expande por detrás -->
+            <span class="flow-circle"></span>
+            <!-- Texto (con la clase lang-node nativa para traducciones integradas) -->
+            <span class="flow-text lang-node" data-en="Download PDF Dossier" data-es="Bajar Dossier (PDF)">Bajar Dossier (PDF)</span>
+            <!-- Flecha animada derecha -->
+            <i class="fa-solid fa-arrow-right flow-arr-right"></i>
+        </a>
     </section>
 
     <section id="contact">
