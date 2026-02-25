@@ -12,14 +12,13 @@
     <style>
         /* --- CORE VARIABLES --- */
         :root {
-            --bg: #030303;
+            --bg: #000000; /* Fondo cambiado a negro absoluto */
             --accent: #FF5A00; 
             --accent-glow: rgba(255, 90, 0, 0.15);
             --card-bg: rgba(25, 25, 27, 0.4);
             --border: rgba(255, 255, 255, 0.05);
             --text: #f3f3f3;
             --text-dim: #8b8b8d;
-            /* Header modificado -> Prácticamente indetectable sin embargo altísimo borroso real */
             --glass: rgba(10, 10, 12, 0.1); 
             --blur: blur(35px);
         }
@@ -43,10 +42,9 @@
             transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
         }
 
-        /* Tiempos fluidos multilenguaje 100% Sin Desvanecimientos Vacíos! */
+        /* Tiempos fluidos multilenguaje */
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating {
-            /* Textos hundidos difusos temporales (nunca cero masa para la flex-line) */
             opacity: 0.25 !important;
             filter: blur(8px) saturate(2);
             transform: scale(0.95) translateY(2px) !important;
@@ -82,7 +80,6 @@
             will-change: transform, width, height;
         }
         
-        /* Expansion mas compactada en estado botonera / Interacción sutil pero existente */
         .hovered-element #cursor-ring {
             width: 50px; height: 50px; background: var(--text); mix-blend-mode: difference;
             border-color: transparent; border-width: 0;
@@ -118,29 +115,30 @@
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 12px 35px; display: flex; align-items: center; gap: 40px;
             border: 1px solid var(--border); border-radius: 100px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Efecto invisible/vidrio hiper clean de agencia superior*/
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
         }
 
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
+        .nav-logo:hover { opacity: 1; }
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--text); }
+        /* Texto del header menos opaco mediante transparencia fina de base (0.6) a sólido (1) en el hover */
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.3s, transform 0.3s; }
+        .nav-links a:hover { opacity: 1; transform: translateY(-1px); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { 
-            background: transparent; border: none; color: var(--text);
-            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, color 0.3s;
+            background: transparent; border: none; color: var(--text); opacity: 0.6;
+            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
         }
-        .icon-btn:hover { color: var(--accent); transform: scale(1.1); }
+        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
 
-        /* EL TEXTO ES MAS ROBUSTO POR PETICION -> Weight de titulo rotundo `800`. Letra pesada y ancla. */
         .lang-sutil-btn {
-            background: transparent; border: none; color: var(--text-dim);
+            background: transparent; border: none; color: var(--text);
             font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; 
-            letter-spacing: 0.5px; padding: 2px 4px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.75; cursor: none;
+            letter-spacing: 0.5px; padding: 2px 4px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
         }
-        .lang-sutil-btn:hover { color: var(--text); opacity: 1; transform: translateY(-1px); }
+        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
         /* --- HERO SECTIONS --- */
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
@@ -196,17 +194,15 @@
             display: flex; justify-content: space-between; align-items: center; 
             padding: 40px 10px; border-bottom: 1px solid var(--border); text-decoration: none; cursor: none;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; 
-            position: relative; overflow: hidden; /* Key masking block! */
+            position: relative; overflow: hidden;
         }
 
-        /* Scan Wave Gradiente Finito Invisible -> Visibile a Derecha (Absolutamente cinematografico!)  */
         .cv-item::before {
             content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
             background: linear-gradient(90deg, rgba(255, 90, 0, 0.08) 0%, transparent 100%);
             z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
         }
 
-        /* Láser Vertical Fuerte Edge / Acordeon Pop  */
         .cv-item::after {
             content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
             background: var(--accent); z-index: 2; transition: height 0.4s ease;
@@ -214,7 +210,7 @@
 
         .cv-item:hover { 
             padding-left: 50px; 
-            border-bottom-color: transparent; /* Difumina la division del base item  */
+            border-bottom-color: transparent;
         }
         .cv-item:hover::before { width: 100%; opacity: 1; }
         .cv-item:hover::after { height: 100%; }
@@ -227,9 +223,8 @@
         }
         .cv-company { font-size: 1.05rem; color: var(--text-dim); transition: all 0.4s; font-family: 'Inter'; }
 
-        /* MAGIA INVERSA EN LOS TEXTOS: Transparente rellenado perimétrico "Stroke Effect"  */
         .cv-item:hover .cv-role h3 { 
-            -webkit-text-stroke: 1.2px var(--accent); color: transparent; /* La silueta asombrosa */
+            -webkit-text-stroke: 1.2px var(--accent); color: transparent; 
             transform: translateX(10px); letter-spacing: 0.5px;
         }
         .cv-item:hover .cv-company { color: var(--text); transform: translateX(10px) translateY(2px); opacity: 0.95;}
@@ -238,7 +233,6 @@
         .cv-year { font-family: 'Inter'; font-weight: 500; font-size: 1rem; color: var(--text-dim); transition: all 0.5s;}
         .cv-item:hover .cv-year { color: var(--text); font-weight: 700; transform: translateX(-10px);}
         
-        /* Accion botón derecho "Polaridad Nube Blanca" Inyectada Adentro   */
         .fx-outbox {
             display: flex; justify-content: center; align-items: center; width: 55px; height: 55px; 
             border-radius: 50%; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
@@ -261,7 +255,7 @@
         .contact-col a { display: block; font-size: 1.5rem; color: var(--text); text-decoration: none; margin-bottom: 8px; transition: all 0.3s; opacity: 0.7;}
         .contact-col a:hover { opacity: 1; color: var(--accent); transform: translateX(3px);}
 
-        /* Creado Central Stack Footer. Espacio purificado, simple vertical block text */
+        /* Creado Central Stack Footer. */
         footer { 
             padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; 
             border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
@@ -322,7 +316,6 @@
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
                 
-                <!-- Etiqueta unificada en la misma línea del subtítulo -->
                 <div class="status-tag inter-hover">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
                     <span class="lang-node" data-en="Available / Book" data-es="Disponible para retos">Disponible para nuevos retos</span>
@@ -450,7 +443,17 @@
                 </div>
                 <div class="cv-right"><span class="cv-year">2021 — 2022</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
             </a>
+            
+            <!-- NUEVO GRADO ACADÉMICO AÑADIDO AQUI -->
             <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="150">
+                <div class="cv-role">
+                    <h3 class="lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
+                    <div class="cv-company lang-node" data-en="Polytechnic Inst. • Advanced Geometries" data-es="Instituto Politécnico • Geometrías Avanzadas">Instituto Politécnico • Geometrías Avanzadas</div>
+                </div>
+                <div class="cv-right"><span class="cv-year">2020 — 2021</span><div class="fx-outbox"><i class="fa-solid fa-arrow-right-long"></i></div></div>
+            </a>
+
+            <a href="#" class="cv-item inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="cv-role">
                     <h3 class="lang-node" data-en="B.S. in Ind. Design Degree" data-es="Graduado en Diseño Industrial">Graduado en Diseño Industrial</h3>
                     <div class="cv-company lang-node" data-en="Three-university polytechnic crossover." data-es="Curriculum de cruce interdisciplinar y académico.">Curriculum de cruce interdisciplinar y académico.</div>
