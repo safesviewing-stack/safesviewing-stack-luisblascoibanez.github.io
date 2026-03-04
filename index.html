@@ -111,20 +111,26 @@
 
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
-        /* --- NAVBAR CENTRO--- */
+        /* --- NAVBAR CENTRO Y OCULTAMIENTO --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .ui-hidden {
-            transform: translateY(-130px) !important;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-130px);
         }
+        
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 12px 35px; display: flex; align-items: center; gap: 40px;
             border: 1px solid var(--border); border-radius: 100px;
             box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
+            animation: headerFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes headerFadeIn {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
@@ -224,20 +230,25 @@
 
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
+        
+        /* HOVER EFECTO INTENSO E INSTANTÁNEO */
         .skills-bento .bento-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.1s ease-out; /* Acción instantánea */
+            will-change: transform, box-shadow, border-color;
         }
         .skills-bento .bento-card:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 40px rgba(255, 90, 0, 0.08);
-            transform: translateY(-5px);
+            background: rgba(255, 90, 0, 0.05); /* Tinte naranja sutil */
+            border-color: rgba(255, 90, 0, 0.6); /* Borde vibrante instantáneo */
+            box-shadow: 0 15px 45px rgba(255, 90, 0, 0.25); /* Glow radiante intenso */
+            transform: translateY(-10px) scale(1.02); /* Levitación fuerte */
         }
         .light-mode .skills-bento .bento-card:hover {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: rgba(0, 0, 0, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(255, 90, 0, 0.6);
+            box-shadow: 0 15px 45px rgba(255, 90, 0, 0.25);
+            transform: translateY(-10px) scale(1.02);
         }
+        
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
 
@@ -462,14 +473,14 @@
 
         .apellido-ajustado {
             display: inline-block;
-            font-size: 0.45em; /* Reducción notable para integrar en misma línea */
+            font-size: 0.45em;
             letter-spacing: -0.01em;
             vertical-align: middle; 
             margin-left: 0.25em;
         }
 
         .hero-title {
-            max-width: 1200px;   /* aumenta el ancho */
+            max-width: 1200px;
             width: 100%;
         }
 
@@ -491,22 +502,7 @@
         }
 
         .hero .subtitle {
-            margin-left: 0.4vw; /* ajusta: 1vw – 3vw según gusto */
-        }
-
-        @keyframes headerFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .navbar-wrapper {
-            animation: headerFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-left: 0.4vw;
         }
     </style>
 </head>
@@ -853,7 +849,7 @@
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
 
-            // Mostrar el header si subimos, esconderlo si bajamos (con límite inicial)
+            // Mostrar el header si subimos, esconderlo deslizándose hacia arriba si bajamos
             if (currentScroll > lastScroll && currentScroll > 100) {
                 navbar.classList.add("ui-hidden");
             } else {
