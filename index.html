@@ -732,17 +732,7 @@
             }, 250); 
         });
 
-        const uiLayerSyncs = document.querySelectorAll(".ui-sync");
-        let lastScrollTop = 0;
-        window.addEventListener("scroll", () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 150) {
-                uiLayerSyncs.forEach(layer => layer.classList.add("ui-hidden"));
-            } else {
-                uiLayerSyncs.forEach(layer => layer.classList.remove("ui-hidden"));
-            }
-            lastScrollTop = scrollTop;
-        });
+        
 
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
