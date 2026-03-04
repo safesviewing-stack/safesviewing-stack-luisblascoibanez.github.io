@@ -396,16 +396,16 @@
         .cv-row:hover .cv-year { color: var(--text); }
 
 
-        /* --- BOTÓN DESCARGA C.V --- */
+        /* --- BOTÓN DESCARGA C.V: SHINE AND SLIDE EFFECT --- */
         .btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            overflow: hidden; /* Crucial for the expanding circle */
-            border-radius: 100px;
-            background: #ffffff;
+            gap: 8px; /* Increased gap for better spacing with new animation */
+            overflow: hidden;
+            border-radius: 100px; /* Pill shape */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly dimmed white background */
             padding: 18px 40px;
             text-decoration: none;
             font-weight: 600;
@@ -414,76 +414,101 @@
             letter-spacing: 1px;
             color: #000000;
             cursor: none;
-            border: 1.5px solid rgba(51, 51, 51, 0.4); /* Add border for initial state */
-            transition: border-color 0.6s cubic-bezier(0.23,1,0.32,1), border-radius 0.6s cubic-bezier(0.23,1,0.32,1), transform 0.2s; /* Adjust transition for border-radius */
+            border: none; /* No solid border */
+            isolation: isolate; /* Create new stacking context for pseudo-elements */
             margin-top: 35px;
+            transition: color 0.4s cubic-bezier(0.23,1,0.32,1), background-color 0.4s cubic-bezier(0.23,1,0.32,1), border-radius 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px; /* Slightly larger than the button for the border effect */
+            background: conic-gradient(from var(--angle) at 50% 50%, #FF5A00, transparent, #FF5A00); /* Shimmer gradient */
+            border-radius: inherit; /* Inherit border-radius from button */
+            animation: rotateBorder 4s linear infinite forwards;
+            z-index: -1; /* Behind the button content */
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: var(--bg); /* Dark mode inner border simulation */
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 1;
+            transition: background-color 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        /* Set custom property for angle for CSS variable animation */
+        .btn {
+            --angle: 0deg;
+        }
+
+        @keyframes rotateBorder {
+            to { --angle: 360deg; }
         }
 
         .btn:hover {
-            border-color: transparent; /* Border disappears on hover */
-            border-radius: 12px; /* Changes to square on hover */
-            transform: scale(1); /* No Y-axis animation, just scale for active */
+            background-color: var(--accent); /* Solid orange on hover */
+            color: white; /* Text becomes white */
+            border-radius: 12px; /* Subtly squares off */
+            transform: translateY(-2px); /* Slight lift */
+            box-shadow: 0 8px 20px rgba(255, 90, 0, 0.25);
         }
-        .btn:active { transform: scale(0.95); }
+
+        .btn:hover::before {
+            opacity: 1; /* Make border shimmer visible */
+            animation-duration: 2s; /* Faster shimmer on hover */
+        }
+
+        .btn:hover::after {
+            background-color: var(--accent); /* Inner color matches accent */
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: translateY(0); /* Press effect */
+            box-shadow: 0 4px 10px rgba(255, 90, 0, 0.2);
+        }
 
         .btn .flow-arr-left, .btn .flow-arr-right {
-            position: absolute;
-            z-index: 9;
+            position: relative; /* Change to relative for sliding within button */
             font-size: 1rem;
             color: #111111; /* Initial color */
-            transition: all 800ms cubic-bezier(0.34,1.56,0.64,1);
-        }
-
-        .btn .flow-arr-left {
-            left: -25%; /* Start off-screen */
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), color 0.4s cubic-bezier(0.23,1,0.32,1);
+            transform: translateX(0); /* Reset initial transform */
+            z-index: 1; /* Ensure arrows are above the background */
         }
 
         .btn:hover .flow-arr-left {
-            left: 16px; /* Moves in from left */
             color: white;
+            transform: translateX(-4px); /* Slide left slightly */
         }
 
         .btn .flow-text {
             position: relative;
-            z-index: 1;
-            transform: translateX(-12px); /* Initial text position */
-            transition: transform 800ms ease-out, color 800ms ease-out;
+            z-index: 1; /* Ensure text is above the background */
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), color 0.4s cubic-bezier(0.23,1,0.32,1);
+            transform: translateX(0); /* Reset initial transform */
         }
         .btn:hover .flow-text {
             color: #ffffff;
-            transform: translateX(12px); /* Text moves right on hover */
-        }
-
-        .btn .flow-arr-right {
-            right: 16px; /* Initial position */
+            transform: translateX(0); /* Keep text centered or slight adjustment */
         }
 
         .btn:hover .flow-arr-right {
-            right: -25%; /* Moves out to the right */
             color: white;
+            transform: translateX(4px); /* Slide right slightly */
         }
 
-        /* Expanding circle background for the button */
+        /* Remove the old circle background, it's replaced by ::before and ::after */
         .btn-background-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 16px;
-            height: 16px;
-            background-color: var(--accent); /* Orange color */
-            border-radius: 50%;
-            opacity: 0;
-            z-index: 0; /* Behind text and arrows */
-            transition: width 800ms cubic-bezier(0.19,1,0.22,1), height 800ms cubic-bezier(0.19,1,0.22,1), opacity 800ms cubic-bezier(0.19,1,0.22,1);
+            display: none;
         }
-
-        .btn:hover .btn-background-circle {
-            width: 220px; /* Expands to cover the button */
-            height: 220px;
-            opacity: 1;
-        }
-
 
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
@@ -891,8 +916,7 @@
         <!-- Bloque descarga PDF Intacto Capsula Form -->
         <div style="padding-top: 15px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
-                <span class="btn-background-circle"></span>
-                <i class="fa-solid fa-arrow-right flow-arr-left"></i>
+                <i class="fa-solid fa-arrow-left flow-arr-left"></i> <!-- Changed to left arrow for initial state -->
                 <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
                 <i class="fa-solid fa-arrow-right flow-arr-right"></i>
             </a>
