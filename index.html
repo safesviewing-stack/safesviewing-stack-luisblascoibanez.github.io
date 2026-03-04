@@ -173,17 +173,7 @@
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
         .bento-card:hover {
-    border-color: var(--accent);
-    background: linear-gradient(
-        180deg,
-        var(--card-bg) 0%,
-        rgba(255, 90, 0, 0.08) 100%
-    );
-    box-shadow: 
-        0 10px 40px rgba(0,0,0,0.4),
-        0 0 35px var(--accent-glow);
-    transform: translateY(-6px);
-}
+   
         .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); }
         .about-text strong { color: var(--text); font-weight: 500;}
 
@@ -430,6 +420,29 @@
         .hero .subtitle {
             margin-left: 0.4vw; /* ajusta: 1vw – 3vw según gusto */
         }
+
+
+            .skills-bento .bento-card {
+    position: relative;
+    transition: 
+        transform 0.35s cubic-bezier(0.16,1,0.3,1),
+        box-shadow 0.35s cubic-bezier(0.16,1,0.3,1),
+        border-color 0.35s ease,
+        background 0.35s ease;
+}
+
+.skills-bento .bento-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.4),
+        0 0 35px var(--accent-glow);
+    background: linear-gradient(
+        180deg,
+        var(--card-bg) 0%,
+        rgba(255, 90, 0, 0.08) 100%
+    );
+}
     </style>
 </head>
 <body>
