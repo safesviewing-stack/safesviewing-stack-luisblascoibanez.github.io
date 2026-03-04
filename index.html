@@ -396,119 +396,90 @@
         .cv-row:hover .cv-year { color: var(--text); }
 
 
-        /* --- BOTÓN DESCARGA C.V: SHINE AND SLIDE EFFECT --- */
+        /* --- BOTÓN DESCARGA C.V: FRAMER STYLE --- */
         .btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Increased gap for better spacing with new animation */
+            gap: 12px; /* Adjusted gap for a cleaner look */
             overflow: hidden;
             border-radius: 100px; /* Pill shape */
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly dimmed white background */
-            padding: 18px 40px;
+            background: var(--card-bg); /* Use card-bg for glass effect */
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            padding: 16px 35px; /* Slightly adjusted padding */
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Slightly smaller font for subtlety */
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #000000;
+            color: var(--text); /* Default text color */
             cursor: none;
-            border: none; /* No solid border */
-            isolation: isolate; /* Create new stacking context for pseudo-elements */
+            border: 1px solid var(--border); /* Use existing border variable */
+            isolation: isolate;
             margin-top: 35px;
-            transition: color 0.4s cubic-bezier(0.23,1,0.32,1), background-color 0.4s cubic-bezier(0.23,1,0.32,1), border-radius 0.4s cubic-bezier(0.23,1,0.32,1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); /* Unified, smoother transition */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle initial shadow */
         }
 
         .btn::before {
             content: '';
             position: absolute;
-            inset: -2px; /* Slightly larger than the button for the border effect */
-            background: conic-gradient(from var(--angle) at 50% 50%, #FF5A00, transparent, #FF5A00); /* Shimmer gradient */
-            border-radius: inherit; /* Inherit border-radius from button */
-            animation: rotateBorder 4s linear infinite forwards;
-            z-index: -1; /* Behind the button content */
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
             inset: 0;
-            background-color: var(--bg); /* Dark mode inner border simulation */
+            background-color: var(--accent); /* Accent color for hover fill */
             border-radius: inherit;
             z-index: -1;
-            opacity: 1;
-            transition: background-color 0.4s ease-out, opacity 0.4s ease-out;
-        }
-
-        /* Set custom property for angle for CSS variable animation */
-        .btn {
-            --angle: 0deg;
-        }
-
-        @keyframes rotateBorder {
-            to { --angle: 360deg; }
+            opacity: 0; /* Starts invisible */
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.8); /* Starts slightly smaller */
         }
 
         .btn:hover {
-            background-color: var(--accent); /* Solid orange on hover */
-            color: white; /* Text becomes white */
-            border-radius: 12px; /* Subtly squares off */
-            transform: translateY(-2px); /* Slight lift */
-            box-shadow: 0 8px 20px rgba(255, 90, 0, 0.25);
+            color: white; /* Text becomes white on accent background */
+            border-color: var(--accent); /* Border matches accent */
+            transform: translateY(-3px) scale(1.01); /* Subtle lift and slight scale */
+            box-shadow: 0 10px 25px var(--accent-glow); /* Enhanced glow effect */
         }
 
         .btn:hover::before {
-            opacity: 1; /* Make border shimmer visible */
-            animation-duration: 2s; /* Faster shimmer on hover */
-        }
-
-        .btn:hover::after {
-            background-color: var(--accent); /* Inner color matches accent */
-            opacity: 1;
+            opacity: 1; /* Fade in the accent background */
+            transform: scale(1); /* Scale up to fill */
         }
 
         .btn:active {
-            transform: translateY(0); /* Press effect */
-            box-shadow: 0 4px 10px rgba(255, 90, 0, 0.2);
+            transform: translateY(0) scale(0.99); /* Press effect */
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
 
         .btn .flow-arr-left, .btn .flow-arr-right {
-            position: relative; /* Change to relative for sliding within button */
-            font-size: 1rem;
-            color: #111111; /* Initial color */
-            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), color 0.4s cubic-bezier(0.23,1,0.32,1);
-            transform: translateX(0); /* Reset initial transform */
-            z-index: 1; /* Ensure arrows are above the background */
-        }
-
-        .btn:hover .flow-arr-left {
-            color: white;
-            transform: translateX(-4px); /* Slide left slightly */
+            position: relative;
+            font-size: 0.9rem; /* Slightly smaller arrow size */
+            color: var(--text-dim); /* More subtle initial arrow color */
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(0);
+            z-index: 1;
         }
 
         .btn .flow-text {
             position: relative;
-            z-index: 1; /* Ensure text is above the background */
-            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), color 0.4s cubic-bezier(0.23,1,0.32,1);
-            transform: translateX(0); /* Reset initial transform */
+            z-index: 1;
+            transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn:hover .flow-arr-left {
+            color: white;
+            transform: translateX(-6px); /* More pronounced slide */
         }
         .btn:hover .flow-text {
-            color: #ffffff;
-            transform: translateX(0); /* Keep text centered or slight adjustment */
+            color: white;
+            transform: translateX(0);
         }
-
         .btn:hover .flow-arr-right {
             color: white;
-            transform: translateX(4px); /* Slide right slightly */
+            transform: translateX(6px); /* More pronounced slide */
         }
 
-        /* Remove the old circle background, it's replaced by ::before and ::after */
-        .btn-background-circle {
-            display: none;
-        }
 
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
