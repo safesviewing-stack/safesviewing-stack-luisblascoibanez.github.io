@@ -231,22 +231,36 @@
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         
-        /* HOVER EFECTO INTENSO E INSTANTÁNEO */
+        /* Dinámica idéntica a cajas de contacto (Naranja), con transición rápida */
         .skills-bento .bento-card {
-            transition: all 0.1s ease-out; /* Acción instantánea */
-            will-change: transform, box-shadow, border-color;
+            transition: all 0.1s ease-out; 
+            will-change: transform, box-shadow, border-color, background-color;
         }
+
+        /* Preparar textos para cambio de color instantáneo */
+        .skills-bento .bento-card h3,
+        .skills-bento .bento-card p.about-text {
+            transition: color 0.1s ease-out;
+        }
+
         .skills-bento .bento-card:hover {
-            background: rgba(255, 90, 0, 0.05); /* Tinte naranja sutil */
-            border-color: rgba(255, 90, 0, 0.6); /* Borde vibrante instantáneo */
-            box-shadow: 0 15px 45px rgba(255, 90, 0, 0.25); /* Glow radiante intenso */
-            transform: translateY(-10px) scale(1.02); /* Levitación fuerte */
+            border-color: var(--accent);
+            background: rgba(255, 90, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.1);
+            transform: translateY(-5px);
         }
+
+        /* Los títulos y el texto se tiñen de naranja al pasar el cursor */
+        .skills-bento .bento-card:hover h3, 
+        .skills-bento .bento-card:hover p.about-text { 
+            color: var(--accent); 
+        }
+
         .light-mode .skills-bento .bento-card:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: rgba(255, 90, 0, 0.6);
-            box-shadow: 0 15px 45px rgba(255, 90, 0, 0.25);
-            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 90, 0, 0.05);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.1);
+            transform: translateY(-5px);
         }
         
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
