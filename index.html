@@ -136,8 +136,8 @@
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
         .nav-logo:hover { opacity: 1; }
         
-        /* Nav Links y Píldora Activa */
-        .nav-links { display: flex; gap: 15px; align-items: center; } /* Gap reducido para las píldoras */
+        /* Nav Links y Píldora Activa (Sutil y translúcida) */
+        .nav-links { display: flex; gap: 15px; align-items: center; } 
         .nav-links a { 
             text-decoration: none; 
             color: var(--text); 
@@ -146,16 +146,16 @@
             font-weight: 500; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
-            padding: 8px 16px; /* Espaciado interno de píldora */
+            padding: 8px 16px; 
             border-radius: 100px;
             transition: all 0.3s ease; 
         }
         .nav-links a:hover { opacity: 1; }
         
-        /* Estado Activo: Píldora de color invertido */
+        /* Píldora traslúcida */
         .nav-links a.active {
-            background: var(--text);
-            color: var(--bg) !important;
+            background: rgba(150, 150, 150, 0.15); 
+            color: var(--text) !important;
             opacity: 1;
             font-weight: 700;
         }
@@ -163,17 +163,23 @@
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
+        
+        /* Icono sin outline cuadrado al clicar */
         .icon-btn { 
-            background: transparent; border: none; color: var(--text); opacity: 0.6;
+            background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6;
             width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
+            -webkit-tap-highlight-color: transparent;
         }
+        .icon-btn:focus, .icon-btn:active { outline: none; box-shadow: none; }
         .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
 
         .lang-sutil-btn {
-            background: transparent; border: none; color: var(--text);
+            background: transparent; border: none; outline: none; color: var(--text);
             font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; 
             letter-spacing: 0.5px; padding: 2px 4px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
+            -webkit-tap-highlight-color: transparent;
         }
+        .lang-sutil-btn:focus, .lang-sutil-btn:active { outline: none; box-shadow: none; }
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
         /* --- HERO SECTIONS --- */
@@ -198,7 +204,13 @@
 
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;}
+        
+        /* Fijación de bug sombra blanquecina por defecto a todas las bento-card */
+        .bento-card { 
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); /* Anti-ghosting artifacts Safari/Chrome */
+        }
+        
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
@@ -253,22 +265,21 @@
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         
-        /* Dinámica sencilla y elegante */
+        /* Dinámica idéntica a Contacto, libre de la sombra blanca buggeada */
         .skills-bento .bento-card {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }
 
-        /* Hover: Levantar suavemente y solo iluminar el borde de naranja translúcido */
         .skills-bento .bento-card:hover {
-            border-color: rgba(255, 90, 0, 0.5); /* Naranja más sutil y elegante */
-            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.05); /* Resplandor muy suave */
-            transform: translateY(-5px);
+            border-color: rgba(255, 90, 0, 0.5); /* Naranja translúcido */
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: none !important; /* Forza la eliminación de residuos/sombras raras */
         }
 
         .light-mode .skills-bento .bento-card:hover {
             border-color: rgba(255, 90, 0, 0.5);
-            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.05);
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: none !important;
         }
         
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
@@ -408,6 +419,10 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            -webkit-backface-visibility: hidden; 
+            backface-visibility: hidden; 
+            transform: translateZ(0); /* Anti-ghosting artifacts */
         }
         
         .contact-box h4 {
@@ -433,7 +448,7 @@
             border-color: #22c55e;
             background: rgba(34, 197, 94, 0.05);
             box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1);
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(0);
         }
         .box-phone:hover .box-text, .box-phone:hover h4 { color: #22c55e; }
 
@@ -442,7 +457,7 @@
             border-color: #0a66c2;
             background: rgba(10, 102, 194, 0.05);
             box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1);
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(0);
         }
         .box-linkedin:hover .box-text, .box-linkedin:hover h4 { color: #0a66c2; }
 
@@ -451,7 +466,7 @@
             border-color: var(--text);
             background: rgba(255, 255, 255, 0.05);
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(0);
         }
         .light-mode .box-neutral:hover {
             background: rgba(0, 0, 0, 0.05);
@@ -769,16 +784,19 @@
             
             <div class="contact-links-grid">
                 
-                <a href="tel:+34" class="contact-box box-phone inter-hover">
+                <!-- Caja estática / NO clicable para el teléfono -->
+                <div class="contact-box box-phone inter-hover">
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
                     <span class="box-text">+34 (TLF Línea directa)</span>
-                </a>
+                </div>
                 
+                <!-- Botón / Caja clicable para LinkedIn -->
                 <a href="#" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
                     <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
                 </a>
                 
+                <!-- Botón / Caja clicable para Email -->
                 <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box box-neutral inter-hover">
                     <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
                     <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
