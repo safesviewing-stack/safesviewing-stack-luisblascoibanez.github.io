@@ -752,7 +752,13 @@
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
-
+window.addEventListener("load", function () {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
+});
     </script>
 </body>
 </html>
