@@ -403,8 +403,8 @@
             align-items: center;
             justify-content: center;
             gap: 4px;
-            overflow: hidden;
-            border-radius: 100px !important;
+            overflow: hidden; /* Crucial for the expanding circle */
+            border-radius: 100px;
             background: #ffffff;
             padding: 18px 40px;
             text-decoration: none;
@@ -414,15 +414,14 @@
             letter-spacing: 1px;
             color: #000000;
             cursor: none;
-            border: none;
-            transition: all 600ms cubic-bezier(0.23,1,0.32,1); /* Combined transition */
+            border: 1.5px solid rgba(51, 51, 51, 0.4); /* Add border for initial state */
+            transition: border-color 0.6s cubic-bezier(0.23,1,0.32,1), border-radius 0.6s cubic-bezier(0.23,1,0.32,1), transform 0.2s; /* Adjust transition for border-radius */
             margin-top: 35px;
         }
 
         .btn:hover {
-            border-color: transparent;
-            color: white;
-            border-radius: 12px;
+            border-color: transparent; /* Border disappears on hover */
+            border-radius: 12px; /* Changes to square on hover */
             transform: scale(1); /* No Y-axis animation, just scale for active */
         }
         .btn:active { transform: scale(0.95); }
@@ -436,11 +435,11 @@
         }
 
         .btn .flow-arr-left {
-            left: -25%;
+            left: -25%; /* Start off-screen */
         }
 
         .btn:hover .flow-arr-left {
-            left: 16px; /* Adjust to match the FlowButton's visual effect */
+            left: 16px; /* Moves in from left */
             color: white;
         }
 
@@ -448,7 +447,7 @@
             position: relative;
             z-index: 1;
             transform: translateX(-12px); /* Initial text position */
-            transition: transform 800ms ease-out, color 800ms ease-out; /* Smooth text color transition */
+            transition: transform 800ms ease-out, color 800ms ease-out;
         }
         .btn:hover .flow-text {
             color: #ffffff;
@@ -456,18 +455,15 @@
         }
 
         .btn .flow-arr-right {
-            right: 16px;
+            right: 16px; /* Initial position */
         }
 
         .btn:hover .flow-arr-right {
-            right: -25%; /* Arrow moves out on hover */
+            right: -25%; /* Moves out to the right */
             color: white;
         }
 
-        .flow-circle { /* This element is no longer needed for the new hover effect */
-            display: none;
-        }
-
+        /* Expanding circle background for the button */
         .btn-background-circle {
             position: absolute;
             top: 50%;
@@ -475,7 +471,7 @@
             transform: translate(-50%, -50%);
             width: 16px;
             height: 16px;
-            background: #111111; /* Dark background color for the circle */
+            background-color: var(--accent); /* Orange color */
             border-radius: 50%;
             opacity: 0;
             z-index: 0; /* Behind text and arrows */
