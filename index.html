@@ -424,23 +424,25 @@
             color: #000000; 
             cursor: none;
             border: none;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Adjusted transition for hover effect */
+            /* Update transition for smooth background and color change */
+            transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
             margin-top: 35px;
         }
         
         .btn:hover { 
-            background-color: var(--accent); /* Change background to accent color */
-            color: #ffffff; 
+            background-color: var(--accent); /* Change background to accent color on hover */
+            color: #ffffff; /* Change text color to white on hover */
             transform: translateY(0px); /* No Y-axis animation */
         }
         .btn:active { transform: scale(0.95); }
 
         .flow-arr-left, .flow-arr-right {
-            position: relative; /* Changed to relative to move with the text */
+            /* Position relative so they move with the button content */
+            position: relative; 
             z-index: 9; 
             font-size: 1rem; 
-            color: inherit; /* Inherit color from parent */
-            transition: transform 0.3s ease, color 0.3s ease;
+            color: inherit; /* Inherit color from parent (.btn) */
+            transition: transform 0.4s ease-in-out, color 0.4s ease-in-out;
         }
 
         .btn:hover .flow-arr-left, .btn:hover .flow-arr-right {
@@ -451,7 +453,7 @@
         .flow-text {
             position: relative; 
             z-index: 1; 
-            transition: color 0.3s ease;
+            transition: color 0.4s ease-in-out; /* Smooth text color transition */
         }
         .btn:hover .flow-text { color: #ffffff; } /* Text becomes white on hover */
 
@@ -866,7 +868,6 @@
         <div style="padding-top: 15px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
                 <i class="fa-solid fa-arrow-right flow-arr-left"></i>
-                <span class="flow-circle"></span>
                 <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
                 <i class="fa-solid fa-arrow-right flow-arr-right"></i>
             </a>
@@ -967,19 +968,20 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        window.addEventListener("load", function () {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "instant"
-            });
-        });
+        // The scroll restoration is commented out to prevent automatic scrolling to top
+        // window.addEventListener("load", function () {
+        //     window.scrollTo({
+        //         top: 0,
+        //         left: 0,
+        //         behavior: "instant"
+        //     });
+        // });
 
-        history.scrollRestoration = "manual";
+        // history.scrollRestoration = "manual";
 
-        window.addEventListener("load", function () {
-            window.scrollTo(0, 0);
-        });
+        // window.addEventListener("load", function () {
+        //     window.scrollTo(0, 0);
+        // });
 
         let lastScroll = 0;
         const navbar = document.getElementById("navbar");
