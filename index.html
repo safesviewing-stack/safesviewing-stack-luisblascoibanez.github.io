@@ -231,22 +231,22 @@
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         
-        /* Dinámica idéntica a cajas de contacto (Naranja), con transición rápida */
+        /* Dinámica instantánea (sin animación) */
         .skills-bento .bento-card {
-            transition: all 0.1s ease-out; 
-            will-change: transform, box-shadow, border-color, background-color;
+            transition: none !important; 
+            will-change: transform, box-shadow, border-color;
         }
 
-        /* Preparar textos para cambio de color instantáneo */
+        /* Preparar textos para cambio instantáneo */
         .skills-bento .bento-card h3,
         .skills-bento .bento-card p.about-text {
-            transition: color 0.1s ease-out;
+            transition: none !important;
         }
 
+        /* Hover: Levantar al instante, borde naranja más claro, sin fondo de color extra */
         .skills-bento .bento-card:hover {
-            border-color: var(--accent);
-            background: rgba(255, 90, 0, 0.05);
-            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.1);
+            border-color: #ff8c42; /* Naranja un poco más claro */
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.15); /* Resplandor a juego con el naranja claro */
             transform: translateY(-5px);
         }
 
@@ -257,9 +257,8 @@
         }
 
         .light-mode .skills-bento .bento-card:hover {
-            background: rgba(255, 90, 0, 0.05);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.1);
+            border-color: #ff8c42;
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.15);
             transform: translateY(-5px);
         }
         
