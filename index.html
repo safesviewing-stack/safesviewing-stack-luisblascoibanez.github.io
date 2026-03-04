@@ -202,6 +202,60 @@
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
+
+        /* --- MARQUEE EDITORIAL INFINITO --- */
+        .marquee-section {
+            width: 100%;
+            overflow: hidden;
+            background: transparent;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 35s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-section:hover .marquee-content {
+            animation-play-state: paused;
+        }
+
+        .marquee-text {
+            display: flex;
+            align-items: center;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-dim);
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .marquee-section:hover .marquee-text {
+            color: var(--text);
+            -webkit-text-stroke: 0px var(--text);
+        }
+
+        .m-dot {
+            color: var(--accent) !important;
+            -webkit-text-stroke: 0px;
+            margin: 0 45px;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            transform: translateY(-4px);
+        }
+
+        @keyframes marqueeScroll {
+            to { transform: translateX(-50%); }
+        }
+
+
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         
@@ -587,6 +641,46 @@
             </div>
         </div>
     </section>
+
+    <!-- CARRUSEL EDITORIAL INFINITO -->
+    <div class="marquee-section inter-hover">
+        <div class="marquee-content">
+            <!-- Bloque 1 -->
+            <div class="marquee-text">
+                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="CLASS-A SURFACING" data-es="SUPERFICIES CLASE-A">SUPERFICIES CLASE-A</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="DFM INTEGRATION" data-es="INTEGRACIÓN DFM">INTEGRACIÓN DFM</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="C.M.F CONTROL" data-es="CONTROL C.M.F">CONTROL C.M.F</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+            </div>
+            <!-- Bloque 2 (Duplicado exacto para el loop) -->
+            <div class="marquee-text">
+                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="CLASS-A SURFACING" data-es="SUPERFICIES CLASE-A">SUPERFICIES CLASE-A</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="DFM INTEGRATION" data-es="INTEGRACIÓN DFM">INTEGRACIÓN DFM</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="C.M.F CONTROL" data-es="CONTROL C.M.F">CONTROL C.M.F</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+            </div>
+        </div>
+    </div>
 
     <section id="about">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="About me /" data-es="Sobre mí /">Sobre mí /</h2>
