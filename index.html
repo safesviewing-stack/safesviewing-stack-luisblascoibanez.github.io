@@ -203,12 +203,12 @@
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
 
-        /* --- MARQUEE EDITORIAL INFINITO --- */
+        /* --- MARQUEE EDITORIAL SUTIL --- */
         .marquee-section {
             width: 100%;
             overflow: hidden;
             background: transparent;
-            padding: 40px 0;
+            padding: 15px 0; /* Más estrecho */
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -218,37 +218,26 @@
         .marquee-content {
             display: flex;
             width: max-content;
-            animation: marqueeScroll 35s linear infinite;
+            animation: marqueeScroll 30s linear infinite;
             will-change: transform;
-        }
-
-        .marquee-section:hover .marquee-content {
-            animation-play-state: paused;
         }
 
         .marquee-text {
             display: flex;
             align-items: center;
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            color: transparent;
-            -webkit-text-stroke: 1.5px var(--text-dim);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem; /* Letra más pequeña */
+            font-weight: 500;
+            color: var(--text-dim); /* Tono atenuado integrado */
             text-transform: uppercase;
-            transition: all 0.4s ease;
-        }
-
-        .marquee-section:hover .marquee-text {
-            color: var(--text);
-            -webkit-text-stroke: 0px var(--text);
+            letter-spacing: 2px;
         }
 
         .m-dot {
-            color: var(--accent) !important;
-            -webkit-text-stroke: 0px;
-            margin: 0 45px;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            transform: translateY(-4px);
+            color: var(--accent);
+            margin: 0 35px; /* Espaciado elegante */
+            font-size: 0.6rem; /* Punto/Asterisco reducido */
+            opacity: 0.8;
         }
 
         @keyframes marqueeScroll {
@@ -642,8 +631,8 @@
         </div>
     </section>
 
-    <!-- CARRUSEL EDITORIAL INFINITO -->
-    <div class="marquee-section inter-hover">
+    <!-- CARRUSEL EDITORIAL INFINITO SUTIL -->
+    <div class="marquee-section">
         <div class="marquee-content">
             <!-- Bloque 1 -->
             <div class="marquee-text">
@@ -662,7 +651,24 @@
                 <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
-            <!-- Bloque 2 (Duplicado exacto para el loop) -->
+            <!-- Bloque 2 (Duplicado para flujo infinito) -->
+            <div class="marquee-text">
+                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="CLASS-A SURFACING" data-es="SUPERFICIES CLASE-A">SUPERFICIES CLASE-A</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="DFM INTEGRATION" data-es="INTEGRACIÓN DFM">INTEGRACIÓN DFM</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="C.M.F CONTROL" data-es="CONTROL C.M.F">CONTROL C.M.F</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+            </div>
+            <!-- Bloque 3 (Por seguridad en monitores ultrawide) -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
