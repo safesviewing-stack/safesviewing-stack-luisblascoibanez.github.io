@@ -116,8 +116,10 @@
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .ui-hidden { transform: translateY(-130px); }
-
+        .ui-hidden {
+    transform: translateY(-130px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 12px 35px; display: flex; align-items: center; gap: 40px;
@@ -769,6 +771,21 @@ window.addEventListener("load", function () {
 
 window.addEventListener("load", function () {
     window.scrollTo(0, 0);
+});
+
+        let lastScroll = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        navbar.classList.add("ui-hidden");
+    } else {
+        navbar.classList.remove("ui-hidden");
+    }
+
+    lastScroll = currentScroll;
 });
     </script>
 </body>
