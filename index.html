@@ -67,13 +67,13 @@
 
         /* --- REDUCCION ANILLO HARDWARE CURSOR --- */
         #cursor-dot {
-            width: 8px; height: 8px; background: var(--text); border-radius: 50%;
+            width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
             will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
         }
         
         #cursor-ring {
-            width: 45px; height: 45px; border: 1.5px solid var(--border); border-radius: 50%;
+            width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
             transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
             will-change: transform, width, height;
@@ -135,10 +135,32 @@
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
         .nav-logo:hover { opacity: 1; }
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.3s, transform 0.3s; }
-        .nav-links a:hover { opacity: 1; transform: translateY(-1px); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; }
+        
+        /* Nav Links y Píldora Activa */
+        .nav-links { display: flex; gap: 15px; align-items: center; } /* Gap reducido para las píldoras */
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text); 
+            opacity: 0.6; 
+            font-size: 0.8rem; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            padding: 8px 16px; /* Espaciado interno de píldora */
+            border-radius: 100px;
+            transition: all 0.3s ease; 
+        }
+        .nav-links a:hover { opacity: 1; }
+        
+        /* Estado Activo: Píldora de color invertido */
+        .nav-links a.active {
+            background: var(--text);
+            color: var(--bg) !important;
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { 
@@ -231,34 +253,21 @@
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         
-        /* Dinámica instantánea (sin animación) */
+        /* Dinámica sencilla y elegante */
         .skills-bento .bento-card {
-            transition: none !important; 
-            will-change: transform, box-shadow, border-color;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* Preparar textos para cambio instantáneo */
-        .skills-bento .bento-card h3,
-        .skills-bento .bento-card p.about-text {
-            transition: none !important;
-        }
-
-        /* Hover: Levantar al instante, borde naranja más claro, sin fondo de color extra */
+        /* Hover: Levantar suavemente y solo iluminar el borde de naranja translúcido */
         .skills-bento .bento-card:hover {
-            border-color: #ff8c42; /* Naranja un poco más claro */
-            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.15); /* Resplandor a juego con el naranja claro */
+            border-color: rgba(255, 90, 0, 0.5); /* Naranja más sutil y elegante */
+            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.05); /* Resplandor muy suave */
             transform: translateY(-5px);
         }
 
-        /* Los títulos y el texto se tiñen de naranja al pasar el cursor */
-        .skills-bento .bento-card:hover h3, 
-        .skills-bento .bento-card:hover p.about-text { 
-            color: var(--accent); 
-        }
-
         .light-mode .skills-bento .bento-card:hover {
-            border-color: #ff8c42;
-            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.15);
+            border-color: rgba(255, 90, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 90, 0, 0.05);
             transform: translateY(-5px);
         }
         
@@ -871,6 +880,33 @@
 
             lastScroll = currentScroll;
         });
+
+        // --- LÓGICA DE PÍLDORA DE SECCIÓN EN EL NAVBAR ---
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        const observerOptions = {
+            root: null,
+            // Ajustado para activar el estado cuando entras con holgura a la sección
+            rootMargin: "-20% 0px -60% 0px", 
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove("active");
+                        if (link.getAttribute("href") === `#${entry.target.id}`) {
+                            link.classList.add("active");
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
     </script>
 </body>
 </html>
