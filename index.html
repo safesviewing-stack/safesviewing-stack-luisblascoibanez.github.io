@@ -265,15 +265,15 @@
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         
-        /* Dinámica idéntica a Contacto, libre de la sombra blanca buggeada */
+        /* Eliminamos la animación de "border-color" para que sea instantáneo como en contacto */
         .skills-bento .bento-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }
 
         .skills-bento .bento-card:hover {
-            border-color: rgba(255, 90, 0, 0.5); /* Naranja translúcido */
+            border-color: rgba(255, 90, 0, 0.5); /* Se ilumina al instante */
             transform: translateY(-5px) translateZ(0);
-            box-shadow: none !important; /* Forza la eliminación de residuos/sombras raras */
+            box-shadow: none !important; /* Fuerza la eliminación de sombras/bugs residuales */
         }
 
         .light-mode .skills-bento .bento-card:hover {
@@ -417,7 +417,8 @@
             flex-direction: column;
             justify-content: center;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Aquí también excluimos el border-color para igualar instantaneidad */
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
             backdrop-filter: var(--blur);
             -webkit-backdrop-filter: var(--blur);
             -webkit-backface-visibility: hidden; 
