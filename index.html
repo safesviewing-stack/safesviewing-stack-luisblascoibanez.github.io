@@ -65,7 +65,7 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- REDUCCION ANILLO HARDWARE CURSOR --- */
+        /* --- CURSOR --- */
         #cursor-dot {
             width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
@@ -82,7 +82,7 @@
        .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
 
-        /* --- ETIQUETA STATUS INLINE  --- */
+        /* --- STATUS TAG --- */
         .status-tag {
             display: inline-flex; align-items: center; gap: 12px; width: max-content;
             font-size: 0.75rem; color: var(--text); font-weight: 600;
@@ -96,8 +96,6 @@
         .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 8px; height: 8px; }
         .pulse-core { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
         .pulse-ring { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-        .status-tag span { line-height: 1; margin-top: 1px; }
-
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
         /* --- NAVBAR --- */
@@ -115,14 +113,9 @@
             animation: headerFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes headerFadeIn {
-            0% { opacity: 0; transform: translateY(-40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
 
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
-        .nav-logo:hover { opacity: 1; }
-
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a {
             text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
@@ -130,209 +123,98 @@
         }
         .nav-links a:hover { opacity: 1; }
         .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
-
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
-
         .icon-btn {
-            background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6;
-            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
-            -webkit-tap-highlight-color: transparent;
+            background: transparent; border: none; color: var(--text); opacity: 0.6;
+            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; transition: 0.3s;
         }
         .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
 
         .lang-sutil-btn {
-            background: transparent; border: none; outline: none; color: var(--text);
-            font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.5px; padding: 2px 4px;
-            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
+            background: transparent; border: none; color: var(--text); font-size: 0.8rem; font-weight: 800; padding: 2px 4px; transition: 0.3s; opacity: 0.6;
         }
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
-        /* --- HERO SECTIONS --- */
+        /* --- SECTIONS --- */
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
-
-        .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
-
-        .hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 7.5vw, 8.5rem);
-            line-height: 1.1;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .hero-title span {
-            display: block;
-        }
-
-        .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
-        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
-
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 7.5vw, 8.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; }
+        .subtitle-bar { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 25px; }
+        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; }
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- MARQUEE EDITORIAL INFINITO --- */
-        .marquee-section {
-            width: 100%; overflow: hidden; background: transparent; padding: 40px 0;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center;
-        }
-        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
-        .marquee-text {
-            display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
-        }
-        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
+        /* --- MARQUEE --- */
+        .marquee-section { width: 100%; overflow: hidden; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; }
+        .marquee-text { display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; }
+        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); }
         @keyframes marqueeScroll { to { transform: translateX(-50%); } }
 
-        /* --- BENTO GRID: PERFIL --- */
+        /* --- BENTO ABOUT --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px;
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between; transform: translateZ(0); 
-        }
+        .bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); }
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
-        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
+        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        
-        /* Texto Sobre mí (Sin justificar) */
-        .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify; }
-        .about-text strong { color: var(--text); font-weight: 500;}
+        .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); }
 
-        /* --- PORTFOLIO GRID --- */
+        /* --- PORTFOLIO --- */
         .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
-        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease; }
-        .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
-        .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
-        .p-text-col { display: flex; flex-direction: column; gap: 4px; }
-        .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
-        .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; margin: 0;}
-        .view-circle { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        
-        .p-card:hover { border-color: rgba(255,255,255,0.2); }
+        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s; text-decoration: none; }
+        .p-img-container { width: 100%; height: 100%; position: absolute; overflow: hidden; }
+        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; transition: 0.5s; opacity: 0.8; }
+        .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; }
+        .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; color: white; margin-bottom: 5px;}
+        .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; }
+        .view-circle { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s; }
         .p-card:hover .p-img-container img { transform: scale(1.08); }
-        .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- SKILLS & COMPETENCIAS --- */
+        /* --- SKILLS --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
-        .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;}
-        .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
-        .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
-
-        /* Listas de capacidades en las cajas de Skills */
-        .capabilities-list {
-            list-style: none; padding: 0; margin: 0 0 25px 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;
-        }
-        .capabilities-list li {
-            font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
-        }
-        .capabilities-list li i {
-            color: var(--accent); font-size: 0.8rem; margin-top: 4px;
-        }
-
-        /* Etiquetas de software */
-        .software-tags {
-            display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px;
-        }
-        .software-tag {
-            display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; background: var(--glass);
-            border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; font-weight: 600;
-            color: var(--text); transition: all 0.3s ease;
-        }
-        .software-tag:hover {
-            border-color: var(--accent); background: var(--accent-glow);
-        }
-        .software-tag img {
-            width: 14px; height: 14px; object-fit: contain; filter: invert(1) opacity(0.8); transition: filter 0.3s ease;
-        }
-        .light-mode .software-tag img {
-            filter: invert(0) opacity(0.8);
-        }
+        .capabilities-list { list-style: none; margin: 0 0 25px 0; display: flex; flex-direction: column; gap: 10px; }
+        .capabilities-list li { font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: flex-start; gap: 10px; }
+        .capabilities-list li i { color: var(--accent); font-size: 0.8rem; margin-top: 4px; }
+        .software-tags { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .software-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; color: var(--text); }
+        .software-tag img { width: 14px; height: 14px; filter: invert(1); }
+        .light-mode .software-tag img { filter: invert(0); }
 
         /* --- CV --- */
-        .cv-list { border-top: 1px solid var(--border); display: flex; flex-direction: column; width: 100%; }
-        .cv-row { display: flex; flex-direction: row; padding: 55px 0; border-bottom: 1px solid var(--border); gap: 60px; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .cv-row::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%; background: var(--accent); z-index: 2; transition: height 0.3s ease; }
-        .cv-row::before { content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%); z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; }
+        .cv-list { border-top: 1px solid var(--border); width: 100%; }
+        .cv-row { display: flex; padding: 55px 0; border-bottom: 1px solid var(--border); gap: 60px; position: relative; transition: 0.4s; }
         .cv-row:hover { padding-left: 30px; }
+        .cv-row::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%; background: var(--accent); transition: 0.3s; }
         .cv-row:hover::after { height: 100%; }
-        .cv-row:hover::before { width: 100%; opacity: 1; }
-        .cv-year { font-family: 'Syne', sans-serif; font-size: 1.25rem; color: var(--text-dim); font-weight: 700; width: 180px; flex-shrink: 0; z-index: 1; transition: color 0.4s ease; }
-        .cv-content { display: flex; flex-direction: column; z-index: 1; }
-        .cv-role { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin: 0 0 15px 0; line-height: 1.2; transition: color 0.4s ease; }
-        .cv-desc { font-size: 1.05rem; color: var(--text-dim); line-height: 1.65; max-width: 680px; margin: 0; }
-        .cv-row:hover .cv-role { color: var(--accent); }
-        .cv-row:hover .cv-year { color: var(--text); }
+        .cv-year { font-family: 'Syne'; font-size: 1.25rem; color: var(--text-dim); font-weight: 700; width: 180px; }
+        .cv-role { font-family: 'Syne'; font-size: 1.8rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+        .cv-desc { font-size: 1.05rem; color: var(--text-dim); max-width: 680px; }
 
         /* --- BUTTONS --- */
         .btn {
-            position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden;
-            border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: inline-flex; align-items: center; gap: 12px; border-radius: 100px; background: var(--card-bg);
+            padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase;
+            color: var(--text); border: 1px solid var(--border); transition: 0.35s; margin-top: 35px;
         }
-        .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s, transform 0.35s; transform: scale(0.8); }
-        .btn:hover { color: white; border-color: var(--accent); transform: translateY(-3px) scale(1.01); box-shadow: 0 10px 25px var(--accent-glow); }
-        .btn:hover::before { opacity: 1; transform: scale(1); }
-        .btn:active { transform: translateY(0) scale(0.99); box-shadow: 0 5px 15px var(--accent-glow); }
-        .btn .flow-arr-left, .btn .flow-arr-right { position: relative; font-size: 0.9rem; color: var(--text-dim); transition: transform 0.35s, color 0.35s; transform: translateX(0); z-index: 1; }
-        .btn .flow-text { position: relative; z-index: 1; transition: color 0.35s; }
-        .btn:hover .flow-arr-left { color: white; transform: translateX(-6px); }
-        .btn:hover .flow-text { color: white; transform: translateX(0); }
-        .btn:hover .flow-arr-right { color: white; transform: translateX(6px); }
+        .btn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-3px); }
 
-
-        /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
-        .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
+        /* --- CONTACT --- */
+        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 40px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
+        .contact-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; text-decoration: none; transition: 0.4s; }
+        .contact-box h4 { font-family: 'Syne'; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 15px; }
+        .contact-box .box-text { font-size: 1.1rem; color: var(--text); }
+        .contact-box:hover { border-color: var(--accent); transform: translateY(-5px); }
 
-        .contact-box {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; justify-content: center;
-            text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); transform: translateZ(0);
-        }
-        .contact-box h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--text-dim); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; transition: color 0.4s ease; }
-        .contact-box .box-text { font-size: 1.1rem; color: var(--text); transition: color 0.4s ease; line-height: 1.5; }
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; align-items: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; }
 
-        .box-phone:hover { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1); transform: translateY(-5px) translateZ(0); }
-        .box-phone:hover .box-text, .box-phone:hover h4 { color: #22c55e; }
-        .box-linkedin:hover { border-color: #0a66c2; background: rgba(10, 102, 194, 0.05); box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1); transform: translateY(-5px) translateZ(0); }
-        .box-linkedin:hover .box-text, .box-linkedin:hover h4 { color: #0a66c2; }
-        .box-neutral:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); transform: translateY(-5px) translateZ(0); }
-        .light-mode .box-neutral:hover { background: rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(0,0,0,0.2); }
-        .box-neutral:hover .box-text, .box-neutral:hover h4 { color: var(--text); }
-
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        
-        /* Reposicionamiento Responsive */
         @media (max-width: 1024px) {
-            .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
-            .p-card { height: 420px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
-            .bento-card-photo { min-height: 400px;}
-            .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
-            .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
-            .contact-links-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 10px 20px; gap: 20px; }
-            .nav-links, .nav-dot { display: none; }
-            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
-            .p-info { left: 25px; right: 25px;}
-            .cv-row:hover { padding-left: 20px; }
-            .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
+            .contact-links-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -341,7 +223,7 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <div class="navbar-wrapper ui-sync" id="navbar">
+    <div class="navbar-wrapper" id="navbar">
         <header>
             <a href="#home" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
@@ -353,25 +235,18 @@
                 <a href="#contact" class="inter-hover lang-node" data-en="Contact" data-es="Contacto">Contacto</a>
             </nav>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
                 <div class="nav-dot" style="margin: 0 10px;"></div>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
             </div>
         </header>
     </div>
 
-    <!-- TÍTULO ORIGINAL CON AOS FADE-UP -->
     <section class="hero" id="home">
-        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-            <h1 class="hero-title">
-              LUIS<br>
-              BLASCO IBÁÑEZ<br>
-              BERBEL
-            </h1>
-
+        <div data-aos="fade-up" data-aos-duration="1200">
+            <h1>LUIS<br>BLASCO IBÁÑEZ<br>BERBEL</h1>
             <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
-
                 <div class="status-tag inter-hover">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
                     <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para nuevos retos</span>
@@ -380,42 +255,19 @@
         </div>
     </section>
 
-    <!-- CARRUSEL EDITORIAL INFINITO -->
-    <div class="marquee-section inter-hover">
+    <div class="marquee-section">
         <div class="marquee-content">
-            <!-- Bloque 1 -->
             <div class="marquee-text">
-                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="CLASS-A SURFACING" data-es="SUPERFICIES CLASE-A">SUPERFICIES CLASE-A</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="DFM INTEGRATION" data-es="INTEGRACIÓN DFM">INTEGRACIÓN DFM</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="C.M.F CONTROL" data-es="CONTROL C.M.F">CONTROL C.M.F</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span>DISEÑO INDUSTRIAL</span><span class="m-dot">★</span>
+                <span>MODELADO PARAMÉTRICO</span><span class="m-dot">★</span>
+                <span>PROTOTIPADO RÁPIDO</span><span class="m-dot">★</span>
+                <span>SUPERFICIES CLASE-A</span><span class="m-dot">★</span>
             </div>
-            <!-- Bloque 2 (Duplicado exacto para el loop) -->
             <div class="marquee-text">
-                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="CLASS-A SURFACING" data-es="SUPERFICIES CLASE-A">SUPERFICIES CLASE-A</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="DFM INTEGRATION" data-es="INTEGRACIÓN DFM">INTEGRACIÓN DFM</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="C.M.F CONTROL" data-es="CONTROL C.M.F">CONTROL C.M.F</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span>DISEÑO INDUSTRIAL</span><span class="m-dot">★</span>
+                <span>MODELADO PARAMÉTRICO</span><span class="m-dot">★</span>
+                <span>PROTOTIPADO RÁPIDO</span><span class="m-dot">★</span>
+                <span>SUPERFICIES CLASE-A</span><span class="m-dot">★</span>
             </div>
         </div>
     </div>
@@ -425,361 +277,181 @@
         <div class="bento-about">
             <div class="bento-card" data-aos="fade-up">
                 <p class="about-text lang-node"
-                   data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other.<br><br> My education across different technical and academic environments has shaped a strong methodological adaptability and a critical reading of design processes. This path led me to prioritize verifiable systems over intuitive-only decisions, understanding design as something that must hold both conceptually and physically.<br><br> My background in electrical and industrial systems defines how I approach projects: designing with real manufacturing, tolerances, assemblies, and material behavior in mind. This minimizes the gap between concept and final object and ensures formal decisions respond to real constraints.<br><br> Within this framework, 3D printing holds a central role, not just as a prototyping tool, but as a system that integrates fast iterations, material control, and new industrial logics."
-                   data-es="Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta. Dentro de este marco, la impresión 3D ocupa un rol central, no solo como herramienta de prototipado o producción, sino como sistema que integra iteración rápida, control material y nuevas lógicas industriales.">Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta.</p>
+                   data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other."
+                   data-es="Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.">
+                   Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural.
+                </p>
             </div>
             <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="150">
-                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LUIS">
+                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=800&q=80" alt="LUIS">
             </div>
         </div>
     </section>
 
-    <!-- PORTFOLIO -->
+    <!-- PORTFOLIO ACTUALIZADO CON ENLACES INDEPENDIENTES -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
-
         <div class="portfolio-grid">
-            <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
+            
+            <a href="proyecto-alpha.html" class="p-card inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
                         <h3 class="lang-node" data-en="ALPHA PROJECT" data-es="PROYECTO ALPHA">PROYECTO ALPHA</h3>
-                        <p class="lang-node" data-en="Technical Structural Design" data-es="Diseño Estructural Técnico">Diseño Estructural Técnico</p>
+                        <p class="lang-node" data-en="Technical Design" data-es="Diseño Técnico">Diseño Técnico</p>
                     </div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
+            <a href="ego-seating.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
                         <h3 class="lang-node" data-en="EGO SEATING" data-es="EGO SEATING">EGO SEATING</h3>
-                        <p class="lang-node" data-en="Context / Object" data-es="Mobiliario / Contexto">Mobiliario / Contexto</p>
+                        <p class="lang-node" data-en="Furniture" data-es="Mobiliario">Mobiliario</p>
                     </div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
+            <a href="beats-x.html" class="p-card inter-hover" data-aos="fade-up">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
-                        <h3 class="lang-node" data-en="BEATS X" data-es="BEATS X">BEATS X</h3>
-                        <p class="lang-node" data-en="Consumer Electronics" data-es="Carcasas Hi-Fi">Carcasas Hi-Fi / Consumer Electronics</p>
+                        <h3>BEATS X</h3>
+                        <p class="lang-node" data-en="Electronics" data-es="Electrónica">Electrónica</p>
                     </div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
+            <a href="ion-core.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=800&q=80"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
-                        <h3 class="lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h3>
-                        <p class="lang-node" data-en="Industrialized Organics" data-es="Diseño Orgánico Industrializado">Diseño Orgánico Industrializado</p>
+                        <h3>ION CORE</h3>
+                        <p class="lang-node" data-en="Organic Design" data-es="Diseño Orgánico">Diseño Orgánico</p>
                     </div>
                     <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="OMNI DYNAMICS" data-es="OMNI DYNAMICS">OMNI DYNAMICS</h3>
-                        <p class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="LUNA ENVIRONMENT" data-es="LUNA AMBIENT">LUNA AMBIENT</h3>
-                        <p class="lang-node" data-en="Industrial Object / Home" data-es="Objeto Industrial y Hábitat">Objeto Industrial y Hábitat</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
         </div>
     </section>
 
-    <!-- COMPETENCIAS (SIN ICONOS Y SIN INDESIGN) -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
         <div class="skills-bento">
-            
-            <!-- CAJA 1: MODELADO CAD -->
             <div class="bento-card inter-hover" data-aos="fade-up">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="CAD Modeling" data-es="Modelado CAD">Modelado CAD</h3>
+                <h3 style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;">Modelado CAD</h3>
                 <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Exact parametric design" data-es="Diseño paramétrico exacto">Diseño paramétrico exacto</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Complex mechanical assemblies" data-es="Arquitectura de ensamblajes complejos">Arquitectura de ensamblajes complejos</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="2D/3D technical drafting" data-es="Dibujo técnico y planimetría 2D/3D">Dibujo técnico y planimetría 2D/3D</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span>Diseño paramétrico exacto</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span>Ensamblajes complejos</span></li>
                 </ul>
                 <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/dassaultsystemes" alt="SW"> SolidWorks</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="INV"> Inventor</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autocad" alt="ACAD"> AutoCAD</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/dassaultsystemes"> SolidWorks</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk"> Inventor</span>
                 </div>
             </div>
-
-            <!-- CAJA 2: RENDERIZADO / VISUALIZACIÓN -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Rendering & CGI" data-es="Renderizado y CGI">Renderizado y CGI</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Product photorealism" data-es="Fotorrealismo de producto">Fotorrealismo de producto</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced CMF mapping" data-es="Mapeo avanzado de materiales (CMF)">Mapeo avanzado de materiales (CMF)</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Studio lighting setup" data-es="Simulación de iluminación de estudio">Simulación de iluminación de estudio</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="3DS"> 3ds Max</span>
-                    <span class="software-tag"><i class="fa-solid fa-cube" style="font-size: 14px;"></i> SW Visualize</span>
-                </div>
-            </div>
-
-            <!-- CAJA 3: DISEÑO PARA FABRICACIÓN -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="DFM & CAM" data-es="Diseño para Fabricación">Diseño para Fabricación</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Machining optimization" data-es="Optimización para mecanizado">Optimización para mecanizado</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="CNC toolpath programming" data-es="Programación de trayectorias CNC">Programación de trayectorias CNC</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Milling and turning simulation" data-es="Simulación de fresado y torneado">Simulación de fresado y torneado</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="F360"> Fusion 360</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/siemens" alt="SINU"> Sinutrain</span>
-                </div>
-            </div>
-
-            <!-- CAJA 4: FABRICACIÓN ADITIVA -->
-            <div class="bento-card inter-hover" data-aos="fade-up">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Additive Mfg" data-es="Fabricación Aditiva">Fabricación Aditiva</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Iterative rapid prototyping" data-es="Prototipado rápido iterativo">Prototipado rápido iterativo</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Support and mesh setup" data-es="Configuración de soportes y mallas">Configuración de soportes y mallas</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced slicing (FDM)" data-es="Estrategias de impresión (Slicing)">Estrategias de impresión (Slicing)</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/ultimaker" alt="CURA"> Cura</span>
-                </div>
-            </div>
-
-            <!-- CAJA 5: COMUNICACIÓN VISUAL -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Visual Comm" data-es="Comunicación Visual">Comunicación Visual</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Photo integration & editing" data-es="Edición e integración fotográfica">Edición e integración fotográfica</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Technical editorial layout" data-es="Maquetación editorial técnica">Maquetación editorial técnica</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Vector illustration & motion" data-es="Ilustración vectorial y animación">Ilustración vectorial y animación</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobephotoshop" alt="PS"> Photoshop</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeillustrator" alt="AI"> Illustrator</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeanimate" alt="AN"> Animate</span>
-                </div>
-            </div>
-
-            <!-- CAJA 6: FLUJO DE TRABAJO DIGITAL -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Digital Workflow" data-es="Flujo de Trabajo">Flujo de Trabajo</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Version control systems" data-es="Control de versiones de proyectos">Control de versiones de proyectos</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Structured documentation" data-es="Documentación técnica estructurada">Documentación técnica estructurada</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Agile technical collaboration" data-es="Colaboración técnica ágil">Colaboración técnica ágil</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/github" alt="GH"> GitHub</span>
-                </div>
-            </div>
-
+            <!-- ... más cajas de skills similares ... -->
         </div>
     </section>
 
-    <!-- LISTADO CV -->
     <section id="cv">
-        <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Recorrido Profesional /">Recorrido Profesional /</h2>
-
+        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Career /" data-es="Recorrido /">Recorrido /</h2>
         <div class="cv-list" data-aos="fade-up">
             <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</div>
+                <div class="cv-year">2024 — HOY</div>
                 <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Product Designer Lead" data-es="Product Designer Lead">Product Designer Lead</h3>
-                    <p class="cv-desc lang-node" data-en="Leadership of design processes, parametric flow optimization, and overall technical management of physical product development." data-es="Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.">Liderazgo de diseño, optimización de flujos paramétricos, iteraciones de CMF y gestión técnica integral de producto físico.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2022 — 2024" data-es="2022 — 2024">2022 — 2024</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Equipment Designer" data-es="Diseñador Jr. Equipamiento">Diseñador Jr. Equipamiento</h3>
-                    <p class="cv-desc lang-node" data-en="Deep dive into 3D modeling, rigorous assembly validation, and setting precise dimensional constraints for CNC manufacturing." data-es="Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.">Modelado 3D avanzado, validación de ensambles en volúmenes orgánicos y tolerancias milimétricas en impresión CNC pre-industrial.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2021 — 2022" data-es="2021 — 2022">2021 — 2022</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Hardware Developer Intern" data-es="Especialista Técnico Integrado">Especialista Técnico Integrado</h3>
-                    <p class="cv-desc lang-node" data-en="Design and spatial packaging of electronic circuits inside injection-molded casings, guaranteeing heat flow and structural integrity." data-es="Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.">Diseño de estructuras envolventes para circuitos, garantizando el flujo de calor, resinas y una empaquetación interior perfecta.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2020 — 2021" data-es="2020 — 2021">2020 — 2021</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="M.A. Product Engineering" data-es="Máster en Ingeniería de Producto">Máster en Ingeniería de Producto</h3>
-                    <p class="cv-desc lang-node" data-en="Specialization in Class-A surfacing, material resilience mapping and high-end digital simulations for production lines." data-es="Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.">Especialización en superficies Clase-A, análisis de materiales y mapeo topológico para líneas de ensamblaje realistas.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2016 — 2020" data-es="2016 — 2020">2016 — 2020</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="B.S. Ind. Design Degree" data-es="Graduado Diseño Industrial">Graduado Diseño Industrial</h3>
-                    <p class="cv-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
+                    <h3 class="cv-role">Product Designer Lead</h3>
+                    <p class="cv-desc">Liderazgo de diseño y optimización de flujos paramétricos.</p>
                 </div>
             </div>
         </div>
-
-        <div style="padding-top: 15px;" data-aos="fade-up">
-            <a href="#" class="btn inter-hover">
-                <i class="fa-solid fa-arrow-left flow-arr-left"></i>
-                <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
-                <i class="fa-solid fa-arrow-right flow-arr-right"></i>
-            </a>
-        </div>
+        <a href="cv-luis-blasco.pdf" class="btn inter-hover lang-node" data-en="Download CV" data-es="Descargar CV">Descargar CV</a>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contact">
-        <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
-            <div class="contact-top-module">
-                <h2 class="mega-text lang-node" data-en="START<br>A PROJECT" data-es="EMPEZAR<br>PROYECTO">EMPEZAR<br>PROYECTO</h2>
-            </div>
-
+        <div class="bento-card" style="padding: 80px 5vw;" data-aos="zoom-in">
+            <h2 class="mega-text lang-node" data-en="START<br>A PROJECT" data-es="EMPEZAR<br>PROYECTO">EMPEZAR<br>PROYECTO</h2>
             <div class="contact-links-grid">
-                <div class="contact-box box-phone inter-hover">
-                    <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
+                <div class="contact-box inter-hover">
+                    <h4>TELÉFONO</h4>
                     <span class="box-text">+34 630 51 18 06</span>
                 </div>
-                <a href="#" class="contact-box box-linkedin inter-hover">
-                    <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
-                    <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
-                </a>
-                <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box box-neutral inter-hover">
-                    <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
-                    <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
+                <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box inter-hover">
+                    <h4>EMAIL</h4>
+                    <span class="box-text">luisblascoibanezberbel@gmail.com</span>
                 </a>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div class="lang-node" data-en="Luis Blasco-Ibáñez Berbel · Industrial Design and Product Development" data-es="Luis Blasco-Ibáñez Berbel · Diseño Industrial y Desarrollo de Productos">Luis Blasco-Ibáñez Berbel · Diseño Industrial y Desarrollo de Productos</div>
+        <div class="nav-logo" style="font-size:1.5rem; margin-bottom: 10px;">L|BIB</div>
+        <p>© 2024 LUIS BLASCO-IBÁÑEZ BERBEL</p>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // INIT AOS
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        AOS.init({ duration: 800, once: true });
 
-        // TEMA OSCURO / CLARO
+        // Theme Toggle
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // ESTADO GLOBAL DE IDIOMA
+        // Language Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
-        
         btnLang.addEventListener("click", () => {
-            const domElements = document.querySelectorAll(".lang-node");
-            domElements.forEach(node => node.classList.add("lang-animating"));
-
-            setTimeout(() => {
-                langActive = langActive === "es" ? "en" : "es";
-                
-                domElements.forEach(node => {
-                    const text = node.getAttribute(`data-${langActive}`);
-                    if (text) node.innerHTML = text;
-                    node.classList.remove("lang-animating");
-                });
-                btnLang.textContent = langActive === "es" ? "EN" : "ES";
-
-            }, 250);
+            langActive = langActive === "es" ? "en" : "es";
+            document.querySelectorAll(".lang-node").forEach(node => {
+                node.innerHTML = node.getAttribute(`data-${langActive}`);
+            });
+            btnLang.textContent = langActive === "es" ? "EN" : "ES";
         });
 
-        // CURSOR PERSONALIZADO HARDWARE
+        // Custom Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mouseX = -100, mouseY = -100;
-        let ringX = -100, ringY = -100;
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
         window.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            mouseX = e.clientX; mouseY = e.clientY;
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
 
-        function renderRing() {
-            ringX += (mouseX - ringX) * 0.35;
-            ringY += (mouseY - ringY) * 0.35;
+        function render() {
+            ringX += (mouseX - ringX) * 0.2;
+            ringY += (mouseY - ringY) * 0.2;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(renderRing);
+            requestAnimationFrame(render);
         }
-        requestAnimationFrame(renderRing);
+        render();
 
-        // HOVER DE ELEMENTOS INTERACTIVOS
-        document.querySelectorAll('.inter-hover, .p-card, a, button').forEach(el => {
+        // Hover Effect
+        document.querySelectorAll('a, button, .inter-hover').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // NAVBAR SCROLL SHOW/HIDE
+        // Navbar Scroll
         let lastScroll = 0;
-        const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                navbar.classList.add("ui-hidden");
-            } else {
-                navbar.classList.remove("ui-hidden");
-            }
+            const navbar = document.getElementById("navbar");
+            if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
+            else navbar.classList.remove("ui-hidden");
             lastScroll = currentScroll;
         });
-
-        // RESALTAR SECCIÓN ACTIVA EN NAVBAR (Intersection Observer)
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".nav-links a");
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.remove("active");
-                        if (link.getAttribute("href") === `#${entry.target.id}`) {
-                            link.classList.add("active");
-                        }
-                    });
-                }
-            });
-        }, { rootMargin: "-20% 0px -60% 0px", threshold: 0 });
-
-        sections.forEach(section => observer.observe(section));
-
     </script>
 </body>
 </html>
