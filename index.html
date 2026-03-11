@@ -136,7 +136,6 @@
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
         .nav-logo:hover { opacity: 1; }
 
-        /* Nav Links y Píldora Activa (Sutil y translúcida) */
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a {
             text-decoration: none;
@@ -152,7 +151,6 @@
         }
         .nav-links a:hover { opacity: 1; }
 
-        /* Píldora traslúcida */
         .nav-links a.active {
             background: rgba(150, 150, 150, 0.15);
             color: var(--text) !important;
@@ -161,10 +159,8 @@
         }
 
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-
         .tools-nav { display:flex; align-items: center; gap: 10px;}
 
-        /* Icono sin outline cuadrado al clicar */
         .icon-btn {
             background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6;
             width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
@@ -188,6 +184,7 @@
 
         .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
 
+        /* Estilos base del título */
         .hero h1 {
             font-family: 'Syne', sans-serif;
             font-size: clamp(2rem, 7.5vw, 8.5rem);
@@ -195,13 +192,28 @@
             font-weight: 800;
             letter-spacing: -0.04em;
             text-transform: uppercase;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* --- COMPONENTE WORD PULL UP (SUSTITUCIÓN) --- */
+        .word-pull-up .word {
+            display: inline-block;
+            padding-right: 8px; /* Padding especificado en el componente React */
+            opacity: 0;
+            transform: translateY(20px); /* Equivalente a hidden: { y: 20 } */
+            animation: framerWordPullUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes framerWordPullUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
-        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0;}
+        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
-
 
         /* --- MARQUEE EDITORIAL INFINITO --- */
         .marquee-section {
@@ -225,7 +237,7 @@
         .marquee-text {
             display: flex;
             align-items: center;
-            font-family: 'Syne', sans-serif; /* Added font-family */
+            font-family: 'Syne', sans-serif; 
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             color: transparent;
@@ -246,14 +258,12 @@
             to { transform: translateX(-50%); }
         }
 
-
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
 
-        /* Fijación de bug sombra blanquecina por defecto a todas las bento-card */
         .bento-card {
             background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;
-            -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); /* Anti-ghosting artifacts Safari/Chrome */
+            -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);
         }
 
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
@@ -262,22 +272,12 @@
         .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify; text-justify: inter-word;}
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- MÓDULO UNIFICADO DEL PORTFOLIO GRID EQUITATIVO --- */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-top: 40px;
-        }
+        /* --- MÓDULO UNIFICADO DEL PORTFOLIO --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
 
         .p-card {
-            position: relative;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            overflow: hidden;
-            height: 480px;
-            transition: 0.5s ease;
+            position: relative; background: var(--bg); border: 1px solid var(--border);
+            border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease;
         }
 
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
@@ -285,18 +285,8 @@
 
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
 
-        .p-info {
-            position: absolute; bottom: 30px; left: 35px; right: 35px;
-            z-index: 2; pointer-events: none; display: flex;
-            justify-content: space-between; align-items: flex-end;
-        }
-
-        .p-text-col {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
+        .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
+        .p-text-col { display: flex; flex-direction: column; gap: 4px; }
         .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
         .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; margin: 0;}
 
@@ -309,272 +299,65 @@
 
         /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
-
-        /* Eliminamos la animación de "border-color" para que sea instantáneo como en contacto */
-        .skills-bento .bento-card {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .skills-bento .bento-card:hover {
-            border-color: rgba(255, 90, 0, 0.5); /* Se ilumina al instante */
-            transform: translateY(-5px) translateZ(0);
-            box-shadow: none !important; /* Fuerza la eliminación de sombras/bugs residuales */
-        }
-
-        .light-mode .skills-bento .bento-card:hover {
-            border-color: rgba(255, 90, 0, 0.5);
-            transform: translateY(-5px) translateZ(0);
-            box-shadow: none !important;
-        }
-
+        .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
+        .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-
-        /* =======================================================
-           EL CURRÍCULUM: FORMAL Y MINIMALISTA
-           ======================================================= */
-
-        .cv-list {
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .cv-row {
-            display: flex;
-            flex-direction: row;
-            padding: 55px 0;
-            border-bottom: 1px solid var(--border);
-            gap: 60px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .cv-row::after {
-            content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%;
-            background: var(--accent); z-index: 2; transition: height 0.3s ease;
-        }
-
-        .cv-row::before {
-            content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%;
-            background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%);
-            z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
-        }
-
+        /* --- EL CURRÍCULUM --- */
+        .cv-list { border-top: 1px solid var(--border); display: flex; flex-direction: column; width: 100%; }
+        .cv-row { display: flex; flex-direction: row; padding: 55px 0; border-bottom: 1px solid var(--border); gap: 60px; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .cv-row::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%; background: var(--accent); z-index: 2; transition: height 0.3s ease; }
+        .cv-row::before { content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%); z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; }
         .cv-row:hover { padding-left: 30px; }
         .cv-row:hover::after { height: 100%; }
         .cv-row:hover::before { width: 100%; opacity: 1; }
-
-        .cv-year {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.25rem;
-            color: var(--text-dim);
-            font-weight: 700;
-            width: 180px;
-            flex-shrink: 0;
-            z-index: 1;
-            transition: color 0.4s ease;
-        }
-
+        .cv-year { font-family: 'Syne', sans-serif; font-size: 1.25rem; color: var(--text-dim); font-weight: 700; width: 180px; flex-shrink: 0; z-index: 1; transition: color 0.4s ease; }
         .cv-content { display: flex; flex-direction: column; z-index: 1; }
-
-        .cv-role {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.5px;
-            margin: 0 0 15px 0;
-            line-height: 1.2;
-            transition: color 0.4s ease;
-        }
-
+        .cv-role { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin: 0 0 15px 0; line-height: 1.2; transition: color 0.4s ease; }
         .cv-desc { font-size: 1.05rem; color: var(--text-dim); line-height: 1.65; max-width: 680px; margin: 0; }
-
         .cv-row:hover .cv-role { color: var(--accent); }
         .cv-row:hover .cv-year { color: var(--text); }
 
-
-        /* --- BOTÓN DESCARGA C.V: FRAMER STYLE --- */
-        .btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px; /* Adjusted gap for a cleaner look */
-            overflow: hidden;
-            border-radius: 100px; /* Pill shape */
-            background: var(--card-bg); /* Use card-bg for glass effect */
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            padding: 16px 35px; /* Slightly adjusted padding */
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem; /* Slightly smaller font for subtlety */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text); /* Default text color */
-            cursor: none;
-            border: 1px solid var(--border); /* Use existing border variable */
-            isolation: isolate;
-            margin-top: 35px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); /* Unified, smoother transition */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle initial shadow */
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: var(--accent); /* Accent color for hover fill */
-            border-radius: inherit;
-            z-index: -1;
-            opacity: 0; /* Starts invisible */
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: scale(0.8); /* Starts slightly smaller */
-        }
-
-        .btn:hover {
-            color: white; /* Text becomes white on accent background */
-            border-color: var(--accent); /* Border matches accent */
-            transform: translateY(-3px) scale(1.01); /* Subtle lift and slight scale */
-            box-shadow: 0 10px 25px var(--accent-glow); /* Enhanced glow effect */
-        }
-
-        .btn:hover::before {
-            opacity: 1; /* Fade in the accent background */
-            transform: scale(1); /* Scale up to fill */
-        }
-
-        .btn:active {
-            transform: translateY(0) scale(0.99); /* Press effect */
-            box-shadow: 0 5px 15px var(--accent-glow);
-        }
-
-        .btn .flow-arr-left, .btn .flow-arr-right {
-            position: relative;
-            font-size: 0.9rem; /* Slightly smaller arrow size */
-            color: var(--text-dim); /* More subtle initial arrow color */
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: translateX(0);
-            z-index: 1;
-        }
-
-        .btn .flow-text {
-            position: relative;
-            z-index: 1;
-            transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn:hover .flow-arr-left {
-            color: white;
-            transform: translateX(-6px); /* More pronounced slide */
-        }
-        .btn:hover .flow-text {
-            color: white;
-            transform: translateX(0);
-        }
-        .btn:hover .flow-arr-right {
-            color: white;
-            transform: translateX(6px); /* More pronounced slide */
-        }
-
+        /* --- BOTÓN DESCARGA C.V --- */
+        .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
+        .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.8); }
+        .btn:hover { color: white; border-color: var(--accent); transform: translateY(-3px) scale(1.01); box-shadow: 0 10px 25px var(--accent-glow); }
+        .btn:hover::before { opacity: 1; transform: scale(1); }
+        .btn:active { transform: translateY(0) scale(0.99); box-shadow: 0 5px 15px var(--accent-glow); }
+        .btn .flow-arr-left, .btn .flow-arr-right { position: relative; font-size: 0.9rem; color: var(--text-dim); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1); transform: translateX(0); z-index: 1; }
+        .btn .flow-text { position: relative; z-index: 1; transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn:hover .flow-arr-left { color: white; transform: translateX(-6px); }
+        .btn:hover .flow-text { color: white; transform: translateX(0); }
+        .btn:hover .flow-arr-right { color: white; transform: translateX(6px); }
 
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
-
-        /* Cajas Interactivas de Contacto */
-        .contact-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-decoration: none;
-            /* Aquí también excluimos el border-color para igualar instantaneidad */
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transform: translateZ(0); /* Anti-ghosting artifacts */
-        }
-
-        .contact-box h4 {
-            font-family: 'Syne';
-            text-transform: uppercase;
-            color: var(--text-dim);
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            transition: color 0.4s ease;
-        }
-
-        .contact-box .box-text {
-            font-size: 1.1rem;
-            color: var(--text);
-            transition: color 0.4s ease;
-            line-height: 1.5;
-        }
-
-        /* Hover: Teléfono (Verde) */
-        .box-phone:hover {
-            border-color: #22c55e;
-            background: rgba(34, 197, 94, 0.05);
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1);
-            transform: translateY(-5px) translateZ(0);
-        }
+        .contact-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; justify-content: center; text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
+        .contact-box h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--text-dim); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; transition: color 0.4s ease; }
+        .contact-box .box-text { font-size: 1.1rem; color: var(--text); transition: color 0.4s ease; line-height: 1.5; }
+        .box-phone:hover { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1); transform: translateY(-5px) translateZ(0); }
         .box-phone:hover .box-text, .box-phone:hover h4 { color: #22c55e; }
-
-        /* Hover: LinkedIn (Azul) */
-        .box-linkedin:hover {
-            border-color: #0a66c2;
-            background: rgba(10, 102, 194, 0.05);
-            box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1);
-            transform: translateY(-5px) translateZ(0);
-        }
+        .box-linkedin:hover { border-color: #0a66c2; background: rgba(10, 102, 194, 0.05); box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1); transform: translateY(-5px) translateZ(0); }
         .box-linkedin:hover .box-text, .box-linkedin:hover h4 { color: #0a66c2; }
-
-        /* Hover: Email/Neutral */
-        .box-neutral:hover {
-            border-color: var(--text);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px) translateZ(0);
-        }
-        .light-mode .box-neutral:hover {
-            background: rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border-color: rgba(0,0,0,0.2);
-        }
+        .box-neutral:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); transform: translateY(-5px) translateZ(0); }
+        .light-mode .box-neutral:hover { background: rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(0,0,0,0.2); }
         .box-neutral:hover .box-text, .box-neutral:hover h4 { color: var(--text); }
 
-
-        footer {
-            padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px;
-            border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;
-        }
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
         footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
         footer a:hover {color: var(--accent);}
-
 
         /* Reposicionamiento Responsive */
         @media (max-width: 1024px) {
             .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
             .p-card { height: 420px; }
-
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
             .bento-card-photo { min-height: 400px;}
-
             .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
             .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
-
             .contact-links-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -584,43 +367,11 @@
             .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
             .p-info { left: 25px; right: 25px;}
             .cv-row:hover { padding-left: 20px; }
-
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
 
-        .apellido-ajustado {
-            display: inline-block;
-            font-size: 0.45em;
-            letter-spacing: -0.01em;
-            vertical-align: middle;
-            margin-left: 0.25em;
-        }
-
-        .hero-title {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .hero-title span {
-            display: block;
-        }
-
-        .nav-logo-home {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-logo-home:visited,
-        .nav-logo-home:hover,
-        .nav-logo-home:active,
-        .nav-logo-home:focus {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .hero .subtitle {
-            margin-left: 0.4vw;
-        }
+        .nav-logo-home { text-decoration: none; color: inherit; }
+        .nav-logo-home:visited, .nav-logo-home:hover, .nav-logo-home:active, .nav-logo-home:focus { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
@@ -647,16 +398,18 @@
         </header>
     </div>
 
-    <!-- TÍTULO EN DOS LÍNEAS COMPACTADAS -->
+    <!-- TÍTULO INTEGRADO CON EL COMPONENTE WORD-PULL-UP -->
     <section class="hero" id="home">
-        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-            <h1 class="hero-title">
-              LUIS<br>
-              BLASCO IBÁÑEZ<br>
-              BERBEL
+        <div class="hero-text-block">
+            <!-- La animación "staggerChildren: 0.2" de framer se emula usando animation-delay por cada palabra -->
+            <h1 class="hero-title word-pull-up">
+                <span class="word" style="animation-delay: 0s;">LUIS</span><br>
+                <span class="word" style="animation-delay: 0.2s;">BLASCO</span>
+                <span class="word" style="animation-delay: 0.4s;">IBÁÑEZ</span><br>
+                <span class="word" style="animation-delay: 0.6s;">BERBEL</span>
             </h1>
 
-            <div class="subtitle-bar">
+            <div class="subtitle-bar" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="700">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
 
                 <div class="status-tag inter-hover">
@@ -670,7 +423,6 @@
     <!-- CARRUSEL EDITORIAL INFINITO -->
     <div class="marquee-section inter-hover">
         <div class="marquee-content">
-            <!-- Bloque 1 -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -687,7 +439,6 @@
                 <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
-            <!-- Bloque 2 (Duplicado exacto para el loop) -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -721,7 +472,6 @@
         </div>
     </section>
 
-    <!-- PANNEL CORTES GRID EQUALIZADOS (CON MAYOR MARGEN ARRIBA DE PROYECTOS) -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
 
@@ -836,7 +586,6 @@
         </div>
     </section>
 
-    <!-- LISTADO CV PURIFICADO MINIMALISTA -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Recorrido Profesional /">Recorrido Profesional /</h2>
 
@@ -884,17 +633,15 @@
 
         </div>
 
-        <!-- Bloque descarga PDF Intacto Capsula Form -->
         <div style="padding-top: 15px;" data-aos="fade-up">
             <a href="#" class="btn inter-hover">
-                <i class="fa-solid fa-arrow-left flow-arr-left"></i> <!-- Changed to left arrow for initial state -->
+                <i class="fa-solid fa-arrow-left flow-arr-left"></i>
                 <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
                 <i class="fa-solid fa-arrow-right flow-arr-right"></i>
             </a>
         </div>
     </section>
 
-    <!-- ESTILO BENTO CONTACTO INTERACTIVO -->
     <section id="contact">
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
             <div class="contact-top-module">
@@ -903,19 +650,16 @@
 
             <div class="contact-links-grid">
 
-                <!-- Caja estática / NO clicable para el teléfono -->
                 <div class="contact-box box-phone inter-hover">
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
                     <span class="box-text">+34 (TLF Línea directa)</span>
                 </div>
 
-                <!-- Botón / Caja clicable para LinkedIn -->
                 <a href="#" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
                     <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
                 </a>
 
-                <!-- Botón / Caja clicable para Email -->
                 <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box box-neutral inter-hover">
                     <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
                     <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
@@ -925,7 +669,6 @@
         </div>
     </section>
 
-    <!-- Limpio cimiento de clausura footer page -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
         <div>DESIGN FRAMEWORK SYSTEM © 2026.</div>
@@ -1010,7 +753,6 @@
 
         const observerOptions = {
             root: null,
-            // Ajustado para activar el estado cuando entras con holgura a la sección
             rootMargin: "-20% 0px -60% 0px",
             threshold: 0
         };
