@@ -158,32 +158,56 @@
         .hero-title {
             font-family: 'Syne', sans-serif;
             font-size: clamp(2rem, 6.5vw, 7.5rem);
-            line-height: 1.1;
             font-weight: 800;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             max-width: 1200px;
             width: 100%;
-            min-height: 3.5em; 
             display: flex;
-            align-items: flex-start;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
 
-        /* CLASES TYPEWRITER CSS */
-        .cursor-blink {
-            font-weight: 400;
-            color: var(--accent);
-            animation: blinker 0.8s step-end infinite;
-            margin-left: 5px;
+        /* --- ANIMACIÓN DE ENTRADA DEL TÍTULO (MASK REVEAL) --- */
+        .reveal-mask {
+            overflow: hidden;
+            display: block;
+            line-height: 1.05;
+            padding-bottom: 5px; 
         }
-        @keyframes blinker { 50% { opacity: 0; } }
+        
+        .reveal-text {
+            display: block;
+            opacity: 0;
+            transform: translateY(120%);
+            animation: textReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity, filter;
+        }
 
-        .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
+        /* Retardos en cascada y colores para impacto visual */
+        .reveal-mask:nth-child(1) .reveal-text { animation-delay: 0.1s; color: var(--text); }
+        .reveal-mask:nth-child(2) .reveal-text { animation-delay: 0.25s; color: var(--text-dim); }
+        .reveal-mask:nth-child(3) .reveal-text { animation-delay: 0.4s; color: var(--accent); }
+
+        @keyframes textReveal {
+            0% { opacity: 0; transform: translateY(120%) rotate(3deg); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
+        }
+
+        .subtitle-bar { 
+            display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; 
+            margin-top: 25px; width: 100%; max-width: 90%; 
+            opacity: 0;
+            animation: fadeInSub 1s ease forwards;
+            animation-delay: 1.2s;
+        }
+        
+        @keyframes fadeInSub {
+            to { opacity: 1; }
+        }
+
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
-
 
         /* --- MARQUEE EDITORIAL INFINITO --- */
         .marquee-section {
@@ -228,12 +252,11 @@
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- SKILLS & COMPETENCIAS (NUEVO DISEÑO) --- */
+        /* --- SKILLS & COMPETENCIAS (SIN ICONOS) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;}
         .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
-        .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
         /* Listas de capacidades en las cajas de Skills */
         .capabilities-list {
@@ -264,7 +287,6 @@
         .light-mode .software-tag img {
             filter: invert(0) opacity(0.8);
         }
-
 
         /* --- CV --- */
         .cv-list { border-top: 1px solid var(--border); display: flex; flex-direction: column; width: 100%; }
@@ -344,7 +366,6 @@
             .p-info { left: 25px; right: 25px;}
             .cv-row:hover { padding-left: 20px; }
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
-            .hero-title { min-height: 120px; }
         }
     </style>
 </head>
@@ -372,11 +393,19 @@
         </header>
     </div>
 
-    <!-- TÍTULO ANIMADO CON EFECTO TYPEWRITER -->
+    <!-- TÍTULO ANIMADO (STAGGERED MASK REVEAL) -->
     <section class="hero" id="home">
-        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+        <div class="hero-text-block">
             <h1 class="hero-title">
-              <span id="typewriter-text"></span><span class="cursor-blink">_</span>
+                <div class="reveal-mask">
+                    <span class="reveal-text">LUIS BLASCO IBÁÑEZ</span>
+                </div>
+                <div class="reveal-mask">
+                    <span class="reveal-text lang-node" data-en="PRODUCT DESIGN LEAD" data-es="LÍDER DE DISEÑO DE PRODUCTO">LÍDER DE DISEÑO DE PRODUCTO</span>
+                </div>
+                <div class="reveal-mask">
+                    <span class="reveal-text lang-node" data-en="INDUSTRIAL DESIGNER" data-es="DISEÑADOR INDUSTRIAL">DISEÑADOR INDUSTRIAL</span>
+                </div>
             </h1>
 
             <div class="subtitle-bar">
@@ -523,14 +552,13 @@
         </div>
     </section>
 
-    <!-- COMPETENCIAS (NUEVA ESTRUCTURA) -->
+    <!-- COMPETENCIAS (SIN ICONOS) -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
         <div class="skills-bento">
             
             <!-- CAJA 1: MODELADO CAD -->
             <div class="bento-card inter-hover" data-aos="fade-up">
-                <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="CAD Modeling" data-es="Modelado CAD">Modelado CAD</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Exact parametric design" data-es="Diseño paramétrico exacto">Diseño paramétrico exacto</span></li>
@@ -538,7 +566,6 @@
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="2D/3D technical drafting" data-es="Dibujo técnico y planimetría 2D/3D">Dibujo técnico y planimetría 2D/3D</span></li>
                 </ul>
                 <div class="software-tags">
-                    <!-- SolidWorks usa el logo de Dassault, Inventor el de Autodesk -->
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/dassaultsystemes" alt="SW"> SolidWorks</span>
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="INV"> Inventor</span>
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/autocad" alt="ACAD"> AutoCAD</span>
@@ -547,7 +574,6 @@
 
             <!-- CAJA 2: RENDERIZADO / VISUALIZACIÓN -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-camera"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Rendering & CGI" data-es="Renderizado y CGI">Renderizado y CGI</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Product photorealism" data-es="Fotorrealismo de producto">Fotorrealismo de producto</span></li>
@@ -562,7 +588,6 @@
 
             <!-- CAJA 3: DISEÑO PARA FABRICACIÓN -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="DFM & CAM" data-es="Diseño para Fabricación">Diseño para Fabricación</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Machining optimization" data-es="Optimización para mecanizado">Optimización para mecanizado</span></li>
@@ -577,7 +602,6 @@
 
             <!-- CAJA 4: FABRICACIÓN ADITIVA -->
             <div class="bento-card inter-hover" data-aos="fade-up">
-                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Additive Mfg" data-es="Fabricación Aditiva">Fabricación Aditiva</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Iterative rapid prototyping" data-es="Prototipado rápido iterativo">Prototipado rápido iterativo</span></li>
@@ -585,14 +609,12 @@
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced slicing (FDM)" data-es="Estrategias de impresión (Slicing)">Estrategias de impresión (Slicing)</span></li>
                 </ul>
                 <div class="software-tags">
-                    <!-- Cura pertenece a Ultimaker -->
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/ultimaker" alt="CURA"> Cura</span>
                 </div>
             </div>
 
             <!-- CAJA 5: COMUNICACIÓN VISUAL -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-pen-nib"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Visual Comm" data-es="Comunicación Visual">Comunicación Visual</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Photo integration & editing" data-es="Edición e integración fotográfica">Edición e integración fotográfica</span></li>
@@ -609,7 +631,6 @@
 
             <!-- CAJA 6: FLUJO DE TRABAJO DIGITAL -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <div class="skill-icon"><i class="fa-solid fa-code-branch"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Digital Workflow" data-es="Flujo de Trabajo">Flujo de Trabajo</h3>
                 <ul class="capabilities-list">
                     <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Version control systems" data-es="Control de versiones de proyectos">Control de versiones de proyectos</span></li>
@@ -727,54 +748,10 @@
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // ESTADO GLOBAL DE IDIOMA
+        // ESTADO GLOBAL DE IDIOMA Y TOGGLE (Compatible con Staggered Reveal)
         let langActive = "es";
-
-        // EFECTO TYPEWRITER
-        const typewriterText = document.getElementById("typewriter-text");
-        const typePhrases = {
-            es:["LUIS BLASCO IBÁÑEZ BERBEL", "LÍDER DE DISEÑO DE PRODUCTO", "DISEÑADOR INDUSTRIAL"],
-            en:["LUIS BLASCO IBÁÑEZ BERBEL", "PRODUCT DESIGN LEAD", "INDUSTRIAL DESIGNER"]
-        };
-
-        let twWordIndex = 0;
-        let twCharIndex = 0;
-        let twIsDeleting = false;
-        let twTimeout;
-
-        function runTypewriter() {
-            const currentWord = typePhrases[langActive][twWordIndex];
-
-            if (!twIsDeleting) {
-                // Escribiendo
-                typewriterText.textContent = currentWord.substring(0, twCharIndex + 1);
-                twCharIndex++;
-
-                if (twCharIndex === currentWord.length) {
-                    twIsDeleting = true;
-                    twTimeout = setTimeout(runTypewriter, 2500); // Pausa al completar la palabra
-                    return;
-                }
-            } else {
-                // Borrando
-                typewriterText.textContent = currentWord.substring(0, twCharIndex - 1);
-                twCharIndex--;
-
-                if (twCharIndex === 0) {
-                    twIsDeleting = false;
-                    twWordIndex = (twWordIndex + 1) % typePhrases[langActive].length; // Siguiente palabra
-                }
-            }
-
-            const speed = twIsDeleting ? 30 : 60; // Borra más rápido que escribe
-            twTimeout = setTimeout(runTypewriter, speed);
-        }
-
-        // Iniciar máquina de escribir
-        runTypewriter();
-
-        // TOGGLE DE IDIOMA (Con reinicio de Typewriter)
         const btnLang = document.getElementById("lang-toggle");
+        
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
@@ -782,21 +759,12 @@
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es";
                 
-                // Transición del texto estático
                 domElements.forEach(node => {
                     const text = node.getAttribute(`data-${langActive}`);
                     if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
-
-                // Reiniciar el Typewriter en el nuevo idioma
-                clearTimeout(twTimeout);
-                twCharIndex = 0;
-                twIsDeleting = false;
-                twWordIndex = 0;
-                typewriterText.textContent = "";
-                runTypewriter();
 
             }, 250);
         });
