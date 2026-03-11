@@ -164,7 +164,7 @@
             text-transform: uppercase;
             max-width: 1200px;
             width: 100%;
-            min-height: 3.5em; /* Previene saltos de layout cuando se borra el texto */
+            min-height: 3.5em; 
             display: flex;
             align-items: flex-start;
             flex-wrap: wrap;
@@ -228,12 +228,42 @@
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- SKILLS --- */
+        /* --- SKILLS & COMPETENCIAS (NUEVO DISEÑO) --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
-        .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;}
         .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
+
+        /* Listas de capacidades en las cajas de Skills */
+        .capabilities-list {
+            list-style: none; padding: 0; margin: 0 0 25px 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;
+        }
+        .capabilities-list li {
+            font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+        }
+        .capabilities-list li i {
+            color: var(--accent); font-size: 0.8rem; margin-top: 4px;
+        }
+
+        /* Etiquetas de software */
+        .software-tags {
+            display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px;
+        }
+        .software-tag {
+            display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; background: var(--glass);
+            border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; font-weight: 600;
+            color: var(--text); transition: all 0.3s ease;
+        }
+        .software-tag:hover {
+            border-color: var(--accent); background: var(--accent-glow);
+        }
+        .software-tag img {
+            width: 14px; height: 14px; object-fit: contain; filter: invert(1) opacity(0.8); transition: filter 0.3s ease;
+        }
+        .light-mode .software-tag img {
+            filter: invert(0) opacity(0.8);
+        }
 
 
         /* --- CV --- */
@@ -493,40 +523,104 @@
         </div>
     </section>
 
-    <!-- COMPETENCIAS -->
+    <!-- COMPETENCIAS (NUEVA ESTRUCTURA) -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
         <div class="skills-bento">
+            
+            <!-- CAJA 1: MODELADO CAD -->
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Parametric Modeling" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino. Native flow geometry setup." data-es="Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías exactas.">Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías exactas.</p>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="CAD Modeling" data-es="Modelado CAD">Modelado CAD</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Exact parametric design" data-es="Diseño paramétrico exacto">Diseño paramétrico exacto</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Complex mechanical assemblies" data-es="Arquitectura de ensamblajes complejos">Arquitectura de ensamblajes complejos</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="2D/3D technical drafting" data-es="Dibujo técnico y planimetría 2D/3D">Dibujo técnico y planimetría 2D/3D</span></li>
+                </ul>
+                <div class="software-tags">
+                    <!-- SolidWorks usa el logo de Dassault, Inventor el de Autodesk -->
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/dassaultsystemes" alt="SW"> SolidWorks</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="INV"> Inventor</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autocad" alt="ACAD"> AutoCAD</span>
+                </div>
             </div>
+
+            <!-- CAJA 2: RENDERIZADO / VISUALIZACIÓN -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="C.G.I Visualization" data-es="Representación C.G.I">Representación C.G.I</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Keyshot & Rendering flow mapping logic to simulate material weights visually." data-es="Control C.M.F absoluto utilizando visualización fotorrealista para evocar textura y gravedad de producto.">Control C.M.F absoluto utilizando visualización fotorrealista para evocar textura y gravedad de producto.</p>
+                <div class="skill-icon"><i class="fa-solid fa-camera"></i></div>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Rendering & CGI" data-es="Renderizado y CGI">Renderizado y CGI</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Product photorealism" data-es="Fotorrealismo de producto">Fotorrealismo de producto</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced CMF mapping" data-es="Mapeo avanzado de materiales (CMF)">Mapeo avanzado de materiales (CMF)</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Studio lighting setup" data-es="Simulación de iluminación de estudio">Simulación de iluminación de estudio</span></li>
+                </ul>
+                <div class="software-tags">
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="3DS"> 3ds Max</span>
+                    <span class="software-tag"><i class="fa-solid fa-cube" style="font-size: 14px;"></i> SW Visualize</span>
+                </div>
             </div>
+
+            <!-- CAJA 3: DISEÑO PARA FABRICACIÓN -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="DFM & Mfg logic" data-es="Matricería & D.F.M">Matricería & D.F.M</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready. Translating models for strict mold constraints, plastics and tolerances." data-es="Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes e inyección.">Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes e inyección.</p>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="DFM & CAM" data-es="Diseño para Fabricación">Diseño para Fabricación</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Machining optimization" data-es="Optimización para mecanizado">Optimización para mecanizado</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="CNC toolpath programming" data-es="Programación de trayectorias CNC">Programación de trayectorias CNC</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Milling and turning simulation" data-es="Simulación de fresado y torneado">Simulación de fresado y torneado</span></li>
+                </ul>
+                <div class="software-tags">
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="F360"> Fusion 360</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/siemens" alt="SINU"> Sinutrain</span>
+                </div>
             </div>
+
+            <!-- CAJA 4: FABRICACIÓN ADITIVA -->
             <div class="bento-card inter-hover" data-aos="fade-up">
-                <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Ergonomic Scale" data-es="Adaptabilidad & Ergonomía">Adaptabilidad & Ergonomía</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Human factored limits study. Guaranteeing object relation through dimensional reality testing." data-es="Estudio riguroso empírico en relación humana para lograr iteraciones métricas justas.">Estudio riguroso empírico en relación humana para lograr iteraciones métricas justas.</p>
+                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Additive Mfg" data-es="Fabricación Aditiva">Fabricación Aditiva</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Iterative rapid prototyping" data-es="Prototipado rápido iterativo">Prototipado rápido iterativo</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Support and mesh setup" data-es="Configuración de soportes y mallas">Configuración de soportes y mallas</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced slicing (FDM)" data-es="Estrategias de impresión (Slicing)">Estrategias de impresión (Slicing)</span></li>
+                </ul>
+                <div class="software-tags">
+                    <!-- Cura pertenece a Ultimaker -->
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/ultimaker" alt="CURA"> Cura</span>
+                </div>
             </div>
+
+            <!-- CAJA 5: COMUNICACIÓN VISUAL -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Mch Prototyping" data-es="Mecanización Rápida">Mecanización Rápida</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Early validation phase control: fast mockups & integration for proof-of-concept CNC checking." data-es="Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala.">Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala.</p>
+                <div class="skill-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Visual Comm" data-es="Comunicación Visual">Comunicación Visual</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Photo integration & editing" data-es="Edición e integración fotográfica">Edición e integración fotográfica</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Technical editorial layout" data-es="Maquetación editorial técnica">Maquetación editorial técnica</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Vector illustration & motion" data-es="Ilustración vectorial y animación">Ilustración vectorial y animación</span></li>
+                </ul>
+                <div class="software-tags">
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobephotoshop" alt="PS"> Photoshop</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeillustrator" alt="AI"> Illustrator</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeindesign" alt="ID"> InDesign</span>
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeanimate" alt="AN"> Animate</span>
+                </div>
             </div>
+
+            <!-- CAJA 6: FLUJO DE TRABAJO DIGITAL -->
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="A-Class Surfacing" data-es="Geometría Class-A">Geometría Class-A</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Sustained surface flow continuities avoiding reflections brakes using advanced nurbs grids." data-es="Mapeado profundo sobre tangencias entre caras: suavizado matemático continuo y cero fisuras." >Mapeado profundo sobre tangencias entre caras: suavizado matemático continuo y cero fisuras.</p>
+                <div class="skill-icon"><i class="fa-solid fa-code-branch"></i></div>
+                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Digital Workflow" data-es="Flujo de Trabajo">Flujo de Trabajo</h3>
+                <ul class="capabilities-list">
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Version control systems" data-es="Control de versiones de proyectos">Control de versiones de proyectos</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Structured documentation" data-es="Documentación técnica estructurada">Documentación técnica estructurada</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Agile technical collaboration" data-es="Colaboración técnica ágil">Colaboración técnica ágil</span></li>
+                </ul>
+                <div class="software-tags">
+                    <span class="software-tag"><img src="https://cdn.simpleicons.org/github" alt="GH"> GitHub</span>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -636,11 +730,11 @@
         // ESTADO GLOBAL DE IDIOMA
         let langActive = "es";
 
-        // EFECTO TYPEWRITER (Sustituye a React Component)
+        // EFECTO TYPEWRITER
         const typewriterText = document.getElementById("typewriter-text");
         const typePhrases = {
             es:["LUIS BLASCO IBÁÑEZ BERBEL", "LÍDER DE DISEÑO DE PRODUCTO", "DISEÑADOR INDUSTRIAL"],
-            en: ["LUIS BLASCO IBÁÑEZ BERBEL", "PRODUCT DESIGN LEAD", "INDUSTRIAL DESIGNER"]
+            en:["LUIS BLASCO IBÁÑEZ BERBEL", "PRODUCT DESIGN LEAD", "INDUSTRIAL DESIGNER"]
         };
 
         let twWordIndex = 0;
