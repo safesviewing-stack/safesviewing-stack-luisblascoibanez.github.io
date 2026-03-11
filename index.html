@@ -79,19 +79,8 @@
             will-change: transform, width, height;
         }
 
-       .hovered-element #cursor-ring {
-            width: 22px;
-            height: 22px;
-            background: transparent;
-            border-color: var(--accent);
-            border-width: 2px;
-        }
-
-        .hovered-element #cursor-dot {
-            width: 6px;
-            height: 6px;
-            opacity: 1;
-        }
+       .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
+       .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
 
         /* --- ETIQUETA STATUS INLINE  --- */
         .status-tag {
@@ -111,14 +100,12 @@
 
         @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
 
-        /* --- NAVBAR CENTRO Y OCULTAMIENTO --- */
+        /* --- NAVBAR --- */
         .navbar-wrapper {
             position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .ui-hidden {
-            transform: translateY(-130px);
-        }
+        .ui-hidden { transform: translateY(-130px); }
 
         header {
             background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
@@ -133,32 +120,19 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s;}
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
         .nav-logo:hover { opacity: 1; }
 
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            opacity: 0.6;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 8px 16px;
-            border-radius: 100px;
-            transition: all 0.3s ease;
+            text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease;
         }
         .nav-links a:hover { opacity: 1; }
-
-        .nav-links a.active {
-            background: rgba(150, 150, 150, 0.15);
-            color: var(--text) !important;
-            opacity: 1;
-            font-weight: 700;
-        }
+        .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
 
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
+
         .tools-nav { display:flex; align-items: center; gap: 10px;}
 
         .icon-btn {
@@ -166,16 +140,13 @@
             width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
             -webkit-tap-highlight-color: transparent;
         }
-        .icon-btn:focus, .icon-btn:active { outline: none; box-shadow: none; }
         .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
 
         .lang-sutil-btn {
             background: transparent; border: none; outline: none; color: var(--text);
-            font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800;
-            letter-spacing: 0.5px; padding: 2px 4px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
-            -webkit-tap-highlight-color: transparent;
+            font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.5px; padding: 2px 4px;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
         }
-        .lang-sutil-btn:focus, .lang-sutil-btn:active { outline: none; box-shadow: none; }
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
         /* --- HERO SECTIONS --- */
@@ -184,127 +155,88 @@
 
         .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
 
-        /* Estilos base del título */
-        .hero h1 {
+        .hero-title {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 7.5vw, 8.5rem);
+            font-size: clamp(2rem, 6.5vw, 7.5rem);
             line-height: 1.1;
             font-weight: 800;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             max-width: 1200px;
             width: 100%;
+            min-height: 3.5em; /* Previene saltos de layout cuando se borra el texto */
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
         }
 
-        /* --- COMPONENTE WORD PULL UP (SUSTITUCIÓN) --- */
-        .word-pull-up .word {
-            display: inline-block;
-            padding-right: 8px; /* Padding especificado en el componente React */
-            opacity: 0;
-            transform: translateY(20px); /* Equivalente a hidden: { y: 20 } */
-            animation: framerWordPullUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* CLASES TYPEWRITER CSS */
+        .cursor-blink {
+            font-weight: 400;
+            color: var(--accent);
+            animation: blinker 0.8s step-end infinite;
+            margin-left: 5px;
         }
-
-        @keyframes framerWordPullUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes blinker { 50% { opacity: 0; } }
 
         .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
+
         /* --- MARQUEE EDITORIAL INFINITO --- */
         .marquee-section {
-            width: 100%;
-            overflow: hidden;
-            background: transparent;
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
+            width: 100%; overflow: hidden; background: transparent; padding: 40px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center;
         }
-
-        .marquee-content {
-            display: flex;
-            width: max-content;
-            animation: marqueeScroll 35s linear infinite;
-            will-change: transform;
-        }
-
+        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
         .marquee-text {
-            display: flex;
-            align-items: center;
-            font-family: 'Syne', sans-serif; 
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            color: transparent;
-            -webkit-text-stroke: 1.5px var(--text-dim);
-            text-transform: uppercase;
-            transition: all 0.4s ease;
+            display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
         }
+        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
+        @keyframes marqueeScroll { to { transform: translateX(-50%); } }
 
-        .m-dot {
-            color: var(--accent) !important;
-            -webkit-text-stroke: 0px;
-            margin: 0 45px;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            transform: translateY(-4px);
-        }
-
-        @keyframes marqueeScroll {
-            to { transform: translateX(-50%); }
-        }
 
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-
         .bento-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between;
-            -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px;
+            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between; transform: translateZ(0); 
         }
-
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
         .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify; text-justify: inter-word;}
         .about-text strong { color: var(--text); font-weight: 500;}
 
-        /* --- MÓDULO UNIFICADO DEL PORTFOLIO --- */
+        /* --- PORTFOLIO GRID --- */
         .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
-
-        .p-card {
-            position: relative; background: var(--bg); border: 1px solid var(--border);
-            border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease;
-        }
-
+        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease; }
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
-
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
-
         .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
         .p-text-col { display: flex; flex-direction: column; gap: 4px; }
         .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
         .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; margin: 0;}
-
         .view-circle { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-
+        
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.08); }
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- INFRAESTRUCTURA (COMPETENCIAS) --- */
+        /* --- SKILLS --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .skill-icon { width: 60px; height: 60px; border: 1px solid var(--border); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent); background: var(--bg);}
 
-        /* --- EL CURRÍCULUM --- */
+
+        /* --- CV --- */
         .cv-list { border-top: 1px solid var(--border); display: flex; flex-direction: column; width: 100%; }
         .cv-row { display: flex; flex-direction: row; padding: 55px 0; border-bottom: 1px solid var(--border); gap: 60px; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .cv-row::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%; background: var(--accent); z-index: 2; transition: height 0.3s ease; }
@@ -319,25 +251,39 @@
         .cv-row:hover .cv-role { color: var(--accent); }
         .cv-row:hover .cv-year { color: var(--text); }
 
-        /* --- BOTÓN DESCARGA C.V --- */
-        .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden; border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
-        .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.8); }
+
+        /* --- BUTTONS --- */
+        .btn {
+            position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden;
+            border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s, transform 0.35s; transform: scale(0.8); }
         .btn:hover { color: white; border-color: var(--accent); transform: translateY(-3px) scale(1.01); box-shadow: 0 10px 25px var(--accent-glow); }
         .btn:hover::before { opacity: 1; transform: scale(1); }
         .btn:active { transform: translateY(0) scale(0.99); box-shadow: 0 5px 15px var(--accent-glow); }
-        .btn .flow-arr-left, .btn .flow-arr-right { position: relative; font-size: 0.9rem; color: var(--text-dim); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1); transform: translateX(0); z-index: 1; }
-        .btn .flow-text { position: relative; z-index: 1; transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn .flow-arr-left, .btn .flow-arr-right { position: relative; font-size: 0.9rem; color: var(--text-dim); transition: transform 0.35s, color 0.35s; transform: translateX(0); z-index: 1; }
+        .btn .flow-text { position: relative; z-index: 1; transition: color 0.35s; }
         .btn:hover .flow-arr-left { color: white; transform: translateX(-6px); }
         .btn:hover .flow-text { color: white; transform: translateX(0); }
         .btn:hover .flow-arr-right { color: white; transform: translateX(6px); }
+
 
         /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
         .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
         .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
         .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
-        .contact-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; justify-content: center; text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease; backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
+
+        .contact-box {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; justify-content: center;
+            text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); transform: translateZ(0);
+        }
         .contact-box h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--text-dim); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; transition: color 0.4s ease; }
         .contact-box .box-text { font-size: 1.1rem; color: var(--text); transition: color 0.4s ease; line-height: 1.5; }
+
         .box-phone:hover { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1); transform: translateY(-5px) translateZ(0); }
         .box-phone:hover .box-text, .box-phone:hover h4 { color: #22c55e; }
         .box-linkedin:hover { border-color: #0a66c2; background: rgba(10, 102, 194, 0.05); box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1); transform: translateY(-5px) translateZ(0); }
@@ -368,10 +314,8 @@
             .p-info { left: 25px; right: 25px;}
             .cv-row:hover { padding-left: 20px; }
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
+            .hero-title { min-height: 120px; }
         }
-
-        .nav-logo-home { text-decoration: none; color: inherit; }
-        .nav-logo-home:visited, .nav-logo-home:hover, .nav-logo-home:active, .nav-logo-home:focus { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
@@ -381,7 +325,7 @@
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
-            <a href="#home" class="nav-logo inter-hover nav-logo-home">L|BIB</a>
+            <a href="#home" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
                 <a href="#about" class="inter-hover lang-node" data-en="About me" data-es="Sobre mí">Sobre mí</a>
@@ -398,23 +342,19 @@
         </header>
     </div>
 
-    <!-- TÍTULO INTEGRADO CON EL COMPONENTE WORD-PULL-UP -->
+    <!-- TÍTULO ANIMADO CON EFECTO TYPEWRITER -->
     <section class="hero" id="home">
-        <div class="hero-text-block">
-            <!-- La animación "staggerChildren: 0.2" de framer se emula usando animation-delay por cada palabra -->
-            <h1 class="hero-title word-pull-up">
-                <span class="word" style="animation-delay: 0s;">LUIS</span><br>
-                <span class="word" style="animation-delay: 0.2s;">BLASCO</span>
-                <span class="word" style="animation-delay: 0.4s;">IBÁÑEZ</span><br>
-                <span class="word" style="animation-delay: 0.6s;">BERBEL</span>
+        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+            <h1 class="hero-title">
+              <span id="typewriter-text"></span><span class="cursor-blink">_</span>
             </h1>
 
-            <div class="subtitle-bar" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="700">
+            <div class="subtitle-bar">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
 
                 <div class="status-tag inter-hover">
                     <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                    <span class="lang-node" data-en="Available / Book" data-es="Disponible para retos">Disponible para nuevos retos</span>
+                    <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para nuevos retos</span>
                 </div>
             </div>
         </div>
@@ -423,6 +363,7 @@
     <!-- CARRUSEL EDITORIAL INFINITO -->
     <div class="marquee-section inter-hover">
         <div class="marquee-content">
+            <!-- Bloque 1 -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -439,6 +380,7 @@
                 <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
+            <!-- Bloque 2 (Duplicado exacto para el loop) -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -463,7 +405,7 @@
         <div class="bento-about">
             <div class="bento-card" data-aos="fade-up">
                 <p class="about-text lang-node"
-                   data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other.<br><br> My education across different technical and academic environments has shaped a strong methodological adaptability and a critical reading of design processes. This path led me to prioritize verifiable systems over intuitive-only decisions, understanding design as something that must hold both conceptually and physically.<br><br> My background in electrical and industrial systems defines how I approach projects: designing with real manufacturing, tolerances, assemblies, and material behavior in mind. This minimizes the gap between concept and final object and ensures formal decisions respond to real constraints.<br><br>"
+                   data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other.<br><br> My education across different technical and academic environments has shaped a strong methodological adaptability and a critical reading of design processes. This path led me to prioritize verifiable systems over intuitive-only decisions, understanding design as something that must hold both conceptually and physically.<br><br> My background in electrical and industrial systems defines how I approach projects: designing with real manufacturing, tolerances, assemblies, and material behavior in mind. This minimizes the gap between concept and final object and ensures formal decisions respond to real constraints.<br><br> Within this framework, 3D printing holds a central role, not just as a prototyping tool, but as a system that integrates fast iterations, material control, and new industrial logics."
                    data-es="Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta.<br><br> Dentro de este marco, la impresión 3D ocupa un rol central, no solo como herramienta de prototipado o producción, sino como sistema que integra iteración rápida, control material y nuevas lógicas industriales.">Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta.<br><br> Dentro de este marco, la impresión 3D ocupa un rol central, no solo como herramienta de prototipado o producción, sino como sistema que integra iteración rápida, control material y nuevas lógicas industriales.</p>
             </div>
             <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="150">
@@ -472,12 +414,13 @@
         </div>
     </section>
 
+    <!-- PORTFOLIO -->
     <section id="work">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
 
         <div class="portfolio-grid">
             <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -489,7 +432,7 @@
             </a>
 
             <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -501,7 +444,7 @@
             </a>
 
             <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -513,7 +456,7 @@
             </a>
 
             <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -525,7 +468,7 @@
             </a>
 
             <a href="#" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&fit=crop&w=1200&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&fit=crop&w=1200&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -537,7 +480,7 @@
             </a>
 
             <a href="#" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"></div>
+                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -550,13 +493,14 @@
         </div>
     </section>
 
+    <!-- COMPETENCIAS -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
         <div class="skills-bento">
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-cube"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Parametric Modeling" data-es="Modelado Paramétrico">Modelado Paramétrico</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino. Native flow geometry setup." data-es="Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías volumétricas exactas.">Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías volumétricas exactas.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="High tolerance SolidWorks & Rhino. Native flow geometry setup." data-es="Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías exactas.">Precisión paramétrica a través de Solidworks. Ensambles mecánicos complejos en geometrías exactas.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
@@ -566,31 +510,31 @@
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-industry"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="DFM & Mfg logic" data-es="Matricería & D.F.M">Matricería & D.F.M</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready. Translating models for strict mold constraints, plastics and tolerances." data-es="Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes plásticos e inyección física pura.">Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes plásticos e inyección física pura.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Factory ready. Translating models for strict mold constraints, plastics and tolerances." data-es="Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes e inyección.">Pensamiento 'Diseñado para fabricación'. Ajuste realístico tolerante para moldes e inyección.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up">
                 <div class="skill-icon"><i class="fa-solid fa-universal-access"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Ergonomic Scale" data-es="Adaptabilidad & Ergonomía">Adaptabilidad & Ergonomía</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Human factored limits study. Guaranteeing object relation through dimensional reality testing." data-es="Integración absoluta a factor de uso humano a base empírica dimensional, estudiando métricas y ratios cómodos de iteración real de usuario con el factor físico final.">Estudio riguroso empírico en relación humana para lograr las iteraciones métricas justas. El bienestar corporal dicta volúmen final.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Human factored limits study. Guaranteeing object relation through dimensional reality testing." data-es="Estudio riguroso empírico en relación humana para lograr iteraciones métricas justas.">Estudio riguroso empírico en relación humana para lograr iteraciones métricas justas.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="skill-icon"><i class="fa-solid fa-robot"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="Mch Prototyping" data-es="Mecanización Rápida">Mecanización Rápida</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Early validation phase control: fast mockups & integration for proof-of-concept CNC checking." data-es="Tesis ágil en prototipos reales: testado primario validativo CNC y resina asegurando el paso 0 de cualquier maquinaria volumétrica construida para producción real del producto al momento de inicio iterativo iterativo a escala local iteración escala macro escala física.">Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala visual asegurada.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Early validation phase control: fast mockups & integration for proof-of-concept CNC checking." data-es="Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala.">Evaluaciones volumétricas tangibles iterando formas con impresiones CNC e industriales en pre-escala.</p>
             </div>
             <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
                 <div class="skill-icon"><i class="fa-solid fa-bezier-curve"></i></div>
                 <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:10px;" data-en="A-Class Surfacing" data-es="Geometría Class-A">Geometría Class-A</h3>
-                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Sustained surface flow continuities avoiding reflections brakes using advanced nurbs grids architecture structure manipulation system manipulation system system toolsets toolsets." data-es="Dominio de manipulación matemática sobre planos que convergen, modelando flujos perfectos evitando quiebres duros lumínicos superficiales al reflejo superficial absoluto superficial total exterior puro final del modelo purificado material modelador superficie modelismo topológico de exterior exterior final pura técnica manipulación sistema de rejillas." >Mapeado profundo sobre tangencias entre caras de modelo: suavizado matemático continuo, cero fisuras lumínicas puras.</p>
+                <p class="about-text lang-node" style="font-size:0.95rem;" data-en="Sustained surface flow continuities avoiding reflections brakes using advanced nurbs grids." data-es="Mapeado profundo sobre tangencias entre caras: suavizado matemático continuo y cero fisuras." >Mapeado profundo sobre tangencias entre caras: suavizado matemático continuo y cero fisuras.</p>
             </div>
         </div>
     </section>
 
+    <!-- LISTADO CV -->
     <section id="cv">
         <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Recorrido Profesional /">Recorrido Profesional /</h2>
 
         <div class="cv-list" data-aos="fade-up">
-
             <div class="cv-row inter-hover">
                 <div class="cv-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</div>
                 <div class="cv-content">
@@ -630,7 +574,6 @@
                     <p class="cv-desc lang-node" data-en="Core curriculum traversing aesthetic conceptualization, physics basis, design methodologies and factory-level drafting execution." data-es="Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.">Fundamentos absolutos formales abarcando física conceptual, metodologías sistémicas de diseño y dibujos puramente orientados a taller.</p>
                 </div>
             </div>
-
         </div>
 
         <div style="padding-top: 15px;" data-aos="fade-up">
@@ -642,6 +585,7 @@
         </div>
     </section>
 
+    <!-- CONTACTO -->
     <section id="contact">
         <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
             <div class="contact-top-module">
@@ -649,22 +593,18 @@
             </div>
 
             <div class="contact-links-grid">
-
                 <div class="contact-box box-phone inter-hover">
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
                     <span class="box-text">+34 (TLF Línea directa)</span>
                 </div>
-
                 <a href="#" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
                     <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
                 </a>
-
                 <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box box-neutral inter-hover">
                     <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
                     <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
                 </a>
-
             </div>
         </div>
     </section>
@@ -680,33 +620,94 @@
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // INIT AOS
         AOS.init({ duration: 800, once: true, offset: 50 });
 
+        // TEMA OSCURO / CLARO
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        const btnLang = document.getElementById("lang-toggle");
+        // ESTADO GLOBAL DE IDIOMA
         let langActive = "es";
+
+        // EFECTO TYPEWRITER (Sustituye a React Component)
+        const typewriterText = document.getElementById("typewriter-text");
+        const typePhrases = {
+            es:["LUIS BLASCO IBÁÑEZ BERBEL", "LÍDER DE DISEÑO DE PRODUCTO", "DISEÑADOR INDUSTRIAL"],
+            en: ["LUIS BLASCO IBÁÑEZ BERBEL", "PRODUCT DESIGN LEAD", "INDUSTRIAL DESIGNER"]
+        };
+
+        let twWordIndex = 0;
+        let twCharIndex = 0;
+        let twIsDeleting = false;
+        let twTimeout;
+
+        function runTypewriter() {
+            const currentWord = typePhrases[langActive][twWordIndex];
+
+            if (!twIsDeleting) {
+                // Escribiendo
+                typewriterText.textContent = currentWord.substring(0, twCharIndex + 1);
+                twCharIndex++;
+
+                if (twCharIndex === currentWord.length) {
+                    twIsDeleting = true;
+                    twTimeout = setTimeout(runTypewriter, 2500); // Pausa al completar la palabra
+                    return;
+                }
+            } else {
+                // Borrando
+                typewriterText.textContent = currentWord.substring(0, twCharIndex - 1);
+                twCharIndex--;
+
+                if (twCharIndex === 0) {
+                    twIsDeleting = false;
+                    twWordIndex = (twWordIndex + 1) % typePhrases[langActive].length; // Siguiente palabra
+                }
+            }
+
+            const speed = twIsDeleting ? 30 : 60; // Borra más rápido que escribe
+            twTimeout = setTimeout(runTypewriter, speed);
+        }
+
+        // Iniciar máquina de escribir
+        runTypewriter();
+
+        // TOGGLE DE IDIOMA (Con reinicio de Typewriter)
+        const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
 
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es";
+                
+                // Transición del texto estático
                 domElements.forEach(node => {
                     const text = node.getAttribute(`data-${langActive}`);
                     if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
+
+                // Reiniciar el Typewriter en el nuevo idioma
+                clearTimeout(twTimeout);
+                twCharIndex = 0;
+                twIsDeleting = false;
+                twWordIndex = 0;
+                typewriterText.textContent = "";
+                runTypewriter();
+
             }, 250);
         });
 
+        // CURSOR PERSONALIZADO HARDWARE
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
@@ -726,37 +727,28 @@
         }
         requestAnimationFrame(renderRing);
 
+        // HOVER DE ELEMENTOS INTERACTIVOS
         document.querySelectorAll('.inter-hover, .p-card, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
+        // NAVBAR SCROLL SHOW/HIDE
         let lastScroll = 0;
         const navbar = document.getElementById("navbar");
-
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
-
-            // Mostrar el header si subimos, esconderlo deslizándose hacia arriba si bajamos
             if (currentScroll > lastScroll && currentScroll > 100) {
                 navbar.classList.add("ui-hidden");
             } else {
                 navbar.classList.remove("ui-hidden");
             }
-
             lastScroll = currentScroll;
         });
 
-        // --- LÓGICA DE PÍLDORA DE SECCIÓN EN EL NAVBAR ---
+        // RESALTAR SECCIÓN ACTIVA EN NAVBAR (Intersection Observer)
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".nav-links a");
-
-        const observerOptions = {
-            root: null,
-            rootMargin: "-20% 0px -60% 0px",
-            threshold: 0
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -768,7 +760,7 @@
                     });
                 }
             });
-        }, observerOptions);
+        }, { rootMargin: "-20% 0px -60% 0px", threshold: 0 });
 
         sections.forEach(section => observer.observe(section));
 
