@@ -155,56 +155,25 @@
 
         .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
 
-        .hero-title {
+        .hero h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 6.5vw, 7.5rem);
+            font-size: clamp(2rem, 7.5vw, 8.5rem);
+            line-height: 1.1;
             font-weight: 800;
             letter-spacing: -0.04em;
             text-transform: uppercase;
+        }
+
+        .hero-title {
             max-width: 1200px;
             width: 100%;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* --- ANIMACIÓN DE ENTRADA DEL TÍTULO (MASK REVEAL) --- */
-        .reveal-mask {
-            overflow: hidden;
+        .hero-title span {
             display: block;
-            line-height: 1.05;
-            padding-bottom: 5px; 
-        }
-        
-        .reveal-text {
-            display: block;
-            opacity: 0;
-            transform: translateY(120%);
-            animation: textReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            will-change: transform, opacity, filter;
         }
 
-        /* Retardos en cascada y colores para impacto visual */
-        .reveal-mask:nth-child(1) .reveal-text { animation-delay: 0.1s; color: var(--text); }
-        .reveal-mask:nth-child(2) .reveal-text { animation-delay: 0.25s; color: var(--text-dim); }
-        .reveal-mask:nth-child(3) .reveal-text { animation-delay: 0.4s; color: var(--accent); }
-
-        @keyframes textReveal {
-            0% { opacity: 0; transform: translateY(120%) rotate(3deg); filter: blur(10px); }
-            100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
-        }
-
-        .subtitle-bar { 
-            display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; 
-            margin-top: 25px; width: 100%; max-width: 90%; 
-            opacity: 0;
-            animation: fadeInSub 1s ease forwards;
-            animation-delay: 1.2s;
-        }
-        
-        @keyframes fadeInSub {
-            to { opacity: 1; }
-        }
-
+        .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
@@ -222,7 +191,6 @@
         .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
         @keyframes marqueeScroll { to { transform: translateX(-50%); } }
 
-
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .bento-card {
@@ -232,7 +200,9 @@
         .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify; text-justify: inter-word;}
+        
+        /* Texto Sobre mí (Sin justificar) */
+        .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: left;}
         .about-text strong { color: var(--text); font-weight: 500;}
 
         /* --- PORTFOLIO GRID --- */
@@ -252,7 +222,7 @@
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* --- SKILLS & COMPETENCIAS (SIN ICONOS) --- */
+        /* --- SKILLS & COMPETENCIAS --- */
         .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
         .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;}
         .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
@@ -303,7 +273,6 @@
         .cv-row:hover .cv-role { color: var(--accent); }
         .cv-row:hover .cv-year { color: var(--text); }
 
-
         /* --- BUTTONS --- */
         .btn {
             position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden;
@@ -344,10 +313,8 @@
         .light-mode .box-neutral:hover { background: rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(0,0,0,0.2); }
         .box-neutral:hover .box-text, .box-neutral:hover h4 { color: var(--text); }
 
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        footer a { color: var(--text-dim); text-decoration: none; transition: 0.3s;}
-        footer a:hover {color: var(--accent);}
-
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+        
         /* Reposicionamiento Responsive */
         @media (max-width: 1024px) {
             .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
@@ -393,19 +360,13 @@
         </header>
     </div>
 
-    <!-- TÍTULO ANIMADO (STAGGERED MASK REVEAL) -->
+    <!-- TÍTULO ORIGINAL CON AOS FADE-UP -->
     <section class="hero" id="home">
-        <div class="hero-text-block">
+        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
             <h1 class="hero-title">
-                <div class="reveal-mask">
-                    <span class="reveal-text">LUIS BLASCO IBÁÑEZ</span>
-                </div>
-                <div class="reveal-mask">
-                    <span class="reveal-text lang-node" data-en="PRODUCT DESIGN LEAD" data-es="LÍDER DE DISEÑO DE PRODUCTO">LÍDER DE DISEÑO DE PRODUCTO</span>
-                </div>
-                <div class="reveal-mask">
-                    <span class="reveal-text lang-node" data-en="INDUSTRIAL DESIGNER" data-es="DISEÑADOR INDUSTRIAL">DISEÑADOR INDUSTRIAL</span>
-                </div>
+              LUIS<br>
+              BLASCO IBÁÑEZ<br>
+              BERBEL
             </h1>
 
             <div class="subtitle-bar">
@@ -552,7 +513,7 @@
         </div>
     </section>
 
-    <!-- COMPETENCIAS (SIN ICONOS) -->
+    <!-- COMPETENCIAS (SIN ICONOS Y SIN INDESIGN) -->
     <section id="skills">
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
         <div class="skills-bento">
@@ -624,7 +585,6 @@
                 <div class="software-tags">
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/adobephotoshop" alt="PS"> Photoshop</span>
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeillustrator" alt="AI"> Illustrator</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeindesign" alt="ID"> InDesign</span>
                     <span class="software-tag"><img src="https://cdn.simpleicons.org/adobeanimate" alt="AN"> Animate</span>
                 </div>
             </div>
@@ -710,7 +670,7 @@
             <div class="contact-links-grid">
                 <div class="contact-box box-phone inter-hover">
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
-                    <span class="box-text">+34 (TLF Línea directa)</span>
+                    <span class="box-text">+34 630 51 18 06</span>
                 </div>
                 <a href="#" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
@@ -726,13 +686,7 @@
 
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div>DESIGN FRAMEWORK SYSTEM © 2026.</div>
-        <div class="lang-node" data-en="VALENCIA LOCATED STUDIO" data-es="SISTEMA NATIVO DE PRODUCTOS Y TÉCNICA (VALENCIA)">SISTEMA NATIVO DE PRODUCTOS Y TÉCNICA (VALENCIA)</div>
-        <div style="margin-top:15px; display:flex; gap:15px; justify-content:center; align-items:center;">
-            <a href="#" class="inter-hover">Políticas Legales</a>
-            <div style="width:5px; height:5px; border-radius:50%; background:var(--text-dim); opacity:0.4;"></div>
-            <a href="#" class="inter-hover">Ajuste Accesibilidad Web</a>
-        </div>
+        <div class="lang-node" data-en="Luis Blasco-Ibáñez Berbel · Industrial Design and Product Development" data-es="Luis Blasco-Ibáñez Berbel · Diseño Industrial y Desarrollo de Productos">Luis Blasco-Ibáñez Berbel · Diseño Industrial y Desarrollo de Productos</div>
     </footer>
 
     <!-- SCRIPTS -->
@@ -748,7 +702,7 @@
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // ESTADO GLOBAL DE IDIOMA Y TOGGLE (Compatible con Staggered Reveal)
+        // ESTADO GLOBAL DE IDIOMA
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         
