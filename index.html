@@ -153,18 +153,7 @@
         section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
         .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
 
-        /* Contenedor flex para dividir texto e imagen 3D */
-        .hero-content-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 100%;
-            gap: 20px;
-            padding-top: 60px; /* Compensa la altura del navbar */
-        }
-
-        .hero-text-block { flex: 1.2; z-index: 10; margin-left: -0.5vw; }
+        .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
 
         .hero h1 {
             font-family: 'Syne', sans-serif;
@@ -175,33 +164,19 @@
             text-transform: uppercase;
         }
 
-        .hero-title { max-width: 1200px; width: 100%; }
-        .hero-title span { display: block; }
+        .hero-title {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .hero-title span {
+            display: block;
+        }
 
         .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
-
-        /* Bloque 3D para Spline */
-        .hero-3d-block {
-            flex: 1;
-            width: 100%;
-            height: 80vh;
-            max-height: 700px;
-            position: relative;
-            z-index: 5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        spline-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
-        }
 
         /* --- MARQUEE EDITORIAL INFINITO --- */
         .marquee-section {
@@ -342,10 +317,6 @@
         
         /* Reposicionamiento Responsive */
         @media (max-width: 1024px) {
-            .hero { height: auto; min-height: 100vh; padding-bottom: 40px; }
-            .hero-content-wrapper { flex-direction: column; justify-content: center; padding-top: 140px; }
-            .hero-text-block { flex: none; width: 100%; margin-left: 0; }
-            .hero-3d-block { flex: none; height: 50vh; min-height: 350px; width: 100%; margin-top: 20px; }
             .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
             .p-card { height: 420px; }
             .bento-about, .skills-bento { grid-template-columns: 1fr; }
@@ -389,34 +360,22 @@
         </header>
     </div>
 
-    <!-- TÍTULO Y BLOQUE 3D SPLINE -->
+    <!-- TÍTULO ORIGINAL CON AOS FADE-UP -->
     <section class="hero" id="home">
-        <div class="hero-content-wrapper">
-            <!-- Columna Izquierda: Textos -->
-            <div class="hero-text-block" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="100">
-                <h1 class="hero-title">
-                  LUIS<br>
-                  BLASCO IBÁÑEZ<br>
-                  BERBEL
-                </h1>
+        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+            <h1 class="hero-title">
+              LUIS<br>
+              BLASCO IBÁÑEZ<br>
+              BERBEL
+            </h1>
 
-                <div class="subtitle-bar">
-                    <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
+            <div class="subtitle-bar">
+                <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
 
-                    <div class="status-tag inter-hover">
-                        <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                        <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para nuevos retos</span>
-                    </div>
+                <div class="status-tag inter-hover">
+                    <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
+                    <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para nuevos retos</span>
                 </div>
-            </div>
-
-            <!-- Columna Derecha: Animación 3D del Brazo Robótico -->
-            <div class="hero-3d-block" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
-                <!-- Script oficial de Spline para HTML Vanilla -->
-                <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
-                
-                <!-- IMPORTANTE: Sustituye esta URL por la URL de exportación de tu modelo en Spline -->
-                <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"></spline-viewer>
             </div>
         </div>
     </section>
