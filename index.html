@@ -128,7 +128,9 @@
             text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
             letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease;
         }
-        .nav-links a:hover { opacity: 1; }
+        
+        /* HOVER TIPO PROYECTO ALPHA */
+        .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
         .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
 
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
@@ -698,6 +700,17 @@
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // SCRIPT REINICIAR POSICIÓN DE SCROLL ARRIBA AL REFRESCA LA PÁGINA
+        if (window.history.scrollRestoration) {
+            window.history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', () => {
+            // Solo fuerza subir si NO venimos con una ancla (ej: "#work" tras pulsar volver)
+            if (!window.location.hash || window.location.hash === '#home') {
+                window.scrollTo(0, 0);
+            }
+        });
+
         // INIT AOS
         AOS.init({ duration: 800, once: true, offset: 50 });
 
