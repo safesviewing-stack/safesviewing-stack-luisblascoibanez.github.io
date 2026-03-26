@@ -33,7 +33,8 @@
             --accent-glow: rgba(255, 90, 0, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
+        /* Quitamos el scroll-behavior: smooth de aquí para que no interfiera al cargar con anclas (#work) */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body {
             background-color: var(--bg); color: var(--text);
@@ -129,7 +130,7 @@
             letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease;
         }
         
-        /* HOVER TIPO PROYECTO ALPHA */
+        /* HOVER SOMBREADO EN EL MENÚ */
         .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
         .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
 
@@ -700,15 +701,23 @@
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // SCRIPT REINICIAR POSICIÓN DE SCROLL ARRIBA AL REFRESCA LA PÁGINA
+        // --- 1. REINICIAR POSICIÓN AL CARGAR LA PÁGINA O SALTAR A SECCIÓN ---
         if (window.history.scrollRestoration) {
             window.history.scrollRestoration = 'manual';
         }
+        
         window.addEventListener('load', () => {
-            // Solo fuerza subir si NO venimos con una ancla (ej: "#work" tras pulsar volver)
             if (!window.location.hash || window.location.hash === '#home') {
+                // Si la URL no tiene sección específica, vuelve arriba del todo (ej: F5)
                 window.scrollTo(0, 0);
             }
+            
+            // --- 2. ACTIVAR SCROLL SUAVE SOLO DESPUÉS DE CARGAR ---
+            // Esto asegura que al llegar desde el proyecto al #work el salto sea totalmente instantáneo,
+            // pero que luego navegar haciendo click en el menú vuelva a ser suave.
+            setTimeout(() => {
+                document.documentElement.style.scrollBehavior = 'smooth';
+            }, 100);
         });
 
         // INIT AOS
