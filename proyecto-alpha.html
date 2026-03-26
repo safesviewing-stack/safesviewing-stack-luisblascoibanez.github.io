@@ -10,7 +10,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- CORE VARIABLES & INDEX CSS (Pegar el mismo del index.html) --- */
+        /* --- CORE VARIABLES & INDEX CSS --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
@@ -52,7 +52,17 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        .project-hero-img { width: 100%; height: 70vh; object-fit: cover; border-radius: 30px; margin: 40px auto; max-width: 1600px; display: block; border: 1px solid var(--border); }
+        /* --- IMAGEN PRINCIPAL AJUSTADA --- */
+        .project-hero-img { 
+            width: 90%; /* Alejada de los bordes laterales */
+            max-width: 1500px; 
+            height: 85vh; /* Más ancha en el eje Y (típicamente 85% de la altura de la pantalla) */
+            object-fit: cover; /* Cambiar a "contain" si quieres que el aspirador no se recorte nada y se vea entero */
+            border-radius: 30px; 
+            margin: 60px auto; /* Más alejada de los textos de arriba y abajo */
+            display: block; 
+            border: 1px solid var(--border); 
+        }
 
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
@@ -76,6 +86,7 @@
             .gallery { grid-template-columns: 1fr; }
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
+            .project-hero-img { width: 95%; height: 60vh; }
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
@@ -127,7 +138,7 @@
         </div>
     </section>
 
-    <!-- IMAGEN PRINCIPAL (Sustituida) -->
+    <!-- IMAGEN PRINCIPAL (Sustituida y con nuevas dimensiones) -->
     <img src="Aspirador1.jpg" alt="Alpha Project" class="project-hero-img inter-hover" data-aos="zoom-in" data-aos-duration="1200">
 
     <!-- DESCRIPCIÓN DEL PROYECTO -->
@@ -160,7 +171,7 @@
         <div class="lang-node" style="font-size:0.65rem; text-transform:none; letter-spacing:1.5px;" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
-    <!-- SCRIPTS (Mismos que Index + Ajustes menores) -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 50 });
