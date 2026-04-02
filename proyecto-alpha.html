@@ -53,12 +53,11 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- IMAGEN PRINCIPAL AJUSTADA Y CON MEJORA DE NITIDEZ --- */
+        /* --- IMAGEN PRINCIPAL AJUSTADA (MENOR TAMAÑO Y SIN CORTES) --- */
         .project-hero-img { 
-            width: 90%; 
-            max-width: 1500px; 
-            height: 85vh; 
-            object-fit: cover; 
+            width: 80%; /* Un poco más pequeña */
+            max-width: 1200px; /* Reducida de 1500px a 1200px */
+            height: auto; /* Mantiene la proporción original para que la imagen NUNCA se corte */
             border-radius: 30px; 
             margin: 60px auto; 
             display: block; 
@@ -92,7 +91,7 @@
             .gallery { grid-template-columns: 1fr; }
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
-            .project-hero-img { width: 95%; height: 60vh; }
+            .project-hero-img { width: 95%; height: auto; } /* También mantenemos auto en móviles */
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
