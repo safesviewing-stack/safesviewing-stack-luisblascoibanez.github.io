@@ -117,20 +117,19 @@
             transform: translateX(-40px);
         }
 
-        /* --- NUEVA ANIMACIÓN 3D PARA PLANOS (FOTOS 3 Y 6) --- */
-        [data-aos="plano-3d-lift"] {
+        /* --- NUEVA ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) --- */
+        [data-aos="plano-scale"] {
             opacity: 0;
-            /* Inicia inclinado hacia atrás (eje X) y ligeramente desaturado, simulando un plano en una mesa */
-            transform: perspective(2000px) rotateX(25deg) translateY(80px) scale(0.9) translateX(-40px);
-            filter: contrast(1.1) brightness(1.1) saturate(0.5); 
-            transition-property: opacity, transform, filter;
-            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1); /* Efecto de rebote muy sutil (back ease out) */
+            /* Empieza al 80% de su tamaño */
+            transform: translateX(-40px) scale(0.8);
+            transition-property: opacity, transform;
+            /* Transición muy suave */
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        [data-aos="plano-3d-lift"].aos-animate {
+        [data-aos="plano-scale"].aos-animate {
             opacity: 1;
-            /* Se levanta de frente a la pantalla */
-            transform: perspective(2000px) rotateX(0deg) translateY(0) scale(1) translateX(-40px);
-            filter: contrast(1.03) brightness(1) saturate(1.02); /* Restaura el filtro base de la imagen */
+            /* Termina al 100% de su tamaño */
+            transform: translateX(-40px) scale(1);
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -156,9 +155,10 @@
             .split-img[style] { margin-top: 0 !important; }
             
             .shift-left { transform: none; }
-            /* Ajuste de la animación 3D para móvil (sin el translateX) */
-            [data-aos="plano-3d-lift"] { transform: perspective(2000px) rotateX(20deg) translateY(50px) scale(0.95) translateX(0); }
-            [data-aos="plano-3d-lift"].aos-animate { transform: perspective(2000px) rotateX(0deg) translateY(0) scale(1) translateX(0); }
+            
+            /* Ajuste de la animación plano-scale para móvil (sin el desplazamiento lateral) */
+            [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
+            [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -228,8 +228,8 @@
         </div>
     </section>
 
-    <!-- FOTO 3 (Animación plano-3d-lift) -->
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="plano-3d-lift" data-aos-duration="1400">
+    <!-- FOTO 3 (Animación sencilla de escalado 'plano-scale') -->
+    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
 
 
     <!-- ==========================================
@@ -264,8 +264,8 @@
         </div>
     </section>
 
-    <!-- FOTO 6 (Animación plano-3d-lift) -->
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="plano-3d-lift" data-aos-duration="1400">
+    <!-- FOTO 6 (Animación sencilla de escalado 'plano-scale') -->
+    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
