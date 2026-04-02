@@ -53,13 +53,13 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- IMAGEN PRINCIPAL (TAMAÑO INTERMEDIO SIN CORTAR) --- */
+        /* --- IMAGEN PRINCIPAL (MÁS GRANDE Y DESPLAZADA HACIA ABAJO) --- */
         .project-hero-img { 
-            width: 85%; /* Subido a 85% */
-            max-width: 1400px; /* Aumentado a 1400px */
-            height: auto; /* IMPORTANTE: Mantiene la proporción para que no se corte */
+            width: 90%; /* Aumentado a 90% */
+            max-width: 1500px; /* Aumentado a 1500px */
+            height: auto; /* Mantiene la proporción para que no se corte */
             border-radius: 30px; 
-            margin: 60px auto; 
+            margin: 90px auto 60px auto; /* 90px de margen superior para bajarla más */
             display: block; 
             border: 1px solid var(--border); 
             
@@ -91,7 +91,11 @@
             .gallery { grid-template-columns: 1fr; }
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
-            .project-hero-img { width: 95%; height: auto; }
+            .project-hero-img { 
+                width: 95%; 
+                height: auto; 
+                margin: 60px auto 40px auto; /* En móviles el margen es un poco menor para no ocupar toda la pantalla */
+            }
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
