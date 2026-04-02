@@ -104,7 +104,6 @@
             max-width: 1500px; 
             height: auto; 
             border-radius: 30px; 
-            /* Se ha aumentado el margen superior de 40px a 140px para dar más espacio de separación */
             margin: 140px auto 100px auto; 
             display: block; 
             border: 1px solid var(--border); 
@@ -117,6 +116,22 @@
         /* Clase para desplazar ligeramente a la izquierda los planos */
         .shift-left {
             transform: translateX(-40px);
+        }
+
+        /* --- NUEVA ANIMACIÓN DE ENTRADA COMPUESTA (FOTOS 3 Y 6) --- */
+        [data-aos="reveal-plano"] {
+            opacity: 0;
+            clip-path: inset(25% 0 0 0);
+            filter: contrast(1.03) saturate(0) blur(15px);
+            transform: translateX(-40px) scale(0.95);
+            transition-property: opacity, clip-path, filter, transform;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-aos="reveal-plano"].aos-animate {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+            filter: contrast(1.03) saturate(1.02) blur(0px); /* Restaura el filtro original de full-w-img */
+            transform: translateX(-40px) scale(1);
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -143,9 +158,11 @@
             /* En móviles también se aumenta el espacio superior para los planos */
             .full-w-img { width: 95%; margin: 80px auto 60px auto; }
             
-            /* Reseteos de márgenes y desplazamientos en móvil para que no se vea roto */
+            /* Reseteos de márgenes, desplazamientos y animaciones en móvil para que no se vea roto */
             .split-img[style] { margin-top: 0 !important; }
             .shift-left { transform: none; }
+            [data-aos="reveal-plano"] { transform: translateX(0) scale(0.95); }
+            [data-aos="reveal-plano"].aos-animate { transform: translateX(0) scale(1); }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -217,8 +234,8 @@
         </div>
     </section>
 
-    <!-- FOTO 3 (Más espacio arriba y desplazada a la izquierda) -->
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="fade-up">
+    <!-- FOTO 3 (Más espacio arriba, desplazada a la izquierda y con nueva animación reveal-plano) -->
+    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="reveal-plano" data-aos-duration="1200">
 
 
     <!-- ==========================================
@@ -255,8 +272,8 @@
         </div>
     </section>
 
-    <!-- FOTO 6 (Más espacio arriba y desplazada a la izquierda) -->
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="fade-up">
+    <!-- FOTO 6 (Más espacio arriba, desplazada a la izquierda y con nueva animación reveal-plano) -->
+    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="reveal-plano" data-aos-duration="1200">
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
