@@ -71,8 +71,12 @@
             border-radius: 20px;
             border: 1px solid var(--border);
             object-fit: cover;
-            /* Se ha eliminado el aspect-ratio para que la imagen tome su altura natural y no se vea estirada/alta */
             image-rendering: high-quality;
+        }
+
+        /* Clase específica para volver a alargar verticalmente las imágenes que lo requieran */
+        .img-tall {
+            aspect-ratio: 4/5;
         }
         
         .split-text h3 {
@@ -106,6 +110,12 @@
             image-rendering: high-quality;
             image-rendering: -webkit-optimize-contrast;
             filter: contrast(1.03) saturate(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        /* Clase para desplazar ligeramente a la izquierda los planos */
+        .shift-left {
+            transform: translateX(-40px);
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -129,8 +139,10 @@
             
             .project-meta { gap: 30px; flex-direction: column; } 
             .full-w-img { width: 95%; margin: 20px auto 60px auto; }
-            /* Reseteamos el margin-top en móviles para que no quede raro */
+            
+            /* Reseteos de márgenes y desplazamientos en móvil para que no se vea roto */
             .split-img[style] { margin-top: 0 !important; }
+            .shift-left { transform: none; }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -174,9 +186,9 @@
 
     <!-- FOTO 1 (Izquierda) | TEXTO 1 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
-        <!-- Margin-top añadido para bajar la imagen -->
+        <!-- Imagen bajada un poquito e imagen alargada (img-tall) -->
         <div class="split-img" style="margin-top: 40px;">
-            <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover">
+            <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
         </div>
         <div class="split-text">
             <h3 class="lang-node" data-en="Ego Model I" data-es="Ego Modelo I">Ego Modelo I</h3>
@@ -198,14 +210,14 @@
                La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.
             </p>
         </div>
-        <!-- Margin-top añadido para bajar la imagen -->
-        <div class="split-img" style="margin-top: 40px;">
+        <!-- Imagen bajada un poco más -->
+        <div class="split-img" style="margin-top: 90px;">
             <img src="3 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 1" class="inter-hover">
         </div>
     </section>
 
-    <!-- FOTO 3 (Ocupa todo el ancho - Plano Lámpara 1) -->
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover" data-aos="zoom-in" data-aos-duration="1000">
+    <!-- FOTO 3 (Ocupa todo el ancho - Movida un poco a la izquierda con shift-left) -->
+    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="zoom-in" data-aos-duration="1000">
 
 
     <!-- ==========================================
@@ -214,8 +226,9 @@
 
     <!-- FOTO 4 (Izquierda) | TEXTO 3 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
-        <div class="split-img">
-            <img src="4 LAMPARA.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover">
+        <!-- Imagen bajada un poco más e imagen alargada como la primera (img-tall) -->
+        <div class="split-img" style="margin-top: 90px;">
+            <img src="4 LAMPARA.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover img-tall">
         </div>
         <div class="split-text">
             <h3 class="lang-node" data-en="Ego Model II" data-es="Ego Modelo II">Ego Modelo II</h3>
@@ -238,13 +251,13 @@
             </p>
         </div>
         <div class="split-img">
-            <!-- Imagen 6 LAMPARA -->
+            <!-- Imagen 6 LAMPARA sustituyendo a la 5 -->
             <img src="6 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 2" class="inter-hover">
         </div>
     </section>
 
-    <!-- FOTO 6 (Ocupa todo el ancho - Plano Lámpara 2) -->
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover" data-aos="zoom-in" data-aos-duration="1000">
+    <!-- FOTO 6 (Ocupa todo el ancho - Movida un poco a la izquierda con shift-left) -->
+    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="zoom-in" data-aos-duration="1000">
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
