@@ -74,7 +74,6 @@
             image-rendering: high-quality;
         }
 
-        /* Clase específica para volver a alargar verticalmente las imágenes que lo requieran */
         .img-tall {
             aspect-ratio: 4/5;
         }
@@ -118,20 +117,20 @@
             transform: translateX(-40px);
         }
 
-        /* --- NUEVA ANIMACIÓN DE ENTRADA COMPUESTA (FOTOS 3 Y 6) --- */
-        [data-aos="reveal-plano"] {
+        /* --- NUEVA ANIMACIÓN 3D PARA PLANOS (FOTOS 3 Y 6) --- */
+        [data-aos="plano-3d-lift"] {
             opacity: 0;
-            clip-path: inset(25% 0 0 0);
-            filter: contrast(1.03) saturate(0) blur(15px);
-            transform: translateX(-40px) scale(0.95);
-            transition-property: opacity, clip-path, filter, transform;
-            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            /* Inicia inclinado hacia atrás (eje X) y ligeramente desaturado, simulando un plano en una mesa */
+            transform: perspective(2000px) rotateX(25deg) translateY(80px) scale(0.9) translateX(-40px);
+            filter: contrast(1.1) brightness(1.1) saturate(0.5); 
+            transition-property: opacity, transform, filter;
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1); /* Efecto de rebote muy sutil (back ease out) */
         }
-        [data-aos="reveal-plano"].aos-animate {
+        [data-aos="plano-3d-lift"].aos-animate {
             opacity: 1;
-            clip-path: inset(0 0 0 0);
-            filter: contrast(1.03) saturate(1.02) blur(0px); /* Restaura el filtro original de full-w-img */
-            transform: translateX(-40px) scale(1);
+            /* Se levanta de frente a la pantalla */
+            transform: perspective(2000px) rotateX(0deg) translateY(0) scale(1) translateX(-40px);
+            filter: contrast(1.03) brightness(1) saturate(1.02); /* Restaura el filtro base de la imagen */
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -149,20 +148,17 @@
                 gap: 40px; 
                 padding: 40px 5vw;
             } 
-            /* En móvil forzamos que la foto vaya siempre arriba del texto */
             .split-layout.reverse .split-text { order: 2; }
             .split-layout.reverse .split-img { order: 1; }
             
             .project-meta { gap: 30px; flex-direction: column; } 
-            
-            /* En móviles también se aumenta el espacio superior para los planos */
             .full-w-img { width: 95%; margin: 80px auto 60px auto; }
-            
-            /* Reseteos de márgenes, desplazamientos y animaciones en móvil para que no se vea roto */
             .split-img[style] { margin-top: 0 !important; }
+            
             .shift-left { transform: none; }
-            [data-aos="reveal-plano"] { transform: translateX(0) scale(0.95); }
-            [data-aos="reveal-plano"].aos-animate { transform: translateX(0) scale(1); }
+            /* Ajuste de la animación 3D para móvil (sin el translateX) */
+            [data-aos="plano-3d-lift"] { transform: perspective(2000px) rotateX(20deg) translateY(50px) scale(0.95) translateX(0); }
+            [data-aos="plano-3d-lift"].aos-animate { transform: perspective(2000px) rotateX(0deg) translateY(0) scale(1) translateX(0); }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -204,7 +200,6 @@
          LÁMPARA 1 
          ========================================== -->
 
-    <!-- FOTO 1 (Izquierda) | TEXTO 1 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
         <div class="split-img" style="margin-top: 40px;">
             <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
@@ -219,7 +214,6 @@
         </div>
     </section>
 
-    <!-- TEXTO 2 (Izquierda) | FOTO 2 (Derecha) -->
     <section class="split-layout reverse" data-aos="fade-up">
         <div class="split-text">
             <h3 class="lang-node" data-en="Material Contrast" data-es="Contraste Material">Contraste Material</h3>
@@ -234,15 +228,14 @@
         </div>
     </section>
 
-    <!-- FOTO 3 (Más espacio arriba, desplazada a la izquierda y con nueva animación reveal-plano) -->
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="reveal-plano" data-aos-duration="1200">
+    <!-- FOTO 3 (Animación plano-3d-lift) -->
+    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="plano-3d-lift" data-aos-duration="1400">
 
 
     <!-- ==========================================
          LÁMPARA 2 
          ========================================== -->
 
-    <!-- FOTO 4 (Izquierda) | TEXTO 3 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
         <div class="split-img" style="margin-top: 90px;">
             <img src="4 LAMPARA.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover img-tall">
@@ -257,7 +250,6 @@
         </div>
     </section>
 
-    <!-- TEXTO 4 (Izquierda) | FOTO 5 (Derecha) -->
     <section class="split-layout reverse" data-aos="fade-up">
         <div class="split-text">
             <h3 class="lang-node" data-en="Spatial Presence" data-es="Presencia Espacial">Presencia Espacial</h3>
@@ -272,8 +264,8 @@
         </div>
     </section>
 
-    <!-- FOTO 6 (Más espacio arriba, desplazada a la izquierda y con nueva animación reveal-plano) -->
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="reveal-plano" data-aos-duration="1200">
+    <!-- FOTO 6 (Animación plano-3d-lift) -->
+    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="plano-3d-lift" data-aos-duration="1400">
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
