@@ -74,7 +74,6 @@
             image-rendering: high-quality;
         }
 
-        /* Clase específica para volver a alargar verticalmente las imágenes que lo requieran */
         .img-tall {
             aspect-ratio: 4/5;
         }
@@ -98,6 +97,12 @@
             font-weight: 600;
         }
 
+        /* --- BLOQUES DE TEXTO INTERMEDIOS (Para los planos) --- */
+        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
+        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
+        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
+        .project-text strong { color: var(--text); font-weight: 600; }
+
         /* --- IMAGEN FULL WIDTH (MODO PORTADA / PLANOS) --- */
         .full-w-img { 
             width: 90%; 
@@ -113,7 +118,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Clase para desplazar ligeramente a la izquierda los planos */
         .shift-left {
             transform: translateX(-40px);
         }
@@ -128,19 +132,15 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) { 
-            .split-layout, .split-layout.reverse { 
-                grid-template-columns: 1fr; 
-                gap: 40px; 
-                padding: 40px 5vw;
-            } 
-            /* En móvil forzamos que la foto vaya siempre arriba del texto */
+            .split-layout, .split-layout.reverse { grid-template-columns: 1fr; gap: 40px; padding: 40px 5vw; } 
             .split-layout.reverse .split-text { order: 2; }
             .split-layout.reverse .split-img { order: 1; }
             
+            .project-content { grid-template-columns: 1fr; gap: 40px; }
             .project-meta { gap: 30px; flex-direction: column; } 
             .full-w-img { width: 95%; margin: 20px auto 60px auto; }
             
-            /* Reseteos de márgenes y desplazamientos en móvil para que no se vea roto */
+            /* Reseteos en móvil para no romper la vista */
             .split-img[style] { margin-top: 0 !important; }
             .shift-left { transform: none; }
         }
@@ -186,7 +186,6 @@
 
     <!-- FOTO 1 (Izquierda) | TEXTO 1 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
-        <!-- Imagen bajada un poquito e imagen alargada (img-tall) -->
         <div class="split-img" style="margin-top: 40px;">
             <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
         </div>
@@ -210,13 +209,25 @@
                La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.
             </p>
         </div>
-        <!-- Imagen bajada un poco más -->
-        <div class="split-img" style="margin-top: 90px;">
+        <!-- Imagen 2 más bajada (margin-top: 130px) -->
+        <div class="split-img" style="margin-top: 130px;">
             <img src="3 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 1" class="inter-hover">
         </div>
     </section>
 
-    <!-- FOTO 3 (Ocupa todo el ancho - Movida un poco a la izquierda con shift-left) -->
+    <!-- TÍTULO Y TEXTO ENCIMA DE LA FOTO 3 (PLANO 1) -->
+    <section class="project-content" data-aos="fade-up" style="padding-top: 0; padding-bottom: 40px;">
+        <div class="project-brief">
+            <h3 class="lang-node" data-en="Technical Drawings I" data-es="Planimetría I">Planimetría I</h3>
+        </div>
+        <div class="project-text lang-node" 
+             data-en="Detailed technical drawings specify the precise dimensions and angles required to manufacture the geometric frame of the first model, ensuring perfect stability and light diffusion." 
+             data-es="Los planos técnicos detallados especifican las dimensiones y ángulos exactos requeridos para fabricar el marco geométrico del primer modelo, garantizando una estabilidad perfecta y una difusión de luz óptima.">
+             Los planos técnicos detallados especifican las dimensiones y ángulos exactos requeridos para fabricar el marco geométrico del primer modelo, garantizando una estabilidad perfecta y una difusión de luz óptima.
+        </div>
+    </section>
+
+    <!-- FOTO 3 (Plano Lámpara 1) -->
     <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="zoom-in" data-aos-duration="1000">
 
 
@@ -226,7 +237,7 @@
 
     <!-- FOTO 4 (Izquierda) | TEXTO 3 (Derecha) -->
     <section class="split-layout" data-aos="fade-up">
-        <!-- Imagen bajada un poco más e imagen alargada como la primera (img-tall) -->
+        <!-- Imagen bajada y alargada -->
         <div class="split-img" style="margin-top: 90px;">
             <img src="4 LAMPARA.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover img-tall">
         </div>
@@ -250,13 +261,25 @@
                Al encenderse, la lámpara se transforma. Los componentes metálicos sólidos difunden la luz, proyectando patrones geométricos dirigidos contra las paredes. <br><br>Funciona no solo como fuente de luz, sino como un modificador del espacio arquitectónico que habita, difuminando la línea entre el diseño de producto y el diseño espacial.
             </p>
         </div>
-        <div class="split-img">
-            <!-- Imagen 6 LAMPARA sustituyendo a la 5 -->
+        <!-- Imagen 5 (6 LAMPARA) más bajada (margin-top: 130px) -->
+        <div class="split-img" style="margin-top: 130px;">
             <img src="6 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 2" class="inter-hover">
         </div>
     </section>
 
-    <!-- FOTO 6 (Ocupa todo el ancho - Movida un poco a la izquierda con shift-left) -->
+    <!-- TÍTULO Y TEXTO ENCIMA DE LA FOTO 6 (PLANO 2) -->
+    <section class="project-content" data-aos="fade-up" style="padding-top: 0; padding-bottom: 40px;">
+        <div class="project-brief">
+            <h3 class="lang-node" data-en="Technical Drawings II" data-es="Planimetría II">Planimetría II</h3>
+        </div>
+        <div class="project-text lang-node" 
+             data-en="The blueprints for the second model outline the reinforced internal core and the exact placement of the light source to achieve the desired vertical shadow casting." 
+             data-es="Los planos del segundo modelo describen el núcleo interno reforzado y la ubicación exacta de la fuente de luz para lograr la proyección de sombra vertical deseada.">
+             Los planos del segundo modelo describen el núcleo interno reforzado y la ubicación exacta de la fuente de luz para lograr la proyección de sombra vertical deseada.
+        </div>
+    </section>
+
+    <!-- FOTO 6 (Plano Lámpara 2) -->
     <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="zoom-in" data-aos-duration="1000">
 
 
