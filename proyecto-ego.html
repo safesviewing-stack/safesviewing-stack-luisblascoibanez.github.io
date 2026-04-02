@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ego Seating | Luis Blasco-Ibáñez</title>
+    <title>Proyecto Ego | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* --- CORE VARIABLES & INDEX CSS --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
@@ -42,21 +43,72 @@
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
 
+        /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
         .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
-        .project-hero-img { width: 100%; height: 70vh; object-fit: cover; border-radius: 30px; margin: 40px auto; max-width: 1600px; display: block; border: 1px solid var(--border); }
-        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
-        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
-        .project-text strong { color: var(--text); font-weight: 600; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; transition: filter 0.4s ease; }
-        .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
-        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+
+        /* --- SECCIONES DIVIDIDAS (FOTO Y TEXTO) --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Foto más grande a la izquierda */
+            gap: 80px;
+            padding: 80px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .split-layout.reverse {
+            grid-template-columns: 1fr 1.2fr; /* Foto más grande a la derecha */
+        }
+        
+        .split-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            object-fit: cover;
+            aspect-ratio: 4/5; /* Proporción elegante para lámparas */
+            image-rendering: high-quality;
+        }
+        
+        .split-text h3 {
+            font-family: 'Syne';
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+        .split-text p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .split-text strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* --- IMAGEN FULL WIDTH (MODO PORTADA) --- */
+        .full-w-img { 
+            width: 90%; 
+            max-width: 1500px; 
+            height: auto; 
+            border-radius: 30px; 
+            margin: 40px auto 100px auto; 
+            display: block; 
+            border: 1px solid var(--border); 
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+            filter: contrast(1.03) saturate(1.02);
+        }
+
+        /* --- SIGUIENTE PROYECTO --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
@@ -64,8 +116,24 @@
         .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
 
-        @media (max-width: 1024px) { .project-content { grid-template-columns: 1fr; gap: 40px; } .gallery { grid-template-columns: 1fr; } .gallery .full-w { aspect-ratio: 16/9; } .project-meta { gap: 30px; flex-direction: column; } }
-        @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) { 
+            .split-layout, .split-layout.reverse { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+                padding: 40px 5vw;
+            } 
+            /* En móvil forzamos que la foto vaya siempre arriba del texto */
+            .split-layout.reverse .split-text { order: 2; }
+            .split-layout.reverse .split-img { order: 1; }
+            
+            .project-meta { gap: 30px; flex-direction: column; } 
+            .full-w-img { width: 95%; margin: 20px auto 60px auto; }
+        }
+        @media (max-width: 768px) { 
+            header { padding: 10px 20px; gap: 20px; } 
+            .nav-links { display: none; } 
+        }
     </style>
 </head>
 <body>
@@ -87,33 +155,98 @@
         </header>
     </div>
 
+    <!-- CABECERA DEL PROYECTO -->
     <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="project-title lang-node" data-en="Ego Seating" data-es="Ego Seating">Ego Seating</h1>
+        <h1 class="project-title lang-node" data-en="Ego Lighting Series" data-es="Proyecto Ego">Proyecto Ego</h1>
         <div class="project-meta">
             <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Product Designer" data-es="Diseñador de Producto">Diseñador de Producto</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Furniture / Context" data-es="Mobiliario / Contexto">Mobiliario / Contexto</span></div>
+            <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Lighting / Context" data-es="Iluminación / Contexto">Iluminación / Contexto</span></div>
             <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2022</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Inventor / Woodworking</span></div>
+            <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>SolidWorks / Rendering</span></div>
         </div>
     </section>
 
-    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1600&q=80" alt="Ego Seating" class="project-hero-img inter-hover" data-aos="zoom-in" data-aos-duration="1200">
+    <!-- ==========================================
+         LÁMPARA 1 
+         ========================================== -->
 
-    <section class="project-content" data-aos="fade-up">
-        <div class="project-brief"><h3 class="lang-node" data-en="The Concept" data-es="El Concepto">El Concepto</h3></div>
-        <div class="project-text lang-node" 
-             data-en="Ego Seating explores the relationship between ergonomics and brutalist aesthetics. <strong>By removing the superfluous</strong>, the chair relies on a single continuous wooden curve supported by an oxidized steel frame.<br><br>The contrast between warm, natural materials and cold, industrialized metal defines not just its appearance, but its structural integrity and manufacturing process." 
-             data-es="Ego Seating explora la relación entre la ergonomía y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la silla se apoya en una única curva continua de madera soportada por una estructura de acero oxidado.<br><br>El contraste entre materiales cálidos y el metal frío e industrializado define no solo su apariencia, sino su integridad estructural y su proceso de fabricación.">
-             Ego Seating explora la relación entre la ergonomía y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la silla se apoya en una única curva continua de madera soportada por una estructura de acero oxidado.<br><br>El contraste entre materiales cálidos y el metal frío e industrializado define no solo su apariencia, sino su integridad estructural y su proceso de fabricación.
+    <!-- FOTO 1 (Izquierda) | TEXTO 1 (Derecha) -->
+    <section class="split-layout" data-aos="fade-up">
+        <div class="split-img">
+            <!-- Sustituye por tu primera foto de la lámpara 1 -->
+            <img src="lampara1-1.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover">
+        </div>
+        <div class="split-text">
+            <h3 class="lang-node" data-en="Ego Model I" data-es="Ego Modelo I">Ego Modelo I</h3>
+            <p class="lang-node" 
+               data-en="The first piece of the Ego series explores the relationship between structural balance and brutalist aesthetics. <strong>By removing the superfluous</strong>, the lamp relies on a continuous geometric frame that dictates the path of light.<br><br>The contrast between cold industrial materials and warm ambient lighting creates a functional sculpture for any modern space." 
+               data-es="La primera pieza de la serie Ego explora la relación entre el equilibrio estructural y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la lámpara se apoya en un marco geométrico continuo que dicta el recorrido de la luz.<br><br>El contraste entre materiales industriales fríos y una iluminación ambiental cálida crea una escultura funcional para cualquier espacio moderno.">
+               La primera pieza de la serie Ego explora la relación entre el equilibrio estructural y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la lámpara se apoya en un marco geométrico continuo que dicta el recorrido de la luz.<br><br>El contraste entre materiales industriales fríos y una iluminación ambiental cálida crea una escultura funcional para cualquier espacio moderno.
+            </p>
         </div>
     </section>
 
-    <section class="gallery">
-        <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=800&q=80" alt="Chair Detail 1" class="inter-hover" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1506439050518-e81ab10f3ea2?auto=format&fit=crop&w=800&q=80" alt="Chair Detail 2" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1600&q=80" alt="Context View" class="full-w inter-hover" data-aos="fade-up">
+    <!-- TEXTO 2 (Izquierda) | FOTO 2 (Derecha) -->
+    <section class="split-layout reverse" data-aos="fade-up">
+        <div class="split-text">
+            <h3 class="lang-node" data-en="Material Contrast" data-es="Contraste Material">Contraste Material</h3>
+            <p class="lang-node" 
+               data-en="Attention to detail defines the transition between elements. The base provides absolute stability, allowing the upper structure to feel lightweight and dynamic.<br><br>Every joint and intersection has been meticulously designed to hide wiring while maintaining a raw, architectural visual language." 
+               data-es="La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.">
+               La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.
+            </p>
+        </div>
+        <div class="split-img">
+            <!-- Sustituye por tu segunda foto de la lámpara 1 -->
+            <img src="lampara1-2.jpg" alt="Detalle Lámpara Ego Modelo 1" class="inter-hover">
+        </div>
     </section>
 
+    <!-- FOTO 3 (Ocupa todo el ancho - Portada Lámpara 1) -->
+    <img src="lampara1-3.jpg" alt="Contexto Lámpara Ego Modelo 1" class="full-w-img inter-hover" data-aos="zoom-in" data-aos-duration="1000">
+
+
+    <!-- ==========================================
+         LÁMPARA 2 
+         ========================================== -->
+
+    <!-- FOTO 4 (Izquierda) | TEXTO 3 (Derecha) -->
+    <section class="split-layout" data-aos="fade-up">
+        <div class="split-img">
+            <!-- Sustituye por tu primera foto de la lámpara 2 -->
+            <img src="lampara2-1.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover">
+        </div>
+        <div class="split-text">
+            <h3 class="lang-node" data-en="Ego Model II" data-es="Ego Modelo II">Ego Modelo II</h3>
+            <p class="lang-node" 
+               data-en="Ego Model II introduces a vertical approach to the same conceptual foundation. Designed as a focal point, it plays with height and shadow casting to alter the perception of its surroundings.<br><br>The elongated proportions require a reinforced internal structure, hidden seamlessly within the outer minimalist shell." 
+               data-es="Ego Modelo II presenta un enfoque vertical basado en el mismo fundamento conceptual. Diseñada como un punto focal, juega con la altura y la proyección de sombras para alterar la percepción de su entorno.<br><br>Las proporciones alargadas requieren una estructura interna reforzada, oculta a la perfección dentro de la carcasa exterior minimalista.">
+               Ego Modelo II presenta un enfoque vertical basado en el mismo fundamento conceptual. Diseñada como un punto focal, juega con la altura y la proyección de sombras para alterar la percepción de su entorno.<br><br>Las proporciones alargadas requieren una estructura interna reforzada, oculta a la perfección dentro de la carcasa exterior minimalista.
+            </p>
+        </div>
+    </section>
+
+    <!-- TEXTO 4 (Izquierda) | FOTO 5 (Derecha) -->
+    <section class="split-layout reverse" data-aos="fade-up">
+        <div class="split-text">
+            <h3 class="lang-node" data-en="Spatial Presence" data-es="Presencia Espacial">Presencia Espacial</h3>
+            <p class="lang-node" 
+               data-en="When lit, the lamp transforms. The solid metal components diffuse the light, projecting directed geometric patterns against the walls. <br><br>It functions not just as a light source, but as a modifier of the architectural space it inhabits, blurring the line between product and spatial design." 
+               data-es="Al encenderse, la lámpara se transforma. Los componentes metálicos sólidos difunden la luz, proyectando patrones geométricos dirigidos contra las paredes. <br><br>Funciona no solo como fuente de luz, sino como un modificador del espacio arquitectónico que habita, difuminando la línea entre el diseño de producto y el diseño espacial.">
+               Al encenderse, la lámpara se transforma. Los componentes metálicos sólidos difunden la luz, proyectando patrones geométricos dirigidos contra las paredes. <br><br>Funciona no solo como fuente de luz, sino como un modificador del espacio arquitectónico que habita, difuminando la línea entre el diseño de producto y el diseño espacial.
+            </p>
+        </div>
+        <div class="split-img">
+            <!-- Sustituye por tu segunda foto de la lámpara 2 -->
+            <img src="lampara2-2.jpg" alt="Detalle Lámpara Ego Modelo 2" class="inter-hover">
+        </div>
+    </section>
+
+    <!-- FOTO 6 (Ocupa todo el ancho - Portada Lámpara 2) -->
+    <img src="lampara2-3.jpg" alt="Contexto Lámpara Ego Modelo 2" class="full-w-img inter-hover" data-aos="zoom-in" data-aos-duration="1000">
+
+
+    <!-- ENLACE AL SIGUIENTE PROYECTO -->
     <a href="proyecto-beats.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">BEATS X <i class="fa-solid fa-arrow-right"></i></h2>
@@ -126,12 +259,21 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        if (window.history.scrollRestoration) {
+            window.history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
         AOS.init({ duration: 800, once: true, offset: 50 });
+        
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
+
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -147,6 +289,7 @@
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
             }, 250);
         });
+
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100; let ringX = -100, ringY = -100;
@@ -160,10 +303,12 @@
             requestAnimationFrame(renderRing);
         }
         requestAnimationFrame(renderRing);
+
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
+
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
