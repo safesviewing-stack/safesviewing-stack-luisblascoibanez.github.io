@@ -33,7 +33,6 @@
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
         .nav-logo:hover { opacity: 1; }
         .nav-links { display: flex; gap: 15px; align-items: center; }
-        /* ENLACE "VOLVER AL PORTFOLIO" */
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
         .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
@@ -53,17 +52,14 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- IMAGEN PRINCIPAL (MÁS GRANDE Y DESPLAZADA HACIA ABAJO) --- */
         .project-hero-img { 
-            width: 90%; /* Aumentado a 90% */
-            max-width: 1500px; /* Aumentado a 1500px */
-            height: auto; /* Mantiene la proporción para que no se corte */
+            width: 90%; 
+            max-width: 1500px; 
+            height: auto; 
             border-radius: 30px; 
-            margin: 90px auto 60px auto; /* 90px de margen superior para bajarla más */
+            margin: 90px auto 60px auto; 
             display: block; 
             border: 1px solid var(--border); 
-            
-            /* Mejoras de renderizado y nitidez por CSS */
             image-rendering: high-quality;
             image-rendering: -webkit-optimize-contrast;
             filter: contrast(1.03) saturate(1.02);
@@ -91,11 +87,7 @@
             .gallery { grid-template-columns: 1fr; }
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
-            .project-hero-img { 
-                width: 95%; 
-                height: auto; 
-                margin: 60px auto 40px auto; /* En móviles el margen es un poco menor para no ocupar toda la pantalla */
-            }
+            .project-hero-img { width: 95%; height: auto; margin: 60px auto 40px auto; }
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
@@ -110,11 +102,9 @@
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
-            <!-- Logo lleva a inicio arriba del todo -->
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <!-- Enlace lleva a la sección exacta #work de index.html -->
                 <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Back to Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left"></i> Volver al Portfolio</a>
             </nav>
             <div class="nav-dot" style="margin: 0 10px;"></div>
@@ -164,11 +154,28 @@
         </div>
     </section>
 
-    <!-- GALERÍA DE IMÁGENES -->
-    <section class="gallery">
+    <!-- GALERÍA DE IMÁGENES (PARTE 1) -->
+    <section class="gallery" style="padding-bottom: 40px;">
         <img src="Aspirador4.jpg" alt="Detail 1" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador3.jpg" alt="Detail 2" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador2.jpg" alt="Detail 3" class="full-w inter-hover" data-aos="fade-up">
+    </section>
+
+    <!-- TEXTO INTERMEDIO (PLANIMETRÍA) -->
+    <section class="project-content" data-aos="fade-up" style="padding-top: 0; padding-bottom: 40px;">
+        <div class="project-brief">
+            <h3 class="lang-node" data-en="Technical Drawings" data-es="Planimetría">Planimetría</h3>
+        </div>
+        <div class="project-text lang-node" 
+             data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
+             data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
+             Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
+        </div>
+    </section>
+
+    <!-- PLANO (GALERÍA PARTE 2) -->
+    <section class="gallery" style="padding-top: 0;">
+        <img src="PLANOASPIRADOR.jpg" alt="Plano Aspirador" class="full-w inter-hover" data-aos="fade-up">
     </section>
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
@@ -185,14 +192,12 @@
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // --- SCRIPT REINICIAR POSICIÓN AL INICIO DE ESTA PÁGINA ---
         if (window.history.scrollRestoration) {
             window.history.scrollRestoration = 'manual';
         }
         window.addEventListener('load', () => {
             window.scrollTo(0, 0);
         });
-        // ---------------------------------------------------------
 
         AOS.init({ duration: 800, once: true, offset: 50 });
 
