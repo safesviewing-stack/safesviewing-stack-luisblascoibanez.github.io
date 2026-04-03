@@ -44,7 +44,6 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
 
         /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
-        /* Hemos restaurado el padding original para que todo el contenido suba bastante */
         .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -96,6 +95,17 @@
         .split-text strong {
             color: var(--text);
             font-weight: 600;
+        }
+
+        /* --- ANIMACIÓN MANUAL PARA LA PRIMERA SECCIÓN --- */
+        .manual-scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .manual-scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- IMAGEN FULL WIDTH (MODO PORTADA / PLANOS) --- */
@@ -196,8 +206,8 @@
          LÁMPARA 1 
          ========================================== -->
 
-    <!-- Se añade un delay de 200ms para que aparezca justo después del título -->
-    <section class="split-layout" data-aos="fade-up" data-aos-delay="200">
+    <!-- SECCIÓN CON ANIMACIÓN MANUAL (Clase manual-scroll-reveal sin AOS) -->
+    <section id="first-section" class="split-layout manual-scroll-reveal">
         <div class="split-img" style="margin-top: 40px;">
             <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
         </div>
@@ -284,6 +294,23 @@
         });
 
         AOS.init({ duration: 800, once: true, offset: 50 });
+
+        // --- LÓGICA PARA REVELAR LA PRIMERA FOTO SOLO CON SCROLL LIGERO ---
+        const firstSection = document.getElementById('first-section');
+        const checkFirstScroll = () => {
+            // Con solo bajar 10px se activa la animación
+            if (window.scrollY > 10) {
+                firstSection.classList.add('is-visible');
+                window.removeEventListener('scroll', checkFirstScroll);
+            }
+        };
+        // Por si al recargar la página el usuario ya está un poco abajo
+        if (window.scrollY > 10) {
+            firstSection.classList.add('is-visible');
+        } else {
+            window.addEventListener('scroll', checkFirstScroll);
+        }
+        // -----------------------------------------------------------------
         
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
