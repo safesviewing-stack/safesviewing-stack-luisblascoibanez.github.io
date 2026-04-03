@@ -77,24 +77,28 @@
             max-width: 1600px; margin-left: auto; margin-right: auto;
         }
 
-        .gallery-split img {
-            grid-column: 2;
-        }
+        .gallery-split img { grid-column: 2; width: 100%; height: 75vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); display: block;}
         .gallery-split .text-content {
             font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
             display: flex; flex-direction: column; justify-content: center;
         }
-        .gallery-split img { width: 100%; height: 75vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
 
-        /* GRID DE FOTOS EN PARALELO: ALTURA UNIFICADA */
+        /* GRID DE FOTOS EN PARALELO: ALINEACIÓN PERFECTA GARANTIZADA */
         .planos-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; 
-            padding: 0 5vw; max-width: 1600px; margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+            padding: 0 5vw; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            align-items: stretch; /* Asegura que la celda del grid mida lo mismo */
         }
         .planos-grid img { 
+            display: block; /* CRÍTICO: Elimina el espacio fantasma debajo de la imagen */
             width: 100%; 
-            height: 60vh; /* Altura fija para asegurar que sean iguales */
-            object-fit: cover; 
+            height: 60vh; /* Altura fija idéntica para ambas */
+            object-fit: cover; /* Recorta la imagen para llenar el contenedor sin distorsionar */
+            object-position: center; /* Asegura que el recorte esté centrado */
             border-radius: 20px; 
             border: 1px solid var(--border); 
         }
@@ -117,6 +121,7 @@
             .planos-grid img { height: 50vh; }
             .project-hero-img { width: 95%; }
             .project-text-full-width { max-width: 100%; }
+            .gallery-split img { grid-column: 1; }
         }
     </style>
 </head>
@@ -173,7 +178,7 @@
             <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </section>
 
-        <!-- PRIMERA FILA DE PLANOS (ALTURA IGUALADA) -->
+        <!-- PRIMERA FILA DE PLANOS (ALTURA IGUALADA PERFECTAMENTE) -->
         <div class="planos-grid" data-aos="fade-up">
             <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
             <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
@@ -188,7 +193,7 @@
             </p>
         </div>
 
-        <!-- ÚLTIMA FILA (7 Y 8): ALTURA IGUALADA -->
+        <!-- ÚLTIMA FILA (7 Y 8): ALTURA IGUALADA PERFECTAMENTE -->
         <div class="planos-grid" data-aos="fade-up">
             <img src="7RELOJ.jpg" alt="Beats X View 1" class="inter-hover">
             <img src="8RELOJ.jpg" alt="Beats X View 2" class="inter-hover">
