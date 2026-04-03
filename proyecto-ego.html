@@ -108,36 +108,36 @@
             transform: translateY(0);
         }
 
+        /* --- ENVOLTORIO PARA PLANOS (Mismo tamaño que el resto de las secciones) --- */
+        .plano-wrapper {
+            max-width: 1600px;
+            margin: 140px auto 100px auto;
+            padding: 0 5vw; /* Esto garantiza la alineación perfecta a izquierda y derecha */
+            width: 100%;
+        }
+
         /* --- IMAGEN FULL WIDTH (MODO PORTADA / PLANOS) --- */
         .full-w-img { 
-            width: 90%; 
-            max-width: 1500px; 
+            width: 100%; 
             height: auto; 
             border-radius: 30px; 
-            margin: 140px auto 100px auto; 
             display: block; 
             border: 1px solid var(--border); 
             image-rendering: high-quality;
             image-rendering: -webkit-optimize-contrast;
             filter: contrast(1.03) saturate(1.02);
-            transition: transform 0.3s ease;
         }
 
-        /* Clase para desplazar ligeramente a la derecha los planos y alinearlos */
-        .shift-right {
-            transform: translateX(40px);
-        }
-
-        /* --- ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) HACIA LA DERECHA --- */
+        /* --- ANIMACIÓN SENCILLA DE ESCALADO CENTRADA --- */
         [data-aos="plano-scale"] {
             opacity: 0;
-            transform: translateX(40px) scale(0.8);
+            transform: scale(0.95);
             transition-property: opacity, transform;
             transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
         }
         [data-aos="plano-scale"].aos-animate {
             opacity: 1;
-            transform: translateX(40px) scale(1);
+            transform: scale(1);
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -159,13 +159,8 @@
             .split-layout.reverse .split-img { order: 1; }
             
             .project-meta { gap: 30px; flex-direction: column; } 
-            .full-w-img { width: 95%; margin: 80px auto 60px auto; }
+            .plano-wrapper { margin: 80px auto 60px auto; }
             .split-img[style] { margin-top: 0 !important; }
-            
-            .shift-right { transform: none; }
-            
-            [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
-            [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -236,8 +231,10 @@
         </div>
     </section>
 
-    <!-- FOTO 3 Alineada a la derecha -->
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-right" data-aos="plano-scale" data-aos-duration="1200">
+    <!-- FOTO 3 (Plano) dentro de su contenedor para alinear perfectamente -->
+    <div class="plano-wrapper" data-aos="plano-scale" data-aos-duration="1200">
+        <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover">
+    </div>
 
 
     <!-- ==========================================
@@ -272,8 +269,10 @@
         </div>
     </section>
 
-    <!-- FOTO 6 Alineada a la derecha -->
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-right" data-aos="plano-scale" data-aos-duration="1200">
+    <!-- FOTO 6 (Plano) dentro de su contenedor para alinear perfectamente -->
+    <div class="plano-wrapper" data-aos="plano-scale" data-aos-duration="1200">
+        <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover">
+    </div>
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
