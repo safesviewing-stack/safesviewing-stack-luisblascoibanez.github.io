@@ -44,10 +44,10 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
 
         /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
-        /* Cabecera a pantalla completa para ocultar la imagen inicial */
+        /* Reducimos la altura a 75vh para que la imagen de abajo suba bastante */
         .project-header { 
             padding: 0 5vw; 
-            min-height: 100vh; /* Ocupa el 100% del alto de la pantalla */
+            min-height: 75vh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -104,6 +104,17 @@
         .split-text strong {
             color: var(--text);
             font-weight: 600;
+        }
+
+        /* --- ANIMACIÓN MANUAL EXCLUSIVA PARA LA PRIMERA SECCIÓN --- */
+        .manual-scroll-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .manual-scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- IMAGEN FULL WIDTH (MODO PORTADA / PLANOS) --- */
@@ -164,7 +175,7 @@
             [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
             [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
             
-            .project-header { min-height: 100vh; padding-top: 0px; }
+            .project-header { min-height: 80vh; padding-top: 100px; }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -191,7 +202,7 @@
         </header>
     </div>
 
-    <!-- CABECERA DEL PROYECTO (Ahora a 100vh) -->
+    <!-- CABECERA DEL PROYECTO (75vh para que la imagen quede más arriba) -->
     <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
         <h1 class="project-title lang-node" data-en="Ego Lighting Series" data-es="Proyecto Ego">Proyecto Ego</h1>
         <div class="project-meta">
@@ -206,8 +217,8 @@
          LÁMPARA 1 
          ========================================== -->
 
-    <!-- Se añade data-aos-offset="250" para que no cargue hasta que el usuario haga un scroll profundo -->
-    <section class="split-layout" data-aos="fade-up" data-aos-offset="250">
+    <!-- SECCIÓN CON ANIMACIÓN MANUAL AL HACER SCROLL (Clase .manual-scroll-reveal) -->
+    <section id="first-section" class="split-layout manual-scroll-reveal">
         <div class="split-img" style="margin-top: 40px;">
             <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
         </div>
@@ -295,6 +306,23 @@
 
         AOS.init({ duration: 800, once: true, offset: 50 });
         
+        // --- JS PARA ANIMAR LA PRIMERA FOTO SOLO AL HACER SCROLL ---
+        const firstSection = document.getElementById('first-section');
+        const checkFirstScroll = () => {
+            // Si el usuario hace scroll hacia abajo (más de 20px)
+            if (window.scrollY > 20) {
+                firstSection.classList.add('is-visible');
+                window.removeEventListener('scroll', checkFirstScroll); // Deja de escuchar para no consumir recursos
+            }
+        };
+        // Por si el usuario recarga la página y ya está scrolleado hacia abajo
+        if (window.scrollY > 20) {
+            firstSection.classList.add('is-visible');
+        } else {
+            window.addEventListener('scroll', checkFirstScroll);
+        }
+        // -------------------------------------------------------------
+
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
