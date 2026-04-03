@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Project | Luis Blasco-Ibáñez</title>
+    <title>Beats X | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,17 +17,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
-        /* --- FONDO ANARANJADO Y GRANO --- */
+        /* --- FONDO ANARANJADO RESTAURADO --- */
         body::before { 
-            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
+            content: ""; 
+            position: fixed; 
+            top: 0; 
+            left: 50%; 
+            width: 150vw; 
+            height: 150vh; 
             background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
-            z-index: -1; transform: translateX(-50%); pointer-events: none;
+            z-index: -1; 
+            transform: translateX(-50%); 
+            pointer-events: none;
         }
         body::after { 
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            pointer-events: none; z-index: 9998; 
+            content: ""; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            pointer-events: none; 
+            z-index: 9998; 
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); 
-            opacity: 0.04; mix-blend-mode: overlay; 
+            opacity: 0.04; 
+            mix-blend-mode: overlay; 
         }
 
         /* --- CURSOR --- */
@@ -57,40 +71,46 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* ALINEACIÓN DE FOTOS HERO (1 Y 5) */
         .project-hero-img { 
-            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
-            margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
+            width: calc(100% - 10vw); height: 90vh; object-fit: cover; border-radius: 30px; 
+            margin: 80px auto 30px; max-width: 1600px; display: block; border: 1px solid var(--border);
+            opacity: 0; transform: translateY(80px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
-        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
+        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 60px; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
-        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+        .gallery-split {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 100px; 
+            margin-top: 25px; margin-bottom: 25px; padding: 0 5vw; 
+            max-width: 1600px; margin-left: auto; margin-right: auto;
+        }
+        .gallery-split .text-content {
+            font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+            display: flex; flex-direction: column; justify-content: center; max-width: 450px;
+        }
+        .gallery-split img { height: 75vh; width: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
 
-        /* TEXTO INTERMEDIO ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 140px 5vw 60px; }
-        .project-text-full-width { 
-            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
+        .gallery img { width: 100%; height: 60vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
+        
+        .text-full-width { 
+            grid-column: 1 / -1; font-size: 1.05rem; color: var(--text-dim); text-align: justify; 
+            margin-top: 80px; margin-bottom: 60px; line-height: 1.8; max-width: 700px; 
         }
 
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
-        .next-project:hover { background: var(--accent-glow); }
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none;}
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content, .gallery { grid-template-columns: 1fr; gap: 40px; }
-            .project-hero-img { width: 95%; }
-            .project-text-full-width { max-width: 100%; }
+            .project-content, .gallery-split, .gallery { grid-template-columns: 1fr; gap: 40px; }
+            .text-full-width, .gallery-split .text-content { max-width: 100%; }
         }
     </style>
 </head>
@@ -99,12 +119,12 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <div class="navbar-wrapper ui-sync" id="navbar">
+    <div class="navbar-wrapper" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left"></i> Volver al Portfolio</a>
             </nav>
             <div class="nav-dot" style="margin: 0 10px;"></div>
             <div class="tools-nav">
@@ -116,48 +136,53 @@
 
     <main>
         <section class="project-header" data-aos="fade-up">
-            <h1 class="project-title lang-node" data-en="Alpha Project" data-es="Proyecto Alpha">Proyecto Alpha</h1>
+            <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
             <div class="project-meta">
-                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Lead Designer" data-es="Diseñador Principal">Diseñador Principal</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Technical Structure" data-es="Estructura Técnica">Estructura Técnica</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2023</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>SolidWorks / FDM / CAM</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Hardware Developer" data-es="Desarrollador de Hardware">Desarrollador de Hardware</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Consumer Electronics" data-es="Electrónica de Consumo">Electrónica de Consumo</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2021</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Class-A Surfacing / Keyshot</span></div>
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
-        <img id="foto1" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover">
+        <img id="main-hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
 
         <section class="project-content" data-aos="fade-up">
-            <div class="project-brief"><h3 class="lang-node" data-en="The Narrative" data-es="La Narrativa">La Narrativa</h3></div>
+            <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
             <div class="project-text lang-node" 
-                 data-en="Alpha Project transcends mere formal conception to address the complex relationship between internal volume and structural efficiency. The goal was to generate an optimized chassis capable of withstanding multidirectional torsion during intensive use without increasing the device's overall mass. Through advanced FEA (Finite Element Analysis) simulations, we identified critical stress points, allowing for a parametric distribution of internal ribs. This iterative process resulted in a lightweight yet monolithic internal architecture that serves as the backbone for all high-performance components." 
-                 data-es="El Proyecto Alpha trasciende la mera concepción formal para abordar la compleja relación entre el volumen interno y la eficiencia estructural. El objetivo fue generar un chasis optimizado capaz de soportar torsiones multidireccionales durante el uso intensivo sin incrementar la masa total del dispositivo. Mediante simulaciones avanzadas de FEA (Análisis de Elementos Finitos), identificamos puntos críticos de tensión, lo que permitió una distribución paramétrica de los nervios internos. Este proceso iterativo resultó en una arquitectura interna ligera pero monolítica que sirve como columna vertebral para todos los componentes.">
-                 El Proyecto Alpha trasciende la mera concepción formal para abordar la compleja relación entre el volumen interno y la eficiencia estructural.
+                 data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish. Beyond the exterior, the challenge involved synchronizing the mechanical architecture with the electronic PCB layout, ensuring that every millimeter of the internal cavity was utilized without compromising heat dissipation. The result is a seamless fusion of high-performance engineering and an uncompromising aesthetic language that defines the next generation of audio peripherals." 
+                 data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable. Más allá del exterior, el desafío implicó sincronizar la arquitectura mecánica con el diseño de la PCB electrónica, asegurando que cada milímetro de la cavidad interna se utilizara sin comprometer la disipación de calor.">
+                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores.
             </div>
+        </section>
+
+        <section class="gallery-split" data-aos="fade-up">
+            <div class="text-content lang-node" 
+                 data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions. Every internal component was modeled with a focus on ease of assembly and thermal management, creating a device that is as robust internally as it is elegant on the outside." 
+                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Cada componente interno fue modelado priorizando la facilidad de ensamblaje y la gestión térmica.">
+                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas.
+            </div>
+            <img src="5RELOJ.jpg" alt="Detail" class="inter-hover">
         </section>
 
         <section class="gallery">
-            <img src="Aspirador4.jpg" alt="Detalle 1" class="inter-hover" data-aos="fade-up">
-            <img src="Aspirador3.jpg" alt="Detalle 2" class="inter-hover" data-aos="fade-up">
-            <img src="Aspirador2.jpg" alt="Detalle 3" class="full-w inter-hover" data-aos="fade-up">
+            <img src="4RELOJ.jpg" alt="Photo 1" class="inter-hover" data-aos="fade-up">
+            <img src="1RELOJ.jpg" alt="Photo 2" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="text-full-width lang-node" 
+                 data-en="These final renders represent the culmination of an exhaustive process of visual and technical refinement, where every detail has been scrutinized to achieve perfection. They are not merely aesthetic images but precise physical simulations that allowed us to study light behavior across various Class-A textures and finishes. We analyzed diffraction on the edges, the sheen on the metals, and the depth of the blacks to ensure the final product conveys a sense of luxury and solidity. This level of detail is fundamental to communicating the device's build quality, allowing the user to appreciate the complexity of internal engineering reflected in a minimalist and elegant exterior."
+                 data-es="Estos renders finales representan la culminación de un exhaustivo proceso de refinamiento visual y técnico, donde cada detalle ha sido escrutado para alcanzar la perfección. No se trata solo de imágenes estéticas, sino de simulaciones físicas precisas que nos permitieron estudiar el comportamiento de la luz sobre las diversas texturas y acabados Clase-A. Analizamos la difracción en las aristas y el brillo en los metales para garantizar que el producto final transmita una sensación de lujo y solidez.">
+                 Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño.
+            </div>
+            
+            <img src="7RELOJ.jpg" alt="Photo 3" class="inter-hover" data-aos="fade-up">
+            <img src="8RELOJ.jpg" alt="Photo 4" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
         </section>
-
-        <div class="text-align-wrapper" data-aos="fade-up">
-            <p class="project-text-full-width lang-node" 
-                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of a exhaustive study of industrial assembly processes. We focused on the seamless integration of mechanical subsystems, specifying not only the dimensions but also the materials' thermal properties and assembly sequences. This documentation ensures that the transition from a digital prototype to a CNC-machined final product is flawless, maintaining the integrity of the design throughout the entire production chain. It covers exploded views, routing for electronic components, and precise anchor points for modular maintenance." 
-                 data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial. Nos centramos en la integración perfecta de los subsistemas mecánicos, especificando no solo las dimensiones, sino también las propiedades térmicas de los materiales y las secuencias de montaje. Esta documentación garantiza que la transición de un prototipo digital a un producto final mecanizado por CNC sea impecable, manteniendo la integridad del diseño durante toda la cadena de producción. Incluye despieces detallados, rutas para componentes y puntos precisos para mantenimiento.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo.
-            </p>
-        </div>
-
-        <!-- FOTO 5 (MISMO MARGEN QUE FOTO 1) -->
-        <img id="foto5" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover">
     </main>
 
-    <a href="proyecto-ego.html" class="next-project inter-hover">
+    <a href="proyecto-ion.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
-        <h2 class="next-title">EGO SEATING <i class="fa-solid fa-arrow-right"></i></h2>
+        <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
     <footer>
@@ -171,7 +196,6 @@
         window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 800, once: true });
 
-        // Theme & Lang
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
@@ -191,7 +215,6 @@
             }, 250);
         });
 
-        // Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -211,18 +234,17 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Hero Reveal para Foto 1 y Foto 5
-        const heroes = document.querySelectorAll('.project-hero-img');
-        let heroObserver = new IntersectionObserver((entries) => {
+        const mainHeroImg = document.getElementById('main-hero-img');
+        let heroImgObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('aos-animate');
+                    mainHeroImg.classList.add('aos-animate');
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.15 }); 
-        heroes.forEach(h => heroObserver.observe(h));
+        heroImgObserver.observe(mainHeroImg);
 
-        // Navbar Scroll
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
