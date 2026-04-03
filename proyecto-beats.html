@@ -39,7 +39,7 @@
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
         header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        /* .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;} Remove this */
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
@@ -139,7 +139,7 @@
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
-            <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
+            <!-- Removed the nav-logo element as requested -->
             <div class="nav-dot"></div>
             <nav class="nav-links">
                 <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
