@@ -70,7 +70,7 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* NUEVA CUADRÍCULA 2x2 para imágenes y texto separador */
+        /* NUEVA CUADRÍCULA 2x2 para imágenes (3 imágenes ahora) */
         .grid-2x2-section {
             display: grid;
             grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
@@ -90,27 +90,7 @@
             border-radius: 20px;
             border: 1px solid var(--border);
         }
-
-        .grid-2x2-section .grid-text-item {
-            display: flex; /* Para centrar el texto verticalmente si es más corto que la imagen adyacente */
-            flex-direction: column;
-            justify-content: center;
-            background: var(--card-bg); /* Un fondo para que el "recuadro" del texto sea visible */
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            padding: 30px; /* Padding interno para el texto */
-            height: 60vh; /* Misma altura que las imágenes */
-            box-sizing: border-box; /* Incluir padding y border en la altura */
-        }
-
-        .grid-2x2-section .grid-text-item p { 
-            max-width: 100%; /* Asegura que el texto se ajuste al ancho de su celda */
-            font-size: 1.1rem; 
-            color: var(--text-dim); 
-            line-height: 1.8; 
-            text-align: justify; 
-            margin: 0; /* Quita márgenes por defecto del párrafo */
-        }
+        /* Eliminamos el estilo para .grid-text-item porque el texto ahora está en su propia sección */
 
         /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
         .planos-grid { 
@@ -132,7 +112,6 @@
             border: 1px solid var(--border); 
         }
 
-
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -142,10 +121,9 @@
 
         @media (max-width: 1024px) {
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
-            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } /* Altura en móviles, auto para texto */
-            .grid-2x2-section .grid-text-item { height: auto; } /* El texto debe tener altura automática para expandirse */
+            .grid-2x2-section img, .planos-grid img { height: 50vh; } /* Altura en móviles */
             .project-hero-img { width: 95%; }
-            .project-text-full-width { max-width: 100%; }
+            /* .project-text-full-width ya no está dentro de una cuadrícula con altura fija */
         }
     </style>
 </head>
@@ -192,15 +170,23 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: CUADRÍCULA 2x2 para 3 imágenes y el texto separador -->
+        <!-- CUADRÍCULA CON LAS 3 IMÁGENES REORGANIZADAS -->
         <div class="grid-2x2-section" data-aos="fade-up">
-            <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
-            <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
-            <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
-            <div class="grid-text-item lang-node" data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
+            <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover"> <!-- Anteriormente 5RELOJ -->
+            <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover"> <!-- Anteriormente 4RELOJ -->
+            <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover"> <!-- Anteriormente 1RELOJ -->
+            <!-- El cuarto elemento de la cuadrícula se deja vacío, o se puede eliminar si solo se quieren 3 elementos que ocupen 3/4 del espacio -->
+            <!-- Si quieres que las 3 imágenes llenen el espacio 2x2, puedes hacer que una imagen ocupe 2 columnas, o que las 3 ocupen el 100% de la fila -->
+            <!-- Por ahora, lo dejaremos con 3 imágenes en un grid de 2x2, lo que dejará un espacio vacío en la última celda -->
+        </div>
+
+        <!-- TEXTO SEPARADOR (ahora fuera de la cuadrícula, como una sección completa) -->
+        <div class="text-align-wrapper" data-aos="fade-up">
+            <p class="project-text-full-width lang-node" 
+                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
                  data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.">
-                <p>La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea es fruto de un estudio profundo.</p>
-            </div>
+                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea es fruto de un estudio profundo.
+            </p>
         </div>
 
         <!-- ÚLTIMA FILA (7 Y 8): ALTURA IGUALADA PERFECTAMENTE -->
