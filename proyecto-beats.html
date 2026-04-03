@@ -17,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
-        /* --- FONDO ANARANJADO Y GRANO --- */
+        /* --- FONDO ANARANJADO Y GRANO (RESTAURADO) --- */
         body::before { 
             content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
             background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
@@ -30,7 +30,7 @@
             opacity: 0.04; mix-blend-mode: overlay; 
         }
 
-        /* --- CURSOR --- */
+        /* --- CURSORTrailing logic --- */
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
         .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
@@ -57,7 +57,7 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* HERO IMAGE */
+        /* ALINEACIÓN DE FOTOS HERO */
         .project-hero-img { 
             width: calc(100% - 10vw); height: auto; border-radius: 30px; 
             margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
@@ -70,7 +70,7 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* SECCIÓN 5RELOJ: TEXTO IZQUIERDA, FOTO DERECHA */
+        /* SECCIÓN 5RELOJ: TEXTO IZQUIERDA / FOTO DERECHA */
         .gallery-split {
             display: grid; grid-template-columns: 1fr 1fr; gap: 80px; 
             margin-top: 25px; margin-bottom: 80px; padding: 0 5vw; 
@@ -82,15 +82,15 @@
         }
         .gallery-split img { width: 100%; height: 75vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
 
-        /* GALERÍA PLANOS: EN PARALELO (SIDE BY SIDE) */
+        /* GRIDS DE FOTOS EN PARALELO */
         .planos-grid { 
             display: grid; grid-template-columns: 1fr 1fr; gap: 25px; 
-            padding: 0 5vw 80px; max-width: 1600px; margin: 0 auto; 
+            padding: 0 5vw; max-width: 1600px; margin: 0 auto; 
         }
         .planos-grid img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--border); }
 
-        /* TEXTO INFERIOR: ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw 60px; }
+        /* TEXTO ESTRECHO PARA SEPARAR SECCIONES */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw; }
         .project-text-full-width { 
             max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
@@ -130,6 +130,7 @@
     </div>
 
     <main>
+        <!-- TÍTULO Y META -->
         <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
             <div class="project-meta">
@@ -140,48 +141,52 @@
             </div>
         </section>
 
-        <!-- FOTO 1: HERO -->
-        <img id="hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
+        <!-- FOTO 1 (HERO) -->
+        <img src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover" data-aos="fade-up">
 
+        <!-- TEXTO DE ANÁLISIS -->
         <section class="project-content" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
-                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems." 
-                 data-es="Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
-                 El proyecto Beats X se centra en la optimización de superficies Clase-A y la integración de componentes de alta fidelidad.
+                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps." 
+                 data-es="Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales.">
+                 Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado.
             </div>
         </section>
 
-        <!-- SECCIÓN 5RELOJ: TEXTO IZQUIERDA / IMAGEN DERECHA -->
+        <!-- FOTO 5RELOJ CON TEXTO A LA IZQUIERDA -->
         <section class="gallery-split" data-aos="fade-up">
             <div class="text-content lang-node" 
-                 data-en="This stage highlights the advanced materials and precision manufacturing techniques employed. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions. Every internal component was modeled prioratizing thermal management and ease of assembly." 
-                 data-es="Esta etapa destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en cualquier condición.">
-                 En esta fase nos centramos en los materiales y la construcción híbrida de aleaciones ligeras.
+                 data-en="The integration of magnesium alloys with soft-touch polymers allowed us to achieve a monolithic appearance without visible parting lines. Each component was simulated to withstand daily wear while housing delicate sensor arrays that monitor biometric data in real-time. We prioritized thermal management and ease of assembly, ensuring the device is as robust as it is elegant." 
+                 data-es="La integración de aleaciones de magnesio con polímeros de tacto suave nos permitió lograr una apariencia monolítica sin líneas de partición visibles. Cada componente fue simulado para resistir el desgaste diario mientras alberga delicados conjuntos de sensores que monitorean datos biométricos en tiempo real. Priorizamos la gestión térmica y la facilidad de ensamblaje para garantizar la máxima durabilidad.">
+                 La integración de aleaciones de magnesio con polímeros de tacto suave nos permitió lograr una apariencia monolítica sin líneas de partición visibles.
             </div>
             <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </section>
 
-        <!-- SECCIÓN PLANOS: UNO AL LADO DEL OTRO (SIDE BY SIDE) -->
+        <!-- PRIMERA FILA DE PLANOS (4 Y 1) -->
         <div class="planos-grid" data-aos="fade-up">
-            <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
-            <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
+            <img src="4RELOJ.jpg" alt="Technical Layout 1" class="inter-hover">
+            <img src="1RELOJ.jpg" alt="Technical Layout 2" class="inter-hover">
         </div>
 
+        <!-- TEXTO DE SEPARACIÓN -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
-                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes. We focused on the seamless integration of mechanical subsystems, specifying not only the dimensions but also the materials' thermal properties and assembly sequences. This documentation ensures that the transition from a digital prototype to a final product is flawless, maintaining the integrity of the design throughout the entire production chain." 
-                 data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial. Nos centramos en la integración perfecta de los subsistemas mecánicos, especificando no solo las dimensiones, sino también las propiedades térmicas de los materiales y las secuencias de montaje para garantizar una transición impecable del prototipo a la producción final.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala.
+                 data-en="This resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the CNC workshop floor. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces." 
+                 data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y el taller de mecanizado. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies.">
+                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo.
             </p>
         </div>
 
-        <section class="gallery">
-            <img src="7RELOJ.jpg" alt="Detail View" class="inter-hover" data-aos="fade-up">
-            <img src="8RELOJ.jpg" alt="Final View" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        </section>
+        <!-- SEGUNDA FILA DE FOTOS (7 Y 8) - DEBAJO Y SEPARADAS -->
+        <div class="planos-grid" data-aos="fade-up">
+            <img src="7RELOJ.jpg" alt="Beats X Angle 1" class="inter-hover">
+            <img src="8RELOJ.jpg" alt="Beats X Angle 2" class="inter-hover">
+        </div>
     </main>
 
+    <!-- SIGUIENTE PROYECTO -->
     <a href="proyecto-ion.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
@@ -201,7 +206,7 @@
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // Lang Toggle con Animación
+        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -218,7 +223,7 @@
             }, 250);
         });
 
-        // Cursor
+        // Cursor logic (0.35 smoothing)
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -238,7 +243,7 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Scroll Reveal para Hero
+        // Hero Reveal
         const heroes = document.querySelectorAll('.project-hero-img');
         let heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
