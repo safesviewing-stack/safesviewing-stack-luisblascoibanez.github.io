@@ -40,14 +40,14 @@
         .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
+        .project-header { padding: 120px 5vw 40px; max-width: 1600px; margin: 0 auto; } /* Ajustado padding-top */
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
         .project-hero-img { 
-            width: 100%; 
+            width: calc(100% - 10vw); /* Para reducir los márgenes laterales */
             height: 95vh; 
             object-fit: cover; 
             border-radius: 30px; 
@@ -128,7 +128,7 @@
         
         /* Ajuste para bajar el contenido */
         body { padding-top: 0; } /* Asegurarse de que no haya padding global */
-        main { padding-top: 100px; } /* Añadir un padding superior al contenido principal */
+        main { padding-top: 0; } /* Ajuste del padding superior del contenido principal, no es necesario si ya se ajustó el header */
 
         @media (max-width: 1024px) { 
             .project-content { grid-template-columns: 1fr; gap: 40px; } 
@@ -136,7 +136,7 @@
             .gallery-split { grid-template-columns: 1fr; /* Colapsa a una columna en móviles */ padding: 0 5vw;}
             .gallery .full-w { aspect-ratio: 16/9; height: auto; }
             .project-meta { gap: 30px; flex-direction: column; } 
-            .project-hero-img, .gallery img, .gallery-split img { height: auto; } 
+            .project-hero-img, .gallery img, .gallery-split img { height: auto; width: 100%; margin-left: 0; margin-right: 0; } /* Ajuste para móviles */
             .gallery-split .text-content { text-align: justify; } 
             .text-full-width { text-align: justify; padding: 0 5vw; /* Restaurar padding en móviles */ } 
         }
@@ -162,7 +162,7 @@
         </header>
     </div>
 
-    <main> <!-- Nuevo contenedor para el contenido principal -->
+    <main> <!-- Contenedor para el contenido principal -->
         <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
             <div class="project-meta">
