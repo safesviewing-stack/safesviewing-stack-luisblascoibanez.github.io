@@ -70,11 +70,11 @@
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
-            height: 60vh; 
+            height: auto; /* Changed from 60vh to auto */
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
-            aspect-ratio: 4/3; 
+            /* Removed aspect-ratio: 4/3; */
             transition: filter 0.4s ease; 
         }
         .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
@@ -147,7 +147,7 @@
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Back to Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left"></i> Volver al Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Back to Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left'></i> Volver al Portfolio</a>
             </nav>
             <div class="nav-dot" style="margin: 0 10px;"></div>
             <div class="tools-nav">
@@ -197,7 +197,7 @@
         <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación, ancho completo de las fotos -->
         <div class="text-full-width lang-node" 
              data-en="These detailed renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We focused on innovative solutions to create a product that stands out in the competitive consumer electronics market, blending cutting-edge technology with timeless design principles."
-             data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.">
+             data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.">
              Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.
         </div>
         
