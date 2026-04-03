@@ -70,6 +70,21 @@
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
         .project-text strong { color: var(--text); font-weight: 600; }
 
+        /* --- NUEVO ESTILO: TEXTO A ANCHO COMPLETO --- */
+        .project-text-full { 
+            padding: 160px 5vw 60px; /* Separación amplia de 160px por arriba */
+            max-width: 1100px; 
+            margin: 0 auto; 
+            font-size: 1.2rem; 
+            color: var(--text-dim); 
+            line-height: 1.8; 
+            text-align: center; 
+        }
+        .project-text-full strong { 
+            color: var(--text); 
+            font-weight: 600; 
+        }
+
         /* --- GALERÍA --- */
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
@@ -88,6 +103,9 @@
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
             .project-hero-img { width: 95%; height: auto; margin: 60px auto 40px auto; }
+            
+            /* Ajuste en móviles para el texto central */
+            .project-text-full { padding: 100px 5vw 40px; font-size: 1.1rem; }
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
@@ -155,23 +173,19 @@
     </section>
 
     <!-- GALERÍA DE IMÁGENES (PARTE 1) -->
-    <section class="gallery" style="padding-bottom: 40px;">
+    <!-- Quitamos el padding inferior inline para permitir que el texto dicte la separación -->
+    <section class="gallery" style="padding-bottom: 0;">
         <img src="Aspirador4.jpg" alt="Detail 1" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador3.jpg" alt="Detail 2" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador2.jpg" alt="Detail 3" class="full-w inter-hover" data-aos="fade-up">
     </section>
 
-    <!-- TEXTO INTERMEDIO (PLANIMETRÍA) -->
-    <section class="project-content" data-aos="fade-up" style="padding-top: 0; padding-bottom: 40px;">
-        <div class="project-brief">
-            <h3 class="lang-node" data-en="Technical Drawings" data-es="Planimetría">Planimetría</h3>
-        </div>
-        <div class="project-text lang-node" 
-             data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
-             data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
-             Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
-        </div>
-    </section>
+    <!-- TEXTO INTERMEDIO (TEXTO A LO ANCHO, SIN TÍTULO) -->
+    <p class="project-text-full lang-node" data-aos="fade-up"
+         data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
+         data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
+         Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
+    </p>
 
     <!-- PLANO (GALERÍA PARTE 2) -->
     <section class="gallery" style="padding-top: 0;">
