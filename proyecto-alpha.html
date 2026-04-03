@@ -70,17 +70,22 @@
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
         .project-text strong { color: var(--text); font-weight: 600; }
 
-        /* --- NUEVO ESTILO: TEXTO A ANCHO COMPLETO --- */
-        .project-text-full { 
-            padding: 160px 5vw 60px; /* Separación amplia de 160px por arriba */
-            max-width: 1100px; 
-            margin: 0 auto; 
-            font-size: 1.2rem; 
+        /* --- NUEVO ESTILO: TEXTO ALINEADO A LA IZQUIERDA --- */
+        .text-align-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 160px 5vw 60px; /* Gran margen superior de 160px para separar de las fotos de arriba */
+            display: flex;
+            justify-content: flex-start; /* Alinea el contenido a la izquierda */
+        }
+        .project-text-left { 
+            max-width: 900px; /* Ancho máximo para que no se haga infinito y sea cómodo de leer */
+            font-size: 1.1rem; 
             color: var(--text-dim); 
             line-height: 1.8; 
-            text-align: center; 
+            text-align: justify; 
         }
-        .project-text-full strong { 
+        .project-text-left strong { 
             color: var(--text); 
             font-weight: 600; 
         }
@@ -89,6 +94,17 @@
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
         .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+        
+        /* --- NUEVA CLASE PARA LA ÚLTIMA IMAGEN (PLANO) SIN RECORTES --- */
+        .gallery .full-w-natural {
+            grid-column: 1 / -1;
+            width: 100%;
+            height: auto;
+            aspect-ratio: auto; /* Anula cualquier proporción forzada */
+            object-fit: cover; 
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
 
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -104,8 +120,8 @@
             .project-meta { gap: 30px; flex-direction: column; }
             .project-hero-img { width: 95%; height: auto; margin: 60px auto 40px auto; }
             
-            /* Ajuste en móviles para el texto central */
-            .project-text-full { padding: 100px 5vw 40px; font-size: 1.1rem; }
+            /* Ajuste en móviles para el texto izquierdo */
+            .text-align-wrapper { padding: 100px 5vw 40px; }
         }
         @media (max-width: 768px) {
             header { padding: 10px 20px; gap: 20px; }
@@ -173,23 +189,24 @@
     </section>
 
     <!-- GALERÍA DE IMÁGENES (PARTE 1) -->
-    <!-- Quitamos el padding inferior inline para permitir que el texto dicte la separación -->
     <section class="gallery" style="padding-bottom: 0;">
         <img src="Aspirador4.jpg" alt="Detail 1" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador3.jpg" alt="Detail 2" class="inter-hover" data-aos="fade-up">
         <img src="Aspirador2.jpg" alt="Detail 3" class="full-w inter-hover" data-aos="fade-up">
     </section>
 
-    <!-- TEXTO INTERMEDIO (TEXTO A LO ANCHO, SIN TÍTULO) -->
-    <p class="project-text-full lang-node" data-aos="fade-up"
-         data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
-         data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
-         Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
-    </p>
+    <!-- TEXTO INTERMEDIO (ALINEADO A LA IZQUIERDA) -->
+    <div class="text-align-wrapper" data-aos="fade-up">
+        <p class="project-text-left lang-node" 
+             data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
+             data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
+             Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
+        </p>
+    </div>
 
-    <!-- PLANO (GALERÍA PARTE 2) -->
+    <!-- PLANO (GALERÍA PARTE 2 CON ALTURA NATURAL) -->
     <section class="gallery" style="padding-top: 0;">
-        <img src="PLANOASPIRADOR.jpg" alt="Plano Aspirador" class="full-w inter-hover" data-aos="fade-up">
+        <img src="PLANOASPIRADOR.jpg" alt="Plano Aspirador" class="full-w-natural inter-hover" data-aos="fade-up">
     </section>
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
