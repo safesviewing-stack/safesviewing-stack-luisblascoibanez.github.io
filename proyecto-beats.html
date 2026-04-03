@@ -70,31 +70,46 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* NUEVA CUADRÍCULA PARA LAS 3 FOTOS DEL MEDIO */
-        .middle-photos-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); /* Tres columnas iguales */
-            gap: 25px; /* Espacio entre las fotos */
-            padding: 80px 5vw 80px; /* Padding para esta sección */
-            max-width: 1600px; 
-            margin: 0 auto; 
-            align-items: stretch; 
+        /* NUEVA CUADRÍCULA 2x2 para imágenes y texto separador */
+        .grid-2x2-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+            gap: 25px; /* Espacio entre los elementos de la cuadrícula */
+            padding: 80px 5vw; /* Padding para esta sección */
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: stretch; /* Asegura que las celdas de la cuadrícula tengan la misma altura */
         }
-        .middle-photos-grid img { 
-            display: block; 
-            width: 100%; 
+
+        .grid-2x2-section img {
+            display: block;
+            width: 100%;
             height: 60vh; /* Altura fija para todas las imágenes */
-            object-fit: cover; 
-            object-position: center; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
+            object-fit: cover;
+            object-position: center;
+            border-radius: 20px;
+            border: 1px solid var(--border);
         }
 
+        .grid-2x2-section .grid-text-item {
+            display: flex; /* Para centrar el texto verticalmente si es más corto que la imagen adyacente */
+            flex-direction: column;
+            justify-content: center;
+            background: var(--card-bg); /* Un fondo para que el "recuadro" del texto sea visible */
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 30px; /* Padding interno para el texto */
+            height: 60vh; /* Misma altura que las imágenes */
+            box-sizing: border-box; /* Incluir padding y border en la altura */
+        }
 
-        /* TEXTO SEPARADOR ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw; }
-        .project-text-full-width { 
-            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+        .grid-2x2-section .grid-text-item p { 
+            max-width: 100%; /* Asegura que el texto se ajuste al ancho de su celda */
+            font-size: 1.1rem; 
+            color: var(--text-dim); 
+            line-height: 1.8; 
+            text-align: justify; 
+            margin: 0; /* Quita márgenes por defecto del párrafo */
         }
 
         /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
@@ -126,8 +141,9 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content, .middle-photos-grid, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
-            .middle-photos-grid img, .planos-grid img { height: 50vh; } /* Altura en móviles */
+            .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
+            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } /* Altura en móviles, auto para texto */
+            .grid-2x2-section .grid-text-item { height: auto; } /* El texto debe tener altura automática para expandirse */
             .project-hero-img { width: 95%; }
             .project-text-full-width { max-width: 100%; }
         }
@@ -176,20 +192,15 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: CUADRÍCULA DE 3 FOTOS (5RELOJ, 4RELOJ, 1RELOJ) -->
-        <div class="middle-photos-grid" data-aos="fade-up">
+        <!-- NUEVA SECCIÓN: CUADRÍCULA 2x2 para 3 imágenes y el texto separador -->
+        <div class="grid-2x2-section" data-aos="fade-up">
             <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
             <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
             <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
-        </div>
-
-        <!-- TEXTO SEPARADOR -->
-        <div class="text-align-wrapper" data-aos="fade-up">
-            <p class="project-text-full-width lang-node" 
-                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
+            <div class="grid-text-item lang-node" data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
                  data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea es fruto de un estudio profundo.
-            </p>
+                <p>La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea es fruto de un estudio profundo.</p>
+            </div>
         </div>
 
         <!-- ÚLTIMA FILA (7 Y 8): ALTURA IGUALADA PERFECTAMENTE -->
