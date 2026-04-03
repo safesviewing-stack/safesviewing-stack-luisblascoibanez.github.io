@@ -10,7 +10,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- CORE VARIABLES & INDEX CSS --- */
+        /* --- CORE VARIABLES --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
@@ -21,7 +21,6 @@
         
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
         body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); }
-        ::selection { background: var(--accent); color: #fff; }
         
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
@@ -30,19 +29,11 @@
 
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
-        @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
-        .nav-logo:hover { opacity: 1; }
-        .nav-links { display: flex; gap: 15px; align-items: center; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; text-decoration: none; color: inherit;}
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
-        .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-        .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
-        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
 
         /* --- PROJECT STYLES --- */
         .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
@@ -50,10 +41,10 @@
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
-        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
+        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* ANIMACIÓN FOTO 1 (REVELADO POR SCROLL) */
+        /* FOTO 1: Preparada para animación retardada */
         .project-hero-img { 
             width: calc(100% - 10vw); 
             height: 90vh; 
@@ -64,25 +55,22 @@
             display: block; 
             border: 1px solid var(--border);
             opacity: 0; 
-            transform: translateY(100px); /* Inicia más abajo */
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+            transform: translateY(120px); 
+            transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        .project-hero-img.aos-animate { 
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 60px; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* GALERÍA SPLIT (FOTO 2): Bajada y alineada con la rejilla inferior */
+        /* GALERÍA SPLIT: Ajustada con separación de 25px hacia abajo */
         .gallery-split {
             display: grid;
             grid-template-columns: 1fr 1fr; 
-            gap: 25px; /* Espacio igual al de la galería inferior para alinear bordes */
-            margin-top: 25px; /* Separación igual a la de la rejilla de fotos inferior */
-            margin-bottom: 80px; 
+            gap: 25px; 
+            margin-top: 25px; 
+            margin-bottom: 25px; /* SEPARACIÓN IGUAL A LA DE 1RELOJ Y 4RELOJ */
             padding: 0 5vw; 
             max-width: 1600px;
             margin-left: auto;
@@ -104,6 +92,7 @@
             border: 1px solid var(--border);
         }
 
+        /* GALERÍA INFERIOR: Mantiene los 25px de gap */
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
@@ -121,20 +110,17 @@
             margin-top: 60px; 
             margin-bottom: 40px; 
             line-height: 1.8;
-            max-width: 100%; 
         }
 
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s; text-decoration: none;}
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
-        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
+        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
-        .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
 
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content { grid-template-columns: 1fr; gap: 40px; }
+            .project-content { grid-template-columns: 1fr; }
             .gallery-split { grid-template-columns: 1fr; }
             .gallery { grid-template-columns: 1fr; }
         }
@@ -145,23 +131,21 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <div class="navbar-wrapper ui-sync" id="navbar">
+    <div class="navbar-wrapper" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio">Portfolio</a>
             </nav>
-            <div class="nav-dot" style="margin: 0 10px;"></div>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
             </div>
         </header>
     </div>
 
     <main>
-        <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
+        <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
             <div class="project-meta">
                 <div class="meta-col">
@@ -183,7 +167,7 @@
             </div>
         </section>
 
-        <!-- FOTO 1 CON ANIMACIÓN DE ENTRADA -->
+        <!-- FOTO 1: Animación retardada configurada en el script (0.6 threshold) -->
         <img id="main-hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
 
         <section class="project-content" data-aos="fade-up">
@@ -193,32 +177,32 @@
             <div class="project-text lang-node" 
                  data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish.<br><br>The internal layout maximizes space for battery housing while providing specific airflow channels for the drivers, blending premium aesthetics with hardcore engineering." 
                  data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.">
-                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección.
+                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores.
             </div>
         </section>
 
-        <!-- SEGUNDA FOTO ALINEADA CON LA FOTO INFERIOR DERECHA (1RELOJ) -->
+        <!-- SEGUNDA FOTO: Separación de 25px con la galería inferior -->
         <section class="gallery-split" data-aos="fade-up">
             <div class="text-content lang-node" 
                  data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions." 
-                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior.">
-                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Cada curva y ángulo fue cuidadosamente considerado.
+                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica.">
+                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas.
             </div>
             <img src="5RELOJ.jpg" alt="Detail" class="inter-hover">
         </section>
 
         <section class="gallery">
-            <img src="4RELOJ.jpg" alt="Photo 3" class="inter-hover" data-aos="fade-up">
-            <img src="1RELOJ.jpg" alt="Photo 4" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <img src="4RELOJ.jpg" alt="Watch 4" class="inter-hover" data-aos="fade-up">
+            <img src="1RELOJ.jpg" alt="Watch 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
             <div class="text-full-width lang-node" 
                  data-en="These final renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We developed a series of ultra-precise simulations to test how light interacts with the micro-textured surfaces, refining the tactile feedback of every control. The result is a device that balances technical complexity with a user-centric design philosophy that prioritizes intuition and timeless aesthetics in every interaction."
-                 data-es="Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia del usuario, asegurando una sensación premium y durabilidad superior. Desarrollamos una serie de simulaciones de ultra-precisión para probar cómo interactúa la luz con las superficies micro-texturizadas, refinando la respuesta táctil de cada control. El resultado es un dispositivo que equilibra la complejidad técnica con una filosofía de diseño centrada en el usuario que prioriza la intuición y la estética atemporal.">
-                 Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función.
+                 data-es="Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia del usuario, asegurando una sensación premium y durabilidad superior.">
+                 Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño.
             </div>
             
-            <img src="7RELOJ.jpg" alt="Photo 5" class="inter-hover" data-aos="fade-up">
-            <img src="8RELOJ.jpg" alt="Photo 6" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <img src="7RELOJ.jpg" alt="Watch 7" class="inter-hover" data-aos="fade-up">
+            <img src="8RELOJ.jpg" alt="Watch 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
         </section>
     </main>
 
@@ -227,9 +211,9 @@
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-     <footer>
+    <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div class="lang-node" style="font-size:0.65rem; text-transform:none; letter-spacing:1.5px;" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -239,13 +223,11 @@
         AOS.init({ duration: 800, once: true, offset: 50 });
 
         // Theme Toggle
-        const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
+        document.getElementById("theme-toggle").addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // Lang Toggle con animación
+        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -262,7 +244,7 @@
             }, 250);
         });
 
-        // Cursor Logic
+        // Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -282,16 +264,8 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Navbar Scroll
-        let lastScroll = 0; const navbar = document.getElementById("navbar");
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
-            else navbar.classList.remove("ui-hidden");
-            lastScroll = currentScroll;
-        });
-
         // REVELADO DE IMAGEN PRINCIPAL (FOTO 1)
+        // He subido el threshold a 0.6 para que no aparezca hasta que deslices más abajo
         const mainHeroImg = document.getElementById('main-hero-img');
         let heroImgObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -300,8 +274,17 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 }); 
+        }, { threshold: 0.6 }); 
         heroImgObserver.observe(mainHeroImg);
+
+        // Navbar
+        let lastScroll = 0; const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
+            else navbar.classList.remove("ui-hidden");
+            lastScroll = currentScroll;
+        });
     </script>
 </body>
 </html>
