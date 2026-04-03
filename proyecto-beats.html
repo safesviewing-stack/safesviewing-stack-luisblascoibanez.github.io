@@ -14,7 +14,7 @@
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; /* padding-top: 50px; -- REMOVIDO */ }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
@@ -125,6 +125,11 @@
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: -2px; transition: color 0.3s; display: flex; align-items: center; gap: 20px; }
         .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
+        
+        /* Ajuste para bajar el contenido */
+        body { padding-top: 0; } /* Asegurarse de que no haya padding global */
+        main { padding-top: 100px; } /* Añadir un padding superior al contenido principal */
+
         @media (max-width: 1024px) { 
             .project-content { grid-template-columns: 1fr; gap: 40px; } 
             .gallery { grid-template-columns: 1fr; padding: 0 5vw 100px; } /* Restaurar padding en móviles */
@@ -157,54 +162,56 @@
         </header>
     </div>
 
-    <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
-        <div class="project-meta">
-            <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Hardware Developer" data-es="Desarrollador de Hardware">Desarrollador de Hardware</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Consumer Electronics" data-es="Electrónica de Consumo">Electrónica de Consumo</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2021</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Class-A Surfacing / Keyshot</span></div>
-        </div>
-    </section>
+    <main> <!-- Nuevo contenedor para el contenido principal -->
+        <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
+            <div class="project-meta">
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Hardware Developer" data-es="Desarrollador de Hardware">Desarrollador de Hardware</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Consumer Electronics" data-es="Electrónica de Consumo">Electrónica de Consumo</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2021</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Class-A Surfacing / Keyshot</span></div>
+            </div>
+        </section>
 
-    <!-- Primera foto: 2RELOJ.jpg - Altura aumentada -->
-    <img id="main-hero-img" src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-duration="1200">
+        <!-- Primera foto: 2RELOJ.jpg - Altura aumentada -->
+        <img id="main-hero-img" src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover">
 
-    <section class="project-content" data-aos="fade-up">
-        <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
-        <div class="project-text lang-node" 
-             data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish.<br><br>The internal layout maximizes space for battery housing while providing specific airflow channels for the drivers, blending premium aesthetics with hardcore engineering." 
-             data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.">
-             El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.
-        </div>
-    </section>
+        <section class="project-content" data-aos="fade-up">
+            <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
+            <div class="project-text lang-node" 
+                 data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish.<br><br>The internal layout maximizes space for battery housing while providing specific airflow channels for the drivers, blending premium aesthetics with hardcore engineering." 
+                 data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.">
+                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.
+            </div>
+        </section>
 
-    <!-- Sección para el texto a la izquierda y 5RELOJ.jpg a la derecha - Altura aumentada para la imagen -->
-    <section class="gallery-split" data-aos="fade-up">
-        <div class="text-content lang-node" 
-             data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. The focus was on creating a durable yet lightweight enclosure that also optimized acoustic performance. Every curve and angle was carefully considered to meet both aesthetic and functional requirements. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions." 
-             data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.">
-             Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.
-        </div>
-        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="inter-hover">
-    </section>
+        <!-- Sección para el texto a la izquierda y 5RELOJ.jpg a la derecha - Altura aumentada para la imagen -->
+        <section class="gallery-split" data-aos="fade-up">
+            <div class="text-content lang-node" 
+                 data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. The focus was on creating a durable yet lightweight enclosure that also optimized acoustic performance. Every curve and angle was carefully considered to meet both aesthetic and functional requirements. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions." 
+                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.">
+                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.
+            </div>
+            <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="inter-hover">
+        </section>
 
-    <section class="gallery">
-        <!-- Fotos 4RELOJ.jpg (izquierda) y 1RELOJ.jpg (derecha) -->
-        <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
-        <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+        <section class="gallery">
+            <!-- Fotos 4RELOJ.jpg (izquierda) y 1RELOJ.jpg (derecha) -->
+            <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
+            <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
-        <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación, ancho completo de las fotos -->
-        <div class="text-full-width lang-node" 
-             data-en="These detailed renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We focused on innovative solutions to create a product that stands out in the competitive consumer electronics market, blending cutting-edge technology with timeless design principles."
-             data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.">
-             Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.
-        </div>
-        
-        <!-- Últimas dos fotos: 7RELOJ.jpg (izquierda) y 8RELOJ.jpg (derecha) - Altura aumentada -->
-        <img src="7RELOJ.jpg" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
-        <img src="8RELOJ.jpg" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-    </section>
+            <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación, ancho completo de las fotos -->
+            <div class="text-full-width lang-node" 
+                 data-en="These detailed renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We focused on innovative solutions to create a product that stands out in the competitive consumer electronics market, blending cutting-edge technology with timeless design principles."
+                 data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.">
+                 Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.
+            </div>
+            
+            <!-- Últimas dos fotos: 7RELOJ.jpg (izquierda) y 8RELOJ.jpg (derecha) - Altura aumentada -->
+            <img src="7RELOJ.jpg" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
+            <img src="8RELOJ.jpg" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+        </section>
+    </main>
 
     <a href="proyecto-ion.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
@@ -264,19 +271,22 @@
         });
 
         const mainHeroImg = document.getElementById('main-hero-img');
-        let hasScrolledOnce = false;
+        let heroImgObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    mainHeroImg.classList.add('aos-animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); // Se activa cuando el 10% de la imagen es visible
 
-        window.addEventListener('scroll', () => {
-            if (!hasScrolledOnce && window.scrollY > 20) { 
-                mainHeroImg.classList.add('aos-animate');
-                hasScrolledOnce = true;
-            }
-        });
+        // Observar la imagen principal
+        heroImgObserver.observe(mainHeroImg);
 
-        mainHeroImg.removeAttribute('data-aos');
-        mainHeroImg.removeAttribute('data-aos-duration');
-
-        // Función para asegurar que al recargar la página esté en la parte superior
+        // Asegurarse de que al cargar y recargar la página esté arriba del todo
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
         window.addEventListener('beforeunload', () => {
             window.scrollTo(0, 0);
         });
