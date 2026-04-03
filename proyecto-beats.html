@@ -10,37 +10,31 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- CORE VARIABLES & INDEX CSS (RESTAURADO) --- */
+        /* --- CORE VARIABLES --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
+        
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
-        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
-        body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); }
         
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
         .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
 
         /* --- HEADER RESTAURADO --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
         header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
-        @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
         .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
-        .nav-logo:hover { opacity: 1; }
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
-        .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
         .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
-        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
@@ -51,7 +45,7 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* FOTO 1: Animación de aparición más temprana */
+        /* FOTO 1: REVELADO */
         .project-hero-img { 
             width: calc(100% - 10vw); 
             height: 90vh; 
@@ -71,66 +65,56 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
+        /* GALERÍA SPLIT: TEXTO MÁS ESTRECHO Y MÁS SEPARADO */
         .gallery-split {
             display: grid;
             grid-template-columns: 1fr 1fr; 
-            gap: 25px; 
+            gap: 100px; /* MÁS SEPARACIÓN DE LA FOTO */
             margin-top: 25px; 
-            margin-bottom: 25px; /* Consistencia de 25px con galería inferior */
+            margin-bottom: 25px; 
             padding: 0 5vw; 
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
         }
         .gallery-split .text-content {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-dim);
             line-height: 1.8;
             text-align: justify; 
             display: flex; 
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px; /* TEXTO MÁS ESTRECHO */
         }
-        .gallery-split img {
-            height: 75vh; 
-            width: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-        }
+
+        .gallery-split img { height: 75vh; width: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
 
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
-        .gallery img { 
-            width: 100%; 
-            height: 60vh; 
-            object-fit: cover; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
-        }
+        .gallery img { width: 100%; height: 60vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
         
-        /* TEXTO ESTRECHO EN GALERÍA */
+        /* TEXTO LARGO Y ESTRECHO */
         .text-full-width { 
             grid-column: 1 / -1; 
-            font-size: 1.1rem; 
+            font-size: 1.05rem; 
             color: var(--text-dim); 
             text-align: justify; 
-            margin-top: 60px; 
-            margin-bottom: 40px; 
+            margin-top: 80px; 
+            margin-bottom: 60px; 
             line-height: 1.8;
-            max-width: 750px; /* TEXTO MÁS ESTRECHO */
+            max-width: 700px; /* TEXTO MÁS ESTRECHO */
+            margin-left: 0; /* Alineado a la izquierda para seguir el flujo de la columna 1 */
         }
 
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
-        .next-project:hover { background: var(--accent-glow); }
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none;}
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content { grid-template-columns: 1fr; }
-            .gallery-split { grid-template-columns: 1fr; }
-            .gallery { grid-template-columns: 1fr; }
-            .text-full-width { max-width: 100%; }
+            .project-content, .gallery-split, .gallery { grid-template-columns: 1fr; gap: 40px; }
+            .text-full-width, .gallery-split .text-content { max-width: 100%; }
         }
     </style>
 </head>
@@ -148,8 +132,8 @@
             </nav>
             <div class="nav-dot" style="margin: 0 10px;"></div>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
             </div>
         </header>
     </div>
@@ -177,7 +161,6 @@
             </div>
         </section>
 
-        <!-- FOTO 1: Aparece antes (Threshold 0.15) -->
         <img id="main-hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
 
         <section class="project-content" data-aos="fade-up">
@@ -187,15 +170,15 @@
             <div class="project-text lang-node" 
                  data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish. Beyond the exterior, the challenge involved synchronizing the mechanical architecture with the electronic PCB layout, ensuring that every millimeter of the internal cavity was utilized without compromising heat dissipation. The result is a seamless fusion of high-performance engineering and an uncompromising aesthetic language that defines the next generation of audio peripherals." 
                  data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable. Más allá del exterior, el desafío implicó sincronizar la arquitectura mecánica con el diseño de la PCB electrónica, asegurando que cada milímetro de la cavidad interna se utilizara sin comprometer la disipación de calor. El resultado es una fusión perfecta de ingeniería de alto rendimiento y un lenguaje estético sin concesiones que define la próxima generación de periféricos de audio.">
-                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.
+                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección.
             </div>
         </section>
 
         <section class="gallery-split" data-aos="fade-up">
             <div class="text-content lang-node" 
-                 data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions." 
-                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior.">
-                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas.
+                 data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions. Every internal component was modeled with a focus on ease of assembly and thermal management, creating a device that is as robust internally as it is elegant on the outside." 
+                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en cualquier condición de uso. Cada componente interno fue modelado priorizando la facilidad de ensamblaje y la gestión térmica, creando un dispositivo tan robusto internamente como elegante por fuera.">
+                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave.
             </div>
             <img src="5RELOJ.jpg" alt="Detail" class="inter-hover">
         </section>
@@ -205,9 +188,9 @@
             <img src="1RELOJ.jpg" alt="Watch 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
             <div class="text-full-width lang-node" 
-                 data-en="The synthesis of digital precision and physical form required a deep dive into the ergonomics of daily use. We analyzed thousands of interaction points to define the optimal tactile feedback for every control surface. Each render presented here is not just a visual representation but a technical study of how light refracts across micro-textured finishes. This iterative design process allowed us to achieve a product that isn't just technologically superior, but emotionally resonant with the user, providing a sense of durability and luxury that is rare in contemporary consumer electronics. Every detail, from the click of a button to the grain of the material, has been engineered for excellence."
-                 data-es="La síntesis de la precisión digital y la forma física requirió una inmersión profunda en la ergonomía del uso diario. Analizamos miles de puntos de interacción para definir la respuesta táctil óptima para cada superficie de control. Cada render presentado aquí no es solo una representación visual, sino un estudio técnico de cómo la luz se refracta a través de acabados microtexturizados. Este proceso de diseño iterativo nos permitió lograr un producto que no es solo tecnológicamente superior, sino emocionalmente resonante con el usuario, brindando una sensación de durabilidad y lujo que es rara en la electrónica de consumo contemporánea.">
-                 Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño.
+                 data-en="These final renders represent the culmination of an exhaustive process of visual and technical refinement, where every detail has been scrutinized to achieve perfection. They are not merely aesthetic images but precise physical simulations that allowed us to study light behavior across various Class-A textures and finishes. We analyzed diffraction on the edges, the sheen on the metals, and the depth of the blacks to ensure the final product conveys a sense of luxury and solidity. This level of detail is fundamental to communicating the device's build quality, allowing the user to appreciate the complexity of internal engineering reflected in a minimalist and elegant exterior. Every surface has been sculpted to guide user interaction intuitively, turning daily use into a unique sensory experience."
+                 data-es="Estos renders finales representan la culminación de un exhaustivo proceso de refinamiento visual y técnico, donde cada detalle ha sido escrutado para alcanzar la perfección. No se trata solo de imágenes estéticas, sino de simulaciones físicas precisas que nos permitieron estudiar el comportamiento de la luz sobre las diversas texturas y acabados Clase-A. Analizamos la difracción en las aristas, el brillo en los metales y la profundidad de los negros para garantizar que el producto final transmita una sensación de lujo y solidez. Este nivel de detalle es fundamental para comunicar la calidad de construcción del dispositivo, permitiendo al usuario apreciar la complejidad de la ingeniería interna reflejada en un exterior minimalista y elegante. Cada superficie ha sido esculpida para guiar la interacción del usuario de forma intuitiva, convirtiendo el uso cotidiano en una experiencia sensorial única.">
+                 Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función.
             </div>
             
             <img src="7RELOJ.jpg" alt="Watch 7" class="inter-hover" data-aos="fade-up">
@@ -231,14 +214,10 @@
         window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 800, once: true, offset: 50 });
 
-        // Theme Toggle
+        // Theme & Lang
         const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-        });
+        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -255,7 +234,7 @@
             }, 250);
         });
 
-        // Cursor logic
+        // Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -275,7 +254,7 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // REVELADO DE IMAGEN PRINCIPAL (THRESHOLD BAJO PARA QUE APAREZCA ANTES)
+        // Hero Reveal (Aparece antes: 0.15 threshold)
         const mainHeroImg = document.getElementById('main-hero-img');
         let heroImgObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -287,7 +266,6 @@
         }, { threshold: 0.15 }); 
         heroImgObserver.observe(mainHeroImg);
 
-        // Navbar Scroll logic
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
