@@ -1,4 +1,4 @@
---- START OF FILE proyecto-beats (1).html ---
+--- START OF FILE proyecto-beats.html ---
 
 <!DOCTYPE html>
 <html lang="es" class="dark">
@@ -16,7 +16,7 @@
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; padding-top: 50px; /* Ajustado para bajar el contenido inicial */ }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
@@ -48,43 +48,15 @@
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
-        .project-hero-img { 
-            width: 100%; 
-            height: 85vh; /* Aumentada la altura para la imagen principal */
-            object-fit: cover; 
-            border-radius: 30px; 
-            margin: 40px auto; 
-            max-width: 1600px; 
-            display: block; 
-            border: 1px solid var(--border);
-            opacity: 0; /* Oculta la imagen inicialmente */
-            transform: translateY(20px); /* Ligeramente hacia abajo */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transición para la animación */
-        }
-        .project-hero-img.aos-animate { /* AOS manejará la visibilidad */
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .project-hero-img { width: 100%; height: 70vh; object-fit: cover; border-radius: 30px; margin: 40px auto; max-width: 1600px; display: block; border: 1px solid var(--border); }
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
         .project-text strong { color: var(--text); font-weight: 600; }
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
-        .gallery img { 
-            width: 100%; 
-            height: 50vh; /* Altura aumentada para las imágenes de la galería */
-            object-fit: cover; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
-            aspect-ratio: 4/3; 
-            transition: filter 0.4s ease; 
-        }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; transition: filter 0.4s ease; }
         .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
-        .gallery .full-w { 
-            grid-column: 1 / -1; 
-            height: 60vh; /* Altura aumentada para la imagen full-width */
-            aspect-ratio: 21/9; 
-        }
+        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
         .text-full-width { grid-column: 1 / -1; font-size: 1rem; color: var(--text-dim); text-align: center; margin-top: 30px; margin-bottom: 20px; padding: 0 5vw;}
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -92,13 +64,7 @@
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: -2px; transition: color 0.3s; display: flex; align-items: center; gap: 20px; }
         .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
-        @media (max-width: 1024px) { 
-            .project-content { grid-template-columns: 1fr; gap: 40px; } 
-            .gallery { grid-template-columns: 1fr; } 
-            .gallery .full-w { aspect-ratio: 16/9; height: auto; } /* Ajusta altura auto en móviles */
-            .project-meta { gap: 30px; flex-direction: column; } 
-            .project-hero-img, .gallery img { height: auto; } /* Altura auto para todas las imágenes en móviles */
-        }
+        @media (max-width: 1024px) { .project-content { grid-template-columns: 1fr; gap: 40px; } .gallery { grid-template-columns: 1fr; } .gallery .full-w { aspect-ratio: 16/9; } .project-meta { gap: 30px; flex-direction: column; } }
         @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
     </style>
 </head>
@@ -131,11 +97,8 @@
         </div>
     </section>
 
-    <!-- Primera foto: 2 RELOJ - Ahora con la ruta local si existe, o generada por IA si no. -->
-    <img id="main-hero-img" src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-duration="1200">
-    <!-- Si no tienes el archivo local '2RELOJ.jpg', puedes usar la URL generada:
-    <img id="main-hero-img" src="https://image.pollinations.ai/prompt/smartwatch%20design,%202%20RELOJ?width=1600&height=900&seed=2001" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-duration="1200">
-    -->
+    <!-- Primera foto: 2 RELOJ -->
+    <img src="https://image.pollinations.ai/prompt/smartwatch%20design,%202%20RELOJ?width=1600&height=900&seed=2001" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="zoom-in" data-aos-duration="1200">
 
     <section class="project-content" data-aos="fade-up">
         <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
@@ -148,20 +111,11 @@
 
     <section class="gallery">
         <!-- Nueva foto alineada a la izquierda: 5 RELOJ -->
-        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="full-w inter-hover" data-aos="fade-up">
-        <!-- O URL generada:
         <img src="https://image.pollinations.ai/prompt/modern%20watch%20design%20close%20up,%205%20RELOJ?width=1600&height=600&seed=2002" alt="Reloj moderno número 5" class="full-w inter-hover" data-aos="fade-up">
-        -->
 
         <!-- Fotos 4 RELOJ (izquierda) y 1 RELOJ (derecha) -->
-        <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
-        <!-- O URL generada:
         <img src="https://image.pollinations.ai/prompt/elegant%20wristwatch,%204%20RELOJ?width=800&height=600&seed=2003" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
-        -->
-        <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        <!-- O URL generada:
         <img src="https://image.pollinations.ai/prompt/classic%20watch%20face,%201%20RELOJ?width=800&height=600&seed=2004" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        -->
 
         <!-- Texto que ocupa el horizontal entero -->
         <div class="text-full-width lang-node" 
@@ -171,14 +125,8 @@
         </div>
         
         <!-- Últimas dos fotos: 7 RELOJ (izquierda) y 8 RELOJ (derecha) -->
-        <img src="7RELOJ.jpg" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
-        <!-- O URL generada:
         <img src="https://image.pollinations.ai/prompt/futuristic%20smartwatch%20interface,%207%20RELOJ?width=800&height=600&seed=2005" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
-        -->
-        <img src="8RELOJ.jpg" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        <!-- O URL generada:
         <img src="https://image.pollinations.ai/prompt/luxury%20chronograph%20watch,%208%20RELOJ?width=800&height=600&seed=2006" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        -->
     </section>
 
     <a href="proyecto-ion.html" class="next-project inter-hover">
@@ -237,23 +185,6 @@
             else navbar.classList.remove("ui-hidden");
             lastScroll = currentScroll;
         });
-
-        // Script para la animación de la primera imagen al hacer scroll
-        const mainHeroImg = document.getElementById('main-hero-img');
-        let hasScrolledOnce = false;
-
-        window.addEventListener('scroll', () => {
-            if (!hasScrolledOnce && window.scrollY > 20) { // Un pequeño scroll para activar
-                mainHeroImg.classList.add('aos-animate'); // AOS ya tiene la animación fade-up
-                hasScrolledOnce = true;
-            }
-        });
-
-        // Remover la animación inicial de AOS para la primera imagen al cargar
-        // y aplicar nuestra lógica de scroll
-        mainHeroImg.removeAttribute('data-aos');
-        mainHeroImg.removeAttribute('data-aos-duration');
-        // Inicialmente ocultamos la imagen con CSS (opacity: 0; transform: translateY(20px);)
     </script>
 </body>
 </html>
