@@ -112,20 +112,15 @@
             border: 1px solid var(--border);
         }
 
-        /* Specific style for 5RELOJ.jpg to make it smaller AND its container taller */
+        /* Specific style for 5RELOJ.jpg to make it smaller inside its container */
         .grid-2x2-section img[src="5RELOJ.jpg"] {
-            width: 70%; /* Image itself is smaller */
+            width: 70%; /* Make the image itself smaller */
             height: auto; /* Allow height to adjust proportionally */
-            max-height: 80vh; /* Allow more height for the image, making its container taller implicitly if it's the tallest item */
+            max-height: 60vh; /* Keep it within the grid cell's height */
             object-fit: contain; /* Ensure the whole image is visible, not cropped */
             margin: auto; /* Center the smaller image within its grid cell */
             border: 1px solid var(--border); /* Maintain its border */
             border-radius: 20px;
-        }
-
-        /* Also adjust the grid-text-item height if it's meant to match */
-        .grid-2x2-section .grid-text-item {
-            height: 80vh; /* Match the new height or adjust as needed */
         }
 
 
