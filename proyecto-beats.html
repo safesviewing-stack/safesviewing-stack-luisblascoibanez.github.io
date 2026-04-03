@@ -81,12 +81,12 @@
             align-items: stretch; /* Asegura que las celdas de la cuadrícula tengan la misma altura */
         }
 
-        /* Restored new style for the text box within the grid */
+        /* MODIFIED: New style for the text box within the grid - transparent background and border */
         .grid-2x2-section .grid-text-item {
             height: 60vh; /* Same height as the images */
-            border: 1px solid var(--border); 
+            border: 1px solid transparent; /* Changed to transparent */ 
             border-radius: 20px;
-            background-color: var(--card-bg); 
+            background-color: transparent; /* Changed to transparent */ 
             display: flex; 
             flex-direction: column;
             align-items: flex-start; /* Align text to the left */
