@@ -44,7 +44,16 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
 
         /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
-        .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
+        /* Convertimos la cabecera en una vista de 85vh para empujar el contenido hacia abajo */
+        .project-header { 
+            padding: 150px 5vw 10vh; 
+            min-height: 85vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
@@ -120,15 +129,12 @@
         /* --- NUEVA ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) --- */
         [data-aos="plano-scale"] {
             opacity: 0;
-            /* Empieza al 80% de su tamaño */
             transform: translateX(-40px) scale(0.8);
             transition-property: opacity, transform;
-            /* Transición muy suave */
             transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
         }
         [data-aos="plano-scale"].aos-animate {
             opacity: 1;
-            /* Termina al 100% de su tamaño */
             transform: translateX(-40px) scale(1);
         }
 
@@ -156,9 +162,11 @@
             
             .shift-left { transform: none; }
             
-            /* Ajuste de la animación plano-scale para móvil (sin el desplazamiento lateral) */
             [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
             [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
+            
+            /* En móvil ajustamos la cabecera para que sea más natural */
+            .project-header { min-height: 80vh; padding-top: 130px; }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
