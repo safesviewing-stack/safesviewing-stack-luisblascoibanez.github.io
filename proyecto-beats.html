@@ -72,9 +72,13 @@
 
         /* SECCIÓN 5RELOJ: TEXTO IZQUIERDA / FOTO DERECHA */
         .gallery-split {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
             margin-top: 25px; margin-bottom: 80px; padding: 0 5vw; 
             max-width: 1600px; margin-left: auto; margin-right: auto;
+        }
+
+        .gallery-split img {
+            grid-column: 2;
         }
         .gallery-split .text-content {
             font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
