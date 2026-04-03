@@ -123,20 +123,21 @@
             transition: transform 0.3s ease;
         }
 
-        .shift-left {
-            transform: translateX(-40px);
+        /* Clase para desplazar ligeramente a la derecha los planos y alinearlos */
+        .shift-right {
+            transform: translateX(40px);
         }
 
-        /* --- ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) --- */
+        /* --- ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) HACIA LA DERECHA --- */
         [data-aos="plano-scale"] {
             opacity: 0;
-            transform: translateX(-40px) scale(0.8);
+            transform: translateX(40px) scale(0.8);
             transition-property: opacity, transform;
             transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
         }
         [data-aos="plano-scale"].aos-animate {
             opacity: 1;
-            transform: translateX(-40px) scale(1);
+            transform: translateX(40px) scale(1);
         }
 
         /* --- SIGUIENTE PROYECTO --- */
@@ -161,7 +162,7 @@
             .full-w-img { width: 95%; margin: 80px auto 60px auto; }
             .split-img[style] { margin-top: 0 !important; }
             
-            .shift-left { transform: none; }
+            .shift-right { transform: none; }
             
             [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
             [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
@@ -235,7 +236,8 @@
         </div>
     </section>
 
-    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
+    <!-- FOTO 3 Alineada a la derecha -->
+    <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-right" data-aos="plano-scale" data-aos-duration="1200">
 
 
     <!-- ==========================================
@@ -270,7 +272,8 @@
         </div>
     </section>
 
-    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
+    <!-- FOTO 6 Alineada a la derecha -->
+    <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-right" data-aos="plano-scale" data-aos-duration="1200">
 
 
     <!-- ENLACE AL SIGUIENTE PROYECTO -->
