@@ -70,7 +70,7 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* NUEVA CUADRÍCULA 2x2 para imágenes (3 imágenes ahora) */
+        /* CUADRÍCULA 2x2 para imágenes y el nuevo cuadro de texto */
         .grid-2x2-section {
             display: grid;
             grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
@@ -81,15 +81,25 @@
             align-items: stretch; /* Asegura que las celdas de la cuadrícula tengan la misma altura */
         }
 
-        .grid-2x2-section .empty-cell {
+        /* Nuevo estilo para el cuadro de texto dentro de la cuadrícula */
+        .grid-2x2-section .grid-text-item {
             height: 60vh; /* Misma altura que las imágenes */
-            border: 1px solid var(--border); /* Borde para el "recuadro" vacío */
+            border: 1px solid var(--border); 
             border-radius: 20px;
-            background-color: var(--card-bg); /* Fondo para que sea visible */
-            display: flex; /* Para centrar cualquier contenido futuro si se añade */
-            align-items: center;
+            background-color: var(--card-bg); 
+            display: flex; 
+            flex-direction: column;
+            align-items: flex-start; /* Alinea el texto a la izquierda */
             justify-content: center;
-            opacity: 0.3; /* Ligeramente transparente para indicar que está vacío */
+            padding: 30px; /* Padding interno */
+            box-sizing: border-box; /* Incluir padding y border en la altura */
+        }
+        .grid-2x2-section .grid-text-item p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify;
+            margin: 0; /* Quita márgenes por defecto del párrafo */
         }
 
 
@@ -102,7 +112,7 @@
             border-radius: 20px;
             border: 1px solid var(--border);
         }
-        /* Eliminamos el estilo para .grid-text-item porque el texto ahora está en su propia sección */
+        /* Eliminamos el estilo para .empty-cell ya que no estará */
 
         /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
         .planos-grid { 
@@ -133,7 +143,8 @@
 
         @media (max-width: 1024px) {
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
-            .grid-2x2-section img, .planos-grid img, .grid-2x2-section .empty-cell { height: 50vh; } /* Altura en móviles */
+            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } /* Altura en móviles, auto para texto */
+            .grid-2x2-section .grid-text-item { height: auto; } /* El texto debe tener altura automática para expandirse */
             .project-hero-img { width: 95%; }
             /* .project-text-full-width ya no está dentro de una cuadrícula con altura fija */
         }
@@ -182,15 +193,19 @@
             </div>
         </section>
 
-        <!-- CUADRÍCULA CON LAS IMÁGENES REORGANIZADAS Y UN RECUAUDRO VACÍO -->
+        <!-- CUADRÍCULA CON TEXTO Y IMÁGENES REORGANIZADAS -->
         <div class="grid-2x2-section" data-aos="fade-up">
-            <div class="empty-cell"></div> <!-- Recuadro vacío -->
-            <img src="5RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover"> <!-- Donde estaba 4RELOJ -->
-            <img src="4RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover"> <!-- Donde estaba 1RELOJ -->
-            <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover"> <!-- Donde estaba el recuadro de texto -->
+            <div class="grid-text-item lang-node" data-en="Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development. This text could delve into the materials used, manufacturing processes, or the user experience considerations that shaped the final product. It is an opportunity to communicate the story behind the visuals and offer a deeper understanding of the project's core principles and innovations." 
+                 data-es="Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. Este texto podría ahondar en los materiales utilizados, los procesos de fabricación o las consideraciones de experiencia de usuario que moldearon el producto final. Es una oportunidad para comunicar la historia detrás de las imágenes y ofrecer una comprensión más profunda de los principios fundamentales e innovaciones del proyecto.">
+                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes.</p>
+            </div>
+            <img src="5RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
+            <img src="4RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
+            <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR (ahora fuera de la cuadrícula, como una sección completa) -->
+        <!-- TEXTO SEPARADOR (mantenido por si es contenido diferente al del grid) -->
+        <!-- Si este texto es redundante o ya no lo necesitas, puedes eliminar este div completo -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
