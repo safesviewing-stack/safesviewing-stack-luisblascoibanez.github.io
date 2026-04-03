@@ -1,3 +1,5 @@
+--- START OF FILE proyecto-beats (8).html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -75,15 +77,17 @@
             display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
             margin-top: 25px; margin-bottom: 80px; padding: 0 5vw; 
             max-width: 1600px; margin-left: auto; margin-right: auto;
+            align-items: stretch; /* Asegura que la celda del grid mida lo mismo, importante para el texto */
         }
 
         .gallery-split img { 
             grid-column: 2; 
             width: 100%; 
-            height: auto; /* Changed to auto to maintain aspect ratio */
-            max-height: 75vh; /* Added max-height to control overall size */
-            object-fit: contain; /* Changed to contain to fit image within bounds */
-            border-radius: 20px; border: 1px solid var(--border); display: block;
+            height: 60vh; /* Establecido a la misma altura fija que las imágenes en .planos-grid */
+            object-fit: cover; /* Asegura que la imagen llene el espacio, recortándose si es necesario */
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            display: block;
         }
         .gallery-split .text-content {
             font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
