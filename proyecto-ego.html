@@ -44,10 +44,10 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
 
         /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
-        /* Convertimos la cabecera en una vista de 85vh para empujar el contenido hacia abajo */
+        /* Cabecera a pantalla completa para ocultar la imagen inicial */
         .project-header { 
-            padding: 150px 5vw 10vh; 
-            min-height: 85vh; 
+            padding: 0 5vw; 
+            min-height: 100vh; /* Ocupa el 100% del alto de la pantalla */
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -63,7 +63,7 @@
         /* --- SECCIONES DIVIDIDAS (FOTO Y TEXTO) --- */
         .split-layout {
             display: grid;
-            grid-template-columns: 1.2fr 1fr; /* Foto más grande a la izquierda */
+            grid-template-columns: 1.2fr 1fr;
             gap: 80px;
             padding: 80px 5vw;
             max-width: 1600px;
@@ -71,7 +71,7 @@
             align-items: center;
         }
         .split-layout.reverse {
-            grid-template-columns: 1fr 1.2fr; /* Foto más grande a la derecha */
+            grid-template-columns: 1fr 1.2fr;
         }
         
         .split-img img {
@@ -121,12 +121,11 @@
             transition: transform 0.3s ease;
         }
 
-        /* Clase para desplazar ligeramente a la izquierda los planos */
         .shift-left {
             transform: translateX(-40px);
         }
 
-        /* --- NUEVA ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) --- */
+        /* --- ANIMACIÓN SENCILLA DE ESCALADO (FOTOS 3 Y 6) --- */
         [data-aos="plano-scale"] {
             opacity: 0;
             transform: translateX(-40px) scale(0.8);
@@ -165,8 +164,7 @@
             [data-aos="plano-scale"] { transform: translateX(0) scale(0.85); }
             [data-aos="plano-scale"].aos-animate { transform: translateX(0) scale(1); }
             
-            /* En móvil ajustamos la cabecera para que sea más natural */
-            .project-header { min-height: 80vh; padding-top: 130px; }
+            .project-header { min-height: 100vh; padding-top: 0px; }
         }
         @media (max-width: 768px) { 
             header { padding: 10px 20px; gap: 20px; } 
@@ -193,7 +191,7 @@
         </header>
     </div>
 
-    <!-- CABECERA DEL PROYECTO -->
+    <!-- CABECERA DEL PROYECTO (Ahora a 100vh) -->
     <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
         <h1 class="project-title lang-node" data-en="Ego Lighting Series" data-es="Proyecto Ego">Proyecto Ego</h1>
         <div class="project-meta">
@@ -208,7 +206,8 @@
          LÁMPARA 1 
          ========================================== -->
 
-    <section class="split-layout" data-aos="fade-up">
+    <!-- Se añade data-aos-offset="250" para que no cargue hasta que el usuario haga un scroll profundo -->
+    <section class="split-layout" data-aos="fade-up" data-aos-offset="250">
         <div class="split-img" style="margin-top: 40px;">
             <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
         </div>
@@ -236,7 +235,6 @@
         </div>
     </section>
 
-    <!-- FOTO 3 (Animación sencilla de escalado 'plano-scale') -->
     <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
 
 
@@ -272,7 +270,6 @@
         </div>
     </section>
 
-    <!-- FOTO 6 (Animación sencilla de escalado 'plano-scale') -->
     <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover shift-left" data-aos="plano-scale" data-aos-duration="1200">
 
 
