@@ -17,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
-        /* --- FONDO ANARANJADO Y GRANO (RESTAURADO) --- */
+        /* --- FONDO ANARANJADO Y GRANO --- */
         body::before { 
             content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
             background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
@@ -57,7 +57,7 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* FOTOS HERO (1 Y 5): ALINEACIÓN UNIFICADA */
+        /* HERO IMAGE */
         .project-hero-img { 
             width: calc(100% - 10vw); height: auto; border-radius: 30px; 
             margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
@@ -70,11 +70,27 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 60vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
-        
-        /* TEXTOS: ESTRECHOS Y JUSTIFICADOS */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 140px 5vw 60px; }
+        /* SECCIÓN 5RELOJ: TEXTO IZQUIERDA, FOTO DERECHA */
+        .gallery-split {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; 
+            margin-top: 25px; margin-bottom: 80px; padding: 0 5vw; 
+            max-width: 1600px; margin-left: auto; margin-right: auto;
+        }
+        .gallery-split .text-content {
+            font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .gallery-split img { width: 100%; height: 75vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
+
+        /* GALERÍA PLANOS: EN PARALELO (SIDE BY SIDE) */
+        .planos-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; 
+            padding: 0 5vw 80px; max-width: 1600px; margin: 0 auto; 
+        }
+        .planos-grid img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--border); }
+
+        /* TEXTO INFERIOR: ESTRECHO */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw 60px; }
         .project-text-full-width { 
             max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
@@ -87,7 +103,7 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content, .gallery { grid-template-columns: 1fr; gap: 40px; }
+            .project-content, .gallery-split, .planos-grid { grid-template-columns: 1fr; gap: 40px; }
             .project-hero-img { width: 95%; }
             .project-text-full-width { max-width: 100%; }
         }
@@ -124,43 +140,45 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
-        <img src="2RELOJ.jpg" alt="Beats X Main" class="project-hero-img inter-hover">
+        <!-- FOTO 1: HERO -->
+        <img id="hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
 
         <section class="project-content" data-aos="fade-up">
-            <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
+            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
-                 data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. Modeling entirely with Class-A surfaces ensured a flawless finish, synchronizing the mechanical architecture with the electronic PCB layout. The result is a seamless fusion of high-performance engineering and an uncompromising aesthetic language that defines the next generation of audio peripherals." 
-                 data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El modelado íntegro con superficies Clase-A garantizó un acabado impecable, sincronizando la arquitectura mecánica con el diseño de la PCB electrónica. El resultado es una fusión perfecta de ingeniería de alto rendimiento y un lenguaje estético sin concesiones.">
-                 El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección.
+                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems." 
+                 data-es="Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
+                 El proyecto Beats X se centra en la optimización de superficies Clase-A y la integración de componentes de alta fidelidad.
             </div>
         </section>
 
+        <!-- SECCIÓN 5RELOJ: TEXTO IZQUIERDA / IMAGEN DERECHA -->
+        <section class="gallery-split" data-aos="fade-up">
+            <div class="text-content lang-node" 
+                 data-en="This stage highlights the advanced materials and precision manufacturing techniques employed. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions. Every internal component was modeled prioratizing thermal management and ease of assembly." 
+                 data-es="Esta etapa destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en cualquier condición.">
+                 En esta fase nos centramos en los materiales y la construcción híbrida de aleaciones ligeras.
+            </div>
+            <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
+        </section>
+
+        <!-- SECCIÓN PLANOS: UNO AL LADO DEL OTRO (SIDE BY SIDE) -->
+        <div class="planos-grid" data-aos="fade-up">
+            <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
+            <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
+        </div>
+
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
-                 data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. We implemented a hybrid construction combining magnesium alloys for structural integrity and soft-touch polymers for user ergonomics. The challenge was to maintain a continuous curvature without visible parting lines, achieving a monolithic appearance. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions. Every internal component was modeled with a focus on ease of assembly and thermal management, creating a device that is as robust internally as it is elegant on the outside." 
-                 data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. Implementamos una construcción híbrida que combina aleaciones de magnesio para la integridad estructural y polímeros de tacto suave para la ergonomía del usuario. El desafío fue mantener una curvatura continua sin líneas de partición visibles, logrando una apariencia monolítica. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en cualquier condición de uso. Cada componente interno fue modelado priorizando la facilidad de ensamblaje y la gestión térmica.">
-                 Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas.
+                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes. We focused on the seamless integration of mechanical subsystems, specifying not only the dimensions but also the materials' thermal properties and assembly sequences. This documentation ensures that the transition from a digital prototype to a final product is flawless, maintaining the integrity of the design throughout the entire production chain." 
+                 data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial. Nos centramos en la integración perfecta de los subsistemas mecánicos, especificando no solo las dimensiones, sino también las propiedades térmicas de los materiales y las secuencias de montaje para garantizar una transición impecable del prototipo a la producción final.">
+                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala.
             </p>
         </div>
 
-        <!-- FOTO 5 (ALINEADA CON FOTO 1) -->
-        <img src="5RELOJ.jpg" alt="Technical Detail" class="project-hero-img inter-hover">
-
         <section class="gallery">
-            <img src="4RELOJ.jpg" alt="Angle 1" class="inter-hover" data-aos="fade-up">
-            <img src="1RELOJ.jpg" alt="Angle 2" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="text-align-wrapper" style="padding-top: 80px; padding-bottom: 40px;">
-                <p class="project-text-full-width lang-node" 
-                     data-en="These final renders represent the culmination of an exhaustive process of visual and technical refinement, where every detail has been scrutinized to achieve perfection. They are not merely aesthetic images but precise physical simulations that allowed us to study light behavior across various Class-A textures and finishes. We analyzed diffraction on the edges, the sheen on the metals, and the depth of the blacks to ensure the final product conveys a sense of luxury and solidity. This level of detail is fundamental to communicating the device's build quality, allowing the user to appreciate the complexity of internal engineering reflected in a minimalist and elegant exterior."
-                     data-es="Estos renders finales representan la culminación de un exhaustivo proceso de refinamiento visual y técnico, donde cada detalle ha sido escrutado para alcanzar la perfección. No se trata solo de imágenes estéticas, sino de simulaciones físicas precisas que nos permitieron estudiar el comportamiento de la luz sobre las diversas texturas y acabados Clase-A. Analizamos la difracción en las aristas y el brillo en los metales para garantizar que el producto final transmita una sensación de lujo y solidez. Este nivel de detalle comunica la calidad de construcción, permitiendo apreciar la complejidad técnica en un exterior minimalista.">
-                     Estos renders finales muestran la meticulosa atención al detalle en el proceso de diseño.
-                </p>
-            </div>
-            
-            <img src="7RELOJ.jpg" alt="Angle 3" class="inter-hover" data-aos="fade-up">
-            <img src="8RELOJ.jpg" alt="Angle 4" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
+            <img src="7RELOJ.jpg" alt="Detail View" class="inter-hover" data-aos="fade-up">
+            <img src="8RELOJ.jpg" alt="Final View" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
         </section>
     </main>
 
@@ -180,10 +198,10 @@
         window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 800, once: true });
 
-        // Theme & Lang
-        const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
+        // Theme Toggle
+        document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
+        // Lang Toggle con Animación
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -200,7 +218,7 @@
             }, 250);
         });
 
-        // Cursor trailing logic (0.35 smoothing)
+        // Cursor
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -220,7 +238,7 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Hero Reveal (threshold 0.15)
+        // Scroll Reveal para Hero
         const heroes = document.querySelectorAll('.project-hero-img');
         let heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -231,7 +249,7 @@
         }, { threshold: 0.15 }); 
         heroes.forEach(h => heroObserver.observe(h));
 
-        // Navbar Scroll behavior
+        // Navbar Scroll
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
