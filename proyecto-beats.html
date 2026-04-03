@@ -1,5 +1,3 @@
---- START OF FILE proyecto-beats.html ---
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -16,7 +14,7 @@
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; padding-top: 50px; }
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
@@ -48,15 +46,65 @@
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
-        .project-hero-img { width: 100%; height: 70vh; object-fit: cover; border-radius: 30px; margin: 40px auto; max-width: 1600px; display: block; border: 1px solid var(--border); }
+        .project-hero-img { 
+            width: 100%; 
+            height: 85vh; 
+            object-fit: cover; 
+            border-radius: 30px; 
+            margin: 40px auto; 
+            max-width: 1600px; 
+            display: block; 
+            border: 1px solid var(--border);
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+        }
+        .project-hero-img.aos-animate { 
+            opacity: 1;
+            transform: translateY(0);
+        }
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
         .project-text strong { color: var(--text); font-weight: 600; }
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; transition: filter 0.4s ease; }
+        .gallery img { 
+            width: 100%; 
+            height: 50vh; 
+            object-fit: cover; 
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            aspect-ratio: 4/3; 
+            transition: filter 0.4s ease; 
+        }
         .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
-        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+        /* Nueva regla para la imagen 5RELOJ y el texto a su derecha */
+        .gallery-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas, una para la imagen, otra para el texto */
+            gap: 25px;
+            margin-bottom: 25px; /* Espacio entre este bloque y el siguiente */
+            padding: 0 5vw; /* Asegura el mismo padding lateral que la galería */
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .gallery-split .text-content {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify;
+            display: flex; /* Para centrar el texto verticalmente si la imagen es más alta */
+            align-items: center;
+        }
+        .gallery-split img {
+            height: 60vh; /* Altura específica para esta imagen */
+            width: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
         .text-full-width { grid-column: 1 / -1; font-size: 1rem; color: var(--text-dim); text-align: center; margin-top: 30px; margin-bottom: 20px; padding: 0 5vw;}
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -64,7 +112,14 @@
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: -2px; transition: color 0.3s; display: flex; align-items: center; gap: 20px; }
         .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
-        @media (max-width: 1024px) { .project-content { grid-template-columns: 1fr; gap: 40px; } .gallery { grid-template-columns: 1fr; } .gallery .full-w { aspect-ratio: 16/9; } .project-meta { gap: 30px; flex-direction: column; } }
+        @media (max-width: 1024px) { 
+            .project-content { grid-template-columns: 1fr; gap: 40px; } 
+            .gallery { grid-template-columns: 1fr; } 
+            .gallery-split { grid-template-columns: 1fr; /* Colapsa a una columna en móviles */ }
+            .gallery .full-w { aspect-ratio: 16/9; height: auto; }
+            .project-meta { gap: 30px; flex-direction: column; } 
+            .project-hero-img, .gallery img, .gallery-split img { height: auto; } 
+        }
         @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
     </style>
 </head>
@@ -97,23 +152,30 @@
         </div>
     </section>
 
-    <!-- Primera foto: 2 RELOJ -->
-    <img src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="zoom-in" data-aos-duration="1200">
+    <!-- Primera foto: 2 RELOJ.jpg -->
+    <img id="main-hero-img" src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-duration="1200">
 
     <section class="project-content" data-aos="fade-up">
         <div class="project-brief"><h3 class="lang-node" data-en="The Scope" data-es="El Alcance">El Alcance</h3></div>
         <div class="project-text lang-node" 
              data-en="Designing casings for Hi-Fi audio equipment demands strict control over interior acoustic volumes and injection molding limits. <strong>Beats X was modeled entirely with Class-A surfaces</strong> to ensure a flawless finish.<br><br>The internal layout maximizes space for battery housing while providing specific airflow channels for the drivers, blending premium aesthetics with hardcore engineering." 
-             data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.">
-             El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.
+             data-es="El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.">
+             El diseño de carcasas para equipos de audio Hi-Fi exige un control estricto sobre los volúmenes acústicos interiores y los límites del moldeo por inyección. <strong>Beats X fue modelado íntegramente con superficies Clase-A</strong> para garantizar un acabado impecable.<br><br>La distribución interna maximiza el espacio para la batería al mismo tiempo que proporciona canales de flujo de aire para los drivers, fusionando estética premium e ingeniería dura.
+        </div>
+    </section>
+
+    <!-- Nueva sección para la imagen 5RELOJ.jpg y su texto asociado -->
+    <section class="gallery-split" data-aos="fade-up">
+        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="inter-hover">
+        <div class="text-content lang-node" 
+             data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. The focus was on creating a durable yet lightweight enclosure that also optimized acoustic performance. Every curve and angle was carefully considered to meet both aesthetic and functional requirements." 
+             data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales.">
+             Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales.
         </div>
     </section>
 
     <section class="gallery">
-        <!-- Nueva foto alineada a la izquierda: 5 RELOJ -->
-        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="full-w inter-hover" data-aos="fade-up">
-
-        <!-- Fotos 4 RELOJ (izquierda) y 1 RELOJ (derecha) -->
+        <!-- Fotos 4 RELOJ.jpg (izquierda) y 1 RELOJ.jpg (derecha) -->
         <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
         <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
@@ -124,7 +186,7 @@
              Estos renders detallados muestran la meticulosa atención al detalle en el diseño, destacando la integración de forma y función. Cada componente está diseñado para mejorar tanto el rendimiento acústico como la experiencia del usuario.
         </div>
         
-        <!-- Últimas dos fotos: 7 RELOJ (izquierda) y 8 RELOJ (derecha) -->
+        <!-- Últimas dos fotos: 7 RELOJ.jpg (izquierda) y 8 RELOJ.jpg (derecha) -->
         <img src="7RELOJ.jpg" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
         <img src="8RELOJ.jpg" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
     </section>
@@ -185,6 +247,19 @@
             else navbar.classList.remove("ui-hidden");
             lastScroll = currentScroll;
         });
+
+        const mainHeroImg = document.getElementById('main-hero-img');
+        let hasScrolledOnce = false;
+
+        window.addEventListener('scroll', () => {
+            if (!hasScrolledOnce && window.scrollY > 20) { 
+                mainHeroImg.classList.add('aos-animate');
+                hasScrolledOnce = true;
+            }
+        });
+
+        mainHeroImg.removeAttribute('data-aos');
+        mainHeroImg.removeAttribute('data-aos-duration');
     </script>
 </body>
 </html>
