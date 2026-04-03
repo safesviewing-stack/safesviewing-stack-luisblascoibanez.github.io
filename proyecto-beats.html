@@ -48,7 +48,7 @@
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
         .project-hero-img { 
             width: 100%; 
-            height: 85vh; 
+            height: 95vh; /* Aumentada la altura para la imagen principal (2RELOJ.jpg) */
             object-fit: cover; 
             border-radius: 30px; 
             margin: 40px auto; 
@@ -70,7 +70,7 @@
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
-            height: 50vh; 
+            height: 60vh; /* Altura aumentada para las imágenes de la galería (incluidas 7RELOJ y 8RELOJ) */
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
@@ -81,31 +81,41 @@
         /* Nueva regla para la imagen 5RELOJ y el texto a su derecha */
         .gallery-split {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Dos columnas, una para la imagen, otra para el texto */
+            grid-template-columns: 1fr 1fr; /* Texto a la izquierda, imagen a la derecha */
             gap: 25px;
-            margin-bottom: 25px; /* Espacio entre este bloque y el siguiente */
-            padding: 0 5vw; /* Asegura el mismo padding lateral que la galería */
+            margin-bottom: 50px; /* Espacio entre este bloque y el siguiente */
+            padding: 0 5vw; 
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 50px; /* Separación de las imágenes de arriba */
         }
         .gallery-split .text-content {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify;
-            display: flex; /* Para centrar el texto verticalmente si la imagen es más alta */
+            text-align: justify; /* Justificado a la izquierda */
+            display: flex; 
             align-items: center;
         }
         .gallery-split img {
-            height: 60vh; /* Altura específica para esta imagen */
+            height: 70vh; /* Altura aumentada para 5RELOJ.jpg */
             width: 100%;
             object-fit: cover;
             border-radius: 20px;
             border: 1px solid var(--border);
         }
 
-        .text-full-width { grid-column: 1 / -1; font-size: 1rem; color: var(--text-dim); text-align: center; margin-top: 30px; margin-bottom: 20px; padding: 0 5vw;}
+        .text-full-width { 
+            grid-column: 1 / -1; 
+            font-size: 1.1rem; /* Aumentado a 1.1rem para que coincida con el texto principal */
+            color: var(--text-dim); 
+            text-align: left; /* Justificado a la izquierda */
+            margin-top: 60px; /* Más separación de las imágenes de arriba */
+            margin-bottom: 20px; 
+            padding: 0 5vw;
+            line-height: 1.8;
+        }
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
@@ -119,6 +129,8 @@
             .gallery .full-w { aspect-ratio: 16/9; height: auto; }
             .project-meta { gap: 30px; flex-direction: column; } 
             .project-hero-img, .gallery img, .gallery-split img { height: auto; } 
+            .gallery-split .text-content { text-align: justify; } /* En móvil puede volver a justificar el texto */
+            .text-full-width { text-align: justify; } /* En móvil puede volver a justificar el texto */
         }
         @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
     </style>
@@ -152,7 +164,7 @@
         </div>
     </section>
 
-    <!-- Primera foto: 2 RELOJ.jpg -->
+    <!-- Primera foto: 2RELOJ.jpg - Altura aumentada -->
     <img id="main-hero-img" src="2RELOJ.jpg" alt="Reloj inteligente número 2" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-duration="1200">
 
     <section class="project-content" data-aos="fade-up">
@@ -164,29 +176,29 @@
         </div>
     </section>
 
-    <!-- Nueva sección para la imagen 5RELOJ.jpg y su texto asociado -->
+    <!-- Sección para el texto a la izquierda y 5RELOJ.jpg a la derecha - Altura aumentada para la imagen -->
     <section class="gallery-split" data-aos="fade-up">
-        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="inter-hover">
         <div class="text-content lang-node" 
-             data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. The focus was on creating a durable yet lightweight enclosure that also optimized acoustic performance. Every curve and angle was carefully considered to meet both aesthetic and functional requirements." 
-             data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales.">
-             Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales.
+             data-en="This section highlights the advanced materials and precision manufacturing techniques employed in the Beats X project. The focus was on creating a durable yet lightweight enclosure that also optimized acoustic performance. Every curve and angle was carefully considered to meet both aesthetic and functional requirements. Extensive testing was conducted to ensure longevity and superior sound quality in all conditions." 
+             data-es="Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.">
+             Esta sección destaca los materiales avanzados y las técnicas de fabricación de precisión empleadas en el proyecto Beats X. El enfoque fue crear una carcasa duradera pero ligera que también optimizara el rendimiento acústico. Cada curva y ángulo fue cuidadosamente considerado para cumplir con los requisitos estéticos y funcionales. Se realizaron pruebas exhaustivas para asegurar la longevidad y una calidad de sonido superior en todas las condiciones.
         </div>
+        <img src="5RELOJ.jpg" alt="Reloj moderno número 5" class="inter-hover">
     </section>
 
     <section class="gallery">
-        <!-- Fotos 4 RELOJ.jpg (izquierda) y 1 RELOJ.jpg (derecha) -->
+        <!-- Fotos 4RELOJ.jpg (izquierda) y 1RELOJ.jpg (derecha) -->
         <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
         <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
-        <!-- Texto que ocupa el horizontal entero -->
+        <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación -->
         <div class="text-full-width lang-node" 
-             data-en="These detailed renders showcase the meticulous attention to detail in the design, highlighting the integration of form and function. Each component is crafted to enhance both acoustic performance and user experience."
-             data-es="Estos renders detallados muestran la meticulosa atención al detalle en el diseño, destacando la integración de forma y función. Cada componente está diseñado para mejorar tanto el rendimiento acústico como la experiencia del usuario.">
-             Estos renders detallados muestran la meticulosa atención al detalle en el diseño, destacando la integración de forma y función. Cada componente está diseñado para mejorar tanto el rendimiento acústico como la experiencia del usuario.
+             data-en="These detailed renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We focused on innovative solutions to create a product that stands out in the competitive consumer electronics market, blending cutting-edge technology with timeless design principles."
+             data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.">
+             Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.
         </div>
         
-        <!-- Últimas dos fotos: 7 RELOJ.jpg (izquierda) y 8 RELOJ.jpg (derecha) -->
+        <!-- Últimas dos fotos: 7RELOJ.jpg (izquierda) y 8RELOJ.jpg (derecha) - Altura aumentada -->
         <img src="7RELOJ.jpg" alt="Interfaz de reloj inteligente futurista número 7" class="inter-hover" data-aos="fade-up">
         <img src="8RELOJ.jpg" alt="Reloj cronógrafo de lujo número 8" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
     </section>
