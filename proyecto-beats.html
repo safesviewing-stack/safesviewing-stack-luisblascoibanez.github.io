@@ -1,3 +1,5 @@
+--- START OF FILE proyecto-beats (1).html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -14,7 +16,7 @@
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; padding-top: 50px; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; /* padding-top: 50px; -- REMOVIDO */ }
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
         body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
@@ -48,7 +50,7 @@
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
         .project-hero-img { 
             width: 100%; 
-            height: 95vh; /* Aumentada la altura para la imagen principal (2RELOJ.jpg) */
+            height: 95vh; 
             object-fit: cover; 
             border-radius: 30px; 
             margin: 40px auto; 
@@ -70,7 +72,7 @@
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
-            height: 60vh; /* Altura aumentada para las imágenes de la galería (incluidas 7RELOJ y 8RELOJ) */
+            height: 60vh; 
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
@@ -78,28 +80,28 @@
             transition: filter 0.4s ease; 
         }
         .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
-        /* Nueva regla para la imagen 5RELOJ y el texto a su derecha */
+        
         .gallery-split {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Texto a la izquierda, imagen a la derecha */
             gap: 25px;
-            margin-bottom: 50px; /* Espacio entre este bloque y el siguiente */
+            margin-bottom: 50px; 
             padding: 0 5vw; 
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 50px; /* Separación de las imágenes de arriba */
+            margin-top: 50px; 
         }
         .gallery-split .text-content {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify; /* Justificado a la izquierda */
+            text-align: justify; 
             display: flex; 
             align-items: center;
         }
         .gallery-split img {
-            height: 70vh; /* Altura aumentada para 5RELOJ.jpg */
+            height: 70vh; 
             width: 100%;
             object-fit: cover;
             border-radius: 20px;
@@ -107,14 +109,17 @@
         }
 
         .text-full-width { 
-            grid-column: 1 / -1; 
-            font-size: 1.1rem; /* Aumentado a 1.1rem para que coincida con el texto principal */
+            grid-column: 1 / -1; /* Ocupa las dos columnas del grid de la galería */
+            font-size: 1.1rem; 
             color: var(--text-dim); 
-            text-align: left; /* Justificado a la izquierda */
-            margin-top: 60px; /* Más separación de las imágenes de arriba */
+            text-align: left; 
+            margin-top: 60px; 
             margin-bottom: 20px; 
-            padding: 0 5vw;
+            padding: 0 0; /* Ajustado a 0 0 para que el texto se alinee con los bordes de las fotos */
             line-height: 1.8;
+            max-width: 100%; /* Asegura que el div no exceda el ancho del contenedor del grid */
+            margin-left: auto; /* Centrar el div si es necesario */
+            margin-right: auto;
         }
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -124,13 +129,13 @@
         .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
         @media (max-width: 1024px) { 
             .project-content { grid-template-columns: 1fr; gap: 40px; } 
-            .gallery { grid-template-columns: 1fr; } 
-            .gallery-split { grid-template-columns: 1fr; /* Colapsa a una columna en móviles */ }
+            .gallery { grid-template-columns: 1fr; padding: 0 5vw 100px; } /* Restaurar padding en móviles */
+            .gallery-split { grid-template-columns: 1fr; /* Colapsa a una columna en móviles */ padding: 0 5vw;}
             .gallery .full-w { aspect-ratio: 16/9; height: auto; }
             .project-meta { gap: 30px; flex-direction: column; } 
             .project-hero-img, .gallery img, .gallery-split img { height: auto; } 
-            .gallery-split .text-content { text-align: justify; } /* En móvil puede volver a justificar el texto */
-            .text-full-width { text-align: justify; } /* En móvil puede volver a justificar el texto */
+            .gallery-split .text-content { text-align: justify; } 
+            .text-full-width { text-align: justify; padding: 0 5vw; /* Restaurar padding en móviles */ } 
         }
         @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
     </style>
@@ -191,11 +196,11 @@
         <img src="4RELOJ.jpg" alt="Reloj elegante número 4" class="inter-hover" data-aos="fade-up">
         <img src="1RELOJ.jpg" alt="Esfera de reloj clásico número 1" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
 
-        <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación -->
+        <!-- Texto encima de 7RELOJ.jpg y 8RELOJ.jpg - Justificado a la izquierda, más contenido, más separación, ancho completo de las fotos -->
         <div class="text-full-width lang-node" 
              data-en="These detailed renders showcase the meticulous attention to detail in the design process, highlighting the seamless integration of form and function. Each component is meticulously crafted to enhance both acoustic performance and the overall user experience, ensuring a premium feel and superior durability. We focused on innovative solutions to create a product that stands out in the competitive consumer electronics market, blending cutting-edge technology with timeless design principles."
              data-es="Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.">
-             Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporales.
+             Estos renders detallados muestran la meticulosa atención al detalle en el proceso de diseño, destacando la integración perfecta de forma y función. Cada componente está meticulosamente elaborado para mejorar tanto el rendimiento acústico como la experiencia general del usuario, asegurando una sensación premium y una durabilidad superior. Nos centramos en soluciones innovadoras para crear un producto que se destaque en el competitivo mercado de la electrónica de consumo, fusionando tecnología de vanguardia con principios de diseño atemporal.
         </div>
         
         <!-- Últimas dos fotos: 7RELOJ.jpg (izquierda) y 8RELOJ.jpg (derecha) - Altura aumentada -->
@@ -272,6 +277,11 @@
 
         mainHeroImg.removeAttribute('data-aos');
         mainHeroImg.removeAttribute('data-aos-duration');
+
+        // Función para asegurar que al recargar la página esté en la parte superior
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
     </script>
 </body>
 </html>
