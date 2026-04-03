@@ -70,38 +70,34 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* SECCIÓN 5RELOJ: ANTES TEXTO IZQUIERDA / FOTO DERECHA, AHORA SOLO FOTO */
-        .gallery-split {
-            display: flex; /* Cambiamos a flex para que solo la imagen ocupe el espacio */
-            justify-content: center; /* Centra la imagen */
-            margin-top: 25px; margin-bottom: 80px; padding: 0 5vw; 
-            max-width: 1600px; margin-left: auto; margin-right: auto;
+        /* NUEVA CUADRÍCULA PARA LAS 3 FOTOS DEL MEDIO */
+        .middle-photos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* Tres columnas iguales */
+            gap: 25px; /* Espacio entre las fotos */
+            padding: 80px 5vw 80px; /* Padding para esta sección */
+            max-width: 1600px; 
+            margin: 0 auto; 
+            align-items: stretch; 
         }
-
-        .gallery-split img { 
-            /* grid-column: 2; Removido ya que no es un grid */
-            width: 100%; /* La imagen ocupará el 100% del ancho disponible en el contenedor flex */
-            max-width: calc(50% - 40px); /* Limita el ancho para simular la columna de la derecha del antiguo grid */
-                                        /* (100% del contenedor - gap de 80px) / 2 para un ancho de columna similar */
-            height: 60vh; 
+        .middle-photos-grid img { 
+            display: block; 
+            width: 100%; 
+            height: 60vh; /* Altura fija para todas las imágenes */
             object-fit: cover; 
+            object-position: center; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
-            display: block;
         }
-        .gallery-split .text-content {
-            /* display: none; */ /* Ocultar el contenido de texto si no se quiere mostrar en absoluto */
-            /* Si solo se quiere que no afecte el layout, ya no es necesario el display: flex; flex-direction: column; justify-content: center; */
-            visibility: hidden; /* Mantiene el espacio pero es invisible */
-            width: 0; /* Colapsa el espacio ocupado por el texto */
-            height: 0;
-            margin: 0;
-            padding: 0;
-        }
-        /* Para evitar el texto por completo, lo eliminaremos del HTML */
 
 
-        /* GRID DE FOTOS EN PARALELO: ALINEACIÓN PERFECTA GARANTIZADA */
+        /* TEXTO SEPARADOR ESTRECHO */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw; }
+        .project-text-full-width { 
+            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+        }
+
+        /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
         .planos-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -109,23 +105,18 @@
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto; 
-            align-items: stretch; /* Asegura que la celda del grid mida lo mismo */
+            align-items: stretch; 
         }
         .planos-grid img { 
-            display: block; /* CRÍTICO: Elimina el espacio fantasma debajo de la imagen */
+            display: block; 
             width: 100%; 
-            height: 60vh; /* Altura fija idéntica para ambas */
-            object-fit: cover; /* Recorta la imagen para llenar el contenedor sin distorsionar */
-            object-position: center; /* Asegura que el recorte esté centrado */
+            height: 60vh; 
+            object-fit: cover; 
+            object-position: center; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
         }
 
-        /* TEXTO SEPARADOR ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw; }
-        .project-text-full-width { 
-            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
-        }
 
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -135,12 +126,10 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content, .planos-grid { grid-template-columns: 1fr; gap: 40px; }
-            .planos-grid img { height: 50vh; }
+            .project-content, .middle-photos-grid, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
+            .middle-photos-grid img, .planos-grid img { height: 50vh; } /* Altura en móviles */
             .project-hero-img { width: 95%; }
             .project-text-full-width { max-width: 100%; }
-            .gallery-split { flex-direction: column; align-items: center; } /* Para móviles, centrar si es solo la imagen */
-            .gallery-split img { max-width: 100%; } /* En móviles, que ocupe todo el ancho */
         }
     </style>
 </head>
@@ -187,13 +176,9 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 5RELOJ: SOLO FOTO (ELIMINADO TEXTO DE LA IZQUIERDA) -->
-        <section class="gallery-split" data-aos="fade-up">
+        <!-- NUEVA SECCIÓN: CUADRÍCULA DE 3 FOTOS (5RELOJ, 4RELOJ, 1RELOJ) -->
+        <div class="middle-photos-grid" data-aos="fade-up">
             <img src="5RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
-        </section>
-
-        <!-- PRIMERA FILA DE PLANOS (ALTURA IGUALADA PERFECTAMENTE) -->
-        <div class="planos-grid" data-aos="fade-up">
             <img src="4RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
             <img src="1RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
         </div>
