@@ -70,22 +70,21 @@
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
         .project-text strong { color: var(--text); font-weight: 600; }
 
-        /* --- NUEVO ESTILO: TEXTO ALINEADO A LA IZQUIERDA --- */
+        /* --- NUEVO ESTILO: TEXTO DE LADO A LADO --- */
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 160px 5vw 60px; /* Gran margen superior de 160px para separar de las fotos de arriba */
+            padding: 160px 5vw 60px; /* Margen superior amplio de 160px */
             display: flex;
-            justify-content: flex-start; /* Alinea el contenido a la izquierda */
         }
-        .project-text-left { 
-            max-width: 900px; /* Ancho máximo para que no se haga infinito y sea cómodo de leer */
+        .project-text-full-width { 
+            width: 100%; /* Ocupa exactamente todo el ancho del contenedor */
             font-size: 1.1rem; 
             color: var(--text-dim); 
             line-height: 1.8; 
-            text-align: justify; 
+            text-align: justify; /* Alinea los bordes del texto perfectamente con los bordes de la imagen inferior */
         }
-        .project-text-left strong { 
+        .project-text-full-width strong { 
             color: var(--text); 
             font-weight: 600; 
         }
@@ -95,12 +94,12 @@
         .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
         .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
         
-        /* --- NUEVA CLASE PARA LA ÚLTIMA IMAGEN (PLANO) SIN RECORTES --- */
+        /* --- CLASE PARA LA ÚLTIMA IMAGEN (PLANO) SIN RECORTES --- */
         .gallery .full-w-natural {
             grid-column: 1 / -1;
             width: 100%;
             height: auto;
-            aspect-ratio: auto; /* Anula cualquier proporción forzada */
+            aspect-ratio: auto; 
             object-fit: cover; 
             border-radius: 20px;
             border: 1px solid var(--border);
@@ -119,8 +118,6 @@
             .gallery .full-w { aspect-ratio: 16/9; }
             .project-meta { gap: 30px; flex-direction: column; }
             .project-hero-img { width: 95%; height: auto; margin: 60px auto 40px auto; }
-            
-            /* Ajuste en móviles para el texto izquierdo */
             .text-align-wrapper { padding: 100px 5vw 40px; }
         }
         @media (max-width: 768px) {
@@ -195,12 +192,12 @@
         <img src="Aspirador2.jpg" alt="Detail 3" class="full-w inter-hover" data-aos="fade-up">
     </section>
 
-    <!-- TEXTO INTERMEDIO (ALINEADO A LA IZQUIERDA) -->
+    <!-- TEXTO INTERMEDIO (ANCHO COMPLETO PARA COINCIDIR EXACTAMENTE CON LA IMAGEN) -->
     <div class="text-align-wrapper" data-aos="fade-up">
-        <p class="project-text-left lang-node" 
-             data-en="To ensure manufacturing feasibility and precision, detailed <strong>technical blueprints</strong> were generated. These specify exact tolerances, surface finishes, and the critical dimensions required for the final assembly." 
-             data-es="Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.">
-             Para garantizar la viabilidad y precisión de la fabricación, se generó una <strong>planimetría técnica</strong> detallada. Esta especifica las tolerancias exactas, los acabados superficiales y las dimensiones críticas requeridas para el ensamblaje final.
+        <p class="project-text-full-width lang-node" 
+             data-en="To ensure absolute manufacturing feasibility and precision, an exhaustive set of <strong>technical blueprints</strong> was generated covering every detail of the chassis. These drawings specify not only the exact tolerances and surface finishes for each component, but also the critical dimensions, anchor points, and assembly routing required to ensure seamless integration between the conceptual design and the final CNC production." 
+             data-es="Para garantizar la viabilidad y precisión absoluta en la fase de fabricación, se generó una <strong>planimetría técnica</strong> exhaustiva que contempla cada detalle del chasis. Este conjunto de planos especifica no solo las tolerancias exactas y los acabados superficiales de cada componente, sino también las dimensiones críticas, los puntos de anclaje y las rutas de ensamblaje requeridas para asegurar una integración perfecta entre el diseño conceptual y la producción final en CNC.">
+             Para garantizar la viabilidad y precisión absoluta en la fase de fabricación, se generó una <strong>planimetría técnica</strong> exhaustiva que contempla cada detalle del chasis. Este conjunto de planos especifica no solo las tolerancias exactas y los acabados superficiales de cada componente, sino también las dimensiones críticas, los puntos de anclaje y las rutas de ensamblaje requeridas para asegurar una integración perfecta entre el diseño conceptual y la producción final en CNC.
         </p>
     </div>
 
