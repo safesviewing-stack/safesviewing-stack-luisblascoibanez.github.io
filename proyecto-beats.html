@@ -56,10 +56,17 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* FOTO HERO */
+        /* FOTO HERO REDUCIDA EN ALTURA */
         .project-hero-img { 
-            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
-            margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
+            width: calc(100% - 10vw); 
+            max-height: 65vh; /* Altura máxima reducida */
+            object-fit: cover; /* Asegura que no se deforme al reducir la altura */
+            object-position: center;
+            border-radius: 30px; 
+            margin: 80px auto; 
+            max-width: 1500px; 
+            display: block; 
+            border: 1px solid var(--border);
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
@@ -74,7 +81,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
-            padding: 80px 5vw 0; /* Eliminado el padding inferior para equilibrarlo con el wrapper del texto */
+            padding: 80px 5vw 0; 
             max-width: 1600px;
             margin: 0 auto;
             align-items: stretch;
@@ -89,7 +96,8 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            padding: 30px;
+            /* Padding ajustado a 0 a la izquierda para alinear perfectamente con la foto */
+            padding: 20px 40px 20px 0; 
             box-sizing: border-box;
         }
         .grid-2x2-section .grid-text-item p {
@@ -157,8 +165,9 @@
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
             .grid-2x2-section { padding: 40px 5vw 0; }
             .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
-            .grid-2x2-section .grid-text-item { height: auto; padding: 0;}
-            .project-hero-img { width: 95%; }
+            /* En móviles devolvemos un poco de margen para que no se pegue totalmente al borde del dispositivo */
+            .grid-2x2-section .grid-text-item { height: auto; padding: 0;} 
+            .project-hero-img { width: 95%; max-height: 50vh;}
             .text-align-wrapper { padding: 80px 5vw; }
         }
     </style>
@@ -205,11 +214,12 @@
             </div>
         </section>
 
-        <!-- CUADRÍCULA CON TEXTO Y IMÁGENES REORGANIZADAS -->
+        <!-- CUADRÍCULA CON TEXTO ALINEADO A LA IZQUIERDA E IMÁGENES -->
         <div class="grid-2x2-section" data-aos="fade-up">
-            <div class="grid-text-item lang-node" data-en="Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development. This text could delve into the materials used, manufacturing processes, or the user experience considerations that shaped the final product. It is an opportunity to communicate the story behind the visuals and offer a deeper understanding of the project's core principles and innovations." 
-                 data-es="Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. Este texto podría ahondar en los materiales utilizados, los procesos de fabricación o las consideraciones de experiencia de usuario que moldearon el producto final. Es una oportunidad para comunicar la historia detrás de las imágenes y ofrecer una comprensión más profunda de los principios fundamentales e innovaciones del proyecto.">
-                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes.</p>
+            <div class="grid-text-item lang-node" 
+                 data-en="Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
+                 data-es="Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
+                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional.</p>
             </div>
             <img src="5RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
             <img src="4RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
