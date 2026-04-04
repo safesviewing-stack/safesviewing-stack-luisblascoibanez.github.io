@@ -53,15 +53,19 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
         }
         .nav-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-        }
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -1px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-logo:hover {
+    opacity: 1;
+}
         .nav-links { display: flex; align-items: center; }
         .nav-links a { 
             text-decoration: none; 
