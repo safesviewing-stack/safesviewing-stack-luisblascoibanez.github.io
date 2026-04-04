@@ -74,7 +74,6 @@
 
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        /* ELIMINADO EL JUSTIFICADO AQUÍ */
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: left; }
 
         /* CUADRÍCULA 2x2 para imágenes */
@@ -100,7 +99,6 @@
             padding: 20px 40px 20px 0; 
             box-sizing: border-box;
         }
-        /* ELIMINADO EL JUSTIFICADO AQUÍ */
         .grid-2x2-section .grid-text-item p {
             font-size: 1.1rem;
             color: var(--text-dim);
@@ -126,7 +124,6 @@
             padding: 120px 5vw; 
         }
 
-        /* ELIMINADO EL JUSTIFICADO AQUÍ */
         .project-text-full-width {
             font-size: 1.1rem;
             color: var(--text-dim);
@@ -160,7 +157,33 @@
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        /* --- FOOTER ESTILO IMAGEN --- */
+        footer { 
+            padding: 100px 5vw; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            border-top: 1px solid var(--border); 
+        }
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem; /* Tamaño grande */
+            font-weight: 800; /* Extra bold */
+            color: var(--text-dim); /* Gris idéntico a la foto */
+            margin-bottom: 25px;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+        .footer-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 4px; /* Separación de letras ampliada */
+        }
 
         @media (max-width: 1024px) {
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
@@ -169,6 +192,8 @@
             .grid-2x2-section .grid-text-item { height: auto; padding: 0;} 
             .project-hero-img { width: 95%; max-height: 50vh;}
             .text-align-wrapper { padding: 80px 5vw; }
+            .footer-logo { font-size: 2.2rem; }
+            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -248,9 +273,10 @@
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
+    <!-- FOOTER ACTUALIZADO -->
     <footer>
-        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="footer-logo">L|BIB</div>
+        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
