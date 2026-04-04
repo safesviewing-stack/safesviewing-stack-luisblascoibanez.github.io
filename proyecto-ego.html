@@ -3,322 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Ego | Luis Blasco-Ibáñez</title>
+    <title>Alpha Project | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- CORE VARIABLES & INDEX CSS --- */
+        /* --- CORE VARIABLES --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
-        .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
-        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
-        body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); }
-        ::selection { background: var(--accent); color: #fff; }
-        
+
+        /* --- FONDO ANARANJADO Y GRANO --- */
+        body::before { 
+            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
+            background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
+            z-index: -1; transform: translateX(-50%); pointer-events: none;
+        }
+        body::after { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            pointer-events: none; z-index: 9998; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); 
+            opacity: 0.04; mix-blend-mode: overlay; 
+        }
+
+        /* --- CURSOR --- */
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
         .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
 
+        /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
-        @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 35px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; opacity: 0.9; transition: opacity 0.3s; text-decoration: none; color: inherit;}
         .nav-logo:hover { opacity: 1; }
         .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
-        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-        .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
-        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Texto del nav-links más grueso (font-weight: 700) */
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
+        .nav-links a:hover { opacity: 1; color: var(--accent); background: rgba(150, 150, 150, 0.15); }
+        
+        /* Puntos separadores */
+        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; margin: 0; }
+        
+        .tools-nav { display:flex; align-items: center; gap: 12px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .icon-btn:hover { opacity: 1; color: var(--accent); }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px; }
+        .lang-sutil-btn:hover { opacity: 1; color: var(--accent); }
 
-        /* --- ESTILOS ESPECÍFICOS: CABECERA --- */
-        .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
+        /* --- PROJECT CONTENT --- */
+        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
-        .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
+        
+        .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
-        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
+        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- SECCIONES DIVIDIDAS (FOTO Y TEXTO) --- */
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 80px;
-            padding: 80px 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: center;
+        /* ALINEACIÓN PERFECTA PARA FOTOS HERO 1 Y 5 */
+        .project-hero-img { 
+            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
+            margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
+            opacity: 0; transform: translateY(60px); 
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        .split-layout.reverse {
-            grid-template-columns: 1fr 1.2fr;
-        }
-        
-        .split-img img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            object-fit: cover;
-            image-rendering: high-quality;
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+
+        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
+        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
+        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
+
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
+        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+
+        /* TEXTO INTERMEDIO ESTRECHO */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 140px 5vw 60px; }
+        .project-text-full-width { 
+            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
 
-        .img-tall {
-            aspect-ratio: 4/5;
-        }
-        
-        .split-text h3 {
-            font-family: 'Syne';
-            font-size: 2.5rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            color: var(--text);
-        }
-        .split-text p {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify;
-        }
-        .split-text strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* --- ANIMACIÓN MANUAL PARA LA PRIMERA SECCIÓN --- */
-        .manual-scroll-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .manual-scroll-reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- ENVOLTORIO PARA PLANOS (Mismo tamaño que el resto de las secciones) --- */
-        .plano-wrapper {
-            max-width: 1600px;
-            margin: 140px auto 100px auto;
-            padding: 0 5vw; /* Esto garantiza la alineación perfecta a izquierda y derecha */
-            width: 100%;
-        }
-
-        /* --- IMAGEN FULL WIDTH (MODO PORTADA / PLANOS) --- */
-        .full-w-img { 
-            width: 100%; 
-            height: auto; 
-            border-radius: 30px; 
-            display: block; 
-            border: 1px solid var(--border); 
-            image-rendering: high-quality;
-            image-rendering: -webkit-optimize-contrast;
-            filter: contrast(1.03) saturate(1.02);
-        }
-
-        /* --- ANIMACIÓN SENCILLA DE ESCALADO CENTRADA --- */
-        [data-aos="plano-scale"] {
-            opacity: 0;
-            transform: scale(0.95);
-            transition-property: opacity, transform;
-            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-        [data-aos="plano-scale"].aos-animate {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* --- SIGUIENTE PROYECTO --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
-        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
-        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: -2px; transition: color 0.3s; display: flex; align-items: center; gap: 20px; }
-        .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
+        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
+        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 1024px) { 
-            .split-layout, .split-layout.reverse { 
-                grid-template-columns: 1fr; 
-                gap: 40px; 
-                padding: 40px 5vw;
-            } 
-            .split-layout.reverse .split-text { order: 2; }
-            .split-layout.reverse .split-img { order: 1; }
-            
-            .project-meta { gap: 30px; flex-direction: column; } 
-            .plano-wrapper { margin: 80px auto 60px auto; }
-            .split-img[style] { margin-top: 0 !important; }
-        }
-        @media (max-width: 768px) { 
-            header { padding: 10px 20px; gap: 20px; } 
-            .nav-links { display: none; } 
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+
+        @media (max-width: 1024px) {
+            .project-content, .gallery { grid-template-columns: 1fr; gap: 40px; }
+            .project-hero-img { width: 95%; }
+            .project-text-full-width { max-width: 100%; }
         }
     </style>
 </head>
 <body>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
+            <!-- Punto separador añadido -->
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Back to Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left"></i> Volver al Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot" style="margin: 0 10px;"></div>
+            <!-- Punto separador añadido -->
+            <div class="nav-dot"></div>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
             </div>
         </header>
     </div>
 
-    <!-- CABECERA DEL PROYECTO -->
-    <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="project-title lang-node" data-en="Ego Lighting Series" data-es="Proyecto Ego">Proyecto Ego</h1>
-        <div class="project-meta">
-            <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Product Designer" data-es="Diseñador de Producto">Diseñador de Producto</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Lighting / Context" data-es="Iluminación / Contexto">Iluminación / Contexto</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2022</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>SolidWorks / Rendering</span></div>
-        </div>
-    </section>
+    <main>
+        <section class="project-header" data-aos="fade-up">
+            <h1 class="project-title lang-node" data-en="Alpha Project" data-es="Proyecto Alpha">Proyecto Alpha</h1>
+            <div class="project-meta">
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Lead Designer" data-es="Diseñador Principal">Diseñador Principal</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Technical Structure" data-es="Estructura Técnica">Estructura Técnica</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2023</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>SolidWorks / FDM / CAM</span></div>
+            </div>
+        </section>
 
-    <!-- ==========================================
-         LÁMPARA 1 
-         ========================================== -->
+        <!-- FOTO 1 (HERO) -->
+        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover">
 
-    <!-- SECCIÓN CON ANIMACIÓN MANUAL (Clase manual-scroll-reveal sin AOS) -->
-    <section id="first-section" class="split-layout manual-scroll-reveal">
-        <div class="split-img" style="margin-top: 40px;">
-            <img src="2 LAMPARA.jpg" alt="Lámpara Ego Modelo 1" class="inter-hover img-tall">
-        </div>
-        <div class="split-text">
-            <h3 class="lang-node" data-en="Ego Model I" data-es="Ego Modelo I">Ego Modelo I</h3>
-            <p class="lang-node" 
-               data-en="The first piece of the Ego series explores the relationship between structural balance and brutalist aesthetics. <strong>By removing the superfluous</strong>, the lamp relies on a continuous geometric frame that dictates the path of light.<br><br>The contrast between cold industrial materials and warm ambient lighting creates a functional sculpture for any modern space." 
-               data-es="La primera pieza de la serie Ego explora la relación entre el equilibrio estructural y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la lámpara se apoya en un marco geométrico continuo que dicta el recorrido de la luz.<br><br>El contraste entre materiales industriales fríos y una iluminación ambiental cálida crea una escultura funcional para cualquier espacio moderno.">
-               La primera pieza de la serie Ego explora la relación entre el equilibrio estructural y la estética brutalista. <strong>Al eliminar lo superfluo</strong>, la lámpara se apoya en un marco geométrico continuo que dicta el recorrido de la luz.<br><br>El contraste entre materiales industriales fríos y una iluminación ambiental cálida crea una escultura funcional para cualquier espacio moderno.
+        <section class="project-content" data-aos="fade-up">
+            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
+            <div class="project-text lang-node" 
+                 data-en="Alpha Project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance vacuuming cycles. Utilizing parametric design principles, we sculpted an internal architecture that optimizes airflow while maintaining rigid stability. Every curve and rib was meticulously analyzed through Finite Element Analysis (FEA) to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems." 
+                 data-es="El Proyecto Alpha representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de succión de alto rendimiento. Utilizando principios de diseño paramétrico, esculpimos una arquitectura interna que optimiza el flujo de aire mientras mantiene una estabilidad rígida. Cada curva y nervio fue analizado meticulosamente mediante Análisis de Elementos Finitos (FEA) para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
+                 El Proyecto Alpha trasciende la mera concepción formal para abordar la compleja relación entre el volumen interno y la eficiencia estructural.
+            </div>
+        </section>
+
+        <section class="gallery">
+            <img src="Aspirador4.jpg" alt="Macro Detail" class="inter-hover" data-aos="fade-up">
+            <img src="Aspirador3.jpg" alt="Shell Integrity" class="inter-hover" data-aos="fade-up">
+            <img src="Aspirador2.jpg" alt="Full Assembly" class="full-w inter-hover" data-aos="fade-up">
+        </section>
+
+        <div class="text-align-wrapper" data-aos="fade-up">
+            <p class="project-text-full-width lang-node" 
+                 data-en="Precision in manufacturing is only achievable through a flawless set of technical planimetries. For Project Alpha, we generated a comprehensive documentation package that bridges the gap between digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material heat-treatments required for the magnesium-alloy chassis components. We focused intensely on the routing of internal mechanical sensors and the precise anchor points for modular maintenance, ensuring that the final assembly process is both efficient and repeatable. This meticulous attention to industrial standards guarantees that every unit produced maintains the exact specifications of the original engineering prototype, facilitating a seamless transition to large-scale production." 
+                 data-es="La precisión en la fabricación solo es alcanzable mediante un conjunto impecable de planimetrías técnicas. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repetible. Esta atención meticulosa garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo original.">
+                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo.
             </p>
         </div>
-    </section>
 
-    <section class="split-layout reverse" data-aos="fade-up">
-        <div class="split-text">
-            <h3 class="lang-node" data-en="Material Contrast" data-es="Contraste Material">Contraste Material</h3>
-            <p class="lang-node" 
-               data-en="Attention to detail defines the transition between elements. The base provides absolute stability, allowing the upper structure to feel lightweight and dynamic.<br><br>Every joint and intersection has been meticulously designed to hide wiring while maintaining a raw, architectural visual language." 
-               data-es="La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.">
-               La atención al detalle define la transición entre los elementos. La base proporciona estabilidad absoluta, permitiendo que la estructura superior se perciba ligera y dinámica.<br><br>Cada unión e intersección ha sido meticulosamente diseñada para ocultar el cableado manteniendo un lenguaje visual arquitectónico y puro.
-            </p>
-        </div>
-        <div class="split-img" style="margin-top: 90px;">
-            <img src="3 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 1" class="inter-hover">
-        </div>
-    </section>
+        <!-- FOTO 5 (PLANIMETRÍA - ALINEADA CON FOTO 1) -->
+        <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover">
+    </main>
 
-    <!-- FOTO 3 (Plano) dentro de su contenedor para alinear perfectamente -->
-    <div class="plano-wrapper" data-aos="plano-scale" data-aos-duration="1200">
-        <img src="PLANOLAMP1.jpg" alt="Plano Lámpara Ego Modelo 1" class="full-w-img inter-hover">
-    </div>
-
-
-    <!-- ==========================================
-         LÁMPARA 2 
-         ========================================== -->
-
-    <section class="split-layout" data-aos="fade-up">
-        <div class="split-img" style="margin-top: 90px;">
-            <img src="4 LAMPARA.jpg" alt="Lámpara Ego Modelo 2" class="inter-hover img-tall">
-        </div>
-        <div class="split-text">
-            <h3 class="lang-node" data-en="Ego Model II" data-es="Ego Modelo II">Ego Modelo II</h3>
-            <p class="lang-node" 
-               data-en="Ego Model II introduces a vertical approach to the same conceptual foundation. Designed as a focal point, it plays with height and shadow casting to alter the perception of its surroundings.<br><br>The elongated proportions require a reinforced internal structure, hidden seamlessly within the outer minimalist shell." 
-               data-es="Ego Modelo II presenta un enfoque vertical basado en el mismo fundamento conceptual. Diseñada como un punto focal, juega con la altura y la proyección de sombras para alterar la percepción de su entorno.<br><br>Las proporciones alargadas requieren una estructura interna reforzada, oculta a la perfección dentro de la carcasa exterior minimalista.">
-               Ego Modelo II presenta un enfoque vertical basado en el mismo fundamento conceptual. Diseñada como un punto focal, juega con la altura y la proyección de sombras para alterar la percepción de su entorno.<br><br>Las proporciones alargadas requieren una estructura interna reforzada, oculta a la perfección dentro de la carcasa exterior minimalista.
-            </p>
-        </div>
-    </section>
-
-    <section class="split-layout reverse" data-aos="fade-up">
-        <div class="split-text">
-            <h3 class="lang-node" data-en="Spatial Presence" data-es="Presencia Espacial">Presencia Espacial</h3>
-            <p class="lang-node" 
-               data-en="When lit, the lamp transforms. The solid metal components diffuse the light, projecting directed geometric patterns against the walls. <br><br>It functions not just as a light source, but as a modifier of the architectural space it inhabits, blurring the line between product and spatial design." 
-               data-es="Al encenderse, la lámpara se transforma. Los componentes metálicos sólidos difunden la luz, proyectando patrones geométricos dirigidos contra las paredes. <br><br>Funciona no solo como fuente de luz, sino como un modificador del espacio arquitectónico que habita, difuminando la línea entre el diseño de producto y el diseño espacial.">
-               Al encenderse, la lámpara se transforma. Los componentes metálicos sólidos difunden la luz, proyectando patrones geométricos dirigidos contra las paredes. <br><br>Funciona no solo como fuente de luz, sino como un modificador del espacio arquitectónico que habita, difuminando la línea entre el diseño de producto y el diseño espacial.
-            </p>
-        </div>
-        <div class="split-img">
-            <img src="6 LAMPARA.jpg" alt="Detalle Lámpara Ego Modelo 2" class="inter-hover">
-        </div>
-    </section>
-
-    <!-- FOTO 6 (Plano) dentro de su contenedor para alinear perfectamente -->
-    <div class="plano-wrapper" data-aos="plano-scale" data-aos-duration="1200">
-        <img src="PLANOLAMP2.jpg" alt="Plano Lámpara Ego Modelo 2" class="full-w-img inter-hover">
-    </div>
-
-
-    <!-- ENLACE AL SIGUIENTE PROYECTO -->
-    <a href="proyecto-beats.html" class="next-project inter-hover">
+    <a href="proyecto-ego.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
-        <h2 class="next-title">BEATS X <i class="fa-solid fa-arrow-right"></i></h2>
+        <h2 class="next-title">EGO SEATING <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
-        <div class="lang-node" style="font-size:0.65rem; text-transform:none; letter-spacing:1.5px;" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        if (window.history.scrollRestoration) {
-            window.history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
-        });
+        if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+        AOS.init({ duration: 800, once: true });
 
-        AOS.init({ duration: 800, once: true, offset: 50 });
-
-        // --- LÓGICA PARA REVELAR LA PRIMERA FOTO SOLO CON SCROLL LIGERO ---
-        const firstSection = document.getElementById('first-section');
-        const checkFirstScroll = () => {
-            // Con solo bajar 10px se activa la animación
-            if (window.scrollY > 10) {
-                firstSection.classList.add('is-visible');
-                window.removeEventListener('scroll', checkFirstScroll);
-            }
-        };
-        // Por si al recargar la página el usuario ya está un poco abajo
-        if (window.scrollY > 10) {
-            firstSection.classList.add('is-visible');
-        } else {
-            window.addEventListener('scroll', checkFirstScroll);
-        }
-        // -----------------------------------------------------------------
-        
         const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-        });
+        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
@@ -338,7 +202,7 @@
 
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mouseX = -100, mouseY = -100; let ringX = -100, ringY = -100;
+        let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
         window.addEventListener("mousemove", (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
@@ -348,12 +212,23 @@
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
-        requestAnimationFrame(renderRing);
+        renderRing();
 
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
+
+        // Intersection Observer para las dos imágenes HERO
+        const heroes = document.querySelectorAll('.project-hero-img');
+        let heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('aos-animate');
+                }
+            });
+        }, { threshold: 0.15 }); 
+        heroes.forEach(h => heroObserver.observe(h));
 
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
