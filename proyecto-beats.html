@@ -74,7 +74,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
-            padding: 80px 5vw;
+            padding: 80px 5vw 40px; /* Reducido un poco el padding inferior */
             max-width: 1600px;
             margin: 0 auto;
             align-items: stretch;
@@ -110,6 +110,22 @@
             border: 1px solid var(--border);
         }
 
+        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO */
+        .text-align-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            /* 5vw iguala el padding lateral de las fotos, 120px asegura mucha separación inferior */
+            padding: 20px 5vw 120px 5vw; 
+        }
+
+        .project-text-full-width {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify; /* Justificado perfecto */
+            width: 100%;
+        }
+
         /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
         .planos-grid { 
             display: grid; 
@@ -123,15 +139,14 @@
         .planos-grid img { 
             display: block; 
             width: 100%; 
-            /* ALTURA AUMENTADA a 85vh para que las imágenes sean más alargadas verticalmente */
-            height: 85vh; 
+            height: 85vh; /* Altura alargada verticalmente */
             object-fit: cover; 
             object-position: center; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
         }
 
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
@@ -141,8 +156,9 @@
         @media (max-width: 1024px) {
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
             .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
-            .grid-2x2-section .grid-text-item { height: auto; }
+            .grid-2x2-section .grid-text-item { height: auto; padding: 0;}
             .project-hero-img { width: 95%; }
+            .text-align-wrapper { padding: 20px 5vw 80px 5vw; }
         }
     </style>
 </head>
@@ -199,12 +215,12 @@
             <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR -->
+        <!-- TEXTO SEPARADOR JUSTIFICADO Y SEPARADO -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
                  data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea es fruto de un estudio profundo.
+                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.
             </p>
         </div>
 
