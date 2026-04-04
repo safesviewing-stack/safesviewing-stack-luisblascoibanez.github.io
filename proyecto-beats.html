@@ -74,7 +74,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
-            padding: 80px 5vw 40px; /* Reducido un poco el padding inferior */
+            padding: 80px 5vw 0; /* Eliminado el padding inferior para equilibrarlo con el wrapper del texto */
             max-width: 1600px;
             margin: 0 auto;
             align-items: stretch;
@@ -110,12 +110,12 @@
             border: 1px solid var(--border);
         }
 
-        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO */
+        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO (CENTRADOS Y JUSTIFICADOS) */
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            /* 5vw iguala el padding lateral de las fotos, 120px asegura mucha separación inferior */
-            padding: 20px 5vw 120px 5vw; 
+            /* 120px arriba y abajo sitúa el texto exactamente a la misma distancia entre ambos grupos de fotos */
+            padding: 120px 5vw; 
         }
 
         .project-text-full-width {
@@ -155,10 +155,11 @@
 
         @media (max-width: 1024px) {
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
+            .grid-2x2-section { padding: 40px 5vw 0; }
             .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
             .grid-2x2-section .grid-text-item { height: auto; padding: 0;}
             .project-hero-img { width: 95%; }
-            .text-align-wrapper { padding: 20px 5vw 80px 5vw; }
+            .text-align-wrapper { padding: 80px 5vw; }
         }
     </style>
 </head>
@@ -215,7 +216,7 @@
             <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR JUSTIFICADO Y SEPARADO -->
+        <!-- TEXTO SEPARADOR JUSTIFICADO Y CENTRADO ENTRE FOTOS -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
