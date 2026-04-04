@@ -59,8 +59,8 @@
         /* FOTO HERO REDUCIDA EN ALTURA */
         .project-hero-img { 
             width: calc(100% - 10vw); 
-            max-height: 65vh; /* Altura máxima reducida */
-            object-fit: cover; /* Asegura que no se deforme al reducir la altura */
+            max-height: 65vh; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px; 
             margin: 80px auto; 
@@ -74,7 +74,8 @@
 
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
+        /* ELIMINADO EL JUSTIFICADO AQUÍ */
+        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: left; }
 
         /* CUADRÍCULA 2x2 para imágenes */
         .grid-2x2-section {
@@ -96,15 +97,15 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            /* Padding ajustado a 0 a la izquierda para alinear perfectamente con la foto */
             padding: 20px 40px 20px 0; 
             box-sizing: border-box;
         }
+        /* ELIMINADO EL JUSTIFICADO AQUÍ */
         .grid-2x2-section .grid-text-item p {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify;
+            text-align: left;
             margin: 0;
         }
 
@@ -118,19 +119,19 @@
             border: 1px solid var(--border);
         }
 
-        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO (CENTRADOS Y JUSTIFICADOS) */
+        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO */
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            /* 120px arriba y abajo sitúa el texto exactamente a la misma distancia entre ambos grupos de fotos */
             padding: 120px 5vw; 
         }
 
+        /* ELIMINADO EL JUSTIFICADO AQUÍ */
         .project-text-full-width {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify; /* Justificado perfecto */
+            text-align: left; 
             width: 100%;
         }
 
@@ -147,7 +148,7 @@
         .planos-grid img { 
             display: block; 
             width: 100%; 
-            height: 85vh; /* Altura alargada verticalmente */
+            height: 85vh; 
             object-fit: cover; 
             object-position: center; 
             border-radius: 20px; 
@@ -165,7 +166,6 @@
             .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
             .grid-2x2-section { padding: 40px 5vw 0; }
             .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
-            /* En móviles devolvemos un poco de margen para que no se pegue totalmente al borde del dispositivo */
             .grid-2x2-section .grid-text-item { height: auto; padding: 0;} 
             .project-hero-img { width: 95%; max-height: 50vh;}
             .text-align-wrapper { padding: 80px 5vw; }
@@ -207,10 +207,11 @@
 
         <section class="project-content" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
+            <!-- TEXTO AMPLIADO Y SIN JUSTIFICAR -->
             <div class="project-text lang-node" 
-                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems." 
-                 data-es="El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
-                 Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado.
+                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems. Furthermore, the ergonomic study of tactile components guarantees an intuitive and fluid user interaction, redefining the standards of modern consumer electronics." 
+                 data-es="El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, centrándonos puramente en la integridad estructural y la integración perfecta de los subsistemas internos. Además, el estudio ergonómico de los componentes táctiles garantiza una interacción intuitiva y fluida con el usuario, redefiniendo los estándares de la electrónica de consumo moderna.">
+                 El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, centrándonos puramente en la integridad estructural y la integración perfecta de los subsistemas internos. Además, el estudio ergonómico de los componentes táctiles garantiza una interacción intuitiva y fluida con el usuario, redefiniendo los estándares de la electrónica de consumo moderna.
             </div>
         </section>
 
@@ -226,7 +227,7 @@
             <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR JUSTIFICADO Y CENTRADO ENTRE FOTOS -->
+        <!-- TEXTO SEPARADOR SIN JUSTIFICAR Y CENTRADO ENTRE FOTOS -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
@@ -235,7 +236,7 @@
             </p>
         </div>
 
-        <!-- ÚLTIMA FILA (7 Y 8): ALTURA AUMENTADA -->
+        <!-- ÚLTIMA FILA (7 Y 8) -->
         <div class="planos-grid" data-aos="fade-up">
             <img src="7RELOJ.jpg" alt="Beats X View 1" class="inter-hover">
             <img src="8RELOJ.jpg" alt="Beats X View 2" class="inter-hover">
