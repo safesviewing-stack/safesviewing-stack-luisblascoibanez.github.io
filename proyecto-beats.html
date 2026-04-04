@@ -38,14 +38,50 @@
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
-        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-        .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
+        
+        /* HEADER ACTUALIZADO */
+        header { 
+            background: var(--glass); 
+            backdrop-filter: var(--blur); 
+            -webkit-backdrop-filter: var(--blur); 
+            padding: 12px 35px; 
+            display: flex; 
+            align-items: center; 
+            gap: 40px; 
+            border: 1px solid var(--border); 
+            border-radius: 100px; 
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
+        }
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text); 
+            opacity: 0.8; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            padding: 5px 10px; 
+            border-radius: 100px; 
+            transition: all 0.3s ease; 
+        }
+        .nav-links a:hover { opacity: 1; color: var(--accent); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; opacity: 0.5; }
+        .tools-nav { display:flex; align-items: center; gap: 15px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.8; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .icon-btn:hover { color: var(--accent); opacity: 1; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.8; }
+        .lang-sutil-btn:hover { color: var(--accent); opacity: 1; }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
@@ -56,10 +92,10 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* FOTO HERO REDUCIDA EN ALTURA */
+        /* FOTO HERO MÁS ALTA */
         .project-hero-img { 
             width: calc(100% - 10vw); 
-            max-height: 65vh; 
+            height: 75vh; /* ALTURA AUMENTADA */
             object-fit: cover; 
             object-position: center;
             border-radius: 30px; 
@@ -74,7 +110,8 @@
 
         .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: left; }
+        /* JUSTIFICADO */
+        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
         /* CUADRÍCULA 2x2 para imágenes */
         .grid-2x2-section {
@@ -99,11 +136,12 @@
             padding: 20px 40px 20px 0; 
             box-sizing: border-box;
         }
+        /* JUSTIFICADO */
         .grid-2x2-section .grid-text-item p {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: left;
+            text-align: justify;
             margin: 0;
         }
 
@@ -124,11 +162,12 @@
             padding: 120px 5vw; 
         }
 
+        /* JUSTIFICADO */
         .project-text-full-width {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: left; 
+            text-align: justify; 
             width: 100%;
         }
 
@@ -169,9 +208,9 @@
         }
         .footer-logo {
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem; /* Tamaño grande */
-            font-weight: 800; /* Extra bold */
-            color: var(--text-dim); /* Gris idéntico a la foto */
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: var(--text-dim); 
             margin-bottom: 25px;
             line-height: 1;
             letter-spacing: 1px;
@@ -182,7 +221,7 @@
             font-weight: 500;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 4px; /* Separación de letras ampliada */
+            letter-spacing: 4px; 
         }
 
         @media (max-width: 1024px) {
@@ -190,8 +229,10 @@
             .grid-2x2-section { padding: 40px 5vw 0; }
             .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
             .grid-2x2-section .grid-text-item { height: auto; padding: 0;} 
-            .project-hero-img { width: 95%; max-height: 50vh;}
+            .project-hero-img { width: 95%; height: 60vh;}
             .text-align-wrapper { padding: 80px 5vw; }
+            header { gap: 20px; padding: 12px 25px; }
+            .nav-logo { font-size: 1.2rem; }
             .footer-logo { font-size: 2.2rem; }
             .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
@@ -202,13 +243,15 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
+    <!-- HEADER IDÉNTICO A LA FOTO -->
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
+            <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot" style="margin: 0 10px;"></div>
+            <div class="nav-dot"></div>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
@@ -227,20 +270,20 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
+        <!-- FOTO 1 (HERO) MÁS ALTA -->
         <img id="hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
 
         <section class="project-content" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
-            <!-- TEXTO AMPLIADO Y SIN JUSTIFICAR -->
+            <!-- TEXTO REDUCIDO Y JUSTIFICADO -->
             <div class="project-text lang-node" 
-                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems. Furthermore, the ergonomic study of tactile components guarantees an intuitive and fluid user interaction, redefining the standards of modern consumer electronics." 
-                 data-es="El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, centrándonos puramente en la integridad estructural y la integración perfecta de los subsistemas internos. Además, el estudio ergonómico de los componentes táctiles garantiza una interacción intuitiva y fluida con el usuario, redefiniendo los estándares de la electrónica de consumo moderna.">
-                 El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, centrándonos puramente en la integridad estructural y la integración perfecta de los subsistemas internos. Además, el estudio ergonómico de los componentes táctiles garantiza una interacción intuitiva y fluida con el usuario, redefiniendo los estándares de la electrónica de consumo moderna.
+                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible." 
+                 data-es="El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
+                 El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.
             </div>
         </section>
 
-        <!-- CUADRÍCULA CON TEXTO ALINEADO A LA IZQUIERDA E IMÁGENES -->
+        <!-- CUADRÍCULA CON TEXTO JUSTIFICADO E IMÁGENES -->
         <div class="grid-2x2-section" data-aos="fade-up">
             <div class="grid-text-item lang-node" 
                  data-en="Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
@@ -252,7 +295,7 @@
             <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR SIN JUSTIFICAR Y CENTRADO ENTRE FOTOS -->
+        <!-- TEXTO SEPARADOR JUSTIFICADO -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
@@ -273,7 +316,7 @@
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER ACTUALIZADO -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-logo">L|BIB</div>
         <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
