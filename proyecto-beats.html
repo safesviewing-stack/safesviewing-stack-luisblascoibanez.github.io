@@ -39,7 +39,6 @@
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
         header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
-        /* Removed .nav-logo style here */
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
@@ -70,42 +69,41 @@
         .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
         .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* CUADRÍCULA 2x2 para imágenes (Restored previous styling for text box) */
+        /* CUADRÍCULA 2x2 para imágenes */
         .grid-2x2-section {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
-            gap: 25px; /* Espacio entre los elementos de la cuadrícula */
-            padding: 80px 5vw; /* Padding para esta sección */
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: stretch; /* Asegura que las celdas de la cuadrícula tengan la misma altura */
+            align-items: stretch;
         }
 
-        /* MODIFIED: New style for the text box within the grid - transparent background and border */
         .grid-2x2-section .grid-text-item {
-            height: 60vh; /* Same height as the images */
-            border: 1px solid transparent; /* Changed to transparent */ 
+            height: 60vh;
+            border: 1px solid transparent; 
             border-radius: 20px;
-            background-color: transparent; /* Changed to transparent */ 
+            background-color: transparent; 
             display: flex; 
             flex-direction: column;
-            align-items: flex-start; /* Align text to the left */
+            align-items: flex-start;
             justify-content: center;
-            padding: 30px; /* Internal padding */
-            box-sizing: border-box; /* Include padding and border in height */
+            padding: 30px;
+            box-sizing: border-box;
         }
         .grid-2x2-section .grid-text-item p {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
             text-align: justify;
-            margin: 0; /* Remove default paragraph margins */
+            margin: 0;
         }
 
         .grid-2x2-section img {
             display: block;
             width: 100%;
-            height: 60vh; /* Fixed height for all images */
+            height: 60vh;
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
@@ -125,7 +123,8 @@
         .planos-grid img { 
             display: block; 
             width: 100%; 
-            height: 60vh; 
+            /* ALTURA AUMENTADA a 85vh para que las imágenes sean más alargadas verticalmente */
+            height: 85vh; 
             object-fit: cover; 
             object-position: center; 
             border-radius: 20px; 
@@ -140,9 +139,9 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
-            .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } /* Ajuste para todas las cuadrículas en móviles */
-            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } /* Altura en móviles, auto para texto */
-            .grid-2x2-section .grid-text-item { height: auto; } /* The text should have automatic height to expand */
+            .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
+            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
+            .grid-2x2-section .grid-text-item { height: auto; }
             .project-hero-img { width: 95%; }
         }
     </style>
@@ -154,7 +153,6 @@
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
-            <!-- <a href="index.html" class="nav-logo inter-hover">L|BIB</a> -- Removed as requested -->
             <div class="nav-dot"></div>
             <nav class="nav-links">
                 <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Portfolio"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
@@ -201,7 +199,7 @@
             <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
         </div>
 
-        <!-- TEXTO SEPARADOR (mantenido por si es contenido diferente al del grid) -->
+        <!-- TEXTO SEPARADOR -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
@@ -210,7 +208,7 @@
             </p>
         </div>
 
-        <!-- ÚLTIMA FILA (7 Y 8): ALTURA IGUALADA PERFECTAMENTE -->
+        <!-- ÚLTIMA FILA (7 Y 8): ALTURA AUMENTADA -->
         <div class="planos-grid" data-aos="fade-up">
             <img src="7RELOJ.jpg" alt="Beats X View 1" class="inter-hover">
             <img src="8RELOJ.jpg" alt="Beats X View 2" class="inter-hover">
