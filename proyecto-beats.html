@@ -38,36 +38,18 @@
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        
-        header { 
-            background: var(--glass); 
-            backdrop-filter: var(--blur); 
-            -webkit-backdrop-filter: var(--blur); 
-            padding: 12px 35px; 
-            display: flex; 
-            align-items: center; 
-            gap: 35px;
-            border: 1px solid var(--border); 
-            border-radius: 100px; 
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
-        }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; color: var(--text); text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
-        .nav-logo:hover { opacity: 1; }
-        
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; transition: all 0.3s ease; display: flex; align-items: center; }
-        .nav-links a:hover { opacity: 1; } 
-        
-        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
-        
-        .tools-nav { display:flex; align-items: center; gap: 12px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
-        .icon-btn:hover { opacity: 1; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px;}
-        .lang-sutil-btn:hover { opacity: 1; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
+        .tools-nav { display:flex; align-items: center; gap: 10px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 30px; max-width: 1600px; margin: 0 auto; }
+        .project-header { padding: 200px 5vw 15px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -75,93 +57,114 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- NUEVO LAYOUT ESPECÍFICO --- */
-
-        /* 1. Primera foto en grande */
-        .large-image-section { padding: 0 5vw; margin-top: 75px; max-width: 1600px; }
+        /* --- FOTO 1 (HERO) --- */
+        .large-image-section {
+            padding: 0 5vw;
+            margin-top: 90px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 80vh;
-            object-fit: cover;
+            height: 100%; 
+            max-height: 90vh; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
         }
 
-        /* 2. Texto horizontal de ancho completo */
-        .text-align-wrapper {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 80px 5vw; 
-        }
-        .project-text-full-width {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify; 
-            width: 100%;
-            column-count: 2; /* Divide el texto horizontal en dos columnas para mejor lectura en desktop */
-            column-gap: 60px;
-        }
-
-        /* 3. Cuadrícula 2x2 (3 fotos + 1 cuadro de texto transparente) */
-        .grid-2x2-section {
+        /* --- SECCIÓN SPLIT (EL ANÁLISIS) --- */
+        .project-content-split { 
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            padding: 0 5vw; 
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: stretch;
+            align-items: flex-start;
         }
-        .grid-text-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: transparent; /* Cuadro de texto transparente */
-            padding: 20px 60px 20px 0; /* Espaciado para que no pegue con la imagen de la derecha */
+        .project-brief h3 { 
+            font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
         }
-        .grid-text-item h3 {
-            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; color: var(--text);
-        }
-        .grid-text-item p {
+        .project-content-split .project-text { 
             font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
         }
-        .grid-2x2-section img {
-            display: block; width: 100%; height: 60vh; object-fit: cover; object-position: center; border-radius: 20px; border: 1px solid var(--border);
+
+        /* --- GALERÍA --- */
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
+        .gallery img { 
+            width: 100%; 
+            height: auto;
+            max-height: 70vh; 
+            object-fit: cover; 
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            aspect-ratio: 4/3; 
+        }
+        .gallery .full-w { 
+            grid-column: 1 / -1; 
+            aspect-ratio: 16/9; 
+            max-height: 85vh;
         }
 
-        /* 4. Últimas 2 fotos en paralelo */
-        .planos-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; align-items: stretch; 
-        }
-        .planos-grid img { 
-            display: block; width: 100%; height: 80vh; object-fit: cover; object-position: center; border-radius: 20px; border: 1px solid var(--border); 
+        /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
+        .project-text-full-width { 
+            width: 100%; 
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
 
-        /* --- NEXT PROJECT & FOOTER --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
+        /* --- FOTO 5 (PLANIMETRÍA) --- */
+        .project-hero-img { 
+            width: calc(100% - 10vw); 
+            height: auto; 
+            max-height: 90vh; 
+            object-fit: contain; 
+            border-radius: 30px; 
+            margin: 0 auto 80px auto; 
+            max-width: 1500px; 
+            display: block; 
+            border: 1px solid var(--border);
+            opacity: 0; transform: translateY(60px); 
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+
+        /* --- SEPARADOR VISUAL --- */
+        .visual-separator {
+            width: 100%;
+            height: 1px; 
+            background-color: var(--border);
+            margin: 80px auto; 
+            max-width: 1600px;
+        }
+
+        /* --- NEXT PROJECT --- */
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
-        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
+        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 80-; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
-       
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
-            .grid-2x2-section img, .planos-grid img { height: auto; min-height: 50vh; } 
-            .grid-text-item { padding: 0; } 
-            .large-image-section img { height: 60vh; }
-            .project-text-full-width { column-count: 1; } /* Quita las dos columnas en móvil */
-            .text-align-wrapper { padding: 60px 5vw; }
-            
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; }
+            .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
+                max-height: 60vh;
+            }
+            .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -173,11 +176,9 @@
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot"></div>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
@@ -197,49 +198,53 @@
             </div>
         </section>
 
-        <!-- 1. PRIMERA FOTO EN GRANDE -->
+        <!-- FOTO 1 (HERO) -->
         <section class="large-image-section">
-            <img src="2RELOJ.jpg" alt="Beats X Main View" class="inter-hover" data-aos="fade-up" data-aos-offset="200">
+            <img id="hero-main" src="2RELOJ.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
         </section>
 
-        <!-- 2. TEXTO DEBAJO HORIZONTAL COMPLETO -->
-        <section class="text-align-wrapper" data-aos="fade-up">
-            <div class="project-text-full-width lang-node" 
+        <!-- SECCIÓN SPLIT (EL ANÁLISIS) - Adaptado para ser un texto completo con un título en una columna y el texto en otra. -->
+        <section class="project-content-split" data-aos="fade-up">
+            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
+            <div class="project-text lang-node" 
                  data-en="The Beats X project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
                  data-es="El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
                  El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
             </div>
         </section>
 
-        <!-- 3. CUADRÍCULA 2X2 (TEXTO TRANSPARENTE + 3 FOTOS) -->
-        <section class="grid-2x2-section" data-aos="fade-up">
-            <!-- Hueco transparente con texto -->
-            <div class="grid-text-item lang-node" 
-                 data-en="<h3>Design Evolution</h3><p>Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development.</p>" 
-                 data-es="<h3>Evolución del Diseño</h3><p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>">
-                <h3>Evolución del Diseño</h3>
-                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>
-            </div>
-            
-            <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover">
-            <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover">
-            <img src="1RELOJ.jpg" alt="Technical Detail 1" class="inter-hover">
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- GALERÍA (con las 3 imágenes y el texto, adaptado para la estructura de la galería Alpha Project) -->
+        <section class="gallery">
+            <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover" data-aos="fade-up">
+            <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover" data-aos="fade-up">
+            <img src="1RELOJ.jpg" alt="Technical Detail 1" class="full-w inter-hover" data-aos="fade-up"> 
+            <!-- El texto se integrará en la sección split o en un full-width text section, no como un item de galería -->
         </section>
 
-        <!-- 4. TEXTO HORIZONTAL COMPLETO (ARRIBA DE LAS ÚLTIMAS 2 FOTOS) -->
-        <section class="text-align-wrapper" data-aos="fade-up">
-            <div class="project-text-full-width lang-node" style="column-count: 1; max-width: 1000px; text-align: center; margin: 0 auto;"
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- TEXTO INTERMEDIO (ANCHO COMPLETO Y ALINEADO CON LOS MÁRGENES) -->
+        <div class="text-align-wrapper" data-aos="fade-up">
+            <p class="project-text-full-width lang-node" 
                  data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation." 
                  data-es="La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.">
                  La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.
-            </div>
+            </p>
+        </div>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (usando la misma clase que project-hero-img para animación, pero adaptado para dos imágenes) -->
+        <section class="gallery"> <!-- Reutilizamos la clase gallery para la disposición de 2 columnas -->
+            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up">
+            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up">
         </section>
 
-        <!-- 5. ÚLTIMAS 2 FOTOS EN PARALELO -->
-        <section class="planos-grid" data-aos="fade-up">
-            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover">
-            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover">
-        </section>
     </main>
 
     <!-- NEXT PROJECT -->
@@ -250,8 +255,8 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">L|BIB</div>
-        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
