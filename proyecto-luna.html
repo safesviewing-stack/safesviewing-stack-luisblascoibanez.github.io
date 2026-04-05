@@ -57,9 +57,10 @@
 
         /* --- LAYOUT ESPECÍFICO --- */
 
-        /* Fotos en grande (1 y 2) - ALTURA AUMENTADA */
+        /* Fotos en grande (1 y 2) - ALTURA Y MÁRGENES AJUSTADOS */
         .large-image-section {
-            padding: 0; /* Eliminar padding horizontal para que la imagen ocupe todo el ancho */
+            padding: 0 5vw; /* Vuelve al padding lateral para que la imagen no ocupe todo el ancho */
+            max-width: 1600px; /* Restringe el ancho total como los otros bloques */
             margin: 0 auto;
             display: flex;
             justify-content: center;
@@ -69,14 +70,14 @@
         }
         .large-image-section img {
             display: block;
-            width: 100vw; /* Ocupa el 100% del ancho del viewport */
-            max-width: none; /* Elimina la restricción de max-width */
+            width: 100%; /* Ocupa el 100% del ancho disponible dentro de .large-image-section */
+            max-width: 800px; /* Vuelve a restringir el ancho máximo de la imagen */
             height: auto; 
-            max-height: 80vh; /* Aumenta la altura máxima a 80% del viewport height */
-            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            max-height: 65vh; /* Vuelve a la altura inicial más contenida */
+            object-fit: cover; 
             object-position: center;
-            border-radius: 0; /* Quita el border-radius para un look de ancho completo */
-            border: none; /* Quita el borde */
+            border-radius: 30px; /* Vuelve al border-radius */
+            border: 1px solid var(--border); /* Vuelve al borde */
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
@@ -132,7 +133,7 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section img { max-height: 65vh; } /* Ajuste de altura en tablet/móvil */
+            .large-image-section img { max-height: 50vh; } /* Aún más pequeña en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
@@ -176,7 +177,7 @@
             </div>
         </section>
 
-        <!-- PRIMER BLOQUE: IMAGEN GIGANTE "1 MONO" -->
+        <!-- PRIMER BLOQUE: IMAGEN GRANDE "1 MONO" -->
         <section class="large-image-section" data-aos="fade-up" data-aos-duration="1200">
             <img src="1 MONO.jpg" alt="Luna Ambient - Vista Mono" class="inter-hover">
         </section>
@@ -200,7 +201,7 @@
             <img src="8 MONO.jpg" alt="Mono Detail 8" class="inter-hover" data-aos="fade-up" data-aos-delay="200">
         </section>
 
-        <!-- SEGUNDO BLOQUE: IMAGEN GIGANTE "2 TOP" -->
+        <!-- SEGUNDO BLOQUE: IMAGEN GRANDE "2 TOP" -->
         <section class="large-image-section" data-aos="fade-up">
             <img src="2 TOP.jpg" alt="Luna Ambient - Vista Top" class="inter-hover">
         </section>
