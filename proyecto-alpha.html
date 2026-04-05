@@ -98,7 +98,7 @@
         }
 
         /* TEXTO INTERMEDIO ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw 60px; } /* Se redujo el padding-top de 140px a 80px */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 80px 5vw 40px; } /* Se redujo el padding-bottom de 60px a 40px */
         .project-text-full-width { 
             max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
@@ -187,11 +187,11 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO ESTRECHO - MOVIDO AQUÍ Y SUBIDO -->
+        <!-- TEXTO INTERMEDIO ESTRECHO - MOVIDO AQUÍ Y ESPACIO AJUSTADO -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="Precision in manufacturing is only achievable through a flawless set of technical planimetries. For Project Alpha, we generated a comprehensive documentation package that bridges the gap between digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material heat-treatments required for the magnesium-alloy chassis components. We focused intensely on the routing of internal mechanical sensors and the precise anchor points for modular maintenance, ensuring that the final assembly process is both efficient and repeatable. This meticulous attention to industrial standards guarantees that every unit produced maintains the exact specifications of the original engineering prototype, facilitating a seamless transition to large-scale production." 
-                 data-es="La precisión en la fabricación solo es alcanzable mediante un conjunto impecable de planimetrías técnicas. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repetible. Esta atención meticulosa garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo original.">
+                 data-es="La precisión en la fabricación solo es alcanzable mediante un conjunto impecable de planimetrías técnicas. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repeatable. Esta atención meticulosa garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo original.">
                  La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo.
             </p>
         </div>
@@ -258,7 +258,7 @@
         });
 
         // Intersection Observer para todas las imágenes y elementos con AOS
-        const aosElements = document.querySelectorAll('[data-aos]'); // Ahora selecciona todos los elementos con data-aos
+        const aosElements = document.querySelectorAll('[data-aos]'); 
         let observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
