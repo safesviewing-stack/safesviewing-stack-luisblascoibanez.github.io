@@ -57,16 +57,16 @@
 
         /* --- NUEVO LAYOUT ESPECÍFICO PARA OMNI (BRAZO) --- */
 
-        /* Fotos en grande (Primera y Cuarta) */
+        /* Fotos en grande (Primera y Cuarta) - AUMENTADA SU ALTURA Y ESPACIO */
         .large-image-section {
-            padding: 40px 5vw;
+            padding: 100px 5vw; /* Mucho más espacio arriba y abajo */
             max-width: 1600px;
             margin: 0 auto;
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 85vh;
+            height: 95vh; /* Altura aumentada a casi toda la pantalla */
             object-fit: cover;
             object-position: center;
             border-radius: 30px;
@@ -120,7 +120,9 @@
 
         @media (max-width: 1024px) { 
             .side-by-side-grid { grid-template-columns: 1fr; gap: 40px; } 
-            .side-by-side-grid img, .large-image-section img { height: 60vh; }
+            .side-by-side-grid img { height: 60vh; }
+            .large-image-section { padding: 60px 5vw; }
+            .large-image-section img { height: 75vh; } /* Ajuste proporcional para móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -190,7 +192,7 @@
         </section>
 
         <!-- 5. CUARTA FOTO EN GRANDE (Abajo del todo) -->
-        <section class="large-image-section" style="padding-top: 0;" data-aos="fade-up">
+        <section class="large-image-section" data-aos="fade-up">
             <img src="4 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Final" class="inter-hover">
         </section>
     </main>
