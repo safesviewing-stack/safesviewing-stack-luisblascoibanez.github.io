@@ -102,6 +102,15 @@
             max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
 
+        /* --- SEPARADOR VISUAL --- */
+        .visual-separator {
+            width: 100%;
+            height: 1px; /* Línea muy fina */
+            background-color: var(--border);
+            margin: 100px auto; /* Espacio antes y después */
+            max-width: 1600px;
+        }
+
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -165,11 +174,17 @@
             </div>
         </section>
 
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
         <section class="gallery">
             <img src="Aspirador4.jpg" alt="Macro Detail" class="inter-hover" data-aos="fade-up">
             <img src="Aspirador3.jpg" alt="Shell Integrity" class="inter-hover" data-aos="fade-up">
             <img src="Aspirador2.jpg" alt="Full Assembly" class="full-w inter-hover" data-aos="fade-up">
         </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
@@ -178,6 +193,9 @@
                  La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo.
             </p>
         </div>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 5 (PLANIMETRÍA - ALINEADA CON FOTO 1) -->
         <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover" data-aos="fade-up">
