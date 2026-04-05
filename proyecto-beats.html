@@ -51,32 +51,11 @@
             border-radius: 100px; 
             box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
         }
-        .nav-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.5px;
-            color: var(--text);
-            text-decoration: none;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; color: var(--text); text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
         .nav-logo:hover { opacity: 1; }
         
         .nav-links { display: flex; align-items: center; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            opacity: 0.65;
-            font-size: 0.8rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; transition: all 0.3s ease; display: flex; align-items: center; }
         .nav-links a:hover { opacity: 1; } 
         
         .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
@@ -96,62 +75,72 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- NUEVO LAYOUT DE FOTOS (6 FOTOS ALTERNADAS) --- */
-        
-        /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
-        .split-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding: 80px 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: center;
-        }
-        .split-section img {
-            width: 100%;
-            height: 70vh;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-        }
-        .split-text-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .split-text-container h3 {
-            font-family: 'Syne';
-            font-size: 2rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-        .split-text {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify;
-        }
+        /* --- NUEVO LAYOUT ESPECÍFICO --- */
 
-        /* Bloques de Imagen Grande (Pantalla Completa) */
-        .large-image-section {
-            padding: 40px 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
+        /* 1. Primera foto en grande */
+        .large-image-section { padding: 60px 5vw 0; max-width: 1600px; margin: 0 auto; }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 85vh;
+            height: 80vh;
             object-fit: cover;
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
         }
 
-        /* --- FOOTER & NEXT PROJECT --- */
+        /* 2. Texto horizontal de ancho completo */
+        .text-align-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 5vw; 
+        }
+        .project-text-full-width {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify; 
+            width: 100%;
+            column-count: 2; /* Divide el texto horizontal en dos columnas para mejor lectura en desktop */
+            column-gap: 60px;
+        }
+
+        /* 3. Cuadrícula 2x2 (3 fotos + 1 cuadro de texto transparente) */
+        .grid-2x2-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 0 5vw; 
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+        .grid-text-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: transparent; /* Cuadro de texto transparente */
+            padding: 20px 60px 20px 0; /* Espaciado para que no pegue con la imagen de la derecha */
+        }
+        .grid-text-item h3 {
+            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; color: var(--text);
+        }
+        .grid-text-item p {
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
+        }
+        .grid-2x2-section img {
+            display: block; width: 100%; height: 60vh; object-fit: cover; object-position: center; border-radius: 20px; border: 1px solid var(--border);
+        }
+
+        /* 4. Últimas 2 fotos en paralelo */
+        .planos-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; align-items: stretch; 
+        }
+        .planos-grid img { 
+            display: block; width: 100%; height: 80vh; object-fit: cover; object-position: center; border-radius: 20px; border: 1px solid var(--border); 
+        }
+
+        /* --- NEXT PROJECT & FOOTER --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -162,21 +151,12 @@
        
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .split-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 60px 5vw;
-            }
-            .split-section img {
-                height: auto;
-                min-height: 50vh;
-                order: 1; /* En móvil, la imagen siempre va arriba */
-            }
-            .split-text-container {
-                order: 2; /* En móvil, el texto siempre va abajo de la foto */
-            }
-            .large-image-section { padding: 40px 5vw; }
+            .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
+            .grid-2x2-section img, .planos-grid img { height: auto; min-height: 50vh; } 
+            .grid-text-item { padding: 0; } 
             .large-image-section img { height: 60vh; }
+            .project-text-full-width { column-count: 1; } /* Quita las dos columnas en móvil */
+            .text-align-wrapper { padding: 60px 5vw; }
             
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -217,66 +197,48 @@
             </div>
         </section>
 
-        <!-- FOTO 1: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
-            <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
-                <p class="split-text lang-node" 
-                   data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
-                   data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
-                   Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
-                </p>
-            </div>
-        </section>
-
-        <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
-                <p class="split-text lang-node" 
-                   data-en="The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle. This section highlights key features, challenges overcome, and the overall impact of the design decisions made during the product's development." 
-                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
-                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
-                </p>
-            </div>
-            <img src="3 LAMPARA.jpg" alt="Detalle Lámpara 2" class="inter-hover">
-        </section>
-
-        <!-- FOTO 3: IMAGEN GRANDE (SIN TEXTO) -->
+        <!-- 1. PRIMERA FOTO EN GRANDE -->
         <section class="large-image-section" data-aos="fade-up">
-            <img src="PLANOLAMP1.jpg" alt="Plano Lámpara 1" class="inter-hover">
+            <img src="2RELOJ.jpg" alt="Beats X Main View" class="inter-hover">
         </section>
 
-        <!-- FOTO 4: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
-            <img src="4 LAMPARA.jpg" alt="Detalle Lámpara 4" class="inter-hover">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="Technical Approach" data-es="Enfoque Técnico">Enfoque Técnico</h3>
-                <p class="split-text lang-node" 
-                   data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object." 
-                   data-es="La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico.">
-                   La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico.
-                </p>
+        <!-- 2. TEXTO DEBAJO HORIZONTAL COMPLETO -->
+        <section class="text-align-wrapper" data-aos="fade-up">
+            <div class="project-text-full-width lang-node" 
+                 data-en="The Beats X project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
+                 data-es="El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
+                 El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
             </div>
         </section>
 
-        <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="Final Details" data-es="Detalles Finales">Detalles Finales</h3>
-                <p class="split-text lang-node" 
-                   data-en="These visualizations represent a precise physical simulation of how light interacts with the materials, ensuring that the final product conveys a sense of sophistication and engineering solidity before entering production." 
-                   data-es="Estas visualizaciones representan una simulación física precisa de cómo la luz interactúa con los materiales, asegurando que el producto final transmita una sensación de sofisticación y solidez técnica antes de entrar en producción.">
-                   Estas visualizaciones representan una simulación física precisa de cómo la luz interactúa con los materiales, asegurando que el producto final transmita una sensación de sofisticación y solidez técnica antes de entrar en producción.
-                </p>
+        <!-- 3. CUADRÍCULA 2X2 (TEXTO TRANSPARENTE + 3 FOTOS) -->
+        <section class="grid-2x2-section" data-aos="fade-up">
+            <!-- Hueco transparente con texto -->
+            <div class="grid-text-item lang-node" 
+                 data-en="<h3>Design Evolution</h3><p>Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development.</p>" 
+                 data-es="<h3>Evolución del Diseño</h3><p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>">
+                <h3>Evolución del Diseño</h3>
+                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>
             </div>
-            <img src="6 LAMPARA.jpg" alt="Detalle Lámpara 6" class="inter-hover">
+            
+            <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover">
+            <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover">
+            <img src="1RELOJ.jpg" alt="Technical Detail 1" class="inter-hover">
         </section>
 
-        <!-- FOTO 6: IMAGEN GRANDE (SIN TEXTO) -->
-        <section class="large-image-section" data-aos="fade-up">
-            <img src="PLANOLAMP2.jpg" alt="Plano Lámpara 2" class="inter-hover">
+        <!-- 4. TEXTO HORIZONTAL COMPLETO (ARRIBA DE LAS ÚLTIMAS 2 FOTOS) -->
+        <section class="text-align-wrapper" data-aos="fade-up">
+            <div class="project-text-full-width lang-node" style="column-count: 1; max-width: 1000px; text-align: center; margin: 0 auto;"
+                 data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation." 
+                 data-es="La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.">
+                 La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.
+            </div>
+        </section>
+
+        <!-- 5. ÚLTIMAS 2 FOTOS EN PARALELO -->
+        <section class="planos-grid" data-aos="fade-up">
+            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover">
+            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover">
         </section>
     </main>
 
