@@ -64,13 +64,19 @@
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
+            /* Añadimos una altura mínima para el contenedor de la imagen si se necesita para hacer el contenedor más alto,
+               aunque object-fit: cover ya se encargará de que la imagen lo llene. */
+            min-height: 70vh; /* Puedes ajustar este valor si quieres un contenedor más alto aún */
+            display: flex; /* Para centrar la imagen si es necesario */
+            align-items: center; /* Centrado vertical */
+            justify-content: center; /* Centrado horizontal */
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: auto;
-            max-height: 85vh; /* Evita que sea más alta que la pantalla */
-            object-fit: contain; /* CAMBIO CLAVE: Usa 'contain' para que la imagen completa sea visible */
+            height: 100%; /* CAMBIO: La imagen ahora intentará ocupar el 100% de la altura de su contenedor */
+            max-height: 90vh; /* CAMBIO CLAVE: Aumentado para permitir una imagen más alta */
+            object-fit: cover; /* Mantenemos 'cover' para que llene el contenedor y se recorte si es necesario */
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
