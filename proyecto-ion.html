@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grifo Project | Luis Blasco-Ibáñez</title>
+    <title>ION CORE | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,36 +38,18 @@
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        
-        header { 
-            background: var(--glass); 
-            backdrop-filter: var(--blur); 
-            -webkit-backdrop-filter: var(--blur); 
-            padding: 12px 35px; 
-            display: flex; 
-            align-items: center; 
-            gap: 35px;
-            border: 1px solid var(--border); 
-            border-radius: 100px; 
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
-        }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; color: var(--text); text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
-        .nav-logo:hover { opacity: 1; }
-        
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; transition: all 0.3s ease; display: flex; align-items: center; }
-        .nav-links a:hover { opacity: 1; } 
-        
-        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
-        
-        .tools-nav { display:flex; align-items: center; gap: 12px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
-        .icon-btn:hover { opacity: 1; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px;}
-        .lang-sutil-btn:hover { opacity: 1; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
+        .tools-nav { display:flex; align-items: center; gap: 10px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
+        .project-header { padding: 200px 5vw 15px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -75,109 +57,139 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- NUEVO LAYOUT DE FOTOS Y TEXTO --- */
-
-        /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
-        .split-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding: 80px 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: center;
-        }
-        .split-section img {
-            width: 100%;
-            height: 70vh;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-        }
-        .split-text-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .split-text-container h3 {
-            font-family: 'Syne';
-            font-size: 2rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-        .split-text {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        /* Bloques de Imagen Grande (Pantalla Completa respetando márgenes) */
+        /* --- FOTO 1 (HERO) --- */
         .large-image-section {
-            padding: 40px 5vw;
+            padding: 0 5vw;
+            margin-top: 90px;
             max-width: 1600px;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 85vh;
-            object-fit: cover;
+            height: 100%; 
+            max-height: 90vh; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
         }
 
-        /* Texto intermedio (entre foto 3 y 4) */
-        .text-align-wrapper {
+        /* --- SECCIÓN SPLIT (EL ANÁLISIS) --- */
+        .project-content-split { 
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            padding: 80px 5vw; 
+            align-items: flex-start;
         }
-        .project-text-full-width {
+        .project-brief h3 { 
+            font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
+        }
+        .project-content-split .project-text { 
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
+        }
+
+        /* --- GALERÍA --- */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+            padding: 0 5vw; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            /* Se ha quitado el margin-bottom de la galería para que sea más flexible */
+        }
+        .gallery img { 
+            width: 100%; 
+            height: 70vh; /* Ajustado a un valor más estándar para galerías */
+            max-height: 70vh; /* Se asegura de no desbordar */
+            object-fit: cover; /* Las imágenes llenan su contenedor, recortándose si es necesario */
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            aspect-ratio: 4/3; 
+        }
+        .gallery .full-w { 
+            grid-column: 1 / -1; 
+            aspect-ratio: 16/9; 
+            max-height: 85vh;
+            height: 85vh; /* Se asegura de aplicar la altura */
+        }
+
+        /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
+        .project-text-full-width { 
+            width: 100%; 
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+        }
+
+        /* --- SECCIÓN IMAGEN INDIVIDUAL CON TEXTO AL LADO --- */
+        .image-with-text-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Una columna para texto, otra para imagen */
+            gap: 80px;
+            padding: 80px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: center; /* Centra el contenido verticalmente */
+        }
+        .image-with-text-section img {
+            width: 100%;
+            height: 70vh; /* Ajustado a un valor más estándar para imágenes con texto */
+            max-height: 70vh;
+            object-fit: cover; /* Las imágenes llenan su contenedor, recortándose si es necesario */
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+        .image-with-text-section .text-content {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify; 
-            width: 100%;
-            max-width: 1000px; /* Para que quede centrado y no se alargue infinitamente */
-            margin: 0 auto;
+            text-align: justify;
+        }
+        .image-with-text-section .text-content h3 {
+            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; color: var(--text);
         }
 
-        /* --- FOOTER & NEXT PROJECT --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
+        /* --- SEPARADOR VISUAL --- */
+        .visual-separator {
+            width: 100%;
+            height: 1px; 
+            background-color: var(--border);
+            margin: 80px auto; 
+            max-width: 1600px;
+        }
+
+        /* --- NEXT PROJECT --- */
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
-       
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .split-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 60px 5vw;
+            .project-content-split, .image-with-text-section { grid-template-columns: 1fr; gap: 30px; }
+            .large-image-section img, .gallery img, .gallery .full-w, 
+            .image-with-text-section img { 
+                height: 60vh; /* Ajustado para móviles */
+                max-height: 60vh;
             }
-            .split-section img {
-                height: auto;
-                min-height: 50vh;
-                order: 1; /* En móvil, la imagen siempre va arriba */
-            }
-            .split-text-container {
-                order: 2; /* En móvil, el texto siempre va abajo de la foto */
-            }
-            .large-image-section { padding: 40px 5vw; }
-            .large-image-section img { height: 60vh; }
-            .text-align-wrapper { padding: 60px 5vw; }
-            
+            .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
+            .image-with-text-section img { order: 1; } 
+            .image-with-text-section .text-content { order: 2; } 
         }
     </style>
 </head>
@@ -189,11 +201,9 @@
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot"></div>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
@@ -204,79 +214,83 @@
     <main>
         <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
-            <h1 class="project-title lang-node" data-en="Grifo Series" data-es="Serie Grifo">Serie Grifo</h1>
+            <h1 class="project-title lang-node" data-en="ION CORE" data-es="ION CORE">ION CORE</h1>
             <div class="project-meta">
                 <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Product Designer" data-es="Diseñador de Producto">Diseñador de Producto</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Industrial Equipment" data-es="Equipamiento Industrial">Equipamiento Industrial</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2022</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>CAD / Keyshot</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Consumer Electronics" data-es="Electrónica de Consumo">Electrónica de Consumo</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2023</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>SolidWorks / Keyshot</span></div>
             </div>
         </section>
 
-        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up" data-aos-offset="300">
-            <img src="1 GRIFO.jpg" alt="Grifo Detalle 1" class="inter-hover">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
-                <p class="split-text lang-node" 
-                   data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
-                   data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
-                   Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
-                </p>
+        <!-- FOTO PRINCIPAL (ION1.jpg) -->
+        <section class="large-image-section">
+            <img src="ION1.jpg" alt="ION CORE Main View" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
+        </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- TEXTO DE ANÁLISIS (split-section) -->
+        <section class="project-content-split" data-aos="fade-up">
+            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
+            <div class="project-text lang-node" 
+                 data-en="The ION CORE project delves into the intricate balance between user interaction and advanced technological integration. The primary goal was to create an intuitive control interface that enhances the user experience, making complex functions accessible and enjoyable. Through extensive ergonomic studies and iterative prototyping, we refined every touchpoint to ensure seamless interaction. The design emphasizes clean lines and robust materials, reflecting its high-performance capabilities and durability. This approach allowed us to address potential usability challenges proactively, resulting in a product that not only looks sophisticated but also performs flawlessly." 
+                 data-es="El proyecto ION CORE profundiza en el intrincado equilibrio entre la interacción del usuario y la integración tecnológica avanzada. El objetivo principal fue crear una interfaz de control intuitiva que mejore la experiencia del usuario, haciendo que las funciones complejas sean accesibles y agradables. A través de extensos estudios ergonómicos y prototipos iterativos, refinamos cada punto de contacto para garantizar una interacción fluida. El diseño enfatiza las líneas limpias y los materiales robustos, reflejando sus capacidades de alto rendimiento y durabilidad. Este enfoque nos permitió abordar los posibles desafíos de usabilidad de manera proactiva, lo que resultó en un producto que no solo luce sofisticado, sino que también funciona a la perfección.">
+                 El proyecto ION CORE profundiza en el intrincado equilibrio entre la interacción del usuario y la integración tecnológica avanzada. El objetivo principal fue crear una interfaz de control intuitiva que mejore la experiencia del usuario, haciendo que las funciones complejas sean accesibles y agradables. A través de extensos estudios ergonómicos y prototipos iterativos, refinamos cada punto de contacto para garantizar una interacción fluida. El diseño enfatiza las líneas limpias y los materiales robustos, reflejando sus capacidades de alto rendimiento y durabilidad. Este enfoque nos permitió abordar los posibles desafíos de usabilidad de manera proactiva, lo que resultó en un producto que no solo luce sofisticado, sino que también funciona a la perfección.
             </div>
         </section>
 
-        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
-            <div class="split-text-container">
-                <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
-                <p class="split-text lang-node" 
-                   data-en="The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle. This section highlights key features, challenges overcome, and the overall impact of the design decisions made during the product's development." 
-                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
-                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
-                </p>
-            </div>
-            <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- GALERÍA DE IMÁGENES (ION2.jpg, ION3.jpg, ION4.jpg, ION5.jpg) -->
+        <section class="gallery">
+            <img src="ION2.jpg" alt="ION CORE Detail 2" class="inter-hover" data-aos="fade-up">
+            <img src="ION3.jpg" alt="ION CORE Detail 3" class="inter-hover" data-aos="fade-up">
+            <img src="ION4.jpg" alt="ION CORE Detail 4" class="inter-hover" data-aos="fade-up">
+            <img src="ION5.jpg" alt="ION CORE Detail 5" class="inter-hover" data-aos="fade-up">
         </section>
 
-        <!-- 3. FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
-        <section class="large-image-section" data-aos="fade-up">
-            <img src="3 GRIFO.jpg" alt="Grifo Vista Principal 3" class="inter-hover">
-        </section>
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES -->
-        <section class="text-align-wrapper" data-aos="fade-up">
-            <div class="project-text-full-width lang-node" 
-                 data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object. These visualizations represent a precise physical simulation of how light interacts with the materials, conveying sophistication and solidity." 
-                 data-es="La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico. Estas visualizaciones representan una simulación precisa de cómo la luz interactúa con los materiales, transmitiendo sofisticación y solidez.">
-                 La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico. Estas visualizaciones representan una simulación precisa de cómo la luz interactúa con los materiales, transmitiendo sofisticación y solidez.
-            </div>
-        </section>
+        <!-- TEXTO CENTRAL (full-width) -->
+        <div class="text-align-wrapper" data-aos="fade-up">
+            <p class="project-text-full-width lang-node" 
+                 data-en="Precision in manufacturing is achieved through comprehensive technical planimetries. For ION CORE, we generated an extensive documentation package that bridges digital CAD data with the production floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material treatments. We meticulously focused on internal component routing and precise anchor points for modular maintenance, ensuring an efficient and repeatable assembly process. This dedication to industrial standards guarantees that every unit produced matches the original engineering prototype, facilitating a smooth transition to large-scale production." 
+                 data-es="La precisión en la fabricación se logra mediante planimetrías técnicas exhaustivas. Para ION CORE, generamos un paquete de documentación extenso que conecta los datos CAD digitales con el taller de producción. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos de materiales. Nos enfocamos meticulosamente en el enrutamiento de componentes internos y en los puntos de anclaje precisos para un mantenimiento modular, asegurando un proceso de ensamblaje eficiente y repetible. Esta dedicación a los estándares industriales garantiza que cada unidad producida coincida con el prototipo de ingeniería original, facilitando una transición fluida a la producción a gran escala.">
+                 La precisión en la fabricación se logra mediante planimetrías técnicas exhaustivas. Para ION CORE, generamos un paquete de documentación extenso que conecta los datos CAD digitales con el taller de producción. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos de materiales. Nos enfocamos meticulosamente en el enrutamiento de componentes internos y en los puntos de anclaje precisos para un mantenimiento modular, asegurando un proceso de ensamblaje eficiente y repetible. Esta dedicación a los estándares industriales garantiza que cada unidad producida coincida con el prototipo de ingeniería original, facilitando una transición fluida a la producción a gran escala.
+            </p>
+        </div>
 
-        <!-- 5. ÚLTIMA FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
-        <section class="large-image-section" style="padding-top: 0;" data-aos="fade-up">
-            <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- FOTO FINAL (ION6.jpg) -->
+        <section class="large-image-section" style="padding-top: 0;">
+            <img src="ION6.jpg" alt="ION CORE Final View" class="inter-hover" data-aos="fade-up">
         </section>
 
     </main>
 
     <!-- NEXT PROJECT -->
-    <a href="proyecto-ion.html" class="next-project inter-hover">
+    <a href="proyecto-grifo.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
-        <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
+        <h2 class="next-title">GRIFO SERIES <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">L|BIB</div>
-        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
