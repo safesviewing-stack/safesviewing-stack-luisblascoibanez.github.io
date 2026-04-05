@@ -43,7 +43,7 @@
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; } /* Updated from alpha for consistency */
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; } 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
         .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
@@ -57,30 +57,7 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- NUEVO LAYOUT DE FOTOS Y TEXTO --- */
-
-        /* FOTO 1 (HERO) - Copied from alpha, adapted for Grifo's first image */
-        .hero-image-section {
-            padding: 0 5vw;
-            margin-top: 90px;
-            max-width: 1600px;
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 70vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
-        .hero-image-section img {
-            display: block;
-            width: 100%;
-            height: 100%; 
-            max-height: 90vh; 
-            object-fit: cover; 
-            object-position: center;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-        }
+        /* --- LAYOUT DE FOTOS Y TEXTO --- */
 
         /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
         .split-section {
@@ -94,7 +71,7 @@
         }
         .split-section img {
             width: 100%;
-            height: 70vh;
+            height: 80vh; /* Increased height as requested */
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
@@ -134,6 +111,29 @@
             border-radius: 30px;
             border: 1px solid var(--border);
         }
+        
+        /* Hero Image Section (for larger, more prominent images) */
+        .hero-image-section {
+            padding: 0 5vw; /* Consistent padding */
+            margin-top: 90px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 70vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .hero-image-section img {
+            display: block;
+            width: 100%;
+            height: 100%; 
+            max-height: 90vh; 
+            object-fit: cover; 
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
 
         /* Texto intermedio (entre foto 3 y 4) */
         .text-align-wrapper {
@@ -151,7 +151,7 @@
             margin: 0 auto;
         }
 
-        /* SEPARADOR VISUAL - Copied from alpha */
+        /* SEPARADOR VISUAL */
         .visual-separator {
             width: 100%;
             height: 1px; 
@@ -228,17 +228,9 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) - Previously "1 GRIFO.jpg", now using the new hero-image-section style -->
-        <section class="hero-image-section">
-            <img src="1 GRIFO.jpg" alt="Grifo Detalle 1" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
-        </section>
-
-        <!-- SEPARADOR VISUAL -->
-        <div class="visual-separator" data-aos="fade-up"></div>
-
-        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA (now split-section for consistency) -->
+        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA -->
         <section class="split-section" data-aos="fade-up" data-aos-offset="300">
-            <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
+            <img src="1 GRIFO.jpg" alt="Grifo Detalle 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
                 <p class="split-text lang-node" 
@@ -262,13 +254,21 @@
                    La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
                 </p>
             </div>
+            <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
+        </section>
+        
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- 3. FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
+        <section class="large-image-section" data-aos="fade-up">
             <img src="3 GRIFO.jpg" alt="Grifo Vista Principal 3" class="inter-hover">
         </section>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES (now aligned with alpha's styling) -->
+        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object. These visualizations represent a precise physical simulation of how light interacts with the materials, conveying sophistication and solidity." 
@@ -280,8 +280,8 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 5. ÚLTIMA FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
-        <section class="large-image-section" style="padding-top: 0;" data-aos="fade-up">
+        <!-- 5. ÚLTIMA FOTO EN GRANDE (tipo hero-image-section) -->
+        <section class="hero-image-section" style="margin-bottom: 120px;" data-aos="fade-up"> <!-- Increased bottom margin -->
             <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
         </section>
 
@@ -293,7 +293,7 @@
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER - Copied from alpha, adapted for consistency -->
+    <!-- FOOTER -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -303,10 +303,10 @@
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 1000, once: true }); /* Changed duration to 1000ms for alpha consistency */
+        AOS.init({ duration: 1000, once: true });
 
         // Theme Toggle
-        const btnToggle = document.getElementById("theme-toggle"); /* Changed variable name for consistency */
+        const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
         // Lang Toggle
