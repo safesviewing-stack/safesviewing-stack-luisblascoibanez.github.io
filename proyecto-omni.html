@@ -9,60 +9,124 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- EL MISMO BLOQUE STYLE DE ARRIBA -->
     <style>
+        /* --- CORE VARIABLES --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
+        
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
         .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
-        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
+        
         body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); }
+        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
+        
         ::selection { background: var(--accent); color: #fff; }
+
+        /* --- CURSOR --- */
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
         .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
+
+        /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 35px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
         @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; opacity: 0.9; transition: opacity 0.3s; text-decoration: none; color: var(--text);}
         .nav-logo:hover { opacity: 1; }
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
-        .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-        .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
-        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        .project-header { padding: 180px 5vw 40px; max-width: 1600px; margin: 0 auto; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; transition: all 0.3s ease; display: flex; align-items: center; }
+        .nav-links a:hover { opacity: 1; } 
+        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
+        .tools-nav { display:flex; align-items: center; gap: 12px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
+        .icon-btn:hover { opacity: 1; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px;}
+        .lang-sutil-btn:hover { opacity: 1; }
+
+        /* --- PROJECT CONTENT --- */
+        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
-        .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 50px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
+        .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
-        .project-hero-img { width: 100%; height: 70vh; object-fit: cover; border-radius: 30px; margin: 40px auto; max-width: 1600px; display: block; border: 1px solid var(--border); }
-        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 80px 5vw; max-width: 1600px; margin: 0 auto; }
-        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
-        .project-text strong { color: var(--text); font-weight: 600; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw 100px; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; transition: filter 0.4s ease; }
-        .gallery img:hover { filter: contrast(1.1) brightness(1.1); }
-        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.4s;}
+
+        /* --- NUEVO LAYOUT ESPECÍFICO PARA OMNI (BRAZO) --- */
+
+        /* Fotos en grande (Primera y Cuarta) */
+        .large-image-section {
+            padding: 40px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .large-image-section img {
+            display: block;
+            width: 100%;
+            height: 85vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        /* Texto centrado de ancho completo */
+        .text-align-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 5vw; 
+        }
+        .project-text-full-width {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify; 
+            width: 100%;
+            max-width: 1000px; /* Ancho máximo para que no sea infinito en pantallas muy grandes */
+            margin: 0 auto;
+        }
+
+        /* Fotos en paralelo (Segunda y Tercera) */
+        .side-by-side-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+            padding: 0 5vw; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            align-items: stretch; 
+        }
+        .side-by-side-grid img { 
+            display: block; 
+            width: 100%; 
+            height: 70vh; 
+            object-fit: cover; 
+            object-position: center; 
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+        }
+
+        /* --- FOOTER & NEXT PROJECT --- */
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
-        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: -2px; transition: color 0.3s; display: flex; align-items: center; gap: 20px; }
-        .next-title i { font-size: clamp(2rem, 4vw, 3rem); transform: rotate(-45deg); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .next-project:hover .next-title i { transform: rotate(0deg) translateX(10px); color: var(--accent);}
-        @media (max-width: 1024px) { .project-content { grid-template-columns: 1fr; gap: 40px; } .gallery { grid-template-columns: 1fr; } .gallery .full-w { aspect-ratio: 16/9; } .project-meta { gap: 30px; flex-direction: column; } }
-        @media (max-width: 768px) { header { padding: 10px 20px; gap: 20px; } .nav-links { display: none; } }
+        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
+
+        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
+
+        @media (max-width: 1024px) { 
+            .side-by-side-grid { grid-template-columns: 1fr; gap: 40px; } 
+            .side-by-side-grid img, .large-image-section img { height: 60vh; }
+            .text-align-wrapper { padding: 60px 5vw; }
+            header { gap: 20px; padding: 12px 25px; }
+            .nav-logo { font-size: 1.1rem; }
+            .footer-logo { font-size: 2.2rem; }
+            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
+        }
     </style>
 </head>
 <body>
@@ -74,9 +138,9 @@
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> Back to Portfolio" data-es="<i class='fa-solid fa-arrow-left'></i> Volver al Portfolio"><i class="fa-solid fa-arrow-left"></i> Volver al Portfolio</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot" style="margin: 0 10px;"></div>
+            <div class="nav-dot"></div>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
@@ -84,53 +148,78 @@
         </header>
     </div>
 
-    <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="project-title lang-node" data-en="Omni Dynamics" data-es="Omni Dynamics">Omni Dynamics</h1>
-        <div class="project-meta">
-            <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Mechanical Designer" data-es="Diseñador Mecánico">Diseñador Mecánico</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2024</span></div>
-            <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Fusion 360 / CNC Milling</span></div>
-        </div>
-    </section>
+    <main>
+        <!-- CABECERA -->
+        <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="project-title lang-node" data-en="Omni Dynamics" data-es="Omni Dynamics">Omni Dynamics</h1>
+            <div class="project-meta">
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Mechanical Designer" data-es="Diseñador Mecánico">Diseñador Mecánico</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2024</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Fusion 360 / CNC Milling</span></div>
+            </div>
+        </section>
 
-    <img src="https://images.unsplash.com/photo-1588654877395-cb0bb2d35cda?auto=format&fit=crop&w=1600&q=80" alt="Omni Dynamics" class="project-hero-img inter-hover" data-aos="zoom-in" data-aos-duration="1200">
+        <!-- 1. PRIMERA FOTO EN GRANDE (Centro) -->
+        <section class="large-image-section" data-aos="fade-up" data-aos-duration="1200">
+            <img src="2 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Principal" class="inter-hover">
+        </section>
 
-    <section class="project-content" data-aos="fade-up">
-        <div class="project-brief"><h3 class="lang-node" data-en="The Execution" data-es="La Ejecución">La Ejecución</h3></div>
-        <div class="project-text lang-node" 
-             data-en="Omni Dynamics required the development of robust articulation nodes for an industrial robotic arm. <strong>Design for Manufacturing (DFM) was critical</strong> here, as every chamfer and fillet was optimized to reduce CNC milling time.<br><br>By simulating toolpaths beforehand, we achieved a seamless transition from the digital model to the physical 5-axis machined aluminum part, eliminating assembly bottlenecks." 
-             data-es="Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. <strong>El Diseño para Fabricación (DFM) fue crítico</strong> aquí, ya que cada chaflán y empalme se optimizó para reducir el tiempo de fresado CNC.<br><br>Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje.">
-             Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. <strong>El Diseño para Fabricación (DFM) fue crítico</strong> aquí, ya que cada chaflán y empalme se optimizó para reducir el tiempo de fresado CNC.<br><br>Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje.
-        </div>
-    </section>
+        <!-- 2. TEXTO DEBAJO -->
+        <section class="text-align-wrapper" data-aos="fade-up">
+            <div class="project-text-full-width lang-node" 
+                 data-en="Omni Dynamics required the development of robust articulation nodes for an industrial robotic arm. Design for Manufacturing (DFM) was critical here, as every chamfer and fillet was meticulously optimized to reduce CNC milling time. The convergence of industrial aesthetics and advanced mechanical performance was the core objective, ensuring a structural chassis capable of neutralizing multi-axial stresses." 
+                 data-es="Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. El Diseño para Fabricación (DFM) fue crítico aquí, ya que cada chaflán y empalme se optimizó meticulosamente para reducir el tiempo de fresado CNC. La convergencia de la estética industrial y el rendimiento mecánico avanzado fue el objetivo central, asegurando un chasis estructural capaz de neutralizar tensiones multi-axiales.">
+                 Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. El Diseño para Fabricación (DFM) fue crítico aquí, ya que cada chaflán y empalme se optimizó meticulosamente para reducir el tiempo de fresado CNC. La convergencia de la estética industrial y el rendimiento mecánico avanzado fue el objetivo central, asegurando un chasis estructural capaz de neutralizar tensiones multi-axiales.
+            </div>
+        </section>
 
-    <section class="gallery">
-        <img src="https://images.unsplash.com/photo-1563514787998-8c5e937d5cb4?auto=format&fit=crop&w=800&q=80" alt="Robotics 1" class="inter-hover" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1614314169000-4f227ee010a3?auto=format&fit=crop&w=800&q=80" alt="Robotics 2" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1600&q=80" alt="CNC Machining" class="full-w inter-hover" data-aos="fade-up">
-    </section>
+        <!-- 3. SEGUNDA Y TERCERA FOTO (Una al lado de la otra) -->
+        <section class="side-by-side-grid" data-aos="fade-up">
+            <img src="3 BRAZO.jpg" alt="Detalle Brazo Robótico 3" class="inter-hover">
+            <img src="1 BRAZO.jpg" alt="Detalle Brazo Robótico 1" class="inter-hover">
+        </section>
 
+        <!-- 4. TEXTO DEBAJO DE LAS DOS FOTOS -->
+        <section class="text-align-wrapper" data-aos="fade-up">
+            <div class="project-text-full-width lang-node" 
+                 data-en="By simulating toolpaths beforehand, we achieved a seamless transition from the digital CAD model to the physical 5-axis machined aluminum part, eliminating assembly bottlenecks. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
+                 data-es="Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
+                 Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
+            </div>
+        </section>
+
+        <!-- 5. CUARTA FOTO EN GRANDE (Abajo del todo) -->
+        <section class="large-image-section" style="padding-top: 0;" data-aos="fade-up">
+            <img src="4 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Final" class="inter-hover">
+        </section>
+    </main>
+
+    <!-- NEXT PROJECT -->
     <a href="proyecto-luna.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">LUNA AMBIENT <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-     <footer>
-        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div class="lang-node" style="font-size:0.65rem; text-transform:none; letter-spacing:1.5px;" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">L|BIB</div>
+        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
-    <!-- EL MISMO BLOQUE DE SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 800, once: true, offset: 50 });
+        
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => {
             document.body.classList.toggle("light-mode");
-            btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
-        let langActive = "es"; const btnLang = document.getElementById("lang-toggle");
+
+        let langActive = "es"; 
+        const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
@@ -144,7 +233,9 @@
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
             }, 250);
         });
-        const dot = document.getElementById("cursor-dot"); const ring = document.getElementById("cursor-ring");
+
+        const dot = document.getElementById("cursor-dot"); 
+        const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100; let ringX = -100, ringY = -100;
         window.addEventListener("mousemove", (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
@@ -156,10 +247,12 @@
             requestAnimationFrame(renderRing);
         }
         requestAnimationFrame(renderRing);
+
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
+
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
