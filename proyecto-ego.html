@@ -1,3 +1,5 @@
+--- START OF FILE proyecto-ego (6).html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -193,7 +195,7 @@
         </section>
 
         <!-- FOTO 1: Implementación con Observer estilo Proyecto Alpha -->
-        <section class="split-section custom-hero-reveal" data-aos="fade-up">
+        <section class="split-section" data-aos="fade-up" data-aos-delay="200"> <!-- Añadido data-aos-delay -->
             <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
@@ -294,16 +296,9 @@
             once: true
         });
 
-        // Intersection Observer (Referencia estricta a Proyecto Alpha)
-        const heroes = document.querySelectorAll('.custom-hero-reveal');
-        let heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('aos-animate');
-                }
-            });
-        }, { threshold: 0.15 }); 
-        heroes.forEach(h => heroObserver.observe(h));
+        // NOTA: Eliminado el Intersection Observer personalizado, ya que AOS.init()
+        // debe manejar todas las animaciones con data-aos de forma nativa.
+        // Si necesitas un retraso específico, usa data-aos-delay en el HTML.
 
 
         // Theme Toggle
