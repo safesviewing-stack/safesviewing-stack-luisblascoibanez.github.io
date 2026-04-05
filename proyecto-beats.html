@@ -105,11 +105,11 @@
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto; 
-            margin-bottom: 80px; /* Añadido margin-bottom a la galería */
+            margin-bottom: 80px; 
         }
         .gallery img { 
             width: 100%; 
-            height: 85vh; /* Aumentado la altura de las imágenes de la galería */
+            height: 85vh; 
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
@@ -140,7 +140,7 @@
         }
         .image-with-text-section img {
             width: 100%;
-            height: 85vh; /* Aumentado la altura de la imagen individual */
+            height: 85vh; 
             object-fit: cover; 
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -222,7 +222,7 @@
 
         <!-- FOTO 1 (HERO) -->
         <section class="large-image-section">
-            <img id="hero-main" src="2RELOJ.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="200">
+            <img id="hero-main" src="2RELOJ.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
         </section>
 
         <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
@@ -273,10 +273,10 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (con margin-bottom y altura aumentada) -->
-        <section class="gallery" style="margin-bottom: 120px;"> <!-- Añadido margin-bottom -->
-            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: cover;"> <!-- Altura aumentada -->
-            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: cover;"> <!-- Altura aumentada -->
+        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (con margin-bottom y altura aumentada, object-fit: contain para ver la imagen completa) -->
+        <section class="gallery" style="margin-bottom: 120px;"> 
+            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: contain;"> 
+            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: contain;"> 
         </section>
 
     </main>
