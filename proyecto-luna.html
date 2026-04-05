@@ -64,19 +64,21 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            /* Aumenta la altura del contenedor para que haya más espacio para la imagen */
-            min-height: 80vh; /* Puedes ajustar este valor si necesitas más o menos altura */
+            align-items: center; /* Centra verticalmente la imagen dentro del contenedor */
+            /* Ajusta la altura del contenedor para "recortar" el recuadro por arriba y por abajo */
+            height: 70vh; /* Se ha reducido de 80vh a 70vh para recortar el recuadro */
+            overflow: hidden; /* Asegura que la imagen no sobresalga del contenedor si es más grande */
         }
         .large-image-section:first-of-type {
             margin-top: 60px; 
         }
         .large-image-section img {
             display: block;
-            width: 100%; 
+            width: 90%; /* La imagen es un poco más pequeña dentro del recuadro */
             max-width: none; 
-            height: 100%; /* La imagen ocupa el 100% de la altura de su contenedor */
-            max-height: 100%; /* Asegura que no exceda la altura del contenedor */
-            object-fit: contain; /* Se mantiene 'contain' para que la imagen completa sea visible */
+            height: auto; 
+            max-height: 90%; /* Ajusta la altura máxima de la imagen para que sea más pequeña */
+            object-fit: contain; 
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
@@ -135,7 +137,7 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section { min-height: 60vh; } /* Ajusta la altura del contenedor en tablet/móvil */
+            .large-image-section { min-height: 55vh; } /* Ajusta la altura del contenedor en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
