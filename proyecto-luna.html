@@ -59,23 +59,24 @@
 
         /* Fotos en grande (1 y 2) - ALTURA Y MÁRGENES AJUSTADOS */
         .large-image-section {
-            /* Ahora el padding y max-width del contenedor se definen igual que los textos */
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto;
             display: flex;
             justify-content: center;
+            /* Aumenta la altura del contenedor para que haya más espacio para la imagen */
+            min-height: 80vh; /* Puedes ajustar este valor si necesitas más o menos altura */
         }
         .large-image-section:first-of-type {
             margin-top: 60px; 
         }
         .large-image-section img {
             display: block;
-            width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-            max-width: none; /* Elimina cualquier restricción de ancho máximo de la imagen para que el 100% sea el límite */
-            height: auto; 
-            max-height: 65vh; /* Se mantiene la altura máxima como referencia */
-            object-fit: contain; 
+            width: 100%; 
+            max-width: none; 
+            height: 100%; /* La imagen ocupa el 100% de la altura de su contenedor */
+            max-height: 100%; /* Asegura que no exceda la altura del contenedor */
+            object-fit: contain; /* Se mantiene 'contain' para que la imagen completa sea visible */
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
@@ -134,7 +135,7 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section img { max-height: 50vh; } 
+            .large-image-section { min-height: 60vh; } /* Ajusta la altura del contenedor en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
