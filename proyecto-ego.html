@@ -83,10 +83,14 @@
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
-            /* Estas propiedades iniciales son gestionadas por AOS,
-               pero si quieres un estado inicial oculto antes de AOS, podrías añadir: */
-            /* opacity: 0; transform: translateY(60px); */
         }
+        /* Estilo para ocultar inicialmente la primera split-section */
+        .initial-hidden-split-section {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
         .split-text-container {
             display: flex;
             flex-direction: column;
@@ -195,8 +199,8 @@
             </div>
         </section>
 
-        <!-- FOTO 1: Ahora se animará como las demás con data-aos="fade-up" -->
-        <section class="split-section" data-aos="fade-up"> 
+        <!-- FOTO 1: Ahora se ocultará inicialmente y se animará al hacer scroll -->
+        <section class="split-section initial-hidden-split-section" data-aos="fade-up"> 
             <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
@@ -291,11 +295,38 @@
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
 
-        // Inicialización de AOS estándar para todos los elementos con data-aos
+        // Inicialización de AOS, pero sin que anime la primera sección por defecto
         AOS.init({ 
             duration: 800, 
-            once: true
+            once: true,
+            // Deshabilitar la detección automática al cargar para la primera sección.
+            // Los elementos que ya están en el viewport no deberían animarse inmediatamente.
+            // Para eso, necesitamos controlarlos con un IntersectionObserver.
+            disable: function() {
+                // Deshabilita AOS para la primera sección si ya está en el viewport
+                const firstSection = document.querySelector('.initial-hidden-split-section');
+                if (firstSection) {
+                    const rect = firstSection.getBoundingClientRect();
+                    return rect.top >= 0 && rect.bottom <= window.innerHeight;
+                }
+                return false;
+            }
         });
+
+        // Intersection Observer para la primera split-section
+        const firstSplitSection = document.querySelector('.initial-hidden-split-section');
+        if (firstSplitSection) {
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        firstSplitSection.classList.remove('initial-hidden-split-section'); // Quita el estilo oculto
+                        firstSplitSection.classList.add('aos-animate'); // Activa la animación AOS
+                        observer.unobserve(firstSplitSection); // Deja de observar una vez animado
+                    }
+                });
+            }, { threshold: 0.15 }); 
+            observer.observe(firstSplitSection);
+        }
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
