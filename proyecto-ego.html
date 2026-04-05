@@ -83,6 +83,9 @@
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
+            /* Estas propiedades iniciales son gestionadas por AOS,
+               pero si quieres un estado inicial oculto antes de AOS, podrías añadir: */
+            /* opacity: 0; transform: translateY(60px); */
         }
         .split-text-container {
             display: flex;
@@ -192,8 +195,8 @@
             </div>
         </section>
 
-        <!-- FOTO 1: Implementación con Observer estilo Proyecto Alpha -->
-        <section class="split-section" data-aos="fade-up" data-aos-delay="200"> <!-- Añadido data-aos-delay -->
+        <!-- FOTO 1: Ahora se animará como las demás con data-aos="fade-up" -->
+        <section class="split-section" data-aos="fade-up"> 
             <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
@@ -288,16 +291,11 @@
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
 
-        // Inicialización de AOS estándar
+        // Inicialización de AOS estándar para todos los elementos con data-aos
         AOS.init({ 
             duration: 800, 
             once: true
         });
-
-        // NOTA: Eliminado el Intersection Observer personalizado, ya que AOS.init()
-        // debe manejar todas las animaciones con data-aos de forma nativa.
-        // Si necesitas un retraso específico, usa data-aos-delay en el HTML.
-
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
