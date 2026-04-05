@@ -1,3 +1,5 @@
+--- START OF FILE proyecto-alpha (13).html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -64,7 +66,15 @@
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
+        /* La primera imagen hero (#hero-main) no tendrá este estilo por defecto, 
+           ya que le quitamos el data-aos, así que no se animará y estará visible.
+           Las demás imágenes con data-aos seguirán usando este estilo y la clase 'aos-animate' para la animación. */
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+        /* Añadimos un estilo para la imagen hero principal que siempre esté visible */
+        #hero-main {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .project-content-split { /* New class for the split section of Alpha Project */
             display: grid;
@@ -162,8 +172,8 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
-        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover" data-aos="fade-up">
+        <!-- FOTO 1 (HERO) - Se quitó data-aos="fade-up" para que esté visible al cargar -->
+        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover">
 
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
@@ -255,8 +265,8 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Intersection Observer para las dos imágenes HERO
-        const heroes = document.querySelectorAll('.project-hero-img');
+        // Intersection Observer para las imágenes hero (ahora solo para la segunda hero y las de galería)
+        const heroes = document.querySelectorAll('.project-hero-img:not(#hero-main), .gallery img, .project-content-split, .visual-separator, .text-align-wrapper'); // Incluimos otros elementos que usan AOS
         let heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
