@@ -1,3 +1,5 @@
+--- START OF FILE proyecto-alpha (13).html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -64,15 +66,13 @@
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        /* La primera imagen hero (#hero-main) no tendrá este estilo por defecto, 
-           ya que le quitamos el data-aos, así que no se animará y estará visible.
-           Las demás imágenes con data-aos seguirán usando este estilo y la clase 'aos-animate' para la animación. */
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
-        /* Añadimos un estilo para la imagen hero principal que siempre esté visible */
-        #hero-main {
+        /* Ya no necesitamos #hero-main específico si queremos que se anime como el resto */
+        /* #hero-main {
             opacity: 1;
             transform: translateY(0);
-        }
+        } */
+
 
         .project-content-split { /* New class for the split section of Alpha Project */
             display: grid;
@@ -170,8 +170,8 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) - Se quitó data-aos="fade-up" para que esté visible al cargar -->
-        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover">
+        <!-- FOTO 1 (HERO) - Con animación de entrada y un pequeño retraso -->
+        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover" data-aos="fade-up" data-aos-delay="200">
 
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
@@ -194,6 +194,7 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
+        <!-- TEXTO INTERMEDIO ESTRECHO - MOVIDO AQUÍ -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="Precision in manufacturing is only achievable through a flawless set of technical planimetries. For Project Alpha, we generated a comprehensive documentation package that bridges the gap between digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material heat-treatments required for the magnesium-alloy chassis components. We focused intensely on the routing of internal mechanical sensors and the precise anchor points for modular maintenance, ensuring that the final assembly process is both efficient and repeatable. This meticulous attention to industrial standards guarantees that every unit produced maintains the exact specifications of the original engineering prototype, facilitating a seamless transition to large-scale production." 
@@ -263,16 +264,16 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Intersection Observer para las imágenes hero (ahora solo para la segunda hero y las de galería)
-        const heroes = document.querySelectorAll('.project-hero-img:not(#hero-main), .gallery img, .project-content-split, .visual-separator, .text-align-wrapper'); // Incluimos otros elementos que usan AOS
-        let heroObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer para todas las imágenes y elementos con AOS
+        const aosElements = document.querySelectorAll('[data-aos]'); // Ahora selecciona todos los elementos con data-aos
+        let observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('aos-animate');
                 }
             });
         }, { threshold: 0.15 }); 
-        heroes.forEach(h => heroObserver.observe(h));
+        aosElements.forEach(el => observer.observe(el));
 
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
