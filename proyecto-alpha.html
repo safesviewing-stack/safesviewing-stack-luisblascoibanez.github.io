@@ -258,12 +258,7 @@
         });
 
         // Intersection Observer para todas las imágenes y elementos con AOS
-        const aosElements = document.querySelectorAll('[data-aos]'); 
-        let observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('aos-animate');
-                }
+       
             });
         }, { threshold: 0.15 }); 
         aosElements.forEach(el => observer.observe(el));
