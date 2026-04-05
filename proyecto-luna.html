@@ -55,21 +55,27 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- LAYOUT ESPECÍFICO (FOTOS GRANDES + TEXTOS + GALERÍAS 6X) --- */
+        /* --- LAYOUT ESPECÍFICO --- */
 
-        /* Fotos en grande (1 y 2) */
+        /* Fotos en grande (1 y 2) - ALTURA REDUCIDA */
         .large-image-section {
             padding: 0 5vw; 
             max-width: 1600px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
         }
         .large-image-section:first-of-type {
-            margin-top: 60px; /* Separación inicial con la cabecera */
+            margin-top: 60px; 
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: auto; /* Evita cualquier tipo de recorte */
+            max-width: 800px; /* Reducido para que sea más contenida */
+            height: auto; 
+            max-height: 65vh; /* Límite estricto de altura */
+            object-fit: cover; /* Evita que se deforme si alcanza el límite de altura */
+            object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
         }
@@ -78,7 +84,7 @@
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 100px 5vw; /* Separador vertical entre bloques */
+            padding: 100px 5vw; 
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -86,7 +92,7 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            column-count: 2; /* Texto a 2 columnas para mejor lectura */
+            column-count: 2; 
             column-gap: 60px;
         }
 
@@ -95,7 +101,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-            padding: 0 5vw 100px; /* Padding inferior para separar del siguiente bloque */
+            padding: 0 5vw 100px; 
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -103,7 +109,7 @@
             display: block;
             width: 100%;
             height: 100%;
-            aspect-ratio: 1 / 1; /* Formato cuadrado para que la cuadrícula sea perfecta */
+            aspect-ratio: 1 / 1; 
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
@@ -127,7 +133,9 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section, .text-align-wrapper { padding: 60px 5vw; }
+            .large-image-section { padding: 0 5vw; }
+            .large-image-section img { max-height: 50vh; } /* Aún más pequeña en tablet/móvil */
+            .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -196,7 +204,7 @@
 
         <!-- SEGUNDO BLOQUE: IMAGEN GIGANTE "2 TOP" -->
         <section class="large-image-section" data-aos="fade-up">
-            <img src="1 TOP.jpg" alt="Luna Ambient - Vista Top" class="inter-hover">
+            <img src="2 TOP.jpg" alt="Luna Ambient - Vista Top" class="inter-hover">
         </section>
 
         <!-- TEXTO CENTRAL (2 Columnas) -->
