@@ -67,7 +67,11 @@
         .lang-sutil-btn:hover { opacity: 1; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
+        .project-header { 
+            padding: 100px 5vw 20px; /* Reduced padding-top */
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -78,7 +82,12 @@
         /* --- NUEVO LAYOUT ESPECÍFICO --- */
 
         /* 1. Primera foto en grande */
-        .large-image-section { padding: 60px 5vw 0; max-width: 1600px; margin: 0 auto; }
+        .large-image-section { 
+            padding: 0 5vw 0; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            margin-top: 100px; /* Added margin-top to push the first image down */
+        }
         .large-image-section img {
             display: block;
             width: 100%;
@@ -229,7 +238,7 @@
         <!-- 4. TEXTO HORIZONTAL COMPLETO (ARRIBA DE LAS ÚLTIMAS 2 FOTOS) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width lang-node" style="column-count: 1; max-width: 1000px; text-align: center; margin: 0 auto;"
-                 data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation." 
+                 data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line while maintaining an elegant, seamless appearance." 
                  data-es="La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.">
                  La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.
             </div>
