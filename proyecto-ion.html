@@ -43,13 +43,13 @@
         .nav-links { display: flex; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; } /* Updated from alpha for consistency */
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
         .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 15px; max-width: 1600px; margin: 0 auto; }
+        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -57,19 +57,21 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- FOTO 1 (HERO) --- */
-        .large-image-section {
+        /* --- NUEVO LAYOUT DE FOTOS Y TEXTO --- */
+
+        /* FOTO 1 (HERO) - Copied from alpha, adapted for Grifo's first image */
+        .hero-image-section {
             padding: 0 5vw;
             margin-top: 90px;
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 70vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
         }
-        .large-image-section img {
+        .hero-image-section img {
             display: block;
             width: 100%;
             height: 100%; 
@@ -80,85 +82,76 @@
             border: 1px solid var(--border);
         }
 
-        /* --- SECCIÓN SPLIT (EL ANÁLISIS) --- */
-        .project-content-split { 
+        /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
+        .split-section {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1fr;
             gap: 80px;
             padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: flex-start;
+            align-items: center;
         }
-        .project-brief h3 { 
-            font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
-        }
-        .project-content-split .project-text { 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
-        }
-
-        /* --- GALERÍA --- */
-        .gallery { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 25px; 
-            padding: 0 5vw; 
-            max-width: 1600px; 
-            margin: 0 auto; 
-            /* Se ha quitado el margin-bottom de la galería para que sea más flexible */
-        }
-        .gallery img { 
-            width: 100%; 
-            height: 70vh; /* Ajustado a un valor más estándar para galerías */
-            max-height: 70vh; /* Se asegura de no desbordar */
-            object-fit: cover; /* Las imágenes llenan su contenedor, recortándose si es necesario */
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
-            aspect-ratio: 4/3; 
-        }
-        .gallery .full-w { 
-            grid-column: 1 / -1; 
-            aspect-ratio: 16/9; 
-            max-height: 85vh;
-            height: 85vh; /* Se asegura de aplicar la altura */
-        }
-
-        /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
-        .project-text-full-width { 
-            width: 100%; 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
-        }
-
-        /* --- SECCIÓN IMAGEN INDIVIDUAL CON TEXTO AL LADO --- */
-        .image-with-text-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Una columna para texto, otra para imagen */
-            gap: 80px;
-            padding: 80px 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: center; /* Centra el contenido verticalmente */
-        }
-        .image-with-text-section img {
+        .split-section img {
             width: 100%;
-            height: 70vh; /* Ajustado a un valor más estándar para imágenes con texto */
-            max-height: 70vh;
-            object-fit: cover; /* Las imágenes llenan su contenedor, recortándose si es necesario */
-            border-radius: 30px;
+            height: 70vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 20px;
             border: 1px solid var(--border);
         }
-        .image-with-text-section .text-content {
+        .split-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .split-text-container h3 {
+            font-family: 'Syne';
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .split-text {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
             text-align: justify;
         }
-        .image-with-text-section .text-content h3 {
-            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; color: var(--text);
+
+        /* Bloques de Imagen Grande (Pantalla Completa respetando márgenes) */
+        .large-image-section {
+            padding: 40px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .large-image-section img {
+            display: block;
+            width: 100%;
+            height: 85vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
         }
 
-        /* --- SEPARADOR VISUAL --- */
+        /* Texto intermedio (entre foto 3 y 4) */
+        .text-align-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 5vw; 
+        }
+        .project-text-full-width {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify; 
+            width: 100%;
+            max-width: 1000px; /* Para que quede centrado y no se alargue infinitamente */
+            margin: 0 auto;
+        }
+
+        /* SEPARADOR VISUAL - Copied from alpha */
         .visual-separator {
             width: 100%;
             height: 1px; 
@@ -167,7 +160,7 @@
             max-width: 1600px;
         }
 
-        /* --- NEXT PROJECT --- */
+        /* --- FOOTER & NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -175,21 +168,33 @@
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
-
+       
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split, .image-with-text-section { grid-template-columns: 1fr; gap: 30px; }
-            .large-image-section img, .gallery img, .gallery .full-w, 
-            .image-with-text-section img { 
-                height: 60vh; /* Ajustado para móviles */
-                max-height: 60vh;
+            .split-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 5vw;
             }
-            .project-hero-img { width: 90%; }
+            .split-section img {
+                height: auto;
+                min-height: 50vh;
+                order: 1; /* En móvil, la imagen siempre va arriba */
+            }
+            .split-text-container {
+                order: 2; /* En móvil, el texto siempre va abajo de la foto */
+            }
+            .large-image-section { padding: 40px 5vw; }
+            .large-image-section img { height: 60vh; }
+            .hero-image-section img {
+                max-height: 60vh; /* Se adaptan mejor a pantallas de móviles sin quedar demasiado estiradas */
+            }
+            .text-align-wrapper { padding: 60px 5vw; }
+            
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .image-with-text-section img { order: 1; } 
-            .image-with-text-section .text-content { order: 2; } 
+            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -223,37 +228,47 @@
             </div>
         </section>
 
-        <!-- FOTO PRINCIPAL (Primera imagen proporcionada: la del grifo detallado con azul) -->
-        <section class="large-image-section">
-            <img src="https://i.ibb.co/3W6qW4Q/Grifo-Plano-Azul.jpg" alt="Grifo Plano Azul" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
+        <!-- FOTO 1 (HERO) - Previously "1 GRIFO.jpg", now using the new hero-image-section style -->
+        <section class="hero-image-section">
+            <img src="1 GRIFO.jpg" alt="Grifo Detalle 1" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
         </section>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO DE ANÁLISIS (split-section) -->
-        <section class="project-content-split" data-aos="fade-up">
-            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
-            <div class="project-text lang-node" 
-                 data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
-                 data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
-                 Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
+        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA (now split-section for consistency) -->
+        <section class="split-section" data-aos="fade-up" data-aos-offset="300">
+            <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
+                <p class="split-text lang-node" 
+                   data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
+                   data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
+                   Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
+                </p>
             </div>
         </section>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA DE IMÁGENES (las dos imágenes detalladas del grifo) -->
-        <section class="gallery">
-            <img src="https://i.ibb.co/L5r1RjR/Grifo-Detalle-Superior.jpg" alt="Grifo Detalle Superior" class="inter-hover" data-aos="fade-up">
-            <img src="https://i.ibb.co/Wc2tqJ2/Grifo-Detalle-Inferior.jpg" alt="Grifo Detalle Inferior" class="inter-hover" data-aos="fade-up">
+        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
+                <p class="split-text lang-node" 
+                   data-en="The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle. This section highlights key features, challenges overcome, and the overall impact of the design decisions made during the product's development." 
+                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
+                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
+                </p>
+            </div>
+            <img src="3 GRIFO.jpg" alt="Grifo Vista Principal 3" class="inter-hover">
         </section>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO CENTRAL (full-width) -->
+        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES (now aligned with alpha's styling) -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object. These visualizations represent a precise physical simulation of how light interacts with the materials, conveying sophistication and solidity." 
@@ -265,9 +280,9 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO FINAL (Plano acotado del grifo) -->
-        <section class="large-image-section" style="padding-top: 0;">
-            <img src="https://i.ibb.co/YyT8s2z/Grifo-Plano-Acotado.jpg" alt="Grifo Plano Acotado" class="inter-hover" data-aos="fade-up">
+        <!-- 5. ÚLTIMA FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
+        <section class="large-image-section" style="padding-top: 0;" data-aos="fade-up">
+            <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
         </section>
 
     </main>
@@ -278,7 +293,7 @@
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER -->
+    <!-- FOOTER - Copied from alpha, adapted for consistency -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -288,10 +303,11 @@
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 1000, once: true }); /* Changed duration to 1000ms for alpha consistency */
 
         // Theme Toggle
-        document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
+        const btnToggle = document.getElementById("theme-toggle"); /* Changed variable name for consistency */
+        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
         // Lang Toggle
         let langActive = "es";
@@ -331,7 +347,8 @@
         });
 
         // Navbar Scroll
-        let lastScroll = 0; const navbar = document.getElementById("navbar");
+        let lastScroll = 0; 
+        const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
             if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
