@@ -38,54 +38,15 @@
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        
-        header { 
-            background: var(--glass); 
-            backdrop-filter: var(--blur); 
-            -webkit-backdrop-filter: var(--blur); 
-            padding: 12px 35px; 
-            display: flex; 
-            align-items: center; 
-            gap: 35px;
-            border: 1px solid var(--border); 
-            border-radius: 100px; 
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
-        }
-        .nav-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.5px;
-            color: var(--text);
-            text-decoration: none;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
-        .nav-logo:hover { opacity: 1; }
-        
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            opacity: 0.65;
-            font-size: 0.8rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-        .nav-links a:hover { opacity: 1; } 
-        
-        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
-        
-        .tools-nav { display:flex; align-items: center; gap: 12px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
-        .icon-btn:hover { opacity: 1; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px;}
-        .lang-sutil-btn:hover { opacity: 1; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
+        .tools-nav { display:flex; align-items: center; gap: 10px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
@@ -96,16 +57,14 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- ANIMACIÓN HERO (REFERENCIA ALPHA) --- */
-        .custom-hero-reveal {
-            opacity: 0; 
-            transform: translateY(60px); 
+        /* ALINEACIÓN PERFECTA PARA FOTOS HERO 1 Y 5 */
+        .project-hero-img { 
+            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
+            margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
+            opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        .custom-hero-reveal.aos-animate { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
         /* --- NUEVO LAYOUT DE FOTOS (6 FOTOS ALTERNADAS) --- */
         
@@ -120,12 +79,17 @@
             align-items: center;
         }
         .split-section img {
-            width: 100%;
+            width: calc(100% + 10vw); /* Extend image slightly to the sides */
+            margin-left: -5vw; /* Pull image to the left */
             height: 70vh;
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
+        }
+        .split-section.right-aligned img {
+            margin-left: auto; /* Reset margin for right-aligned */
+            margin-right: -5vw; /* Pull image to the right */
         }
         .split-text-container {
             display: flex;
@@ -148,18 +112,18 @@
 
         /* Bloques de Imagen Grande (Pantalla Completa) */
         .large-image-section {
-            padding: 40px 5vw;
-            max-width: 1600px;
+            padding: 40px 0; /* Remove horizontal padding here */
+            max-width: none; /* Allow full width */
             margin: 0 auto;
         }
         .large-image-section img {
             display: block;
-            width: 100%;
+            width: 100vw; /* Make image full viewport width */
             height: 85vh;
             object-fit: cover;
             object-position: center;
-            border-radius: 30px;
-            border: 1px solid var(--border);
+            border-radius: 0; /* Remove border radius for full width */
+            border: none; /* Remove border for full width */
         }
 
         /* --- SEPARADOR VISUAL --- */
@@ -188,6 +152,9 @@
                 padding: 60px 5vw;
             }
             .split-section img {
+                width: 100%; /* Reset width for mobile */
+                margin-left: 0; /* Reset margin for mobile */
+                margin-right: 0; /* Reset margin for mobile */
                 height: auto;
                 min-height: 50vh;
                 order: 1; /* En móvil, la imagen siempre va arriba */
@@ -195,8 +162,8 @@
             .split-text-container {
                 order: 2; /* En móvil, el texto siempre va abajo de la foto */
             }
-            .large-image-section { padding: 40px 5vw; }
-            .large-image-section img { height: 60vh; }
+            .large-image-section { padding: 40px 0; }
+            .large-image-section img { height: 60vh; border-radius: 0; }
             
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -213,11 +180,9 @@
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot"></div>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
                 <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
@@ -254,7 +219,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
+        <section class="split-section right-aligned" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
                 <p class="split-text lang-node" 
@@ -294,7 +259,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section" data-aos="fade-up">
+        <section class="split-section right-aligned" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Final Details" data-es="Detalles Finales">Detalles Finales</h3>
                 <p class="split-text lang-node" 
@@ -323,8 +288,8 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">L|BIB</div>
-        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
