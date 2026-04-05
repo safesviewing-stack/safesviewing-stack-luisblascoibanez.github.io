@@ -55,27 +55,31 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- NUEVO LAYOUT ESPECÍFICO PARA OMNI (BRAZO) --- */
+        /* --- LAYOUT OPTIMIZADO PARA CENTRAR TEXTOS --- */
 
         /* Fotos en grande (Primera y Cuarta) */
         .large-image-section {
-            padding: 100px 5vw; 
+            padding: 0 5vw; /* Eliminamos el padding vertical para controlar el hueco solo con el texto */
             max-width: 1600px;
             margin: 0 auto;
+        }
+        .large-image-section:first-of-type {
+            margin-top: 60px; /* Margen inicial para separarlo un poco de la cabecera */
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: auto; /* Al poner auto, la foto no se recorta NUNCA, mantiene su formato original */
+            height: auto; 
             border-radius: 30px;
             border: 1px solid var(--border);
         }
 
-        /* Texto centrado de ancho completo */
+        /* Texto perfectamente centrado de ancho completo */
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 80px 5vw; 
+            /* Estos 100px arriba y abajo actúan como separador perfecto entre las fotos */
+            padding: 100px 5vw; 
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -83,8 +87,9 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            max-width: 1000px; 
-            margin: 0 auto;
+            /* Dividimos en 2 columnas para que el texto sea legible al ocupar todo el ancho */
+            column-count: 2;
+            column-gap: 60px;
         }
 
         /* Fotos en paralelo (Segunda y Tercera) */
@@ -92,7 +97,7 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 25px; 
-            padding: 0 5vw; 
+            padding: 0 5vw; /* Igual, 0 padding vertical, controlado por el texto */
             max-width: 1600px; 
             margin: 0 auto; 
             align-items: stretch; 
@@ -119,9 +124,8 @@
         @media (max-width: 1024px) { 
             .side-by-side-grid { grid-template-columns: 1fr; gap: 40px; } 
             .side-by-side-grid img { height: 60vh; }
-            .large-image-section { padding: 60px 5vw; }
-            .large-image-section img { height: auto; } /* En móvil también se asegura que no haya recortes */
-            .text-align-wrapper { padding: 60px 5vw; }
+            .project-text-full-width { column-count: 1; } /* En móvil se vuelve de 1 sola columna */
+            .text-align-wrapper { padding: 80px 5vw; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
@@ -165,7 +169,7 @@
             <img src="2 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Principal" class="inter-hover">
         </section>
 
-        <!-- 2. TEXTO DEBAJO -->
+        <!-- 2. TEXTO DEBAJO (Totalmente centrado entre foto 1 y fotos 2-3) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width lang-node" 
                  data-en="Omni Dynamics required the development of robust articulation nodes for an industrial robotic arm. Design for Manufacturing (DFM) was critical here, as every chamfer and fillet was meticulously optimized to reduce CNC milling time. The convergence of industrial aesthetics and advanced mechanical performance was the core objective, ensuring a structural chassis capable of neutralizing multi-axial stresses." 
@@ -180,7 +184,7 @@
             <img src="1 BRAZO.jpg" alt="Detalle Brazo Robótico 1" class="inter-hover">
         </section>
 
-        <!-- 4. TEXTO DEBAJO DE LAS DOS FOTOS -->
+        <!-- 4. TEXTO DEBAJO DE LAS DOS FOTOS (Totalmente centrado entre fotos 2-3 y foto 4) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width lang-node" 
                  data-en="By simulating toolpaths beforehand, we achieved a seamless transition from the digital CAD model to the physical 5-axis machined aluminum part, eliminating assembly bottlenecks. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
