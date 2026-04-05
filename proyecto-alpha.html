@@ -64,19 +64,13 @@
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            /* Añadimos una altura mínima para el contenedor de la imagen si se necesita para hacer el contenedor más alto,
-               aunque object-fit: cover ya se encargará de que la imagen lo llene. */
-            min-height: 70vh; /* Puedes ajustar este valor si quieres un contenedor más alto aún */
-            display: flex; /* Para centrar la imagen si es necesario */
-            align-items: center; /* Centrado vertical */
-            justify-content: center; /* Centrado horizontal */
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 100%; /* CAMBIO: La imagen ahora intentará ocupar el 100% de la altura de su contenedor */
-            max-height: 90vh; /* CAMBIO CLAVE: Aumentado para permitir una imagen más alta */
-            object-fit: cover; /* Mantenemos 'cover' para que llene el contenedor y se recorte si es necesario */
+            height: auto;
+            max-height: 85vh; /* Evita que sea más alta que la pantalla */
+            object-fit: contain; /* CAMBIO CLAVE: Usa 'contain' para que la imagen completa sea visible */
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -232,6 +226,79 @@
                  data-es="La precisión en la fabricación solo es alcanzable mediante un conjunto impecable de planimetrías técnicas. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repeatable. Esta atención meticulosa garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo original.">
                  La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo.
             </p>
+        </div>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- FOTO 5 (PLANIMETRÍA - Usa object-fit: contain para no cortarse) -->
+        <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover" data-aos="fade-up">
+    </main>
+
+    <a href="proyecto-ego.html" class="next-project inter-hover">
+        <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
+        <h2 class="next-title">EGO SEATING <i class="fa-solid fa-arrow-right"></i></h2>
+    </a>
+
+    <footer>
+        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+        AOS.init({ duration: 1000, once: true });
+
+        const btnToggle = document.getElementById("theme-toggle");
+        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
+
+        let langActive = "es";
+        const btnLang = document.getElementById("lang-toggle");
+        btnLang.addEventListener("click", () => {
+            const domElements = document.querySelectorAll(".lang-node");
+            domElements.forEach(node => node.classList.add("lang-animating"));
+            setTimeout(() => {
+                langActive = langActive === "es" ? "en" : "es";
+                domElements.forEach(node => {
+                    const text = node.getAttribute(`data-${langActive}`);
+                    if (text) node.innerHTML = text;
+                    node.classList.remove("lang-animating");
+                });
+                btnLang.textContent = langActive === "es" ? "EN" : "ES";
+            }, 250);
+        });
+
+        const dot = document.getElementById("cursor-dot");
+        const ring = document.getElementById("cursor-ring");
+        let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
+        window.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        });
+        function renderRing() {
+            ringX += (mouseX - ringX) * 0.35; ringY += (mouseY - ringY) * 0.35;
+            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(renderRing);
+        }
+        renderRing();
+
+        document.querySelectorAll('.inter-hover, a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
+        });
+
+        let lastScroll = 0; const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
+            else navbar.classList.remove("ui-hidden");
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>            </p>
         </div>
 
         <!-- SEPARADOR VISUAL -->
