@@ -65,8 +65,9 @@
             display: flex;
             justify-content: center;
             align-items: center; 
-            height: 70vh; 
+            min-height: 70vh; /* Changed from height to min-height to ensure content fits */
             overflow: hidden; 
+            position: relative; /* Added for object-fit-contain */
         }
         .large-image-section:first-of-type {
             margin-top: 60px; 
@@ -75,7 +76,7 @@
             display: block;
             width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
             height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
-            object-fit: cover; /* Cambiado a 'cover' para que la imagen ocupe todo el recuadro, recortando si es necesario */
+            object-fit: contain; /* Changed to 'contain' to ensure the entire image is visible */
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
