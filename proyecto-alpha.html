@@ -59,20 +59,42 @@
 
         /* ALINEACIÓN PERFECTA PARA FOTOS HERO 1 Y 5 */
         .project-hero-img { 
-            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
+            width: calc(100% - 10vw); height: 110vh; object-fit: cover; object-position: center; border-radius: 30px; 
             margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
-        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
-        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
+        .project-content-split { /* New class for the split section of Alpha Project */
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            padding: 40px 5vw 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: flex-start; /* Align text to the top */
+        }
+        .project-content-split .project-brief h3 { 
+            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;
+        }
+        .project-content-split .project-text { 
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+        }
 
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
-        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 21/9; }
+        .gallery img { 
+            width: 100%; 
+            height: 110vh; /* Increased height for gallery images */
+            object-fit: cover; 
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            aspect-ratio: 4/3; 
+        }
+        .gallery .full-w { 
+            grid-column: 1 / -1; 
+            aspect-ratio: 21/9; 
+        }
 
         /* TEXTO INTERMEDIO ESTRECHO */
         .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 140px 5vw 60px; }
@@ -86,11 +108,19 @@
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
+
 
         @media (max-width: 1024px) {
-            .project-content, .gallery { grid-template-columns: 1fr; gap: 40px; }
-            .project-hero-img { width: 95%; }
+            .project-content-split { grid-template-columns: 1fr; gap: 40px; }
+            .project-hero-img { width: 95%; height: 100vh; }
+            .gallery img { height: 100vh; }
             .project-text-full-width { max-width: 100%; }
+
+            header { gap: 20px; padding: 12px 25px; }
+            .nav-logo { font-size: 1.1rem; }
+            .footer-logo { font-size: 2.2rem; }
+            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -124,9 +154,9 @@
         </section>
 
         <!-- FOTO 1 (HERO) -->
-        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover">
+        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="project-hero-img inter-hover" data-aos="fade-up">
 
-        <section class="project-content" data-aos="fade-up">
+        <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
                  data-en="Alpha Project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance vacuuming cycles. Utilizing parametric design principles, we sculpted an internal architecture that optimizes airflow while maintaining rigid stability. Every curve and rib was meticulously analyzed through Finite Element Analysis (FEA) to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems." 
@@ -150,7 +180,7 @@
         </div>
 
         <!-- FOTO 5 (PLANIMETRÍA - ALINEADA CON FOTO 1) -->
-        <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover">
+        <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover" data-aos="fade-up">
     </main>
 
     <a href="proyecto-ego.html" class="next-project inter-hover">
