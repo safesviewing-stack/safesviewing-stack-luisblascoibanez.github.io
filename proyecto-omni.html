@@ -48,7 +48,11 @@
         .lang-sutil-btn:hover { opacity: 1; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
+        .project-header { 
+            padding: 100px 5vw 20px; /* Reduced padding-top */
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
@@ -59,12 +63,13 @@
 
         /* Fotos en grande (Primera y Cuarta) */
         .large-image-section {
-            padding: 0 5vw; /* Eliminamos el padding vertical para controlar el hueco solo con el texto */
+            padding: 0 5vw; 
             max-width: 1600px;
             margin: 0 auto;
+            margin-top: 100px; /* Added margin-top to push the first image down */
         }
         .large-image-section:first-of-type {
-            margin-top: 60px; /* Margen inicial para separarlo un poco de la cabecera */
+            margin-top: 100px; 
         }
         .large-image-section img {
             display: block;
@@ -78,7 +83,6 @@
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            /* Estos 100px arriba y abajo actúan como separador perfecto entre las fotos */
             padding: 100px 5vw; 
         }
         .project-text-full-width {
@@ -87,7 +91,6 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            /* Dividimos en 2 columnas para que el texto sea legible al ocupar todo el ancho */
             column-count: 2;
             column-gap: 60px;
         }
@@ -97,7 +100,7 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 25px; 
-            padding: 0 5vw; /* Igual, 0 padding vertical, controlado por el texto */
+            padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto; 
             align-items: stretch; 
@@ -124,7 +127,7 @@
         @media (max-width: 1024px) { 
             .side-by-side-grid { grid-template-columns: 1fr; gap: 40px; } 
             .side-by-side-grid img { height: 60vh; }
-            .project-text-full-width { column-count: 1; } /* En móvil se vuelve de 1 sola columna */
+            .project-text-full-width { column-count: 1; } 
             .text-align-wrapper { padding: 80px 5vw; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
