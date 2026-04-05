@@ -71,9 +71,9 @@
         }
         .split-section img {
             width: 100%;
-            height: 75vh; /* Adjusted height for less cropping */
-            object-fit: cover;
-            object-position: center;
+            height: 75vh; /* Keep the container height to ensure overall section size */
+            max-height: 60vh; /* Make the actual image content smaller */
+            object-fit: contain; /* Crucial: ensures image is not cropped and fits within max-height */
             border-radius: 20px;
             border: 1px solid var(--border);
         }
@@ -177,8 +177,9 @@
                 padding: 60px 5vw;
             }
             .split-section img {
-                height: auto;
-                min-height: 50vh;
+                height: auto; /* Allow image to take natural height */
+                max-height: 50vh; /* Max height for mobile, ensures it's not too tall */
+                object-fit: contain; /* Maintain full image content */
                 order: 1; /* En móvil, la imagen siempre va arriba */
             }
             .split-text-container {
@@ -281,7 +282,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- 5. ÚLTIMA FOTO EN GRANDE (tipo hero-image-section) -->
-        <section class="hero-image-section" style="margin-bottom: 120px;" data-aos="fade-up"> <!-- Increased bottom margin -->
+        <section class="hero-image-section" style="margin-bottom: 120px;" data-aos="fade-up"> 
             <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
         </section>
 
