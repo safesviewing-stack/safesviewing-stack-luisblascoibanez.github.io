@@ -48,7 +48,11 @@
         .lang-sutil-btn:hover { opacity: 1; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
+        .project-header { 
+            padding: 100px 5vw 20px; /* Reduced padding-top */
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
@@ -65,22 +69,23 @@
             display: flex;
             justify-content: center;
             align-items: center; 
-            min-height: 70vh; /* Changed from height to min-height to ensure content fits */
+            min-height: 70vh; 
             overflow: hidden; 
-            position: relative; /* Added for object-fit-contain */
+            position: relative; 
+            margin-top: 100px; /* Added margin-top to push the first image down */
         }
         .large-image-section:first-of-type {
-            margin-top: 60px; 
+            margin-top: 100px; /* This one will apply to the very first large-image-section, overriding the general margin-top */
         }
         .large-image-section img {
             display: block;
-            width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-            height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
-            object-fit: contain; /* Changed to 'contain' to ensure the entire image is visible */
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
-            padding: 0; /* Elimina el padding interno de la imagen para que ocupe el 100% */
+            padding: 0; 
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
