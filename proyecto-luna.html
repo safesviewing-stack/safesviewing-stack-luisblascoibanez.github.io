@@ -59,8 +59,9 @@
 
         /* Fotos en grande (1 y 2) - ALTURA Y MÁRGENES AJUSTADOS */
         .large-image-section {
-            padding: 0 5vw; /* Mantiene el padding lateral del 5vw */
-            max-width: 1600px; /* Ancho máximo del contenedor */
+            /* Ahora el padding y max-width del contenedor se definen igual que los textos */
+            padding: 0 5vw; 
+            max-width: 1600px; 
             margin: 0 auto;
             display: flex;
             justify-content: center;
@@ -70,11 +71,11 @@
         }
         .large-image-section img {
             display: block;
-            width: 100%; /* Ocupa el 100% del ancho del contenedor .large-image-section */
-            max-width: 1200px; /* AUMENTADO: Ancho máximo del marco de la imagen (la imagen en sí se ajustará) */
+            width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+            max-width: none; /* Elimina cualquier restricción de ancho máximo de la imagen para que el 100% sea el límite */
             height: auto; 
             max-height: 65vh; /* Se mantiene la altura máxima como referencia */
-            object-fit: contain; /* Cambiado a 'contain' para que la imagen se ajuste dentro del marco sin ser recortada */
+            object-fit: contain; 
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
