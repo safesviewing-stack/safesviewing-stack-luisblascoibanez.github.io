@@ -57,82 +57,92 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* ALINEACIÓN PERFECTA PARA FOTOS HERO 1 Y 5 */
-        .project-hero-img { 
-            width: calc(100% - 10vw); height: 110vh; object-fit: cover; object-position: center; border-radius: 30px; 
-            margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        /* --- FOTO 1 (HERO) --- */
+        .large-image-section {
+            padding: 0 5vw;
+            margin-top: 60px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .large-image-section img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 85vh; /* Evita que sea más alta que la pantalla */
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
         }
 
-        /* --- HERO COMO BEATS --- */
-.large-image-section {
-    padding: 0 5vw;
-    margin-top: 80px;
-    max-width: 1600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.large-image-section img {
-    display: block;
-    width: 100%;
-    height: 80vh;
-    object-fit: cover;
-    border-radius: 30px;
-    border: 1px solid var(--border);
-}
-        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
-
-
-        .project-content-split { /* New class for the split section of Alpha Project */
+        /* --- SECCIÓN SPLIT (EL ANÁLISIS) --- */
+        .project-content-split { 
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 40px 5vw 80px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: flex-start; /* Align text to the top */
+            align-items: flex-start; /* Alinea perfectamente la parte superior del título y del texto */
         }
-        .project-content-split .project-brief h3 { 
-            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;
+        .project-brief h3 { 
+            font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
         }
-
-        .project-brief {
-    margin-top: 60px;
-}
         .project-content-split .project-text { 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
         }
 
+        /* --- GALERÍA --- */
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
-            height: auto; /* Increased height for gallery images */
-            object-fit: contain; 
+            height: auto;
+            max-height: 70vh; 
+            object-fit: cover; /* Cambiado a cover para que llene la cuadrícula sin dejar huecos */
             border-radius: 20px; 
             border: 1px solid var(--border); 
             aspect-ratio: 4/3; 
         }
         .gallery .full-w { 
             grid-column: 1 / -1; 
-            aspect-ratio: 21/9; 
+            aspect-ratio: 16/9; /* Proporción más estándar y equilibrada */
+            max-height: 85vh;
         }
 
-        /* TEXTO INTERMEDIO ESTRECHO */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 40px 5vw 40px; } /* Se redujo el padding-top de 80px a 40px */
+        /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
+        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
         .project-text-full-width { 
-            max-width: 750px; font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+            width: 100%; /* Ahora ocupa el 100% de la caja, respetando los 5vw laterales */
+            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
+
+        /* --- FOTO 5 (PLANIMETRÍA) --- */
+        .project-hero-img { 
+            width: calc(100% - 10vw); /* Respeta los márgenes laterales */
+            height: auto; 
+            max-height: 90vh; /* No desborda la pantalla verticalmente */
+            object-fit: contain; /* CRUCIAL: 'contain' evita que se corte ninguna parte del plano */
+            border-radius: 30px; 
+            margin: 0 auto 80px auto; 
+            max-width: 1500px; 
+            display: block; 
+            border: 1px solid var(--border);
+            opacity: 0; transform: translateY(60px); 
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
         /* --- SEPARADOR VISUAL --- */
         .visual-separator {
             width: 100%;
-            height: 1px; /* Línea muy fina */
+            height: 1px; 
             background-color: var(--border);
-            margin: 100px auto; /* Espacio antes y después */
+            margin: 80px auto; 
             max-width: 1600px;
         }
 
+        /* --- NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -141,17 +151,16 @@
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
 
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 40px; }
-            .project-hero-img { width: 95%; height: 100vh; }
-            .gallery img { height: 100vh; }
-            .project-text-full-width { max-width: 100%; }
-
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; }
+            .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
+                max-height: 60vh; /* Se adaptan mejor a pantallas de móviles sin quedar demasiado estiradas */
+            }
+            .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -184,10 +193,10 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) - Con animación de entrada y un pequeño retraso -->
+        <!-- FOTO 1 (HERO) -->
         <section class="large-image-section">
-    <img id="hero-main" src="Aspirador1.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150" style="object-position: center top;">
-</section>
+            <img id="hero-main" src="Aspirador1.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
+        </section>
 
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
@@ -210,7 +219,7 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO ESTRECHO - MOVIDO Y ESPACIO SUPERIOR REDUCIDO -->
+        <!-- TEXTO INTERMEDIO (ANCHO COMPLETO Y ALINEADO CON LOS MÁRGENES) -->
         <div class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="Precision in manufacturing is only achievable through a flawless set of technical planimetries. For Project Alpha, we generated a comprehensive documentation package that bridges the gap between digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material heat-treatments required for the magnesium-alloy chassis components. We focused intensely on the routing of internal mechanical sensors and the precise anchor points for modular maintenance, ensuring that the final assembly process is both efficient and repeatable. This meticulous attention to industrial standards guarantees that every unit produced maintains the exact specifications of the original engineering prototype, facilitating a seamless transition to large-scale production." 
@@ -222,7 +231,7 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 5 (PLANIMETRÍA - ALINEADA CON FOTO 1) -->
+        <!-- FOTO 5 (PLANIMETRÍA - Usa object-fit: contain para no cortarse) -->
         <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover" data-aos="fade-up">
     </main>
 
@@ -279,10 +288,6 @@
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
-
-        // Intersection Observer para todas las imágenes y elementos con AOS
-       
-          
 
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
