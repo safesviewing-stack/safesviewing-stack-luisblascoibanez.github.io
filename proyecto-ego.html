@@ -151,6 +151,15 @@
             border: 1px solid var(--border);
         }
 
+        /* --- SEPARADOR VISUAL --- */
+        .visual-separator {
+            width: 100%;
+            height: 1px; /* Línea muy fina */
+            background-color: var(--border);
+            margin: 100px auto; /* Espacio antes y después */
+            max-width: 1600px;
+        }
+
         /* --- FOOTER & NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
         .next-project:hover { background: var(--accent-glow); }
@@ -230,6 +239,9 @@
             </div>
         </section>
 
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
         <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
@@ -243,10 +255,16 @@
             <img src="3 LAMPARA.jpg" alt="Detalle Lámpara 2" class="inter-hover">
         </section>
 
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
         <!-- FOTO 3: IMAGEN GRANDE (SIN TEXTO) -->
         <section class="large-image-section" data-aos="fade-up">
             <img src="PLANOLAMP1.jpg" alt="Plano Lámpara 1" class="inter-hover">
         </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 4: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
@@ -261,6 +279,9 @@
             </div>
         </section>
 
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
         <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
@@ -273,6 +294,9 @@
             </div>
             <img src="6 LAMPARA.jpg" alt="Detalle Lámpara 6" class="inter-hover">
         </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 6: IMAGEN GRANDE (SIN TEXTO) -->
         <section class="large-image-section" data-aos="fade-up">
@@ -295,28 +319,27 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Inicialización de AOS
+        // Modificado para que la primera imagen no se vea al cargar, sino al hacer scroll.
         AOS.init({ 
             duration: 800, 
             once: true,
-            // Deshabilita AOS para la primera sección si el scroll está en la parte superior al cargar
-            // para que solo se active cuando el usuario desplace.
-            disable: function() {
-                return window.pageYOffset === 0;
-            }
-        });
-
-        // Asegura que AOS se active una vez que el usuario empieza a hacer scroll
-        let aosInitialized = false;
-        window.addEventListener('scroll', () => {
-            if (!aosInitialized && window.pageYOffset > 0) {
-                AOS.refresh(); // Refresca AOS para activar las animaciones
-                aosInitialized = true;
-            }
+            // Agregamos un offset para que las animaciones de las secciones (incluida la primera foto)
+            // comiencen un poco antes de que el elemento esté completamente visible, dando un efecto más suave.
+            offset: 120 
         });
 
         // Restauración del scroll (se mantiene para la experiencia de usuario general)
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo(0, 0));
+        // Desactivamos el scroll a 0,0 en 'load' para que el usuario controle el inicio del scroll
+        // y así la primera imagen no se muestre hasta que se desplace.
+        // window.addEventListener('load', () => window.scrollTo(0, 0)); 
+        
+        // Pero, para asegurar que el usuario siempre empiece arriba si recarga, podemos hacer esto:
+        window.onload = function() {
+            window.scrollTo(0, 0);
+            AOS.refresh(); // Asegura que AOS recalcule las posiciones si el scroll cambia al cargar.
+        };
+
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
