@@ -64,6 +64,23 @@
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
+
+        /* --- HERO COMO BEATS --- */
+.large-image-section {
+    padding: 0 5vw;
+    margin-top: 80px;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.large-image-section img {
+    display: block;
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+}
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
 
@@ -164,7 +181,9 @@
         </section>
 
         <!-- FOTO 1 (HERO) - Con animación de entrada y un pequeño retraso -->
-        <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="inter-hover" data-aos="fade-up" data-aos-offset="200">
+        <section class="large-image-section">
+    <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="inter-hover" data-aos="fade-up" data-aos-offset="200">
+</section>
 
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
