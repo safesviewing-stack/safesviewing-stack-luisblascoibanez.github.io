@@ -39,7 +39,6 @@
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
         
-        /* HEADER ACTUALIZADO PARA REPLICAR LA IMAGEN */
         header { 
             background: var(--glass); 
             backdrop-filter: var(--blur); 
@@ -47,7 +46,7 @@
             padding: 12px 35px; 
             display: flex; 
             align-items: center; 
-            gap: 35px; /* Ajuste preciso del espacio entre bloques */
+            gap: 35px;
             border: 1px solid var(--border); 
             border-radius: 100px; 
             box-shadow: 0 4px 30px rgba(0,0,0,0.1); 
@@ -68,25 +67,19 @@
         .nav-links a {
             text-decoration: none;
             color: var(--text);
-            opacity: 0.65; /* Opacidad exacta de la foto */
+            opacity: 0.65;
             font-size: 0.8rem;
             font-family: 'Inter', sans-serif;
-            font-weight: 700; /* Bolder para replicar la imagen */
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
         }
-        .nav-links a:hover { opacity: 1; } /* Transición suave a blanco puro, sin color de acento */
+        .nav-links a:hover { opacity: 1; } 
         
-        .nav-dot { 
-            width: 3px; 
-            height: 3px; 
-            background: var(--text); 
-            border-radius: 50%; 
-            opacity: 0.25; 
-        } /* Puntos exactos como en la foto */
+        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
         
         .tools-nav { display:flex; align-items: center; gap: 12px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
@@ -103,130 +96,88 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* FOTO HERO MÁS ALTA (80vh) */
-        .project-hero-img { 
-            width: calc(100% - 10vw); 
-            height: 80vh; /* ALTURA AUMENTADA AÚN MÁS */
-            object-fit: cover; 
-            object-position: center;
-            border-radius: 30px; 
-            margin: 80px auto; 
-            max-width: 1500px; 
-            display: block; 
-            border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
-
-        .project-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 40px 5vw 80px; max-width: 1600px; margin: 0 auto; }
-        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;}
-        /* JUSTIFICADO */
-        .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
-
-        /* CUADRÍCULA 2x2 para imágenes */
-        .grid-2x2-section {
+        /* --- NUEVO LAYOUT DE FOTOS (6 FOTOS ALTERNADAS) --- */
+        
+        /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
+        .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            padding: 80px 5vw 0; 
+            gap: 80px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: stretch;
+            align-items: center;
         }
-
-        .grid-2x2-section .grid-text-item {
-            height: 60vh;
-            border: 1px solid transparent; 
-            border-radius: 20px;
-            background-color: transparent; 
-            display: flex; 
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 20px 40px 20px 0; 
-            box-sizing: border-box;
-        }
-        /* JUSTIFICADO */
-        .grid-2x2-section .grid-text-item p {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify;
-            margin: 0;
-        }
-
-        .grid-2x2-section img {
-            display: block;
+        .split-section img {
             width: 100%;
-            height: 60vh;
+            height: 70vh;
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
         }
-
-        /* ESTILOS PARA EL TEXTO ANCHO COMPLETO */
-        .text-align-wrapper {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 120px 5vw; 
+        .split-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-
-        /* JUSTIFICADO */
-        .project-text-full-width {
+        .split-text-container h3 {
+            font-family: 'Syne';
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .split-text {
             font-size: 1.1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            text-align: justify; 
+            text-align: justify;
+        }
+
+        /* Bloques de Imagen Grande (Pantalla Completa) */
+        .large-image-section {
+            padding: 40px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .large-image-section img {
+            display: block;
             width: 100%;
+            height: 85vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
         }
 
-        /* GRID DE FOTOS EN PARALELO (PARA LAS ÚLTIMAS 2) */
-        .planos-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 25px; 
-            padding: 0 5vw; 
-            max-width: 1600px; 
-            margin: 0 auto; 
-            align-items: stretch; 
-        }
-        .planos-grid img { 
-            display: block; 
-            width: 100%; 
-            height: 85vh; 
-            object-fit: cover; 
-            object-position: center; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
-        }
-
+        /* --- FOOTER & NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
-        /* --- FOOTER ESTILO IMAGEN --- */
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem; 
-            font-weight: 800; 
-            color: var(--text-dim); 
-            margin-bottom: 20px;
-            line-height: 1;
-            letter-spacing: 1px;
-        }
+        .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
        
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content, .grid-2x2-section, .planos-grid { grid-template-columns: 1fr; gap: 40px; } 
-            .grid-2x2-section { padding: 40px 5vw 0; }
-            .grid-2x2-section img, .grid-2x2-section .grid-text-item, .planos-grid img { height: auto; min-height: 50vh; } 
-            .grid-2x2-section .grid-text-item { height: auto; padding: 0;} 
-            .project-hero-img { width: 95%; height: 65vh;}
-            .text-align-wrapper { padding: 80px 5vw; }
+            .split-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 5vw;
+            }
+            .split-section img {
+                height: auto;
+                min-height: 50vh;
+                order: 1; /* En móvil, la imagen siempre va arriba */
+            }
+            .split-text-container {
+                order: 2; /* En móvil, el texto siempre va abajo de la foto */
+            }
+            .large-image-section { padding: 40px 5vw; }
+            .large-image-section img { height: 60vh; }
+            
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
@@ -239,13 +190,11 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- HEADER IDÉNTICO A LA FOTO -->
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <!-- Flecha de texto (&larr;) que en la fuente Inter luce idéntica a tu captura -->
                 <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
             </nav>
             <div class="nav-dot"></div>
@@ -257,6 +206,7 @@
     </div>
 
     <main>
+        <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
             <div class="project-meta">
@@ -267,47 +217,70 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) AUMENTADA A 80vh -->
-        <img id="hero-img" src="2RELOJ.jpg" alt="Beats X Hero" class="project-hero-img inter-hover">
-
-        <section class="project-content" data-aos="fade-up">
-            <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
-            <!-- TEXTO REDUCIDO Y JUSTIFICADO -->
-            <div class="project-text lang-node" 
-                 data-en="Beats X represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible." 
-                 data-es="El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.">
-                 El Proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de audio de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible.
+        <!-- FOTO 1: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
+                <p class="split-text lang-node" 
+                   data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
+                   data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
+                   Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
+                </p>
             </div>
         </section>
 
-        <!-- CUADRÍCULA CON TEXTO JUSTIFICADO E IMÁGENES -->
-        <div class="grid-2x2-section" data-aos="fade-up">
-            <div class="grid-text-item lang-node" 
-                 data-en="Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
-                 data-es="Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
-                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional.</p>
+        <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
+                <p class="split-text lang-node" 
+                   data-en="The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle. This section highlights key features, challenges overcome, and the overall impact of the design decisions made during the product's development." 
+                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
+                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
+                </p>
             </div>
-            <img src="5RELOJ.jpg" alt="Technical Drawing 1" class="inter-hover">
-            <img src="4RELOJ.jpg" alt="Technical Drawing 2" class="inter-hover">
-            <img src="1RELOJ.jpg" alt="Beats X Detail" class="inter-hover">
-        </div>
+            <img src="3 LAMPARA.jpg" alt="Detalle Lámpara 2" class="inter-hover">
+        </section>
 
-        <!-- TEXTO SEPARADOR JUSTIFICADO -->
-        <div class="text-align-wrapper" data-aos="fade-up">
-            <p class="project-text-full-width lang-node" 
-                 data-en="The resulting technical planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined in these blueprints is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation of how light interacts with micro-textured surfaces, ensuring that the final product conveys a sense of luxury and engineering solidity." 
-                 data-es="La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida en estos planos es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa de cómo la luz interactúa con las superficies micro-texturizadas.
-            </p>
-        </div>
+        <!-- FOTO 3: IMAGEN GRANDE (SIN TEXTO) -->
+        <section class="large-image-section" data-aos="fade-up">
+            <img src="PLANOLAMP1.jpg" alt="Plano Lámpara 1" class="inter-hover">
+        </section>
 
-        <!-- ÚLTIMA FILA (7 Y 8) -->
-        <div class="planos-grid" data-aos="fade-up">
-            <img src="7RELOJ.jpg" alt="Beats X View 1" class="inter-hover">
-            <img src="8RELOJ.jpg" alt="Beats X View 2" class="inter-hover">
-        </div>
+        <!-- FOTO 4: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <img src="4 LAMPARA.jpg" alt="Detalle Lámpara 4" class="inter-hover">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="Technical Approach" data-es="Enfoque Técnico">Enfoque Técnico</h3>
+                <p class="split-text lang-node" 
+                   data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object." 
+                   data-es="La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico.">
+                   La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico.
+                </p>
+            </div>
+        </section>
+
+        <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="Final Details" data-es="Detalles Finales">Detalles Finales</h3>
+                <p class="split-text lang-node" 
+                   data-en="These visualizations represent a precise physical simulation of how light interacts with the materials, ensuring that the final product conveys a sense of sophistication and engineering solidity before entering production." 
+                   data-es="Estas visualizaciones representan una simulación física precisa de cómo la luz interactúa con los materiales, asegurando que el producto final transmita una sensación de sofisticación y solidez técnica antes de entrar en producción.">
+                   Estas visualizaciones representan una simulación física precisa de cómo la luz interactúa con los materiales, asegurando que el producto final transmita una sensación de sofisticación y solidez técnica antes de entrar en producción.
+                </p>
+            </div>
+            <img src="6 LAMPARA.jpg" alt="Detalle Lámpara 6" class="inter-hover">
+        </section>
+
+        <!-- FOTO 6: IMAGEN GRANDE (SIN TEXTO) -->
+        <section class="large-image-section" data-aos="fade-up">
+            <img src="PLANOLAMP2.jpg" alt="Plano Lámpara 2" class="inter-hover">
+        </section>
     </main>
 
+    <!-- NEXT PROJECT -->
     <a href="proyecto-ion.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
@@ -345,7 +318,7 @@
             }, 250);
         });
 
-        // Cursor logic (0.35 smoothing)
+        // Cursor logic
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -364,17 +337,6 @@
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
-
-        // Hero Reveal
-        const heroes = document.querySelectorAll('.project-hero-img');
-        let heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('aos-animate');
-                }
-            });
-        }, { threshold: 0.15 }); 
-        heroes.forEach(h => heroObserver.observe(h));
 
         // Navbar Scroll
         let lastScroll = 0; const navbar = document.getElementById("navbar");
