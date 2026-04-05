@@ -96,6 +96,10 @@
         .project-content-split .project-brief h3 { 
             font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;
         }
+
+        .project-brief {
+    margin-top: 60px;
+}
         .project-content-split .project-text { 
             font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
@@ -103,8 +107,8 @@
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
         .gallery img { 
             width: 100%; 
-            height: 110vh; /* Increased height for gallery images */
-            object-fit: cover; 
+            height: auto; /* Increased height for gallery images */
+            object-fit: contain; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
             aspect-ratio: 4/3; 
@@ -182,7 +186,7 @@
 
         <!-- FOTO 1 (HERO) - Con animación de entrada y un pequeño retraso -->
         <section class="large-image-section">
-    <img id="hero-main" src="Aspirador1.jpg" alt="Alpha Hero" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
+    <img id="hero-main" src="Aspirador1.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150" style="object-position: center top;">
 </section>
 
         <section class="project-content-split" data-aos="fade-up">
