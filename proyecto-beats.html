@@ -78,7 +78,7 @@
         /* --- NUEVO LAYOUT ESPECÍFICO --- */
 
         /* 1. Primera foto en grande */
-        .large-image-section { padding: 60px 5vw 0; max-width: 1600px; margin: 0 auto; }
+        .large-image-section { padding: 0 5vw; margin-top: 80px; max-width: 1600px; margin: 0 auto; }
         .large-image-section img {
             display: block;
             width: 100%;
@@ -198,7 +198,7 @@
         </section>
 
         <!-- 1. PRIMERA FOTO EN GRANDE -->
-        <section class="large-image-section" data-aos="fade-up" data-aos-offset="300">
+        <section class="large-image-section" data-aos="fade-up" data-aos-offset="400" >
             <img src="2RELOJ.jpg" alt="Beats X Main View" class="inter-hover">
         </section>
 
@@ -258,7 +258,7 @@
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
