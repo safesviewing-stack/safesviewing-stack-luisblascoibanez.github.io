@@ -64,24 +64,25 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            align-items: center; /* Centra verticalmente la imagen dentro del contenedor */
-            /* Ajusta la altura del contenedor para "recortar" el recuadro por arriba y por abajo */
-            height: 70vh; /* Se ha reducido de 80vh a 70vh para recortar el recuadro */
-            overflow: hidden; /* Asegura que la imagen no sobresalga del contenedor si es más grande */
+            align-items: center; 
+            height: 70vh; 
+            overflow: hidden; 
         }
         .large-image-section:first-of-type {
             margin-top: 60px; 
         }
         .large-image-section img {
             display: block;
-            width: 90%; /* La imagen es un poco más pequeña dentro del recuadro */
-            max-width: none; 
-            height: auto; 
-            max-height: 90%; /* Ajusta la altura máxima de la imagen para que sea más pequeña */
-            object-fit: contain; 
+            width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+            max-width: none; /* Elimina cualquier restricción de ancho máximo de la imagen */
+            height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
+            max-height: 100%; 
+            object-fit: contain; /* Se mantiene 'contain' para que la imagen completa sea visible */
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
+            /* Se añade un poco de padding interno a la imagen para simular que es más pequeña dentro del marco */
+            padding: 2vh 0; /* Padding vertical para reducir la imagen y dejar espacio arriba/abajo */
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
@@ -137,7 +138,8 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section { min-height: 55vh; } /* Ajusta la altura del contenedor en tablet/móvil */
+            .large-image-section { min-height: 55vh; } 
+            .large-image-section img { padding: 1vh 0; } /* Ajusta el padding de la imagen en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
