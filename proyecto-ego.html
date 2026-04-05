@@ -91,6 +91,11 @@
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
 
+        .initial-hidden-split-section.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
         .split-text-container {
             display: flex;
             flex-direction: column;
@@ -302,31 +307,11 @@
             // Deshabilitar la detección automática al cargar para la primera sección.
             // Los elementos que ya están en el viewport no deberían animarse inmediatamente.
             // Para eso, necesitamos controlarlos con un IntersectionObserver.
-            disable: function() {
-                // Deshabilita AOS para la primera sección si ya está en el viewport
-                const firstSection = document.querySelector('.initial-hidden-split-section');
-                if (firstSection) {
-                    const rect = firstSection.getBoundingClientRect();
-                    return rect.top >= 0 && rect.bottom <= window.innerHeight;
-                }
-                return false;
-            }
+           
         });
 
         // Intersection Observer para la primera split-section
-        const firstSplitSection = document.querySelector('.initial-hidden-split-section');
-        if (firstSplitSection) {
-            let observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        firstSplitSection.classList.remove('initial-hidden-split-section'); // Quita el estilo oculto
-                        firstSplitSection.classList.add('aos-animate'); // Activa la animación AOS
-                        observer.unobserve(firstSplitSection); // Deja de observar una vez animado
-                    }
-                });
-            }, { threshold: 0.15 }); 
-            observer.observe(firstSplitSection);
-        }
+        
 
         // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
