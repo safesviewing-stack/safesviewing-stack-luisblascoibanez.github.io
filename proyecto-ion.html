@@ -71,9 +71,9 @@
         }
         .split-section img {
             width: 100%;
-            height: 75vh; /* Keep the container height to ensure overall section size */
-            max-height: 60vh; /* Make the actual image content smaller */
-            object-fit: contain; /* Crucial: ensures image is not cropped and fits within max-height */
+            height: 95vh; /* Increased height to make the container larger and fill it */
+            object-fit: cover; /* Ensures image fills the container, cropping if aspect ratio differs */
+            object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
         }
@@ -177,9 +177,8 @@
                 padding: 60px 5vw;
             }
             .split-section img {
-                height: auto; /* Allow image to take natural height */
-                max-height: 50vh; /* Max height for mobile, ensures it's not too tall */
-                object-fit: contain; /* Maintain full image content */
+                height: 70vh; /* Responsive height for mobile */
+                object-fit: cover; /* Fill container on mobile */
                 order: 1; /* En móvil, la imagen siempre va arriba */
             }
             .split-text-container {
