@@ -57,10 +57,9 @@
 
         /* --- LAYOUT ESPECÍFICO --- */
 
-        /* Fotos en grande (1 y 2) - ALTURA REDUCIDA */
+        /* Fotos en grande (1 y 2) - ALTURA AUMENTADA */
         .large-image-section {
-            padding: 0 5vw; 
-            max-width: 1600px;
+            padding: 0; /* Eliminar padding horizontal para que la imagen ocupe todo el ancho */
             margin: 0 auto;
             display: flex;
             justify-content: center;
@@ -70,14 +69,14 @@
         }
         .large-image-section img {
             display: block;
-            width: 100%;
-            max-width: 800px; /* Reducido para que sea más contenida */
+            width: 100vw; /* Ocupa el 100% del ancho del viewport */
+            max-width: none; /* Elimina la restricción de max-width */
             height: auto; 
-            max-height: 65vh; /* Límite estricto de altura */
-            object-fit: cover; /* Evita que se deforme si alcanza el límite de altura */
+            max-height: 80vh; /* Aumenta la altura máxima a 80% del viewport height */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
             object-position: center;
-            border-radius: 30px;
-            border: 1px solid var(--border);
+            border-radius: 0; /* Quita el border-radius para un look de ancho completo */
+            border: none; /* Quita el borde */
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
@@ -133,8 +132,7 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section { padding: 0 5vw; }
-            .large-image-section img { max-height: 50vh; } /* Aún más pequeña en tablet/móvil */
+            .large-image-section img { max-height: 65vh; } /* Ajuste de altura en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
