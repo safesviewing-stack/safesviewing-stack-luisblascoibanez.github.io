@@ -121,21 +121,33 @@
             font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
 
-        /* --- FOTO 5 (PLANIMETRÍA) --- */
-        .project-hero-img { 
-            width: calc(100% - 10vw); 
-            height: auto; 
-            max-height: 90vh; 
-            object-fit: contain; 
-            border-radius: 30px; 
-            margin: 0 auto 80px auto; 
-            max-width: 1500px; 
-            display: block; 
-            border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        /* --- SECCIÓN IMAGEN INDIVIDUAL CON TEXTO AL LADO --- */
+        .image-with-text-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Una columna para texto, otra para imagen */
+            gap: 80px;
+            padding: 80px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: center; /* Centra el contenido verticalmente */
         }
-        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+        .image-with-text-section img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh; /* Ajustado para que la imagen sea más grande */
+            object-fit: contain; /* Para que la imagen se vea completa */
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+        .image-with-text-section .text-content {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .image-with-text-section .text-content h3 {
+            font-family: 'Syne'; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; color: var(--text);
+        }
 
         /* --- SEPARADOR VISUAL --- */
         .visual-separator {
@@ -157,14 +169,17 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 30px; }
-            .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
+            .project-content-split, .image-with-text-section { grid-template-columns: 1fr; gap: 30px; }
+            .large-image-section img, .gallery img, .gallery .full-w, 
+            .image-with-text-section img { 
                 max-height: 60vh;
             }
             .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
+            .image-with-text-section img { order: 1; } /* En móvil, la imagen va primero */
+            .image-with-text-section .text-content { order: 2; } /* Y el texto después */
         }
     </style>
 </head>
@@ -203,7 +218,7 @@
             <img id="hero-main" src="2RELOJ.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="150">
         </section>
 
-        <!-- SECCIÓN SPLIT (EL ANÁLISIS) - Adaptado para ser un texto completo con un título en una columna y el texto en otra. -->
+        <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
@@ -216,12 +231,24 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA (con las 3 imágenes y el texto, adaptado para la estructura de la galería Alpha Project) -->
+        <!-- IMAGEN INDIVIDUAL 5RELOJ CON TEXTO A LA IZQUIERDA -->
+        <section class="image-with-text-section" data-aos="fade-up">
+            <div class="text-content lang-node" 
+                 data-en="<h3>Design Evolution</h3><p>Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development.</p>" 
+                 data-es="<h3>Evolución del Diseño</h3><p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>">
+                <h3>Evolución del Diseño</h3>
+                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>
+            </div>
+            <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover">
+        </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- GALERÍA (las otras dos fotos que quedan) -->
         <section class="gallery">
-            <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover" data-aos="fade-up">
             <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover" data-aos="fade-up">
-            <img src="1RELOJ.jpg" alt="Technical Detail 1" class="full-w inter-hover" data-aos="fade-up"> 
-            <!-- El texto se integrará en la sección split o en un full-width text section, no como un item de galería -->
+            <img src="1RELOJ.jpg" alt="Technical Detail 1" class="inter-hover" data-aos="fade-up">
         </section>
 
         <!-- SEPARADOR VISUAL -->
@@ -239,10 +266,10 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (usando la misma clase que project-hero-img para animación, pero adaptado para dos imágenes) -->
+        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (con max-height aumentado y object-fit: contain) -->
         <section class="gallery"> <!-- Reutilizamos la clase gallery para la disposición de 2 columnas -->
-            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up">
-            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up">
+            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up" style="max-height: 90vh; object-fit: contain;">
+            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up" style="max-height: 90vh; object-fit: contain;">
         </section>
 
     </main>
