@@ -96,6 +96,17 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
+        /* --- ANIMACIÓN HERO (REFERENCIA ALPHA) --- */
+        .custom-hero-reveal {
+            opacity: 0; 
+            transform: translateY(60px); 
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .custom-hero-reveal.aos-animate { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
         /* --- NUEVO LAYOUT DE FOTOS (6 FOTOS ALTERNADAS) --- */
         
         /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
@@ -226,8 +237,8 @@
             </div>
         </section>
 
-        <!-- FOTO 1: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA (con data-aos para animar al scroll) -->
-        <section class="split-section" data-aos="fade-up">
+        <!-- FOTO 1: Implementación con Observer estilo Proyecto Alpha -->
+        <section class="split-section custom-hero-reveal">
             <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
@@ -318,27 +329,26 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicialización de AOS
-        // Modificado para que la primera imagen no se vea al cargar, sino al hacer scroll.
+        // Restauración del scroll limpia al recargar
+        if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+
+        // Inicialización de AOS estándar
         AOS.init({ 
             duration: 800, 
-            once: true,
-            // Agregamos un offset para que las animaciones de las secciones (incluida la primera foto)
-            // comiencen un poco antes de que el elemento esté completamente visible, dando un efecto más suave.
-            offset: 120 
+            once: true
         });
 
-        // Restauración del scroll (se mantiene para la experiencia de usuario general)
-        if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
-        // Desactivamos el scroll a 0,0 en 'load' para que el usuario controle el inicio del scroll
-        // y así la primera imagen no se muestre hasta que se desplace.
-        // window.addEventListener('load', () => window.scrollTo(0, 0)); 
-        
-        // Pero, para asegurar que el usuario siempre empiece arriba si recarga, podemos hacer esto:
-        window.onload = function() {
-            window.scrollTo(0, 0);
-            AOS.refresh(); // Asegura que AOS recalcule las posiciones si el scroll cambia al cargar.
-        };
+        // Intersection Observer (Referencia estricta a Proyecto Alpha)
+        const heroes = document.querySelectorAll('.custom-hero-reveal');
+        let heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('aos-animate');
+                }
+            });
+        }, { threshold: 0.15 }); 
+        heroes.forEach(h => heroObserver.observe(h));
 
 
         // Theme Toggle
