@@ -67,7 +67,11 @@
         .lang-sutil-btn:hover { opacity: 1; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
+        .project-header { 
+            padding: 100px 5vw 20px; /* Reduced padding-top */
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
         
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
@@ -86,6 +90,9 @@
             max-width: 1600px;
             margin: 0 auto;
             align-items: center;
+        }
+        .split-section:first-of-type {
+            margin-top: 100px; /* Added margin-top to push the first split section down */
         }
         .split-section img {
             width: 100%;
