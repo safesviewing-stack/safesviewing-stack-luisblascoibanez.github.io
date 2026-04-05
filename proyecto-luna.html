@@ -74,15 +74,12 @@
         .large-image-section img {
             display: block;
             width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-            max-width: none; /* Elimina cualquier restricción de ancho máximo de la imagen */
             height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
-            max-height: 100%; 
-            object-fit: contain; /* Se mantiene 'contain' para que la imagen completa sea visible */
+            object-fit: cover; /* Cambiado a 'cover' para que la imagen ocupe todo el recuadro, recortando si es necesario */
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
-            /* Se añade un poco de padding interno a la imagen para simular que es más pequeña dentro del marco */
-            padding: 2vh 0; /* Padding vertical para reducir la imagen y dejar espacio arriba/abajo */
+            padding: 0; /* Elimina el padding interno de la imagen para que ocupe el 100% */
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
@@ -139,7 +136,6 @@
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
             .large-image-section { min-height: 55vh; } 
-            .large-image-section img { padding: 1vh 0; } /* Ajusta el padding de la imagen en tablet/móvil */
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
@@ -191,7 +187,7 @@
         <!-- TEXTO CENTRAL (2 Columnas) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width lang-node" 
-                 data-en="Luna Ambient is an exploration of how industrial objects interact with domestic light. The design relies heavily on CMF (Color, Material, Finish) to dictate how the textured surface diffuses LED projection. The physical form is merely a vessel; the real product is the atmosphere it creates. Extensive prototyping with frosted polymers and anodized aluminum rings allowed us to find the perfect refraction index for a warm, non-intrusive glow." 
+                 data-en="Luna Ambient is an exploration of how industrial objects interact with domestic light. The design relies heavily on CMF (Color, Material, Finish) to dictate how the textured surface diffuses LED projection. The physical form is merely a vessel; the real product is the atmosphere it creates. Extensive prototyping with frosted polymers and anodized aluminum rings allowed us to find the perfect refraction index for a warm, non-intrusiVE glow." 
                  data-es="Luna Ambient es una exploración de cómo los objetos industriales interactúan con la luz doméstica. El diseño depende en gran medida del CMF (Color, Material, Acabado) para dictar cómo la superficie texturizada difunde la proyección LED. La forma física es meramente un contenedor; el producto real es la atmósfera que crea. El prototipado exhaustivo con polímeros esmerilados y anillos de aluminio anodizado nos permitió encontrar el índice de refracción perfecto para un resplandor cálido y no intrusivo.">
                  Luna Ambient es una exploración de cómo los objetos industriales interactúan con la luz doméstica. El diseño depende en gran medida del CMF (Color, Material, Acabado) para dictar cómo la superficie texturizada difunde la proyección LED. La forma física es meramente un contenedor; el producto real es la atmósfera que crea. El prototipado exhaustivo con polímeros esmerilados y anillos de aluminio anodizado nos permitió encontrar el índice de refracción perfecto para un resplandor cálido y no intrusivo.
             </div>
