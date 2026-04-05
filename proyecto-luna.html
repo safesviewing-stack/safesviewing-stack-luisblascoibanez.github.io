@@ -59,8 +59,8 @@
 
         /* Fotos en grande (1 y 2) - ALTURA Y MÁRGENES AJUSTADOS */
         .large-image-section {
-            padding: 0 5vw; 
-            max-width: 1600px; 
+            padding: 0 5vw; /* Mantiene el padding lateral del 5vw */
+            max-width: 1600px; /* Ancho máximo del contenedor */
             margin: 0 auto;
             display: flex;
             justify-content: center;
@@ -70,11 +70,11 @@
         }
         .large-image-section img {
             display: block;
-            width: 100%; 
-            max-width: 1000px; /* Aumenta el ancho máximo de la imagen */
+            width: 100%; /* Ocupa el 100% del ancho del contenedor .large-image-section */
+            max-width: 1200px; /* AUMENTADO: Ancho máximo del marco de la imagen (la imagen en sí se ajustará) */
             height: auto; 
-            max-height: 65vh; 
-            object-fit: cover; 
+            max-height: 65vh; /* Se mantiene la altura máxima como referencia */
+            object-fit: contain; /* Cambiado a 'contain' para que la imagen se ajuste dentro del marco sin ser recortada */
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
@@ -133,7 +133,7 @@
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
-            .large-image-section img { max-height: 50vh; } /* Aún más pequeña en tablet/móvil */
+            .large-image-section img { max-height: 50vh; } 
             .text-align-wrapper { padding: 60px 5vw; }
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
@@ -203,7 +203,7 @@
 
         <!-- SEGUNDO BLOQUE: IMAGEN GRANDE "2 TOP" -->
         <section class="large-image-section" data-aos="fade-up">
-            <img src="1 TOP.jpg" alt="Luna Ambient - Vista Top" class="inter-hover">
+            <img src="2 TOP.jpg" alt="Luna Ambient - Vista Top" class="inter-hover">
         </section>
 
         <!-- TEXTO CENTRAL (2 Columnas) -->
