@@ -59,15 +59,13 @@
 
         /* ALINEACIÓN PERFECTA PARA FOTOS HERO 1 Y 5 */
         .project-hero-img { 
-            width: calc(100% - 10vw); height: auto; border-radius: 30px; 
+            width: calc(100% - 10vw); height: 90vh; object-fit: cover; object-position: center; border-radius: 30px; 
             margin: 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border);
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
-        /* --- NUEVO LAYOUT DE FOTOS (6 FOTOS ALTERNADAS) --- */
-        
         /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
         .split-section {
             display: grid;
@@ -79,17 +77,12 @@
             align-items: center;
         }
         .split-section img {
-            width: calc(100% + 10vw); /* Extend image slightly to the sides */
-            margin-left: -5vw; /* Pull image to the left */
-            height: 70vh;
+            width: 100%;
+            height: 90vh; /* Increased height */
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
-        }
-        .split-section.right-aligned img {
-            margin-left: auto; /* Reset margin for right-aligned */
-            margin-right: -5vw; /* Pull image to the right */
         }
         .split-text-container {
             display: flex;
@@ -110,20 +103,20 @@
             text-align: justify;
         }
 
-        /* Bloques de Imagen Grande (Pantalla Completa) */
+        /* Bloques de Imagen Grande */
         .large-image-section {
-            padding: 40px 0; /* Remove horizontal padding here */
-            max-width: none; /* Allow full width */
+            padding: 40px 5vw;
+            max-width: 1600px;
             margin: 0 auto;
         }
         .large-image-section img {
             display: block;
-            width: 100vw; /* Make image full viewport width */
-            height: 85vh;
+            width: 100%;
+            height: 90vh; /* Increased height */
             object-fit: cover;
             object-position: center;
-            border-radius: 0; /* Remove border radius for full width */
-            border: none; /* Remove border for full width */
+            border-radius: 30px;
+            border: 1px solid var(--border);
         }
 
         /* --- SEPARADOR VISUAL --- */
@@ -152,18 +145,15 @@
                 padding: 60px 5vw;
             }
             .split-section img {
-                width: 100%; /* Reset width for mobile */
-                margin-left: 0; /* Reset margin for mobile */
-                margin-right: 0; /* Reset margin for mobile */
                 height: auto;
-                min-height: 50vh;
+                min-height: 70vh; /* Adjusted minimum height for mobile */
                 order: 1; /* En móvil, la imagen siempre va arriba */
             }
             .split-text-container {
                 order: 2; /* En móvil, el texto siempre va abajo de la foto */
             }
-            .large-image-section { padding: 40px 0; }
-            .large-image-section img { height: 60vh; border-radius: 0; }
+            .large-image-section { padding: 40px 5vw; }
+            .large-image-section img { height: 70vh; /* Adjusted height for mobile */ }
             
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -219,7 +209,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section right-aligned" data-aos="fade-up">
+        <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
                 <p class="split-text lang-node" 
@@ -259,7 +249,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
-        <section class="split-section right-aligned" data-aos="fade-up">
+        <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Final Details" data-es="Detalles Finales">Detalles Finales</h3>
                 <p class="split-text lang-node" 
