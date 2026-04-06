@@ -85,7 +85,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 120px 5vw; /* Aumentado aún más el padding superior para bajarlo */
+            padding: 120px 5vw 80px; /* Aumentado padding superior y reducido el inferior */
             max-width: 1600px;
             margin: 0 auto;
             align-items: flex-start; 
@@ -163,7 +163,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 60px 5vw; /* Ajuste para móvil */ }
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 60px 5vw 40px; /* Ajuste para móvil */ }
             .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
                 max-height: 60vh; 
             }
