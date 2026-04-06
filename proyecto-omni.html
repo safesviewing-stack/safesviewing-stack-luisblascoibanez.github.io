@@ -75,7 +75,10 @@
             justify-content: center; 
             /* Added min-height to ensure the container provides enough space for images that are not cropped */
             min-height: 70vh; /* Adjust as needed */
-        }
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+         }
         .large-image-section img {
             display: block;
             width: 100%;
@@ -344,6 +347,15 @@
             else navbar.classList.remove("ui-hidden");
             lastScroll = currentScroll;
         });
+
+        const heroSection = document.querySelector(".large-image-section");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 35) { // ajusta este valor a tu gusto
+        heroSection.style.opacity = "1";
+        heroSection.style.transform = "translateY(0)";
+    }
+});
     </script>
 </body>
 </html>
