@@ -63,17 +63,18 @@
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            /* Removed min-height to let the image define its own height */
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            /* Added min-height to ensure the container provides enough space for images that are not cropped */
+            min-height: 70vh; /* Adjust as needed */
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: auto; /* Changed to auto to avoid cutting off images */
-            max-height: 90vh; 
-            object-fit: contain; /* Changed to contain to show full image without cropping */
+            height: auto; 
+            max-height: 90vh; /* Allow images to be taller if needed */
+            object-fit: contain; /* CRITICAL: ensures the whole image is visible */
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -97,20 +98,29 @@
         }
 
         /* --- GALERÍA --- */
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+            padding: 0 5vw; 
+            max-width: 1600px; 
+            margin: 0 auto;
+            /* Added min-height to ensure gallery containers can grow */
+            min-height: 50vh; /* Adjust as needed */
+        }
         .gallery img { 
             width: 100%; 
             height: auto;
             max-height: 70vh; 
-            object-fit: cover; 
+            object-fit: contain; /* Changed to contain for gallery images */
             border-radius: 20px; 
             border: 1px solid var(--border); 
-            aspect-ratio: 4/3; 
+            /* Removed aspect-ratio to let image define its own height */
         }
         .gallery .full-w { 
             grid-column: 1 / -1; 
-            aspect-ratio: 16/9; 
             max-height: 85vh;
+            /* Removed aspect-ratio here too */
         }
 
         /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
