@@ -69,6 +69,9 @@
             min-height: 70vh; /* Changed from height to min-height to ensure content fits */
             overflow: hidden; 
             position: relative; /* Added for object-fit-contain */
+            opacity: 0;
+           transform: translateY(120px); /* antes 40px → ahora más abajo */
+           transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .large-image-section:first-of-type {
             margin-top: 500px; /* Increased top margin for the first image */
@@ -303,6 +306,15 @@
             else navbar.classList.remove("ui-hidden");
             lastScroll = currentScroll;
         });
+
+        const heroSection = document.querySelector(".large-image-section");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 80) { // ajusta este valor a tu gusto
+        heroSection.style.opacity = "1";
+        heroSection.style.transform = "translateY(0)";
+    }
+});
     </script>
 </body>
 </html>
