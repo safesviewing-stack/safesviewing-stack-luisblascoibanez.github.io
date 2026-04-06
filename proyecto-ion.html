@@ -75,17 +75,17 @@
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding: 80px 5vw;
+            gap: 60px; /* Reducido de 80px */
+            padding: 60px 5vw; /* Reducido de 80px */
             max-width: 1600px;
             margin: 0 auto;
             align-items: center;
         }
         .split-section img {
             width: 100%;
-            height: 80vh; /* Fixed height for wider aspect ratio */
-            aspect-ratio: 16/9; /* Make it wider */
-            object-fit: cover; /* Ensures image fills the container */
+            height: 60vh; 
+            aspect-ratio: 16/9; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 20px;
             border: 1px solid var(--border);
@@ -111,7 +111,7 @@
 
         /* Bloques de Imagen Grande (Pantalla Completa respetando márgenes) */
         .large-image-section {
-            padding: 40px 5vw;
+            padding: 30px 5vw; /* Reducido de 40px */
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -127,8 +127,8 @@
         
         /* Hero Image Section (for larger, more prominent images) */
         .hero-image-section {
-            padding: 0 5vw; /* Consistent padding */
-            margin-top: 90px;
+            padding: 0 5vw; 
+            margin-top: 60px; /* Reducido de 90px */
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
@@ -152,7 +152,15 @@
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 80px 5vw; 
+            padding: 60px 5vw; /* Reducido de 80px */
+        }
+        .text-align-wrapper.split { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; 
+            padding: 30px 5vw; /* Reducido de 0 5vw para ajustarse mejor */
+            max-width: 1600px;
+            margin: 0 auto;
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -169,7 +177,7 @@
             width: 100%;
             height: 1px; 
             background-color: var(--border);
-            margin: 80px auto; 
+            margin: 60px auto; /* Reducido de 80px */
             max-width: 1600px;
         }
 
@@ -190,21 +198,24 @@
                 padding: 60px 5vw;
             }
             .split-section img {
-                height: 50vh; /* Responsive height for mobile */
-                aspect-ratio: 16/9; /* Maintain aspect ratio on mobile */
-                object-fit: cover; /* Fill container on mobile */
-                order: 1; /* En móvil, la imagen siempre va arriba */
+                height: 50vh; 
+                aspect-ratio: 16/9; 
+                object-fit: cover; 
+                order: 1; 
             }
             .split-text-container {
-                order: 2; /* En móvil, el texto siempre va abajo de la foto */
+                order: 2; 
             }
             .large-image-section { padding: 40px 5vw; }
             .large-image-section img { height: 60vh; }
             .hero-image-section img {
-                max-height: 60vh; /* Se adaptan mejor a pantallas de móviles sin quedar demasiado estiradas */
+                max-height: 60vh; 
             }
             .text-align-wrapper { padding: 60px 5vw; }
-            
+            .text-align-wrapper.split {
+                grid-template-columns: 1fr; 
+                gap: 30px;
+            }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
@@ -261,15 +272,22 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA -->
+        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA (AHORA DIVIDIDO EN 2 COLUMNAS Y CON MÁS TEXTO) -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
-                <p class="split-text lang-node" 
-                   data-en="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto." 
-                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
-                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
-                </p>
+                <div class="text-align-wrapper split">
+                    <p class="project-text-full-width lang-node" 
+                       data-en="The integration of high-quality materials and millimeter-precise tolerances ensure an exceptional lifecycle, setting a new benchmark for structural reliability in its category. Here, we highlight key features, overcome challenges, and the overall impact of design decisions made during product development. Our commitment to innovation is reflected in every detail, from the selection of sustainable materials to the ergonomic studies that guarantee user comfort." 
+                       data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto. Nuestro compromiso con la innovación se refleja en cada detalle, desde la selección de materiales sostenibles hasta los estudios ergonómicos que garantizan la comodidad del usuario.">
+                       La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto. Nuestro compromiso con la innovación se refleja en cada detalle, desde la selección de materiales sostenibles hasta los estudios ergonómicos que garantizan la comodidad del usuario.
+                    </p>
+                    <p class="project-text-full-width lang-node"
+                       data-en="This meticulous attention to industrial standards guarantees that every unit maintains the exact specifications of the original prototype, facilitating a seamless transition to large-scale production. The planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every manufacturing stage. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product."
+                       data-es="Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala. Las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final.">
+                       Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala. Las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final.
+                    </p>
+                </div>
             </div>
             <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
         </section>
@@ -298,7 +316,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- 5. ÚLTIMA FOTO EN GRANDE (tipo hero-image-section) -->
-        <section class="hero-image-section" style="margin-bottom: 120px;" data-aos="fade-up"> 
+        <section class="hero-image-section" style="margin-bottom: 60px;" data-aos="fade-up"> <!-- Reducido de 120px -->
             <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
         </section>
 
