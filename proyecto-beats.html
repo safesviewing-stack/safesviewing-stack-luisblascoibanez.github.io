@@ -81,8 +81,8 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-           transform: translateY(120px); /* antes 40px → ahora más abajo */
-           transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(120px); /* antes 40px → ahora más abajo */
+            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .large-image-section img {
             display: block;
@@ -369,7 +369,7 @@
         const heroSection = document.querySelector(".large-image-section");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 80) { // ajusta este valor a tu gusto
+    if (window.scrollY > 35) { // ajusta este valor a tu gusto
         heroSection.style.opacity = "1";
         heroSection.style.transform = "translateY(0)";
     }
