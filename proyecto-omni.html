@@ -63,7 +63,7 @@
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            min-height: 70vh; 
+            /* Removed min-height to let the image define its own height */
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -71,9 +71,9 @@
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 100%; 
+            height: auto; /* Changed to auto to avoid cutting off images */
             max-height: 90vh; 
-            object-fit: cover; 
+            object-fit: contain; /* Changed to contain to show full image without cropping */
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -87,7 +87,7 @@
             padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: flex-start; /* Alinea perfectamente la parte superior del título y del texto */
+            align-items: flex-start; 
         }
         .project-brief h3 { 
             font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
@@ -114,10 +114,20 @@
         }
 
         /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
+        .text-align-wrapper { 
+            max-width: 1600px; 
+            margin: 0 auto; 
+            padding: 0 5vw; 
+            display: grid; /* Use grid for two columns */
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: 60px; /* Gap between columns */
+        } 
         .project-text-full-width { 
             width: 100%; 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
+            font-size: 1.1rem; 
+            color: var(--text-dim); 
+            line-height: 1.8; 
+            text-align: justify; 
         }
 
         /* --- SEPARADOR VISUAL --- */
@@ -130,7 +140,20 @@
         }
 
         /* --- NEXT PROJECT --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
+        .next-project { 
+            text-align: center; 
+            padding: 100px 5vw; 
+            background: var(--card-bg); 
+            border-top: 1px solid var(--border); 
+            border-bottom: 1px solid var(--border); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-decoration: none; 
+            transition: background 0.4s;
+            margin-top: 80px; /* Added margin above the next project section */
+        }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
@@ -143,6 +166,10 @@
             .project-content-split { grid-template-columns: 1fr; gap: 30px; }
             .large-image-section img, .gallery img, .gallery .full-w { 
                 max-height: 60vh; 
+            }
+            .text-align-wrapper {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+                gap: 30px;
             }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -214,12 +241,17 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 4. TEXTO DEBAJO DE LAS DOS FOTOS (Totalmente centrado entre fotos 2-3 y foto 4) -->
+        <!-- TEXTO INTERMEDIO (Dividido en dos columnas) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="By simulating toolpaths beforehand, we achieved a seamless transition from the digital CAD model to the physical 5-axis machined aluminum part, eliminating assembly bottlenecks. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
                  data-es="Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
                  Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
+            </p>
+            <p class="project-text-full-width lang-node"
+                 data-en="The rigorous testing protocols applied to each component guarantee optimal performance under extreme operational conditions. This approach not only enhances durability but also minimizes maintenance requirements, providing a cost-effective and reliable solution for industrial applications. Our commitment to innovation and precision ensures that Omni Dynamics remains at the forefront of robotic arm technology."
+                 data-es="Los rigurosos protocolos de prueba aplicados a cada componente garantizan un rendimiento óptimo en condiciones operativas extremas. Este enfoque no solo mejora la durabilidad, sino que también minimiza los requisitos de mantenimiento, proporcionando una solución rentable y fiable para aplicaciones industriales. Nuestro compromiso con la innovación y la precisión asegura que Omni Dynamics se mantenga a la vanguardia de la tecnología de brazos robóticos.">
+                 Los rigurosos protocolos de prueba aplicados a cada componente garantizan un rendimiento óptimo en condiciones operativas extremas. Este enfoque no solo mejora la durabilidad, sino que también minimiza los requisitos de mantenimiento, proporcionando una solución rentable y fiable para aplicaciones industriales. Nuestro compromiso con la innovación y la precisión asegura que Omni Dynamics se mantenga a la vanguardia de la tecnología de brazos robóticos.
             </p>
         </section>
 
