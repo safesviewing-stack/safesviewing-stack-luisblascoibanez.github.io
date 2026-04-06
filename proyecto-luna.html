@@ -90,8 +90,8 @@
         /* Texto centrado ancho completo (2 Columnas) */
         .text-align-wrapper {
             max-width: 1600px;
-            margin: 0 auto;
-            padding: 100px 5vw; 
+            margin: 40px auto; /* Reducimos el margen superior e inferior */
+            padding: 0 5vw; /* Eliminamos el padding vertical para controlar el margen con 'margin' */
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -108,7 +108,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-            padding: 0 5vw 100px; 
+            padding: 0 5vw; /* Eliminamos el padding-bottom de 100px */
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -150,7 +150,7 @@
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
             .large-image-section { min-height: 55vh; } 
-            .text-align-wrapper { padding: 60px 5vw; }
+            .text-align-wrapper { margin: 30px auto; } /* Ajuste de margen para móviles */
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -257,9 +257,6 @@
             <img src="13 TOP.jpg" alt="Top Detail 13" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
             <img src="14 TOP.jpg" alt="Top Detail 14" class="inter-hover" data-aos="fade-up" data-aos-delay="200">
         </section>
-
-        <!-- SEPARADOR VISUAL -->
-        <div class="visual-separator" data-aos="fade-up"></div>
     </main>
 
     <!-- FINAL DEL SHOWCASE (Vuelve al portfolio) -->
