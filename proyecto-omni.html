@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni Dynamics | Luis Blasco-Ibáñez</title>
+    <title>Grifo Project | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,14 +16,19 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
-        
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
-        .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
-        
-        body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); }
-        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
-        
-        ::selection { background: var(--accent); color: #fff; }
+
+        /* --- FONDO ANARANJADO Y GRANO --- */
+        body::before { 
+            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
+            background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
+            z-index: -1; transform: translateX(-50%); pointer-events: none;
+        }
+        body::after { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            pointer-events: none; z-index: 9998; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); 
+            opacity: 0.04; mix-blend-mode: overlay; 
+        }
 
         /* --- CURSOR --- */
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
@@ -33,53 +38,109 @@
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .ui-hidden { transform: translateY(-130px); }
-        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 35px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); animation: headerFadeIn 1s forwards; }
-        @keyframes headerFadeIn { 0% { opacity: 0; transform: translateY(-40px); } 100% { opacity: 1; transform: translateY(0); } }
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; opacity: 0.9; transition: opacity 0.3s; text-decoration: none; color: var(--text);}
-        .nav-logo:hover { opacity: 1; }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.65; font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; transition: all 0.3s ease; display: flex; align-items: center; }
-        .nav-links a:hover { opacity: 1; } 
-        .nav-dot { width: 3px; height: 3px; background: var(--text); border-radius: 50%; opacity: 0.25; }
-        .tools-nav { display:flex; align-items: center; gap: 12px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.65; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s; }
-        .icon-btn:hover { opacity: 1; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; transition: all 0.3s ease; opacity: 0.65; letter-spacing: 0.5px;}
-        .lang-sutil-btn:hover { opacity: 1; }
+        header { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); padding: 12px 35px; display: flex; align-items: center; gap: 40px; border: 1px solid var(--border); border-radius: 100px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease; }
+        .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
+        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; } 
+        .tools-nav { display:flex; align-items: center; gap: 10px;}
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
 
         /* --- PROJECT CONTENT --- */
-        .project-header { padding: 200px 5vw 100px; max-width: 1600px; margin: 0 auto; }
+        .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
         .project-title { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; text-transform: uppercase; line-height: 1; letter-spacing: -2px; }
+        
         .project-meta { display: flex; flex-wrap: wrap; gap: 60px; margin-top: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
         .meta-col { display: flex; flex-direction: column; gap: 8px; }
-        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
+        .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- LAYOUT OPTIMIZADO PARA CENTRAR TEXTOS --- */
+        /* --- LAYOUT DE FOTOS Y TEXTO --- */
 
-        /* Fotos en grande (Primera y Cuarta) */
-        .large-image-section {
-            padding: 0 5vw; /* Eliminamos el padding vertical para controlar el hueco solo con el texto */
+        /* Bloques Divididos (Mitad Imagen / Mitad Texto) */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
+            align-items: center;
         }
-        .large-image-section:first-of-type {
-            margin-top: 100px; /* Margen inicial para separarlo un poco de la cabecera */
+        .split-section img {
+            width: 100%;
+            height: 60vh; /* Fixed height for wider aspect ratio */
+            aspect-ratio: 16/9; /* Make it wider */
+            object-fit: cover; /* Ensures image fills the container */
+            object-position: center;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .split-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .split-text-container h3 {
+            font-family: 'Syne';
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .split-text {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Bloques de Imagen Grande (Pantalla Completa respetando márgenes) */
+        .large-image-section {
+            padding: 40px 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: auto; 
+            height: 85vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+        
+        /* Hero Image Section (for larger, more prominent images) */
+        .hero-image-section {
+            padding: 0 5vw; /* Consistent padding */
+            margin-top: 90px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 70vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .hero-image-section img {
+            display: block;
+            width: 100%;
+            height: 100%; 
+            max-height: 90vh; 
+            object-fit: cover; 
+            object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
         }
 
-        /* Texto perfectamente centrado de ancho completo */
+        /* Texto intermedio (entre foto 3 y 4) */
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            /* Estos 100px arriba y abajo actúan como separador perfecto entre las fotos */
-            padding: 100px 5vw; 
+            padding: 80px 5vw; 
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -87,45 +148,51 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            /* Dividimos en 2 columnas para que el texto sea legible al ocupar todo el ancho */
-            column-count: 2;
-            column-gap: 60px;
+            max-width: 1000px; /* Para que quede centrado y no se alargue infinitamente */
+            margin: 0 auto;
         }
 
-        /* Fotos en paralelo (Segunda y Tercera) */
-        .side-by-side-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 25px; 
-            padding: 0 5vw; /* Igual, 0 padding vertical, controlado por el texto */
-            max-width: 1600px; 
-            margin: 0 auto; 
-            align-items: stretch; 
-        }
-        .side-by-side-grid img { 
-            display: block; 
-            width: 100%; 
-            height: 70vh; 
-            object-fit: cover; 
-            object-position: center; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
+        /* SEPARADOR VISUAL */
+        .visual-separator {
+            width: 100%;
+            height: 1px; 
+            background-color: var(--border);
+            margin: 80px auto; 
+            max-width: 1600px;
         }
 
         /* --- FOOTER & NEXT PROJECT --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
-        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
+        .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
-
-        @media (max-width: 1024px) { 
-            .side-by-side-grid { grid-template-columns: 1fr; gap: 40px; } 
-            .side-by-side-grid img { height: 60vh; }
-            .project-text-full-width { column-count: 1; } /* En móvil se vuelve de 1 sola columna */
-            .text-align-wrapper { padding: 80px 5vw; }
+       
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .split-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 5vw;
+            }
+            .split-section img {
+                height: 50vh; /* Responsive height for mobile */
+                aspect-ratio: 16/9; /* Maintain aspect ratio on mobile */
+                object-fit: cover; /* Fill container on mobile */
+                order: 1; /* En móvil, la imagen siempre va arriba */
+            }
+            .split-text-container {
+                order: 2; /* En móvil, el texto siempre va abajo de la foto */
+            }
+            .large-image-section { padding: 40px 5vw; }
+            .large-image-section img { height: 60vh; }
+            .hero-image-section img {
+                max-height: 60vh; /* Se adaptan mejor a pantallas de móviles sin quedar demasiado estiradas */
+            }
+            .text-align-wrapper { padding: 60px 5vw; }
+            
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
@@ -134,95 +201,118 @@
     </style>
 </head>
 <body>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
     <div class="navbar-wrapper ui-sync" id="navbar">
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="&larr; BACK TO PORTFOLIO" data-es="&larr; VOLVER AL PORTFOLIO">&larr; VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
             </nav>
-            <div class="nav-dot"></div>
             <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
+                <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
+                <button id="lang-toggle" class="lang-sutil-btn inter-hover">EN</button>
             </div>
         </header>
     </div>
 
     <main>
-        <!-- CABECERA -->
-        <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="project-title lang-node" data-en="Omni Dynamics" data-es="Omni Dynamics">Omni Dynamics</h1>
+        <!-- CABECERA DEL PROYECTO -->
+        <section class="project-header" data-aos="fade-up">
+            <h1 class="project-title lang-node" data-en="Grifo Series" data-es="Serie Grifo">Serie Grifo</h1>
             <div class="project-meta">
-                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Mechanical Designer" data-es="Diseñador Mecánico">Diseñador Mecánico</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Robotics Integration" data-es="Mecanización & Robótica">Mecanización & Robótica</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2024</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Fusion 360 / CNC Milling</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Product Designer" data-es="Diseñador de Producto">Diseñador de Producto</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Industrial Equipment" data-es="Equipamiento Industrial">Equipamiento Industrial</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2022</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>CAD / Keyshot</span></div>
             </div>
         </section>
 
-        <!-- 1. PRIMERA FOTO EN GRANDE (Centro) -->
-        <section class="large-image-section" data-aos="fade-up" data-aos-duration="1200" data-aos-offset="100">
-            <img src="2 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Principal" class="inter-hover">
-        </section>
-
-        <!-- 2. TEXTO DEBAJO (Totalmente centrado entre foto 1 y fotos 2-3) -->
-        <section class="text-align-wrapper" data-aos="fade-up">
-            <div class="project-text-full-width lang-node" 
-                 data-en="Omni Dynamics required the development of robust articulation nodes for an industrial robotic arm. Design for Manufacturing (DFM) was critical here, as every chamfer and fillet was meticulously optimized to reduce CNC milling time. The convergence of industrial aesthetics and advanced mechanical performance was the core objective, ensuring a structural chassis capable of neutralizing multi-axial stresses." 
-                 data-es="Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. El Diseño para Fabricación (DFM) fue crítico aquí, ya que cada chaflán y empalme se optimizó meticulosamente para reducir el tiempo de fresado CNC. La convergencia de la estética industrial y el rendimiento mecánico avanzado fue el objetivo central, asegurando un chasis estructural capaz de neutralizar tensiones multi-axiales.">
-                 Omni Dynamics requirió el desarrollo de nodos de articulación robustos para un brazo robótico industrial. El Diseño para Fabricación (DFM) fue crítico aquí, ya que cada chaflán y empalme se optimizó meticulosamente para reducir el tiempo de fresado CNC. La convergencia de la estética industrial y el rendimiento mecánico avanzado fue el objetivo central, asegurando un chasis estructural capaz de neutralizar tensiones multi-axiales.
+        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up" data-aos-offset="300">
+            <img src="1 GRIFO.jpg" alt="Grifo Detalle 1" class="inter-hover">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3>
+                <p class="split-text lang-node" 
+                   data-en="This project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced performance. Every curve was meticulously analyzed to ensure that the material distribution responded directly to real-world utility, resulting in a product that is perfectly balanced." 
+                   data-es="Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.">
+                   Este proyecto representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento avanzado. Cada curva fue analizada meticulosamente para asegurar que la distribución del material respondiera directamente a su utilidad en el mundo real, resultando en un producto perfectamente equilibrado.
+                </p>
             </div>
         </section>
 
-        <!-- 3. SEGUNDA Y TERCERA FOTO (Una al lado de la otra) -->
-        <section class="side-by-side-grid" data-aos="fade-up">
-            <img src="3 BRAZO.jpg" alt="Detalle Brazo Robótico 3" class="inter-hover">
-            <img src="1 BRAZO.jpg" alt="Detalle Brazo Robótico 1" class="inter-hover">
-        </section>
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 4. TEXTO DEBAJO DE LAS DOS FOTOS (Totalmente centrado entre fotos 2-3 y foto 4) -->
-        <section class="text-align-wrapper" data-aos="fade-up">
-            <div class="project-text-full-width lang-node" 
-                 data-en="By simulating toolpaths beforehand, we achieved a seamless transition from the digital CAD model to the physical 5-axis machined aluminum part, eliminating assembly bottlenecks. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
-                 data-es="Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
-                 Al simular las trayectorias de herramientas previamente, logramos una transición perfecta desde el modelo digital CAD hasta la pieza física de aluminio mecanizada en 5 ejes, eliminando cuellos de botella en el ensamblaje. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
+        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA -->
+        <section class="split-section" data-aos="fade-up">
+            <div class="split-text-container">
+                <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
+                <p class="split-text lang-node" 
+                   data-en="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto." 
+                   data-es="La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.">
+                   La integración de materiales de alta calidad y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional. Aquí se destacan las características clave, los desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del producto.
+                </p>
             </div>
+            <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
         </section>
+        
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 5. CUARTA FOTO EN GRANDE (Abajo del todo) -->
+        <!-- 3. FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
         <section class="large-image-section" data-aos="fade-up">
-            <img src="4 BRAZO.jpg" alt="Omni Dynamics - Brazo Vista Final" class="inter-hover">
+            <img src="3 GRIFO.jpg" alt="Grifo Vista Principal 3" class="inter-hover">
         </section>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES -->
+        <div class="text-align-wrapper" data-aos="fade-up">
+            <p class="project-text-full-width lang-node" 
+                 data-en="The resulting planimetry represents a critical map for manufacturing. Every detail defined here is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital data and the physical object. These visualizations represent a precise physical simulation of how light interacts with the materials, conveying sophistication and solidity." 
+                 data-es="La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico. Estas visualizaciones representan una simulación precisa de cómo la luz interactúa con los materiales, transmitiendo sofisticación y solidez.">
+                 La planimetría resultante representa un mapa crítico para la fabricación. Cada detalle definido aquí es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos digitales y el objeto físico. Estas visualizaciones representan una simulación precisa de cómo la luz interactúa con los materiales, transmitiendo sofisticación y solidez.
+            </p>
+        </div>
+
+        <!-- SEPARADOR VISUAL -->
+        <div class="visual-separator" data-aos="fade-up"></div>
+
+        <!-- 5. ÚLTIMA FOTO EN GRANDE (tipo hero-image-section) -->
+        <section class="hero-image-section" style="margin-bottom: 120px;" data-aos="fade-up"> 
+            <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
+        </section>
+
     </main>
 
     <!-- NEXT PROJECT -->
-    <a href="proyecto-luna.html" class="next-project inter-hover">
+    <a href="proyecto-ion.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
-        <h2 class="next-title">LUNA AMBIENT <i class="fa-solid fa-arrow-right"></i></h2>
+        <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">L|BIB</div>
-        <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
+        <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 800, once: true, offset: 50 });
-        
-        const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-        });
+        AOS.init({ duration: 1000, once: true });
 
-        let langActive = "es"; 
+        // Theme Toggle
+        const btnToggle = document.getElementById("theme-toggle");
+        btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
+
+        // Lang Toggle
+        let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
@@ -238,9 +328,10 @@
             }, 250);
         });
 
-        const dot = document.getElementById("cursor-dot"); 
+        // Cursor logic
+        const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
-        let mouseX = -100, mouseY = -100; let ringX = -100, ringY = -100;
+        let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
         window.addEventListener("mousemove", (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
@@ -250,14 +341,16 @@
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
-        requestAnimationFrame(renderRing);
+        renderRing();
 
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        let lastScroll = 0; const navbar = document.getElementById("navbar");
+        // Navbar Scroll
+        let lastScroll = 0; 
+        const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
             if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add("ui-hidden");
