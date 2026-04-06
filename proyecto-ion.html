@@ -17,6 +17,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
+        /* Estilos para la animación de idioma */
+        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
+        .lang-animating {
+            opacity: 0.25 !important;
+            filter: blur(8px) saturate(2);
+            transform: scale(0.95) translateY(2px) !important;
+            letter-spacing: -2px;
+        }
+
         /* --- FONDO ANARANJADO Y GRANO --- */
         body::before { 
             content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
@@ -46,7 +55,10 @@
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; } 
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
+        .lang-sutil-btn { 
+            background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; 
+            letter-spacing: 0.5px;
+        }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 20px; max-width: 1600px; margin: 0 auto; }
@@ -209,7 +221,10 @@
         <header>
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node">
+                    <i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i>
+                    <span data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</span>
+                </a>
             </nav>
             <div class="tools-nav">
                 <button id="theme-toggle" class="icon-btn inter-hover"><i class="fa-solid fa-moon"></i></button>
