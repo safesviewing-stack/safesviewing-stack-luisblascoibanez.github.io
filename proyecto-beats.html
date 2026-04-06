@@ -81,7 +81,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transform: translateY(120px); /* antes 40px → ahora más abajo */
+            transform: translateY(100px); /* Ajustado a 100px para que coincida con Alpha */
             transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .large-image-section img {
@@ -239,8 +239,13 @@
         </section>
 
         <!-- FOTO 1 (HERO) -->
-        <section class="large-image-section" data-aos="fade-up" data-aos-offset="170">
-            <img id="hero-main" src="2RELOJ.jpg" class="inter-hover" data-aos="fade-up" data-aos-offset="170">
+        <section class="large-image-section">
+            <img id="hero-main" 
+                 src="2RELOJ.jpg" 
+                 class="inter-hover" 
+                 data-aos="fade-up" 
+                 data-aos-anchor-placement="top-bottom"
+                 data-aos-offset="-500"> <!-- Ajustado offset a negativo -->
         </section>
 
         <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
@@ -368,12 +373,12 @@
 
         const heroSection = document.querySelector(".large-image-section");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 35) { // ajusta este valor a tu gusto
-        heroSection.style.opacity = "1";
-        heroSection.style.transform = "translateY(0)";
-    }
-});
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 80) { // ajusta este valor a tu gusto (igual que en proyecto-alpha)
+                heroSection.style.opacity = "1";
+                heroSection.style.transform = "translateY(0)";
+            }
+        });
     </script>
 </body>
 </html>
