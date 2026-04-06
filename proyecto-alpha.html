@@ -64,19 +64,17 @@
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
-            /* Añadimos una altura mínima para el contenedor de la imagen si se necesita para hacer el contenedor más alto,
-               aunque object-fit: cover ya se encargará de que la imagen lo llene. */
-            min-height: 70vh; /* Puedes ajustar este valor si quieres un contenedor más alto aún */
-            display: flex; /* Para centrar la imagen si es necesario */
-            align-items: center; /* Centrado vertical */
-            justify-content: center; /* Centrado horizontal */
+            min-height: 70vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
         }
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 110%; /* CAMBIO: La imagen ahora intentará ocupar el 100% de la altura de su contenedor */
-            max-height: 115vh; /* CAMBIO CLAVE: Aumentado para permitir una imagen más alta */
-            object-fit: cover; /* Mantenemos 'cover' para que llene el contenedor y se recorte si es necesario */
+            height: 100%; 
+            max-height: 90vh; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -87,10 +85,10 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 80px 5vw;
+            padding: 80px 5vw; /* Aumentado el padding superior para bajarlo */
             max-width: 1600px;
             margin: 0 auto;
-            align-items: flex-start; /* Alinea perfectamente la parte superior del título y del texto */
+            align-items: flex-start; 
         }
         .project-brief h3 { 
             font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
@@ -105,30 +103,36 @@
             width: 100%; 
             height: auto;
             max-height: 70vh; 
-            object-fit: cover; /* Cambiado a cover para que llene la cuadrícula sin dejar huecos */
+            object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
             aspect-ratio: 4/3; 
         }
         .gallery .full-w { 
             grid-column: 1 / -1; 
-            aspect-ratio: 16/9; /* Proporción más estándar y equilibrada */
+            aspect-ratio: 16/9; 
             max-height: 85vh;
         }
 
-        /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
-        .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
+        /* --- TEXTO INFERIOR (DIVIDIDO EN 2) --- */
+        .text-align-wrapper.split { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; /* Espacio entre las dos columnas de texto */
+            padding: 0 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
         .project-text-full-width { 
-            width: 100%; /* Ahora ocupa el 100% de la caja, respetando los 5vw laterales */
             font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
         }
 
         /* --- FOTO 5 (PLANIMETRÍA) --- */
         .project-hero-img { 
-            width: calc(100% - 10vw); /* Respeta los márgenes laterales */
+            width: calc(100% - 10vw); 
             height: auto; 
-            max-height: 90vh; /* No desborda la pantalla verticalmente */
-            object-fit: contain; /* CRUCIAL: 'contain' evita que se corte ninguna parte del plano */
+            max-height: 90vh; 
+            object-fit: contain; 
             border-radius: 30px; 
             margin: 0 auto 80px auto; 
             max-width: 1500px; 
@@ -159,14 +163,18 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 30px; }
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 40px 5vw; /* Ajuste para móvil */ }
             .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
-                max-height: 60vh; /* Se adaptan mejor a pantallas de móviles sin quedar demasiado estiradas */
+                max-height: 60vh; 
             }
             .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
+            .text-align-wrapper.split {
+                grid-template-columns: 1fr; /* Una columna para móvil */
+                gap: 30px;
+            }
         }
     </style>
 </head>
@@ -207,9 +215,9 @@
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
-                 data-en="Alpha Project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance vacuuming cycles. Utilizing parametric design principles, we sculpted an internal architecture that optimizes airflow while maintaining rigid stability. Every curve and rib was meticulously analyzed through Finite Element Analysis (FEA) to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems. Our approach combined cutting-edge computational fluid dynamics (CFD) with advanced material science to achieve unparalleled efficiency. The final design not only meets but exceeds industry standards for durability and performance, setting a new benchmark for structural integrity in consumer appliances." 
-                 data-es="El Proyecto Alpha trasciende la mera concepción formal para abordar la compleja relación entre el volumen interno y la eficiencia estructural. Nuestro objetivo fundamental fue el desarrollo de un chasis estructural capaz de neutralizar las tensiones multi-axiales generadas durante ciclos de aspiración de alto rendimiento. Utilizando principios de diseño paramétrico, esculpimos una arquitectura interna que optimiza el flujo de aire mientras mantiene una estabilidad rígida sin precedentes. Cada curva y nervadura fue analizada meticulosamente mediante Análisis de Elementos Finitos (FEA) para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, dando como resultado un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, concentrándonos puramente en la integridad estructural y la integración perfecta de subsistemas internos. Nuestra metodología combinó fluidodinámica computacional (CFD) de vanguardia con ciencia de materiales avanzada para lograr una eficiencia sin igual. El diseño final no solo cumple, sino que supera los estándares de la industria en cuanto a durabilidad y rendimiento, estableciendo un nuevo referente en integridad estructural para electrodomésticos de consumo.">
-                 El Proyecto Alpha trasciende la mera concepción formal para abordar la compleja relación entre el volumen interno y la eficiencia estructural. Nuestro objetivo fundamental fue el desarrollo de un chasis estructural capaz de neutralizar las tensiones multi-axiales generadas durante ciclos de aspiración de alto rendimiento. Utilizando principios de diseño paramétrico, esculpimos una arquitectura interna que optimiza el flujo de aire mientras mantiene una estabilidad rígida sin precedentes. Cada curva y nervadura fue analizada meticulosamente mediante Análisis de Elementos Finitos (FEA) para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, dando como resultado un producto tan ligero como indestructible. Este proceso iterativo nos permitió eliminar masa innecesaria, concentrándonos puramente en la integridad estructural y la integración perfecta de subsistemas internos. Nuestra metodología combinó fluidodinámica computacional (CFD) de vanguardia con ciencia de materiales avanzada para lograr una eficiencia sin igual. El diseño final no solo cumple, sino que supera los estándares de la industria en cuanto a durabilidad y rendimiento, estableciendo un nuevo referente en integridad estructural para electrodomésticos de consumo.
+                 data-en="Alpha Project explores the convergence of industrial aesthetics and advanced mechanical performance. The core objective was developing a structural chassis to neutralize multi-axial stresses during high-performance vacuuming cycles. Using parametric design, we sculpted an internal architecture that optimizes airflow while maintaining rigid stability. Every curve was analyzed through Finite Element Analysis (FEA) to ensure material distribution responded directly to tension maps, resulting in a lightweight yet indestructible product. This iterative process allowed us to eliminate unnecessary mass, focusing purely on structural integrity and the seamless integration of internal subsystems. Our approach combined computational fluid dynamics (CFD) with advanced material science for unparalleled efficiency. The design exceeds industry standards for durability, setting a new benchmark for structural integrity in consumer appliances." 
+                 data-es="El Proyecto Alpha explora la convergencia entre la estética industrial y el rendimiento mecánico avanzado. El objetivo principal fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de aspiración de alto rendimiento. Utilizando diseño paramétrico, esculpimos una arquitectura interna que optimiza el flujo de aire mientras mantiene una estabilidad rígida. Cada curva fue analizada mediante Análisis de Elementos Finitos (FEA) para asegurar que la distribución del material respondiera directamente a mapas de tensión, resultando en un producto ligero pero indestructible. Este proceso iterativo permitió eliminar masa innecesaria, enfocándose en la integridad estructural y la integración de subsistemas. Nuestro enfoque combinó fluidodinámica computacional (CFD) con ciencia de materiales avanzada para una eficiencia sin igual. El diseño supera los estándares de durabilidad, estableciendo un nuevo referente en integridad estructural para electrodomésticos.">
+                 El Proyecto Alpha explora la convergencia entre la estética industrial y el rendimiento mecánico avanzado. El objetivo principal fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de aspiración de alto rendimiento. Utilizando diseño paramétrico, esculpimos una arquitectura interna que optimiza el flujo de aire mientras mantiene una estabilidad rígida. Cada curva fue analizada mediante Análisis de Elementos Finitos (FEA) para asegurar que la distribución del material respondiera directamente a mapas de tensión, resultando en un producto ligero pero indestructible. Este proceso iterativo permitió eliminar masa innecesaria, enfocándose en la integridad estructural y la integración de subsistemas. Nuestro enfoque combinó fluidodinámica computacional (CFD) con ciencia de materiales avanzada para una eficiencia sin igual. El diseño supera los estándares de durabilidad, estableciendo un nuevo referente en integridad estructural para electrodomésticos.
             </div>
         </section>
 
@@ -225,12 +233,17 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO (ANCHO COMPLETO Y ALINEADO CON LOS MÁRGENES) -->
-        <div class="text-align-wrapper" data-aos="fade-up">
+        <!-- TEXTO INTERMEDIO (DIVIDIDO EN 2 COLUMNAS) -->
+        <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
-                 data-en="Precision in manufacturing is only achievable through a flawless set of technical planimetries. For Project Alpha, we generated a comprehensive documentation package that bridges the gap between digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness specifications, and material heat-treatments required for the magnesium-alloy chassis components. We focused intensely on the routing of internal mechanical sensors and the precise anchor points for modular maintenance, ensuring that the final assembly process is both efficient and repeatable. This meticulous attention to industrial standards guarantees that every unit produced maintains the exact specifications of the original engineering prototype, facilitating a seamless transition to large-scale production. Furthermore, the planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every stage of manufacturing. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product, solidifying Project Alpha's position as a leader in innovative industrial design and manufacturing." 
-                 data-es="La precisión en la fabricación solo es alcanzable mediante un conjunto impecable de planimetrías técnicas. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repeatable. Esta atención meticulosa a los estándares industriales garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo de ingeniería original, facilitando una transición fluida a la producción a gran escala. Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final, consolidando la posición del Proyecto Alpha como líder en diseño industrial y fabricación innovadores.">
-                 La planimetría técnica resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es fruto de un estudio profundo. Para el Proyecto Alpha, generamos un paquete de documentación exhaustivo que cierra la brecha entre los datos CAD digitales y el taller de CNC. Estos planos detallan tolerancias a nivel de micras, especificaciones de rugosidad superficial y tratamientos térmicos requeridos para los componentes de aleación de magnesio del chasis. Nos centramos intensamente en la ruta de los sensores mecánicos internos y los puntos de anclaje precisos para el mantenimiento modular, asegurando que el proceso de ensamblaje final sea eficiente y repeatable. Esta atención meticulosa a los estándares industriales garantiza que cada unidad producida mantenga las especificaciones exactas del prototipo de ingeniería original, facilitando una transición fluida a la producción a gran escala. Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final, consolidando la posición del Proyecto Alpha como líder en diseño industrial y fabricación innovadores.
+                 data-en="Precision in manufacturing requires flawless technical planimetries. For Project Alpha, we generated comprehensive documentation that bridges digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness, and material heat-treatments for the magnesium-alloy chassis. We focused intensely on routing internal sensors and precise anchor points for modular maintenance, ensuring an efficient and repeatable final assembly. This meticulous attention to industrial standards guarantees every unit maintains the exact specifications of the original prototype, facilitating a seamless transition to large-scale production." 
+                 data-es="La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repetible. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.">
+                 La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repetible. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.
+            </p>
+            <p class="project-text-full-width lang-node"
+                 data-en="Furthermore, the planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every manufacturing stage. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product. Project Alpha solidifies its position as a leader in innovative industrial design and manufacturing, proving that meticulous planning and execution are paramount for achieving excellence in complex product development. Our commitment to detail minimizes errors and maximizes operational efficiency, delivering a superior product to the market."
+                 data-es="Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Alpha consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.">
+                 Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Alpha consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.
             </p>
         </div>
 
