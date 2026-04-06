@@ -126,6 +126,10 @@
         .gallery-6-grid img:hover {
             filter: contrast(1.1) brightness(1.1);
         }
+        /* Margen adicional debajo de la última galería */
+        .gallery-6-grid:last-of-type {
+            margin-bottom: 120px; /* Aumentado el margen inferior */
+        }
 
         /* Separador visual */
         .visual-separator {
@@ -157,6 +161,9 @@
             .footer-logo { font-size: 2.2rem; }
             .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
             .visual-separator { margin: 60px auto; } /* Ajuste del margen del separador para móviles */
+            .gallery-6-grid:last-of-type {
+                margin-bottom: 90px; /* Ajuste del margen inferior para móviles */
+            }
         }
         @media (max-width: 768px) {
             .gallery-6-grid { grid-template-columns: 1fr; }
