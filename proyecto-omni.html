@@ -100,6 +100,7 @@
             margin: 0 auto;
             align-items: flex-start; 
         }
+        /* MODIFICACIÓN: Ajuste de márgenes para el título y el texto en la sección dividida */
         .project-brief h3 { 
             font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
         }
@@ -183,7 +184,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 30px; }
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 40px 5vw; } /* Reduced padding for mobile */
             .large-image-section img, .gallery img, .gallery .full-w { 
                 max-height: 60vh; 
             }
@@ -194,6 +195,7 @@
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
+            .project-brief h3 { margin-bottom: 15px; } /* Added some bottom margin for the title on mobile */
         }
     </style>
 </head>
