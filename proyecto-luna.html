@@ -70,7 +70,7 @@
             position: relative; /* Added for object-fit-contain */
         }
         .large-image-section:first-of-type {
-            margin-top: 60px; 
+            margin-top: 90px; /* Increased top margin for the first image */
         }
         .large-image-section img {
             display: block;
@@ -158,7 +158,7 @@
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <div class="nav-dot"></div>
             <nav class="nav-links">
-                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left'></i> BACK TO PORTFOLIO" data-es="<i class='fa-solid fa-arrow-left'></i> VOLVER AL PORTFOLIO"><i class="fa-solid fa-arrow-left"></i> VOLVER AL PORTFOLIO</a>
+                <a href="index.html#work" class="inter-hover lang-node" data-en="<i class='fa-solid fa-arrow-left' style='margin-right: 8px;'></i> BACK TO PORTFOLIO" data-es="<i class='fa-solid fa-arrow-left' style='margin-right: 8px;'></i> VOLVER AL PORTFOLIO"><i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> VOLVER AL PORTFOLIO</a>
             </nav>
             <div class="nav-dot"></div>
             <div class="tools-nav">
@@ -260,8 +260,15 @@
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es";
                 domElements.forEach(node => {
-                    const text = node.getAttribute(`data-${langActive}`);
-                    if (text) node.innerHTML = text;
+                    // Update innerHTML only if data attribute exists to preserve the icon
+                    const enText = node.getAttribute('data-en');
+                    const esText = node.getAttribute('data-es');
+
+                    if (langActive === "en" && enText) {
+                        node.innerHTML = enText;
+                    } else if (langActive === "es" && esText) {
+                        node.innerHTML = esText;
+                    }
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
