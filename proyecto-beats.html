@@ -120,11 +120,12 @@
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto; 
-            margin-bottom: 80px; 
+            margin-bottom: 80px; /* Mantener un margen inferior */
         }
         .gallery img { 
             width: 100%; 
-            height: 85vh; 
+            height: auto; /* Altura automática para mantener la proporción */
+            max-height: 70vh; /* Altura máxima como en Alpha */
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
@@ -187,12 +188,12 @@
             max-width: 1600px;
         }
 
-        /* --- IMAGENES INDIVIDUALES (FINAL) --- */
-        .project-hero-img { 
+        /* --- IMAGENES INDIVIDUALES (FINAL - Eliminado, ahora se usa .gallery) --- */
+        /* .project-hero-img { 
             width: calc(100% - 10vw); 
             height: auto; 
             max-height: 90vh; 
-            object-fit: cover; /* Ajustado a cover para que rellene */
+            object-fit: cover; 
             border-radius: 30px; 
             margin: 0 auto 80px auto; 
             max-width: 1500px; 
@@ -201,7 +202,7 @@
             opacity: 0; transform: translateY(60px); 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
         }
-        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); } */
 
 
         /* --- NEXT PROJECT --- */
@@ -221,7 +222,7 @@
                 max-height: 60vh;
                 height: 60vh; /* Ajustado para móviles */
             }
-            .project-hero-img { width: 90%; }
+            /* .project-hero-img { width: 90%; } */ /* Eliminado */
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
@@ -333,10 +334,11 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS (AHORA COMO project-hero-img para que ocupen todo el ancho) -->
-        <img src="7RELOJ.jpg" alt="View 7" class="project-hero-img inter-hover" data-aos="fade-up"> 
-        <img src="8RELOJ.jpg" alt="View 8" class="project-hero-img inter-hover" data-aos="fade-up" style="margin-bottom: 80px;"> 
-        <!-- Se ajusta el margin-bottom de la última imagen para mantener el espaciado -->
+        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (en una galería para el ancho completo) -->
+        <section class="gallery" style="margin-bottom: 80px;"> 
+            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up"> 
+            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up"> 
+        </section>
 
     </main>
 
