@@ -17,6 +17,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
+        /* Estilos para la animación de idioma */
+        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
+        .lang-animating {
+            opacity: 0.25 !important;
+            filter: blur(8px) saturate(2);
+            transform: scale(0.95) translateY(2px) !important;
+            letter-spacing: -2px;
+        }
+
         /* --- FONDO ANARANJADO Y GRANO --- */
         body::before { 
             content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
@@ -34,6 +43,7 @@
         #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
         #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
         .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
+        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
 
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -46,7 +56,10 @@
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
         .tools-nav { display:flex; align-items: center; gap: 10px;}
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; }
+        .lang-sutil-btn { 
+            background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; 
+            letter-spacing: 0.5px; /* Añadido letter-spacing para que coincida con el estilo del index */
+        }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 15px; max-width: 1600px; margin: 0 auto; }
@@ -242,8 +255,8 @@
         <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="Precision in manufacturing requires flawless technical planimetries. For Project Alpha, we generated comprehensive documentation that bridges digital CAD data and the CNC workshop floor. These blueprints detail micron-level tolerances, surface roughness, and material heat-treatments for the magnesium-alloy chassis. We focused intensely on routing internal sensors and precise anchor points for modular maintenance, ensuring an efficient and repeatable final assembly. This meticulous attention to industrial standards guarantees every unit maintains the exact specifications of the original prototype, facilitating a seamless transition to large-scale production." 
-                 data-es="La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repetible. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.">
-                 La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repetible. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.
+                 data-es="La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repeatable. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.">
+                 La precisión en la fabricación requiere planimetrías técnicas impecables. Para el Proyecto Alpha, generamos una documentación exhaustiva que conecta los datos CAD digitales con el taller de CNC. Estos planos detallan tolerancias a nivel de micras, rugosidad superficial y tratamientos térmicos para el chasis de aleación de magnesio. Nos centramos intensamente en el enrutamiento de sensores internos y puntos de anclaje precisos para el mantenimiento modular, asegurando un ensamblaje final eficiente y repeatable. Esta atención meticulosa a los estándares industriales garantiza que cada unidad mantenga las especificaciones exactas del prototipo original, facilitando una transición fluida a la producción a gran escala.
             </p>
             <p class="project-text-full-width lang-node"
                  data-en="Furthermore, the planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every manufacturing stage. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product. Project Alpha solidifies its position as a leader in innovative industrial design and manufacturing, proving that meticulous planning and execution are paramount for achieving excellence in complex product development. Our commitment to detail minimizes errors and maximizes operational efficiency, delivering a superior product to the market."
@@ -278,19 +291,24 @@
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
+        // ESTADO GLOBAL DE IDIOMA
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
+        
         btnLang.addEventListener("click", () => {
             const domElements = document.querySelectorAll(".lang-node");
             domElements.forEach(node => node.classList.add("lang-animating"));
+
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es";
+                
                 domElements.forEach(node => {
                     const text = node.getAttribute(`data-${langActive}`);
                     if (text) node.innerHTML = text;
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
+
             }, 250);
         });
 
