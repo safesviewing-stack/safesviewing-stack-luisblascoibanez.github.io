@@ -81,7 +81,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transform: translateY(100px); /* Ajustado a 100px para que coincida con Alpha */
+            transform: translateY(100px); 
             transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .large-image-section img {
@@ -100,7 +100,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 80px 5vw;
+            padding: 60px 5vw 60px; /* Ajustado padding para que sea como el de Alpha */
             max-width: 1600px;
             margin: 0 auto;
             align-items: flex-start;
@@ -138,6 +138,14 @@
 
         /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
         .text-align-wrapper { max-width: 1600px; margin: 0 auto; padding: 0 5vw; } 
+        .text-align-wrapper.split { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; 
+            padding: 0 5vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
         .project-text-full-width { 
             width: 100%; 
             font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
@@ -179,6 +187,23 @@
             max-width: 1600px;
         }
 
+        /* --- IMAGENES INDIVIDUALES (FINAL) --- */
+        .project-hero-img { 
+            width: calc(100% - 10vw); 
+            height: auto; 
+            max-height: 90vh; 
+            object-fit: cover; /* Ajustado a cover para que rellene */
+            border-radius: 30px; 
+            margin: 0 auto 80px auto; 
+            max-width: 1500px; 
+            display: block; 
+            border: 1px solid var(--border);
+            opacity: 0; transform: translateY(60px); 
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
+
+
         /* --- NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -202,6 +227,10 @@
             .footer-logo { font-size: 2.2rem; }
             .image-with-text-section img { order: 1; } 
             .image-with-text-section .text-content { order: 2; } 
+            .text-align-wrapper.split {
+                grid-template-columns: 1fr; /* Una columna para móvil */
+                gap: 30px;
+            }
         }
     </style>
 </head>
@@ -245,8 +274,11 @@
                  class="inter-hover" 
                  data-aos="fade-up" 
                  data-aos-anchor-placement="top-bottom"
-                 data-aos-offset="-500"> <!-- Ajustado offset a negativo -->
+                 data-aos-offset="-500"> 
         </section>
+
+        <!-- SEPARADOR VISUAL (AÑADIDO PARA EL ANÁLISIS) -->
+        <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
         <section class="project-content-split" data-aos="fade-up">
@@ -284,23 +316,27 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO (ANCHO COMPLETO Y ALINEADO CON LOS MÁRGENES) -->
-        <div class="text-align-wrapper" data-aos="fade-up">
+        <!-- TEXTO INTERMEDIO (DIVIDIDO EN 2 COLUMNAS) -->
+        <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation." 
                  data-es="La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.">
                  La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.
+            </p>
+            <p class="project-text-full-width lang-node"
+                 data-en="Furthermore, the planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every manufacturing stage. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product. Project Beats X solidifies its position as a leader in innovative industrial design and manufacturing, proving that meticulous planning and execution are paramount for achieving excellence in complex product development. Our commitment to detail minimizes errors and maximizes operational efficiency, delivering a superior product to the market."
+                 data-es="Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Beats X consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.">
+                 Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Beats X consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.
             </p>
         </div>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (con margin-bottom y altura aumentada, object-fit: contain para ver la imagen completa) -->
-        <section class="gallery" style="margin-bottom: 120px;"> 
-            <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: contain;"> 
-            <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up" style="height: 95vh; object-fit: contain;"> 
-        </section>
+        <!-- ÚLTIMAS 2 FOTOS (AHORA COMO project-hero-img para que ocupen todo el ancho) -->
+        <img src="7RELOJ.jpg" alt="View 7" class="project-hero-img inter-hover" data-aos="fade-up"> 
+        <img src="8RELOJ.jpg" alt="View 8" class="project-hero-img inter-hover" data-aos="fade-up" style="margin-bottom: 80px;"> 
+        <!-- Se ajusta el margin-bottom de la última imagen para mantener el espaciado -->
 
     </main>
 
@@ -374,7 +410,7 @@
         const heroSection = document.querySelector(".large-image-section");
 
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 80) { // ajusta este valor a tu gusto (igual que en proyecto-alpha)
+            if (window.scrollY > 80) { 
                 heroSection.style.opacity = "1";
                 heroSection.style.transform = "translateY(0)";
             }
