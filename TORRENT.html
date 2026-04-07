@@ -99,8 +99,12 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            column-count: 2; 
-            column-gap: 60px;
+            display: flex; /* Use flexbox for direct child paragraphs */
+            gap: 60px; /* Space between the two paragraphs */
+        }
+
+        .project-text-full-width p {
+            flex: 1; /* Each paragraph takes equal width */
         }
 
         /* Galería de 6 imágenes (3 columnas x 2 filas) */
@@ -152,7 +156,7 @@
 
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
-            .project-text-full-width { column-count: 1; }
+            .project-text-full-width { flex-direction: column; gap: 20px; } /* Stack paragraphs on smaller screens */
             .large-image-section { min-height: 55vh; } 
             .text-align-wrapper { margin: 20px auto; } 
             .gallery-6-grid { padding-bottom: 60px; }
