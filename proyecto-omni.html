@@ -73,8 +73,7 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            /* Added min-height to ensure the container provides enough space for images that are not cropped */
-            min-height: 70vh; /* Adjust as needed */
+            min-height: 70vh; 
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.6s ease, transform 0.6s ease;
@@ -83,8 +82,8 @@
             display: block;
             width: 100%;
             height: 100%; 
-            max-height: 140vh; /* Allow images to be taller if needed */
-            object-fit: cover; /* CRITICAL: ensures the whole image is visible */
+            max-height: 140vh; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px;
             border: 1px solid var(--border);
@@ -95,7 +94,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 80px 5vw;
+            padding: 40px 5vw; /* Reducido de 80px a 40px */
             max-width: 1600px;
             margin: 0 auto;
             align-items: flex-start; 
@@ -116,22 +115,19 @@
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto;
-            /* Added min-height to ensure gallery containers can grow */
-            min-height: 50vh; /* Adjust as needed */
+            min-height: 50vh; 
         }
         .gallery img { 
             width: 100%; 
             height: auto;
             max-height: 70vh; 
-            object-fit: contain; /* Changed to contain for gallery images */
+            object-fit: contain; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
-            /* Removed aspect-ratio to let image define its own height */
         }
         .gallery .full-w { 
             grid-column: 1 / -1; 
             max-height: 85vh;
-            /* Removed aspect-ratio here too */
         }
 
         /* --- TEXTO INFERIOR (ANCHO COMPLETO Y ALINEADO) --- */
@@ -139,9 +135,9 @@
             max-width: 1600px; 
             margin: 0 auto; 
             padding: 0 5vw; 
-            display: grid; /* Use grid for two columns */
-            grid-template-columns: 1fr 1fr; /* Two equal columns */
-            gap: 60px; /* Gap between columns */
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 60px; 
         } 
         .project-text-full-width { 
             width: 100%; 
@@ -173,7 +169,7 @@
             justify-content: center; 
             text-decoration: none; 
             transition: background 0.4s;
-            margin-top: 80px; /* Added margin above the next project section */
+            margin-top: 80px; 
         }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
@@ -184,18 +180,18 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 40px 5vw; } /* Reduced padding for mobile */
+            .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 40px 5vw; } 
             .large-image-section img, .gallery img, .gallery .full-w { 
                 max-height: 60vh; 
             }
             .text-align-wrapper {
-                grid-template-columns: 1fr; /* Single column on smaller screens */
+                grid-template-columns: 1fr; 
                 gap: 30px;
             }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .project-brief h3 { margin-bottom: 15px; } /* Added some bottom margin for the title on mobile */
+            .project-brief h3 { margin-bottom: 15px; } 
         }
     </style>
 </head>
