@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beats X | Luis Blasco-Ibáñez</title>
+    <title>Proyecto Tempo | Luis Blasco-Ibáñez</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -100,7 +100,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 60px 5vw 60px; /* Ajustado padding para que sea como el de Alpha */
+            padding: 60px 5vw 60px;
             max-width: 1600px;
             margin: 0 auto;
             align-items: flex-start;
@@ -120,12 +120,12 @@
             padding: 0 5vw; 
             max-width: 1600px; 
             margin: 0 auto; 
-            margin-bottom: 80px; /* Mantener un margen inferior */
+            margin-bottom: 80px;
         }
         .gallery img { 
             width: 100%; 
-            height: 90vh; /* Altura automática para mantener la proporción */
-            max-height: 120vh; /* Altura máxima como en Alpha */
+            height: 90vh;
+            max-height: 120vh;
             object-fit: cover; 
             border-radius: 20px; 
             border: 1px solid var(--border); 
@@ -155,12 +155,12 @@
         /* --- SECCIÓN IMAGEN INDIVIDUAL CON TEXTO AL LADO --- */
         .image-with-text-section {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Una columna para texto, otra para imagen */
+            grid-template-columns: 1fr 1fr; 
             gap: 80px;
             padding: 80px 5vw;
             max-width: 1600px;
             margin: 0 auto;
-            align-items: center; /* Centra el contenido verticalmente */
+            align-items: center;
         }
         .image-with-text-section img {
             width: 100%;
@@ -188,23 +188,6 @@
             max-width: 1600px;
         }
 
-        /* --- IMAGENES INDIVIDUALES (FINAL - Eliminado, ahora se usa .gallery) --- */
-        /* .project-hero-img { 
-            width: calc(100% - 10vw); 
-            height: auto; 
-            max-height: 90vh; 
-            object-fit: cover; 
-            border-radius: 30px; 
-            margin: 0 auto 80px auto; 
-            max-width: 1500px; 
-            display: block; 
-            border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-        .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); } */
-
-
         /* --- NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
@@ -220,16 +203,15 @@
             .large-image-section img, .gallery img, .gallery .full-w, 
             .image-with-text-section img { 
                 max-height: 60vh;
-                height: 60vh; /* Ajustado para móviles */
+                height: 60vh;
             }
-            /* .project-hero-img { width: 90%; } */ /* Eliminado */
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
             .image-with-text-section img { order: 1; } 
             .image-with-text-section .text-content { order: 2; } 
             .text-align-wrapper.split {
-                grid-template-columns: 1fr; /* Una columna para móvil */
+                grid-template-columns: 1fr;
                 gap: 30px;
             }
         }
@@ -259,12 +241,12 @@
     <main>
         <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
-            <h1 class="project-title lang-node" data-en="Beats X" data-es="Beats X">Beats X</h1>
+            <h1 class="project-title lang-node" data-en="Project<br>Tempo" data-es="Proyecto<br>Tempo">Proyecto<br>Tempo</h1>
             <div class="project-meta">
-                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Hardware Developer" data-es="Desarrollador de Hardware">Desarrollador de Hardware</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Consumer Electronics" data-es="Electrónica de Consumo">Electrónica de Consumo</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2021</span></div>
-                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Class-A Surfacing / Keyshot</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Role" data-es="Rol">Rol</span><span class="lang-node" data-en="Industrial Designer" data-es="Diseñador Industrial">Diseñador Industrial</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Category" data-es="Categoría">Categoría</span><span class="lang-node" data-en="Product Design" data-es="Diseño de Producto">Diseño de Producto</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Year" data-es="Año">Año</span><span>2024</span></div>
+                <div class="meta-col"><span class="lang-node" data-en="Core Tools" data-es="Herramientas">Herramientas</span><span>Rhinoceros</span></div>
             </div>
         </section>
 
@@ -278,29 +260,29 @@
                  data-aos-offset="-500"> 
         </section>
 
-        <!-- SEPARADOR VISUAL (AÑADIDO PARA EL ANÁLISIS) -->
+        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
-                 data-en="The Beats X project represents an exhaustive exploration into the convergence of industrial aesthetics and advanced mechanical performance. The core objective was the development of a structural chassis capable of neutralizing multi-axial stresses during high-performance audio cycles. Every curve and rib was meticulously analyzed to ensure that the material distribution responded directly to real-world tension maps, resulting in a product that is as lightweight as it is indestructible. The integration of high-strength materials and millimeter-precise tolerances ensures an exceptional lifecycle, setting a new benchmark for structural reliability in its category." 
-                 data-es="El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.">
-                 El proyecto Beats X representa una exploración exhaustiva en la convergencia de la estética industrial y el rendimiento mecánico avanzado. El objetivo central fue el desarrollo de un chasis estructural capaz de neutralizar tensiones multi-axiales durante ciclos de alto rendimiento. Cada curva y nervio fue analizado meticulosamente para asegurar que la distribución del material respondiera directamente a mapas de tensión reales, resultando en un producto tan ligero como indestructible. La integración de materiales de alta resistencia y tolerancias de precisión milimétrica aseguran un ciclo de vida excepcional, estableciendo un nuevo estándar de fiabilidad estructural en su categoría.
+                 data-en="The project focuses on the design of a watch intended for everyday use, with the ability to adapt to sports contexts as well. Its approach is based on formal simplicity, using basic geometries that facilitate reading, use, and integration into different environments. The result is a versatile object, balanced between functionality and aesthetic clarity." 
+                 data-es="El proyecto se centra en el diseño de un reloj pensado para un uso cotidiano, con la capacidad de adaptarse también a contextos deportivos. Su planteamiento parte de la simplicidad formal, utilizando geometrías básicas que facilitan la lectura, el uso y la integración en distintos entornos. El resultado es un objeto versátil, equilibrado entre funcionalidad y claridad estética.">
+                 El proyecto se centra en el diseño de un reloj pensado para un uso cotidiano, con la capacidad de adaptarse también a contextos deportivos. Su planteamiento parte de la simplicidad formal, utilizando geometrías básicas que facilitan la lectura, el uso y la integración en distintos entornos. El resultado es un objeto versátil, equilibrado entre funcionalidad y claridad estética.
             </div>
         </section>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- IMAGEN INDIVIDUAL 5RELOJ CON TEXTO A LA IZQUIERDA -->
+        <!-- IMAGEN INDIVIDUAL CON TEXTO A LA IZQUIERDA -->
         <section class="image-with-text-section" data-aos="fade-up">
             <div class="text-content lang-node" 
-                 data-en="<h3>Design Evolution</h3><p>Here is some insightful text about the project details, technical specifications, or design philosophy. This section aims to provide context and elaborate on the visual elements presented in the surrounding images. It highlights key features, challenges overcome, and the overall impact of the design decisions made during the project's development.</p>" 
-                 data-es="<h3>Evolución del Diseño</h3><p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>">
+                 data-en="<h3>Design Evolution</h3><p>The development of the watch was approached through an iterative process focused on formal reduction. Early proposals explored more complex configurations, which were progressively simplified until reaching a solution based on essential volumes. This evolution allowed for improved ergonomics, optimized legibility, and the elimination of unnecessary elements, reinforcing the coherence between form and function.</p>" 
+                 data-es="<h3>Evolución del Diseño</h3><p>El desarrollo del reloj se abordó a través de un proceso iterativo centrado en la reducción formal. Las primeras propuestas exploraban configuraciones más complejas, que fueron progresivamente simplificadas hasta alcanzar una solución basada en volúmenes esenciales. Esta evolución permitió mejorar la ergonomía, optimizar la legibilidad y eliminar elementos innecesarios, reforzando la coherencia entre forma y función.</p>">
                 <h3>Evolución del Diseño</h3>
-                <p>Aquí se presenta un texto detallado sobre los pormenores del proyecto, especificaciones técnicas o la filosofía de diseño. Esta sección busca proporcionar contexto y profundizar en los elementos visuales presentados en las imágenes circundantes. Destaca características clave, desafíos superados y el impacto general de las decisiones de diseño tomadas durante el desarrollo del proyecto.</p>
+                <p>El desarrollo del reloj se abordó a través de un proceso iterativo centrado en la reducción formal. Las primeras propuestas exploraban configuraciones más complejas, que fueron progresivamente simplificadas hasta alcanzar una solución basada en volúmenes esenciales. Esta evolución permitió mejorar la ergonomía, optimizar la legibilidad y eliminar elementos innecesarios, reforzando la coherencia entre forma y función.</p>
             </div>
             <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover">
         </section>
@@ -308,7 +290,7 @@
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA (las otras dos fotos que quedan) -->
+        <!-- GALERÍA -->
         <section class="gallery">
             <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover" data-aos="fade-up">
             <img src="1RELOJ.jpg" alt="Technical Detail 1" class="inter-hover" data-aos="fade-up">
@@ -320,21 +302,21 @@
         <!-- TEXTO INTERMEDIO (DIVIDIDO EN 2 COLUMNAS) -->
         <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
-                 data-en="The resulting planimetry represents a critical map for large-scale manufacturing. Every line and tolerance defined is the result of an exhaustive study of industrial assembly processes, bridging the gap between digital CAD data and the production line. These renders represent a precise physical simulation." 
-                 data-es="La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.">
-                 La planimetría resultante representa un mapa crítico para la fabricación a gran escala. Cada línea y tolerancia definida es el resultado de un estudio exhaustivo de los procesos de ensamblaje industrial, cerrando la brecha entre los datos CAD digitales y la línea de producción. Estos renders representan una simulación física precisa.
+                 data-en="The design is resolved through a clear and compact structure, where each component responds to a specific function. The case, the interface, and the strap are integrated coherently, facilitating both daily use and adaptation to more dynamic activities. The choice of basic shapes not only simplifies manufacturing but also provides robustness and durability to the assembly." 
+                 data-es="El diseño se resuelve mediante una estructura clara y compacta, donde cada componente responde a una función específica. La caja, la interfaz y la correa se integran de forma coherente, facilitando tanto el uso diario como su adaptación a actividades más dinámicas. La elección de formas básicas no solo simplifica la fabricación, sino que también aporta robustez y durabilidad al conjunto.">
+                 El diseño se resuelve mediante una estructura clara y compacta, donde cada componente responde a una función específica. La caja, la interfaz y la correa se integran de forma coherente, facilitando tanto el uso diario como su adaptación a actividades más dinámicas. La elección de formas básicas no solo simplifica la fabricación, sino que también aporta robustez y durabilidad al conjunto.
             </p>
             <p class="project-text-full-width lang-node"
-                 data-en="Furthermore, the planimetries include detailed instructions for quality control checkpoints, ensuring rigorous testing at every manufacturing stage. This holistic approach from design to production ensures consistency, reliability, and unparalleled performance in the final product. Project Beats X solidifies its position as a leader in innovative industrial design and manufacturing, proving that meticulous planning and execution are paramount for achieving excellence in complex product development. Our commitment to detail minimizes errors and maximizes operational efficiency, delivering a superior product to the market."
-                 data-es="Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Beats X consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.">
-                 Además, las planimetrías incluyen instrucciones detalladas para los puntos de control de calidad, asegurando pruebas rigurosas en cada etapa de la fabricación. Este enfoque holístico, desde el diseño hasta la producción, asegura la consistencia, la fiabilidad y un rendimiento inigualable en el producto final. El Proyecto Beats X consolida su posición como líder en diseño industrial y fabricación innovadores, demostrando que la planificación y ejecución meticulosas son fundamentales para alcanzar la excelencia en el desarrollo de productos complejos. Nuestro compromiso con el detalle minimiza errores y maximiza la eficiencia operativa, entregando un producto superior al mercado.
+                 data-en="The project seeks to find a balance between the everyday and the active, avoiding an excessively technical or sporty aesthetic. Through a clean formal language, the watch positions itself as a neutral yet recognizable object, capable of accompanying different rhythms of use without losing identity. Simplicity thus becomes the central element of the design."
+                 data-es="El proyecto busca encontrar un equilibrio entre lo cotidiano y lo activo, evitando una estética excesivamente técnica o deportiva. A través de un lenguaje formal limpio, el reloj se posiciona como un objeto neutro pero reconocible, capaz de acompañar distintos ritmos de uso sin perder identidad. La simplicidad se convierte así en el elemento central del diseño.">
+                 El proyecto busca encontrar un equilibrio entre lo cotidiano y lo activo, evitando una estética excesivamente técnica o deportiva. A través de un lenguaje formal limpio, el reloj se posiciona como un objeto neutro pero reconocible, capaz de acompañar distintos ritmos de uso sin perder identidad. La simplicidad se convierte así en el elemento central del diseño.
             </p>
         </div>
 
         <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS EN PARALELO (en una galería para el ancho completo) -->
+        <!-- ÚLTIMAS 2 FOTOS EN PARALELO -->
         <section class="gallery" style="margin-bottom: 80px;"> 
             <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up"> 
             <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up"> 
@@ -343,9 +325,9 @@
     </main>
 
     <!-- NEXT PROJECT -->
-    <a href="proyecto-ion.html" class="next-project inter-hover">
+    <a href="proyecto-ponteo.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
-        <h2 class="next-title">ION CORE <i class="fa-solid fa-arrow-right"></i></h2>
+        <h2 class="next-title">PONTEO <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
     <!-- FOOTER -->
