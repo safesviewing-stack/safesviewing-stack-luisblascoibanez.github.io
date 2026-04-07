@@ -66,12 +66,12 @@
             display: flex;
             justify-content: center;
             align-items: center; 
-            min-height: 70vh; /* Changed from height to min-height to ensure content fits */
+            min-height: 60vh; /* Changed from height to min-height to ensure content fits */
             overflow: hidden; 
             position: relative; /* Added for object-fit-contain */
             opacity: 0;
            transform: translateY(100px); /* Antes 120px, ahora 100px para coincidir con Omni */
-           transition: opacity 1.2s ease, transform 1.2s ease; /* Transición ajustada a 1.2s ease para coincidir con Omni */
+           transition: opacity 1.2s ease, transform 1s ease; /* Transición ajustada a 1.2s ease para coincidir con Omni */
         }
         .large-image-section:first-of-type {
             margin-top: 500px; /* Increased top margin for the first image */
