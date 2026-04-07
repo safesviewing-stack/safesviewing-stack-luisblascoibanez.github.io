@@ -82,16 +82,16 @@
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding: 80px 5vw;
+            gap: 80px; /* Reducido de 80px a 60px para menos espacio entre fotos */
+            padding: 60px 5vw; /* Reducido de 80px a 60px para menos espacio entre fotos */
             max-width: 1600px;
             margin: 0 auto;
             align-items: center;
         }
 
         .split-section:first-of-type {
-    margin-top: 80px;
-}
+            margin-top: 80px;
+        }
         .split-section img {
             width: 100%;
             height: 110vh; /* Even more increased height */
@@ -108,9 +108,9 @@
         }
 
         .initial-hidden-split-section.aos-animate {
-    opacity: 1;
-    transform: translateY(0);
-}
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .split-text-container {
             display: flex;
@@ -152,17 +152,17 @@
             width: 100%;
             height: 1px; /* Línea muy fina */
             background-color: var(--border);
-            margin: 100px auto; /* Espacio antes y después */
+            margin: 60px auto; /* Reducido de 100px a 60px para menos espacio entre fotos */
             max-width: 1600px;
         }
 
         /* --- FOOTER & NEXT PROJECT --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 100px; }
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 60px; /* Reducido de 100px a 60px */ }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        footer { padding: 60px 5vw; /* Reducido de 80px a 60px */ display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
        
         /* --- RESPONSIVE --- */
@@ -296,7 +296,7 @@
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <!-- FOTO 6: IMAGEN GRANDE (SIN TEXTO) -->
-        <section class="large-image-section" data-aos="fade-up">
+        <section class="large-image-section" data-aos="fade-up" style="margin-bottom: 30px;">
             <img src="PLANOLAMP2.jpg" alt="Plano Lámpara 2" class="inter-hover">
         </section>
     </main>
