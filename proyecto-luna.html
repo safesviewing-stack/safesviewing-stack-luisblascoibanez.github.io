@@ -70,8 +70,8 @@
             overflow: hidden; 
             position: relative; /* Added for object-fit-contain */
             opacity: 0;
-           transform: translateY(120px); /* antes 40px → ahora más abajo */
-           transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+           transform: translateY(100px); /* Antes 120px, ahora 100px para coincidir con Omni */
+           transition: opacity 1.2s ease, transform 1.2s ease; /* Transición ajustada a 1.2s ease para coincidir con Omni */
         }
         .large-image-section:first-of-type {
             margin-top: 500px; /* Increased top margin for the first image */
@@ -90,8 +90,8 @@
         /* Texto centrado ancho completo (2 Columnas) */
         .text-align-wrapper {
             max-width: 1600px;
-            margin: 30px auto; /* Reducimos el margen superior e inferior de 40px a 30px */
-            padding: 0 5vw; /* Eliminamos el padding vertical para controlar el margen con 'margin' */
+            margin: 30px auto; 
+            padding: 0 5vw; 
         }
         .project-text-full-width {
             font-size: 1.1rem;
@@ -108,7 +108,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-            padding: 0 5vw; /* Eliminamos el padding-bottom de 100px */
+            padding: 0 5vw; 
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -128,7 +128,7 @@
         }
         /* Margen adicional debajo de la última galería */
         .gallery-6-grid:last-of-type {
-            margin-bottom: 90px; /* Reducido a 90px de 120px */
+            margin-bottom: 90px; 
         }
 
         /* Separador visual */
@@ -136,7 +136,7 @@
             width: 100%;
             height: 1px; 
             background-color: var(--border);
-            margin: 80px auto; /* Aplicamos el margen aquí */
+            margin: 80px auto; 
             max-width: 1600px;
         }
 
@@ -154,15 +154,15 @@
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
             .project-text-full-width { column-count: 1; }
             .large-image-section { min-height: 55vh; } 
-            .text-align-wrapper { margin: 20px auto; } /* Ajuste de margen para móviles */
+            .text-align-wrapper { margin: 20px auto; } 
             .gallery-6-grid { padding-bottom: 60px; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
             .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
-            .visual-separator { margin: 60px auto; } /* Ajuste del margen del separador para móviles */
+            .visual-separator { margin: 60px auto; } 
             .gallery-6-grid:last-of-type {
-                margin-bottom: 70px; /* Ajuste del margen inferior para móviles */
+                margin-bottom: 70px; 
             }
         }
         @media (max-width: 768px) {
@@ -203,7 +203,7 @@
         </section>
 
         <!-- PRIMER BLOQUE: IMAGEN GRANDE "1 MONO" -->
-        <section class="large-image-section" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200">
+        <section class="large-image-section" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="150"> <!-- data-aos-offset="150" para que empiece a animar antes -->
             <img src="1 MONO.jpg" alt="Luna Ambient - Vista Mono" class="inter-hover">
         </section>
 
