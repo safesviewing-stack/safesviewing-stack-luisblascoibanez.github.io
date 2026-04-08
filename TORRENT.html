@@ -44,9 +44,8 @@
         .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
         .lang-sutil-btn { 
             background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; 
-            letter-spacing: 0.5px; /* Añadido letter-spacing para que coincida con el estilo del index */
+            letter-spacing: 0.5px; 
         }
-
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 100px; max-width: 1600px; margin: 0 auto; }
@@ -58,7 +57,7 @@
 
         /* --- LAYOUT ESPECÍFICO --- */
 
-        /* Fotos en grande (1 y 2) - ALTURA Y MÁRGENES AJUSTADOS */
+        /* Fotos en grande (1 y 2) */
         .large-image-section {
             padding: 0 5vw; 
             max-width: 1600px; 
@@ -66,25 +65,25 @@
             display: flex;
             justify-content: center;
             align-items: center; 
-            height: 100vh; /* Changed from height to min-height to ensure content fits */
+            height: 100vh; 
             overflow: hidden; 
-            position: relative; /* Added for object-fit-contain */
+            position: relative; 
             opacity: 0;
-            transform: translateY(100px); /* Antes 120px, ahora 100px para coincidir con Omni */
-            transition: opacity 1.2s ease, transform 1s ease; /* Transición ajustada a 1.2s ease para coincidir con Omni */
+            transform: translateY(100px); 
+            transition: opacity 1.2s ease, transform 1s ease; 
         }
         .large-image-section:first-of-type {
-            margin-top: 500px; /* Increased top margin for the first image */
+            margin-top: 500px; 
         }
         .large-image-section img {
             display: block;
-            width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-            height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
-            object-fit: cover; /* Changed to 'contain' to ensure the entire image is visible */
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
             object-position: center;
             border-radius: 30px; 
             border: 1px solid var(--border); 
-            padding: 0; /* Elimina el padding interno de la imagen para que ocupe el 100% */
+            padding: 0; 
         }
 
         /* Texto centrado ancho completo (2 Columnas) */
@@ -99,12 +98,12 @@
             line-height: 1.8;
             text-align: justify; 
             width: 100%;
-            display: flex; /* Use flexbox for direct child paragraphs */
-            gap: 60px; /* Space between the two paragraphs */
+            display: flex; 
+            gap: 60px; 
         }
 
         .project-text-full-width p {
-            flex: 1; /* Each paragraph takes equal width */
+            flex: 1; 
         }
 
         /* Galería de 6 imágenes (3 columnas x 2 filas) */
@@ -148,10 +147,22 @@
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; display: block; }
-        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; } /* Reduced gap to 8px */
-        .next-title i { font-size: clamp(2rem, 4vw, 3rem); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .next-project:hover .next-title i {
-            transform: translateX(-10px); /* Moves the arrow slightly to the left on hover */
+        .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; } 
+        .next-title i { font-size: clamp(2rem, 4vw, 3rem); }
+        
+        /* Animación para la flecha de Back to Portfolio (Apunta a la izquierda) */
+        @keyframes arrowMoveLeft {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-15px); }
+        }
+        .next-title .fa-arrow-left {
+            display: inline-block;
+            transition: color 0.4s ease;
+            animation: arrowMoveLeft 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .next-project:hover .fa-arrow-left {
+            color: var(--accent);
+            animation: arrowMoveLeft 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
@@ -159,7 +170,7 @@
 
         @media (max-width: 1024px) { 
             .gallery-6-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } 
-            .project-text-full-width { flex-direction: column; gap: 20px; } /* Stack paragraphs on smaller screens */
+            .project-text-full-width { flex-direction: column; gap: 20px; } 
             .large-image-section { min-height: 55vh; } 
             .text-align-wrapper { margin: 20px auto; } 
             .gallery-6-grid { padding-bottom: 60px; }
@@ -186,7 +197,7 @@
             <a href="index.html" class="nav-logo inter-hover">L|BIB</a>
             <nav class="nav-links">
                 <a href="index.html#work" class="inter-hover">
-                    <i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> <!-- Flecha añadida aquí -->
+                    <i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> 
                     <span class="lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</span>
                 </a>
             </nav>
@@ -318,7 +329,6 @@
             setTimeout(() => {
                 langActive = langActive === "es" ? "en" : "es";
                 domElements.forEach(node => {
-                    // Update innerHTML only if data attribute exists to preserve the icon
                     const enText = node.getAttribute('data-en');
                     const esText = node.getAttribute('data-es');
 
@@ -363,7 +373,7 @@
         const heroSection = document.querySelector(".large-image-section");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 35) { // ajusta este valor a tu gusto
+    if (window.scrollY > 35) { 
         heroSection.style.opacity = "1";
         heroSection.style.transform = "translateY(0)";
     }
