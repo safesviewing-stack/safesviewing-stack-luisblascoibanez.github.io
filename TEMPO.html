@@ -194,6 +194,21 @@
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
+        /* Animación para la flecha de Next Project */
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+        .next-title .fa-arrow-right {
+            display: inline-block;
+            transition: color 0.4s ease;
+            animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .next-project:hover .fa-arrow-right {
+            color: var(--accent);
+            animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
 
@@ -239,7 +254,6 @@
     </div>
 
     <main>
-        <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Tempo<br>Project" data-es="Proyecto<br>Tempo">Proyecto<br>Tempo</h1>
             <div class="project-meta">
@@ -250,7 +264,6 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
         <section class="large-image-section">
             <img id="hero-main" 
                  src="2RELOJ.jpg" 
@@ -260,10 +273,8 @@
                  data-aos-offset="-500"> 
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- SECCIÓN SPLIT (EL ANÁLISIS) -->
         <section class="project-content-split" data-aos="fade-up">
             <div class="project-brief"><h3 class="lang-node" data-en="The Analysis" data-es="El Análisis">El Análisis</h3></div>
             <div class="project-text lang-node" 
@@ -273,10 +284,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- IMAGEN INDIVIDUAL CON TEXTO A LA IZQUIERDA -->
         <section class="image-with-text-section" data-aos="fade-up">
             <div class="text-content lang-node" 
                  data-en="<h3>Design Evolution</h3><p>The development of the watch did not start by adding, but by subtracting. Early proposals explored more loaded solutions, but quickly showed that complexity did not add real value to use. From there, the process focused on refining: reducing, adjusting proportions, and keeping only what was essential. This evolution allowed not only to improve ergonomics and legibility, but also to build a more honest object, where each formal decision responds directly to its function. The result is a clear synthesis between use, form, and context.</p>" 
@@ -287,19 +296,15 @@
             <img src="5RELOJ.jpg" alt="Technical Detail 5" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA -->
         <section class="gallery">
             <img src="4RELOJ.jpg" alt="Technical Detail 4" class="inter-hover" data-aos="fade-up">
             <img src="1RELOJ.jpg" alt="Technical Detail 1" class="inter-hover" data-aos="fade-up">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO (DIVIDIDO EN 2 COLUMNAS) -->
         <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The case is made of black anodized aluminum, providing lightness and resistance in a compact format. This material allows for good overall protection without adding unnecessary weight, maintaining a clean and versatile aesthetic." 
@@ -313,10 +318,8 @@
             </p>
         </div>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- ÚLTIMAS 2 FOTOS EN PARALELO -->
         <section class="gallery" style="margin-bottom: 80px;"> 
             <img src="7RELOJ.jpg" alt="View 7" class="inter-hover" data-aos="fade-up"> 
             <img src="8RELOJ.jpg" alt="View 8" class="inter-hover" data-aos="fade-up"> 
@@ -324,13 +327,11 @@
 
     </main>
 
-    <!-- NEXT PROJECT -->
     <a href="PONTEO.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">PONTEO <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -342,10 +343,8 @@
         window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 1000, once: true });
 
-        // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -362,7 +361,6 @@
             }, 250);
         });
 
-        // Cursor logic
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -382,7 +380,6 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Navbar Scroll
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
