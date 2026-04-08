@@ -172,9 +172,26 @@
             width: 100%;
         }
 
-        .hero-title span {
-            display: block;
+        /* --- EFECTO REVELACIÓN NOMBRE --- */
+        .title-reveal {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
         }
+        .title-reveal span {
+            display: inline-block;
+            transform: translateY(110%);
+            opacity: 0;
+            filter: blur(15px);
+            animation: cinematicReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes cinematicReveal {
+            0% { transform: translateY(110%); opacity: 0; filter: blur(15px); }
+            100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+        }
+        .hero-title .line-1 span { animation-delay: 0.2s; }
+        .hero-title .line-2 span { animation-delay: 0.35s; }
+        .hero-title .line-3 span { animation-delay: 0.5s; }
 
         .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
         .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
@@ -385,16 +402,16 @@
         </header>
     </div>
 
-    <!-- TÍTULO ORIGINAL CON AOS FADE-UP -->
+    <!-- SECCIÓN HERO CON EFECTO DE APARICIÓN -->
     <section class="hero" id="home">
-        <div class="hero-text-block" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+        <div class="hero-text-block">
             <h1 class="hero-title">
-              LUIS<br>
-              BLASCO IBÁÑEZ<br>
-              BERBEL
+              <span class="title-reveal line-1"><span>LUIS</span></span><br>
+              <span class="title-reveal line-2"><span>BLASCO IBÁÑEZ</span></span><br>
+              <span class="title-reveal line-3"><span>BERBEL</span></span>
             </h1>
 
-            <div class="subtitle-bar">
+            <div class="subtitle-bar" data-aos="fade-up" data-aos-delay="800">
                 <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
 
                 <div class="status-tag inter-hover">
@@ -530,7 +547,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 6: LUNA (Imagen actualizada a TORRENTE.png) -->
+            <!-- Proyecto 6: LUNA -->
             <a href="TORRENT.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="TORRENTE.png" alt="Project"></div>
                 <div class="p-overlay"></div>
