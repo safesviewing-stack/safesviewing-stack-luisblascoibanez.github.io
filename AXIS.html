@@ -94,12 +94,11 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 80px;
-            padding: 40px 5vw; /* Reducido de 80px a 40px */
+            padding: 40px 5vw; 
             max-width: 1600px;
             margin: 0 auto;
             align-items: flex-start; 
         }
-        /* MODIFICACIÓN: Ajuste de márgenes para el título y el texto en la sección dividida */
         .project-brief h3 { 
             font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; line-height: 1.2;
         }
@@ -175,6 +174,21 @@
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
+        /* Animación para la flecha de Next Project */
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+        .next-title .fa-arrow-right {
+            display: inline-block;
+            transition: color 0.4s ease;
+            animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .next-project:hover .fa-arrow-right {
+            color: var(--accent);
+            animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
 
@@ -242,7 +256,6 @@
                  data-en="This project involves the creation of a homemade robotic arm using 3D printing. All parts have been manufactured one by one, which has allowed the design to be adapted little by little as it developed. Screws have been used to join the different parts, achieving a resistant structure that is easy to disassemble if any changes or improvements are needed." 
                  data-es="Este proyecto consiste en la creación de un brazo robótico hecho de forma casera utilizando impresión 3D. Todas las piezas se han fabricado una a una, lo que ha permitido adaptar el diseño poco a poco según se iba desarrollando. Para unir las diferentes partes se han utilizado tornillos, logrando una estructura resistente y fácil de desmontar si se necesita hacer algún cambio o mejora.">
                  Este proyecto consiste en la creación de un brazo robótico hecho de forma casera utilizando impresión 3D. Todas las piezas se han fabricado una a una, lo que ha permitido adaptar el diseño poco a poco según se iba desarrollando. Para unir las diferentes partes se han utilizado tornillos, logrando una estructura resistente y fácil de desmontar si se necesita hacer algún cambio o mejora.
-            </p>
             </div>
         </section>
 
@@ -349,12 +362,12 @@
 
         const heroSection = document.querySelector(".large-image-section");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 35) { // ajusta este valor a tu gusto
-        heroSection.style.opacity = "1";
-        heroSection.style.transform = "translateY(0)";
-    }
-});
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 35) { 
+                heroSection.style.opacity = "1";
+                heroSection.style.transform = "translateY(0)";
+            }
+        });
     </script>
 </body>
 </html>
