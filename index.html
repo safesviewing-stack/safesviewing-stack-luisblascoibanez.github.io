@@ -1,5 +1,3 @@
---- START OF FILE text/html ---
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -223,14 +221,16 @@
             transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
             transform: scale(1.01); 
         }
-        /* Fix específico ALPHA: Más grande y centrado hacia abajo */
+
+        /* Fix ALPHA: Imagen reducida y centrada */
         .p-card.alpha-fix .p-img-container img { 
-            transform: scale(1.22); 
-            object-position: center 60%;
+            object-fit: contain;
+            transform: scale(0.85); 
+            object-position: center;
         } 
-        /* Fix específico ION / OMNI: Más grandes */
+        /* Fix ION / OMNI: Imagen más grande */
         .p-card.img-larger .p-img-container img { 
-            transform: scale(1.18); 
+            transform: scale(1.2); 
         }
 
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
@@ -242,8 +242,8 @@
         
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.1); }
-        .p-card.alpha-fix:hover .p-img-container img { transform: scale(1.3); }
-        .p-card.img-larger:hover .p-img-container img { transform: scale(1.25); }
+        .p-card.alpha-fix:hover .p-img-container img { transform: scale(0.92); }
+        .p-card.img-larger:hover .p-img-container img { transform: scale(1.28); }
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
@@ -465,7 +465,7 @@
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
 
         <div class="portfolio-grid">
-            <!-- Proyecto 1: ALPHA (Ajustado fix específico) -->
+            <!-- Proyecto 1: ALPHA (Ajustado fix específico para ser más pequeña) -->
             <a href="TUKAN.html" class="p-card inter-hover alpha-fix" data-aos="fade-up">
                 <div class="p-img-container"><img src="Aspirador1.jpg" alt="Project"></div>
                 <div class="p-overlay"></div>
