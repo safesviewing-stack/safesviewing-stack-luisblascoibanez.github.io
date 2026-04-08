@@ -82,8 +82,8 @@
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px; /* Reducido de 80px a 60px para menos espacio entre fotos */
-            padding: 60px 5vw; /* Reducido de 80px a 60px para menos espacio entre fotos */
+            gap: 80px; 
+            padding: 60px 5vw; 
             max-width: 1600px;
             margin: 0 auto;
             align-items: center;
@@ -94,7 +94,7 @@
         }
         .split-section img {
             width: 100%;
-            height: 120vh; /* Even more increased height */
+            height: 120vh; 
             object-fit: cover;
             object-position: center;
             border-radius: 20px;
@@ -140,7 +140,7 @@
         .large-image-section img {
             display: block;
             width: 100%;
-            height: 110vh; /* Even more increased height */
+            height: 110vh; 
             object-fit: cover;
             object-position: center;
             border-radius: 30px;
@@ -150,19 +150,34 @@
         /* --- SEPARADOR VISUAL --- */
         .visual-separator {
             width: 100%;
-            height: 1px; /* Línea muy fina */
+            height: 1px; 
             background-color: var(--border);
-            margin: 60px auto; /* Reducido de 100px a 60px para menos espacio entre fotos */
+            margin: 60px auto; 
             max-width: 1600px;
         }
 
         /* --- FOOTER & NEXT PROJECT --- */
-        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 60px; /* Reducido de 100px a 60px */ }
+        .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; margin-top: 60px; }
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
 
-        footer { padding: 60px 5vw; /* Reducido de 80px a 60px */ display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        /* Animación para la flecha de Next Project */
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+        .next-title .fa-arrow-right {
+            display: inline-block;
+            transition: color 0.4s ease;
+            animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .next-project:hover .fa-arrow-right {
+            color: var(--accent);
+            animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        footer { padding: 60px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
        
         /* --- RESPONSIVE --- */
@@ -174,14 +189,14 @@
             }
             .split-section img {
                 height: auto;
-                min-height: 100vh; /* Adjusted minimum height for mobile */
-                order: 1; /* En móvil, la imagen siempre va arriba */
+                min-height: 100vh; 
+                order: 1; 
             }
             .split-text-container {
-                order: 2; /* En móvil, el texto siempre va abajo de la foto */
+                order: 2; 
             }
             .large-image-section { padding: 40px 5vw; }
-            .large-image-section img { height: 100vh; /* Adjusted height for mobile */ }
+            .large-image-section img { height: 100vh; }
             
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
@@ -212,7 +227,6 @@
     </div>
 
     <main>
-        <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Dualis<br>Series" data-es="Serie<br>Dualis">Serie<br>Dualis</h1>
             <div class="project-meta">
@@ -223,7 +237,6 @@
             </div>
         </section>
 
-        <!-- FOTO 1: Ahora se ocultará inicialmente y se animará al hacer scroll -->
         <section class="split-section" data-aos="fade-up" data-aos-offset="200"> 
             <img src="2 LAMPARA.jpg" alt="Detalle Lámpara 1" class="inter-hover">
             <div class="split-text-container">
@@ -236,10 +249,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 2: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Design Philosophy" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
@@ -252,18 +263,14 @@
             <img src="3 LAMPARA.jpg" alt="Detalle Lámpara 2" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 3: IMAGEN GRANDE (SIN TEXTO) -->
         <section class="large-image-section" data-aos="fade-up">
             <img src="PLANOLAMP1.jpg" alt="Plano Lámpara 1" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 4: IMAGEN A LA IZQUIERDA / TEXTO A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <img src="4 LAMPARA.jpg" alt="Detalle Lámpara 4" class="inter-hover">
             <div class="split-text-container">
@@ -276,10 +283,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 5: TEXTO A LA IZQUIERDA / IMAGEN A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Final Details" data-es="Filosofía de Diseño">Filosofía de Diseño</h3>
@@ -292,22 +297,18 @@
             <img src="6 LAMPARA.jpg" alt="Detalle Lámpara 6" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 6: IMAGEN GRANDE (SIN TEXTO) -->
         <section class="large-image-section" data-aos="fade-up" style="margin-bottom: 30px;">
             <img src="PLANOLAMP2.jpg" alt="Plano Lámpara 2" class="inter-hover">
         </section>
     </main>
 
-    <!-- NEXT PROJECT -->
     <a href="TEMPO.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">TEMPO <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -315,27 +316,12 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Restauración del scroll limpia al recargar
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
+        AOS.init({ duration: 1000, once: true });
 
-        // Inicialización de AOS, pero sin que anime la primera sección por defecto
-        AOS.init({ 
-            duration: 1000, 
-            once: true,
-            // Deshabilitar la detección automática al cargar para la primera sección.
-            // Los elementos que ya están en el viewport no deberían animarse inmediatamente.
-            // Para eso, necesitamos controlarlos con un IntersectionObserver.
-           
-        });
-
-        // Intersection Observer para la primera split-section
-        
-
-        // Theme Toggle
         document.getElementById("theme-toggle").addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -352,7 +338,6 @@
             }, 250);
         });
 
-        // Cursor logic
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -372,7 +357,6 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Navbar Scroll
         let lastScroll = 0; const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset;
