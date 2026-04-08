@@ -222,10 +222,10 @@
             transform: scale(1.01); 
         }
 
-        /* Fix ALPHA: Imagen reducida y centrada */
+        /* Fix ALPHA: Que rellene (cover) pero no se vea gigante (scale 1.0) */
         .p-card.alpha-fix .p-img-container img { 
-            object-fit: contain;
-            transform: scale(0.85); 
+            object-fit: cover;
+            transform: scale(1.0); 
             object-position: center;
         } 
         /* Fix ION / OMNI: Imagen más grande */
@@ -242,7 +242,7 @@
         
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.1); }
-        .p-card.alpha-fix:hover .p-img-container img { transform: scale(0.92); }
+        .p-card.alpha-fix:hover .p-img-container img { transform: scale(1.08); }
         .p-card.img-larger:hover .p-img-container img { transform: scale(1.28); }
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
@@ -465,9 +465,9 @@
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
 
         <div class="portfolio-grid">
-            <!-- Proyecto 1: ALPHA (Ajustado fix específico para ser más pequeña) -->
+            <!-- Proyecto 1: ALPHA (Cambio de imagen y fix para que rellene sin ser gigante) -->
             <a href="TUKAN.html" class="p-card inter-hover alpha-fix" data-aos="fade-up">
-                <div class="p-img-container"><img src="Aspirador1.jpg" alt="Project"></div>
+                <div class="p-img-container"><img src="ASPIRIN.png" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -504,7 +504,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 4: ION (Ajustado más grande) -->
+            <!-- Proyecto 4: ION (Imagen más grande) -->
             <a href="PONTEO.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="GRIFITO.png" alt="Project"></div>
                 <div class="p-overlay"></div>
@@ -517,7 +517,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 5: OMNI (Manteniendo tamaño grande) -->
+            <!-- Proyecto 5: OMNI (Imagen más grande) -->
             <a href="AXIS.html" class="p-card inter-hover img-larger" data-aos="fade-up">
                 <div class="p-img-container"><img src="AXISS.png" alt="Project"></div>
                 <div class="p-overlay"></div>
