@@ -222,11 +222,11 @@
             transform: scale(1.01); 
         }
 
-        /* Fix ALPHA: Que rellene (cover) pero no se vea gigante (scale 1.0) */
+        /* Fix ALPHA: Que rellene (cover), scale neutro y movida un poco hacia abajo (60%) */
         .p-card.alpha-fix .p-img-container img { 
             object-fit: cover;
             transform: scale(1.0); 
-            object-position: center;
+            object-position: center 60%;
         } 
         /* Fix ION / OMNI: Imagen más grande */
         .p-card.img-larger .p-img-container img { 
@@ -465,7 +465,7 @@
         <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
 
         <div class="portfolio-grid">
-            <!-- Proyecto 1: ALPHA (Cambio de imagen y fix para que rellene sin ser gigante) -->
+            <!-- Proyecto 1: ALPHA -->
             <a href="TUKAN.html" class="p-card inter-hover alpha-fix" data-aos="fade-up">
                 <div class="p-img-container"><img src="ASPIRIN.png" alt="Project"></div>
                 <div class="p-overlay"></div>
@@ -504,7 +504,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 4: ION (Imagen más grande) -->
+            <!-- Proyecto 4: ION -->
             <a href="PONTEO.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="GRIFITO.png" alt="Project"></div>
                 <div class="p-overlay"></div>
@@ -517,7 +517,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 5: OMNI (Imagen más grande) -->
+            <!-- Proyecto 5: OMNI -->
             <a href="AXIS.html" class="p-card inter-hover img-larger" data-aos="fade-up">
                 <div class="p-img-container"><img src="AXISS.png" alt="Project"></div>
                 <div class="p-overlay"></div>
@@ -530,9 +530,9 @@
                 </div>
             </a>
 
-            <!-- Proyecto 6: LUNA -->
+            <!-- Proyecto 6: LUNA (Imagen actualizada a TORRENTE.png) -->
             <a href="TORRENT.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Project"></div>
+                <div class="p-img-container"><img src="TORRENTE.png" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
