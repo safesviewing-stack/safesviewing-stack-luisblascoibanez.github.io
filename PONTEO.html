@@ -75,8 +75,8 @@
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px; /* Reducido de 80px */
-            padding: 60px 5vw; /* Reducido de 80px */
+            gap: 60px; 
+            padding: 60px 5vw; 
             max-width: 1600px;
             margin: 0 auto;
             align-items: center;
@@ -111,7 +111,7 @@
 
         /* Bloques de Imagen Grande (Pantalla Completa respetando márgenes) */
         .large-image-section {
-            padding: 30px 5vw; /* Reducido de 40px */
+            padding: 30px 5vw; 
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -128,7 +128,7 @@
         /* Hero Image Section (for larger, more prominent images) */
         .hero-image-section {
             padding: 0 5vw; 
-            margin-top: 60px; /* Reducido de 90px */
+            margin-top: 60px; 
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
@@ -152,13 +152,13 @@
         .text-align-wrapper {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 60px 5vw; /* Reducido de 80px */
+            padding: 60px 5vw; 
         }
         .text-align-wrapper.split { 
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px; 
-            padding: 30px 5vw; /* Reducido y ajustado para el texto final */
+            padding: 30px 5vw; 
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -175,7 +175,7 @@
             width: 100%;
             height: 1px; 
             background-color: var(--border);
-            margin: 60px auto; /* Reducido de 80px */
+            margin: 60px auto; 
             max-width: 1600px;
         }
 
@@ -184,6 +184,21 @@
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
+
+        /* Animación para la flecha de Next Project */
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+        .next-title .fa-arrow-right {
+            display: inline-block;
+            transition: color 0.4s ease;
+            animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .next-project:hover .fa-arrow-right {
+            color: var(--accent);
+            animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
@@ -243,7 +258,6 @@
     </div>
 
     <main>
-        <!-- CABECERA DEL PROYECTO -->
         <section class="project-header" data-aos="fade-up">
             <h1 class="project-title lang-node" data-en="Ponteo<br>Project" data-es="Proyecto<br>Ponteo">Proyecto<br>Ponteo</h1>
             <div class="project-meta">
@@ -254,7 +268,6 @@
             </div>
         </section>
 
-        <!-- 1. FOTO A LA IZQUIERDA / TEXTO A LA DERECHA -->
         <section class="split-section" data-aos="fade-up" data-aos-offset="350">
             <img src="1 GRIFO.png" alt="Grifo Detalle 1" class="inter-hover">
             <div class="split-text-container">
@@ -267,10 +280,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 2. TEXTO A LA IZQUIERDA / FOTO A LA DERECHA -->
         <section class="split-section" data-aos="fade-up">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="DESIGN PHILOSOPHY" data-es="FILOSOFÍA DE DISEÑO">FILOSOFÍA DE DISEÑO</h3>
@@ -283,18 +294,14 @@
             <img src="2 GRIFO.jpg" alt="Grifo Detalle 2" class="inter-hover">
         </section>
         
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 3. FOTO EN GRANDE (RESPETANDO MÁRGENES) -->
         <section class="large-image-section" data-aos="fade-up">
             <img src="3 GRIFO.jpg" alt="Grifo Vista Principal 3" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 4. TEXTO ENTRE LAS DOS FOTOS GRANDES (AHORA DIVIDIDO EN 2 COLUMNAS Y CON MÁS TEXTO) -->
         <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="To materialize this complex structural geometry, the selection of the material was a critical step. The material ultimately chosen is chrome-plated brass, a classic yet unparalleled alloy in the industrial sector, deeply valued for its excellent capacity for easy, precision machining. This characteristic allowed the straight edges and rectangular openings to be turned and milled with minimal tolerances, ensuring that the digital design translated into reality with absolute fidelity. The exterior chrome finish acts as a mirror that highlights the purity of the geometric forms, providing a level of sophistication and a cold, technical touch highly appreciated in contemporary design." 
@@ -308,23 +315,19 @@
             </p>
         </div>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- 5. ÚLTIMA FOTO EN GRANDE (tipo hero-image-section) -->
         <section class="hero-image-section" style="margin-bottom: 60px;" data-aos="fade-up"> 
             <img src="4 GRIFO.jpg" alt="Grifo Vista Principal 4" class="inter-hover">
         </section>
 
     </main>
 
-    <!-- NEXT PROJECT -->
     <a href="AXIS.html" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="Next Project" data-es="Siguiente Proyecto">Siguiente Proyecto</span>
         <h2 class="next-title">AXIS <i class="fa-solid fa-arrow-right"></i></h2>
     </a>
 
-    <!-- FOOTER -->
     <footer>
         <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 20px;">L|BIB</div>
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -336,11 +339,9 @@
         window.addEventListener('load', () => window.scrollTo(0, 0));
         AOS.init({ duration: 1000, once: true });
 
-        // Theme Toggle
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // Lang Toggle
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         btnLang.addEventListener("click", () => {
@@ -357,7 +358,6 @@
             }, 250);
         });
 
-        // Cursor logic
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
@@ -377,7 +377,6 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
         });
 
-        // Navbar Scroll
         let lastScroll = 0; 
         const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
