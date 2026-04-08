@@ -1,3 +1,5 @@
+--- START OF FILE text/html ---
+
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -212,7 +214,18 @@
         .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
         .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease; }
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.01); }
+        
+        /* CORRECCIÓN IMÁGENES: Ajuste general y específico para Omni y Alpha */
+        .p-img-container img { 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            object-position: center;
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+            transform: scale(1.01); 
+        }
+        .p-card.img-scale-up .p-img-container img { transform: scale(1.15); } /* Corrección para OMNI */
+        .p-card.img-top-align .p-img-container img { object-position: center 20%; } /* Ajuste opcional para Alpha */
+
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
         .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
         .p-text-col { display: flex; flex-direction: column; gap: 4px; }
@@ -222,6 +235,7 @@
         
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.08); }
+        .p-card.img-scale-up:hover .p-img-container img { transform: scale(1.22); }
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
@@ -444,7 +458,7 @@
 
         <div class="portfolio-grid">
             <!-- Proyecto 1: ALPHA -->
-            <a href="TUKAN.html" class="p-card inter-hover" data-aos="fade-up">
+            <a href="TUKAN.html" class="p-card inter-hover img-top-align" data-aos="fade-up">
                 <div class="p-img-container"><img src="Aspirador1.jpg" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
@@ -495,8 +509,8 @@
                 </div>
             </a>
 
-            <!-- Proyecto 5: OMNI -->
-            <a href="AXIS.html" class="p-card inter-hover" data-aos="fade-up">
+            <!-- Proyecto 5: OMNI (Corregida con img-scale-up) -->
+            <a href="AXIS.html" class="p-card inter-hover img-scale-up" data-aos="fade-up">
                 <div class="p-img-container"><img src="AXISS.png" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
