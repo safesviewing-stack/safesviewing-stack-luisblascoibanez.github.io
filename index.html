@@ -33,7 +33,6 @@
             --accent-glow: rgba(255, 90, 0, 0.05);
         }
 
-        /* Quitamos el scroll-behavior: smooth de aquí para que no interfiera al cargar con anclas (#work) */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body {
@@ -130,7 +129,6 @@
             letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease;
         }
         
-        /* HOVER SOMBREADO EN EL MENÚ */
         .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
         .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
 
@@ -172,7 +170,6 @@
             width: 100%;
         }
 
-        /* --- ANIMACIÓN INDEPENDIENTE POR PALABRA --- */
         .word-reveal {
             display: inline-block;
             overflow: hidden;
@@ -198,18 +195,24 @@
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- MARQUEE EDITORIAL INFINITO --- */
+        /* --- MARQUEE EDITORIAL INFINITO EN 2 LÍNEAS --- */
         .marquee-section {
             width: 100%; overflow: hidden; background: transparent; padding: 40px 0;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
+            display: flex; flex-direction: column; gap: 15px; justify-content: center;
         }
-        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
+        .marquee-content { display: flex; width: max-content; will-change: transform; }
+        .scroll-left { animation: marqueeScrollLeft 35s linear infinite; }
+        .scroll-right { animation: marqueeScrollRight 35s linear infinite; }
+        
         .marquee-text {
             display: flex; white-space: nowrap; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
         }
         .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
-        @keyframes marqueeScroll { to { transform: translateX(-50%); } }
+        
+        @keyframes marqueeScrollLeft { to { transform: translateX(-50%); } }
+        @keyframes marqueeScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
 
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
@@ -221,7 +224,6 @@
         .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
         .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
         
-        /* Texto Sobre mí (Sin justificar) */
         .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify;}
         .about-text strong { color: var(--text); font-weight: 500;}
 
@@ -230,7 +232,6 @@
         .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease; }
         .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
         
-        /* CORRECCIÓN IMÁGENES: Ajuste general y específico */
         .p-img-container img { 
             width: 100%; height: 100%; 
             object-fit: cover; 
@@ -239,13 +240,11 @@
             transform: scale(1.01); 
         }
 
-        /* Fix ALPHA: Que rellene (cover), scale neutro y movida un poco hacia abajo (60%) */
         .p-card.alpha-fix .p-img-container img { 
             object-fit: cover;
             transform: scale(1.0); 
             object-position: center 60%;
         } 
-        /* Fix ION / OMNI / DUALIS: Imagen sustancialmente más grande */
         .p-card.img-larger .p-img-container img { 
             transform: scale(1.25); 
         }
@@ -270,7 +269,6 @@
         .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
         .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
 
-        /* Listas de capacidades en las cajas de Skills */
         .capabilities-list {
             list-style: none; padding: 0; margin: 0 0 25px 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;
         }
@@ -281,7 +279,6 @@
             color: var(--accent); font-size: 0.8rem; margin-top: 4px;
         }
 
-        /* Etiquetas de software */
         .software-tags {
             display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px;
         }
@@ -423,10 +420,10 @@
         </div>
     </section>
 
-    <!-- CARRUSEL EDITORIAL INFINITO -->
+    <!-- CARRUSEL EDITORIAL INFINITO EN 2 LÍNEAS -->
     <div class="marquee-section inter-hover">
-        <div class="marquee-content">
-            <!-- Bloque 1 -->
+        <!-- LÍNEA 1 (Hacia la izquierda) -->
+        <div class="marquee-content scroll-left">
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -435,15 +432,9 @@
                 <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
                 <span class="lang-node" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIALS & FINISHES" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
-            <!-- Bloque 2 (Duplicado exacto para el loop) -->
+            <!-- Duplicado L1 -->
             <div class="marquee-text">
                 <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
@@ -453,11 +444,30 @@
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
                 <span class="lang-node" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+            </div>
+        </div>
+
+        <!-- LÍNEA 2 (Hacia la derecha) -->
+        <div class="marquee-content scroll-right">
+            <div class="marquee-text">
                 <span class="lang-node" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
                 <span class="lang-node" data-en="MATERIALS & FINISHES" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
                 <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+            </div>
+            <!-- Duplicado L2 -->
+            <div class="marquee-text">
+                <span class="lang-node" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="MATERIALS & FINISHES" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
         </div>
@@ -471,7 +481,6 @@
                    data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other.<br><br> My education across different technical and academic environments has shaped a strong methodological adaptability and a critical reading of design processes. This path led me to prioritize verifiable systems over intuitive-only decisions, understanding design as something that must hold both conceptually and physically.<br><br> My background in electrical and industrial systems defines how I approach projects: designing with real manufacturing, tolerances, assemblies, and material behavior in mind. This minimizes the gap between concept and final object and ensures formal decisions respond to real constraints.<br><br> Within this framework, 3D printing holds a central role, not just as a prototyping tool, but as a system that integrates fast iterations, material control, and new industrial logics."
                    data-es="Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta. Dentro de este marco, la impresión 3D ocupa un rol central, no solo como herramienta de prototipado o producción, sino como sistema que integra iteración rápida, control material y nuevas lógicas industriales.">Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta.</p>
             </div>
-            <!-- IMAGEN SUSTITUIDA AQUÍ -->
             <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="150">
                 <img src="Retrato.jpg" alt="LUIS">
             </div>
@@ -713,7 +722,6 @@
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
                     <span class="box-text">+34 630 51 18 06</span>
                 </div>
-                <!-- ENLACE DE LINKEDIN ACTUALIZADO AQUÍ -->
                 <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank" rel="noopener noreferrer" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
                     <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
@@ -741,11 +749,9 @@
         
         window.addEventListener('load', () => {
             if (!window.location.hash || window.location.hash === '#home') {
-                // Si la URL no tiene sección específica, vuelve arriba del todo (ej: F5)
                 window.scrollTo(0, 0);
             }
             
-            // Retraso opcional para evitar conflictos
             setTimeout(() => {
                 document.documentElement.style.scrollBehavior = 'smooth';
             }, 100);
@@ -839,10 +845,10 @@
 
         sections.forEach(section => observer.observe(section));
 
-        // --- SCRIPT NUEVO: FORZAR SCROLL SUAVE EN LOS ENLACES DEL MENÚ ---
+        // FORZAR SCROLL SUAVE EN LOS ENLACES DEL MENÚ
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Evita el salto brusco del navegador
+                e.preventDefault(); 
                 
                 const targetId = this.getAttribute('href');
                 if (targetId === '#' || targetId === '') return;
