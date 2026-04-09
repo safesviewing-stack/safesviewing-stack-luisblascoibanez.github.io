@@ -195,7 +195,7 @@
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- MARQUEE EDITORIAL INFINITO EN 2 LÍNEAS ZIGZAG --- */
+        /* --- MARQUEE EDITORIAL INFINITO EN 2 LÍNEAS ZIGZAG (Misma dirección) --- */
         .marquee-section {
             width: 100%; overflow: hidden; background: transparent; padding: 70px 0; /* Más ancho/alto */
             border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
@@ -209,7 +209,7 @@
         
         /* Desplazamiento inicial para que las palabras queden intercaladas visualmente */
         .marquee-content.staggered {
-            margin-left: -20vw; 
+            margin-left: -15vw; 
         }
         
         .marquee-text {
@@ -728,15 +728,19 @@
             </div>
 
             <div class="contact-links-grid">
-                <div class="contact-box box-phone inter-hover">
+                <!-- Teléfono clicable -->
+                <a href="tel:+34630511806" class="contact-box box-phone inter-hover">
                     <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
                     <span class="box-text">+34 630 51 18 06</span>
-                </div>
+                </a>
+                
                 <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank" rel="noopener noreferrer" class="contact-box box-linkedin inter-hover">
                     <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
                     <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
                 </a>
-                <a href="mailto:luisblascoibanezberbel@gmail.com" class="contact-box box-neutral inter-hover">
+                
+                <!-- Correo clicable -->
+                <a href="mailto:luisblascoibanezberbel@gmail.com" target="_blank" class="contact-box box-neutral inter-hover">
                     <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
                     <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
                 </a>
