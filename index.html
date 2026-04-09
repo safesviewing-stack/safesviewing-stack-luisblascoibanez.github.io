@@ -205,7 +205,7 @@
         }
         .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
         .marquee-text {
-            display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+            display: center; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
         }
         .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
@@ -245,9 +245,9 @@
             transform: scale(1.0); 
             object-position: center 60%;
         } 
-        /* Fix ION / OMNI / DUALIS: Imagen más grande */
+        /* Fix ION / OMNI / DUALIS: Imagen sustancialmente más grande */
         .p-card.img-larger .p-img-container img { 
-            transform: scale(1.14); 
+            transform: scale(1.25); 
         }
 
         .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
@@ -260,7 +260,7 @@
         .p-card:hover { border-color: rgba(255,255,255,0.2); }
         .p-card:hover .p-img-container img { transform: scale(1.1); }
         .p-card.alpha-fix:hover .p-img-container img { transform: scale(1.08); }
-        .p-card.img-larger:hover .p-img-container img { transform: scale(1.28); }
+        .p-card.img-larger:hover .p-img-container img { transform: scale(1.38); }
         .p-card:hover .p-overlay { opacity: 1; }
         .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
 
@@ -496,7 +496,7 @@
                 </div>
             </a>
 
-            <!-- Proyecto 2: EGO (Dualis) - Foto ajustada a img-larger -->
+            <!-- Proyecto 2: EGO -->
             <a href="DUALIS.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-img-container"><img src="LAMPARITAS.png" alt="Project"></div>
                 <div class="p-overlay"></div>
