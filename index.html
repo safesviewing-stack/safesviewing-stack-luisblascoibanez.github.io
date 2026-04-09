@@ -195,34 +195,30 @@
 
         h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
 
-        /* --- MARQUEE EDITORIAL INFINITO EN 2 LÍNEAS ZIGZAG (Misma dirección) --- */
+        /* --- MARQUEE EDITORIAL INFINITO (1 LÍNEA, AUTO-WRAP) --- */
         .marquee-section {
-            width: 100%; overflow: hidden; background: transparent; padding: 70px 0; /* Más ancho/alto */
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
-            display: flex; flex-direction: column; gap: 25px; justify-content: center;
+            width: 100%; overflow: hidden; background: transparent; padding: 40px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center;
         }
-        
-        .marquee-content { 
-            display: flex; width: max-content; will-change: transform; 
-            animation: marqueeScroll 35s linear infinite; 
-        }
-        
-        /* Desplazamiento inicial para que las palabras queden intercaladas visualmente */
-        .marquee-content.staggered {
-            margin-left: -15vw; 
-        }
+        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
         
         .marquee-text {
-            display: flex; white-space: nowrap; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+            display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
         }
         
-        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); }
-        
-        /* Ambas líneas comparten la misma animación en la misma dirección */
-        @keyframes marqueeScroll { 
-            to { transform: translateX(-50%); } 
+        /* Clase específica para que los textos largos bajen de línea si no caben en pantalla */
+        .marquee-item {
+            white-space: normal; /* Permite que el texto se rompa en varias líneas */
+            max-width: 90vw;     /* Si el texto supera el 90% de la pantalla, bajará al párrafo inferior */
+            text-align: center;
+            line-height: 1.1;
+            display: inline-block;
         }
+
+        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); flex-shrink: 0; }
+        
+        @keyframes marqueeScroll { to { transform: translateX(-50%); } }
 
         /* --- BENTO GRID: PERFIL --- */
         .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
@@ -430,54 +426,45 @@
         </div>
     </section>
 
-    <!-- CARRUSEL EDITORIAL INFINITO EN 2 LÍNEAS ZIGZAG -->
+    <!-- CARRUSEL EDITORIAL INFINITO (1 LÍNEA, AUTO-WRAP) -->
     <div class="marquee-section inter-hover">
-        <!-- LÍNEA 1 -->
         <div class="marquee-content">
+            <!-- Bloque 1 -->
             <div class="marquee-text">
-                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
+                <span class="lang-node marquee-item" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
+                <span class="lang-node marquee-item" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
+                <span class="lang-node marquee-item" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="lang-node marquee-item" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node marquee-item" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node marquee-item" data-en="CONCEPTUAL DESIGN" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node marquee-item" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
+                <span class="lang-node marquee-item" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
-            <!-- Duplicado L1 para el loop -->
+            <!-- Bloque 2 (Duplicado para el bucle) -->
             <div class="marquee-text">
-                <span class="lang-node" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
+                <span class="lang-node marquee-item" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
+                <span class="lang-node marquee-item" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
+                <span class="lang-node marquee-item" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
+                <span class="lang-node marquee-item" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-            </div>
-        </div>
-
-        <!-- LÍNEA 2 (Desplazada hacia la izquierda inicialmente para intercalar visualmente) -->
-        <div class="marquee-content staggered">
-            <div class="marquee-text">
-                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
+                <span class="lang-node marquee-item" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
+                <span class="lang-node marquee-item" data-en="CONCEPTUAL DESIGN" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIALS & FINISHES" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
+                <span class="lang-node marquee-item" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-            </div>
-            <!-- Duplicado L2 para el loop -->
-            <div class="marquee-text">
-                <span class="lang-node" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="MATERIALS & FINISHES" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
+                <span class="lang-node marquee-item" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
                 <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
             </div>
         </div>
