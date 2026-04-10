@@ -627,7 +627,7 @@
                 </ul>
                 <div class="software-tags">
                     <span class="software-tag">Cura</span>
-                    <span class="software-tag"><img src="orcaslicer.png" alt="OrcaSlicer"> OrcaSlicer</span>
+                    <span class="software-tag">OrcaSlicer</span>
                 </div>
             </div>
 
@@ -700,7 +700,8 @@
         </div>
 
         <div style="padding-top: 15px;" data-aos="fade-up">
-            <a href="CV_Luis_Blasco-Ibanez_Berbel.pdf" download="CV_Luis_Blasco-Ibanez_Berbel.pdf" class="btn inter-hover">
+            <!-- Añadimos el ID 'cv-download-btn' a la etiqueta <a> -->
+            <a id="cv-download-btn" href="CV_Luis_Blasco-Ibanez_Berbel.pdf" download="CV_Luis_Blasco-Ibanez_Berbel.pdf" class="btn inter-hover">
                 <i class="fa-solid fa-arrow-left flow-arr-left"></i>
                 <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
                 <i class="fa-solid fa-arrow-right flow-arr-right"></i>
@@ -769,7 +770,7 @@
             btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         });
 
-        // ESTADO GLOBAL DE IDIOMA
+        // ESTADO GLOBAL DE IDIOMA Y DESCARGA DINÁMICA DE CV
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         
@@ -786,6 +787,16 @@
                     node.classList.remove("lang-animating");
                 });
                 btnLang.textContent = langActive === "es" ? "EN" : "ES";
+
+                // Lógica de descarga dinámica del CV según el idioma
+                const cvLink = document.getElementById("cv-download-btn");
+                if (cvLink) {
+                    const newFileName = langActive === "es" 
+                        ? "CV_Luis_Blasco-Ibanez_Berbel.pdf" 
+                        : "CV_Luis_Blasco-Ibanez_Berbel_EN.pdf";
+                    cvLink.setAttribute("href", newFileName);
+                    cvLink.setAttribute("download", newFileName);
+                }
 
             }, 250);
         });
