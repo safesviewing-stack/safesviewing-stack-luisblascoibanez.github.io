@@ -1,881 +1,186 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Blasco-Ibáñez | Industrial Design</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <title>Luis Blasco Ibáñez | Portfolio 3D</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Spline Viewer Web Component -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js"></script>
     <style>
-        /* --- CORE VARIABLES --- */
-        :root {
-            --bg: #000000;
-            --accent: #FF5A00;
-            --accent-glow: rgba(255, 90, 0, 0.15);
-            --card-bg: rgba(25, 25, 27, 0.4);
-            --border: rgba(255, 255, 255, 0.05);
-            --text: #f3f3f3;
-            --text-dim: #8b8b8d;
-            --glass: rgba(10, 10, 12, 0.1);
-            --blur: blur(35px);
+        /* Estilos personalizados para efectos de luz de fondo */
+        .spotlight {
+            background: radial-gradient(circle 500px at 50% 50%, rgba(120, 119, 198, 0.1), transparent);
         }
-
-        .light-mode {
-            --bg: #f2f2f4;
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --border: rgba(0, 0, 0, 0.06);
-            --text: #111112;
-            --text-dim: #5c5c5f;
-            --glass: rgba(255, 255, 255, 0.2);
-            --accent-glow: rgba(255, 90, 0, 0.05);
+        /* Loader simple mientras se descarga el modelo de Spline */
+        .loader {
+            border-top-color: #3b82f6;
+            animation: spinner 1.5s linear infinite;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-
-        body {
-            background-color: var(--bg); color: var(--text);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden; line-height: 1.5;
-            transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s;
-        }
-
-        .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
-        .lang-animating {
-            opacity: 0.25 !important;
-            filter: blur(8px) saturate(2);
-            transform: scale(0.95) translateY(2px) !important;
-            letter-spacing: -2px;
-        }
-
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9998;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04; mix-blend-mode: overlay;
-        }
-
-        body::before {
-            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh;
-            background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%);
-            z-index: -1; transform: translateX(-50%);
-        }
-
-        ::selection { background: var(--accent); color: #fff; }
-
-        /* --- REDUCCION ANILLO HARDWARE CURSOR --- */
-        #cursor-dot {
-            width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-            will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
-        }
-
-        #cursor-ring {
-            width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%;
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
-            transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
-            will-change: transform, width, height;
-        }
-
-       .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-       .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
-
-        /* --- ETIQUETA STATUS INLINE  --- */
-        .status-tag {
-            display: inline-flex; align-items: center; gap: 12px; width: max-content;
-            font-size: 0.75rem; color: var(--text); font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 10px 20px; border-radius: 100px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .pulse-box { position: relative; display: flex; justify-content: center; align-items: center; width: 8px; height: 8px; }
-        .pulse-core { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
-        .pulse-ring { position: absolute; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-        .status-tag span { line-height: 1; margin-top: 1px; }
-
-        @keyframes ping { 75%, 100% { transform: scale(3.5); opacity: 0; } }
-
-        /* --- NAVBAR --- */
-        .navbar-wrapper {
-            position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .ui-hidden { transform: translateY(-130px); }
-
-        header {
-            background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 12px 35px; display: flex; align-items: center; gap: 40px;
-            border: 1px solid var(--border); border-radius: 100px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-            animation: headerFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-        }
-
-        @keyframes headerFadeIn {
-            0% { opacity: 0; transform: translateY(-15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; opacity: 0.8; transition: opacity 0.3s; text-decoration: none; color: inherit;}
-        .nav-logo:hover { opacity: 1; }
-
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a {
-            text-decoration: none; color: var(--text); opacity: 0.6; font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
-            letter-spacing: 0.5px; padding: 8px 16px; border-radius: 100px; transition: all 0.3s ease;
-        }
-        
-        .nav-links a:hover { opacity: 1; color: var(--text); background: rgba(150, 150, 150, 0.15); }
-        .nav-links a.active { background: rgba(150, 150, 150, 0.15); color: var(--text) !important; opacity: 1; font-weight: 700; }
-
-        .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
-
-        .tools-nav { display:flex; align-items: center; gap: 10px;}
-
-        .icon-btn {
-            background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6;
-            width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .icon-btn:hover { color: var(--accent); opacity: 1; transform: scale(1.1); }
-
-        .lang-sutil-btn {
-            background: transparent; border: none; outline: none; color: var(--text);
-            font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.5px; padding: 2px 4px;
-            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
-        }
-        .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
-
-        /* --- HERO SECTIONS --- */
-        section { padding: 160px 5vw; max-width: 1600px; margin: 0 auto; }
-        .hero { height: 100vh; padding: 0 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
-
-        .hero-text-block { margin-top: 6vh; margin-left: -0.5vw; }
-
-        .hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 7.5vw, 8.5rem);
-            line-height: 1.1;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .word-reveal {
-            display: inline-block;
-            overflow: hidden;
-            vertical-align: bottom;
-            margin-right: 0.15em;
-            line-height: 1.1;
-        }
-        .word-reveal span {
-            display: inline-block;
-            transform: translateY(110%);
-            animation: slideUpWord 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes slideUpWord {
-            to { transform: translateY(0); }
-        }
-        .hero-title .w1 span { animation-delay: 0.1s; }
-        .hero-title .w2 span { animation-delay: 0.25s; }
-        .hero-title .w3 span { animation-delay: 0.4s; }
-        .hero-title .w4 span { animation-delay: 0.55s; }
-
-        .subtitle-bar { display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap; margin-top: 25px; width: 100%; max-width: 90%; }
-        .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--accent); font-weight: 600; font-family: 'Inter'; letter-spacing: -0.5px; margin-top:0; margin-left: 0.4vw;}
-
-        h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 60px; letter-spacing: -2px;}
-
-        /* --- MARQUEE EDITORIAL INFINITO (1 LÍNEA, AUTO-WRAP) --- */
-        .marquee-section {
-            width: 100%; overflow: hidden; background: transparent; padding: 40px 0;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center;
-        }
-        .marquee-content { display: flex; width: max-content; animation: marqueeScroll 35s linear infinite; will-change: transform; }
-        
-        .marquee-text {
-            display: flex; align-items: center; font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--text-dim); text-transform: uppercase; transition: all 0.4s ease;
-        }
-        
-        /* Clase específica para que los textos largos bajen de línea si no caben en pantalla */
-        .marquee-item {
-            white-space: normal; /* Permite que el texto se rompa en varias líneas */
-            max-width: 90vw;     /* Si el texto supera el 90% de la pantalla, bajará al párrafo inferior */
-            text-align: center;
-            line-height: 1.1;
-            display: inline-block;
-        }
-
-        .m-dot { color: var(--accent) !important; -webkit-text-stroke: 0px; margin: 0 45px; font-size: clamp(1.5rem, 3vw, 2.5rem); transform: translateY(-4px); flex-shrink: 0; }
-        
-        @keyframes marqueeScroll { to { transform: translateX(-50%); } }
-
-        /* --- BENTO GRID: PERFIL --- */
-        .bento-about { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .bento-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; padding: 40px;
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; justify-content: space-between; transform: translateZ(0); 
-        }
-        .bento-card-photo { padding: 0; overflow: hidden; height: 100%; min-height: 450px; position: relative; border-radius: 30px; border: 1px solid var(--border); }
-        .bento-card-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s, transform 0.5s; }
-        .bento-card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        
-        .about-text { font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); text-align: justify;}
-        .about-text strong { color: var(--text); font-weight: 500;}
-
-        /* --- PORTFOLIO GRID --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 40px; }
-        .p-card { position: relative; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; height: 480px; transition: 0.5s ease; }
-        .p-img-container { width: 100%; height: 100%; position: absolute; inset: 0; overflow: hidden; }
-        
-        .p-img-container img { 
-            width: 100%; height: 100%; 
-            object-fit: cover; 
-            object-position: center;
-            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
-            transform: scale(1.01); 
-        }
-
-        .p-card.alpha-fix .p-img-container img { 
-            object-fit: cover;
-            transform: scale(1.0); 
-            object-position: center 60%;
-        } 
-        .p-card.img-larger .p-img-container img { 
-            transform: scale(1.25); 
-        }
-
-        .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 80%); z-index: 1; pointer-events: none; transition: 0.5s; opacity: 0.8; }
-        .p-info { position: absolute; bottom: 30px; left: 35px; right: 35px; z-index: 2; pointer-events: none; display: flex; justify-content: space-between; align-items: flex-end; }
-        .p-text-col { display: flex; flex-direction: column; gap: 4px; }
-        .p-text-col h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; color: white;}
-        .p-text-col p { font-size: 0.9rem; text-transform: uppercase; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; margin: 0;}
-        .view-circle { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; background: var(--accent); display: flex; justify-content: center; align-items: center; color: white; transform: translateY(20px) scale(0.8); opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        
-        .p-card:hover { border-color: rgba(255,255,255,0.2); }
-        .p-card:hover .p-img-container img { transform: scale(1.1); }
-        .p-card.alpha-fix:hover .p-img-container img { transform: scale(1.08); }
-        .p-card.img-larger:hover .p-img-container img { transform: scale(1.38); }
-        .p-card:hover .p-overlay { opacity: 1; }
-        .p-card:hover .view-circle { transform: translateY(0) scale(1); opacity: 1; }
-
-        /* --- SKILLS & COMPETENCIAS --- */
-        .skills-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
-        .skills-bento .bento-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;}
-        .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
-        .light-mode .skills-bento .bento-card:hover { border-color: rgba(255, 90, 0, 0.5); transform: translateY(-5px) translateZ(0); box-shadow: none !important; }
-
-        .capabilities-list {
-            list-style: none; padding: 0; margin: 0 0 25px 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;
-        }
-        .capabilities-list li {
-            font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
-        }
-        .capabilities-list li i {
-            color: var(--accent); font-size: 0.8rem; margin-top: 4px;
-        }
-
-        .software-tags {
-            display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px;
-        }
-        .software-tag {
-            display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; background: var(--glass);
-            border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; font-weight: 600;
-            color: var(--text); transition: all 0.3s ease;
-        }
-        .software-tag:hover {
-            border-color: var(--accent); background: var(--accent-glow);
-        }
-        .software-tag img {
-            width: 14px; height: 14px; object-fit: contain; filter: invert(1) opacity(0.8); transition: filter 0.3s ease;
-        }
-        .light-mode .software-tag img {
-            filter: invert(0) opacity(0.8);
-        }
-
-        /* --- CV --- */
-        .cv-list { border-top: 1px solid var(--border); display: flex; flex-direction: column; width: 100%; }
-        .cv-row { display: flex; flex-direction: row; padding: 55px 0; border-bottom: 1px solid var(--border); gap: 60px; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .cv-row::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0%; background: var(--accent); z-index: 2; transition: height 0.3s ease; }
-        .cv-row::before { content: ""; position: absolute; left: 0; top: 0; width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-glow) 0%, transparent 100%); z-index: 0; transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; }
-        .cv-row:hover { padding-left: 30px; }
-        .cv-row:hover::after { height: 100%; }
-        .cv-row:hover::before { width: 100%; opacity: 1; }
-        .cv-year { font-family: 'Syne', sans-serif; font-size: 1.25rem; color: var(--text-dim); font-weight: 700; width: 180px; flex-shrink: 0; z-index: 1; transition: color 0.4s ease; }
-        .cv-content { display: flex; flex-direction: column; z-index: 1; }
-        .cv-role { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin: 0 0 15px 0; line-height: 1.2; transition: color 0.4s ease; }
-        .cv-desc { font-size: 1.05rem; color: var(--text-dim); line-height: 1.65; max-width: 680px; margin: 0; }
-        .cv-row:hover .cv-role { color: var(--accent); }
-        .cv-row:hover .cv-year { color: var(--text); }
-
-        /* --- BUTTONS --- */
-        .btn {
-            position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden;
-            border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-            padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s, transform 0.35s; transform: scale(0.8); }
-        .btn:hover { color: white; border-color: var(--accent); transform: translateY(-3px) scale(1.01); box-shadow: 0 10px 25px var(--accent-glow); }
-        .btn:hover::before { opacity: 1; transform: scale(1); }
-        .btn:active { transform: translateY(0) scale(0.99); box-shadow: 0 5px 15px var(--accent-glow); }
-        .btn .flow-arr-left, .btn .flow-arr-right { position: relative; font-size: 0.9rem; color: var(--text-dim); transition: transform 0.35s, color 0.35s; transform: translateX(0); z-index: 1; }
-        .btn .flow-text { position: relative; z-index: 1; transition: color 0.35s; }
-        .btn:hover .flow-arr-left { color: white; transform: translateX(-6px); }
-        .btn:hover .flow-text { color: white; transform: translateX(0); }
-        .btn:hover .flow-arr-right { color: white; transform: translateX(6px); }
-
-
-        /* --- CONTACT ESTUDIO VERTICAL BENTO --- */
-        .contact-top-module { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .mega-text { font-family: 'Syne'; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; font-weight: 800; text-transform: uppercase; margin-bottom: 15px;}
-        .contact-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;}
-
-        .contact-box {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; justify-content: center;
-            text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); transform: translateZ(0);
-        }
-        .contact-box h4 { font-family: 'Syne'; text-transform: uppercase; color: var(--text-dim); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px; transition: color 0.4s ease; }
-        .contact-box .box-text { font-size: 1.1rem; color: var(--text); transition: color 0.4s ease; line-height: 1.5; }
-
-        .box-phone:hover { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1); transform: translateY(-5px) translateZ(0); }
-        .box-phone:hover .box-text, .box-phone:hover h4 { color: #22c55e; }
-        .box-linkedin:hover { border-color: #0a66c2; background: rgba(10, 102, 194, 0.05); box-shadow: 0 10px 30px rgba(10, 102, 194, 0.1); transform: translateY(-5px) translateZ(0); }
-        .box-linkedin:hover .box-text, .box-linkedin:hover h4 { color: #0a66c2; }
-        .box-neutral:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); transform: translateY(-5px) translateZ(0); }
-        .light-mode .box-neutral:hover { background: rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(0,0,0,0.2); }
-        .box-neutral:hover .box-text, .box-neutral:hover h4 { color: var(--text); }
-
-        footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
-        
-        /* Reposicionamiento Responsive */
-        @media (max-width: 1024px) {
-            .portfolio-grid { grid-template-columns: 1fr; gap: 40px;}
-            .p-card { height: 420px; }
-            .bento-about, .skills-bento { grid-template-columns: 1fr; }
-            .bento-card-photo { min-height: 400px;}
-            .cv-row { flex-direction: column; gap: 20px; padding: 40px 0; }
-            .cv-year { width: 100%; margin-bottom: -10px; font-size: 1.4rem;}
-            .contact-links-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 10px 20px; gap: 20px; }
-            .nav-links, .nav-dot { display: none; }
-            .subtitle-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 10px; }
-            .p-info { left: 25px; right: 25px;}
-            .cv-row:hover { padding-left: 20px; }
-            .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body>
+<body class="bg-[#030303] text-neutral-100 min-h-screen font-sans overflow-x-hidden relative">
 
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
+    <!-- Efecto Spotlight fijo de fondo -->
+    <div class="fixed inset-0 pointer-events-none z-0 spotlight"></div>
 
-    <div class="navbar-wrapper ui-sync" id="navbar">
-        <header>
-            <a href="#home" class="nav-logo inter-hover">L|BIB</a>
-            <div class="nav-dot"></div>
-            <nav class="nav-links">
-                <a href="#about" class="inter-hover lang-node" data-en="About me" data-es="Sobre mí">Sobre mí</a>
-                <a href="#work" class="inter-hover lang-node" data-en="Work" data-es="Portfolio">Portfolio</a>
-                <a href="#skills" class="inter-hover lang-node" data-en="Core Skills" data-es="Competencias">Competencias</a>
-                <a href="#cv" class="inter-hover lang-node" data-en="Resume" data-es="Currículum">Currículum</a>
-                <a href="#contact" class="inter-hover lang-node" data-en="Contact" data-es="Contacto">Contacto</a>
-            </nav>
-            <div class="tools-nav">
-                <button id="theme-toggle" class="icon-btn inter-hover" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-                <div class="nav-dot" style="margin: 0 10px;"></div>
-                <button id="lang-toggle" class="lang-sutil-btn inter-hover" aria-label="Cambio de idioma">EN</button>
-            </div>
-        </header>
-    </div>
-
-    <!-- TÍTULO PRINCIPAL CON ANIMACIÓN POR PALABRAS -->
-    <section class="hero" id="home">
-        <div class="hero-text-block">
-            <h1 class="hero-title">
-              <span class="word-reveal w1"><span>LUIS</span></span><br>
-              <span class="word-reveal w2"><span>BLASCO</span></span>
-              <span class="word-reveal w3"><span>IBÁÑEZ</span></span><br>
-              <span class="word-reveal w4"><span>BERBEL</span></span>
-            </h1>
-
-            <div class="subtitle-bar" data-aos="fade-up" data-aos-delay="900">
-                <p class="subtitle lang-node" data-en="Portfolio | Industrial Design" data-es="Portfolio | Diseño Industrial">Portfolio | Diseño Industrial</p>
-
-                <div class="status-tag inter-hover">
-                    <div class="pulse-box"><div class="pulse-ring"></div><div class="pulse-core"></div></div>
-                    <span class="lang-node" data-en="Available for new projects" data-es="Disponible para retos">Disponible para nuevos retos</span>
-                </div>
+    <!-- Barra de Navegación -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#030303]/70 backdrop-blur-md border-b border-neutral-900">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <span class="font-bold tracking-wider text-sm">LUIS BLASCO</span>
+            <div class="flex gap-6 text-sm text-neutral-400">
+                <a href="#hero" class="hover:text-white transition-colors">Inicio</a>
+                <a href="#experiencia" class="hover:text-white transition-colors">Experiencia</a>
+                <a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- CARRUSEL EDITORIAL INFINITO (1 LÍNEA, AUTO-WRAP) -->
-    <div class="marquee-section inter-hover">
-        <div class="marquee-content">
-            <!-- Bloque 1 -->
-            <div class="marquee-text">
-                <span class="lang-node marquee-item" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="CONCEPTUAL DESIGN" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-            </div>
-            <!-- Bloque 2 (Duplicado para el bucle) -->
-            <div class="marquee-text">
-                <span class="lang-node marquee-item" data-en="INDUSTRIAL DESIGN" data-es="DISEÑO INDUSTRIAL">DISEÑO INDUSTRIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="PARAMETRIC MODELING" data-es="MODELADO PARAMÉTRICO">MODELADO PARAMÉTRICO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="RAPID PROTOTYPING" data-es="PROTOTIPADO RÁPIDO">PROTOTIPADO RÁPIDO</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="ADVANCED SURFACES" data-es="SUPERFICIES AVANZADAS">SUPERFICIES AVANZADAS</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="DESIGN FOR MANUFACTURING" data-es="DISEÑO PARA FABRICACIÓN">DISEÑO PARA FABRICACIÓN</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="CONCEPTUAL DESIGN" data-es="DISEÑO CONCEPTUAL">DISEÑO CONCEPTUAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="MATERIAL BEHAVIOR" data-es="COMPORTAMIENTO MATERIAL">COMPORTAMIENTO MATERIAL</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-                <span class="lang-node marquee-item" data-en="TECHNICAL DRAFTING" data-es="PLANIMETRÍA TÉCNICA">PLANIMETRÍA TÉCNICA</span>
-                <span class="m-dot"><i class="fa-solid fa-asterisk"></i></span>
-            </div>
-        </div>
-    </div>
-
-    <section id="about">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="About me /" data-es="Sobre mí /">Sobre mí /</h2>
-        <div class="bento-about">
-            <div class="bento-card" data-aos="fade-up">
-                <p class="about-text lang-node"
-                   data-en="I design objects from a technical–material perspective, where form is always the result of functional, productive, and structural logic. My practice exists neither purely within art nor strict engineering, but in the intersection where both systems validate each other.<br><br> My education across different technical and academic environments has shaped a strong methodological adaptability and a critical reading of design processes. This path led me to prioritize verifiable systems over intuitive-only decisions, understanding design as something that must hold both conceptually and physically.<br><br> My background in electrical and industrial systems defines how I approach projects: designing with real manufacturing, tolerances, assemblies, and material behavior in mind. This minimizes the gap between concept and final object and ensures formal decisions respond to real constraints.<br><br> Within this framework, 3D printing holds a central role, not just as a prototyping tool, but as a system that integrates fast iterations, material control, and new industrial logics."
-                   data-es="Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta. Dentro de este marco, la impresión 3D ocupa un rol central, no solo como herramienta de prototipado o producción, sino como sistema que integra iteración rápida, control material y nuevas lógicas industriales.">Diseño objetos desde un enfoque técnico–material, donde la forma es siempre consecuencia de una lógica funcional, productiva y estructural. Mi práctica no se sitúa ni en el terreno puramente artístico ni en el estrictamente ingenieril, sino en el punto intermedio donde ambos sistemas se validan mutuamente.<br><br> Mi formación en distintos entornos universitarios y técnicos me ha permitido desarrollar una alta adaptabilidad metodológica y una lectura crítica de los procesos de diseño. Este recorrido me llevó a priorizar sistemas verificables frente a decisiones puramente intuitivas, entendiendo el diseño como un proceso que debe sostenerse tanto conceptual como físicamente.<br><br> La base previa en electricidad y técnica industrial define mi manera de proyectar: diseño pensando en fabricación real, tolerancias, ensamblajes y comportamiento material. Esto reduce la distancia entre concepto y objeto final y convierte cada decisión formal en una respuesta a una necesidad concreta.</p>
-            </div>
-            <div class="bento-card-photo inter-hover" data-aos="fade-up" data-aos-delay="150">
-                <img src="Retrato.jpg" alt="LUIS">
-            </div>
-        </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section id="work">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Portfolio /" data-es="Portfolio /">Portfolio /</h2>
-
-        <div class="portfolio-grid">
-            <!-- Proyecto 1: ALPHA -->
-            <a href="TUKAN.html" class="p-card inter-hover alpha-fix" data-aos="fade-up">
-                <div class="p-img-container"><img src="ASPIRINAA.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="TUKAN" data-es="TUKAN">TUKAN</h3>
-                        <p class="lang-node" data-en="Domestic Design" data-es="Diseño de Electrodoméstico">Diseño de Electrodoméstico</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- Proyecto 2: EGO -->
-            <a href="DUALIS.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="LAMPARITAS.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="DUALIS SERIES" data-es="SERIE DUALIS">SERIE DUALIS</h3>
-                        <p class="lang-node" data-en="Lighting" data-es="Iluminación">Iluminación</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- Proyecto 3: BEATS -->
-            <a href="TEMPO.html" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="RELOJITO.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="TEMPO" data-es="TEMPO">TEMPO</h3>
-                        <p class="lang-node" data-en="Smartwatch" data-es="Smartwatch">Smartwatch</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- Proyecto 4: ION -->
-            <a href="PONTEO.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="GRIFITO.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="PONTEO" data-es="PONTEO">PONTEO</h3>
-                        <p class="lang-node" data-en="Faucets" data-es="Grifería">Grifería</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- Proyecto 5: OMNI -->
-            <a href="AXIS.html" class="p-card inter-hover img-larger" data-aos="fade-up">
-                <div class="p-img-container"><img src="AXISS.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="AXIS" data-es="AXIS">AXIS</h3>
-                        <p class="lang-node" data-en="Electronics and Design" data-es="Diseño y Electrónica">Diseño y Electrónica</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- Proyecto 6: LUNA -->
-            <a href="TORRENT.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="TORRENTE.png" alt="Project"></div>
-                <div class="p-overlay"></div>
-                <div class="p-info">
-                    <div class="p-text-col">
-                        <h3 class="lang-node" data-en="TORRENT" data-es="TORRENT">TORRENT</h3>
-                        <p class="lang-node" data-en="Graphic Design" data-es="Diseño Gráfico">Diseño Gráfico</p>
-                    </div>
-                    <div class="view-circle"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- COMPETENCIAS -->
-    <section id="skills">
-        <h2 class="section-title lang-node" data-aos="fade-right" data-en="Core Skills /" data-es="Competencias /">Competencias /</h2>
-        <div class="skills-bento">
+    <!-- Sección Hero Principal -->
+    <section id="hero" class="relative min-h-screen pt-24 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <!-- CAJA 1: MODELADO CAD -->
-            <div class="bento-card inter-hover" data-aos="fade-up">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="CAD Modeling" data-es="Modelado CAD">Modelado CAD</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Exact parametric design" data-es="Diseño paramétrico">Diseño paramétrico</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Complex mechanical assemblies" data-es="Arquitectura de ensamblajes complejos">Arquitectura de ensamblajes complejos</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="2D/3D technical drafting" data-es="Dibujo técnico y planimetría 2D/3D">Dibujo técnico y planimetría 2D/3D</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/dassaultsystemes" alt="SW"> SolidWorks</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="INV"> Inventor</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autocad" alt="ACAD"> AutoCAD</span>
+            <!-- Contenido Izquierdo (Texto y Presentación) -->
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs text-neutral-400 w-fit">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Disponible para proyectos
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-tight">
+                    Diseño interfaces de cara <br class="hidden md:inline">al futuro.
+                </h1>
+                <p class="text-neutral-400 text-lg max-w-lg leading-relaxed">
+                    Soy desarrollador front-end especializado en experiencias tridimensionales e interactivas que conectan con los usuarios.
+                </p>
+                <div class="flex items-center gap-4 pt-4">
+                    <a href="#proyectos" class="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-neutral-200 transition-colors text-sm">
+                        Ver Proyectos
+                    </a>
+                    <a href="mailto:luis@ejemplo.com" class="px-6 py-3 bg-neutral-900 text-white border border-neutral-800 font-semibold rounded-lg hover:bg-neutral-800 transition-colors text-sm">
+                        Contacto
+                    </a>
                 </div>
             </div>
 
-            <!-- CAJA 2: RENDERIZADO / VISUALIZACIÓN -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Rendering & CGI" data-es="Renderizado y CGI">Renderizado</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Product photorealism" data-es="Fotorrealismo de producto">Fotorrealismo de producto</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced CMF mapping" data-es="Mapeo avanzado de materiales (CMF)">Mapeo de materiales</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Studio lighting setup" data-es="Simulación de iluminación de estudio">Simulación de iluminación de estudio</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="3DS"> 3ds Max</span>
-                    <span class="software-tag"><i class="fa-solid fa-cube" style="font-size: 14px;"></i> SW Visualize</span>
+            <!-- Contenedor Derecho del Modelo 3D Estático/Interactivo -->
+            <div class="lg:col-span-5 h-[400px] md:h-[500px] relative rounded-2xl border border-neutral-900 bg-neutral-950/40 backdrop-blur-sm overflow-hidden flex items-center justify-center">
+                <!-- Loader temporal de Spline -->
+                <div class="absolute inset-0 flex items-center justify-center z-0">
+                    <div class="loader w-10 h-10 border-4 border-neutral-800 rounded-full"></div>
                 </div>
-            </div>
-
-            <!-- CAJA 3: DISEÑO PARA FABRICACIÓN -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="DFM & CAM" data-es="Diseño para Fabricación">Diseño para Fabricación</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Machining optimization" data-es="Optimización para mecanizado">Optimización para mecanizado</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="CNC toolpath programming" data-es="Programación de trayectorias CNC">Programación de trayectorias CNC</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Milling and turning simulation" data-es="Simulación de fresado y torneado">Simulación de fresado y torneado</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/autodesk" alt="F360"> Fusion 360</span>
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/siemens" alt="SINU"> Sinutrain</span>
-                </div>
-            </div>
-
-            <!-- CAJA 4: FABRICACIÓN ADITIVA -->
-            <div class="bento-card inter-hover" data-aos="fade-up">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Additive Mfg" data-es="Fabricación Aditiva">Fabricación Aditiva</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Iterative rapid prototyping" data-es="Prototipado rápido iterativo">Prototipado rápido iterativo</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Support and mesh setup" data-es="Configuración de soportes y mallas">Configuración de soportes y mallas</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Advanced slicing (FDM)" data-es="Estrategias de impresión (Slicing)">Estrategias de impresión (Slicing)</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag">Cura</span>
-                    <span class="software-tag">OrcaSlicer</span>
-                </div>
-            </div>
-
-            <!-- CAJA 5: COMUNICACIÓN VISUAL -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Visual Comm" data-es="Comunicación Visual">Comunicación Visual</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Photo integration & editing" data-es="Edición e integración fotográfica">Edición e integración fotográfica</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Technical editorial layout" data-es="Maquetación editorial técnica">Maquetación editorial técnica</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Vector illustration & motion" data-es="Ilustración vectorial y animación">Ilustración vectorial y animación</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/adobephotoshop.svg" alt="PS"> Photoshop</span>
-                    <span class="software-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/adobeillustrator.svg" alt="AI"> Illustrator</span>
-                </div>
+                <!-- Escena Spline -->
+                <spline-viewer 
+                    class="w-full h-full relative z-10" 
+                    url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode">
+                </spline-viewer>
             </div>
             
-            <!-- CAJA 6: FLUJO DE TRABAJO DIGITAL -->
-            <div class="bento-card inter-hover" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="lang-node" style="font-family:'Syne'; font-size:1.5rem; margin-bottom:15px;" data-en="Digital Workflow" data-es="Flujo de Trabajo">Flujo de Trabajo</h3>
-                <ul class="capabilities-list">
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Version control systems" data-es="Control de versiones de projects">Control de versiones de proyectos</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Structured documentation" data-es="Documentación técnica estructurada">Documentación técnica estructurada</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span class="lang-node" data-en="Agile technical collaboration" data-es="Colaboración técnica ágil">Colaboración técnica ágil</span></li>
-                </ul>
-                <div class="software-tags">
-                    <span class="software-tag"><img src="https://cdn.simpleicons.org/github" alt="GH"> GitHub</span>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- LISTADO CV -->
-    <section id="cv">
-        <h2 class="section-title lang-node" style="margin-top: 50px;" data-aos="fade-right" data-en="Career Path /" data-es="Recorrido Profesional /">Recorrido Profesional /</h2>
-
-        <div class="cv-list" data-aos="fade-up">
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2024 — NOW" data-es="2024 — HOY">2024 — HOY</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Bachelor’s Degree in Industrial Design and Product Development<br>Engineering" data-es="Ingeniería en Diseño Industrial y Desarrollo<br>de Producto">Ingeniería en Diseño Industrial y Desarrollo<br>de Producto</h3>
-                    <p class="cv-desc lang-node" data-en="University education focused on product design and development, integrating 3D modeling, materials, and manufacturing processes at the Universitat Politècnica de València." data-es="Formación universitaria orientada al diseño y desarrollo de productos, integrando modelado 3D, materiales y procesos de fabricación en la Universitat Politècnica de València.">Formación universitaria orientada al diseño y desarrollo de productos, integrando modelado 3D, materiales y procesos de fabricación en la Universitat Politècnica de València.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2021 — 2024" data-es="2021 — 2024">2021 — 2024</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Bachelor’s Degree in Industrial Design and Product Development<br>Engineering" data-es="Ingeniería en Diseño Industrial y Desarrollo<br>de Producto">Ingeniería en Diseño Industrial y Desarrollo<br>de Producto</h3>
-                    <p class="cv-desc lang-node" data-en="University education focused on product design and development, integrating 3D modeling, materials, and manufacturing processes at the Universidad Jaume I." data-es="Formación universitaria orientada al diseño y desarrollo de productos, integrando modelado 3D, materiales y procesos de fabricación en la Universitat Jaume I.">Formación universitaria orientada al diseño y desarrollo de productos, integrando modelado 3D, materiales y procesos de fabricación en la Universitat Jaume I.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2019 — 2021" data-es="2019 — 2021">2019 — 2021</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Advanced Vocational Diploma in Electrotechnical and Automated<br>Systems" data-es="Grado Superior en Sistemas Electrotécnicos y<br>Automatizados">Grado Superior en Sistemas Electrotécnicos y<br>Automatizados</h3>
-                    <p class="cv-desc lang-node" data-en="Specialized training in the design, configuration, and management of electrical installations and automated systems, including industrial control and technical documentation." data-es="Especialización en diseño, configuración y gestión de instalaciones eléctricas y sistemas automatizados, incluyendo control industrial e interpretación de esquemas técnicos.">Especialización en diseño, configuración y gestión de instalaciones eléctricas y sistemas automatizados, incluyendo control industrial e interpretación de esquemas técnicos.</p>
-                </div>
-            </div>
-
-            <div class="cv-row inter-hover">
-                <div class="cv-year lang-node" data-en="2017 — 2019" data-es="2017 — 2019">2017 — 2019</div>
-                <div class="cv-content">
-                    <h3 class="cv-role lang-node" data-en="Vocational Diploma in Electrical and Automatic Installations" data-es="Grado Medio en Instalaciones Eléctricas y Automáticas">Grado Medio en Instalaciones Eléctricas y Automáticas</h3>
-                    <p class="cv-desc lang-node" data-en="Technical training in electrical and automation fundamentals, focused on installation, maintenance, and operation of electrical systems in residential and industrial environments." data-es="Formación técnica en fundamentos de electricidad y automatización, centrada en montaje, mantenimiento y operación de instalaciones eléctricas en entornos residenciales e industriales.">Formación técnica en fundamentos de electricidad y automatización, centrada en montaje, mantenimiento y operación de instalaciones eléctricas en entornos residenciales e industriales.</p>
-                </div>
-            </div>
+    <!-- SECCIÓN INTERACTIVA 3D CON MOVIMIENTO AL HACER SCROLL -->
+    <section class="relative min-h-screen py-24 flex flex-col justify-center items-center z-10">
+        <div class="max-w-4xl mx-auto px-6 text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-500">
+                Experiencias Envolventes
+            </h2>
+            <p class="text-neutral-400 mt-2">Observa cómo reacciona el modelo 3D mientras avanzas por la página.</p>
         </div>
 
-        <div style="padding-top: 15px;" data-aos="fade-up">
-            <!-- Añadimos el ID 'cv-download-btn' a la etiqueta <a> -->
-            <a id="cv-download-btn" href="CV_Luis_Blasco-Ibanez_Berbel.pdf" download="CV_Luis_Blasco-Ibanez_Berbel.pdf" class="btn inter-hover">
-                <i class="fa-solid fa-arrow-left flow-arr-left"></i>
-                <span class="flow-text lang-node" data-en="Download Detailed CV (PDF)" data-es="Descargar CV detallado (PDF)">Descargar CV detallado (PDF)</span>
-                <i class="fa-solid fa-arrow-right flow-arr-right"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contact">
-        <div class="bento-card inter-hover" style="padding: 100px 5vw;" data-aos="zoom-in" data-aos-duration="1200">
-            <div class="contact-top-module">
-                <h2 class="mega-text lang-node" data-en="START<br>A PROJECT" data-es="EMPEZAR<br>PROYECTO">EMPEZAR<br>PROYECTO</h2>
-            </div>
-
-            <div class="contact-links-grid">
-                <!-- Teléfono NO clicable -->
-                <div class="contact-box box-phone inter-hover">
-                    <h4 class="lang-node" data-en="DIRECT LINE" data-es="TELÉFONO">TELÉFONO</h4>
-                    <span class="box-text">+34 630 51 18 06</span>
+        <!-- Contenedor del elemento 3D que se moverá físicamente al hacer Scroll -->
+        <div class="w-full max-w-5xl h-[550px] relative px-6">
+            <div class="w-full h-full rounded-2xl border border-neutral-900 bg-neutral-950/20 overflow-hidden relative">
+                <!-- Loader -->
+                <div class="absolute inset-0 flex items-center justify-center z-0">
+                    <div class="loader w-10 h-10 border-4 border-neutral-800 rounded-full"></div>
                 </div>
-                
-                <a href="https://www.linkedin.com/in/luisblasiber/" target="_blank" rel="noopener noreferrer" class="contact-box box-linkedin inter-hover">
-                    <h4 class="lang-node" data-en="NETWORK" data-es="LINKEDIN">LINKEDIN</h4>
-                    <span class="box-text">Perfil Profesional <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem; transform: rotate(-45deg);"></i></span>
-                </a>
-                
-                <!-- Correo NO clicable -->
-                <div class="contact-box box-neutral inter-hover">
-                    <h4 class="lang-node" data-en="INBOX / HQ" data-es="EMAIL / UBICACIÓN">EMAIL / UBICACIÓN</h4>
-                    <span class="box-text" style="font-size: 0.95rem; word-break: break-word;">luisblascoibanezberbel@gmail.com<br><br>Valencia, España.</span>
+                <!-- Contenedor animable -->
+                <div id="scroll-3d-model" class="w-full h-full transition-all duration-75 ease-out relative z-10" style="transform-style: preserve-3d; will-change: transform, opacity;">
+                    <spline-viewer 
+                        class="w-full h-full" 
+                        url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode">
+                    </spline-viewer>
                 </div>
             </div>
         </div>
     </section>
 
-     <footer>
-        <div class="nav-logo" style="font-size:1.5rem; letter-spacing:0; margin-bottom: 5px;">L|BIB</div>
-        <div class="lang-node" style="font-size:0.65rem; text-transform:none; letter-spacing:1.5px;" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
+    <!-- Sección de Proyectos (Para dar espacio de Scroll) -->
+    <section id="proyectos" class="relative py-32 z-10 max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12">Proyectos Destacados</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Proyecto 1 -->
+            <div class="p-6 rounded-2xl border border-neutral-900 bg-neutral-950/50 hover:border-neutral-800 transition-all group">
+                <div class="aspect-video w-full rounded-xl bg-neutral-900 mb-6 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Proyecto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <h3 class="text-xl font-semibold">Plataforma SaaS de Visualización</h3>
+                <p class="text-neutral-400 text-sm mt-2">Integración de cuadros de mando analíticos en tiempo real con modelados interactivos.</p>
+            </div>
+            <!-- Proyecto 2 -->
+            <div class="p-6 rounded-2xl border border-neutral-900 bg-neutral-950/50 hover:border-neutral-800 transition-all group">
+                <div class="aspect-video w-full rounded-xl bg-neutral-900 mb-6 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541462608141-27b2864e002d?auto=format&fit=crop&w=600&q=80" alt="Proyecto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <h3 class="text-xl font-semibold">Modelado de Producto 3D Web</h3>
+                <p class="text-neutral-400 text-sm mt-2">E-commerce interactivo donde los usuarios pueden personalizar artículos en tiempo real.</p>
+            </div>
+            <!-- Proyecto 3 -->
+            <div class="p-6 rounded-2xl border border-neutral-900 bg-neutral-950/50 hover:border-neutral-800 transition-all group">
+                <div class="aspect-video w-full rounded-xl bg-neutral-900 mb-6 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=600&q=80" alt="Proyecto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <h3 class="text-xl font-semibold">Optimización de Motores WebGL</h3>
+                <p class="text-neutral-400 text-sm mt-2">Reducción de tiempos de carga en assets 3D optimizando mallas mediante sombreadores.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-950 py-12 text-center text-sm text-neutral-500 z-10 relative">
+        <p>© 2026 Luis Blasco Ibáñez. Hecho con HTML, Tailwind & Spline.</p>
     </footer>
 
-    <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Script para la animación fluida en scroll mediante interpolación (Lerp) -->
     <script>
-        // --- 1. REINICIAR POSICIÓN AL CARGAR LA PÁGINA O SALTAR A SECCIÓN ---
-        if (window.history.scrollRestoration) {
-            window.history.scrollRestoration = 'manual';
-        }
+        const splineModel = document.getElementById('scroll-3d-model');
         
-        window.addEventListener('load', () => {
-            if (!window.location.hash || window.location.hash === '#home') {
-                window.scrollTo(0, 0);
+        let targetScrollProgress = 0;
+        let currentScrollProgress = 0;
+
+        // Escucha del scroll de la página
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollHeight > 0) {
+                targetScrollProgress = window.scrollY / scrollHeight;
             }
-            
-            setTimeout(() => {
-                document.documentElement.style.scrollBehavior = 'smooth';
-            }, 100);
         });
 
-        // INIT AOS
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        // Bucle de renderizado para suavizar la física de la animación (Lerp)
+        function updateAnimation() {
+            // Suavizado del progreso actual hacia el objetivo (10% de velocidad por cuadro)
+            currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.1;
 
-        // TEMA OSCURO / CLARO
-        const btnToggle = document.getElementById("theme-toggle");
-        btnToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            btnToggle.innerHTML = document.body.classList.contains("light-mode") ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-        });
+            if (splineModel) {
+                // Cálculo de parámetros basados en el avance del scroll
+                const translateY = (currentScrollProgress * 140) - 70; // Desplazamiento de -70px a +70px
+                const rotateY = (currentScrollProgress * 40) - 20;     // Rotación de -20deg a +20deg
+                const scale = 0.85 + (currentScrollProgress * 0.25);    // Escala de 0.85 a 1.1
 
-        // ESTADO GLOBAL DE IDIOMA Y DESCARGA DINÁMICA DE CV
-        let langActive = "es";
-        const btnLang = document.getElementById("lang-toggle");
-        
-        btnLang.addEventListener("click", () => {
-            const domElements = document.querySelectorAll(".lang-node");
-            domElements.forEach(node => node.classList.add("lang-animating"));
+                // Aplicar transformaciones combinadas en 3D
+                splineModel.style.transform = `translate3d(0, ${translateY}px, 0) rotate3d(0, 1, 0, ${rotateY}deg) scale(${scale})`;
+            }
 
-            setTimeout(() => {
-                langActive = langActive === "es" ? "en" : "es";
-                
-                domElements.forEach(node => {
-                    const text = node.getAttribute(`data-${langActive}`);
-                    if (text) node.innerHTML = text;
-                    node.classList.remove("lang-animating");
-                });
-                btnLang.textContent = langActive === "es" ? "EN" : "ES";
-
-                // Lógica de descarga dinámica del CV según el idioma
-                const cvLink = document.getElementById("cv-download-btn");
-                if (cvLink) {
-                    const newFileName = langActive === "es" 
-                        ? "CV_Luis_Blasco-Ibanez_Berbel.pdf" 
-                        : "CV_Luis_Blasco-Ibanez_Berbel_EN.pdf";
-                    cvLink.setAttribute("href", newFileName);
-                    cvLink.setAttribute("download", newFileName);
-                }
-
-            }, 250);
-        });
-
-        // CURSOR PERSONALIZADO HARDWARE
-        const dot = document.getElementById("cursor-dot");
-        const ring = document.getElementById("cursor-ring");
-        let mouseX = -100, mouseY = -100;
-        let ringX = -100, ringY = -100;
-
-        window.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-        });
-
-        function renderRing() {
-            ringX += (mouseX - ringX) * 0.35;
-            ringY += (mouseY - ringY) * 0.35;
-            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(renderRing);
+            requestAnimationFrame(updateAnimation);
         }
-        requestAnimationFrame(renderRing);
 
-        // HOVER DE ELEMENTOS INTERACTIVOS
-        document.querySelectorAll('.inter-hover, .p-card, a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
-        });
-
-        // NAVBAR SCROLL SHOW/HIDE
-        let lastScroll = 0;
-        const navbar = document.getElementById("navbar");
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                navbar.classList.add("ui-hidden");
-            } else {
-                navbar.classList.remove("ui-hidden");
-            }
-            lastScroll = currentScroll;
-        });
-
-        // RESALTAR SECCIÓN ACTIVA EN NAVBAR (Intersection Observer)
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".nav-links a");
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.remove("active");
-                        if (link.getAttribute("href") === `#${entry.target.id}`) {
-                            link.classList.add("active");
-                        }
-                    });
-                }
-            });
-        }, { rootMargin: "-20% 0px -60% 0px", threshold: 0 });
-
-        sections.forEach(section => observer.observe(section));
-
-        // FORZAR SCROLL SUAVE EN LOS ENLACES DEL MENÚ
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); 
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#' || targetId === '') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth', 
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
+        // Iniciar ciclo de animación
+        updateAnimation();
     </script>
 </body>
 </html>
