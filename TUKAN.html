@@ -17,33 +17,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
-        /* Estilos para la animación de idioma */
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
-        .lang-animating {
-            opacity: 0.25 !important;
-            filter: blur(8px) saturate(2);
-            transform: scale(0.95) translateY(2px) !important;
-            letter-spacing: -2px;
-        }
+        .lang-animating { opacity: 0.25 !important; filter: blur(8px) saturate(2); transform: scale(0.95) translateY(2px) !important; letter-spacing: -2px; }
 
-        /* --- FONDO ANARANJADO Y GRANO --- */
-        body::before { 
-            content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; 
-            background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); 
-            z-index: -1; transform: translateX(-50%); pointer-events: none;
-        }
-        body::after { 
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            pointer-events: none; z-index: 9998; 
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); 
-            opacity: 0.04; mix-blend-mode: overlay; 
-        }
+        body::before { content: ""; position: fixed; top: 0; left: 50%; width: 150vw; height: 150vh; background: radial-gradient(circle at center 20%, var(--accent-glow), transparent 60%); z-index: -1; transform: translateX(-50%); pointer-events: none; }
+        body::after { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; mix-blend-mode: overlay; }
 
-        /* --- CURSOR --- */
-        #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
-        #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
-        .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
+        /* --- CURSOR (LENTE INVERSO) --- */
+        #cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: opacity 0.3s ease; }
+        #cursor-ring { width: 35px; height: 35px; background: #fff; border: none; border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; mix-blend-mode: difference; transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, width, height; }
+        .hovered-element #cursor-ring { width: 75px; height: 75px; }
+        .hovered-element #cursor-dot { opacity: 0; }
 
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -55,11 +39,8 @@
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
         .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .lang-sutil-btn { 
-            background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; 
-            letter-spacing: 0.5px;
-        }
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color: var(--accent); }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; letter-spacing: 0.5px; }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 15px; max-width: 1600px; margin: 0 auto; }
@@ -70,142 +51,45 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- FOTO 1 (HERO) --- */
-        .large-image-section {
-            padding: 0 5vw;
-            margin-top: 90px;
-            max-width: 1600px;
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 70vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .large-image-section img {
-            display: block;
-            width: 100%;
-            height: 110%;
-            max-height: 110vh;
-            object-fit: cover; 
-            object-position: center;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-        }
+        .large-image-section { padding: 0 5vw; margin-top: 90px; max-width: 1600px; margin-left: auto; margin-right: auto; min-height: 70vh; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(100px); transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .large-image-section img { display: block; width: 100%; height: 110%; max-height: 110vh; object-fit: cover; object-position: center; border-radius: 30px; border: 1px solid var(--border); }
 
-        /* --- SECCIÓN SPLIT (EL ANÁLISIS) --- */
-        .project-content-split { 
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 80px;
-            padding: 60px 5vw 60px;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: flex-start; 
-        }
-        .project-brief h3 { 
-            font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -0.8px; line-height: 1.2;
-        }
-        .project-content-split .project-text { 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0;
-        }
+        .project-content-split { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; padding: 60px 5vw 60px; max-width: 1600px; margin: 0 auto; align-items: flex-start; }
+        .project-brief h3 { font-family: 'Syne'; font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: -0.8px; line-height: 1.2; }
+        .project-content-split .project-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; margin: 0; }
 
-        /* --- GALERÍA --- */
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
-        .gallery img { 
-            width: 100%; 
-            height: auto;
-            max-height: 70vh; 
-            object-fit: cover; 
-            border-radius: 20px; 
-            border: 1px solid var(--border); 
-            aspect-ratio: 4/3; 
-        }
-        .gallery .full-w { 
-            grid-column: 1 / -1; 
-            aspect-ratio: 16/9; 
-            max-height: 85vh;
-        }
+        .gallery img { width: 100%; height: auto; max-height: 70vh; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); aspect-ratio: 4/3; }
+        .gallery .full-w { grid-column: 1 / -1; aspect-ratio: 16/9; max-height: 85vh; }
 
-        /* --- TEXTO INFERIOR (DIVIDIDO EN 2) --- */
-        .text-align-wrapper.split { 
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px; 
-            padding: 0 5vw;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-        .project-text-full-width { 
-            font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; 
-        }
+        .text-align-wrapper.split { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
+        .project-text-full-width { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; }
 
-        /* --- FOTO 5 (PLANIMETRÍA) --- */
-        .project-hero-img { 
-            width: calc(100% - 10vw); 
-            height: auto; 
-            max-height: 90vh; 
-            object-fit: contain; 
-            border-radius: 30px; 
-            margin: 0 auto 80px auto; 
-            max-width: 1500px; 
-            display: block; 
-            border: 1px solid var(--border);
-            opacity: 0; transform: translateY(60px); 
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
+        .project-hero-img { width: calc(100% - 10vw); height: auto; max-height: 90vh; object-fit: contain; border-radius: 30px; margin: 0 auto 80px auto; max-width: 1500px; display: block; border: 1px solid var(--border); opacity: 0; transform: translateY(60px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .project-hero-img.aos-animate { opacity: 1; transform: translateY(0); }
 
-        /* --- SEPARADOR VISUAL --- */
-        .visual-separator {
-            width: 100%;
-            height: 1px; 
-            background-color: var(--border);
-            margin: 80px auto; 
-            max-width: 1600px;
-        }
+        .visual-separator { width: 100%; height: 1px; background-color: var(--border); margin: 80px auto; max-width: 1600px; }
 
-        /* --- NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s;}
         .next-project:hover { background: var(--accent-glow); }
         .next-label { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 20px; }
         
-        /* Animación para la flecha de Next Project */
-        @keyframes arrowMove {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(15px); }
-        }
-        .next-title .fa-arrow-right {
-            display: inline-block;
-            transition: color 0.4s ease;
-            animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .next-project:hover .fa-arrow-right {
-            color: var(--accent);
-            animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        @keyframes arrowMove { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(15px); } }
+        .next-title .fa-arrow-right { display: inline-block; transition: color 0.4s ease; animation: arrowMove 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+        .next-project:hover .fa-arrow-right { color: var(--accent); animation: arrowMove 1s infinite cubic-bezier(0.4, 0, 0.2, 1); }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .project-content-split { grid-template-columns: 1fr; gap: 30px; padding: 60px 5vw 40px; }
-            .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { 
-                max-height: 60vh; 
-            }
+            .large-image-section img, .gallery img, .gallery .full-w, .project-hero-img { max-height: 60vh; }
             .project-hero-img { width: 90%; }
             header { gap: 20px; padding: 12px 25px; }
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
-            .text-align-wrapper.split {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+            .text-align-wrapper.split { grid-template-columns: 1fr; gap: 30px; }
         }
     </style>
 </head>
@@ -241,17 +125,10 @@
             </div>
         </section>
 
-        <!-- FOTO 1 (HERO) -->
         <section class="large-image-section">
-            <img id="hero-main" 
-     src="Aspirador1.jpg"
-     class="inter-hover"
-     data-aos="fade-up"
-     data-aos-anchor-placement="top-bottom"
-     data-aos-offset="-500">
+            <img id="hero-main" src="Aspirador1.jpg" class="inter-hover" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="-500">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <section class="project-content-split" data-aos="fade-up">
@@ -262,7 +139,6 @@
                  El proyecto consiste en el desarrollo de un aspirador de mano para automóvil, centrado en la integración entre rendimiento funcional y diseño industrial. El objetivo fue optimizar la arquitectura interna para maximizar la capacidad de succión en un formato compacto y portátil. Mediante modelado paramétrico, se definió una geometría que mejora el flujo de aire y minimiza pérdidas energéticas, manteniendo una estructura ligera y resistente. El diseño prioriza la ergonomía, la facilidad de uso y la integración eficiente de los componentes. A través de un proceso iterativo, se simplificó el conjunto eliminando elementos innecesarios y mejorando la eficiencia global. El resultado es un producto equilibrado entre funcionalidad, durabilidad y claridad formal.</div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
         <section class="gallery">
@@ -271,10 +147,8 @@
             <img src="Aspirador2.jpg" alt="Full Assembly" class="full-w inter-hover" data-aos="fade-up">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO INTERMEDIO (DIVIDIDO EN 2 COLUMNAS) -->
         <div class="text-align-wrapper split" data-aos="fade-up">
             <p class="project-text-full-width lang-node" 
                  data-en="The design of the vacuum cleaner is articulated from a clear composition in two main volumes: a translucent upper casing and an opaque structural base. The chromatic range, based on white, dark gray, and red accents, reinforces the functional reading of each component. The casing allows partial visualization of the interior, adding an informative dimension to its use. On a functional level, the product integrates a push button to open the deposit, a differentiated area for power control, and a USB port for recharging, reinforcing its wireless character." 
@@ -288,10 +162,8 @@
             </p>
         </div>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- FOTO 5 (PLANIMETRÍA - Usa object-fit: contain para no cortarse) -->
         <img id="hero-plan" src="PLANOASPIRADOR.jpg" alt="Alpha Planimetry" class="project-hero-img inter-hover" data-aos="fade-up">
     </main>
 
@@ -314,7 +186,6 @@
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
 
-        // ESTADO GLOBAL DE IDIOMA
         let langActive = "es";
         const btnLang = document.getElementById("lang-toggle");
         
@@ -343,7 +214,8 @@
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
         function renderRing() {
-            ringX += (mouseX - ringX) * 0.35; ringY += (mouseY - ringY) * 0.35;
+            ringX += (mouseX - ringX) * 0.85; 
+            ringY += (mouseY - ringY) * 0.85;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
@@ -363,13 +235,12 @@
         });
 
         const heroSection = document.querySelector(".large-image-section");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 80) {
-        heroSection.style.opacity = "1";
-        heroSection.style.transform = "translateY(0)";
-    }
-});
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 80) {
+                heroSection.style.opacity = "1";
+                heroSection.style.transform = "translateY(0)";
+            }
+        });
     </script>
 </body>
 </html>
