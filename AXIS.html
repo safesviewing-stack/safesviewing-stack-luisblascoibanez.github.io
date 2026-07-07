@@ -35,9 +35,46 @@
         }
 
         /* --- CURSOR --- */
-        #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
-        #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
-        .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
+        #cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    transition: opacity 0.3s ease;
+}
+
+#cursor-ring {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9997;
+    mix-blend-mode: difference;
+    transition:
+        width 0.35s cubic-bezier(0.16,1,0.3,1),
+        height 0.35s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform,width,height;
+}
+
+.hovered-element #cursor-ring {
+    width: 75px;
+    height: 75px;
+}
+
+.hovered-element #cursor-dot {
+    opacity: 0;
+}
 
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -333,20 +370,26 @@
             }, 250);
         });
 
-        const dot = document.getElementById("cursor-dot"); 
-        const ring = document.getElementById("cursor-ring");
-        let mouseX = -100, mouseY = -100; let ringX = -100, ringY = -100;
-        window.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-        });
-        function renderRing() {
-            ringX += (mouseX - ringX) * 0.35; ringY += (mouseY - ringY) * 0.35;
-            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(renderRing);
-        }
-        requestAnimationFrame(renderRing);
+        const dot = document.getElementById("cursor-dot");
+const ring = document.getElementById("cursor-ring");
 
+let mouseX = -100, mouseY = -100;
+let ringX = -100, ringY = -100;
+
+window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+});
+
+function renderRing() {
+    ringX += (mouseX - ringX) * 0.85;
+    ringY += (mouseY - ringY) * 0.85;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(renderRing);
+}
+
+renderRing();
         document.querySelectorAll('.inter-hover, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered-element'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered-element'));
