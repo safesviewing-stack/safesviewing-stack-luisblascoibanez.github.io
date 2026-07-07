@@ -65,22 +65,24 @@
 
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- REDUCCION ANILLO HARDWARE CURSOR --- */
+        /* --- OPCIÓN 1: LENTE INVERSO (CURSOR HARDWARE) --- */
         #cursor-dot {
-            width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+            width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-            will-change: transform; transition: background 0.2s ease, opacity 0.3s ease;
+            will-change: transform; transition: opacity 0.3s ease;
         }
 
         #cursor-ring {
-            width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%;
+            width: 35px; height: 35px; background: #fff; border: none; border-radius: 50%;
             position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997;
-            transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
+            mix-blend-mode: difference; /* Efecto de inversión de color */
+            transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, width, height;
         }
 
-       .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-       .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
+        /* Al pasar por encima de elementos interactivos crece y oculta el punto */
+        .hovered-element #cursor-ring { width: 75px; height: 75px; }
+        .hovered-element #cursor-dot { opacity: 0; }
 
         /* --- ETIQUETA STATUS INLINE  --- */
         .status-tag {
