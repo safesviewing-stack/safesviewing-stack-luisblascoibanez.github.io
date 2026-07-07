@@ -25,11 +25,11 @@
         
         ::selection { background: var(--accent); color: #fff; }
 
-        /* --- CURSOR --- */
-        #cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: background 0.2s ease, opacity 0.3s ease; }
-        #cursor-ring { width: 45px; height: 45px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease; will-change: transform, width, height; }
-        .hovered-element #cursor-ring { width: 22px; height: 22px; background: transparent; border-color: var(--accent); border-width: 2px; }
-        .hovered-element #cursor-dot { width: 6px; height: 6px; opacity: 1; }
+        /* --- CURSOR (LENTE INVERSO) --- */
+        #cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; will-change: transform; transition: opacity 0.3s ease; }
+        #cursor-ring { width: 35px; height: 35px; background: #fff; border: none; border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9997; mix-blend-mode: difference; transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, width, height; }
+        .hovered-element #cursor-ring { width: 75px; height: 75px; }
+        .hovered-element #cursor-dot { opacity: 0; }
 
         /* --- HEADER --- */
         .navbar-wrapper { position: fixed; top: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -41,11 +41,8 @@
         .nav-links a:hover { opacity: 1; background: rgba(150, 150, 150, 0.15); }
         .nav-dot { width: 4px; height: 4px; background: var(--border); border-radius: 50%; margin: 0 5px; }
         .tools-nav { display:flex; align-items: center; gap: 10px;}
-        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color 0.3s; }
-        .lang-sutil-btn { 
-            background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; 
-            letter-spacing: 0.5px; 
-        }
+        .icon-btn { background: transparent; border: none; outline: none; color: var(--text); opacity: 0.6; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.3s, opacity 0.3s, color: var(--accent); }
+        .lang-sutil-btn { background: transparent; border: none; outline: none; color: var(--text); font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; padding: 2px 4px; transition: all 0.3s ease; opacity: 0.6; letter-spacing: 0.5px; }
 
         /* --- PROJECT CONTENT --- */
         .project-header { padding: 200px 5vw 100px; max-width: 1600px; margin: 0 auto; }
@@ -55,93 +52,24 @@
         .meta-col span:first-child { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-family: 'Inter';}
         .meta-col span:last-child { font-size: 1.1rem; color: var(--text); font-weight: 500; font-family: 'Syne'; text-transform: uppercase;}
 
-        /* --- LAYOUT ESPECÍFICO --- */
-
         /* Fotos en grande (1 y 2) */
-        .large-image-section {
-            padding: 0 5vw; 
-            max-width: 1600px; 
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-            height: 100vh; 
-            overflow: hidden; 
-            position: relative; 
-            opacity: 0;
-            transform: translateY(100px); 
-            transition: opacity 1.2s ease, transform 1s ease; 
-        }
-        .large-image-section:first-of-type {
-            margin-top: 500px; 
-        }
-        .large-image-section img {
-            display: block;
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            object-position: center;
-            border-radius: 30px; 
-            border: 1px solid var(--border); 
-            padding: 0; 
-        }
+        .large-image-section { padding: 0 5vw; max-width: 1600px; margin: 0 auto; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; position: relative; opacity: 0; transform: translateY(100px); transition: opacity 1.2s ease, transform 1s ease; }
+        .large-image-section:first-of-type { margin-top: 500px; }
+        .large-image-section img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 30px; border: 1px solid var(--border); padding: 0; }
 
         /* Texto centrado ancho completo (2 Columnas) */
-        .text-align-wrapper {
-            max-width: 1600px;
-            margin: 30px auto; 
-            padding: 0 5vw; 
-        }
-        .project-text-full-width {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            text-align: justify; 
-            width: 100%;
-            display: flex; 
-            gap: 60px; 
-        }
-
-        .project-text-full-width p {
-            flex: 1; 
-        }
+        .text-align-wrapper { max-width: 1600px; margin: 30px auto; padding: 0 5vw; }
+        .project-text-full-width { font-size: 1.1rem; color: var(--text-dim); line-height: 1.8; text-align: justify; width: 100%; display: flex; gap: 60px; }
+        .project-text-full-width p { flex: 1; }
 
         /* Galería de 6 imágenes (3 columnas x 2 filas) */
-        .gallery-6-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding: 0 5vw; 
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-        .gallery-6-grid img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 1 / 1; 
-            object-fit: cover;
-            object-position: center;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            transition: filter 0.4s ease;
-        }
-        .gallery-6-grid img:hover {
-            filter: contrast(1.1) brightness(1.1);
-        }
-        /* Margen adicional debajo de la última galería */
-        .gallery-6-grid:last-of-type {
-            margin-bottom: 90px; 
-        }
+        .gallery-6-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 0 5vw; max-width: 1600px; margin: 0 auto; }
+        .gallery-6-grid img { display: block; width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center; border-radius: 20px; border: 1px solid var(--border); transition: filter 0.4s ease; }
+        .gallery-6-grid img:hover { filter: contrast(1.1) brightness(1.1); }
+        .gallery-6-grid:last-of-type { margin-bottom: 90px; }
 
         /* Separador visual */
-        .visual-separator {
-            width: 100%;
-            height: 1px; 
-            background-color: var(--border);
-            margin: 80px auto; 
-            max-width: 1600px;
-        }
+        .visual-separator { width: 100%; height: 1px; background-color: var(--border); margin: 80px auto; max-width: 1600px; }
 
         /* --- FOOTER & NEXT PROJECT --- */
         .next-project { text-align: center; padding: 100px 5vw; background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transition: background 0.4s; }
@@ -150,20 +78,9 @@
         .next-title { font-family: 'Syne'; font-size: clamp(3rem, 6vw, 5rem); color: var(--text); font-weight: 800; letter-spacing: -2px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; } 
         .next-title i { font-size: clamp(2rem, 4vw, 3rem); }
         
-        /* Animación para la flecha de Back to Portfolio (Apunta a la izquierda) */
-        @keyframes arrowMoveLeft {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-15px); }
-        }
-        .next-title .fa-arrow-left {
-            display: inline-block;
-            transition: color 0.4s ease;
-            animation: arrowMoveLeft 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .next-project:hover .fa-arrow-left {
-            color: var(--accent);
-            animation: arrowMoveLeft 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        @keyframes arrowMoveLeft { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-15px); } }
+        .next-title .fa-arrow-left { display: inline-block; transition: color 0.4s ease; animation: arrowMoveLeft 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+        .next-project:hover .fa-arrow-left { color: var(--accent); animation: arrowMoveLeft 1s infinite cubic-bezier(0.4, 0, 0.2, 1); }
 
         footer { padding: 80px 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dim); margin-bottom: 20px; line-height: 1; letter-spacing: 1px; }
@@ -179,9 +96,7 @@
             .footer-logo { font-size: 2.2rem; }
             .footer-text { font-size: 0.7rem; letter-spacing: 2px; }
             .visual-separator { margin: 60px auto; } 
-            .gallery-6-grid:last-of-type {
-                margin-bottom: 70px; 
-            }
+            .gallery-6-grid:last-of-type { margin-bottom: 70px; }
         }
         @media (max-width: 768px) {
             .gallery-6-grid { grid-template-columns: 1fr; }
@@ -209,7 +124,6 @@
     </div>
 
     <main>
-        <!-- CABECERA -->
         <section class="project-header" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="project-title lang-node" data-en="Torrent Project" data-es="Proyecto Torrent">Proyecto Torrent</h1>
             <div class="project-meta">
@@ -220,15 +134,12 @@
             </div>
         </section>
 
-        <!-- PRIMER BLOQUE: IMAGEN GRANDE "1 MONO" -->
         <section class="large-image-section" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="350">
             <img src="CHICO.png" alt="Luna Ambient - Vista Mono" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO CENTRAL (2 Columnas) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width">
                 <p class="lang-node" 
@@ -244,10 +155,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA 1 (6 IMÁGENES "MONO") -->
         <section class="gallery-6-grid">
             <img src="3 MONO.jpg" alt="Mono Detail 3" class="inter-hover" data-aos="fade-up">
             <img src="4 MONO.jpg" alt="Mono Detail 4" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
@@ -257,18 +166,14 @@
             <img src="8 MONO.jpg" alt="Mono Detail 8" class="inter-hover" data-aos="fade-up" data-aos-delay="200">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- SEGUNDO BLOQUE: IMAGEN GRANDE "2 TOP" -->
         <section class="large-image-section" data-aos="fade-up">
             <img src="CHICA.png" alt="Luna Ambient - Vista Top" class="inter-hover">
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- TEXTO CENTRAL (2 Columnas) -->
         <section class="text-align-wrapper" data-aos="fade-up">
             <div class="project-text-full-width">
                 <p class="lang-node" 
@@ -284,10 +189,8 @@
             </div>
         </section>
 
-        <!-- SEPARADOR VISUAL -->
         <div class="visual-separator" data-aos="fade-up"></div>
 
-        <!-- GALERÍA 2 (6 IMÁGENES "TOP") -->
         <section class="gallery-6-grid">
             <img src="9 TOP.jpg" alt="Top Detail 9" class="inter-hover" data-aos="fade-up">
             <img src="10 TOP.jpg" alt="Top Detail 10" class="inter-hover" data-aos="fade-up" data-aos-delay="100">
@@ -298,13 +201,11 @@
         </section>
     </main>
 
-    <!-- FINAL DEL SHOWCASE (Vuelve al portfolio) -->
     <a href="index.html#work" class="next-project inter-hover">
         <span class="next-label lang-node" data-en="End of Showcase" data-es="Fin de la Galería">Fin de la Galería</span>
         <h2 class="next-title"><i class="fa-solid fa-arrow-left"></i> <span class="lang-node" data-en="BACK TO PORTFOLIO" data-es="VOLVER AL PORTFOLIO">VOLVER AL PORTFOLIO</span></h2>
     </a>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-logo">L|BIB</div>
         <div class="footer-text lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
@@ -351,7 +252,8 @@
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
         function renderRing() {
-            ringX += (mouseX - ringX) * 0.35; ringY += (mouseY - ringY) * 0.35;
+            ringX += (mouseX - ringX) * 0.85; 
+            ringY += (mouseY - ringY) * 0.85;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
@@ -371,13 +273,12 @@
         });
 
         const heroSection = document.querySelector(".large-image-section");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 35) { 
-        heroSection.style.opacity = "1";
-        heroSection.style.transform = "translateY(0)";
-    }
-});
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 35) { 
+                heroSection.style.opacity = "1";
+                heroSection.style.transform = "translateY(0)";
+            }
+        });
     </script>
 </body>
 </html>
