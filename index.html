@@ -803,7 +803,7 @@
             }, 250);
         });
 
-        // CURSOR PERSONALIZADO HARDWARE
+        // CURSOR PERSONALIZADO HARDWARE (CON MOVIMIENTO RÁPIDO 0.85)
         const dot = document.getElementById("cursor-dot");
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100;
@@ -816,8 +816,8 @@
         });
 
         function renderRing() {
-            ringX += (mouseX - ringX) * 0.35;
-            ringY += (mouseY - ringY) * 0.35;
+            ringX += (mouseX - ringX) * 0.85;
+            ringY += (mouseY - ringY) * 0.85;
             ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderRing);
         }
