@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luis Blasco-Ibáñez | Industrial Design</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="aos.css" rel="stylesheet">
 
     <style>
         /* --- CORE VARIABLES --- */
@@ -33,7 +35,7 @@
             --accent-glow: rgba(255, 90, 0, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg); color: var(--text);
@@ -148,7 +150,7 @@
         .lang-sutil-btn {
             background: transparent; border: none; outline: none; color: var(--text);
             font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.5px; padding: 2px 4px;
-            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6; cursor: none;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.6;
         }
         .lang-sutil-btn:hover { opacity: 1; transform: translateY(-1px); }
 
@@ -325,7 +327,7 @@
             position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; overflow: hidden;
             border-radius: 100px; background: var(--card-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
             padding: 16px 35px; text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--text); cursor: none; border: 1px solid var(--border); isolation: isolate; margin-top: 35px;
+            color: var(--text); border: 1px solid var(--border); isolation: isolate; margin-top: 35px;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         .btn::before { content: ''; position: absolute; inset: 0; background-color: var(--accent); border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.35s, transform 0.35s; transform: scale(0.8); }
@@ -381,6 +383,11 @@
             .cv-row:hover { padding-left: 20px; }
             .contact-links-grid { grid-template-columns: 1fr; gap: 30px;}
         }
+        /* Cursor personalizado: solo se activa cuando el JS detecta el ratón.
+           Si algo falla, se mantiene el cursor normal del sistema. */
+        #cursor-dot, #cursor-ring { visibility: hidden; }
+        html.custom-cursor #cursor-dot, html.custom-cursor #cursor-ring { visibility: visible; }
+        html.custom-cursor, html.custom-cursor * { cursor: none !important; }
     </style>
 </head>
 <body>
@@ -493,7 +500,7 @@
         <div class="portfolio-grid">
             <!-- Proyecto 1: ALPHA -->
             <a href="TUKAN.html" class="p-card inter-hover alpha-fix" data-aos="fade-up">
-                <div class="p-img-container"><img src="ASPIRINAA.png" alt="Project"></div>
+                <div class="p-img-container"><img src="ASPIRINAA.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -506,7 +513,7 @@
 
             <!-- Proyecto 2: EGO -->
             <a href="DUALIS.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="LAMPARITAS.png" alt="Project"></div>
+                <div class="p-img-container"><img src="LAMPARITAS.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -519,7 +526,7 @@
 
             <!-- Proyecto 3: BEATS -->
             <a href="TEMPO.html" class="p-card inter-hover" data-aos="fade-up">
-                <div class="p-img-container"><img src="RELOJITO.png" alt="Project"></div>
+                <div class="p-img-container"><img src="RELOJITO.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -532,7 +539,7 @@
 
             <!-- Proyecto 4: ION -->
             <a href="PONTEO.html" class="p-card inter-hover img-larger" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="GRIFITO.png" alt="Project"></div>
+                <div class="p-img-container"><img src="GRIFITO.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -545,7 +552,7 @@
 
             <!-- Proyecto 5: OMNI -->
             <a href="AXIS.html" class="p-card inter-hover img-larger" data-aos="fade-up">
-                <div class="p-img-container"><img src="AXISS.png" alt="Project"></div>
+                <div class="p-img-container"><img src="AXISS.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -558,7 +565,7 @@
 
             <!-- Proyecto 6: LUNA -->
             <a href="TORRENT.html" class="p-card inter-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-img-container"><img src="TORRENTE.png" alt="Project"></div>
+                <div class="p-img-container"><img src="TORRENTE.webp" alt="Project"></div>
                 <div class="p-overlay"></div>
                 <div class="p-info">
                     <div class="p-text-col">
@@ -745,7 +752,7 @@
     </footer>
 
     <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="aos.js"></script>
     <script>
         // --- 1. REINICIAR POSICIÓN AL CARGAR LA PÁGINA O SALTAR A SECCIÓN ---
         if (window.history.scrollRestoration) {
@@ -763,7 +770,7 @@
         });
 
         // INIT AOS
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        if (window.AOS) AOS.init({ duration: 800, once: true, offset: 50 });
 
         // TEMA OSCURO / CLARO
         const btnToggle = document.getElementById("theme-toggle");
@@ -810,6 +817,7 @@
         let ringX = -100, ringY = -100;
 
         window.addEventListener("mousemove", (e) => {
+            document.documentElement.classList.add('custom-cursor');
             mouseX = e.clientX;
             mouseY = e.clientY;
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;

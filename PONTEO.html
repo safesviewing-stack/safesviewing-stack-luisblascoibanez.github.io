@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Ponteo | Luis Blasco-Ibáñez</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="aos.css" rel="stylesheet">
 
     <style>
         /* --- CORE VARIABLES --- */
         :root { --bg: #000000; --accent: #FF5A00; --accent-glow: rgba(255, 90, 0, 0.15); --card-bg: rgba(25, 25, 27, 0.4); --border: rgba(255, 255, 255, 0.05); --text: #f3f3f3; --text-dim: #8b8b8d; --glass: rgba(10, 10, 12, 0.1); --blur: blur(35px); }
         .light-mode { --bg: #f2f2f4; --card-bg: rgba(255, 255, 255, 0.6); --border: rgba(0, 0, 0, 0.06); --text: #111112; --text-dim: #5c5c5f; --glass: rgba(255, 255, 255, 0.2); --accent-glow: rgba(255, 90, 0, 0.05); }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; transition: background 0.7s cubic-bezier(0.8, 0, 0.2, 1), color 0.7s; }
 
         .lang-node { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center; display: inline-block; }
@@ -94,6 +96,11 @@
             .nav-logo { font-size: 1.1rem; }
             .footer-logo { font-size: 2.2rem; }
         }
+        /* Cursor personalizado: solo se activa cuando el JS detecta el ratón.
+           Si algo falla, se mantiene el cursor normal del sistema. */
+        #cursor-dot, #cursor-ring { visibility: hidden; }
+        html.custom-cursor #cursor-dot, html.custom-cursor #cursor-ring { visibility: visible; }
+        html.custom-cursor, html.custom-cursor * { cursor: none !important; }
     </style>
 </head>
 <body>
@@ -129,7 +136,7 @@
         </section>
 
         <section class="split-section" data-aos="fade-up" data-aos-offset="350">
-            <img src="1 GRIFO.png" alt="Grifo Detalle 1" class="inter-hover">
+            <img src="1 GRIFO.webp" alt="Grifo Detalle 1" class="inter-hover">
             <div class="split-text-container">
                 <h3 class="lang-node" data-en="Concept and Analysis" data-es="El Análisis">El Análisis</h3>
                 <p class="split-text lang-node" 
@@ -193,11 +200,11 @@
         <div class="lang-node" data-en="LUIS BLASCO-IBÁÑEZ BERBEL · INDUSTRIAL DESIGN" data-es="LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL">LUIS BLASCO-IBÁÑEZ BERBEL · DISEÑO INDUSTRIAL</div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="aos.js"></script>
     <script>
         if (window.history.scrollRestoration) window.history.scrollRestoration = 'manual';
         window.addEventListener('load', () => window.scrollTo(0, 0));
-        AOS.init({ duration: 1000, once: true });
+        if (window.AOS) AOS.init({ duration: 1000, once: true });
 
         const btnToggle = document.getElementById("theme-toggle");
         btnToggle.addEventListener("click", () => document.body.classList.toggle("light-mode"));
@@ -222,6 +229,7 @@
         const ring = document.getElementById("cursor-ring");
         let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
         window.addEventListener("mousemove", (e) => {
+            document.documentElement.classList.add('custom-cursor');
             mouseX = e.clientX; mouseY = e.clientY;
             dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         });
